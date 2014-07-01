@@ -1,0 +1,661 @@
+
+atlas.png
+size: 918,800
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+AnimacionesSpells/Fireball01
+  rotate: false
+  xy: 388, 494
+  size: 144, 48
+  orig: 144, 48
+  offset: 0, 0
+  index: -1
+AnimacionesSpells/Fireball02
+  rotate: false
+  xy: 2, 2
+  size: 72, 24
+  orig: 72, 24
+  offset: 0, 0
+  index: -1
+AnimacionesSpells/FrostBolt01
+  rotate: false
+  xy: 774, 752
+  size: 144, 48
+  orig: 144, 48
+  offset: 0, 0
+  index: -1
+AnimacionesSpells/FrostBolt02
+  rotate: false
+  xy: 388, 468
+  size: 72, 24
+  orig: 72, 24
+  offset: 0, 0
+  index: -1
+AnimacionesSpells/Frostball
+  rotate: false
+  xy: 534, 518
+  size: 72, 24
+  orig: 72, 24
+  offset: 0, 0
+  index: -1
+AnimacionesSpells/SpellBalls_01n
+  rotate: false
+  xy: 2, 544
+  size: 384, 256
+  orig: 384, 256
+  offset: 0, 0
+  index: -1
+AnimacionesSpells/SpellBalls_02n
+  rotate: false
+  xy: 2, 286
+  size: 384, 256
+  orig: 384, 256
+  offset: 0, 0
+  index: -1
+AnimacionesSpells/SpellBalls_03n
+  rotate: false
+  xy: 388, 544
+  size: 384, 256
+  orig: 384, 256
+  offset: 0, 0
+  index: -1
+AnimacionesSpells/SpellBalls_04n
+  rotate: false
+  xy: 2, 28
+  size: 384, 256
+  orig: 384, 256
+  offset: 0, 0
+  index: -1
+
+atlas2.png
+size: 868,870
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BAK/Armaduras/Botas1
+  rotate: false
+  xy: 2, 582
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+BAK/Armaduras/Desnudo
+  rotate: false
+  xy: 436, 582
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+BAK/Armaduras/Guantes1
+  rotate: false
+  xy: 2, 292
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+BAK/Armaduras/Hombreras1
+  rotate: false
+  xy: 436, 292
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+BAK/Armaduras/Pantalones1
+  rotate: false
+  xy: 2, 2
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+BAK/Armaduras/Peto1
+  rotate: false
+  xy: 436, 2
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+
+atlas3.png
+size: 866,578
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BAK/Armaduras/CapaFrontal1
+  rotate: false
+  xy: 2, 2
+  size: 864, 576
+  orig: 864, 576
+  offset: 0, 0
+  index: -1
+
+atlas4.png
+size: 866,578
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BAK/Armaduras/CapaTrasera1
+  rotate: false
+  xy: 2, 2
+  size: 864, 576
+  orig: 864, 576
+  offset: 0, 0
+  index: -1
+
+atlas5.png
+size: 866,578
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BAK/Armaduras/Casco1
+  rotate: false
+  xy: 2, 2
+  size: 864, 576
+  orig: 864, 576
+  offset: 0, 0
+  index: -1
+
+atlas6.png
+size: 921,991
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BAK/Player Sprites/Cabeza1
+  rotate: false
+  xy: 2, 703
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Cabeza2
+  rotate: false
+  xy: 2, 413
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Golem
+  rotate: false
+  xy: 436, 557
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Golem2
+  rotate: false
+  xy: 2, 9
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Golem3
+  rotate: false
+  xy: 436, 411
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Humano1
+  rotate: false
+  xy: 436, 703
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Humo
+  rotate: false
+  xy: 870, 940
+  size: 51, 51
+  orig: 51, 51
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Nameplate
+  rotate: false
+  xy: 2, 2
+  size: 36, 5
+  orig: 36, 5
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/NameplateFondo
+  rotate: false
+  xy: 292, 148
+  size: 1, 5
+  orig: 1, 5
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Player
+  rotate: false
+  xy: 2, 155
+  size: 384, 256
+  orig: 384, 256
+  offset: 0, 0
+  index: -1
+BAK/Player Sprites/Sombra
+  rotate: false
+  xy: 726, 690
+  size: 31, 11
+  orig: 31, 11
+  offset: 0, 0
+  index: -1
+
+atlas7.png
+size: 966,457
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+PixiePcCuerpos/Golem
+  rotate: false
+  xy: 388, 121
+  size: 288, 336
+  orig: 288, 336
+  offset: 0, 0
+  index: -1
+PixiePcCuerpos/Golem.OLD
+  rotate: false
+  xy: 678, 167
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+PixiePcCuerpos/Golem2
+  rotate: false
+  xy: 2, 55
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+PixiePcCuerpos/Golem3
+  rotate: false
+  xy: 678, 313
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+PixiePcCuerpos/Humo
+  rotate: false
+  xy: 2, 2
+  size: 51, 51
+  orig: 51, 51
+  offset: 0, 0
+  index: -1
+PixiePcCuerpos/Player
+  rotate: false
+  xy: 2, 201
+  size: 384, 256
+  orig: 384, 256
+  offset: 0, 0
+  index: -1
+
+atlas8.png
+size: 1014,436
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+PixiePcSlots/BotasGolem01
+  rotate: false
+  xy: 2, 2
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+PixiePcSlots/Desnudo
+  rotate: false
+  xy: 2, 148
+  size: 432, 288
+  orig: 432, 288
+  offset: 0, 0
+  index: -1
+PixiePcSlots/GuantesGolem01
+  rotate: false
+  xy: 436, 292
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+PixiePcSlots/HombrerasGolem01
+  rotate: false
+  xy: 726, 292
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+PixiePcSlots/PantalonesGolem01
+  rotate: false
+  xy: 436, 146
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+PixiePcSlots/PetoGolem01
+  rotate: false
+  xy: 726, 146
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+
+atlas9.png
+size: 476,34
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+TexturasIconos/Editar
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/Editar.OLD
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/Espectro
+  rotate: false
+  xy: 70, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/FireBall
+  rotate: false
+  xy: 104, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/FireBall.OLD
+  rotate: false
+  xy: 138, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/FrostBolt
+  rotate: false
+  xy: 172, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/IceBall
+  rotate: false
+  xy: 206, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/IrEste
+  rotate: false
+  xy: 240, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/IrNorte
+  rotate: false
+  xy: 274, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/IrOeste
+  rotate: false
+  xy: 308, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/IrSur
+  rotate: false
+  xy: 342, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/Muros
+  rotate: false
+  xy: 376, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/Plantar
+  rotate: false
+  xy: 410, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasIconos/PoisonBolt
+  rotate: false
+  xy: 444, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+
+atlas10.png
+size: 246,57
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+TexturasMisc/Borrar
+  rotate: false
+  xy: 2, 9
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+TexturasMisc/CasillaTalento
+  rotate: false
+  xy: 130, 49
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+TexturasMisc/CasillaTalentoFondo
+  rotate: false
+  xy: 52, 49
+  size: 76, 8
+  orig: 76, 8
+  offset: 0, 0
+  index: -1
+TexturasMisc/Casillero
+  rotate: false
+  xy: 52, 15
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasMisc/Casillero2
+  rotate: false
+  xy: 86, 15
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasMisc/Grid
+  rotate: false
+  xy: 201, 33
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+TexturasMisc/Nameplate
+  rotate: false
+  xy: 2, 2
+  size: 36, 5
+  orig: 36, 5
+  offset: 0, 0
+  index: -1
+TexturasMisc/Nameplate.OLD
+  rotate: false
+  xy: 130, 52
+  size: 36, 5
+  orig: 36, 5
+  offset: 0, 0
+  index: -1
+TexturasMisc/NameplateFondo
+  rotate: false
+  xy: 40, 2
+  size: 1, 5
+  orig: 1, 5
+  offset: 0, 0
+  index: -1
+TexturasMisc/RebindOff
+  rotate: false
+  xy: 227, 36
+  size: 19, 21
+  orig: 19, 21
+  offset: 0, 0
+  index: -1
+TexturasMisc/RebindOn
+  rotate: false
+  xy: 154, 23
+  size: 19, 21
+  orig: 19, 21
+  offset: 0, 0
+  index: -1
+TexturasMisc/Select
+  rotate: false
+  xy: 120, 15
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TexturasMisc/Sombra
+  rotate: false
+  xy: 168, 46
+  size: 31, 11
+  orig: 31, 11
+  offset: 0, 0
+  index: -1
+
+atlas11.png
+size: 496,220
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+TexturasTerrenos/Arena1
+  rotate: false
+  xy: 2, 2
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Arena2
+  rotate: false
+  xy: 198, 148
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Baldosas1
+  rotate: false
+  xy: 52, 2
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Baldosas2
+  rotate: false
+  xy: 248, 148
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Baldosas3
+  rotate: false
+  xy: 102, 2
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Cesped.OLD
+  rotate: false
+  xy: 2, 76
+  size: 96, 144
+  orig: 96, 144
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Cesped1
+  rotate: false
+  xy: 298, 148
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Cesped2
+  rotate: false
+  xy: 348, 148
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Cesped4
+  rotate: false
+  xy: 348, 148
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Cesped2.OLD
+  rotate: false
+  xy: 100, 76
+  size: 96, 144
+  orig: 96, 144
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Cesped3
+  rotate: false
+  xy: 398, 148
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Cesped5
+  rotate: false
+  xy: 448, 148
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Suelo
+  rotate: false
+  xy: 348, 98
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Suelo2
+  rotate: false
+  xy: 398, 98
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Tierra1
+  rotate: false
+  xy: 198, 74
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Tierra2
+  rotate: false
+  xy: 248, 74
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+TexturasTerrenos/Tierra3
+  rotate: false
+  xy: 298, 74
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1

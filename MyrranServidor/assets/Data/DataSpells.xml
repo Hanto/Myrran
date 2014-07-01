@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<Spells>
+	<Spell>
+		<iD>Terraformar</iD>
+		<nombre>Terraformar</nombre>
+		<descripcion>Terraforma el terreno</descripcion>
+		<tipoSpell>EDITARTERRENO</tipoSpell>
+		<icono>Editar</icono>
+		<SkillStats>
+			<Stat>
+				<id>0</id>
+				<nombre>Casting time</nombre>
+				<valorBase>0.02</valorBase>
+				<isMejorable>false</isMejorable>
+				<talentoMaximo>50</talentoMaximo>
+				<costeTalento>1</costeTalento>
+				<bonoTalento>1</bonoTalento>
+			</Stat>
+		</SkillStats>
+	</Spell>
+	<Spell>
+		<iD>Heal</iD>
+		<nombre>Heal</nombre>
+		<descripcion>Cura los HPs</descripcion>
+		<tipoSpell>HEAL</tipoSpell>
+		<debuff>Hot</debuff>
+		<debuff>Bomba</debuff>
+		<icono>Muros</icono>
+		<SkillStats>
+			<Stat>
+				<id>0</id>
+				<nombre>Casting time</nombre>
+				<valorBase>1.0</valorBase>
+				<isMejorable>true</isMejorable>
+				<talentoMaximo>50</talentoMaximo>
+				<costeTalento>1</costeTalento>
+				<bonoTalento>-0.02</bonoTalento>
+			</Stat>
+			<Stat>
+				<id>1</id>
+				<nombre>Curacion instantanea</nombre>
+				<valorBase>15</valorBase>
+				<isMejorable>true</isMejorable>
+				<talentoMaximo>50</talentoMaximo>
+				<costeTalento>1</costeTalento>
+				<bonoTalento>5</bonoTalento>
+			</Stat>
+		</SkillStats>
+	</Spell>
+</Spells>
