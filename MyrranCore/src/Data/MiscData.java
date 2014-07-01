@@ -11,6 +11,10 @@ public class MiscData
     public static final int GDX_Horizontal_Resolution = 1600;
     public static final int GDX_Vertical_Resolution = 900;
 
+    //BOX2d:
+    public static final float PIXEL_METROS = 0.04f;
+    public static final float METROS_PIXEL = 25f;
+
     //Network:
     public static final int NETWORK_Puerto_Servidor = 54555;
     public static final int NETWORK_Client_Timeout = 5000*10000;

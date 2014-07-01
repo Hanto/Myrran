@@ -61,6 +61,7 @@ public class Mundo extends AbstractModel
 
     public void act(float delta)
     {
+        world.step(delta, 6, 2);
         //Actualizar al Player
         player.actualizar(delta);
         //Actualizar a los demas jugador multiplayer:

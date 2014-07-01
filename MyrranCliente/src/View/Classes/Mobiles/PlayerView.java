@@ -1,12 +1,12 @@
 package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
 import Controller.Controlador;
+import DB.RSC;
 import DTO.NetDTO;
 import Data.MiscData;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Mobiles.Player;
 import Model.DTO.PlayerDTO;
-import DB.RSC;
 import View.Classes.Graficos.PixiePC;
 import View.Classes.Graficos.Texto;
 import View.GameState.MundoView;
@@ -14,11 +14,17 @@ import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
+import static Data.MiscData.PIXEL_METROS;
 
 public class PlayerView extends Group implements PropertyChangeListener
 {
@@ -30,6 +36,7 @@ public class PlayerView extends Group implements PropertyChangeListener
     public String spellIDSeleccionado;
 
     public PixiePC actor;
+    public Body body;
     public NameplateView nameplateView;
     public Texto nombre;
     public PointLight luz;
@@ -44,6 +51,7 @@ public class PlayerView extends Group implements PropertyChangeListener
         this.controlador = controlador;
 
         crearActor();
+        crearBody();
 
         this.setPosition(player.getX(), player.getY());
         player.añadirObservador(this);
@@ -67,10 +75,27 @@ public class PlayerView extends Group implements PropertyChangeListener
         nombre.setPosition(actor.getWidth()/2, actor.getHeight()+8);
         this.addActor(nombre);
 
-        luz = new PointLight(mundoView.getRayHandler(), 300, new Color(0.3f,0.3f,0.3f,1.0f), 350, 0, 0);
+        luz = new PointLight(mundoView.getRayHandler(), 300, new Color(0.3f,0.3f,0.3f,1.0f), 350 *PIXEL_METROS, 0, 0);
     }
 
 
+    public void crearBody ()
+    {
+        BodyDef bd = new BodyDef();
+        bd.position.set(getCenterX() *PIXEL_METROS , getCenterY() *PIXEL_METROS ) ;
+        bd.type = BodyDef.BodyType.DynamicBody;
+
+        CircleShape shape = new CircleShape();
+        shape.setRadius(24f *PIXEL_METROS);
+
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+
+        body = mundoView.getWorld().createBody(bd);
+        body.createFixture(fixDef);
+
+        luz.attachToBody(body,0,0);
+    }
 
     //VISTA:
     public void setNombre (String nuevoNombre)
@@ -95,7 +120,6 @@ public class PlayerView extends Group implements PropertyChangeListener
         if (Math.abs(this.getX()-x) >= 1 || Math.abs(this.getY()-y) >= 1)
         {
             super.setPosition(x, y);
-            luz.setPosition(x,y);
             NetDTO.PosicionPPC moverPlayer = new NetDTO.PosicionPPC(player.getConnectionID(), getX(), getY());
             controlador.enviarAServidor(moverPlayer);
         }

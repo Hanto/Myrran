@@ -57,7 +57,7 @@ public class Controlador implements ControladorUI
         ui.conjuntoBarraAcciones.getBarraAcciones(0).setAccion(2, 2, "IrEste", 32);
         ui.conjuntoBarraAcciones.getBarraAcciones(0).setAccion(0, 2, "IrOeste", 29);
 
-        moverPPC(mundo.getPlayer().getConnectionID(), 21000, 20000);
+        //moverPPC(mundo.getPlayer().getConnectionID(), 21000, 20000);
     }
 
     //LibGDX:

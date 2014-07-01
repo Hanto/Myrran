@@ -16,31 +16,42 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import static Data.MiscData.PIXEL_METROS;
+
 public class MundoView extends Stage implements PropertyChangeListener
 {
+    //Controlador, Model:
     protected Controlador controlador;
     protected Mundo mundo;
 
+    //View:
     protected PlayerView playerView;
     protected MapaView mapaView;
     protected Array<PCView> listaPCViews = new Array<>();
 
+    //LibGDX Tools:
     protected SpriteBatch batch = new SpriteBatch();
     protected RayHandler rayHandler;
     protected ShapeRenderer shape = new ShapeRenderer();
     protected int nivelDeZoom = 0;
+
     protected OrthographicCamera camara;
+    protected OrthographicCamera boxCamara;
+    protected Box2DDebugRenderer worldRender = new Box2DDebugRenderer();
 
     public PlayerView getPlayerView()                   { return playerView; }
     public MapaView getMapaView()                       { return mapaView; }
     public OrthographicCamera getCamara()               { return camara; }
     public RayHandler getRayHandler()                   { return rayHandler; }
+    public World getWorld()                             { return mundo.getWorld(); }
 
     public void eliminarPCView (PCView pcView)
     {   listaPCViews.removeValue(pcView, true); }
@@ -56,6 +67,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         mapaView = new MapaView(mundo.getMapa(), this, player.getX(), player.getY(), MiscData.MAPAVIEW_TamañoX, MiscData.MAPAVIEW_TamañoY);
         playerView = new PlayerView(player, this, controlador);
         camara = new OrthographicCamera (Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        boxCamara = new OrthographicCamera(Gdx.graphics.getWidth() * PIXEL_METROS, Gdx.graphics.getHeight() * PIXEL_METROS);
 
         getViewport().setCamera(camara);
 
@@ -65,10 +77,14 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     @Override public void draw ()
     {
-        //actualizamos la camara
+        //actualizamos las camaras:
         camara.position.x = getPlayerView().getCenterX();
         camara.position.y = getPlayerView().getCenterY();
         camara.update();
+
+        boxCamara.position.x = camara.position.x * PIXEL_METROS;
+        boxCamara.position.y = camara.position.y * PIXEL_METROS;
+        boxCamara.update();
 
         //dibujamos el fondo:
         mapaView.render();
@@ -82,11 +98,20 @@ public class MundoView extends Stage implements PropertyChangeListener
         super.draw();
 
         //aplicamos las luces:
-        rayHandler.setCombinedMatrix(camara.combined);
+        rayHandler.setCombinedMatrix(boxCamara.combined);
         rayHandler.updateAndRender();
+
+        //dibujamos la geometrica fisica de Debug:
+        worldRender.render(getWorld(), boxCamara.combined);
 
         //dibujamos las lineas de debug:
         dibujarVision();
+    }
+
+    public void resize (int anchura, int altura)
+    {
+        camara.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override public void dispose ()
@@ -107,6 +132,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         if (nivelDeZoom ==0) zoom = 1f;
         if (nivelDeZoom > 0) zoom = 1f+ nivelDeZoom *0.2f;
         camara.zoom = zoom;
+        boxCamara.zoom = zoom;
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt)

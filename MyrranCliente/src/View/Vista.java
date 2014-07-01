@@ -53,9 +53,8 @@ public class Vista
 
     public void resize (int anchura, int altura)
     {
-        mundoView.getCamara().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        mundoView.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        uiView.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        mundoView.resize(anchura, altura);
+        uiView.resize(anchura, altura);
     }
 
     public void dispose ()

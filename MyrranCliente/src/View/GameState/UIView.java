@@ -9,6 +9,7 @@ import DB.RSC;
 import View.Classes.Graficos.Texto;
 import View.Classes.UI.BarraTerrenos.BarraTerrenosView;
 import View.Classes.UI.BarraAcciones.ConjuntoBarraAccionesView;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -40,6 +41,9 @@ public class UIView extends Stage implements PropertyChangeListener
 
         ui.conjuntoBarraAcciones.añadirObservador(this);
     }
+
+    public void resize (int anchura, int altura)
+    {   getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); }
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
