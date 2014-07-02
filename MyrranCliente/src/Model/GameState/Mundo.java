@@ -35,15 +35,15 @@ public class Mundo extends AbstractModel
 
     public Mundo()
     {
-        player = new Player();
-        mapa = new Mapa(player);
         world = new World(new Vector2(0, 0), false);
+        player = new Player(world);
+        mapa = new Mapa(player);
     }
 
     //SE NOTIFICA:
     public void añadirPC (int connectionID, float x, float y)
     {
-        PC pc = new PC(connectionID);
+        PC pc = new PC(connectionID, world);
         pc.setPosition(x, y);
         listaPlayers.add(pc);
         mapaPlayers.put(pc.getConnectionID(), pc);
@@ -56,12 +56,12 @@ public class Mundo extends AbstractModel
         PC pc = mapaPlayers.get(connectionID);
         listaPlayers.remove(pc);
         mapaPlayers.remove(connectionID);
-        pc.eliminar();
+        pc.dispose();
     }
 
     public void act(float delta)
     {
-        world.step(delta, 6, 2);
+        world.step(delta, 8, 6);
         //Actualizar al Player
         player.actualizar(delta);
         //Actualizar a los demas jugador multiplayer:

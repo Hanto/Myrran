@@ -37,7 +37,7 @@ public class Cliente extends Client
 
         host = "localhost"; //(String) JOptionPane.showInputDialog(null, "Host:", "Connect to server", JOptionPane.QUESTION_MESSAGE, null, null, "localhost");
 
-        try { this.connect(NetDTO.timeout, host, NetDTO.puerto); }
+        try { this.connect(NetDTO.timeout, host, NetDTO.puertoTCP, NetDTO.puertoUDP); }
         catch (Exception IOException) { System.out.println("ERROR: Imposible conectar cliente: "+IOException); }
     }
 

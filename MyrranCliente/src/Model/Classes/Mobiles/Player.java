@@ -16,11 +16,15 @@ import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
 import Model.DTO.PlayerDTO;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import static Data.MiscData.METROS_PIXEL;
+import static Data.MiscData.PIXEL_METROS;
 
 public class Player extends AbstractModel implements MobPlayer, CasterConTalentos, Vulnerable, Debuffeable
 {
@@ -62,12 +66,13 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
     protected boolean irIzquierda = false;
     protected boolean disparar = false;
 
-    public Player()
-    {
+    protected Body body;
 
-    }
+    public Player(World world)
+    {   crearBody (world); }
 
     //GET:
+    public Body getBody()                                               { return body; }
     @Override public int getConnectionID()                              { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
@@ -98,6 +103,28 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
     @Override public void setActualHPs (float hps)                      { modificarHPs(hps - actualHPs); }
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID){ return listaSkillsPersonalizados.get(skillID); }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID){ return listaSpellsPersonalizados.get(spellID); }
+
+
+    public void crearBody (World world)
+    {
+        BodyDef bd = new BodyDef();
+        bd.position.set((getX()+24) *PIXEL_METROS , (getY()+24) *PIXEL_METROS ) ;
+        bd.type = BodyDef.BodyType.KinematicBody;
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(19f *PIXEL_METROS, 24f *PIXEL_METROS);
+
+        //CircleShape shape = new CircleShape();
+        //shape.setRadius(24f *PIXEL_METROS);
+
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+
+        body = world.createBody(bd);
+        body.createFixture(fixDef);
+
+        shape.dispose();
+    }
 
     //RECEPCION DATOS:
     @Override public void añadirSkillsPersonalizados(String spellID)
@@ -176,9 +203,13 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
 
     @Override public void setPosition (float x, float y)
     {
-        this.x = x; this.y = y;
-        Object posicionDTO = new NetDTO.PosicionPPC(this);
-        notificarActualizacion("ENVIO: setPosition", null, posicionDTO);
+        if (Math.abs(this.x-x) >= 1 || Math.abs(this.y-y) >= 1)
+        {
+            this.x = x;
+            this.y = y;
+            Object posicionDTO = new NetDTO.PosicionPPC(this);
+            notificarActualizacion("ENVIO: setPosition", null, posicionDTO);
+        }
     }
 
     @Override public void setParametrosSpell(Object parametros)
@@ -244,46 +275,41 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
 
         disparar = playerInput.getDisparar();
 
+        moverse();
         setNumAnimacion(playerInput.getNumAnimacion());
 
         if (playerInput.getStopCastear()) setCastear(false, playerInput.getScreenX(), playerInput.getScreenY());
         else if (playerInput.getStartCastear()) setCastear (true, playerInput.getScreenX(), playerInput.getScreenY());
     }
 
-    private void moverse (float delta)
+    private void moverse ()
     {
-        float X=x;
-        float Y=y;
-
         //Sur
         if (irAbajo && !irDerecha && !irIzquierda)
-        { Y += -velocidadMax*velocidadMod*delta; direccion = 4.71239d; setPosition(X, Y);}
+        {   body.setLinearVelocity(0, -velocidadMax*PIXEL_METROS); }
         //Norte
         else if (irArriba && !irDerecha && !irIzquierda)
-        { Y += +velocidadMax*velocidadMod*delta; direccion = 1.5708d; setPosition(X, Y);}
+        {   body.setLinearVelocity(0, velocidadMax*PIXEL_METROS);}
         //Este
         else if (irDerecha && !irArriba && !irAbajo)
-        { X += +velocidadMax*velocidadMod*delta; direccion =  0d; setPosition(X, Y);}
+        {   body.setLinearVelocity(velocidadMax*PIXEL_METROS,0);}
         //Oeste
         else if (irIzquierda && !irArriba && !irAbajo)
-        { X += -velocidadMax*velocidadMod*delta; direccion = 3.14159d; setPosition(X, Y);}
+        {    body.setLinearVelocity(-velocidadMax*PIXEL_METROS,0);}
         //SurOeste
         else if (irAbajo&& irIzquierda)
-        { Y += -0.707f*velocidadMax*velocidadMod*delta;
-          X += -0.707f*velocidadMax*velocidadMod*delta; direccion = 3.927d; setPosition(X, Y);}
+        {   body.setLinearVelocity(-velocidadMax*0.707f*PIXEL_METROS, -velocidadMax*0.707f*PIXEL_METROS); }
         //SurEste
         else if (irAbajo && irDerecha)
-        { Y += -0.707f*velocidadMax*velocidadMod*delta;
-          X += +0.707f*velocidadMax*velocidadMod*delta; direccion = 5.4779d; setPosition(X, Y);}
+        {   body.setLinearVelocity(velocidadMax*0.707f*PIXEL_METROS, -velocidadMax*0.707f*PIXEL_METROS); }
         //NorOeste
         else if (irArriba && irIzquierda)
-        { Y += +0.707f*velocidadMax*velocidadMod*delta;
-          X += -0.707f*velocidadMax*velocidadMod*delta; direccion = 2.35619d; setPosition(X, Y);}
+        {   body.setLinearVelocity(-velocidadMax*0.707f*PIXEL_METROS, velocidadMax*0.707f*PIXEL_METROS); }
         //NorEste
         else if (irArriba && irDerecha)
-        { Y += +0.707f*velocidadMax*velocidadMod*delta;
-          X += +0.707f*velocidadMax*velocidadMod*delta; direccion = 0.7854d; setPosition(X, Y);}
-
+        {   body.setLinearVelocity(velocidadMax*0.707f*PIXEL_METROS, velocidadMax*0.707f*PIXEL_METROS); }
+        else if (!irAbajo && !irArriba && !irDerecha && !irIzquierda)
+        {   body.setLinearVelocity(0,0); }
     }
 
     private void actualizarCastingTime(float delta)
@@ -304,7 +330,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
 
     public void actualizar (float delta)
     {
-        moverse(delta);
+        setPosition((int) (body.getPosition().x * METROS_PIXEL) - 24, (int) (body.getPosition().y * METROS_PIXEL) - 24);
         actualizarCastingTime(delta);
         if (castear) startCastear();
     }

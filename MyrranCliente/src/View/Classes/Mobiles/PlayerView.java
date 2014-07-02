@@ -15,9 +15,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
@@ -28,18 +25,21 @@ import static Data.MiscData.PIXEL_METROS;
 
 public class PlayerView extends Group implements PropertyChangeListener
 {
+    //Modelo:
     public Player player;
     public MundoView mundoView;
     public Controlador controlador;
 
-    public Integer nivel;
-    public String spellIDSeleccionado;
-
+    //Vista:
     public PixiePC actor;
     public Body body;
     public NameplateView nameplateView;
     public Texto nombre;
     public PointLight luz;
+
+    //Datos
+    public Integer nivel;
+    public String spellIDSeleccionado;
 
     public float getCenterX()               { return (this.getX()+this.getWidth()/2); }
     public float getCenterY()               { return (this.getY()+this.getHeight()/2); }
@@ -51,7 +51,6 @@ public class PlayerView extends Group implements PropertyChangeListener
         this.controlador = controlador;
 
         crearActor();
-        crearBody();
 
         this.setPosition(player.getX(), player.getY());
         player.añadirObservador(this);
@@ -76,26 +75,10 @@ public class PlayerView extends Group implements PropertyChangeListener
         this.addActor(nombre);
 
         luz = new PointLight(mundoView.getRayHandler(), 300, new Color(0.3f,0.3f,0.3f,1.0f), 350 *PIXEL_METROS, 0, 0);
+        luz.attachToBody(player.getBody(), 0, 0);
     }
 
 
-    public void crearBody ()
-    {
-        BodyDef bd = new BodyDef();
-        bd.position.set(getCenterX() *PIXEL_METROS , getCenterY() *PIXEL_METROS ) ;
-        bd.type = BodyDef.BodyType.DynamicBody;
-
-        CircleShape shape = new CircleShape();
-        shape.setRadius(24f *PIXEL_METROS);
-
-        FixtureDef fixDef = new FixtureDef();
-        fixDef.shape = shape;
-
-        body = mundoView.getWorld().createBody(bd);
-        body.createFixture(fixDef);
-
-        luz.attachToBody(body,0,0);
-    }
 
     //VISTA:
     public void setNombre (String nuevoNombre)
@@ -107,7 +90,6 @@ public class PlayerView extends Group implements PropertyChangeListener
                 HPs.HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
         texto.setPosition(this.getWidth() / 2 + (float) Math.random() * 30 - 15, this.getHeight() + 15);
         texto.scrollingCombatText(this, 2f);
-
     }
 
 

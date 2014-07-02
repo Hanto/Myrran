@@ -11,7 +11,8 @@ import com.esotericsoftware.kryonet.EndPoint;
 
 public class NetDTO
 {
-    public static final int puerto = MiscData.NETWORK_Puerto_Servidor;
+    public static final int puertoTCP = MiscData.NETWORK_PuertoTCP_Servidor;
+    public static final int puertoUDP = MiscData.NETWORK_PuertoUDP_Servidor;
     public static final int timeout = MiscData.NETWORK_Client_Timeout;
 
     public static void register (EndPoint endPoint)

@@ -20,14 +20,21 @@ public class Servidor extends Server
         //Para activar el log completo de mensajes:
         //Log.TRACE();
 
-        this.addListener(new Listener.ThreadedListener(new Listener()
+        synchronized (controlador.getMundo())
         {
-            public void connected (Connection con)              { controlador.añadirPC(con.getID()); }
-            public void disconnected (Connection con)           { controlador.eliminarPC(con.getID()); }
-            public void received (Connection con, Object obj)   { procesarMensajeCliente(con, obj); }
-        }));
 
-        try { this.bind(NetDTO.puerto); }
+            this.addListener
+                (new Listener.ThreadedListener
+                    (new Listener()
+                    {
+                        public void connected (Connection con)              { controlador.añadirPC(con.getID()); }
+                        public void disconnected (Connection con)           { controlador.eliminarPC(con.getID()); }
+                        public void received (Connection con, Object obj)   { procesarMensajeCliente(con, obj); }
+                    }));
+        }
+
+
+        try { this.bind(NetDTO.puertoTCP, NetDTO.puertoUDP); }
         catch (Exception e) { System.out.println("ERROR: Inicio Servidor: "+e); }
     }
 
@@ -82,7 +89,17 @@ public class Servidor extends Server
     }
 
     public void enviarACliente(int connectionID, Object obj)
-    {   this.sendToTCP(connectionID, obj); }
+    {   //this.sendToTCP(connectionID, obj);
+
+        Connection[] connections = this.getConnections();
+        for (int i = 0, n = connections.length; i < n; i++) {
+            Connection connection = connections[i];
+            if (connection.getID() == connectionID) {
+                System.out.println(connection.sendTCP(obj));
+                break;
+            }
+        }
+    }
 
     public void enviarATodosClientes(Object obj)
     {   this.sendToAllTCP(obj); }

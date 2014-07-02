@@ -5,16 +5,19 @@ import View.Vista;
 
 public class Controlador
 {
-    protected Servidor servidor = new Servidor(this);                  //Input principal de la simulacion
+    protected Servidor servidor;                  //Input principal de la simulacion
     protected Updater updater;
 
     protected Mundo mundo;
     protected Vista vista;
 
+    public Mundo getMundo()         { return mundo; }
+
     public Controlador (Mundo mundo)
     {
         this.mundo = mundo;
         vista = new Vista(this, mundo);
+        servidor = new Servidor(this);
         updater = new Updater(this, mundo);
     }
 
@@ -55,6 +58,8 @@ public class Controlador
     {   mundo.getPC(connectionID).setNumTalentosSkillPersonalizado(skillID, statID, valor);}
 
 
+    public void postRunnable(Runnable runnable)
+    {   updater.postRunnable(runnable); }
 
     public void netUpdater ()
     {   vista.netUpdate(); }

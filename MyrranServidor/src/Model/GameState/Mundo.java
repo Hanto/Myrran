@@ -18,7 +18,6 @@ public class Mundo extends AbstractModel
     public Mapa getMapa()                           { return mapa; }
     public Iterator<PC> getIteratorListaPlayers()   { return listaPlayers.iterator(); }
 
-    //public List<? extends PC> listaPlayers()    { return listaPlayers; }
 
     public Mundo()
     {

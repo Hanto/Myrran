@@ -70,7 +70,6 @@ public class InputManager implements InputProcessor, GestureDetector.GestureList
         return false;
     }
 
-
     @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
         playerE.getPlayerI().setScreenX(screenX);

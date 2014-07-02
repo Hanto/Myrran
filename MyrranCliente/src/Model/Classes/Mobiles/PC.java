@@ -4,6 +4,9 @@ import DTO.NetDTO;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Model.AbstractModel;
+import com.badlogic.gdx.physics.box2d.*;
+
+import static Data.MiscData.PIXEL_METROS;
 
 public class PC extends AbstractModel implements Vulnerable, MobPC
 {
@@ -15,6 +18,8 @@ public class PC extends AbstractModel implements Vulnerable, MobPC
 
     protected float actualHPs;
     protected float maxHPs;
+
+    protected Body body;
 
     public int getConnectionID()            { return connectionID; }
     public int getNumAnimacion()            { return numAnimacion; }
@@ -32,7 +37,7 @@ public class PC extends AbstractModel implements Vulnerable, MobPC
     @Override public float getVelocidadMod()                    { return 0; }
     @Override public float getVelocidadMax()                    { return 0; }
     @Override public double getDireccion()                      { return 0; }
-    @Override public void setConnectionID (int connectionID)    {   this.connectionID = connectionID; }
+    @Override public void setConnectionID (int connectionID)    { this.connectionID = connectionID; }
     @Override public void setNombre (String nombre)             {}
     @Override public void setNivel (int nivel)                  {}
     @Override public void setVelocidaMod(float velocidadMod)    {}
@@ -41,13 +46,38 @@ public class PC extends AbstractModel implements Vulnerable, MobPC
 
 
     //Constructor:
-    public PC(int connectionID)
+    public PC(int connectionID, World world)
     {
         this.connectionID = connectionID;
+        crearBody(world);
     }
+
+    public void crearBody (World world)
+    {
+        BodyDef bd = new BodyDef();
+        bd.position.set((getX()+24) *PIXEL_METROS , (getY()*24) *PIXEL_METROS ) ;
+        bd.type = BodyDef.BodyType.KinematicBody;
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(19f *PIXEL_METROS, 24f *PIXEL_METROS);
+
+        //CircleShape shape = new CircleShape();
+        //shape.setRadius(24f *PIXEL_METROS);
+
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+
+        body = world.createBody(bd);
+        body.createFixture(fixDef);
+
+        shape.dispose();
+    }
+
 
     @Override public void setPosition (float x, float y)
     {
+        body.setTransform((x+24) * PIXEL_METROS, (y+24) * PIXEL_METROS, 0);
+
         this.x = x; this.y = y;
         Object posicionDTO = new NetDTO.PosicionPPC(this);
         notificarActualizacion("setPosition", null, posicionDTO);
@@ -61,8 +91,9 @@ public class PC extends AbstractModel implements Vulnerable, MobPC
         //System.out.println("model animacion a ["+numAnimacion+"]");
     }
 
-    public void eliminar()
+    public void dispose()
     {
+        body.getWorld().destroyBody(body);
         Object eliminarPC = new NetDTO.EliminarPPC(connectionID);
         notificarActualizacion("eliminarPC", null, eliminarPC);
     }
