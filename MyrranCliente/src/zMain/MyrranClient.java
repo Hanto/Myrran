@@ -19,6 +19,9 @@ public class MyrranClient extends Game
         //System.setOut(printStream);
         //System.setErr(printStream);
 
+        //XMLspell xml = new XMLspell("DataSpells.xml");
+        //xml.salvarDatos();
+
         System.setProperty("user.name","Myrran");
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
