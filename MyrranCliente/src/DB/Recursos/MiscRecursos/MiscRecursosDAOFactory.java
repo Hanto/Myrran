@@ -1,15 +1,15 @@
 package DB.Recursos.MiscRecursos;
 
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;
-import DB.Recursos.MiscRecursos.DAO.MiscRecursosLocal;
+import DB.Recursos.MiscRecursos.DAO.MiscRecursosXML;
 
 public enum MiscRecursosDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override
         public MiscRecursosDAO getMiscRecursosDAO()
-        {   return new MiscRecursosLocal(); }
+        {   return new MiscRecursosXML(MiscRecursosXMLDB.get()); }
     };
 
     public abstract MiscRecursosDAO getMiscRecursosDAO();

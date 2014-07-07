@@ -1,11 +1,11 @@
 package zMain;
 
 import Controller.Controlador;
-import DB.Datos.BDebuff.BDebuffLocalDB;
-import DB.Datos.Spell.SpellLocalDB;
-import DB.Datos.Terreno.TerrenoLocalDB;
-import DB.Datos.TipoBDebuff.TipoBDebuffLocalDB;
-import DB.Datos.TipoSpell.TipoSpellLocalDB;
+import DB.Datos.BDebuff.BDebuffXMLDB;
+import DB.Datos.Spell.SpellXMLDB;
+import DB.Datos.Terreno.TerrenoXMLDB;
+import DB.Datos.TipoBDebuff.TipoBDebuffXMLDB;
+import DB.Datos.TipoSpell.TipoSpellXMLDB;
 import Data.Settings;
 import Model.GameState.Mundo;
 
@@ -15,11 +15,11 @@ public class MyrranServer
     {
         Settings.inicializar();
 
-        TipoBDebuffLocalDB.get();
-        BDebuffLocalDB.get();
-        TipoSpellLocalDB.get();
-        SpellLocalDB.get();
-        TerrenoLocalDB.get();
+        TipoBDebuffXMLDB.get();
+        BDebuffXMLDB.get();
+        TipoSpellXMLDB.get();
+        SpellXMLDB.get();
+        TerrenoXMLDB.get();
 
         Controlador controlador = new Controlador(new Mundo());
         while (true) {}

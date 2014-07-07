@@ -11,6 +11,8 @@ import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.TipoSpellI;
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,12 +48,13 @@ public class Spell extends AbstractModel implements SpellI
     @Override public int getNumSkillStats()                     { return skillStats.length; }
     @Override public int getNumDebuffsQueAplica()               { return listaDeDebuffsQueAplica.size(); }
 
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
 
     //CONSTRUCTOR:
     public Spell (TipoSpellI tipospell)
     {   //Se vincula el objeto que ejecutara los metodos de este tipo de Spell
-        if (tipospell == null) { System.out.println("ERROR: spellID no encontrado"); return; }
+        if (tipospell == null) { logger.error("spellID no encontrado"); return; }
         tipoSpell = tipospell;
 
         nombre = tipospell.getNombre();
@@ -87,7 +90,7 @@ public class Spell extends AbstractModel implements SpellI
 
     @Override public void añadirDebuff (BDebuffI debuff)
     {
-        if (debuff == null) { System.out.println("ERROR: debuff que añadir al Spell "+id+" no encontrado."); return; }
+        if (debuff == null) { logger.error("Debuff que añadir al Spell {} no encontrado.", id); return; }
         if (!listaDeDebuffsQueAplica.contains(debuff)) { listaDeDebuffsQueAplica.add(debuff); }
     }
 

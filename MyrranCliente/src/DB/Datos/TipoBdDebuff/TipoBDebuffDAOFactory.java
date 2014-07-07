@@ -1,15 +1,15 @@
 package DB.Datos.TipoBdDebuff;
 
 import DAO.TipoBDebuff.TipoBDebuffDAO;
-import DAO.TipoBDebuff.TipoBDebuffLocal;
+import DAO.TipoBDebuff.TipoBDebuffXML;
 
 public enum TipoBDebuffDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override
         public TipoBDebuffDAO getTipoBDebuffDAO()
-        {   return new TipoBDebuffLocal(TipoBDebuffLocalDB.get().listaDeTipoBDebuffs); }
+        {   return new TipoBDebuffXML(TipoBDebuffXMLDB.get()); }
     };
 
     public abstract TipoBDebuffDAO getTipoBDebuffDAO();

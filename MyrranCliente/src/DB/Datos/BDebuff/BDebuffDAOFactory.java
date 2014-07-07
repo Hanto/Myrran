@@ -1,19 +1,18 @@
 package DB.Datos.BDebuff;
 
 import DAO.BDebuff.BDebuffDAO;
-import DAO.BDebuff.BDebuffLocal;
+import DAO.BDebuff.BDebuffXML;
 
 public enum BDebuffDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override public BDebuffDAO getBDebuffDAO()
-        {   return new BDebuffLocal(BDebuffLocalDB.get().listaDeBDebuffs); }
+        {   return new BDebuffXML(BDebuffXMLDB.get()); }
     };
 
 
     public abstract BDebuffDAO getBDebuffDAO();
-
     private BDebuffDAOFactory(String nombre) {}
 
 }

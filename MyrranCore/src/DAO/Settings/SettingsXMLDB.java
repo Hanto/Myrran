@@ -23,7 +23,7 @@ public class SettingsXMLDB
     public HashMap<String, Integer> ints = new HashMap<>();
     public HashMap<String, Boolean> booleans = new HashMap<>();
 
-    private String settingsFile = "Settings.xml";
+    private String ficheroSettings = "Settings.xml";
     private Logger logger = (Logger)LoggerFactory.getLogger(this.getClass());
 
     public SettingsXMLDB()
@@ -32,14 +32,14 @@ public class SettingsXMLDB
     //Metodos:
     private void cargarDatos()
     {
-        logger.debug("Cargando Settings de: {}", settingsFile);
+        logger.debug("Cargando Settings de: {}", ficheroSettings);
 
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = abrirFichero(settingsFile);
+        InputStream input = abrirFichero(ficheroSettings);
 
         try
         {
-            Document documento = builder.build(fichero);
+            Document documento = builder.build(input);
             Element root = documento.getRootElement();
 
             //Load strings
@@ -52,7 +52,7 @@ public class SettingsXMLDB
                 String key = stringNode.getAttributeValue("key");
                 String value = stringNode.getAttributeValue("value");
                 strings.put(key, value);
-                logger.debug("s {} = {}", key, value);
+                logger.trace("s {} = {}", key, value);
             }
 
             //Load floats
@@ -65,7 +65,7 @@ public class SettingsXMLDB
                 String key = floatNode.getAttributeValue("key");
                 Float value = Float.parseFloat(floatNode.getAttributeValue("value"));
                 floats.put(key, value);
-                logger.debug("f {} = {}", key, value);
+                logger.trace("f {} = {}", key, value);
             }
 
             //Load ints
@@ -78,7 +78,7 @@ public class SettingsXMLDB
                 String key = intNode.getAttributeValue("key");
                 Integer value = Integer.parseInt(intNode.getAttributeValue("value"));
                 ints.put(key, value);
-                logger.debug("i {} = {}", key, value);
+                logger.trace("i {} = {}", key, value);
             }
 
             //Load booleans
@@ -91,18 +91,19 @@ public class SettingsXMLDB
                 String key = boolNode.getAttributeValue("key");
                 Boolean value = Boolean.parseBoolean(boolNode.getAttributeValue("value"));
                 booleans.put(key, value);
-                logger.debug("b {} = {}", key, value);
+                logger.trace("b {} = {}", key, value);
             }
 
-            logger.info("Settings cargados con exito desde: {}", settingsFile);
+            if (strings.size() == 0 || floats.size() == 0 || ints.size() == 0 || booleans.size() == 0)
+                logger.warn("Faltan datos validos en el fichero: {}", ficheroSettings);
         }
         catch (Exception e)
-        {   logger.error("ERROR cargando Settings desde fichero: {}", settingsFile, e.getMessage()); }
+        {   logger.error("ERROR cargando Settings desde fichero: {}. {}", ficheroSettings, e.getMessage()); }
     }
 
     public void salvarDatos()
     {
-        logger.debug("Salvando Datos en: " + settingsFile);
+        logger.debug("Salvando Datos en: " + ficheroSettings);
         Document doc = new Document();
         Element element;
 
@@ -148,10 +149,10 @@ public class SettingsXMLDB
         try
         {
             XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-            xmlOutputter.output(doc, new FileOutputStream(settingsFile));
+            xmlOutputter.output(doc, new FileOutputStream(ficheroSettings));
             logger.info("Datos salvados con exito");
         }
-        catch (Exception e) { logger.error("Error salvando los datos en {}", settingsFile, e); }
+        catch (Exception e) { logger.error("Error salvando los datos en {}", ficheroSettings, e); }
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

@@ -1,5 +1,6 @@
 package View.Classes.Graficos;
 // @author Ivan Delgado Huerta
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import org.slf4j.LoggerFactory;
 
 public class Pixie extends Actor
 {
@@ -29,7 +31,8 @@ public class Pixie extends Actor
     private TextureRegion texturaOriginal;          //textura original de la cual se han extraido los frames
     private int filas;                              //numero de filas que contiene la textura original
     private int columnas;                           //numero de columnas que contiene la textura original
-    
+
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
     public static class Animacion                   //Cada animacion tiene sus propios datos de configuracion esto es sus propios parametros como, duracionFrame, interrumpible, etc...
     {                                               //Estos datos se cargan automaticamente al cargar la animacion en si
         private TextureRegion[] frames;            //Frames que componen la animacion:
@@ -57,6 +60,7 @@ public class Pixie extends Actor
     
     public Pixie(TextureRegion texture, int filas, int columnas)
     {
+        if (texture == null) { logger.error("Textura para crear el Pixie no existe"); return; }
         texturaOriginal = texture;
         this.filas = filas;
         this.columnas = columnas;
@@ -76,6 +80,7 @@ public class Pixie extends Actor
     
     public Pixie(TextureRegion texture, int filas, int columnas, int numFramesPorAnimacion, float duracionFrame)
     {
+        if (texture == null) { logger.error("Textura para crear el Pixie no existe"); return; }
         texturaOriginal = texture;
         this.filas = filas;
         this.columnas = columnas;

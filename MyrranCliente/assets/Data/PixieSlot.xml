@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Pixies>
+  <Razas>
+    <Raza>Golem</Raza>
+  </Razas>
+  <Cuerpo>
+    <Pixie textura="Golem" raza="Golem" />
+  </Cuerpo>
+  <Cabeza>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </Cabeza>
+  <Bota>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </Bota>
+  <Yelmo>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </Yelmo>
+  <Peto>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </Peto>
+  <Pantalon>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </Pantalon>
+  <Guante>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </Guante>
+  <Hombrera>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </Hombrera>
+  <CapaTrasera>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </CapaTrasera>
+  <CapaFrontal>
+    <Pixie textura="Desnudo" raza="Golem" />
+  </CapaFrontal>
+</Pixies>

@@ -1,15 +1,15 @@
 package DB.Datos.TipoSpell;// Created by Hanto on 13/05/2014.
 
-import DAO.TipoSpell.TipoSpellLocal;
+import DAO.TipoSpell.TipoSpellXML;
 import DAO.TipoSpell.TipoSpellDAO;
 
 public enum TipoSpellDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override
         public TipoSpellDAO getTipoSpellDAO()
-        {   return new TipoSpellLocal(TipoSpellLocalDB.get().listaDeTipoSpells); }
+        {   return new TipoSpellXML(TipoSpellXMLDB.get()); }
     };
 
     public abstract TipoSpellDAO getTipoSpellDAO();

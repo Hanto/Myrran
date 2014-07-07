@@ -1,14 +1,14 @@
 package DB.Datos.Terreno;// Created by Hanto on 14/04/2014.
 
 import DAO.Terreno.TerrenoDAO;
-import DAO.Terreno.TerrenoLocal;
+import DAO.Terreno.TerrenoXML;
 
 public enum TerrenoDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override public TerrenoDAO getTerrenoDAO()
-        {   return new TerrenoLocal(TerrenoLocalDB.get().listaDeTerrenos); }
+        {   return new TerrenoXML(TerrenoXMLDB.get()); }
     };
 
     public abstract TerrenoDAO getTerrenoDAO();

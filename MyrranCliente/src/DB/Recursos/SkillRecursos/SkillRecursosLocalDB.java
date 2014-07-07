@@ -6,11 +6,18 @@ import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
 import Data.Settings;
 import View.Classes.Graficos.Pixie;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
+import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +33,8 @@ public class SkillRecursosLocalDB
     public Map<String, SpellRecursos> listaSpell = new HashMap<>();
     public Map<String, TipoSpellRecursos> listaTipoSpell = new HashMap<>();
 
+    private String ficheroTexturas = Settings.RECURSOS_XML+ Settings.XML_TexturasIconoSpells;
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     private SkillRecursosLocalDB()
     {   cargarDatos(); }
@@ -42,15 +51,17 @@ public class SkillRecursosLocalDB
 
     public void cargarTexturasIconos()
     {
-        System.out.println("[CARGANDO TEXTURAS ICONOS SPELLS]:");
+        logger.debug("Cargando datos desde {}", ficheroTexturas);
+
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_TexturasIconoSpells);
+        InputStream input = abrirFichero(ficheroTexturas);
 
         try
         {
-            Document documento = builder.build(fichero);
+            Document documento = builder.build(input);
             Element rootNode = documento.getRootElement();
-            List listaNodos = rootNode.getChildren("Icono");
+
+            List listaNodos = rootNode.getChild("TexturasSpells").getChildren("Textura");
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
@@ -60,11 +71,11 @@ public class SkillRecursosLocalDB
                 TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_TexturasIconos_LOC + nombre));
                 listaDeTexturasIconosSpells.put(nombre, textura);
 
-                System.out.println(" TexturaIconoSpell : " + nombre);
+                logger.trace("TexturaIconoSpell: " + nombre);
             }
-            System.out.println();
+            logger.trace("");
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_TexturasIconoSpells+": "+e); }
+        catch (Exception e) { logger.error("ERROR: leyendo fichero {}:", ficheroTexturas, e); }
     }
 
     public void cargarAnimacionesCasteo()
@@ -140,8 +151,8 @@ public class SkillRecursosLocalDB
             {
                 Element nodo = (Element) listaNodos.get(i);
 
-                String iD           = nodo.getChildText("iD");
-                String nombreIcono  = nodo.getChildText("icono");
+                String iD           = nodo.getAttributeValue("ID");
+                String nombreIcono  = nodo.getAttributeValue("icono");
 
                 SpellRecursos spellRecursos =  new SpellRecursos(iD, listaDeTexturasIconosSpells.get(nombreIcono));
                 listaSpell.put(iD, spellRecursos);
@@ -152,5 +163,44 @@ public class SkillRecursosLocalDB
             System.out.println();
         }
         catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataSpells+": "+e); }
+    }
+
+    public InputStream abrirFichero(String rutaYNombreFichero)
+    {   //probamos a Acceder al fichero directamente, en caso de poder acerlo lo transformamos en un InputStream
+        try { return new FileInputStream(new File(rutaYNombreFichero)); }
+        //En el caso de dar error por que el fichero no exista, probamos a acceder al recurso
+        catch (Exception e) { return this.getClass().getClassLoader().getResourceAsStream(rutaYNombreFichero);}
+    }
+
+    public void salvarTexturasIconos()
+    {
+        logger.debug("Salvando datos en {}", ficheroTexturas);
+
+        Element iconosRoot;
+        Element icono;
+
+        SAXBuilder builder = new SAXBuilder();
+        InputStream input = abrirFichero(ficheroTexturas);
+
+        try
+        {
+            Document doc = builder.build(input);
+
+            doc.getRootElement().removeChildren("TexturasSpells");
+            iconosRoot = new Element("TexturasSpells");
+
+            for (Map.Entry<String, TextureRegion> entry: listaDeTexturasIconosSpells.entrySet())
+            {
+                icono = new Element("Textura");
+                icono.setText(entry.getKey());
+                iconosRoot.addContent(icono);
+            }
+            doc.getRootElement().addContent(iconosRoot);
+
+            XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+            xmlOutputter.output(doc, new FileOutputStream(ficheroTexturas));
+            logger.info("Datos salvados en fichero XML: {}", ficheroTexturas);
+        }
+        catch (Exception e) { logger.error("ERROR: leyendo/parseando el fichero {}", ficheroTexturas);}
     }
 }

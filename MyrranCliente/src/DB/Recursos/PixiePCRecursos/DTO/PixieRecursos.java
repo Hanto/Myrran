@@ -3,7 +3,6 @@ package DB.Recursos.PixiePCRecursos.DTO;// Created by Hanto on 13/06/2014.
 import DB.RSC;
 import Data.Settings;
 import View.Classes.Graficos.Pixie;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class PixieRecursos
 {
@@ -11,8 +10,9 @@ public class PixieRecursos
     {
         public PixieCuerpo(String textura)
         {
-            super(new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_PixiePcCuerpos_LOC + textura)),
-                  Settings.PIXIE_Player_numFilas, Settings.PIXIE_Player_numColumnas);
+            super (RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(
+                   Settings.ATLAS_PixiePcCuerpos_LOC + textura),
+                   Settings.PIXIE_Player_numFilas, Settings.PIXIE_Player_numColumnas);
 
             añadirAnimacion("izquierda",    new int[]{0, 1, 2},     0.15f, true);
             añadirAnimacion("derecha",      new int[]{3, 4, 5},     0.15f, true);
@@ -32,12 +32,13 @@ public class PixieRecursos
         }
     }
 
-    public static class PixieArmadura extends Pixie
+    public static class PixieSlot extends Pixie
     {
-        public PixieArmadura(String textura)
+        public PixieSlot(String textura)
         {
-            super(new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_PixiePcSlots_LOC + textura)),
-                    Settings.PIXIE_Player_numFilas, Settings.PIXIE_Player_numColumnas);
+            super(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(
+                  Settings.ATLAS_PixiePcSlots_LOC + textura),
+                  Settings.PIXIE_Player_numFilas, Settings.PIXIE_Player_numColumnas);
 
             añadirAnimacion("izquierda",    new int[]{0, 1, 2},     0.15f, true);
             añadirAnimacion("derecha",      new int[]{3, 4, 5},     0.15f, true);

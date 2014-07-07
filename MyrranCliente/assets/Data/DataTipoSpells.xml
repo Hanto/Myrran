@@ -1,44 +1,12 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <TipoSpells>
-	<TipoSpell>
-		<iD>EDITARTERRENO</iD>
-		<nombre>EditarTerreno</nombre>
-		<descripcion>Edita el Terreno</descripcion>
-		<SkillStats>
-			<Stat>
-				<id>0</id>
-				<nombre>Castear</nombre>
-				<valorBase>0.02</valorBase>
-				<isMejorable>false</isMejorable>
-				<talentoMaximo>50</talentoMaximo>
-				<costeTalento>1</costeTalento>
-				<bonoTalento>1</bonoTalento>
-			</Stat>
-		</SkillStats>
-	</TipoSpell>
-	<TipoSpell>
-		<iD>HEAL</iD>
-		<nombre>Heal</nombre>
-		<descripcion>Cura los HPs</descripcion>
-		<SkillStats>
-			<Stat>
-				<id>0</id>
-				<nombre>Castear</nombre>
-				<valorBase>1.0</valorBase>
-				<isMejorable>true</isMejorable>
-				<talentoMaximo>50</talentoMaximo>
-				<costeTalento>1</costeTalento>
-				<bonoTalento>1</bonoTalento>
-			</Stat>
-			<Stat>
-				<id>1</id>
-				<nombre>Curacion</nombre>
-				<valorBase>500</valorBase>
-				<isMejorable>true</isMejorable>
-				<talentoMaximo>50</talentoMaximo>
-				<costeTalento>1</costeTalento>
-				<bonoTalento>1</bonoTalento>
-			</Stat>
-		</SkillStats>
-	</TipoSpell>
+  <TipoSpell ID="HEAL" nombre="Heal">
+    <Descripcion>Cura los HPs</Descripcion>
+    <SkillStat ID="0" nombre="Castear" valorBase="1.0" isMejorable="true" costeTalento="1" bonoTalento="1.0" talentoMaximo="50" />
+    <SkillStat ID="1" nombre="Curacion" valorBase="500.0" isMejorable="true" costeTalento="1" bonoTalento="1.0" talentoMaximo="50" />
+  </TipoSpell>
+  <TipoSpell ID="EDITARTERRENO" nombre="EditarTerreno">
+    <Descripcion>Edita el Terreno</Descripcion>
+    <SkillStat ID="0" nombre="Castear" valorBase="0.02" isMejorable="false" costeTalento="0" bonoTalento="0.0" talentoMaximo="0" />
+  </TipoSpell>
 </TipoSpells>

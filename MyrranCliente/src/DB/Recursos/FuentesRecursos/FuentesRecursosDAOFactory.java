@@ -1,15 +1,15 @@
 package DB.Recursos.FuentesRecursos;// Created by Hanto on 02/05/2014.
 
 import DB.Recursos.FuentesRecursos.DAO.FuentesRecursosDAO;
-import DB.Recursos.FuentesRecursos.DAO.FuentesRecursosLocal;
+import DB.Recursos.FuentesRecursos.DAO.FuentesRecursosXML;
 
 public enum FuentesRecursosDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override
         public FuentesRecursosDAO getFuentesRecursosDAO()
-        {   return new FuentesRecursosLocal(); }
+        {   return new FuentesRecursosXML(FuentesRecursosXMLDB.get()); }
     };
 
     public abstract FuentesRecursosDAO getFuentesRecursosDAO();

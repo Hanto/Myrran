@@ -9,7 +9,7 @@
                  <onMismatch>DENY</onMismatch>
              </filter>
              <encoder>
-                 <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+                 <pattern>[%-5level][%-16logger{0}]: %msg %n</pattern>
              </encoder>
          </appender>
 
@@ -22,7 +22,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+            <pattern>[%-5level][%-16logger{0}]: %msg %n</pattern>
         </encoder>
     </appender>
 
@@ -35,7 +35,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+            <pattern>[%-5level][%-16logger{0}]: %msg %n</pattern>
         </encoder>
     </appender>
 
@@ -48,7 +48,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+            <pattern>[%-5level][%-16logger{0}]: %msg %n</pattern>
         </encoder>
     </appender>
 
@@ -61,7 +61,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
-            <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+            <pattern>[%-5level][%-16logger{0}]: %msg %n</pattern>
         </encoder>
     </appender>
 

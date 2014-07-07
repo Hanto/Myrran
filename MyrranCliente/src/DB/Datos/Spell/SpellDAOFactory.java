@@ -1,15 +1,15 @@
 package DB.Datos.Spell;// Created by Hanto on 17/04/2014.
 
-import DAO.Spell.SpellLocal;
+import DAO.Spell.SpellXML;
 import DAO.Spell.SpellDAO;
 
 public enum SpellDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override
         public SpellDAO getSpellDAO()
-        {   return new SpellLocal(SpellLocalDB.get().listaDeSpells); }
+        {   return new SpellXML(SpellXMLDB.get()); }
     };
 
     public abstract SpellDAO getSpellDAO();

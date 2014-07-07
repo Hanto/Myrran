@@ -10,9 +10,9 @@ import DB.Datos.TipoSpell.TipoSpellDAOFactory;
 public class DAO
 {
     public static final SettingsDAOFactory settingsDAOFactory = SettingsDAOFactory.XML;
-    public static final TerrenoDAOFactory terrenoDAOFactory = TerrenoDAOFactory.LOCAL;
-    public static final TipoSpellDAOFactory tipoSpellDAOFactory = TipoSpellDAOFactory.LOCAL;
-    public static final SpellDAOFactory spellDAOFactory = SpellDAOFactory.LOCAL;
-    public static final TipoBDebuffDAOFactory tipoBDebuffDAOFactory = TipoBDebuffDAOFactory.LOCAL;
-    public static final BDebuffDAOFactory debuffDAOFactory = BDebuffDAOFactory.LOCAL;
+    public static final TerrenoDAOFactory terrenoDAOFactory = TerrenoDAOFactory.XML;
+    public static final TipoSpellDAOFactory tipoSpellDAOFactory = TipoSpellDAOFactory.XML;
+    public static final SpellDAOFactory spellDAOFactory = SpellDAOFactory.XML;
+    public static final TipoBDebuffDAOFactory tipoBDebuffDAOFactory = TipoBDebuffDAOFactory.XML;
+    public static final BDebuffDAOFactory debuffDAOFactory = BDebuffDAOFactory.XML;
 }

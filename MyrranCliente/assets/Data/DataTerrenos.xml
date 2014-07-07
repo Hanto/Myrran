@@ -1,81 +1,16 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Terrenos>
-	<Terreno>
-		<iD>0</iD>
-		<nombre>Arena1</nombre>
-		<nombreTextura>Arena1</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>1</iD>
-		<nombre>Arena2</nombre>
-		<nombreTextura>Arena2</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>2</iD>
-		<nombre>Baldosas1</nombre>
-		<nombreTextura>Baldosas1</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>3</iD>
-		<nombre>Baldosas2</nombre>
-		<nombreTextura>Baldosas2</nombreTextura>		
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>4</iD>
-		<nombre>Baldosas3</nombre>
-		<nombreTextura>Baldosas3</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>5</iD>
-		<nombre>Cesped1</nombre>
-		<nombreTextura>Cesped1</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>6</iD>
-		<nombre>Cesped2</nombre>
-		<nombreTextura>Cesped2</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>7</iD>
-		<nombre>Cesped3</nombre>
-		<nombreTextura>Cesped3</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>8</iD>
-		<nombre>Cesped4</nombre>
-		<nombreTextura>Cesped4</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>9</iD>
-		<nombre>Cesped5</nombre>
-		<nombreTextura>Cesped5</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>10</iD>
-		<nombre>Tierra1</nombre>
-		<nombreTextura>Tierra1</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>11</iD>
-		<nombre>Tierra2</nombre>
-		<nombreTextura>Tierra2</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
-	<Terreno>
-		<iD>12</iD>
-		<nombre>Tierra3</nombre>
-		<nombreTextura>Tierra3</nombreTextura>
-		<isSolido>false</isSolido>
-	</Terreno>
+  <Terreno ID="0" nombre="Arena1" isSolido="false" nombreTextura="Arena1" />
+  <Terreno ID="1" nombre="Arena2" isSolido="false" nombreTextura="Arena2" />
+  <Terreno ID="2" nombre="Baldosas1" isSolido="false" nombreTextura="Baldosas1" />
+  <Terreno ID="3" nombre="Baldosas2" isSolido="false" nombreTextura="Baldosas2" />
+  <Terreno ID="4" nombre="Baldosas3" isSolido="false" nombreTextura="Baldosas3" />
+  <Terreno ID="5" nombre="Cesped1" isSolido="false" nombreTextura="Cesped1" />
+  <Terreno ID="6" nombre="Cesped2" isSolido="false" nombreTextura="Cesped2" />
+  <Terreno ID="7" nombre="Cesped3" isSolido="false" nombreTextura="Cesped3" />
+  <Terreno ID="8" nombre="Cesped4" isSolido="false" nombreTextura="Cesped4" />
+  <Terreno ID="9" nombre="Cesped5" isSolido="false" nombreTextura="Cesped5" />
+  <Terreno ID="10" nombre="Tierra1" isSolido="false" nombreTextura="Tierra1" />
+  <Terreno ID="11" nombre="Tierra2" isSolido="false" nombreTextura="Tierra2" />
+  <Terreno ID="12" nombre="Tierra3" isSolido="false" nombreTextura="Tierra3" />
 </Terrenos>

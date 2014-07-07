@@ -1,15 +1,15 @@
 package DB.Recursos.PixiePCRecursos;// Created by Hanto on 01/05/2014.
 
-import DB.Recursos.PixiePCRecursos.DAO.PixiePCRecursosLocal;
+import DB.Recursos.PixiePCRecursos.DAO.PixiePCRecursosXML;
 import DB.Recursos.PixiePCRecursos.DAO.PixiePCRecursosDAO;
 
 public enum PixiePCRecursosDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override
         public PixiePCRecursosDAO getPixiePCRecursosDAO()
-        {   return new PixiePCRecursosLocal(); }
+        {   return new PixiePCRecursosXML(PixiePCRecursosXMLDB.get()); }
     };
 
     public abstract PixiePCRecursosDAO getPixiePCRecursosDAO();

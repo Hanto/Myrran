@@ -46,17 +46,17 @@ public class Settings
         XML_DataBDebuffs            = settings.getString("XML_DataBDebuffs",           "DataBDebuffs.xml");
         XML_DataTerrenos            = settings.getString("XML_DataTerrenos",           "DataTerrenos.xml");
         XML_DataAcciones            = settings.getString("XML_DataAcciones",           "DataAcciones.xml");
-        XML_DataRazas               = settings.getString("XML_DataRazas",              "DataRazas.xml");
         XML_TexturasAtlas           = settings.getString("XML_TexturasAtlas",          "TexturasAtlas.xml");
-        XML_TexturasIconosAcciones  = settings.getString("XML_TexturasIconosAcciones", "TexturasIconosAcciones.xml");
-        XML_TexturasFuentes         = settings.getString("XML_TexturasFuentes",        "TexturasFuentes.xml");
-        XML_TexturasMisc            = settings.getString("XML_TexturasMisc",           "TexturasMisc.xml");
-        XML_TexturasIconoSpells     = settings.getString("XML_TexturasIconoSpells",    "TexturasIconosSpells.xml");
-        XML_TexturasTerrenos        = settings.getString("XML_TexturasTerrenos",       "TexturasTerrenos.xml");
+
+        XML_TexturasMisc            = settings.getString("XML_TexturasMisc",           "Texturas.xml");
+        XML_TexturasIconosAcciones  = settings.getString("XML_TexturasIconosAcciones", "Texturas.xml");
+        XML_TexturasIconoSpells     = settings.getString("XML_TexturasIconoSpells",    "Texturas.xml");
+        XML_TexturasTerrenos        = settings.getString("XML_TexturasTerrenos",       "Texturas.xml");
+        XML_TexturasFuentes         = settings.getString("XML_TexturasFuentes",        "Texturas.xml");
+
+        XML_PixieSlot               = settings.getString("XML_PixieSlot",              "PixieSlot.xml");
         XML_AnimacionesCasteo       = settings.getString("XML_AnimacionesCasteo",      "AnimacionesCasteo.xml");
         XML_AnimacionesProyectil    = settings.getString("XML_AnimacionesProyectil",   "AnimacionesProyectil.xml");
-        XML_PixieCuerpo             = settings.getString("XML_PixieCuerpo",            "PixieCuerpo.xml");
-        XML_PixieSlot               = settings.getString("XML_PixieSlot",              "Pixie");
 
         //Atlas Recursos:
         ATLAS_GenerarAtlas          = settings.getBoolean("ATLAS_GenerarAtlas",         false);
@@ -65,7 +65,7 @@ public class Settings
         ATLAS_TexturasTerrenos_LOC  = settings.getString("ATLAS_TexturasTerrenos_LOC", "TexturasTerrenos/");
         ATLAS_TexturasIconos_LOC    = settings.getString("ATLAS_TexturasIconos_LOC",   "TexturasIconos/");
         ATLAS_TexturasMisc_LOC      = settings.getString("ATLAS_TexturasMisc_LOC",     "TexturasMisc/");
-        ATLAS_AnimacionesSpells_LOC = settings.getString("ATLAS_AnimacionesSpells_LOC ","AnimacionesSpells/");
+        ATLAS_AnimacionesSpells_LOC = settings.getString("ATLAS_AnimacionesSpells_LOC","AnimacionesSpells/");
         ATLAS_Fuentes_LOC           = settings.getString("ATLAS_Fuentes_LOC",          "Fonts/");
 
         //Pixie:
@@ -150,7 +150,6 @@ public class Settings
     public static String XML_DataBDebuffs;
     public static String XML_DataTerrenos;
     public static String XML_DataAcciones;
-    public static String XML_DataRazas;
     public static String XML_TexturasAtlas;
     public static String XML_TexturasIconosAcciones;
     public static String XML_TexturasFuentes;
@@ -159,7 +158,6 @@ public class Settings
     public static String XML_TexturasTerrenos;
     public static String XML_AnimacionesCasteo;
     public static String XML_AnimacionesProyectil;
-    public static String XML_PixieCuerpo;
     public static String XML_PixieSlot;
 
     //Mobiles Recursos:
