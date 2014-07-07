@@ -1,7 +1,7 @@
 package DTO;// Created by Hanto on 07/04/2014.
 
 
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
@@ -11,9 +11,9 @@ import com.esotericsoftware.kryonet.EndPoint;
 
 public class NetDTO
 {
-    public static final int puertoTCP = MiscData.NETWORK_PuertoTCP_Servidor;
-    public static final int puertoUDP = MiscData.NETWORK_PuertoUDP_Servidor;
-    public static final int timeout = MiscData.NETWORK_Client_Timeout;
+    public static final int puertoTCP = Settings.NETWORK_PuertoTCP;
+    public static final int puertoUDP = Settings.NETWORK_PuertoUDP;
+    public static final int timeout = Settings.NETWORK_Client_Timeout;
 
     public static void register (EndPoint endPoint)
     {
@@ -214,7 +214,7 @@ public class NetDTO
     public static class ActualizarMapa
     {
         public static class CeldaMapa
-        {   public short[] celda= new short[MiscData.MAPA_Max_Capas_Terreno];
+        {   public short[] celda= new short[Settings.MAPA_Max_Capas_Terreno];
             public CeldaMapa() { }
         }
 

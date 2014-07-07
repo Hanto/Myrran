@@ -4,7 +4,7 @@ import Core.AbrirFichero;
 import DB.RSC;
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
-import Data.MiscData;
+import Data.Settings;
 import View.Classes.Graficos.Pixie;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;
@@ -44,7 +44,7 @@ public class SkillRecursosLocalDB
     {
         System.out.println("[CARGANDO TEXTURAS ICONOS SPELLS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_TexturasIconoSpells);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_TexturasIconoSpells);
 
         try
         {
@@ -57,21 +57,21 @@ public class SkillRecursosLocalDB
                 Element nodo = (Element) listaNodos.get(i);
                 String nombre = nodo.getText();
 
-                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(MiscData.ATLAS_TexturasIconos_LOC + nombre));
+                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_TexturasIconos_LOC + nombre));
                 listaDeTexturasIconosSpells.put(nombre, textura);
 
                 System.out.println(" TexturaIconoSpell : " + nombre);
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_TexturasIconoSpells+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_TexturasIconoSpells+": "+e); }
     }
 
     public void cargarAnimacionesCasteo()
     {
         System.out.println("[CARGANDO ANIMACIONES CASTEO]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_AnimacionesCasteo);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_AnimacionesCasteo);
 
         try
         {
@@ -84,7 +84,7 @@ public class SkillRecursosLocalDB
                 Element nodo = (Element) listaNodos.get(i);
                 String nombre = nodo.getText();
 
-                Pixie pixie = new Pixie(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(MiscData.ATLAS_AnimacionesSpells_LOC + nombre),1,3);
+                Pixie pixie = new Pixie(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_AnimacionesSpells_LOC + nombre),1,3);
                 pixie.añadirAnimacion("Casteo", new int[]{0, 1, 2}, 0.15f, false);
                 pixie.animaciones().get(0).animarYEliminar = true;
                 listaDeAnimaciones.put(nombre, pixie);
@@ -93,14 +93,14 @@ public class SkillRecursosLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_AnimacionesCasteo+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_AnimacionesCasteo+": "+e); }
     }
 
     public void cargarAnimacionesProyectil()
     {
         System.out.println("[CARGANDO ANIMACIONES PROYECTIL]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_AnimacionesProyectil);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_AnimacionesProyectil);
 
         try
         {
@@ -113,7 +113,7 @@ public class SkillRecursosLocalDB
                 Element nodo = (Element) listaNodos.get(i);
                 String nombre = nodo.getText();
 
-                Pixie pixie = new Pixie(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(MiscData.ATLAS_AnimacionesSpells_LOC + nombre),1,3);
+                Pixie pixie = new Pixie(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_AnimacionesSpells_LOC + nombre),1,3);
                 pixie.añadirAnimacion("Proyectil", new int[]{0, 1, 2}, 0.15f, false);
                 listaDeAnimaciones.put(nombre, pixie);
 
@@ -121,14 +121,14 @@ public class SkillRecursosLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_AnimacionesProyectil+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_AnimacionesProyectil+": "+e); }
     }
 
     public void cargarSpellRecursos()
     {
         System.out.println("[CARGANDO SPELL RECURSOS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_DataSpells);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_DataSpells);
 
         try
         {
@@ -151,6 +151,6 @@ public class SkillRecursosLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_DataSpells+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataSpells+": "+e); }
     }
 }

@@ -2,7 +2,7 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
 import Model.GameState.Mundo;
@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.Array;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import static Data.MiscData.PIXEL_METROS;
+import static Data.Settings.PIXEL_METROS;
 
 public class MundoView extends Stage implements PropertyChangeListener
 {
@@ -64,7 +64,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         RayHandler.useDiffuseLight(true);
         rayHandler = new RayHandler(mundo.getWorld());
         rayHandler.setAmbientLight(0.4f, 0.4f, 0.4f, 1.0f);
-        mapaView = new MapaView(mundo.getMapa(), this, player.getX(), player.getY(), MiscData.MAPAVIEW_TamañoX, MiscData.MAPAVIEW_TamañoY);
+        mapaView = new MapaView(mundo.getMapa(), this, player.getX(), player.getY(), Settings.MAPAVIEW_TamañoX, Settings.MAPAVIEW_TamañoY);
         playerView = new PlayerView(player, this, controlador);
         camara = new OrthographicCamera (Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         boxCamara = new OrthographicCamera(Gdx.graphics.getWidth() * PIXEL_METROS, Gdx.graphics.getHeight() * PIXEL_METROS);
@@ -158,59 +158,59 @@ public class MundoView extends Stage implements PropertyChangeListener
 
         //Dibujar Resolucion
         shape.setColor(new Color(1,1,1, 0.5f));
-        shape.rect((int)(getPlayerView().getCenterX()-MiscData.GDX_Horizontal_Resolution /2-1),
-                   (int)(getPlayerView().getCenterY()-MiscData.GDX_Vertical_Resolution /2-1),
-                   MiscData.GDX_Horizontal_Resolution +2,
-                   MiscData.GDX_Vertical_Resolution +2);
+        shape.rect((int)(getPlayerView().getCenterX()- Settings.GDX_Horizontal_Resolution /2-1),
+                   (int)(getPlayerView().getCenterY()- Settings.GDX_Vertical_Resolution /2-1),
+                   Settings.GDX_Horizontal_Resolution +2,
+                   Settings.GDX_Vertical_Resolution +2);
 
         //Dibujar alcance Vista Virtual:
         shape.setColor(Color.RED);
-        shape.rect((int)(getPlayerView().getCenterX()-MiscData.MAPTILE_Horizontal_Resolution /2-1),
-                   (int)(getPlayerView().getCenterY()-MiscData.MAPTILE_Vertical_Resolution /2-1),
-                   MiscData.MAPTILE_Horizontal_Resolution +2,
-                   MiscData.MAPTILE_Vertical_Resolution +2);
+        shape.rect((int)(getPlayerView().getCenterX()- Settings.MAPTILE_Horizontal_Resolution /2-1),
+                   (int)(getPlayerView().getCenterY()- Settings.MAPTILE_Vertical_Resolution /2-1),
+                   Settings.MAPTILE_Horizontal_Resolution +2,
+                   Settings.MAPTILE_Vertical_Resolution +2);
 
 
         //Dibujar alcance Mobs:
         shape.setColor(Color.GREEN);
-        shape.rect((int)(getPlayerView().getCenterX()-MiscData.MAPTILE_Horizontal_Resolution *MiscData.SERVIDOR_DistanciaVisionMobs/2),
-                   (int)(getPlayerView().getCenterY()-MiscData.MAPTILE_Vertical_Resolution *MiscData.SERVIDOR_DistanciaVisionMobs/2),
-                   MiscData.MAPTILE_Horizontal_Resolution *MiscData.SERVIDOR_DistanciaVisionMobs,
-                   MiscData.MAPTILE_Vertical_Resolution *MiscData.SERVIDOR_DistanciaVisionMobs);
+        shape.rect((int)(getPlayerView().getCenterX()- Settings.MAPTILE_Horizontal_Resolution * Settings.NETWORK_DistanciaVisionMobs /2),
+                   (int)(getPlayerView().getCenterY()- Settings.MAPTILE_Vertical_Resolution * Settings.NETWORK_DistanciaVisionMobs /2),
+                   Settings.MAPTILE_Horizontal_Resolution * Settings.NETWORK_DistanciaVisionMobs,
+                   Settings.MAPTILE_Vertical_Resolution * Settings.NETWORK_DistanciaVisionMobs);
 
         //Dibujar Limites Mapa:
         shape.setColor(Color.WHITE);
-        shape.rect( 0, 0, MiscData.MAPA_Max_TilesX*MiscData.TILESIZE,MiscData.MAPA_Max_TilesY*MiscData.TILESIZE);
+        shape.rect( 0, 0, Settings.MAPA_Max_TilesX* Settings.TILESIZE, Settings.MAPA_Max_TilesY* Settings.TILESIZE);
 
         //Dibujar limites Celda:
         shape.setColor(Color.GRAY);
-        for (int i=1; i<=MiscData.MAPA_Max_TilesX/MiscData.MAPTILE_NumTilesX; i++)
+        for (int i=1; i<= Settings.MAPA_Max_TilesX/ Settings.MAPTILE_NumTilesX; i++)
         {
-            shape.line(i*MiscData.MAPTILE_NumTilesX *MiscData.TILESIZE, 0,
-                       i*MiscData.MAPTILE_NumTilesX *MiscData.TILESIZE, MiscData.MAPA_Max_TilesY*MiscData.TILESIZE);
+            shape.line(i* Settings.MAPTILE_NumTilesX * Settings.TILESIZE, 0,
+                       i* Settings.MAPTILE_NumTilesX * Settings.TILESIZE, Settings.MAPA_Max_TilesY* Settings.TILESIZE);
         }
-        for (int i=1; i<=MiscData.MAPA_Max_TilesY/MiscData.MAPTILE_NumTilesY; i++)
+        for (int i=1; i<= Settings.MAPA_Max_TilesY/ Settings.MAPTILE_NumTilesY; i++)
         {
-            shape.line(0, i*MiscData.MAPTILE_NumTilesY *MiscData.TILESIZE,
-                       MiscData.MAPA_Max_TilesX*MiscData.TILESIZE, i*MiscData.MAPTILE_NumTilesY *MiscData.TILESIZE);
+            shape.line(0, i* Settings.MAPTILE_NumTilesY * Settings.TILESIZE,
+                       Settings.MAPA_Max_TilesX* Settings.TILESIZE, i* Settings.MAPTILE_NumTilesY * Settings.TILESIZE);
         }
 
         //Dibujar Subsectores Celda:
         shape.setColor(Color.DARK_GRAY);
-        for (int i=0; i<=MiscData.MAPA_Max_TilesX/MiscData.MAPTILE_NumTilesX; i++)
+        for (int i=0; i<= Settings.MAPA_Max_TilesX/ Settings.MAPTILE_NumTilesX; i++)
         {
-            shape.line(i*MiscData.MAPTILE_NumTilesX *MiscData.TILESIZE+MiscData.MAPTILE_posHorNeg, 0,
-                       i*MiscData.MAPTILE_NumTilesX *MiscData.TILESIZE+MiscData.MAPTILE_posHorNeg, MiscData.MAPA_Max_TilesY*MiscData.TILESIZE);
-            shape.line(i*MiscData.MAPTILE_NumTilesX *MiscData.TILESIZE+MiscData.MAPTILE_posHorPos, 0,
-                       i*MiscData.MAPTILE_NumTilesX *MiscData.TILESIZE+MiscData.MAPTILE_posHorPos, MiscData.MAPA_Max_TilesY*MiscData.TILESIZE);
+            shape.line(i* Settings.MAPTILE_NumTilesX * Settings.TILESIZE+ Settings.MAPTILE_posHorNeg, 0,
+                       i* Settings.MAPTILE_NumTilesX * Settings.TILESIZE+ Settings.MAPTILE_posHorNeg, Settings.MAPA_Max_TilesY* Settings.TILESIZE);
+            shape.line(i* Settings.MAPTILE_NumTilesX * Settings.TILESIZE+ Settings.MAPTILE_posHorPos, 0,
+                       i* Settings.MAPTILE_NumTilesX * Settings.TILESIZE+ Settings.MAPTILE_posHorPos, Settings.MAPA_Max_TilesY* Settings.TILESIZE);
         }
 
-        for (int i=0; i<=MiscData.MAPA_Max_TilesY/MiscData.MAPTILE_NumTilesY; i++)
+        for (int i=0; i<= Settings.MAPA_Max_TilesY/ Settings.MAPTILE_NumTilesY; i++)
         {
-            shape.line(0, MiscData.MAPTILE_posVerNeg+i*MiscData.MAPTILE_NumTilesY *MiscData.TILESIZE,
-                       MiscData.MAPA_Max_TilesX*MiscData.TILESIZE,  MiscData.MAPTILE_posVerNeg+i*MiscData.MAPTILE_NumTilesY *MiscData.TILESIZE);
-            shape.line(0, MiscData.MAPTILE_posVerPos+i*MiscData.MAPTILE_NumTilesY *MiscData.TILESIZE,
-                       MiscData.MAPA_Max_TilesX*MiscData.TILESIZE,  MiscData.MAPTILE_posVerPos+i*MiscData.MAPTILE_NumTilesY *MiscData.TILESIZE);
+            shape.line(0, Settings.MAPTILE_posVerNeg+i* Settings.MAPTILE_NumTilesY * Settings.TILESIZE,
+                       Settings.MAPA_Max_TilesX* Settings.TILESIZE,  Settings.MAPTILE_posVerNeg+i* Settings.MAPTILE_NumTilesY * Settings.TILESIZE);
+            shape.line(0, Settings.MAPTILE_posVerPos+i* Settings.MAPTILE_NumTilesY * Settings.TILESIZE,
+                       Settings.MAPA_Max_TilesX* Settings.TILESIZE,  Settings.MAPTILE_posVerPos+i* Settings.MAPTILE_NumTilesY * Settings.TILESIZE);
 
         }
 
@@ -225,8 +225,8 @@ public class MundoView extends Stage implements PropertyChangeListener
                     int mapTileX = x-1 + mundo.getMapa().mapTileCentroX;
                     int mapTileY = 1-y + mundo.getMapa().mapTileCentroY;
 
-                    shape.rect( mapTileX*MiscData.MAPTILE_NumTilesX *MiscData.TILESIZE, mapTileY*MiscData.MAPTILE_NumTilesY *MiscData.TILESIZE,
-                            MiscData.MAPTILE_NumTilesX *MiscData.TILESIZE,MiscData.MAPTILE_NumTilesY *MiscData.TILESIZE);
+                    shape.rect( mapTileX* Settings.MAPTILE_NumTilesX * Settings.TILESIZE, mapTileY* Settings.MAPTILE_NumTilesY * Settings.TILESIZE,
+                            Settings.MAPTILE_NumTilesX * Settings.TILESIZE, Settings.MAPTILE_NumTilesY * Settings.TILESIZE);
                 }
             }
         }

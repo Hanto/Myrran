@@ -15,6 +15,19 @@
     <orderEntry type="library" name="Java JDom" level="project" />
     <orderEntry type="library" name="Java Kryonet" level="project" />
     <orderEntry type="library" name="Java SLF4J" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../MyrranCore/lib/Java SLF4J" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../MyrranCore/lib/Java SLF4J" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/../MyrranCore/lib/Java SLF4J" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../MyrranCore/lib/Java SLF4J" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

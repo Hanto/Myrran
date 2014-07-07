@@ -1,6 +1,6 @@
 package Controller;// Created by Hanto on 09/04/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
 
@@ -37,10 +37,10 @@ public class Updater implements Runnable
 
             synchronized (mundo)
             {
-                mundoUpdate(MiscData.SERVIDOR_Delta_Time);
+                mundoUpdate(Settings.NETWORK_Delta_Time);
                 netUpdate();
             }
-            try { Thread.sleep(MiscData.NETWORK_Update_Time); }
+            try { Thread.sleep(Settings.NETWORK_Update_Time); }
             catch (InterruptedException e) { System.out.println("ERROR: Updateando la red: "+e); return; }
         }
     }

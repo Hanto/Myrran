@@ -1,7 +1,7 @@
 package View.Classes.UI.BarraTerrenos;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
-import Data.MiscData;
+import Data.Settings;
 import Model.Classes.UI.BarraTerrenos;
 import Model.DTO.BarraTerrenosDTO;
 import DB.RSC;
@@ -40,7 +40,7 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
 
     protected DragAndDrop dad;
 
-    private Texto[] botonCapas = new Texto[MiscData.MAPA_Max_Capas_Terreno];
+    private Texto[] botonCapas = new Texto[Settings.MAPA_Max_Capas_Terreno];
     protected Image moverBarra;
     protected Image redimensionarBarra;
     protected Image botonBorrarTerreno;
@@ -51,8 +51,8 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
     protected int numFilas = 4;
     protected int numColumnas =2;
 
-    @Override public float getAnchoElemento()           { return MiscData.TILESIZE*2; }
-    @Override public float getAltoElemento()            { return MiscData.TILESIZE*2; }
+    @Override public float getAnchoElemento()           { return Settings.TILESIZE*2; }
+    @Override public float getAltoElemento()            { return Settings.TILESIZE*2; }
 
     public BarraTerrenosView (Controlador controlador, Stage stage, final BarraTerrenos barraTerrenos)
     {
@@ -66,15 +66,15 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
         scrollPane = new ScrollPane(tablaTerrenos);
         this.addActor(scrollPane);
 
-        moverBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_BARRASPELLS_RebindButtonON));
+        moverBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRASPELLS_RebindButtonON));
         moverBarra.addListener(new VentanaMoverListener(moverBarra, this));
         this.addActor(moverBarra);
 
-        redimensionarBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_BARRASPELLS_RebindButtonON));
+        redimensionarBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRASPELLS_RebindButtonON));
         redimensionarBarra.addListener(new VentanaResizeListener(redimensionarBarra, this, this));
         this.addActor(redimensionarBarra);
 
-        botonBorrarTerreno = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_BARRATERRENOS_Borrar_Terreno));
+        botonBorrarTerreno = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRATERRENOS_Borrar_Terreno));
         botonBorrarTerreno.setPosition(0, -botonBorrarTerreno.getHeight());
         this.addActor(botonBorrarTerreno);
         botonBorrarTerreno.addListener(new InputListener()
@@ -118,11 +118,11 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
 
     private void crearBotonCapas()
     {
-        for (int i=0; i< MiscData.MAPA_Max_Capas_Terreno; i++)
+        for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
         {
             final int numCapa = i;
-            botonCapas[i] = new Texto("Capa "+numCapa, RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(MiscData.FUENTE_Nombres), Color.ORANGE, Color.BLACK, Align.left, Align.bottom, 2);
-            botonCapas[i].setPosition(4, -MiscData.TILESIZE*2-18-numCapa*17);
+            botonCapas[i] = new Texto("Capa "+numCapa, RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.ORANGE, Color.BLACK, Align.left, Align.bottom, 2);
+            botonCapas[i].setPosition(4, -Settings.TILESIZE*2-18-numCapa*17);
             this.addActor(botonCapas[i]);
 
             botonCapas[i].addListener(new InputListener()
@@ -152,12 +152,12 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
             if (columna%numColumnas == 0) tablaTerrenos.row();
         }
 
-        scrollPane.setBounds(0,0, numColumnas*MiscData.TILESIZE*2, numFilas*MiscData.TILESIZE*2);
+        scrollPane.setBounds(0,0, numColumnas* Settings.TILESIZE*2, numFilas* Settings.TILESIZE*2);
 
         float esquinaSupIzda = getY() + getHeight();
 
-        this.setWidth(numColumnas*MiscData.TILESIZE*2);
-        this.setHeight(numFilas*MiscData.TILESIZE*2);
+        this.setWidth(numColumnas* Settings.TILESIZE*2);
+        this.setHeight(numFilas* Settings.TILESIZE*2);
 
         setY(esquinaSupIzda - getHeight());
 

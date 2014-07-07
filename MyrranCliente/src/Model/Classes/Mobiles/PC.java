@@ -6,7 +6,7 @@ import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Model.AbstractModel;
 import com.badlogic.gdx.physics.box2d.*;
 
-import static Data.MiscData.PIXEL_METROS;
+import static Data.Settings.PIXEL_METROS;
 
 public class PC extends AbstractModel implements Vulnerable, MobPC
 {

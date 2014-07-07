@@ -1,6 +1,6 @@
 package View.Classes.UI.Ventana;// Created by Hanto on 16/05/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -22,5 +22,5 @@ public class VentanaScrollListener extends DragListener
 
     //Añdimos un listener para el scroll, para configurar su velocidad, hay que parar su propagacion con event.stop() para que no salte el que esta programado de base
     @Override public boolean scrolled(InputEvent event, float x, float y, int amount)
-    { scrollPane.setScrollY(scrollPane.getScrollY()+ MiscData.TILESIZE*3*amount); event.stop(); return true; }
+    { scrollPane.setScrollY(scrollPane.getScrollY()+ Settings.TILESIZE*3*amount); event.stop(); return true; }
 }

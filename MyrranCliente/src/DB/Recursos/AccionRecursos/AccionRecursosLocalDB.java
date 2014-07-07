@@ -3,7 +3,7 @@ package DB.Recursos.AccionRecursos;// Created by Hanto on 07/05/2014.
 import Core.AbrirFichero;
 import DB.RSC;
 import DB.Recursos.AccionRecursos.DTO.AccionRecursos;
-import Data.MiscData;
+import Data.Settings;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -37,7 +37,7 @@ public class AccionRecursosLocalDB
     {
         System.out.println("[CARGANDO TEXTURAS ICONOS ACCIONES]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML + MiscData.XML_TexturasIconosAcciones);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML + Settings.XML_TexturasIconosAcciones);
 
         try
         {
@@ -50,21 +50,21 @@ public class AccionRecursosLocalDB
                 Element nodo = (Element) listaNodos.get(i);
                 String nombre = nodo.getText();
 
-                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(MiscData.ATLAS_TexturasIconos_LOC + nombre));
+                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_TexturasIconos_LOC + nombre));
                 listaDeTexturasAcciones.put(nombre, textura);
 
                 System.out.println(" TexturaIconoAccion : " + nombre);
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_TexturasIconosAcciones+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_TexturasIconosAcciones+": "+e); }
     }
 
     public void cargarAccionRecursos()
     {
         System.out.println("[CARGANDO ACCION RECURSOS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_DataAcciones);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_DataAcciones);
 
         try
         {
@@ -87,6 +87,6 @@ public class AccionRecursosLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_DataAcciones+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataAcciones+": "+e); }
     }
 }

@@ -2,7 +2,7 @@ package DB.Datos.BDebuff;// Created by Hanto on 16/06/2014.
 
 import Core.AbrirFichero;
 import DB.DAO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.BDebuff.TipoBDebuffI;
 import Model.Classes.Skill.BDebuff.BDebuff;
@@ -28,7 +28,7 @@ public class BDebuffLocalDB
     public void cargarDatos()
     {
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML + MiscData.XML_DataBDebuffs);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML + Settings.XML_DataBDebuffs);
 
         try
         {
@@ -99,6 +99,6 @@ public class BDebuffLocalDB
                 listaDeBDebuffs.put(debuff.getID(), debuff);
             }
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_DataBDebuffs+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataBDebuffs+": "+e); }
     }
 }

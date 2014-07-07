@@ -1,6 +1,6 @@
 package Model.Classes.UI;// Created by Hanto on 06/05/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterConTalentos;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.Acciones.AccionI;
@@ -62,7 +62,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
 
 
     public void setKeybind (int posX, int posY, int keycode)
-    {   barraAcciones.get(posY).get(posX).keybind = MiscData.keycodeNames.get(keycode); }
+    {   barraAcciones.get(posY).get(posX).keybind = Settings.keycodeNames.get(keycode); }
 
     public void setBind (int keycode, AccionI accion)
     {   inputManager.salvarKeybind(keycode, accion.getID()); }

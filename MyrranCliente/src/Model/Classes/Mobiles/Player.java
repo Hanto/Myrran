@@ -23,8 +23,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static Data.MiscData.METROS_PIXEL;
-import static Data.MiscData.PIXEL_METROS;
+import static Data.Settings.METROS_PIXEL;
+import static Data.Settings.PIXEL_METROS;
 
 public class Player extends AbstractModel implements MobPlayer, CasterConTalentos, Vulnerable, Debuffeable
 {

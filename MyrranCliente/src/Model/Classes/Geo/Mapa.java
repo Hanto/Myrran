@@ -3,7 +3,7 @@ package Model.Classes.Geo;// Created by Hanto on 19/05/2014.
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesTipos.Mob;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
@@ -31,8 +31,8 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
         this.mob = mob;
         mob.añadirObservador(this);
 
-        this.numTilesX = (int)Math.ceil((double)MiscData.MAPTILE_Horizontal_Resolution /(double)MiscData.TILESIZE);
-        this.numTilesY = (int)Math.ceil((double)MiscData.MAPTILE_Vertical_Resolution /(double)MiscData.TILESIZE);
+        this.numTilesX = (int)Math.ceil((double) Settings.MAPTILE_Horizontal_Resolution /(double) Settings.TILESIZE);
+        this.numTilesY = (int)Math.ceil((double) Settings.MAPTILE_Vertical_Resolution /(double) Settings.TILESIZE);
         mapa = new Celda[numTilesX*3+reborde*2][numTilesY*3+reborde*2];
 
         for (Celda[] fila: mapa)
@@ -41,8 +41,8 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
         }
     }
 
-    private int getMapTileX()                   { return (int)((mob.getX() / (float)(numTilesX * MiscData.TILESIZE))); }
-    private int getMapTileY()                   { return (int)((mob.getY() / (float)(numTilesY * MiscData.TILESIZE))); }
+    private int getMapTileX()                   { return (int)((mob.getX() / (float)(numTilesX * Settings.TILESIZE))); }
+    private int getMapTileY()                   { return (int)((mob.getY() / (float)(numTilesY * Settings.TILESIZE))); }
     private int getTileX(int tileX)             { return (tileX - (mapTileCentroX-1)*numTilesX)+reborde; }
     private int getTileY(int tileY)             { return (tileY - (mapTileCentroY-1)*numTilesY)+reborde; }
 

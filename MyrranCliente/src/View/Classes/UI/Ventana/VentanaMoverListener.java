@@ -1,6 +1,6 @@
 package View.Classes.UI.Ventana;// Created by Hanto on 13/05/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -38,11 +38,11 @@ public class VentanaMoverListener extends DragListener
         float dragACtorY = dragActor.getParent().getY() + dragActor.getY();
 
         if (dragActorX + scrollX < 0)                                                           { actor.setX(getActorX(0)); }
-        else if (dragActorX + anchoDragActor + scrollX > MiscData.GDX_Horizontal_Resolution)    { actor.setX(getActorX(MiscData.GDX_Horizontal_Resolution-anchoDragActor));}
+        else if (dragActorX + anchoDragActor + scrollX > Settings.GDX_Horizontal_Resolution)    { actor.setX(getActorX(Settings.GDX_Horizontal_Resolution-anchoDragActor));}
         else                                                                                    { actor.setX(actor.getX() + scrollX); }
 
         if (dragACtorY + scrollY < 0)                                                           { actor.setY(getActorY(0)); }
-        else if (dragACtorY + altoDragActor + scrollY > MiscData.GDX_Vertical_Resolution)       { actor.setY(getActorY(MiscData.GDX_Vertical_Resolution-altoDragActor)); }
+        else if (dragACtorY + altoDragActor + scrollY > Settings.GDX_Vertical_Resolution)       { actor.setY(getActorY(Settings.GDX_Vertical_Resolution-altoDragActor)); }
         else                                                                                    { actor.setY(actor.getY() + scrollY); }
 
         posicionFinal.set(posicionInicial);

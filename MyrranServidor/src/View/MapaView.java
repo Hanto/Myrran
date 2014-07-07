@@ -2,7 +2,7 @@ package View;// Created by Hanto on 20/05/2014.
 
 import Controller.Controlador;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
 
@@ -23,10 +23,10 @@ public class MapaView
     private int numTilesY;
 
     private final int reborde = 1;
-    private final int posHorNeg = MiscData.MAPTILE_Horizontal_Resolution /4;
-    private final int posHorPos = MiscData.MAPTILE_Horizontal_Resolution - MiscData.MAPTILE_Horizontal_Resolution /4;
-    private final int posVerNeg = MiscData.MAPTILE_Vertical_Resolution /4;
-    private final int posVerPos = MiscData.MAPTILE_Vertical_Resolution - MiscData.MAPTILE_Vertical_Resolution /4;
+    private final int posHorNeg = Settings.MAPTILE_Horizontal_Resolution /4;
+    private final int posHorPos = Settings.MAPTILE_Horizontal_Resolution - Settings.MAPTILE_Horizontal_Resolution /4;
+    private final int posVerNeg = Settings.MAPTILE_Vertical_Resolution /4;
+    private final int posVerPos = Settings.MAPTILE_Vertical_Resolution - Settings.MAPTILE_Vertical_Resolution /4;
 
 
     public MapaView (PC pc, Mundo mundo, Controlador controlador)
@@ -35,8 +35,8 @@ public class MapaView
         this.mundo = mundo;
         this.controlador = controlador;
 
-        this.numTilesX = (int)Math.ceil((double)MiscData.MAPTILE_Horizontal_Resolution /(double)MiscData.TILESIZE);
-        this.numTilesY = (int)Math.ceil((double)MiscData.MAPTILE_Vertical_Resolution /(double)MiscData.TILESIZE);
+        this.numTilesX = (int)Math.ceil((double) Settings.MAPTILE_Horizontal_Resolution /(double) Settings.TILESIZE);
+        this.numTilesY = (int)Math.ceil((double) Settings.MAPTILE_Vertical_Resolution /(double) Settings.TILESIZE);
     }
 
     private void init ()
@@ -49,8 +49,8 @@ public class MapaView
         mapTileCentroY = getMapTileY();
     }
 
-    private int getMapTileX()                                       { return (int)((PC.getX() / (float)(numTilesX * MiscData.TILESIZE))); }
-    private int getMapTileY()                                       { return (int)((PC.getY() / (float)(numTilesY * MiscData.TILESIZE))); }
+    private int getMapTileX()                                       { return (int)((PC.getX() / (float)(numTilesX * Settings.TILESIZE))); }
+    private int getMapTileY()                                       { return (int)((PC.getY() / (float)(numTilesY * Settings.TILESIZE))); }
     private boolean getMapaEnviado(int offSetX, int offSetY)        { return mapaEnviado[offSetX+1][-offSetY+1]; }
     private void setMapaEnviado(int offSetX, int offSetY, boolean b){ mapaEnviado[offSetX+1][-offSetY+1] = b; }
 
@@ -64,8 +64,8 @@ public class MapaView
     {
         if (Math.abs(getMapTileX()-mapTileCentroX) >1 || Math.abs(getMapTileY()-mapTileCentroY) > 1)  { init(); return; }
 
-        int distX = (int)PC.getX() -mapTileCentroX*numTilesX*MiscData.TILESIZE;
-        int distY = (int)PC.getY() -mapTileCentroY*numTilesY*MiscData.TILESIZE;
+        int distX = (int)PC.getX() -mapTileCentroX*numTilesX* Settings.TILESIZE;
+        int distY = (int)PC.getY() -mapTileCentroY*numTilesY* Settings.TILESIZE;
 
         if (distX < posHorNeg)      { posicionHoritontal = -1; }
         else if (distX > posHorPos) { posicionHoritontal = +1; }
@@ -219,7 +219,7 @@ public class MapaView
         {
             for (int y = 0; y< alto; y++)
             {
-                for (int i=0; i<MiscData.MAPA_Max_Capas_Terreno; i++)
+                for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
                 {   actualizarMapa.mapa[x][y].celda[i] = mundo.getMapa().getTerrenoID(x +esquinaInfIzdaX, y +esquinaInfIzdaY, i); }
             }
         }
@@ -228,8 +228,8 @@ public class MapaView
 
     public void cambioTerreno (int tileX, int tileY, int numCapa, short iDTerreno)
     {   //Solo se notifican por cambios los terrenos adyacentes que han sido enviados:
-        int offsetX = tileX/MiscData.MAPTILE_NumTilesX - mapTileCentroX;
-        int offsetY = tileY/MiscData.MAPTILE_NumTilesY - mapTileCentroY;
+        int offsetX = tileX/ Settings.MAPTILE_NumTilesX - mapTileCentroX;
+        int offsetY = tileY/ Settings.MAPTILE_NumTilesY - mapTileCentroY;
 
         if ( Math.abs(offsetX) <= 1 && Math.abs(offsetY) <= 1)
         {

@@ -2,7 +2,7 @@ package DB.Datos.Spell;// Created by Hanto on 17/04/2014.
 
 import Core.AbrirFichero;
 import DB.DAO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.TipoSpellI;
 import Model.Classes.Skill.Spell.Spell;
@@ -28,7 +28,7 @@ public class SpellLocalDB
     public void cargarDatos()
     {
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_DataSpells);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_DataSpells);
 
         try
         {
@@ -103,6 +103,6 @@ public class SpellLocalDB
                 listaDeSpells.put(spell.getID(), spell);
             }
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_DataSpells+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataSpells+": "+e); }
     }
 }

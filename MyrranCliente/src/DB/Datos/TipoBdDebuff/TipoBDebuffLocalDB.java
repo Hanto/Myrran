@@ -2,7 +2,7 @@ package DB.Datos.TipoBdDebuff;// Created by Hanto on 10/06/2014.
 
 import Core.AbrirFichero;
 import Core.Skills.SkillStat;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.BDebuff.TipoBDebuffI;
 import Model.Classes.Skill.BDebuff.TipoBDebuff;
 import Model.Classes.Skill.BDebuff.TipoBDebuffFactory;
@@ -35,7 +35,7 @@ public class TipoBDebuffLocalDB
         }
 
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML + MiscData.XML_DataTipoBDebuffs);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML + Settings.XML_DataTipoBDebuffs);
 
         try
         {
@@ -105,6 +105,6 @@ public class TipoBDebuffLocalDB
                 listaDeTipoBDebuffs.put(tipoDebuff.getID(), tipoDebuff);
             }
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ MiscData.XML_DataTipoBDebuffs+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataTipoBDebuffs+": "+e); }
     }
 }

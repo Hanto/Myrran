@@ -2,7 +2,7 @@ package View;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesTipos.MobPC;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
@@ -94,8 +94,8 @@ public class PcView implements PropertyChangeListener
 
             if (PCCercano.getConnectionID() != PC.getConnectionID())
             {
-                if (Math.abs(PCCercano.getX()- PC.getX()) <=  MiscData.SERVIDOR_DistanciaVisionMobs*MiscData.MAPTILE_Horizontal_Resolution /2 &&
-                    Math.abs(PCCercano.getY()- PC.getY()) <=  MiscData.SERVIDOR_DistanciaVisionMobs*MiscData.MAPTILE_Vertical_Resolution /2     )
+                if (Math.abs(PCCercano.getX()- PC.getX()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Horizontal_Resolution /2 &&
+                    Math.abs(PCCercano.getY()- PC.getY()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Vertical_Resolution /2     )
                 {
                     añadirPCVisible(pcCercanos);
                     pcCercanos.añadirPCVisible(this);

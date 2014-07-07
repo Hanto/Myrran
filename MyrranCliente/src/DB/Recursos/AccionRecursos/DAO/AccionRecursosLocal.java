@@ -2,7 +2,7 @@ package DB.Recursos.AccionRecursos.DAO;// Created by Hanto on 07/05/2014.
 
 import DB.Recursos.AccionRecursos.AccionRecursosLocalDB;
 import DB.Recursos.AccionRecursos.DTO.AccionRecursos;
-import Data.MiscData;
+import Data.Settings;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -20,7 +20,7 @@ public class AccionRecursosLocal implements AccionRecursosDAO
 
     @Override public void salvarTextura(String nombreTextura, String nombreTexturaEnAtlas, TextureAtlas atlas)
     {
-        TextureRegion textura = new TextureRegion(atlas.findRegion(MiscData.ATLAS_TexturasIconos_LOC +nombreTexturaEnAtlas));
+        TextureRegion textura = new TextureRegion(atlas.findRegion(Settings.ATLAS_TexturasIconos_LOC +nombreTexturaEnAtlas));
         listaDeTexturasAccion.put(nombreTextura, textura);
     }
 

@@ -1,7 +1,7 @@
 package View.Classes.UI.BarraTerrenos.TerrenoView;// Created by Hanto on 14/05/2014.
 
+import Data.Settings;
 import Interfaces.UI.BarraTerrenos.ControladorBarraTerrenosI;
-import Data.MiscData;
 import Model.Classes.UI.BarraTerrenos;
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosDAO;
@@ -43,7 +43,7 @@ public class TerrenoIcono implements Icono
         TerrenoRecursosDAO terrenoDAO = RSC.terrenoRecursosDAO.getTerrenoRecursosDAO();
 
         int terrenoID = barraTerrenos.getTerrenoID(posX);
-        TextureRegion textura = new TextureRegion(terrenoDAO.getTerrenoRecurso(terrenoID).getTextura(), 0, MiscData.TILESIZE*1, MiscData.TILESIZE*2, MiscData.TILESIZE*2);
+        TextureRegion textura = new TextureRegion(terrenoDAO.getTerrenoRecurso(terrenoID).getTextura(), 0, Settings.TILESIZE*1, Settings.TILESIZE*2, Settings.TILESIZE*2);
         Image image = new Image(textura);
 
         group.addActor(image);

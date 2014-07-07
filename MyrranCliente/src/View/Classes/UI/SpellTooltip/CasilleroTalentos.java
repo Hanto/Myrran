@@ -1,7 +1,7 @@
 package View.Classes.UI.SpellTooltip;// Created by Hanto on 27/06/2014.
 
 import DB.RSC;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.UI.BarraAcciones.ControladorSpellTooltipI;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -26,8 +26,8 @@ public class CasilleroTalentos extends Actor
     {
         this.controlador = controladorI;
 
-        fondo = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_SPELLTOOLTIP_TalentoFondo);
-        frente = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_SPELLTOOLTIP_Talento);
+        fondo = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_SPELLTOOLTIP_TalentoFondo);
+        frente = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_SPELLTOOLTIP_Talento);
 
         int ancho = fondo.getRegionWidth();
         int alto = fondo.getRegionHeight();

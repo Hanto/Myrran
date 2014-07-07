@@ -9,6 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Java Kryonet" level="project" />
     <orderEntry type="library" name="Java SLF4J" level="project" />
+    <orderEntry type="library" name="Java JDom" level="project" />
   </component>
 </module>
 

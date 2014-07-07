@@ -2,14 +2,14 @@ package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 
 import DAO.Terreno.TerrenoDAO;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Interfaces.Model.AbstractModel;
 
 public class Mapa extends AbstractModel implements MapaI
 {
-    private Celda[][] matriz = new Celda[MiscData.MAPA_Max_TilesX][MiscData.MAPA_Max_TilesY];
+    private Celda[][] matriz = new Celda[Settings.MAPA_Max_TilesX][Settings.MAPA_Max_TilesY];
 
     public Mapa()
     {
@@ -21,20 +21,20 @@ public class Mapa extends AbstractModel implements MapaI
 
     @Override public TerrenoI getTerreno (int x, int y, int numCapa)
     {
-        if (x<0 || y<0 || x>= MiscData.MAPA_Max_TilesX || y>= MiscData.MAPA_Max_TilesY) return null;
+        if (x<0 || y<0 || x>= Settings.MAPA_Max_TilesX || y>= Settings.MAPA_Max_TilesY) return null;
         TerrenoDAO terrenoDAO = DB.DAO.terrenoDAOFactory.getTerrenoDAO();
         return terrenoDAO.getTerreno(matriz[x][y].getTerrenoID(numCapa));
     }
 
     @Override public short getTerrenoID (int x, int y, int numCapa)
     {
-        if (x<0 || y<0 || x>= MiscData.MAPA_Max_TilesX || y>= MiscData.MAPA_Max_TilesY) return -1;
+        if (x<0 || y<0 || x>= Settings.MAPA_Max_TilesX || y>= Settings.MAPA_Max_TilesY) return -1;
         else return matriz[x][y].getTerrenoID(numCapa);
     }
 
     @Override public boolean setTerreno (int x, int y, int numCapa, TerrenoI terreno)
     {
-        if (x<0 || y<0 || x>= MiscData.MAPA_Max_TilesX || y>= MiscData.MAPA_Max_TilesY) return false;
+        if (x<0 || y<0 || x>= Settings.MAPA_Max_TilesX || y>= Settings.MAPA_Max_TilesY) return false;
         else if (matriz[x][y].getTerreno(numCapa) != terreno)
         {
             matriz[x][y].setTerreno(numCapa, terreno);
@@ -47,7 +47,7 @@ public class Mapa extends AbstractModel implements MapaI
 
     @Override public boolean setTerreno (int x, int y, int numCapa, short iDTerreno)
     {
-        if (x<0 || y<0 || x>= MiscData.MAPA_Max_TilesX || y>= MiscData.MAPA_Max_TilesY) return false;
+        if (x<0 || y<0 || x>= Settings.MAPA_Max_TilesX || y>= Settings.MAPA_Max_TilesY) return false;
         else if (matriz[x][y].getTerrenoID(numCapa) != iDTerreno)
         {
             if (matriz[x][y].setTerreno(numCapa, iDTerreno))

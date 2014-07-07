@@ -1,0 +1,75 @@
+<configuration>
+
+    <appender name="TRACE-OUT" class="ch.qos.logback.core.ConsoleAppender">
+             <!-- encoders are assigned the type
+                                ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+             <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                 <level>TRACE</level>
+                 <onMatch>ACCEPT</onMatch>
+                 <onMismatch>DENY</onMismatch>
+             </filter>
+             <encoder>
+                 <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+             </encoder>
+         </appender>
+
+    <appender name="DEBUG-OUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="INFO-OUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="WARN-OUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR-OUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%-5level][%logger{0}]: %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="trace">
+        <appender-ref ref="TRACE-OUT" />
+        <appender-ref ref="DEBUG-OUT" />
+        <appender-ref ref="INFO-OUT" />
+        <appender-ref ref="WARN-OUT" />
+        <appender-ref ref="ERROR-OUT" />
+    </root>
+</configuration>

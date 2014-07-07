@@ -1,7 +1,7 @@
 package View.Classes.UI.BarraAcciones.AccionIcono;// Created by Hanto on 13/05/2014.
 
 import DB.RSC;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Interfaces.UI.BarraAcciones.ListaAccionesI;
@@ -54,11 +54,11 @@ public class AccionIcono extends Actor implements Icono
         this.posX = posX;
         this.posY = posY;
 
-        keybind = new Texto("", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(MiscData.FUENTE_Nombres), Color.ORANGE, Color.BLACK, Align.left, Align.top, 2);
+        keybind = new Texto("", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.ORANGE, Color.BLACK, Align.left, Align.top, 2);
         keybind.setTouchable(Touchable.disabled);
 
         this.addCaptureListener(new AccionTooltipListener(this));
-        this.setBounds(0, 0, MiscData.ICONO_Accion_Ancho, MiscData.ICONO_Accion_Alto);
+        this.setBounds(0, 0, Settings.ICONO_Accion_Ancho, Settings.ICONO_Accion_Alto);
         this.actualizarApariencia();
     }
 
@@ -67,7 +67,7 @@ public class AccionIcono extends Actor implements Icono
         AccionI accion = getAccion();
 
         if (accion == null)
-        {   casillaIcono = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_BARRASPELLS_Textura_Casillero); }
+        {   casillaIcono = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRASPELLS_Textura_Casillero); }
         else
         {
             if (accion instanceof SeleccionarSpell) { casillaIcono = RSC.skillRecursosDAO.getSpellRecursosDAO().getSpellRecursos(accion.getID()).getIcono(); }

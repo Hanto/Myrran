@@ -1,7 +1,7 @@
 package View.GameState;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
-import Data.MiscData;
+import Data.Settings;
 import Model.Classes.UI.BarraAcciones;
 import Model.DTO.BarraAccionesDTO;
 import Model.GameState.UI;
@@ -35,7 +35,7 @@ public class UIView extends Stage implements PropertyChangeListener
         conjuntoBarraAccionesView = new ConjuntoBarraAccionesView(this.controlador, this);
         barraTerrenosView = new BarraTerrenosView(this.controlador, this, ui.barraTerrenos);
 
-        fps = new Texto("fps", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(MiscData.FUENTE_Nombres),
+        fps = new Texto("fps", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
                         Color.WHITE, Color.BLACK, Align.left, Align.bottom, 2);
         addActor(fps);
 

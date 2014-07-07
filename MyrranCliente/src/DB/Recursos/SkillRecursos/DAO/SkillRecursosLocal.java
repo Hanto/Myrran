@@ -1,6 +1,6 @@
 package DB.Recursos.SkillRecursos.DAO;// Created by Hanto on 30/04/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import DB.Recursos.SkillRecursos.SkillRecursosLocalDB;
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
@@ -22,7 +22,7 @@ public class SkillRecursosLocal implements SkillRecursosDAO
 
     @Override public void salvarIcono(String nombreIcono, String nombreTextura, TextureAtlas atlas)
     {
-        TextureRegion textura = new TextureRegion(atlas.findRegion(MiscData.ATLAS_TexturasIconos_LOC +nombreTextura));
+        TextureRegion textura = new TextureRegion(atlas.findRegion(Settings.ATLAS_TexturasIconos_LOC +nombreTextura));
         listaDeTexturasIconosSpells.put(nombreIcono, textura);
     }
 
@@ -33,7 +33,7 @@ public class SkillRecursosLocal implements SkillRecursosDAO
 
     @Override public void salvarAnimacionCasteo(String nombreAnimacion, String nombrePixie, TextureAtlas atlas)
     {
-        Pixie pixie = new Pixie(atlas.findRegion(MiscData.ATLAS_AnimacionesSpells_LOC +nombrePixie),1,3);
+        Pixie pixie = new Pixie(atlas.findRegion(Settings.ATLAS_AnimacionesSpells_LOC +nombrePixie),1,3);
         pixie.añadirAnimacion("Casteo", new int[]{0, 1, 2}, 0.15f, false);
         pixie.animaciones().get(0).animarYEliminar = true;
         listaDeAnimaciones.put(nombreAnimacion, pixie);
@@ -41,7 +41,7 @@ public class SkillRecursosLocal implements SkillRecursosDAO
 
     @Override public void salvarAnimacionProyectil(String nombreAnimacion, String nombrePixie, TextureAtlas atlas)
     {
-        Pixie pixie = new Pixie(atlas.findRegion(MiscData.ATLAS_AnimacionesSpells_LOC +nombrePixie),1,3);
+        Pixie pixie = new Pixie(atlas.findRegion(Settings.ATLAS_AnimacionesSpells_LOC +nombrePixie),1,3);
         pixie.añadirAnimacion("Proyectil", new int[]{0, 1, 2}, 0.15f, false);
         listaDeAnimaciones.put(nombreAnimacion, pixie);
     }

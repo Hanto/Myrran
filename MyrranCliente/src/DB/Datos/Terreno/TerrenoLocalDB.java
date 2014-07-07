@@ -1,7 +1,7 @@
 package DB.Datos.Terreno;// Created by Hanto on 15/04/2014.
 
 import Core.AbrirFichero;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.Geo.TerrenoI;
 import Model.Classes.Geo.Terreno;
 import org.jdom2.Document;
@@ -27,7 +27,7 @@ public class TerrenoLocalDB
     {
         System.out.println("[CARGANDO TERRENOS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_DataTerrenos);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_DataTerrenos);
 
         try
         {
@@ -54,6 +54,6 @@ public class TerrenoLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_DataTerrenos+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataTerrenos+": "+e); }
     }
 }

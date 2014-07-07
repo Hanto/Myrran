@@ -1,6 +1,6 @@
 package Model.Classes.Skill.BDebuff.TiposBDebuff;// Created by Hanto on 26/06/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Skill.BDebuff.TipoBDebuff;
@@ -17,7 +17,7 @@ public class Bomba extends TipoBDebuff
 
     @Override public void actualizarTick(AuraI aura)
     {
-        if (aura.getTicksAplicados() == (int)aura.getDuracionMax()/ MiscData.BDEBUFF_DuracionTick)
+        if (aura.getTicksAplicados() == (int)aura.getDuracionMax()/ Settings.BDEBUFF_DuracionTick)
         {
             float daño = aura.getDebuff().getValorTotal(aura.getCaster(), STAT_Daño) * aura.getStacks();
 

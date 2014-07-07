@@ -2,7 +2,7 @@ package Model.Classes.Utils;// Created by Ladrim on 06/07/2014.
 
 import Core.Skills.SkillStat;
 import DB.DAO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.TipoSpellI;
@@ -48,7 +48,7 @@ public class XMLspell
     {   //probamos a Acceder al fichero directamente, en caso de poder acerlo lo transformamos en un InputStream
         try { return new FileInputStream(new File(rutaYNombreFichero)); }
         //En el caso de dar error por que el fichero no exista, probamos a acceder al recurso
-        catch (Exception e) { return XMLsettings.class.getClassLoader().getResourceAsStream(rutaYNombreFichero);}
+        catch (Exception e) { return this.getClass().getClassLoader().getResourceAsStream(rutaYNombreFichero);}
     }
 
     public void cargarDatos(String file)
@@ -129,7 +129,7 @@ public class XMLspell
                 listaDeSpells.put(spell.getID(), spell);
             }
         }
-        catch (Exception e) { logger.error("ERROR: leyendo fichero {}: ", MiscData.XML_DataSpells, e); }
+        catch (Exception e) { logger.error("ERROR: leyendo fichero {}: ", Settings.XML_DataSpells, e); }
     }
 
     public void salvarDatos()

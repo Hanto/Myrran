@@ -1,7 +1,7 @@
 package Model.GameState;// Created by Hanto on 08/04/2014.
 
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.PC;
@@ -75,7 +75,7 @@ public class Mundo extends AbstractModel
         {
             for (int x=0; x< mapaServidor.mapa.length; x++)
             {
-                for (int i=0; i< MiscData.MAPA_Max_Capas_Terreno; i++)
+                for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
                 {
                     short idTerreno = mapaServidor.mapa[x][y].celda[i];
                     mapa.setTerreno(x+mapaServidor.esquinaInfIzdaX,y+mapaServidor.esquinaInfIzdaY,i,idTerreno);

@@ -1,15 +1,11 @@
 package DB.Recursos.AtlasRecursos;// Created by Hanto on 10/04/2014.
 
-import Core.AbrirFichero;
-import Data.MiscData;
+import Data.Settings;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.input.SAXBuilder;
-
-import java.io.InputStream;
+import org.slf4j.LoggerFactory;
 
 public class AtlasRecursosLocalDB
 {
@@ -23,31 +19,17 @@ public class AtlasRecursosLocalDB
     {   cargarDatos(); }
 
 
-
-
     private void cargarDatos()
     {
-        System.out.println("[CARGANDO CONFIGURACION ATLAS]:");
-        SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML + MiscData.XML_TexturasAtlas);
+        Logger logger = (Logger)LoggerFactory.getLogger(this.getClass());
 
-        try
+        if (Settings.ATLAS_GenerarAtlas)
         {
-            Document documento = builder.build(fichero);
-            Element rootNode = documento.getRootElement();
-            boolean generarAtlas = Boolean.parseBoolean(rootNode.getChildText("Generar"));
-
-            System.out.println(" GenerarAtlas : " + generarAtlas);
-
-            //Creamos un atlas con todas las imagenes que tengamos sueltas, util para el modo edicion/desarrollador
-            if (generarAtlas)
-            {   TexturePacker.process(MiscData.RECURSOS_Atlas_Carpeta_Imagenes_Origen, MiscData.RECURSOS_Atlas_Carpeta_Imagenes_Destino, MiscData.RECURSOS_Atlas_Atlas_Extension); }
-
-            System.out.println();
+            logger.info("Regenerando ATLAS a partir de los recursos almacenados en {}", Settings.RECURSOS_Atlas_Carpeta_Imagenes_Origen);
+            TexturePacker.process(Settings.RECURSOS_Atlas_Carpeta_Imagenes_Origen, Settings.RECURSOS_Atlas_Carpeta_Imagenes_Destino, Settings.RECURSOS_Atlas_Atlas_Extension);
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_TexturasAtlas+": "+e); }
 
         //Cargamos el atlas en memoria
-        atlas = new TextureAtlas(Gdx.files.internal(MiscData.RECURSOS_Atlas_Carpeta_Imagenes_Destino + MiscData.RECURSOS_Atlas_Atlas_Extension +".atlas"));
+        atlas = new TextureAtlas(Gdx.files.internal(Settings.RECURSOS_Atlas_Carpeta_Imagenes_Destino + Settings.RECURSOS_Atlas_Atlas_Extension +".atlas"));
     }
 }

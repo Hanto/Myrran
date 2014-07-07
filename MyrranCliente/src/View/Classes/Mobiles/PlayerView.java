@@ -3,7 +3,7 @@ package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Mobiles.Player;
 import Model.DTO.PlayerDTO;
@@ -21,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import static Data.MiscData.PIXEL_METROS;
+import static Data.Settings.PIXEL_METROS;
 
 public class PlayerView extends Group implements PropertyChangeListener
 {
@@ -70,7 +70,7 @@ public class PlayerView extends Group implements PropertyChangeListener
         nameplateView.setPosition(this.getWidth()/2 - nameplateView.getWidth() / 2, getHeight());
         this.addActor(nameplateView);
 
-        nombre = new Texto("Player", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(MiscData.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
+        nombre = new Texto("Player", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
         nombre.setPosition(actor.getWidth()/2, actor.getHeight()+8);
         this.addActor(nombre);
 
@@ -86,7 +86,7 @@ public class PlayerView extends Group implements PropertyChangeListener
 
     public void modificarHPs(NetDTO.ModificarHPsPPC HPs)
     {
-        Texto texto = new Texto(Integer.toString((int) HPs.HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(MiscData.FUENTE_Nombres),
+        Texto texto = new Texto(Integer.toString((int) HPs.HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
                 HPs.HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
         texto.setPosition(this.getWidth() / 2 + (float) Math.random() * 30 - 15, this.getHeight() + 15);
         texto.scrollingCombatText(this, 2f);

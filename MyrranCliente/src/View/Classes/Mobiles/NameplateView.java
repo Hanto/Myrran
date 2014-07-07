@@ -3,7 +3,7 @@ package View.Classes.Mobiles;
 import DB.RSC;
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.Model.ModelI;
@@ -68,21 +68,21 @@ public class NameplateView extends Actor implements PropertyChangeListener
 
         MiscRecursosDAO miscRecursosDAO = RSC.miscRecusosDAO.getMiscRecursosDAO();
 
-        int alto = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_NAMEPLATE_Nameplate).getRegionHeight();
-        int ancho = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_NAMEPLATE_Nameplate).getRegionWidth();
+        int alto = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_NAMEPLATE_Nameplate).getRegionHeight();
+        int ancho = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_NAMEPLATE_Nameplate).getRegionWidth();
 
         if (isVulnerable)
         {
-            barraVidaTotal = new Sprite(miscRecursosDAO.cargarTextura(MiscData.RECURSO_NAMEPLATE_Nameplate));
-            barraVidaActual = new Sprite(miscRecursosDAO.cargarTextura(MiscData.RECURSO_NAMEPLATE_Nameplate_Fondo));
+            barraVidaTotal = new Sprite(miscRecursosDAO.cargarTextura(Settings.RECURSO_NAMEPLATE_Nameplate));
+            barraVidaActual = new Sprite(miscRecursosDAO.cargarTextura(Settings.RECURSO_NAMEPLATE_Nameplate_Fondo));
             barraVidaTotal.setColor(Color.GREEN);
             barraVidaTotal.setPosition(0, alto-1);
             barraVidaActual.setPosition(ancho-1, alto-1);
         }
         if (isCaster)
         {
-            barraCasteoTotal = new Sprite(miscRecursosDAO.cargarTextura(MiscData.RECURSO_NAMEPLATE_Nameplate));
-            barraCasteoActual = new Sprite(miscRecursosDAO.cargarTextura(MiscData.RECURSO_NAMEPLATE_Nameplate_Fondo));
+            barraCasteoTotal = new Sprite(miscRecursosDAO.cargarTextura(Settings.RECURSO_NAMEPLATE_Nameplate));
+            barraCasteoActual = new Sprite(miscRecursosDAO.cargarTextura(Settings.RECURSO_NAMEPLATE_Nameplate_Fondo));
             barraCasteoTotal.setColor(Color.ORANGE);
             barraCasteoActual.setPosition(ancho-1, 0);
         }

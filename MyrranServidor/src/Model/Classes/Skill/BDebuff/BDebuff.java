@@ -2,7 +2,7 @@ package Model.Classes.Skill.BDebuff;// Created by Hanto on 04/06/2014.
 
 
 import DB.DAO;
-import Data.MiscData;
+import Data.Settings;
 import Core.Skills.SkillStat;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.BDebuff.BDebuffI;
@@ -99,7 +99,7 @@ public class BDebuff implements BDebuffI
         {
             aura.setTicksAplicados((byte)0);
             if (aura.getStacks() < stacksMaximos) aura.setStacks((byte) (aura.getStacks()+1));
-            aura.setDuracion(aura.getDuracion() % MiscData.BDEBUFF_DuracionTick);
+            aura.setDuracion(aura.getDuracion() % Settings.BDEBUFF_DuracionTick);
         }
         else
         {

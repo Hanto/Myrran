@@ -3,7 +3,7 @@ package DB.Recursos.TerrenoRecursos;// Created by Hanto on 15/04/2014.
 import Core.AbrirFichero;
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DTO.TerrenoRecursos;
-import Data.MiscData;
+import Data.Settings;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -36,7 +36,7 @@ public class TerrenoRecursosLocalDB
     {
         System.out.println("[CARGANDO TEXTURAS TERRENOS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_TexturasTerrenos);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_TexturasTerrenos);
 
         try
         {
@@ -49,21 +49,21 @@ public class TerrenoRecursosLocalDB
                 Element nodo = (Element) listaNodos.get(i);
                 String nombre = nodo.getText();
 
-                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(MiscData.ATLAS_TexturasTerrenos_LOC + nombre));
+                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_TexturasTerrenos_LOC + nombre));
                 listaDeTexturasTerreno.put(nombre, textura);
 
                 System.out.println(" TexturaTerreno : " + nombre);
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_TexturasTerrenos+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_TexturasTerrenos+": "+e); }
     }
 
     public void cargarTerrenoRecursos()
     {
         System.out.println("[CARGANDO TERRENOS RECURSOS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_DataTerrenos);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_DataTerrenos);
 
         try
         {
@@ -86,7 +86,7 @@ public class TerrenoRecursosLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_DataTerrenos+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataTerrenos+": "+e); }
     }
 }
 

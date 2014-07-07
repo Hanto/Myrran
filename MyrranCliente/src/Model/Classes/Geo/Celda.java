@@ -2,7 +2,7 @@ package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.Geo.CeldaI;
 import Interfaces.Geo.TerrenoI;
 import com.esotericsoftware.kryo.Kryo;
@@ -13,20 +13,20 @@ import com.esotericsoftware.kryo.io.Output;
 public class Celda implements CeldaI,KryoSerializable
 {
     //private Integer[] terrenosID = new Integer[MiscData.MAPA_Max_Capas_Terreno];
-    private Short[] listaTerrenos = new Short[MiscData.MAPA_Max_Capas_Terreno];
+    private Short[] listaTerrenos = new Short[Settings.MAPA_Max_Capas_Terreno];
 
 
     //CONSTRUCTOR:
     public Celda()
     {
-        for (int i=0; i<MiscData.MAPA_Max_Capas_Terreno; i++)
+        for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
         {   listaTerrenos[i] = -1;}
     }
 
     //CONSTRUCTOR COPIA:
     public Celda(Celda celdaOrigen)
     {
-        for (int i=0; i<MiscData.MAPA_Max_Capas_Terreno; i++)
+        for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
         {   listaTerrenos[i] = celdaOrigen.getTerrenoID(i); }
     }
 
@@ -56,13 +56,13 @@ public class Celda implements CeldaI,KryoSerializable
     //KryoSerializable:
     @Override public void write(Kryo kryo, Output output)
     {
-        for (int i=0; i<MiscData.MAPA_Max_Capas_Terreno; i++)
+        for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
             output.writeInt(listaTerrenos[i]);
     }
 
     @Override public void read(Kryo kryo, Input input)
     {
-        for (int i=0; i<MiscData.MAPA_Max_Capas_Terreno; i++)
+        for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
             setTerreno(i, input.readShort());
     }
 }

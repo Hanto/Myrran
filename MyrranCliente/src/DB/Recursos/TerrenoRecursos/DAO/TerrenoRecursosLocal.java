@@ -1,7 +1,7 @@
 package DB.Recursos.TerrenoRecursos.DAO;// Created by Ladrim on 24/04/2014.
 
 import DB.Recursos.TerrenoRecursos.TerrenoRecursosLocalDB;
-import Data.MiscData;
+import Data.Settings;
 import DB.Recursos.TerrenoRecursos.DTO.TerrenoRecursos;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,7 +19,7 @@ public class TerrenoRecursosLocal implements TerrenoRecursosDAO
 
     @Override public void salvarTextura(String nombreTextura, String nombreTexturaEnAtlas, TextureAtlas atlas)
     {
-        TextureRegion textura = new TextureRegion(atlas.findRegion(MiscData.ATLAS_TexturasTerrenos_LOC +nombreTexturaEnAtlas));
+        TextureRegion textura = new TextureRegion(atlas.findRegion(Settings.ATLAS_TexturasTerrenos_LOC +nombreTexturaEnAtlas));
         listaDeTexturasTerreno.put(nombreTextura, textura);
     }
 

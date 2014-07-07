@@ -3,7 +3,7 @@ package View.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import View.Classes.Graficos.PixiePC;
 import View.Classes.Graficos.Texto;
@@ -70,13 +70,13 @@ public class PCView extends Group implements PropertyChangeListener
     {
         //TODO hay que hacerlo por setPosition y en cambio mover el model interpoladamente, el destino sin decimales
         this.clearActions();
-        this.addAction(Actions.moveTo(x, y, MiscData.SERVIDOR_Delta_Time, Interpolation.linear));
+        this.addAction(Actions.moveTo(x, y, Settings.NETWORK_Delta_Time, Interpolation.linear));
         //setPosition(x,y);
     }
 
     public void modificarHPs(NetDTO.ModificarHPsPPC HPs)
     {
-        Texto texto = new Texto(Integer.toString((int) HPs.HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(MiscData.FUENTE_Nombres),
+        Texto texto = new Texto(Integer.toString((int) HPs.HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
                 HPs.HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
         texto.setPosition(this.getWidth() / 2 + (float) Math.random() * 30 - 15, this.getHeight() + 15);
         texto.scrollingCombatText(this, 2f);

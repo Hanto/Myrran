@@ -1,6 +1,6 @@
 package Model.Classes.Skill.BDebuff;// Created by Hanto on 04/06/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.EntidadesPropiedades.Caster;
@@ -45,7 +45,7 @@ public class Aura implements AuraI
     {
         duracion += delta;
 
-        int tickActual =  (int) (duracion / MiscData.BDEBUFF_DuracionTick);
+        int tickActual =  (int) (duracion / Settings.BDEBUFF_DuracionTick);
 
         for (int i=ticksAplicados; i<tickActual; i++)
         {

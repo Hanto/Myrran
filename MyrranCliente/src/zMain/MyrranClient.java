@@ -1,6 +1,6 @@
 package zMain;// Created by Hanto on 08/04/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import View.PantallaLibGDX;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
@@ -15,14 +15,9 @@ public class MyrranClient extends Game
 
     public static void main (String[] arg)
     {
-        //PrintStream printStream = new PrintStream(new ConsolaOutputStream(Consolas.get().consolaPrincipal));
-        //System.setOut(printStream);
-        //System.setErr(printStream);
+        Settings.inicializar();
 
-        //XMLspell xml = new XMLspell("DataSpells.xml");
-        //xml.salvarDatos();
-
-        System.setProperty("user.name","Myrran");
+        System.setProperty("user.name", "Myrran");
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Myrran";
@@ -31,10 +26,10 @@ public class MyrranClient extends Game
         cfg.foregroundFPS = 5000;
         //cfg.useGL30 = true;
         cfg.fullscreen = false;
-        cfg.width = MiscData.GDX_Horizontal_Resolution;
-        cfg.height = MiscData.GDX_Vertical_Resolution;
+        cfg.width = Settings.GDX_Horizontal_Resolution;
+        cfg.height = Settings.GDX_Vertical_Resolution;
 
-        cfg.addIcon(MiscData.RECURSOS_Atlas_Carpeta_Imagenes_Origen+MiscData.ATLAS_TexturasIconos_LOC+"FireBall.png", Files.FileType.Internal);
+        cfg.addIcon(Settings.RECURSOS_Atlas_Carpeta_Imagenes_Origen+ Settings.ATLAS_TexturasIconos_LOC+"FireBall.png", Files.FileType.Internal);
         new LwjglApplication(new MyrranClient(), cfg);
     }
 

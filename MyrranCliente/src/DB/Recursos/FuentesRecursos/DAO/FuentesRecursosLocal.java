@@ -1,7 +1,7 @@
 package DB.Recursos.FuentesRecursos.DAO;// Created by Hanto on 02/05/2014.
 
 import DB.Recursos.FuentesRecursos.FuentesRecursosLocalDB;
-import Data.MiscData;
+import Data.Settings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,7 +15,7 @@ public class FuentesRecursosLocal implements FuentesRecursosDAO
 
     @Override public void salvarFuente(String nombreFuente, String nombreTextura, TextureAtlas atlas)
     {
-        BitmapFont fuente = new BitmapFont(Gdx.files.internal(MiscData.ATLAS_Fuentes_LOC +nombreTextura), false);
+        BitmapFont fuente = new BitmapFont(Gdx.files.internal(Settings.ATLAS_Fuentes_LOC +nombreTextura), false);
         listaDeFuentes.put(nombreFuente, fuente);
     }
 

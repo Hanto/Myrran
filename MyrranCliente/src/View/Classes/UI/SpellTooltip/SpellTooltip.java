@@ -2,7 +2,7 @@ package View.Classes.UI.SpellTooltip;// Created by Hanto on 19/06/2014.
 
 import DB.RSC;
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterConTalentos;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
@@ -179,7 +179,7 @@ public class SpellTooltip extends Group implements PropertyChangeListener
 
     private void printSkillStats(Table tabla, SkillView skillView, final SkillPersonalizadoI skill)
     {
-        BitmapFont normal = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(MiscData.FUENTE_Nombres);
+        BitmapFont normal = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres);
         BitmapFont mini = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente("11");
         Texto texto;
 

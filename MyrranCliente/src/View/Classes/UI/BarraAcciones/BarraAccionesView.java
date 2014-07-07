@@ -1,7 +1,7 @@
 package View.Classes.UI.BarraAcciones;// Created by Hanto on 06/05/2014.
 
 import DB.RSC;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Model.Classes.UI.BarraAcciones;
 import Model.DTO.BarraAccionesDTO;
@@ -36,8 +36,8 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
 
     public float getEsquinaSupIzdaX()                       { return this.getX(); }
     public float getEsquinaSupIzdaY()                       { return this.getY() + this.getHeight(); }
-    @Override public float getAnchoElemento()               { return MiscData.BARRASPELLS_Ancho_Casilla; }
-    @Override public float getAltoElemento()                { return MiscData.BARRASPELLS_Alto_Casilla; }
+    @Override public float getAnchoElemento()               { return Settings.BARRASPELLS_Ancho_Casilla; }
+    @Override public float getAltoElemento()                { return Settings.BARRASPELLS_Alto_Casilla; }
 
     public BarraAccionesView(BarraAcciones barraAcciones, ConjuntoBarraAccionesView conjuntoBarraAccionesView, Stage stage, ControladorBarraAccionI controller)
     {
@@ -49,21 +49,21 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
 
         barraAcciones.añadirObservador(this);
 
-        this.setWidth(barraModel.getNumColumnas()*(MiscData.BARRASPELLS_Ancho_Casilla));
-        this.setHeight(barraModel.getNumFilas()*(MiscData.BARRASPELLS_Ancho_Casilla));
+        this.setWidth(barraModel.getNumColumnas()*(Settings.BARRASPELLS_Ancho_Casilla));
+        this.setHeight(barraModel.getNumFilas()*(Settings.BARRASPELLS_Ancho_Casilla));
 
         this.bottom().left();
         this.setPosition(500,0);
 
-        moverBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_BARRASPELLS_RebindButtonON));
+        moverBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRASPELLS_RebindButtonON));
         moverBarra.addListener(new VentanaMoverListener(moverBarra, this));
         this.addActor(moverBarra);
 
-        redimensionarBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_BARRASPELLS_RebindButtonON));
+        redimensionarBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRASPELLS_RebindButtonON));
         redimensionarBarra.addListener(new VentanaResizeListener(redimensionarBarra, this, this));
         this.addActor(redimensionarBarra);
 
-        eliminarBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_BARRASPELLS_RebindButtonOFF));
+        eliminarBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRASPELLS_RebindButtonOFF));
         this.addActor(eliminarBarra);
         eliminarBarra.addListener(new InputListener()
         {
@@ -99,8 +99,8 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
 
         float esquinaSupIzda = getEsquinaSupIzdaY();
 
-        this.setWidth(barraModel.getNumColumnas()*(MiscData.BARRASPELLS_Ancho_Casilla));
-        this.setHeight(barraModel.getNumFilas()*(MiscData.BARRASPELLS_Ancho_Casilla));
+        this.setWidth(barraModel.getNumColumnas()*(Settings.BARRASPELLS_Ancho_Casilla));
+        this.setHeight(barraModel.getNumFilas()*(Settings.BARRASPELLS_Ancho_Casilla));
 
         this.setY(esquinaSupIzda-getHeight());
 
@@ -109,7 +109,7 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
             for (int x = 0; x < barraIconos.get(y).size; x++)
             {
                 AccionIcono icono = barraIconos.get(y).get(x);
-                this.add(icono).left().height(MiscData.BARRASPELLS_Alto_Casilla).width(MiscData.BARRASPELLS_Ancho_Casilla);
+                this.add(icono).left().height(Settings.BARRASPELLS_Alto_Casilla).width(Settings.BARRASPELLS_Ancho_Casilla);
             }
             this.row();
         }

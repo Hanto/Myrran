@@ -1,7 +1,7 @@
 package View.Classes.Geo;// Created by Hanto on 16/04/2014.
 
 import DTO.NetDTO;
-import Data.MiscData;
+import Data.Settings;
 import Model.Classes.Geo.Mapa;
 import View.GameState.MundoView;
 import com.badlogic.gdx.Gdx;
@@ -41,8 +41,8 @@ public class MapaView implements PropertyChangeListener
         this.tamañoY = tamañoY;
         this.mapaModel.añadirObservador(this);
 
-        this.numTilesX = (int)Math.ceil((double)MiscData.MAPTILE_Horizontal_Resolution /(double)(tamañoX -1)/(double)MiscData.TILESIZE);
-        this.numTilesY = (int)Math.ceil((double)MiscData.MAPTILE_Vertical_Resolution /(double)(tamañoY -1)/(double)MiscData.TILESIZE);
+        this.numTilesX = (int)Math.ceil((double) Settings.MAPTILE_Horizontal_Resolution /(double)(tamañoX -1)/(double) Settings.TILESIZE);
+        this.numTilesY = (int)Math.ceil((double) Settings.MAPTILE_Vertical_Resolution /(double)(tamañoY -1)/(double) Settings.TILESIZE);
 
         camara = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -55,8 +55,8 @@ public class MapaView implements PropertyChangeListener
 
     public void setPosition(float posX, float posY)
     {
-        int mapTileInicialX = (int)(posX / (numTilesX *MiscData.TILESIZE));
-        int mapTileInicialY = (int)(posY / (numTilesY *MiscData.TILESIZE));
+        int mapTileInicialX = (int)(posX / (numTilesX * Settings.TILESIZE));
+        int mapTileInicialY = (int)(posY / (numTilesY * Settings.TILESIZE));
 
         int xInicial, xFinal, yInicial;
 
@@ -90,8 +90,8 @@ public class MapaView implements PropertyChangeListener
     public void setView (SubMapaView subMapaView)
     {
         camara.zoom = mundoView.getCamara().zoom;
-        camara.position.x = mundoView.getCamara().position.x - subMapaView.getMapTileX() * numTilesX *MiscData.TILESIZE;
-        camara.position.y = mundoView.getCamara().position.y - subMapaView.getMapTileY() * numTilesY *MiscData.TILESIZE;
+        camara.position.x = mundoView.getCamara().position.x - subMapaView.getMapTileX() * numTilesX * Settings.TILESIZE;
+        camara.position.y = mundoView.getCamara().position.y - subMapaView.getMapTileY() * numTilesY * Settings.TILESIZE;
         camara.update();
 
         subMapaView.setView(camara);
@@ -102,8 +102,8 @@ public class MapaView implements PropertyChangeListener
         xActual = (mundoView.getCamara().position.x );
         yActual = (mundoView.getCamara().position.y );
 
-        if (Math.abs(listaSubMapas[0].getMapTileX() -  (xActual /  (numTilesX *MiscData.TILESIZE))) > tamañoX ||
-            Math.abs(listaSubMapas[0].getMapTileY() -  (yActual /  (numTilesY *MiscData.TILESIZE))) > tamañoY )
+        if (Math.abs(listaSubMapas[0].getMapTileX() -  (xActual /  (numTilesX * Settings.TILESIZE))) > tamañoX ||
+            Math.abs(listaSubMapas[0].getMapTileY() -  (yActual /  (numTilesY * Settings.TILESIZE))) > tamañoY )
             setPosition(xActual, yActual);
 
         for (SubMapaView subMapaView: listaSubMapas)
@@ -123,10 +123,10 @@ public class MapaView implements PropertyChangeListener
 
     public void mapaVistaLoader(SubMapaView subMapaView)
     {
-        mapTileBordeE = (int)(xActual + MiscData.MAPTILE_Horizontal_Resolution /2) /  (numTilesX *MiscData.TILESIZE);
-        mapTileBordeO = (int)(xActual - MiscData.MAPTILE_Horizontal_Resolution /2) /  (numTilesX *MiscData.TILESIZE);
-        mapTileBordeN = (int)(yActual + MiscData.MAPTILE_Vertical_Resolution /2) /    (numTilesY *MiscData.TILESIZE);
-        mapTileBordeS = (int)(yActual - MiscData.MAPTILE_Vertical_Resolution /2) /    (numTilesY *MiscData.TILESIZE);
+        mapTileBordeE = (int)(xActual + Settings.MAPTILE_Horizontal_Resolution /2) /  (numTilesX * Settings.TILESIZE);
+        mapTileBordeO = (int)(xActual - Settings.MAPTILE_Horizontal_Resolution /2) /  (numTilesX * Settings.TILESIZE);
+        mapTileBordeN = (int)(yActual + Settings.MAPTILE_Vertical_Resolution /2) /    (numTilesY * Settings.TILESIZE);
+        mapTileBordeS = (int)(yActual - Settings.MAPTILE_Vertical_Resolution /2) /    (numTilesY * Settings.TILESIZE);
 
         if (mapTileBordeE >= (subMapaView.getMapTileX() + tamañoX))
         {   subMapaView.crearTiledMap(subMapaView.getMapTileX() + tamañoX,  subMapaView.getMapTileY()); }

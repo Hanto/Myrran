@@ -1,7 +1,7 @@
 package Model.Classes.Skill.Spell.TiposSpell;
 // @author Ivan Delgado Huerta
 
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Spell.SpellI;
 import Model.Classes.Skill.Spell.TipoSpell;
@@ -18,8 +18,8 @@ public class EditarTerreno extends TipoSpell
 
     @Override public void ejecutarCasteo(SpellI skill, Caster caster, int targetX, int targetY)
     {
-        int tileX = (targetX / MiscData.TILESIZE);
-        int tileY = (targetY / MiscData.TILESIZE);
+        int tileX = (targetX / Settings.TILESIZE);
+        int tileY = (targetY / Settings.TILESIZE);
 
         int numCapa = 0;
         short iDTerreno = 0;

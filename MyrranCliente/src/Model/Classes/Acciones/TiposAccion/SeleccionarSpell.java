@@ -1,7 +1,7 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 05/05/2014.
 
 import DB.DAO;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesTipos.MobPlayer;
 import Interfaces.Input.PlayerEstadoI;
@@ -26,7 +26,7 @@ public class SeleccionarSpell extends Accion
 
     @Override public void accionKeyDown(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador)
     {
-        if (parametros.equals(MiscData.BARRATERRENOS_EditarTerrenoID)) { controlador.mostrarBarraTerrenos(); /*player.setParametrosSpell(new ParametrosEditarTerreno());*/}
+        if (parametros.equals(Settings.BARRATERRENOS_EditarTerrenoID)) { controlador.mostrarBarraTerrenos(); /*player.setParametrosSpell(new ParametrosEditarTerreno());*/}
 
         if (player instanceof Caster)
             ((Caster)player).setSpellIDSeleccionado(iD);
@@ -34,6 +34,6 @@ public class SeleccionarSpell extends Accion
 
     @Override public void accionKeyUp(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador)
     {
-        if (parametros.equals(MiscData.BARRATERRENOS_EditarTerrenoID)) controlador.ocultarBarraTerrenos();
+        if (parametros.equals(Settings.BARRATERRENOS_EditarTerrenoID)) controlador.ocultarBarraTerrenos();
     }
 }

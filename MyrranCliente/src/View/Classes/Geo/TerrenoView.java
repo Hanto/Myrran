@@ -1,6 +1,6 @@
 package View.Classes.Geo;// Created by Hanto on 15/04/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import Model.DTO.TerrenoDTO;
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DTO.TerrenoRecursos;
@@ -37,7 +37,7 @@ public class TerrenoView
 
     private void generarTexturaNO(TextureRegion terreno)
     {
-        int cuadrante = MiscData.TILESIZE/2;
+        int cuadrante = Settings.TILESIZE/2;
 
         if (  ad.NOizquierda &&  ad.NOdiagonal &&  ad.NOarriba ) { cuadranteNO = new TextureRegion(terreno, cuadrante*2, cuadrante*4, cuadrante, cuadrante); }
         if (  ad.NOizquierda &&  ad.NOdiagonal && !ad.NOarriba ) { cuadranteNO = new TextureRegion(terreno, cuadrante*2, cuadrante*2, cuadrante, cuadrante); }
@@ -51,7 +51,7 @@ public class TerrenoView
 
     private void generarTexturaNE(TextureRegion terreno)
     {
-        int cuadrante = MiscData.TILESIZE/2;
+        int cuadrante = Settings.TILESIZE/2;
 
         if (  ad.NEderecha &&  ad.NEdiagonal &&  ad.NEarriba )   { cuadranteNE = new TextureRegion(terreno, cuadrante*1, cuadrante*4, cuadrante, cuadrante); }
         if (  ad.NEderecha &&  ad.NEdiagonal && !ad.NEarriba )   { cuadranteNE = new TextureRegion(terreno, cuadrante*1, cuadrante*2, cuadrante, cuadrante); }
@@ -65,7 +65,7 @@ public class TerrenoView
 
     private void generarTexturaSO(TextureRegion terreno)
     {
-        int cuadrante = MiscData.TILESIZE/2;
+        int cuadrante = Settings.TILESIZE/2;
 
         if (  ad.SOizquierda &&  ad.SOdiagonal &&  ad.SOabajo )  { cuadranteSO = new TextureRegion(terreno, cuadrante*2, cuadrante*3, cuadrante, cuadrante); }
         if (  ad.SOizquierda &&  ad.SOdiagonal && !ad.SOabajo )  { cuadranteSO = new TextureRegion(terreno, cuadrante*2, cuadrante*5, cuadrante, cuadrante); }
@@ -79,7 +79,7 @@ public class TerrenoView
 
     private void generarTexturaSE(TextureRegion terreno)
     {
-        int cuadrante = MiscData.TILESIZE/2;
+        int cuadrante = Settings.TILESIZE/2;
 
         if (  ad.SEderecha &&  ad.SEdiagonal &&  ad.SEabajo )    { cuadranteSE = new TextureRegion(terreno, cuadrante*1, cuadrante*3, cuadrante, cuadrante); }
         if (  ad.SEderecha &&  ad.SEdiagonal && !ad.SEabajo )    { cuadranteSE = new TextureRegion(terreno, cuadrante*1, cuadrante*5, cuadrante, cuadrante); }

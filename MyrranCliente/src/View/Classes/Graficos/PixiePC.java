@@ -1,6 +1,6 @@
 package View.Classes.Graficos;
 
-import Data.MiscData;
+import Data.Settings;
 import DB.Recursos.PixiePCRecursos.DAO.PixiePCRecursosDAO;
 import DB.RSC;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -50,7 +50,7 @@ public class PixiePC extends Actor
         capaTrasera = new Pixie(pixiePCDAO.getCapaTraseraPC(iDRaza, "Desnudo")); capaTrasera.setOffset(-24, -24);
         capaFrontal = new Pixie(pixiePCDAO.getCapaFrontalPC(iDRaza, "Desnudo")); capaFrontal.setOffset(-24, -24);
         
-        sombra = new Sprite(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_PIXIEPC_Sombra));
+        sombra = new Sprite(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_PIXIEPC_Sombra));
                 
         this.setHeight(cuerpo.getHeight());
         this.setWidth(cuerpo.getWidth());

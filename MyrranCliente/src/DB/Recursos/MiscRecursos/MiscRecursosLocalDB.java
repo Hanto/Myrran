@@ -2,7 +2,7 @@ package DB.Recursos.MiscRecursos;// Created by Hanto on 02/05/2014.
 
 import Core.AbrirFichero;
 import DB.RSC;
-import Data.MiscData;
+import Data.Settings;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -29,7 +29,7 @@ public class MiscRecursosLocalDB
     {
         System.out.println("[CARGANDO TEXTURAS MISCELANEAS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_TexturasMisc);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_TexturasMisc);
 
         try
         {
@@ -42,14 +42,14 @@ public class MiscRecursosLocalDB
                 Element nodo = (Element) listaNodos.get(i);
                 String nombre = nodo.getText();
 
-                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(MiscData.ATLAS_TexturasMisc_LOC + nombre));
+                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_TexturasMisc_LOC + nombre));
                 listaDeTexturasMisc.put(nombre, textura);
 
                 System.out.println(" TexturaMisc : " + nombre);
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_TexturasMisc+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_TexturasMisc+": "+e); }
     }
 
 }

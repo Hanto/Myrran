@@ -1,6 +1,6 @@
 package View.Classes.Geo;// Created by Hanto on 15/04/2014.
 
-import Data.MiscData;
+import Data.Settings;
 import Model.Classes.Geo.Mapa;
 import Model.DTO.TerrenoDTO;
 import DB.RSC;
@@ -54,16 +54,16 @@ public class SubMapaView extends TiledMap
         TerrenoDTO.Adyacencias adyacencias;
         TerrenoView terrenoView;
 
-        for (int numCapa = 0; numCapa< MiscData.MAPA_Max_Capas_Terreno; numCapa++)
+        for (int numCapa = 0; numCapa< Settings.MAPA_Max_Capas_Terreno; numCapa++)
         {
             TiledMapTileLayer suelo = new TiledMapTileLayer
-                (tamañoX *2, tamañoY *2, MiscData.TILESIZE/2, MiscData.TILESIZE/2);
+                (tamañoX *2, tamañoY *2, Settings.TILESIZE/2, Settings.TILESIZE/2);
 
             for (int x = this.tileOrigenX; x < tileFinalX; x++)
             {
                 for (int y = this.tileOrigenY; y < tileFinalY; y++)
                 {
-                    if (x < 0 || y < 0 || x >= MiscData.MAPA_Max_TilesX || y >= MiscData.MAPA_Max_TilesY) { break; }
+                    if (x < 0 || y < 0 || x >= Settings.MAPA_Max_TilesX || y >= Settings.MAPA_Max_TilesY) { break; }
                     else if (mapa.getTerrenoID(x, y, numCapa) >= 0)
                     {
                         adyacencias = calcularAdyacencias(x,y,numCapa);
@@ -119,7 +119,7 @@ public class SubMapaView extends TiledMap
 
         ad.iDTerreno = mapa.getTerrenoID(X,Y,capa);
 
-        if      (Y+1 >= MiscData.MAPA_Max_TilesY)           { ad.NOarriba = false; ad.NEarriba = false; }
+        if      (Y+1 >= Settings.MAPA_Max_TilesY)           { ad.NOarriba = false; ad.NEarriba = false; }
         else if (mapa.getTerreno(X,Y,capa) ==
                 (mapa.getTerreno(X,Y+1,capa)))              { ad.NOarriba = true; ad.NEarriba = true; }
 
@@ -131,12 +131,12 @@ public class SubMapaView extends TiledMap
         else if (mapa.getTerreno(X,Y,capa) ==
                 (mapa.getTerreno(X-1,Y,capa)))              { ad.NOizquierda = true; ad.SOizquierda = true; }
 
-        if      (X+1 >= MiscData.MAPA_Max_TilesX)           { ad.NEderecha = false; ad.SEderecha = false; }
+        if      (X+1 >= Settings.MAPA_Max_TilesX)           { ad.NEderecha = false; ad.SEderecha = false; }
         else if (mapa.getTerreno(X,Y,capa) ==
                 (mapa.getTerreno(X+1,Y,capa)))              { ad.NEderecha = true; ad.SEderecha = true; }
 
-        if      (X+1 >= MiscData.MAPA_Max_TilesX ||
-                 Y+1 >= MiscData.MAPA_Max_TilesY)           { ad.NEdiagonal = false; }
+        if      (X+1 >= Settings.MAPA_Max_TilesX ||
+                 Y+1 >= Settings.MAPA_Max_TilesY)           { ad.NEdiagonal = false; }
 
         else if (mapa.getTerreno(X,Y,capa) ==
                 (mapa.getTerreno(X+1,Y+1,capa)))            { ad.NEdiagonal = true; }
@@ -146,12 +146,12 @@ public class SubMapaView extends TiledMap
         else if (mapa.getTerreno(X,Y,capa) ==
                 (mapa.getTerreno(X-1,Y-1,capa)))            { ad.SOdiagonal = true; }
 
-        if      (X-1 <0 || Y+1 >= MiscData.MAPA_Max_TilesY) { ad.NOdiagonal = false; }
+        if      (X-1 <0 || Y+1 >= Settings.MAPA_Max_TilesY) { ad.NOdiagonal = false; }
 
         else if (mapa.getTerreno(X,Y,capa) ==
                 (mapa.getTerreno(X-1,Y+1,capa)))            { ad.NOdiagonal = true; }
 
-        if      (X+1 >= MiscData.MAPA_Max_TilesX || Y-1<0)  { ad.SEdiagonal = false; }
+        if      (X+1 >= Settings.MAPA_Max_TilesX || Y-1<0)  { ad.SEdiagonal = false; }
 
         else if (mapa.getTerreno(X,Y,capa) ==
                 (mapa.getTerreno(X+1,Y-1,capa)))            { ad.SEdiagonal = true; }
@@ -163,9 +163,9 @@ public class SubMapaView extends TiledMap
     private void addGrid ()
     {
         TiledMapTileLayer layerGrid = new TiledMapTileLayer
-            (tamañoX, tamañoY, MiscData.TILESIZE, MiscData.TILESIZE);
+            (tamañoX, tamañoY, Settings.TILESIZE, Settings.TILESIZE);
 
-        StaticTiledMapTile grid = new StaticTiledMapTile(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(MiscData.RECURSO_Grid));
+        StaticTiledMapTile grid = new StaticTiledMapTile(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_Grid));
 
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         for (int x = 0; x < tamañoX; x++)
@@ -193,7 +193,7 @@ public class SubMapaView extends TiledMap
 
     public void crearTile (int tileX, int tileY, int numCapa)
     {
-        if (tileX<0 || tileY<0 || tileX>= MiscData.MAPA_Max_TilesX || tileY>= MiscData.MAPA_Max_TilesY) { return; }
+        if (tileX<0 || tileY<0 || tileX>= Settings.MAPA_Max_TilesX || tileY>= Settings.MAPA_Max_TilesY) { return; }
 
         if (mapa.getTerrenoID(tileX, tileY, numCapa) >= 0)
         {

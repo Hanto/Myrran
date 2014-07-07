@@ -2,7 +2,7 @@ package DB.Recursos.PixiePCRecursos;// Created by Hanto on 01/05/2014.
 
 import Core.AbrirFichero;
 import DB.Recursos.PixiePCRecursos.DTO.PixieRecursos;
-import Data.MiscData;
+import Data.Settings;
 import View.Classes.Graficos.Pixie;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -73,7 +73,7 @@ public class PixiePCRecursosLocalDB
     {
         System.out.println("[CARGANDO RAZAS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_DataRazas);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_DataRazas);
 
         try
         {
@@ -93,14 +93,14 @@ public class PixiePCRecursosLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_DataRazas+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataRazas+": "+e); }
     }
 
     public void cargarCuerpos()
     {
         System.out.println("[CARGANDO CUERPOS]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_PixieCuerpo);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_PixieCuerpo);
 
         try
         {
@@ -124,14 +124,14 @@ public class PixiePCRecursosLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_PixieCuerpo+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_PixieCuerpo+": "+e); }
     }
 
     public void cargarSlot(String slot)
     {
         System.out.println("[CARGANDO "+slot.toUpperCase()+"S]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_PixieSlot+slot+".xml");
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_PixieSlot+slot+".xml");
 
         try
         {
@@ -154,6 +154,6 @@ public class PixiePCRecursosLocalDB
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_PixieSlot+slot+"s."+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_PixieSlot+slot+"s."+e); }
     }
 }

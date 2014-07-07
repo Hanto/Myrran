@@ -2,7 +2,7 @@ package DB.Datos.TipoSpell;// Created by Hanto on 17/04/2014.
 
 import Core.AbrirFichero;
 import Core.Skills.SkillStat;
-import Data.MiscData;
+import Data.Settings;
 import Interfaces.Spell.TipoSpellI;
 import Model.Classes.Skill.Spell.TipoSpell;
 import Model.Classes.Skill.Spell.TipoSpellFactory;
@@ -35,7 +35,7 @@ public class TipoSpellLocalDB
         }
 
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML + MiscData.XML_DataTipoSpells);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML + Settings.XML_DataTipoSpells);
 
         try
         {
@@ -99,6 +99,6 @@ public class TipoSpellLocalDB
                 listaDeTipoSpells.put(tipoSpell.getID(), tipoSpell);
             }
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_DataTipoSpells+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_DataTipoSpells+": "+e); }
     }
 }

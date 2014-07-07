@@ -1,7 +1,7 @@
 package DB.Recursos.FuentesRecursos;// Created by Hanto on 02/05/2014.
 
 import Core.AbrirFichero;
-import Data.MiscData;
+import Data.Settings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import org.jdom2.Document;
@@ -30,7 +30,7 @@ public class FuentesRecursosLocalDB
     {
         System.out.println("[CARGANDO TEXTURAS FUENTES]:");
         SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = AbrirFichero.abrirFichero(MiscData.RECURSOS_XML+MiscData.XML_TexturasFuentes);
+        InputStream fichero = AbrirFichero.abrirFichero(Settings.RECURSOS_XML+ Settings.XML_TexturasFuentes);
 
         try
         {
@@ -43,13 +43,13 @@ public class FuentesRecursosLocalDB
                 Element nodo = (Element) listaNodos.get(i);
                 String nombre = nodo.getText();
 
-                BitmapFont fuente = new BitmapFont(Gdx.files.internal(MiscData.ATLAS_Fuentes_LOC + nombre +".fnt"), false);
+                BitmapFont fuente = new BitmapFont(Gdx.files.internal(Settings.ATLAS_Fuentes_LOC + nombre +".fnt"), false);
                 listaDeFuentes.put(nombre, fuente);
 
                 System.out.println(" TexturaTexto : " + nombre);
             }
             System.out.println();
         }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+MiscData.XML_TexturasFuentes+": "+e); }
+        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_TexturasFuentes+": "+e); }
     }
 }
