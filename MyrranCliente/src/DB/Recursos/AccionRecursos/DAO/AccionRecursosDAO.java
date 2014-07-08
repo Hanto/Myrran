@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public interface AccionRecursosDAO
 {
     public TextureRegion getTextura (String nombreTextura);
+    public AccionRecursos getAccionRecurso (String iDAccionRecurso);
+
     public void salvarTextura (String nombreTextura, TextureRegion textura);
     public void salvarTextura(String nombreTextura, String nombreTexturaEnAtlas, TextureAtlas atlas);
-
     public void salvarAccionRecurso (AccionRecursos accionRecurso);
-    public AccionRecursos getAccionRecurso (String iDAccionRecurso);
 
 }

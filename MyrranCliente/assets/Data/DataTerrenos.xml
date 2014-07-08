@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Terrenos>
-  <Terreno ID="0" nombre="Arena1" isSolido="false" nombreTextura="Arena1" />
-  <Terreno ID="1" nombre="Arena2" isSolido="false" nombreTextura="Arena2" />
-  <Terreno ID="2" nombre="Baldosas1" isSolido="false" nombreTextura="Baldosas1" />
-  <Terreno ID="3" nombre="Baldosas2" isSolido="false" nombreTextura="Baldosas2" />
-  <Terreno ID="4" nombre="Baldosas3" isSolido="false" nombreTextura="Baldosas3" />
-  <Terreno ID="5" nombre="Cesped1" isSolido="false" nombreTextura="Cesped1" />
-  <Terreno ID="6" nombre="Cesped2" isSolido="false" nombreTextura="Cesped2" />
-  <Terreno ID="7" nombre="Cesped3" isSolido="false" nombreTextura="Cesped3" />
-  <Terreno ID="8" nombre="Cesped4" isSolido="false" nombreTextura="Cesped4" />
-  <Terreno ID="9" nombre="Cesped5" isSolido="false" nombreTextura="Cesped5" />
-  <Terreno ID="10" nombre="Tierra1" isSolido="false" nombreTextura="Tierra1" />
-  <Terreno ID="11" nombre="Tierra2" isSolido="false" nombreTextura="Tierra2" />
-  <Terreno ID="12" nombre="Tierra3" isSolido="false" nombreTextura="Tierra3" />
+  <Terreno ID="0" nombre="Arena1" isSolido="false">
+    <Recursos textura="Arena1" />
+  </Terreno>
+  <Terreno ID="1" nombre="Arena2" isSolido="false">
+    <Recursos textura="Arena2" />
+  </Terreno>
+  <Terreno ID="2" nombre="Baldosas1" isSolido="false">
+    <Recursos textura="Baldosas1" />
+  </Terreno>
+  <Terreno ID="3" nombre="Baldosas2" isSolido="false">
+    <Recursos textura="Baldosas2" />
+  </Terreno>
+  <Terreno ID="4" nombre="Baldosas3" isSolido="false">
+    <Recursos textura="Baldosas3" />
+  </Terreno>
+  <Terreno ID="5" nombre="Cesped1" isSolido="false">
+    <Recursos textura="Cesped1" />
+  </Terreno>
+  <Terreno ID="6" nombre="Cesped2" isSolido="false">
+    <Recursos textura="Cesped2" />
+  </Terreno>
+  <Terreno ID="7" nombre="Cesped3" isSolido="false">
+    <Recursos textura="Cesped3" />
+  </Terreno>
+  <Terreno ID="8" nombre="Cesped4" isSolido="false">
+    <Recursos textura="Cesped4" />
+  </Terreno>
+  <Terreno ID="9" nombre="Cesped5" isSolido="false">
+    <Recursos textura="Cesped5" />
+  </Terreno>
+  <Terreno ID="10" nombre="Tierra1" isSolido="false">
+    <Recursos textura="Tierra1" />
+  </Terreno>
+  <Terreno ID="11" nombre="Tierra2" isSolido="false">
+    <Recursos textura="Tierra2" />
+  </Terreno>
+  <Terreno ID="12" nombre="Tierra3" isSolido="false">
+    <Recursos textura="Tierra3" />
+  </Terreno>
 </Terrenos>

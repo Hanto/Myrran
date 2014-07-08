@@ -10,6 +10,7 @@ import View.Classes.Geo.MapaView;
 import View.Classes.Mobiles.PCView;
 import View.Classes.Mobiles.PlayerView;
 import box2dLight.RayHandler;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -46,6 +48,8 @@ public class MundoView extends Stage implements PropertyChangeListener
     protected OrthographicCamera camara;
     protected OrthographicCamera boxCamara;
     protected Box2DDebugRenderer worldRender = new Box2DDebugRenderer();
+
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public PlayerView getPlayerView()                   { return playerView; }
     public MapaView getMapaView()                       { return mapaView; }
@@ -117,10 +121,14 @@ public class MundoView extends Stage implements PropertyChangeListener
     @Override public void dispose ()
     {
         super.dispose();
+
+        logger.trace("DISPOSE: Liberando SpriteBatch");
         batch.dispose();
-        mapaView.dispose();
+        logger.trace("DISPOSE: Liberando RayHandler");
         rayHandler.dispose();
+        logger.trace("DISPOSE: Liberando ShapeRenderer");
         shape.dispose();
+        mapaView.dispose();
     }
 
     public void aplicarZoom(int incrementoZoom)

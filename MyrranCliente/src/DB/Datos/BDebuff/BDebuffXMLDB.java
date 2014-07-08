@@ -40,7 +40,7 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
 
     public void cargarDatos()
     {
-        logger.debug("Cargando datos desde {}", ficheroDebuffs);
+        logger.debug("Cargando [DEBUFFS] desde {}", ficheroDebuffs);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroDebuffs);
@@ -118,14 +118,14 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
                 listaDeBDebuffs.put(debuff.getID(), debuff);
             }
             if (listaDeBDebuffs.size()==0)
-                logger.error("No se ha encontrado ningun Dato valido en el fichero {}", ficheroDebuffs);
+                logger.error("No se ha encontrado ningun Dato valido en el fichero [DEBUFFS] {}", ficheroDebuffs);
         }
         catch (Exception e) { logger.error("ERROR: con el fichero XML de datos de {}", ficheroDebuffs, e); }
     }
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando datos en {}", ficheroDebuffs);
+        logger.debug("Salvando [DEBUFFS] en {}", ficheroDebuffs);
         Document doc = new Document();
         Element debuff;
         Element element;
@@ -170,7 +170,7 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
             xmlOutputter.output(doc, new FileOutputStream(ficheroDebuffs));
             logger.info("Datos salvados en fichero XML: {}", ficheroDebuffs);
         }
-        catch (Exception e) { logger.error("ERROR: salvando datos Debuffs en fichero: {}", ficheroDebuffs, e);}
+        catch (Exception e) { logger.error("ERROR: salvando [DEBUFFS] en fichero: {}", ficheroDebuffs, e);}
 
     }
 

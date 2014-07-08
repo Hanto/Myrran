@@ -81,7 +81,7 @@ public class PixiePCRecursosXMLDB
 
     public void cargarRazas()
     {
-        logger.debug("Cargando razas desde {}", ficheroPixies);
+        logger.debug("Cargando [RAZAS] desde {}", ficheroPixies);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream fichero = abrirFichero(ficheroPixies);
@@ -103,12 +103,12 @@ public class PixiePCRecursosXMLDB
             }
             logger.trace("");
         }
-        catch (Exception e) { logger.error("ERROR: leyendo Slot Razas en fichero {}: {}", ficheroPixies, e); }
+        catch (Exception e) { logger.error("ERROR: leyendo [RAZAS] en fichero {}: {}", ficheroPixies, e); }
     }
 
     public void cargarSlot(String slot)
     {
-        logger.debug("Cargando datos de {} desde {}", slot, ficheroPixies);
+        logger.debug("Cargando [{}] desde {}", slot.toUpperCase(), ficheroPixies);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroPixies);
@@ -133,12 +133,12 @@ public class PixiePCRecursosXMLDB
             }
             logger.trace("");
         }
-        catch (Exception e) { logger.error("ERROR: leyendo Slot {} en fichero {}: " + e, slot, ficheroPixies); }
+        catch (Exception e) { logger.error("ERROR: leyendo Slot [{}] en fichero {}: " +e, slot.toUpperCase(), ficheroPixies); }
     }
 
     public void salvarSlot(String slotor)
     {
-        logger.debug("Salvando datos de {} en {}", slotor, ficheroPixies);
+        logger.debug("Salvando [{}] en {}", slotor.toUpperCase(), ficheroPixies);
 
         Element slotRoot;
         Element slot;
@@ -167,14 +167,14 @@ public class PixiePCRecursosXMLDB
 
             XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
             xmlOutputter.output(doc, new FileOutputStream(ficheroPixies));
-            logger.info("Datos de {} salvados en: {}", slotor, ficheroPixies);
+            logger.info("Datos de [{}] salvados en: {}", slotor.toUpperCase(), ficheroPixies);
         }
         catch (Exception e) { logger.error("ERROR: leyendo/parseando el fichero {}", ficheroPixies);}
     }
 
     public void salvarRazas()
     {
-        logger.debug("Salvando razas en {}", ficheroPixies);
+        logger.debug("Salvando [RAZAS] en {}", ficheroPixies);
 
         Element razaRoot;
         Element raza;

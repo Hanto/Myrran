@@ -4,8 +4,10 @@ import DTO.NetDTO;
 import Data.Settings;
 import Model.Classes.Geo.Mapa;
 import View.GameState.MundoView;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -32,6 +34,8 @@ public class MapaView implements PropertyChangeListener
 
     private int numTilesX;                          //numero de Tiles de ancho de cada submapa
     private int numTilesY;                          //numero de Tiles de alto de cada submapa
+
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public MapaView(Mapa mapaModel, MundoView mundoView, float posInicialX, float posInicialY, int tamañoX, int tamañoY)
     {
@@ -117,7 +121,7 @@ public class MapaView implements PropertyChangeListener
     public void dispose()
     {
         for (SubMapaView subMapaView: listaSubMapas)
-        {   subMapaView.dispose(); }
+        {   subMapaView.dispose(); logger.trace("DISPOSE: Liberando SubMapaView(TiledMap) {}", subMapaView);}
 
     }
 

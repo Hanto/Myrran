@@ -2,8 +2,6 @@ package DAO.Settings.DAO;// Created by Hanto on 06/07/2014.
 
 import DAO.Settings.SettingsXMLDB;
 import ch.qos.logback.classic.Logger;
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.core.util.StatusPrinter;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
@@ -20,9 +18,6 @@ public class SettingsXML implements SettingsDAO
 
     public SettingsXML()
     {
-        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-        StatusPrinter.print(lc);
-
         settings = new SettingsXMLDB();
 
         strings = settings.strings;

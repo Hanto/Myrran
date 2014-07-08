@@ -28,7 +28,7 @@ import java.util.Map;
 public class SpellXMLDB implements SpellXMLDBI
 {
     private static class Singleton      { private static final SpellXMLDB get = new SpellXMLDB(); }
-    public static SpellXMLDB get()    { return Singleton.get; }
+    public static SpellXMLDB get()      { return Singleton.get; }
 
     private Map<String, SpellI> listaDeSpells = new HashMap<>();
     private Map<String, String> listaIconos = new HashMap<>();
@@ -52,19 +52,18 @@ public class SpellXMLDB implements SpellXMLDBI
             Document documento = builder.build(input);
             Element rootNode = documento.getRootElement();
 
-            List listaNodos = rootNode.getChildren("Spell");
+            List<Element> listaNodos = rootNode.getChildren("Spell");
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
-                Element nodo = (Element) listaNodos.get(i);
+                Element nodo = listaNodos.get(i);
 
                 String iD           = nodo.getAttributeValue("ID");
                 String nombre       = nodo.getAttributeValue("nombre");
                 String tipoSpell    = nodo.getAttributeValue("tipoSpell");
-                String icono        = nodo.getAttributeValue("icono");
                 String descripcion  = nodo.getChildText("Descripcion");
+                String icono        = nodo.getAttributeValue("icono");
 
-                listaIconos.put(iD, icono);
                 TipoSpellI tipoSpellI =  DAO.tipoSpellDAOFactory.getTipoSpellDAO().getTipoSpell(tipoSpell);
                 SpellI spell = new Spell(tipoSpellI);
                 spell.setID(iD);
@@ -89,13 +88,13 @@ public class SpellXMLDB implements SpellXMLDBI
                     logger.debug("Aplica debuff:  {}", debuffID);
                 }
 
-                List listaStats = nodo.getChildren("SkillStat");
+                List<Element> listaStats= nodo.getChildren("SkillStat");
 
                 for (int j = 0; j < listaStats.size(); j++)
                 {
                     if (listaStats.size() < spell.getTipoSpell().getNumSkillStats()) logger.error("Faltan SkillStats por definir");
 
-                    Element stat = (Element) listaStats.get(j);
+                    Element stat = listaStats.get(j);
 
                     byte id             = Byte.parseByte(stat.getAttributeValue("ID"));
                     String nombreStat   = stat.getAttributeValue("nombre");
@@ -128,7 +127,7 @@ public class SpellXMLDB implements SpellXMLDBI
             if (listaDeSpells.size()==0)
                 logger.error("No se ha encontrado ningun Dato valido en el fichero {}", ficheroSpells);
         }
-        catch (Exception e) { logger.error("ERROR: leyendo fichero {}: ", ficheroSpells, e); }
+        catch (Exception e) { logger.error("ERROR: leyendo fichero {}: "+e, ficheroSpells); }
     }
 
     @Override public void salvarDatos()
@@ -138,6 +137,8 @@ public class SpellXMLDB implements SpellXMLDBI
         Element spell;
         Element element;
         SkillStat skillStat;
+
+        actualizarListaIconos();
 
         //Crear root
         doc.setRootElement(new Element("Spells"));
@@ -187,7 +188,30 @@ public class SpellXMLDB implements SpellXMLDBI
             xmlOutputter.output(doc, new FileOutputStream(ficheroSpells));
             logger.info("Datos salvados en fichero XML: {}", ficheroSpells);
         }
-        catch (Exception e) { logger.error("ERROR: salvando datos Spells en fichero: {}", ficheroSpells, e);}
+        catch (Exception e) { logger.error("ERROR: salvando datos Spells en fichero: {}: "+e, ficheroSpells);}
+    }
+
+    private void actualizarListaIconos()
+    {
+        Document doc;
+        Element nodo;
+        SAXBuilder builder = new SAXBuilder();
+
+        InputStream input = abrirFichero(ficheroSpells);
+        listaIconos.clear();
+
+        try
+        {
+            doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChildren("Spell");
+
+            for (int i = 0; i< listaNodos.size() ; i++)
+            {
+                nodo = listaNodos.get(i);
+                listaIconos.put(nodo.getAttributeValue("ID"), nodo.getAttributeValue("icono"));
+            }
+        }
+        catch (Exception e) { logger.error("ERROR: leyendo campo Iconos de fichero: {}: "+e, ficheroSpells);}
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

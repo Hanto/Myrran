@@ -25,7 +25,7 @@ public class AtlasRecursosLocalDB
 
         if (Settings.ATLAS_GenerarAtlas)
         {
-            logger.info("Regenerando ATLAS a partir de los recursos almacenados en {}", Settings.RECURSOS_Atlas_Carpeta_Imagenes_Origen);
+            logger.info("Regenerando [ATLAS] a partir de los recursos almacenados en {}", Settings.RECURSOS_Atlas_Carpeta_Imagenes_Origen);
             TexturePacker.process(Settings.RECURSOS_Atlas_Carpeta_Imagenes_Origen, Settings.RECURSOS_Atlas_Carpeta_Imagenes_Destino, Settings.RECURSOS_Atlas_Atlas_Extension);
         }
 

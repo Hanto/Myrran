@@ -23,10 +23,10 @@ import java.util.Map;
 public class TerrenoXMLDB implements TerrenoXMLDBI
 {
     private static class Singleton      { private static final TerrenoXMLDB get = new TerrenoXMLDB(); }
-    public static TerrenoXMLDB get()  { return Singleton.get; }
+    public static TerrenoXMLDB get()    { return Singleton.get; }
 
     private Map<Short, TerrenoI> listaDeTerrenos = new HashMap<>();
-    private Map<Short, String> listaDeTexturas = new HashMap<>();
+    private Map<Short, Element> listaRecursos = new HashMap<>();
     private String ficheroTerrenos = Settings.RECURSOS_XML+ Settings.XML_DataTerrenos;
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -37,7 +37,7 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
 
     public void cargarDatos()
     {
-        logger.debug("Cargando datos desde {}", ficheroTerrenos);
+        logger.debug("Cargando [DATOS TERRENOS] desde {}", ficheroTerrenos);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTerrenos);
@@ -55,19 +55,18 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
 
                 short iD        = Short.parseShort(nodo.getAttributeValue("ID"));
                 String nombre   = nodo.getAttributeValue("nombre");
-                String nombreT  = nodo.getAttributeValue("nombreTextura");
                 boolean isSolido= Boolean.parseBoolean(nodo.getAttributeValue("isSolido"));
+                String nombreT  = nodo.getChild("Recursos").getAttributeValue("textura");
 
                 Terreno terreno = new Terreno(iD, nombre, isSolido);
                 listaDeTerrenos.put(iD, terreno);
-                listaDeTexturas.put(iD, nombreT);
 
-                logger.info ("TERRENO:         {}", iD);
-                logger.debug("nombre:          {}", nombre);
-                logger.debug("nombreTextura:   {}", nombreT);
-                logger.debug("isSolido:        {}", isSolido);
+                logger.debug ("TERRENO:       {}", iD);
+                logger.trace("nombre:        {}", nombre);
+                logger.trace("nombreTextura: {}", nombreT);
+                logger.trace("isSolido:      {}", isSolido);
             }
-            logger.debug("");
+            logger.trace("");
 
             if (listaDeTerrenos.size() == 0)
                 logger.error("No se han encontrado datos validos en el fichero {}", ficheroTerrenos);
@@ -77,9 +76,12 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando datos en {}", ficheroTerrenos);
+        logger.debug("Salvando [DATOS TERRENOS] en {}", ficheroTerrenos);
         Document doc = new Document();
         Element terreno;
+        Element recursos;
+
+        actualizarListaTexturas();
 
         //Crear root:
         doc.setRootElement(new Element("Terrenos"));
@@ -89,20 +91,45 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
             terreno = new Element("Terreno");
             terreno.setAttribute("ID", Short.toString(entry.getValue().getID()));
             terreno.setAttribute("nombre", entry.getValue().getNombre());
-            terreno.setAttribute("nombreTextura", listaDeTexturas.get(entry.getValue().getID()));
             terreno.setAttribute("isSolido", Boolean.toString(entry.getValue().getIsSolido()));
 
+            //añadimos los Recursos:
+            recursos = listaRecursos.get(entry.getValue().getID());
+            if (recursos != null) terreno.addContent(recursos);
+
             doc.getRootElement().addContent(terreno);
-            logger.debug("TERRENO: {} salvado", terreno.getAttributeValue("ID"));
+            logger.trace("TERRENO: {} {} salvado", terreno.getAttributeValue("ID"), terreno.getAttributeValue("nombre"));
         }
         try
         {
             XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-            xmlOutputter.output(doc, new FileOutputStream("Prueba.xml"));
+            xmlOutputter.output(doc, new FileOutputStream(ficheroTerrenos));
             logger.info("Datos salvados en fichero XML: {}", ficheroTerrenos);
         }
         catch (Exception e) { logger.error("ERROR: salvando datos Terrenos en fichero: {}", ficheroTerrenos, e);}
 
+    }
+
+    private void actualizarListaTexturas()
+    {
+        Document doc;
+        Element nodo;
+        SAXBuilder builder = new SAXBuilder();
+        InputStream input = abrirFichero(ficheroTerrenos);
+        listaRecursos.clear();
+
+        try
+        {
+            doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChildren("Terreno");
+
+            for (int i = 0; i< listaNodos.size() ; i++)
+            {
+                nodo = listaNodos.get(i).getChild("Recursos");
+                listaRecursos.put(Short.parseShort(listaNodos.get(i).getAttributeValue("ID")), nodo.detach());
+            }
+        }
+        catch (Exception e) { logger.error("ERROR: leyendo Recursos en fichero: {}: "+e, ficheroTerrenos);}
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

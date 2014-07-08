@@ -37,7 +37,7 @@ public class FuentesRecursosXML implements FuentesRecursosDAO
     {
         for (Map.Entry<String, BitmapFont> entry: listaDeFuentes.entrySet())
         {
-            logger.trace("Eliminando fuente {}", entry.getKey());
+            logger.trace("DISPOSE: Liberando fuente {}", entry.getKey());
             entry.getValue().dispose();
         }
     }

@@ -37,21 +37,18 @@ public class MiscRecursosXMLDB
 
     public void cargarDatos()
     {
-        logger.debug("Cargando datos desde {}", ficheroTexturas);
-
+        logger.debug("Cargando [TEXTURAS MISC] desde {}", ficheroTexturas);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTexturas);
 
         try
         {
-            Document documento = builder.build(input);
-            Element rootNode = documento.getRootElement();
-
-            List listaNodos = rootNode.getChild("TexturasMisc").getChildren("Textura");
+            Document doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChild("TexturasMisc").getChildren("Textura");
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
-                Element nodo = (Element) listaNodos.get(i);
+                Element nodo = listaNodos.get(i);
                 String nombre = nodo.getText();
 
                 TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_TexturasMisc_LOC + nombre));
@@ -66,10 +63,9 @@ public class MiscRecursosXMLDB
 
     public void salvarDatos()
     {
-        logger.debug("Salvando datos en {}", ficheroTexturas);
-
-        Element terrenoRoot;
-        Element terreno;
+        logger.debug("Salvando [TEXTURAS MISC] en {}", ficheroTexturas);
+        Element texturaRoot;
+        Element textura;
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTexturas);
@@ -77,17 +73,17 @@ public class MiscRecursosXMLDB
         try
         {
             Document doc = builder.build(input);
-
             doc.getRootElement().removeChildren("TexturasMisc");
-            terrenoRoot = new Element("TexturasMisc");
+            texturaRoot = new Element("TexturasMisc");
 
             for (Map.Entry<String, TextureRegion> entry: listaDeTexturasMisc.entrySet())
             {
-                terreno = new Element("Textura");
-                terreno.setText(entry.getKey());
-                terrenoRoot.addContent(terreno);
+                textura = new Element("Textura");
+                textura.setText(entry.getKey());
+                texturaRoot.addContent(textura);
+                logger.trace("Textura {} salvada", textura.getText());
             }
-            doc.getRootElement().addContent(terrenoRoot);
+            doc.getRootElement().addContent(texturaRoot);
 
             XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
             xmlOutputter.output(doc, new FileOutputStream(ficheroTexturas));

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class PixiePCRecursosXML implements PixiePCRecursosDAO
 {
-    public Map<String, PixiePCRecursosXMLDB.EquipoPC> listaDePCRazas;
+    private Map<String, PixiePCRecursosXMLDB.EquipoPC> listaDePCRazas;
     private PixiePCRecursosXMLDB pixiePCRecursosXMLDB;
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -28,6 +28,7 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
     {
         PixiePCRecursosXMLDB.EquipoPC equipoPC = new PixiePCRecursosXMLDB.EquipoPC();
         listaDePCRazas.put(iDRaza, equipoPC);
+        pixiePCRecursosXMLDB.salvarRazas();
     }
 
     @Override public void salvarCuerpoPC(String iDRaza, String iDCuerpo)
@@ -38,7 +39,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieCuerpo pixieCuerpo = new PixieRecursos.PixieCuerpo(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDeCuerpos.put(iDCuerpo, pixieCuerpo); }
+        {
+            listaDePCRazas.get(iDRaza).listaDeCuerpos.put(iDCuerpo, pixieCuerpo);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -50,7 +54,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieCuerpo = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDeCabezas.put(iDCuerpo, pixieCuerpo); }
+        {
+            listaDePCRazas.get(iDRaza).listaDeCabezas.put(iDCuerpo, pixieCuerpo);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -62,7 +69,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieSlot = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDeYelmos.put(iDCuerpo, pixieSlot); }
+        {
+            listaDePCRazas.get(iDRaza).listaDeYelmos.put(iDCuerpo, pixieSlot);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -74,7 +84,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieSlot = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDeHombreras.put(iDCuerpo, pixieSlot); }
+        {
+            listaDePCRazas.get(iDRaza).listaDeHombreras.put(iDCuerpo, pixieSlot);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -86,7 +99,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieSlot = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDePetos.put(iDCuerpo, pixieSlot); }
+        {
+            listaDePCRazas.get(iDRaza).listaDePetos.put(iDCuerpo, pixieSlot);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -98,7 +114,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieSlot = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDePantalones.put(iDCuerpo, pixieSlot); }
+        {
+            listaDePCRazas.get(iDRaza).listaDePantalones.put(iDCuerpo, pixieSlot);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -110,7 +129,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieSlot = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDeGuantes.put(iDCuerpo, pixieSlot); }
+        {
+            listaDePCRazas.get(iDRaza).listaDeGuantes.put(iDCuerpo, pixieSlot);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -122,7 +144,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieSlot = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDeBotas.put(iDCuerpo, pixieSlot); }
+        {
+            listaDePCRazas.get(iDRaza).listaDeBotas.put(iDCuerpo, pixieSlot);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -134,7 +159,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieSlot = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDeCapasTraseras.put(iDCuerpo, pixieSlot); }
+        {
+            listaDePCRazas.get(iDRaza).listaDeCapasTraseras.put(iDCuerpo, pixieSlot);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 
@@ -146,7 +174,10 @@ public class PixiePCRecursosXML implements PixiePCRecursosDAO
 
         PixieRecursos.PixieSlot pixieSlot = new PixieRecursos.PixieSlot(iDCuerpo);
         if (listaDePCRazas.containsKey(iDRaza))
-        {   listaDePCRazas.get(iDRaza).listaDeCapasFrontales.put(iDCuerpo, pixieSlot); }
+        {
+            listaDePCRazas.get(iDRaza).listaDeCapasFrontales.put(iDCuerpo, pixieSlot);
+            pixiePCRecursosXMLDB.salvarSlot(iDCuerpo);
+        }
         else logger.error("Raza {} no existe", iDRaza);
     }
 

@@ -46,7 +46,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
             listaDeTipoSpells.put(tipoSpell.getID(), tipoSpell);
         }
 
-        logger.debug("Cargando datos desde {}", ficheroTipoSpells);
+        logger.debug("Cargando [TIPO SPELLS] desde {}", ficheroTipoSpells);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTipoSpells);
@@ -76,7 +76,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                 logger.debug("Descripcion:    {}", descripcion);
 
                 if (iD == null || nombre == null || descripcion == null)
-                {   logger.error("Error parseando los datos del TipoBDebuff, campos erroneos", iD);}
+                {   logger.error("Error parseando los datos [TIPO SPELLS], campos erroneos", iD);}
 
                 List listaStats = nodo.getChildren("SkillStat");
 
@@ -115,14 +115,14 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                 listaDeTipoSpells.put(tipoSpell.getID(), tipoSpell);
             }
             if (listaDeTipoSpells.size()==0)
-                logger.error("No se ha encontrado ningun Dato valido en el fichero {}", ficheroTipoSpells);
+                logger.error("No se ha encontrado ningun Dato valido en el fichero [TIPO SPELLS] {}", ficheroTipoSpells);
         }
-        catch (Exception e) { logger.error("ERROR: leyendo fichero {}: ", ficheroTipoSpells, e); }
+        catch (Exception e) { logger.error("ERROR: leyendo fichero [TIPO SPELLS] {}: ", ficheroTipoSpells, e); }
     }
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando datos en {}", ficheroTipoSpells);
+        logger.debug("Salvando [TIPO SPELLS] en {}", ficheroTipoSpells);
         Document doc = new Document();
         Element tspell;
         Element element;
@@ -164,7 +164,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
             xmlOutputter.output(doc, new FileOutputStream(ficheroTipoSpells));
             logger.info("Datos salvados en fichero XML: {}", ficheroTipoSpells);
         }
-        catch (Exception e) { logger.error("ERROR: salvando datos Spells en fichero: {}", ficheroTipoSpells, e);}
+        catch (Exception e) { logger.error("ERROR: salvando [TIPO SPELLS] en fichero: {}", ficheroTipoSpells, e);}
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

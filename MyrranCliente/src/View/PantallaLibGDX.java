@@ -6,13 +6,13 @@ import DB.Datos.Spell.SpellXMLDB;
 import DB.Datos.Terreno.TerrenoXMLDB;
 import DB.Datos.TipoBdDebuff.TipoBDebuffXMLDB;
 import DB.Datos.TipoSpell.TipoSpellXMLDB;
-import DB.Recursos.AccionRecursos.AccionRecursosLocalDB;
+import DB.Recursos.AccionRecursos.AccionRecursosXMLDB;
 import DB.Recursos.AtlasRecursos.AtlasRecursosLocalDB;
 import DB.Recursos.FuentesRecursos.FuentesRecursosXMLDB;
 import DB.Recursos.MiscRecursos.MiscRecursosXMLDB;
 import DB.Recursos.PixiePCRecursos.PixiePCRecursosXMLDB;
-import DB.Recursos.SkillRecursos.SkillRecursosLocalDB;
-import DB.Recursos.TerrenoRecursos.TerrenoRecursosLocalDB;
+import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
+import DB.Recursos.TerrenoRecursos.TerrenoRecursosXMLDB;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Screen;
@@ -39,11 +39,12 @@ public class PantallaLibGDX implements Screen
 
         AtlasRecursosLocalDB.get();
         MiscRecursosXMLDB.get();
-        AccionRecursosLocalDB.get();
-        SkillRecursosLocalDB.get();
-        TerrenoRecursosLocalDB.get();
+        TerrenoRecursosXMLDB.get();
+        AccionRecursosXMLDB.get();
         PixiePCRecursosXMLDB.get();
         FuentesRecursosXMLDB.get();
+
+        SkillRecursosXMLDB.get();
 
         Mundo mundo = new Mundo();
         controlador = new Controlador(mundo);
@@ -53,9 +54,7 @@ public class PantallaLibGDX implements Screen
     {   logger.trace("SHOW (Inicializando Screen):");  }
 
     @Override public void render(float delta)
-    {
-        controlador.render(delta);
-    }
+    {   controlador.render(delta); }
 
     @Override public void resize(int anchura, int altura)
     {   logger.trace("RESIZE (Redimensionando Screen) a: {} x {}", anchura, altura);

@@ -47,8 +47,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
             listaDeTipoBDebuffs.put(tipoBDebuff.getID(), tipoBDebuff);
         }
 
-        logger.debug("Cargando datos desde {}", ficheroTipoDebuffs);
-
+        logger.debug("Cargando [TIPO BDEBUFFS] desde {}", ficheroTipoDebuffs);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTipoDebuffs);
 
@@ -122,14 +121,14 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                 listaDeTipoBDebuffs.put(tipoDebuff.getID(), tipoDebuff);
             }
             if (listaDeTipoBDebuffs.size()==0)
-                logger.error("No se ha encontrado ningun Dato valido en el fichero {}", ficheroTipoDebuffs);
+                logger.error("No se ha encontrado ningun Dato valido en el fichero [TIPO BDEBUFFS] {}", ficheroTipoDebuffs);
         }
-        catch (Exception e) { logger.error("ERROR: leyendo fichero {}: ", ficheroTipoDebuffs, e); }
+        catch (Exception e) { logger.error("ERROR: leyendo fichero [TIPO BDEBUFFS] {}: ", ficheroTipoDebuffs, e); }
     }
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando datos en {}", ficheroTipoDebuffs);
+        logger.debug("Salvando [TIPO BDEBUFFS] en {}", ficheroTipoDebuffs);
         Document doc = new Document();
         Element debuff;
         Element element;
@@ -172,9 +171,9 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
         {
             XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
             xmlOutputter.output(doc, new FileOutputStream(ficheroTipoDebuffs));
-            logger.info("Datos salvados en fichero XML: {}", ficheroTipoDebuffs);
+            logger.info("[TIPO BDEBUFFS] salvados en fichero XML: {}", ficheroTipoDebuffs);
         }
-        catch (Exception e) { logger.error("ERROR: salvando datos Spells en fichero: {}", ficheroTipoDebuffs, e);}
+        catch (Exception e) { logger.error("ERROR: salvando [TIPO BDEBUFFS] en fichero: {}", ficheroTipoDebuffs, e);}
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

@@ -1,7 +1,7 @@
 package DB.Recursos.TerrenoRecursos;// Created by Ladrim on 24/04/2014.
 
 import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosDAO;
-import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosLocal;
+import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosXML;
 
 public enum TerrenoRecursosDAOFactory
 {
@@ -9,7 +9,7 @@ public enum TerrenoRecursosDAOFactory
     {
         @Override
         public TerrenoRecursosDAO getTerrenoRecursosDAO()
-        {   return new TerrenoRecursosLocal(); }
+        {   return new TerrenoRecursosXML(TerrenoRecursosXMLDB.get()); }
     };
 
     public abstract TerrenoRecursosDAO getTerrenoRecursosDAO();

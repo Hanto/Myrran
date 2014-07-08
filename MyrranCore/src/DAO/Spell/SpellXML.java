@@ -25,7 +25,7 @@ public class SpellXML implements SpellDAO
     @Override public boolean añadirSpell(SpellI spell)
     {
         if (listaDeSpells.containsKey(spell.getID()))
-        {   logger.warn("Ya existe un Spell con este ID[{}]",spell.getID());  return false; }
+        {   logger.warn("No se puede añadir spell, ya existe ID[{}]",spell.getID());  return false; }
         else
         {
             listaDeSpells.put(spell.getID(), spell);
@@ -41,6 +41,7 @@ public class SpellXML implements SpellDAO
             listaDeSpells.put(spell.getID(), spell);
             spellXMLDBI.salvarDatos();
         }
+        else logger.warn("No se puede salvar spell, no existe ID[{}]", spell.getID());
     }
 
     @Override public void eliminarSpell(String spellID)
@@ -50,6 +51,7 @@ public class SpellXML implements SpellDAO
             listaDeSpells.remove(spellID);
             spellXMLDBI.salvarDatos();
         }
+        else logger.warn("No se puede eliminar spell, no existe ID[{}]", spellID);
     }
 
     @Override public SpellI getSpell(String spellID)

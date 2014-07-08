@@ -37,7 +37,7 @@ public class FuentesRecursosXMLDB
 
     public void cargarDatos()
     {
-        logger.debug("Cargando datos desde {}", ficheroTexturas);
+        logger.debug("Cargando [FUENTES] desde {}", ficheroTexturas);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream fichero = abrirFichero(ficheroTexturas);
@@ -61,12 +61,12 @@ public class FuentesRecursosXMLDB
             }
             logger.trace("");
         }
-        catch (Exception e) { logger.error("ERROR: leyendo fichero {}:", ficheroTexturas, e); }
+        catch (Exception e) { logger.error("ERROR: leyendo fuente de fichero {}:"+e, ficheroTexturas); }
     }
 
     public void salvarDatos()
     {
-        logger.debug("Salvando datos en {}", ficheroTexturas);
+        logger.debug("Salvando [FUENTES] en {}", ficheroTexturas);
 
         Element fuenteRoot;
         Element fuente;
@@ -86,6 +86,7 @@ public class FuentesRecursosXMLDB
                 fuente = new Element("Textura");
                 fuente.setText(entry.getKey());
                 fuenteRoot.addContent(fuente);
+                logger.trace("Textura {} salvada", fuente.getText());
             }
             doc.getRootElement().addContent(fuenteRoot);
 
@@ -93,7 +94,7 @@ public class FuentesRecursosXMLDB
             xmlOutputter.output(doc, new FileOutputStream(ficheroTexturas));
             logger.info("Datos salvados en fichero XML: {}", ficheroTexturas);
         }
-        catch (Exception e) { logger.error("ERROR: leyendo/parseando el fichero {}", ficheroTexturas);}
+        catch (Exception e) { logger.error("ERROR: escribiendo Fuentes en el fichero {}"+e, ficheroTexturas);}
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

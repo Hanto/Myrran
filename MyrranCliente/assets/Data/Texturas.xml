@@ -19,12 +19,12 @@
     <Textura>IrSur</Textura>
     <Textura>IrEste</Textura>
   </TexturasAcciones>
-  <TexturasSpells>
-    <Textura>FireBall</Textura>
-    <Textura>FrostBolt</Textura>
-    <Textura>Muros</Textura>
-    <Textura>Editar</Textura>
-  </TexturasSpells>
+  <Fuentes>
+    <Textura>20</Textura>
+    <Textura>10</Textura>
+    <Textura>14</Textura>
+    <Textura>11</Textura>
+  </Fuentes>
   <TexturasTerrenos>
     <Textura>Arena1</Textura>
     <Textura>Tierra2</Textura>
@@ -40,10 +40,10 @@
     <Textura>Cesped2</Textura>
     <Textura>Cesped3</Textura>
   </TexturasTerrenos>
-  <Fuentes>
-    <Textura>20</Textura>
-    <Textura>10</Textura>
-    <Textura>14</Textura>
-    <Textura>11</Textura>
-  </Fuentes>
+  <TexturasSpells>
+    <Textura>FireBall</Textura>
+    <Textura>FrostBolt</Textura>
+    <Textura>Muros</Textura>
+    <Textura>Editar</Textura>
+  </TexturasSpells>
 </Texturas>

@@ -32,7 +32,7 @@ public class SettingsXMLDB
     //Metodos:
     private void cargarDatos()
     {
-        logger.debug("Cargando Settings de: {}", ficheroSettings);
+        logger.debug("Cargando [SETTINGS] de: {}", ficheroSettings);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroSettings);
@@ -103,7 +103,7 @@ public class SettingsXMLDB
 
     public void salvarDatos()
     {
-        logger.debug("Salvando Datos en: " + ficheroSettings);
+        logger.debug("Salvando [SETTINGS] en: " + ficheroSettings);
         Document doc = new Document();
         Element element;
 
@@ -152,7 +152,7 @@ public class SettingsXMLDB
             xmlOutputter.output(doc, new FileOutputStream(ficheroSettings));
             logger.info("Datos salvados con exito");
         }
-        catch (Exception e) { logger.error("Error salvando los datos en {}", ficheroSettings, e); }
+        catch (Exception e) { logger.error("Error salvando [SETTINGS] en {}", ficheroSettings, e); }
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)
