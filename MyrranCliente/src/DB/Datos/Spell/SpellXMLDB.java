@@ -43,17 +43,14 @@ public class SpellXMLDB implements SpellXMLDBI
 
     public void cargarDatos()
     {
-        logger.debug("Cargando [SPELLS] desde {}", ficheroSpells);
-
+        logger.info("Cargando [SPELLS] desde {}", ficheroSpells);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroSpells);
 
         try
         {
-            Document documento = builder.build(input);
-            Element rootNode = documento.getRootElement();
-
-            List<Element> listaNodos = rootNode.getChildren("Spell");
+            Document doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChildren("Spell");
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
@@ -71,11 +68,11 @@ public class SpellXMLDB implements SpellXMLDBI
                 spell.setNombre(nombre);
                 spell.setDescripcion(descripcion);
 
-                logger.info ("SPELL:          {}", iD);
-                logger.debug("nombre:         {}", nombre);
-                logger.debug("TipoSpell:      {}", tipoSpell);
-                logger.debug("Descripcion:    {}", descripcion);
-                logger.debug("Icono:          {}", icono);
+                logger.debug("SPELL:          {}", iD);
+                logger.trace("nombre:         {}", nombre);
+                logger.trace("TipoSpell:      {}", tipoSpell);
+                logger.trace("Descripcion:    {}", descripcion);
+                logger.trace("Icono:          {}", icono);
 
                 if (iD == null || nombre == null || tipoSpell == null || icono == null || descripcion == null )
                 {   logger.error("Error parseando los datos de [SPELL] {}, campos erroneos", iD);}
@@ -87,7 +84,7 @@ public class SpellXMLDB implements SpellXMLDBI
                     String debuffID = ((Element)listaDebuffs.get(j)).getText();
                     spell.añadirDebuff(debuffID);
 
-                    logger.debug("Aplica debuff:  {}", debuffID);
+                    logger.trace("Aplica debuff:  {}", debuffID);
                 }
 
                 List<Element> listaStats= nodo.getChildren("SkillStat");
@@ -110,31 +107,31 @@ public class SpellXMLDB implements SpellXMLDBI
                     if (isMejorable) spell.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
                     else spell.getSkillStat(id).setIsMejorable(isMejorable);
 
-                    logger.debug("  id:           {}", id);
-                    logger.debug("  nombreStat:   {}", nombreStat);
-                    logger.debug("  valorBase:    {}", valorBase);
-                    logger.debug("  isMejorable:  {}", isMejorable);
+                    logger.trace("  id:           {}", id);
+                    logger.trace("  nombreStat:   {}", nombreStat);
+                    logger.trace("  valorBase:    {}", valorBase);
+                    logger.trace("  isMejorable:  {}", isMejorable);
 
                     if (isMejorable)
                     {
-                        logger.debug("  talentoMaximo:{}", talentoMaximo);
-                        logger.debug("  costeTalento: {}", costeTalento);
-                        logger.debug("  bonoTalento:  {}", bonoTalento);
+                        logger.trace("  talentoMaximo:{}", talentoMaximo);
+                        logger.trace("  costeTalento: {}", costeTalento);
+                        logger.trace("  bonoTalento:  {}", bonoTalento);
                     }
                 }
-                logger.debug("");
+                logger.trace("");
 
                 listaDeSpells.put(spell.getID(), spell);
             }
             if (listaDeSpells.size()==0)
                 logger.error("No se ha encontrado ningun Dato valido en el fichero [SPELLS] {}", ficheroSpells);
         }
-        catch (Exception e) { logger.error("ERROR: leyendo fichero [SPELLS] {}: "+e, ficheroSpells); }
+        catch (Exception e) { logger.error("ERROR: leyendo fichero [SPELLS] {}: ", ficheroSpells, e); }
     }
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando [SPELLS] en {}", ficheroSpells);
+        logger.info("Salvando [SPELLS] en {}", ficheroSpells);
         Document doc = new Document();
         Element spell;
         Element element;
@@ -193,7 +190,7 @@ public class SpellXMLDB implements SpellXMLDBI
             xmlOutputter.output(doc, new FileOutputStream(ficheroSpells));
             logger.info("[SPELLS] salvados en fichero XML: {}", ficheroSpells);
         }
-        catch (Exception e) { logger.error("ERROR: salvando [SPELLS] en fichero: {}: "+e, ficheroSpells);}
+        catch (Exception e) { logger.error("ERROR: salvando [SPELLS] en fichero: {}: ", ficheroSpells, e);}
     }
 
     private void actualizarListaRecursos()
@@ -215,7 +212,7 @@ public class SpellXMLDB implements SpellXMLDBI
                 listaRecursos.put(listaNodos.get(i).getAttributeValue("ID"), nodo.detach());
             }
         }
-        catch (Exception e) { logger.error("ERROR: leyendo Recursos de fichero [SPELLS]: {}: "+e, ficheroSpells);}
+        catch (Exception e) { logger.error("ERROR: leyendo Recursos de fichero [SPELLS]: {}: ", ficheroSpells, e);}
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

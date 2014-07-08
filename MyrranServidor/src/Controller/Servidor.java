@@ -1,13 +1,16 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
 import DTO.NetDTO;
+import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import org.slf4j.LoggerFactory;
 
 public class Servidor extends Server
 {
     public Controlador controlador;
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public Servidor (Controlador control)
     {
@@ -89,13 +92,12 @@ public class Servidor extends Server
     }
 
     public void enviarACliente(int connectionID, Object obj)
-    {   //this.sendToTCP(connectionID, obj);
-
+    {
         Connection[] connections = this.getConnections();
         for (int i = 0, n = connections.length; i < n; i++) {
             Connection connection = connections[i];
             if (connection.getID() == connectionID) {
-                System.out.println(connection.sendTCP(obj));
+                logger.trace("ENVIAR: "+connectionID+" {} {} bytes", obj.getClass().getSimpleName(), connection.sendTCP(obj));
                 break;
             }
         }

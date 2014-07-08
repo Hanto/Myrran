@@ -27,7 +27,7 @@ import java.util.Map;
 public class BDebuffXMLDB implements BDebuffXMLDBI
 {
     private static class Singleton      { private static final BDebuffXMLDB get = new BDebuffXMLDB(); }
-    public static BDebuffXMLDB get()  { return Singleton.get; }
+    public static BDebuffXMLDB get()    { return Singleton.get; }
 
     private Map<String, BDebuffI> listaDeBDebuffs = new HashMap<>();
     private String ficheroDebuffs = Settings.RECURSOS_XML + Settings.XML_DataBDebuffs;
@@ -40,21 +40,18 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
 
     public void cargarDatos()
     {
-        logger.debug("Cargando [DEBUFFS] desde {}", ficheroDebuffs);
-
+        logger.info("Cargando [DEBUFFS] desde {}", ficheroDebuffs);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroDebuffs);
 
         try
         {
-            Document documento = builder.build(input);
-            Element rootNode = documento.getRootElement();
-
-            List listaNodos = rootNode.getChildren("Debuff");
+            Document doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChildren("Debuff");
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
-                Element nodo = (Element) listaNodos.get(i);
+                Element nodo = listaNodos.get(i);
 
                 String iD           = nodo.getAttributeValue("ID");
                 String nombre       = nodo.getAttributeValue("nombre");
@@ -71,23 +68,23 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
                 debuff.setIsDebuff(isDebuff);
                 debuff.setStacksMaximos(stacksMaximos);
 
-                logger.info("BDEBUFF:        {}", iD);
-                logger.debug("nombre:         {}", nombre);
-                logger.debug("Descripcion:    {}", descripcion);
-                logger.debug("isDebuff:       {}", isDebuff);
-                logger.debug("stacksMaximos:  {}", stacksMaximos);
-                logger.debug("TipoDebuff:     {}", tipoBDebuff);
+                logger.debug("BDEBUFF:        {}", iD);
+                logger.trace("nombre:         {}", nombre);
+                logger.trace("Descripcion:    {}", descripcion);
+                logger.trace("isDebuff:       {}", isDebuff);
+                logger.trace("stacksMaximos:  {}", stacksMaximos);
+                logger.trace("TipoDebuff:     {}", tipoBDebuff);
 
                 if (iD == null || nombre == null || tipoBDebuff == null || descripcion == null || stacksMaximos == 0)
                 {   logger.error("Error parseando los datos del BDebuff, campos erroneos", iD);}
 
-                List listaStats = nodo.getChildren("SkillStat");
+                List<Element> listaStats = nodo.getChildren("SkillStat");
 
                 for (int j = 0; j < listaStats.size(); j++)
                 {
                     if (listaStats.size() < debuff.getTipoBDebuff().getNumSkillStats()) logger.error("Faltan SkillStats por definir");
 
-                    Element stat = (Element) listaStats.get(j);
+                    Element stat = listaStats.get(j);
 
                     byte id             = Byte.parseByte(stat.getAttributeValue("ID"));
                     String nombreStat   = stat.getAttributeValue("nombre");
@@ -101,19 +98,19 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
                     if (isMejorable) debuff.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
                     else debuff.getSkillStat(id).setIsMejorable(isMejorable);
 
-                    logger.debug("  id:           {}", id);
-                    logger.debug("  nombreStat:   {}", nombreStat);
-                    logger.debug("  valorBase:    {}", valorBase);
-                    logger.debug("  isMejorable:  {}", isMejorable);
+                    logger.trace("  id:           {}", id);
+                    logger.trace("  nombreStat:   {}", nombreStat);
+                    logger.trace("  valorBase:    {}", valorBase);
+                    logger.trace("  isMejorable:  {}", isMejorable);
 
                     if (isMejorable)
                     {
-                        logger.debug("  talentoMaximo:{}", talentoMaximo);
-                        logger.debug("  costeTalento: {}", costeTalento);
-                        logger.debug("  bonoTalento:  {}", bonoTalento);
+                        logger.trace("  talentoMaximo:{}", talentoMaximo);
+                        logger.trace("  costeTalento: {}", costeTalento);
+                        logger.trace("  bonoTalento:  {}", bonoTalento);
                     }
                 }
-                logger.debug("");
+                logger.trace("");
 
                 listaDeBDebuffs.put(debuff.getID(), debuff);
             }
@@ -125,7 +122,7 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando [DEBUFFS] en {}", ficheroDebuffs);
+        logger.info("Salvando [DEBUFFS] en {}", ficheroDebuffs);
         Document doc = new Document();
         Element debuff;
         Element element;

@@ -47,20 +47,17 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
             listaDeTipoBDebuffs.put(tipoBDebuff.getID(), tipoBDebuff);
         }
 
-        logger.debug("Cargando [TIPO BDEBUFFS] desde {}", ficheroTipoDebuffs);
+        logger.info("Cargando [TIPO BDEBUFFS] desde {}", ficheroTipoDebuffs);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTipoDebuffs);
 
         try
         {
-            Document documento = builder.build(input);
-            Element rootNode = documento.getRootElement();
-
-            List listaNodos = rootNode.getChildren("TDebuff");
-
+            Document doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChildren("TDebuff");
             for (int i = 0; i < listaNodos.size(); i++)
             {
-                Element nodo = (Element) listaNodos.get(i);
+                Element nodo        = listaNodos.get(i);
 
                 String iD           = nodo.getAttributeValue("ID");
                 String nombre       = nodo.getAttributeValue("nombre");
@@ -75,22 +72,22 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                 tipoDebuff.setIsDebuff(isDebuff);
                 tipoDebuff.setStacksMaximos(stacksMaximos);
 
-                logger.info ("TIPO DEBUFF:    {}", iD);
-                logger.debug("nombre:         {}", nombre);
-                logger.debug("isDebuff:       {}", isDebuff);
-                logger.debug("stacksMaximos:  {}", stacksMaximos);
-                logger.debug("Descripcion:    {}", descripcion);
+                logger.debug("TIPO DEBUFF:    {}", iD);
+                logger.trace("nombre:         {}", nombre);
+                logger.trace("isDebuff:       {}", isDebuff);
+                logger.trace("stacksMaximos:  {}", stacksMaximos);
+                logger.trace("Descripcion:    {}", descripcion);
 
                 if (iD == null || nombre == null || descripcion == null || stacksMaximos == 0)
                 {   logger.error("Error parseando los datos del TipoBDebuff, campos erroneos", iD);}
 
-                List listaStats = nodo.getChildren("SkillStat");
+                List<Element> listaStats = nodo.getChildren("SkillStat");
 
                 for (int j = 0; j < listaStats.size(); j++)
                 {
                     if (listaStats.size() < tipoDebuff.getNumSkillStats()) logger.error("Faltan SkillStats por definir");
 
-                    Element stat = (Element) listaStats.get(j);
+                    Element stat        = listaStats.get(j);
 
                     byte id             = Byte.parseByte(stat.getAttributeValue("ID"));
                     String nombreStat   = stat.getAttributeValue("nombre");
@@ -104,19 +101,19 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                     if (isMejorable) tipoDebuff.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
                     else tipoDebuff.getSkillStat(id).setIsMejorable(isMejorable);
 
-                    logger.debug("  id:           {}", id);
-                    logger.debug("  nombreStat:   {}", nombreStat);
-                    logger.debug("  valorBase:    {}", valorBase);
-                    logger.debug("  isMejorable:  {}", isMejorable);
+                    logger.trace("  id:           {}", id);
+                    logger.trace("  nombreStat:   {}", nombreStat);
+                    logger.trace("  valorBase:    {}", valorBase);
+                    logger.trace("  isMejorable:  {}", isMejorable);
 
                     if (isMejorable)
                     {
-                        logger.debug("  talentoMaximo:{}", talentoMaximo);
-                        logger.debug("  costeTalento: {}", costeTalento);
-                        logger.debug("  bonoTalento:  {}", bonoTalento);
+                        logger.trace("  talentoMaximo:{}", talentoMaximo);
+                        logger.trace("  costeTalento: {}", costeTalento);
+                        logger.trace("  bonoTalento:  {}", bonoTalento);
                     }
                 }
-                logger.debug("");
+                logger.trace("");
 
                 listaDeTipoBDebuffs.put(tipoDebuff.getID(), tipoDebuff);
             }
@@ -128,7 +125,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando [TIPO BDEBUFFS] en {}", ficheroTipoDebuffs);
+        logger.info("Salvando [TIPO BDEBUFFS] en {}", ficheroTipoDebuffs);
         Document doc = new Document();
         Element debuff;
         Element element;

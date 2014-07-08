@@ -37,21 +37,18 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
 
     public void cargarDatos()
     {
-        logger.debug("Cargando [DATOS TERRENOS] desde {}", ficheroTerrenos);
-
+        logger.info("Cargando [DATOS TERRENOS] desde {}", ficheroTerrenos);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTerrenos);
 
         try
         {
-            Document documento = builder.build(input);
-            Element rootNode = documento.getRootElement();
-
-            List listaNodos = rootNode.getChildren("Terreno");
+            Document doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChildren("Terreno");
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
-                Element nodo = (Element) listaNodos.get(i);
+                Element nodo    = listaNodos.get(i);
 
                 short iD        = Short.parseShort(nodo.getAttributeValue("ID"));
                 String nombre   = nodo.getAttributeValue("nombre");
@@ -76,7 +73,7 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando [DATOS TERRENOS] en {}", ficheroTerrenos);
+        logger.info("Salvando [DATOS TERRENOS] en {}", ficheroTerrenos);
         Document doc = new Document();
         Element terreno;
         Element recursos;

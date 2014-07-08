@@ -81,8 +81,7 @@ public class PixiePCRecursosXMLDB
 
     public void cargarRazas()
     {
-        logger.debug("Cargando [RAZAS] desde {}", ficheroPixies);
-
+        logger.info("Cargando [RAZAS] desde {}", ficheroPixies);
         SAXBuilder builder = new SAXBuilder();
         InputStream fichero = abrirFichero(ficheroPixies);
 
@@ -108,8 +107,7 @@ public class PixiePCRecursosXMLDB
 
     public void cargarSlot(String slot)
     {
-        logger.debug("Cargando [{}] desde {}", slot.toUpperCase(), ficheroPixies);
-
+        logger.info("Cargando [{}] desde {}", slot.toUpperCase(), ficheroPixies);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroPixies);
 
@@ -138,8 +136,7 @@ public class PixiePCRecursosXMLDB
 
     public void salvarSlot(String slotor)
     {
-        logger.debug("Salvando [{}] en {}", slotor.toUpperCase(), ficheroPixies);
-
+        logger.info("Salvando [{}] en {}", slotor.toUpperCase(), ficheroPixies);
         Element slotRoot;
         Element slot;
 
@@ -174,8 +171,7 @@ public class PixiePCRecursosXMLDB
 
     public void salvarRazas()
     {
-        logger.debug("Salvando [RAZAS] en {}", ficheroPixies);
-
+        logger.info("Salvando [RAZAS] en {}", ficheroPixies);
         Element razaRoot;
         Element raza;
 

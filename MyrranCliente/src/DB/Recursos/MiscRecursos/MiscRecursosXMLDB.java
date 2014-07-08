@@ -37,7 +37,7 @@ public class MiscRecursosXMLDB
 
     public void cargarDatos()
     {
-        logger.debug("Cargando [TEXTURAS MISC] desde {}", ficheroTexturas);
+        logger.info("Cargando [TEXTURAS MISC] desde {}", ficheroTexturas);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTexturas);
 
@@ -63,7 +63,7 @@ public class MiscRecursosXMLDB
 
     public void salvarDatos()
     {
-        logger.debug("Salvando [TEXTURAS MISC] en {}", ficheroTexturas);
+        logger.info("Salvando [TEXTURAS MISC] en {}", ficheroTexturas);
         Element texturaRoot;
         Element textura;
 

@@ -56,7 +56,7 @@ public class SkillRecursosXMLDB
 
     public void cargarTexturasIconos()
     {
-        logger.debug("Cargando [TEXTURAS ICONOS SPELL] desde {}", ficheroTexturas);
+        logger.info("Cargando [TEXTURAS ICONOS SPELL] desde {}", ficheroTexturas);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTexturas);
 
@@ -139,7 +139,7 @@ public class SkillRecursosXMLDB
 
     public void cargarSpellRecursos()
     {
-        logger.debug("Cargando [SPELL RECURSOS] desde {}", ficheroRecursos);
+        logger.info("Cargando [SPELL RECURSOS] desde {}", ficheroRecursos);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroRecursos);
 
@@ -168,8 +168,7 @@ public class SkillRecursosXMLDB
 
     public void salvarTexturasIconos()
     {
-        logger.debug("Salvando [TEXTURAS ICONOS]s en {}", ficheroTexturas);
-
+        logger.info("Salvando [TEXTURAS ICONOS]s en {}", ficheroTexturas);
         Element iconoRoot;
         Element icono;
 
@@ -200,7 +199,7 @@ public class SkillRecursosXMLDB
 
     public void salvarSpellRecursos()
     {
-        logger.debug("Salvando [SPELL RECURSOS] en {}", ficheroRecursos);
+        logger.info("Salvando [SPELL RECURSOS] en {}", ficheroRecursos);
         Document doc;
         Element recurso;
         SAXBuilder builder = new SAXBuilder();

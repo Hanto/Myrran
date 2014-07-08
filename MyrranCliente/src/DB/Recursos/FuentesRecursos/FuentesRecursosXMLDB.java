@@ -37,7 +37,7 @@ public class FuentesRecursosXMLDB
 
     public void cargarDatos()
     {
-        logger.debug("Cargando [FUENTES] desde {}", ficheroTexturas);
+        logger.info("Cargando [FUENTES] desde {}", ficheroTexturas);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream fichero = abrirFichero(ficheroTexturas);
@@ -66,7 +66,7 @@ public class FuentesRecursosXMLDB
 
     public void salvarDatos()
     {
-        logger.debug("Salvando [FUENTES] en {}", ficheroTexturas);
+        logger.info("Salvando [FUENTES] en {}", ficheroTexturas);
 
         Element fuenteRoot;
         Element fuente;

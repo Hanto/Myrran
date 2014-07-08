@@ -46,7 +46,7 @@ public class AccionRecursosXMLDB
 
     public void cargarTexturasIconos()
     {
-        logger.debug("Cargando [TEXTURAS ACCIONES] desde {}", ficheroTexturas);
+        logger.info("Cargando [TEXTURAS ACCIONES] desde {}", ficheroTexturas);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTexturas);
@@ -73,7 +73,7 @@ public class AccionRecursosXMLDB
 
     public void cargarAccionRecursos()
     {
-        logger.debug("Cargando [ACCIONES RECURSOS] desde {}", ficheroRecursos);
+        logger.info("Cargando [ACCIONES RECURSOS] desde {}", ficheroRecursos);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroRecursos);
@@ -105,7 +105,7 @@ public class AccionRecursosXMLDB
 
     public void salvarTexturasIconos()
     {
-        logger.debug("Salvando [TEXTURAS ACCIONES] en {}", ficheroTexturas);
+        logger.info("Salvando [TEXTURAS ACCIONES] en {}", ficheroTexturas);
 
         Element accionRoot;
         Element accion;
@@ -137,7 +137,7 @@ public class AccionRecursosXMLDB
 
     public void salvarAccionRecursos()
     {
-        logger.debug("Salvando [ACCION RECURSOS] en {}", ficheroRecursos);
+        logger.info("Salvando [ACCION RECURSOS] en {}", ficheroRecursos);
 
         Document doc;
         Element nodo;

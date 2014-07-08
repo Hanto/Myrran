@@ -46,8 +46,7 @@ public class TerrenoRecursosXMLDB
 
     public void cargarTexturasTerrenos()
     {
-        logger.debug("Cargando [TEXTURAS TERRENOS] desde {}", ficheroTexturas);
-
+        logger.info("Cargando [TEXTURAS TERRENOS] desde {}", ficheroTexturas);
         SAXBuilder builder = new SAXBuilder();
         InputStream fichero = abrirFichero(ficheroTexturas);
 
@@ -75,8 +74,7 @@ public class TerrenoRecursosXMLDB
 
     public void cargarTerrenoRecursos()
     {
-        logger.debug("Cargando [TERRENOS RECURSOS] desde {}", ficheroTRecursos);
-
+        logger.info("Cargando [TERRENOS RECURSOS] desde {}", ficheroTRecursos);
         SAXBuilder builder = new SAXBuilder();
         InputStream fichero = abrirFichero(ficheroTRecursos);
 
@@ -106,8 +104,7 @@ public class TerrenoRecursosXMLDB
 
     public void salvarTexturasTerrenos()
     {
-        logger.debug("Salvando [TEXTURAS TERRENOS] en {}", ficheroTexturas);
-
+        logger.info("Salvando [TEXTURAS TERRENOS] en {}", ficheroTexturas);
         Element terrenoRoot;
         Element terreno;
 
@@ -139,7 +136,7 @@ public class TerrenoRecursosXMLDB
 
     public void salvarTerrenoRecursos()
     {
-        logger.debug("Salvando [TERRENO RECURSOS] en {}", ficheroTRecursos);
+        logger.info("Salvando [TERRENO RECURSOS] en {}", ficheroTRecursos);
         Document doc;
         Element recurso;
         SAXBuilder builder = new SAXBuilder();

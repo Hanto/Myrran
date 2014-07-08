@@ -26,7 +26,7 @@ import java.util.Map;
 public class TipoSpellXMLDB implements TipoSpellXMLDBI
 {
     private static class Singleton          { private static final TipoSpellXMLDB get = new TipoSpellXMLDB(); }
-    public static TipoSpellXMLDB get()    { return Singleton.get; }
+    public static TipoSpellXMLDB get()      { return Singleton.get; }
 
     private Map<String, TipoSpellI>  listaDeTipoSpells = new HashMap<>();
     private String ficheroTipoSpells = Settings.RECURSOS_XML + Settings.XML_DataTipoSpells;
@@ -46,21 +46,18 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
             listaDeTipoSpells.put(tipoSpell.getID(), tipoSpell);
         }
 
-        logger.debug("Cargando [TIPO SPELLS] desde {}", ficheroTipoSpells);
-
+        logger.info("Cargando [TIPO SPELLS] desde {}", ficheroTipoSpells);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTipoSpells);
 
         try
         {
-            Document documento = builder.build(input);
-            Element rootNode = documento.getRootElement();
-
-            List listaNodos = rootNode.getChildren("TipoSpell");
+            Document doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChildren("TipoSpell");
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
-                Element nodo = (Element) listaNodos.get(i);
+                Element nodo        = listaNodos.get(i);
 
                 String iD           = nodo.getAttributeValue("ID");
                 String nombre       = nodo.getAttributeValue("nombre");
@@ -71,20 +68,20 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                 tipoSpell.setNombre(nombre);
                 tipoSpell.setDescripcion(descripcion);
 
-                logger.info ("TIPO SPELL:     {}", iD);
-                logger.debug("nombre:         {}", nombre);
-                logger.debug("Descripcion:    {}", descripcion);
+                logger.debug("TIPO SPELL:     {}", iD);
+                logger.trace("nombre:         {}", nombre);
+                logger.trace("Descripcion:    {}", descripcion);
 
                 if (iD == null || nombre == null || descripcion == null)
                 {   logger.error("Error parseando los datos [TIPO SPELLS], campos erroneos", iD);}
 
-                List listaStats = nodo.getChildren("SkillStat");
+                List<Element> listaStats = nodo.getChildren("SkillStat");
 
                 for (int j = 0; j < listaStats.size(); j++)
                 {
                     if (listaStats.size() < tipoSpell.getNumSkillStats()) logger.error("Faltan SkillStats por definir");
 
-                    Element stat = (Element) listaStats.get(j);
+                    Element stat        = listaStats.get(j);
 
                     byte id             = Byte.parseByte(stat.getAttributeValue("ID"));
                     String nombreStat   = stat.getAttributeValue("nombre");
@@ -98,19 +95,19 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                     if (isMejorable) tipoSpell.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
                     else tipoSpell.getSkillStat(id).setIsMejorable(isMejorable);
 
-                    logger.debug("  id:           {}", id);
-                    logger.debug("  nombreStat:   {}", nombreStat);
-                    logger.debug("  valorBase:    {}", valorBase);
-                    logger.debug("  isMejorable:  {}", isMejorable);
+                    logger.trace("  id:           {}", id);
+                    logger.trace("  nombreStat:   {}", nombreStat);
+                    logger.trace("  valorBase:    {}", valorBase);
+                    logger.trace("  isMejorable:  {}", isMejorable);
 
                     if (isMejorable)
                     {
-                        logger.debug("  talentoMaximo:{}", talentoMaximo);
-                        logger.debug("  costeTalento: {}", costeTalento);
-                        logger.debug("  bonoTalento:  {}", bonoTalento);
+                        logger.trace("  talentoMaximo:{}", talentoMaximo);
+                        logger.trace("  costeTalento: {}", costeTalento);
+                        logger.trace("  bonoTalento:  {}", bonoTalento);
                     }
                 }
-                logger.debug("");
+                logger.trace("");
 
                 listaDeTipoSpells.put(tipoSpell.getID(), tipoSpell);
             }
@@ -122,7 +119,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando [TIPO SPELLS] en {}", ficheroTipoSpells);
+        logger.info("Salvando [TIPO SPELLS] en {}", ficheroTipoSpells);
         Document doc = new Document();
         Element tspell;
         Element element;

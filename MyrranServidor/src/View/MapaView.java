@@ -5,6 +5,8 @@ import DTO.NetDTO;
 import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MapaView
 {
@@ -28,6 +30,7 @@ public class MapaView
     private final int posVerNeg = Settings.MAPTILE_Vertical_Resolution /4;
     private final int posVerPos = Settings.MAPTILE_Vertical_Resolution - Settings.MAPTILE_Vertical_Resolution /4;
 
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public MapaView (PC pc, Mundo mundo, Controlador controlador)
     {
@@ -205,7 +208,7 @@ public class MapaView
 
     private void enviarMapa(int mapTileInicialX, int mapTileInicialY)
     {
-        System.out.println("Enviar MapTile: ["+mapTileInicialX+" "+mapTileInicialY+"]");
+        logger.debug("ENVIAR: "+PC.getConnectionID()+" MapTile: ["+mapTileInicialX+" "+mapTileInicialY+"]");
         if (mapTileInicialX <0 || mapTileInicialY < 0) { return; }
 
         int ancho = numTilesX+reborde*2;
@@ -237,7 +240,7 @@ public class MapaView
             {
                 NetDTO.SetTerreno setTerreno = new NetDTO.SetTerreno(tileX,tileY,numCapa,iDTerreno);
                 controlador.enviarACliente(PC.getConnectionID(), setTerreno);
-                System.out.println("Editando SetTerreno: ["+tileX+"]["+tileY+"]");
+                logger.trace("Editando SetTerreno: ["+tileX+"]["+tileY+"]");
             }
         }
     }

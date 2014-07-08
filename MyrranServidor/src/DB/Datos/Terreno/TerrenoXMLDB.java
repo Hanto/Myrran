@@ -26,7 +26,7 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
     public static TerrenoXMLDB get()    { return Singleton.get; }
 
     private Map<Short, TerrenoI> listaDeTerrenos = new HashMap<>();
-    private Map<Short, String> listaDeNombresTextura = new HashMap<>();
+    private Map<Short, Element> listaRecursos = new HashMap<>();
     private String ficheroTerrenos = Settings.RECURSOS_XML+ Settings.XML_DataTerrenos;
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -37,26 +37,23 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
 
     public void cargarDatos()
     {
-        logger.debug("Cargando datos desde {}", ficheroTerrenos);
-
+        logger.info("Cargando [DATOS TERRENOS] desde {}", ficheroTerrenos);
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroTerrenos);
 
         try
         {
-            Document documento = builder.build(input);
-            Element rootNode = documento.getRootElement();
-
-            List listaNodos = rootNode.getChildren("Terreno");
+            Document doc = builder.build(input);
+            List<Element> listaNodos = doc.getRootElement().getChildren("Terreno");
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
-                Element nodo = (Element) listaNodos.get(i);
+                Element nodo    = listaNodos.get(i);
 
                 short iD        = Short.parseShort(nodo.getAttributeValue("ID"));
                 String nombre   = nodo.getAttributeValue("nombre");
-                String nombreT  = nodo.getAttributeValue("nombreTextura");
                 boolean isSolido= Boolean.parseBoolean(nodo.getAttributeValue("isSolido"));
+                String nombreT  = nodo.getChild("Recursos").getAttributeValue("textura");
 
                 Terreno terreno = new Terreno(iD, nombre, isSolido);
                 listaDeTerrenos.put(iD, terreno);
@@ -76,9 +73,10 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
 
     @Override public void salvarDatos()
     {
-        logger.debug("Salvando datos en {}", ficheroTerrenos);
+        logger.info("Salvando [DATOS TERRENOS] en {}", ficheroTerrenos);
         Document doc = new Document();
         Element terreno;
+        Element recursos;
 
         actualizarListaTexturas();
 
@@ -90,8 +88,11 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
             terreno = new Element("Terreno");
             terreno.setAttribute("ID", Short.toString(entry.getValue().getID()));
             terreno.setAttribute("nombre", entry.getValue().getNombre());
-            terreno.setAttribute("nombreTextura", listaDeNombresTextura.get(entry.getValue().getID()));
             terreno.setAttribute("isSolido", Boolean.toString(entry.getValue().getIsSolido()));
+
+            //añadimos los Recursos:
+            recursos = listaRecursos.get(entry.getValue().getID());
+            if (recursos != null) terreno.addContent(recursos);
 
             doc.getRootElement().addContent(terreno);
             logger.trace("TERRENO: {} {} salvado", terreno.getAttributeValue("ID"), terreno.getAttributeValue("nombre"));
@@ -111,9 +112,8 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
         Document doc;
         Element nodo;
         SAXBuilder builder = new SAXBuilder();
-
         InputStream input = abrirFichero(ficheroTerrenos);
-        listaDeNombresTextura.clear();
+        listaRecursos.clear();
 
         try
         {
@@ -122,11 +122,11 @@ public class TerrenoXMLDB implements TerrenoXMLDBI
 
             for (int i = 0; i< listaNodos.size() ; i++)
             {
-                nodo = listaNodos.get(i);
-                listaDeNombresTextura.put(Short.parseShort(nodo.getAttributeValue("ID")), nodo.getAttributeValue("nombreTextura"));
+                nodo = listaNodos.get(i).getChild("Recursos");
+                listaRecursos.put(Short.parseShort(listaNodos.get(i).getAttributeValue("ID")), nodo.detach());
             }
         }
-        catch (Exception e) { logger.error("ERROR: leyendo campo nombreTextura en fichero: {}: "+e, ficheroTerrenos);}
+        catch (Exception e) { logger.error("ERROR: leyendo Recursos en fichero: {}: "+e, ficheroTerrenos);}
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

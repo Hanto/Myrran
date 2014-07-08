@@ -23,7 +23,7 @@ public class SettingsXMLDB
     public HashMap<String, Integer> ints = new HashMap<>();
     public HashMap<String, Boolean> booleans = new HashMap<>();
 
-    private String ficheroSettings = "Settings.xml";
+    private String ficheroSettings = "Data/Settings.xml";
     private Logger logger = (Logger)LoggerFactory.getLogger(this.getClass());
 
     public SettingsXMLDB()
@@ -32,7 +32,7 @@ public class SettingsXMLDB
     //Metodos:
     private void cargarDatos()
     {
-        logger.debug("Cargando [SETTINGS] de: {}", ficheroSettings);
+        logger.info("Cargando [SETTINGS] de: {}", ficheroSettings);
 
         SAXBuilder builder = new SAXBuilder();
         InputStream input = abrirFichero(ficheroSettings);
@@ -103,7 +103,7 @@ public class SettingsXMLDB
 
     public void salvarDatos()
     {
-        logger.debug("Salvando [SETTINGS] en: " + ficheroSettings);
+        logger.info("Salvando [SETTINGS] en: " + ficheroSettings);
         Document doc = new Document();
         Element element;
 

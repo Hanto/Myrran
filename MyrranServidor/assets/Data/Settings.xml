@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+  <int key="GDX_Horizontal_Resolution"      value="1600" />
+  <int key="GDX_Vertical_Resolution"        value="900" />
+  
+  <int key="TILESIZE"                       value="24" />
+  
+  <float key="PIXEL_METROS"                 value="0.01" />
+  <float key="METROS_PIXEL"                 value="100.0" />
+  
+  <int key="NETWORK_PuertoTCP"              value="54555" />
+  <int key="NETWORK_PuertoUDP"              value="54777" />
+  <int key="NETWORK_Client_Timeout"         value="50000000" />
+  <float key="NETWORK_DistanciaVisionMobs"  value="1.2" />
+  <int key="NETWORK_Update_Time"            value="40" />
+  
+  <float key="BDEBUFF_DuracionTick"         value="1.0" />
+  
+  <string key="RECURSOS_XML"                value="Data/" />
+  <string key="RECURSOS_Atlas_Carpeta_Imagenes_Origen" value="Images/" />
+  <string key="RECURSOS_Atlas_Atlas_Extension" value="atlas" />
+  <string key="RECURSOS_Atlas_Carpeta_Imagenes_Destino" value="Atlas/" />
+    
+  <string key="XML_DataTipoSpells"          value="DataTipoSpells.xml" />
+  <string key="XML_DataSpells"              value="DataSpells.xml" />
+  <string key="XML_DataTipoBDebuffs"        value="DataTipoBDebuffs.xml" />
+  <string key="XML_DataBDebuffs"            value="DataBDebuffs.xml" />
+  <string key="XML_DataAcciones"            value="DataAcciones.xml" />
+  <string key="XML_TexturasAtlas"           value="TexturasAtlas.xml" />
+  
+  <string key="XML_TexturasMisc"            value="Texturas.xml" />
+  <string key="XML_TexturasIconosAcciones"  value="Texturas.xml" />
+  <string key="XML_TexturasIconoSpells"     value="Texturas.xml" />
+  <string key="XML_TexturasTerrenos"        value="Texturas.xml" />
+  <string key="XML_TexturasFuentes"         value="Texturas.xml" />
+  
+  <string key="XML_DataTerrenos"            value="DataTerrenos.xml" />
+  <string key="XML_AnimacionesCasteo"       value="AnimacionesCasteo.xml" />
+  <string key="XML_AnimacionesProyectil"    value="AnimacionesProyectil.xml" />
+  <string key="XML_PixieSlot"               value="PixieSlot.xml" />
+    
+  <boolean key="ATLAS_GenerarAtlas"         value="false" />
+  <string key="ATLAS_PixiePcCuerpos_LOC"    value="PixiePcCuerpos/" />
+  <string key="ATLAS_PixiePcSlots_LOC"      value="PixiePcSlots/" />
+  <string key="ATLAS_TexturasTerrenos_LOC"  value="TexturasTerrenos/" />
+  <string key="ATLAS_TexturasIconos_LOC"    value="TexturasIconos/" />
+  <string key="ATLAS_TexturasMisc_LOC"      value="TexturasMisc/" />
+  <string key="ATLAS_AnimacionesSpells_LOC" value="AnimacionesSpells/" />
+  <string key="ATLAS_Fuentes_LOC"           value="Fonts/" />
+    
+  <int key="PIXIE_Player_numFilas"          value="7" />
+  <int key="PIXIE_Player_numColumnas"       value="6" />
+    
+  <int key="MAPTILE_Horizontal_Resolution"  value="1980" />
+  <int key="MAPTILE_Vertical_Resolution"    value="1200" />
+  <int key="MAPA_Max_Capas_Terreno"         value="4" />
+  <int key="MAPA_Max_TilesX"                value="2000" />
+  <int key="MAPA_Max_TilesY"                value="2000" />
+  <int key="MAPAVIEW_TamañoX"               value="2" />
+  <int key="MAPAVIEW_TamañoY"               value="2" />
+  
+  <string key="FUENTE_Nombres"              value="14" />
+  
+  <int key="BARRASPELLS_Ancho_Casilla"      value="34" />
+  <int key="BARRASPELLS_Alto_Casilla" 	    value="34" />
+  
+  <string key="BARRATERRENOS_EditarTerrenoID" value="EDITARTERRENO" />
+  
+  <string key="RECURSO_BARRASPELLS_Textura_Casillero" value="Casillero" />
+  <string key="RECURSO_BARRASPELLS_RebindButtonON" value="RebindOn" />
+  <string key="RECURSO_BARRASPELLS_RebindButtonOFF" value="RebindOff" />
+  <string key="RECURSO_BARRATERRENOS_Borrar_Terreno" value="Borrar" />
+  <string key="RECURSO_NAMEPLATE_Nameplate" value="Nameplate" />
+  <string key="RECURSO_NAMEPLATE_Nameplate_Fondo" value="NameplateFondo" />
+  <string key="RECURSO_PIXIEPC_Sombra"      value="Sombra" />
+  <string key="RECURSO_Grid"                value="Grid" />
+  <string key="RECURSO_SPELLTOOLTIP_TalentoFondo" value="CasillaTalentoFondo" />
+  <string key="RECURSO_SPELLTOOLTIP_Talento" value="CasillaTalento" />
+  
+  <int key="ICONO_Accion_Ancho"             value="32" />
+  <int key="ICONO_Accion_Alto"              value="32" />
+</Settings>
