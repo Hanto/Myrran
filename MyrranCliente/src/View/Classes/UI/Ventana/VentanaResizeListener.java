@@ -1,6 +1,6 @@
 package View.Classes.UI.Ventana;// Created by Hanto on 14/05/2014.
 
-import View.Classes.Graficos.Caja;
+import View.Classes.Actores.Caja;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;

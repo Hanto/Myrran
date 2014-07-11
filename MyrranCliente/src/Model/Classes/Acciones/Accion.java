@@ -7,5 +7,5 @@ public abstract class Accion implements AccionI
     protected Object parametros;
     protected String iD;
 
-    @Override public String getID()           { return iD; }
+    @Override public String getID()             { return iD; }
 }

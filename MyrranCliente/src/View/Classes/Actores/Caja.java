@@ -1,4 +1,4 @@
-package View.Classes.Graficos;// Created by Hanto on 12/05/2014.
+package View.Classes.Actores;// Created by Hanto on 12/05/2014.
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;

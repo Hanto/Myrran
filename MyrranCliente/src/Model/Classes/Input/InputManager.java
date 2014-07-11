@@ -4,13 +4,13 @@ import Controller.Controlador;
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Mobiles.Player;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class InputManager implements InputProcessor, GestureDetector.GestureListener
+public class InputManager implements InputProcessor, GestureListener
 {
     //Model:
     private Player player;

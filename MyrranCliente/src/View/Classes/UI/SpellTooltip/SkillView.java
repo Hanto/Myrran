@@ -1,7 +1,7 @@
 package View.Classes.UI.SpellTooltip;// Created by Hanto on 27/06/2014.
 
 import Interfaces.Skill.SkillPersonalizadoI;
-import View.Classes.Graficos.Texto;
+import View.Classes.Actores.Texto;
 
 public class SkillView
 {

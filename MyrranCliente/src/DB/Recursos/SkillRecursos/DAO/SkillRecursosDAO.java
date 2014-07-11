@@ -2,7 +2,7 @@ package DB.Recursos.SkillRecursos.DAO;// Created by Hanto on 30/04/2014.
 
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
-import View.Classes.Graficos.Pixie;
+import View.Classes.Actores.Pixie;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

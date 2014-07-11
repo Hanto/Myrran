@@ -10,6 +10,7 @@ import DB.Recursos.AccionRecursos.AccionRecursosXMLDB;
 import DB.Recursos.AtlasRecursos.AtlasRecursosLocalDB;
 import DB.Recursos.FuentesRecursos.FuentesRecursosXMLDB;
 import DB.Recursos.MiscRecursos.MiscRecursosXMLDB;
+import DB.Recursos.ParticulasRecursos.ParticulaRecursosXMLDB;
 import DB.Recursos.PixiePCRecursos.PixiePCRecursosXMLDB;
 import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
 import DB.Recursos.TerrenoRecursos.TerrenoRecursosXMLDB;
@@ -43,15 +44,17 @@ public class PantallaLibGDX implements Screen
         AccionRecursosXMLDB.get();
         PixiePCRecursosXMLDB.get();
         FuentesRecursosXMLDB.get();
-
         SkillRecursosXMLDB.get();
+        ParticulaRecursosXMLDB.get();
 
         Mundo mundo = new Mundo();
         controlador = new Controlador(mundo);
+
+
     }
 
     @Override public void show()
-    {   logger.trace("SHOW (Inicializando Screen):");  }
+    {   logger.trace("SHOW (Inicializando Screen):"); }
 
     @Override public void render(float delta)
     {   controlador.render(delta); }

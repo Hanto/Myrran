@@ -34,10 +34,12 @@ public class Settings
         BDEBUFF_DuracionTick        = settings.getFloat("BDEBUFF_DuracionTick",1.0f);
 
         //Recursos:
-        RECURSOS_XML = settings.getString("RECURSOS_XML", "Data/");
-        RECURSOS_Atlas_Carpeta_Imagenes_Origen  = settings.getString("RECURSOS_Atlas_Carpeta_Imagenes_Origen", "Images/");
+        RECURSOS_XML                            = settings.getString("RECURSOS_XML",                            "Data/");
+        RECURSOS_Atlas_Carpeta_Imagenes_Origen  = settings.getString("RECURSOS_Atlas_Carpeta_Imagenes_Origen",  "Images/");
         RECURSOS_Atlas_Carpeta_Imagenes_Destino = settings.getString("RECURSOS_Atlas_Carpeta_Imagenes_Destino", "Atlas/");
-        RECURSOS_Atlas_Atlas_Extension          = settings.getString("RECURSOS_Atlas_Atlas_Extension", "atlas");
+        RECURSOS_Atlas_Atlas_Extension          = settings.getString("RECURSOS_Atlas_Atlas_Extension",          "atlas");
+        RECURSOS_CarpetaParticulas              = settings.getString("RECURSOS_CarpetaParticulas",              "Particles/");
+        RECURSOS_CarpetaImagesParticulas        = settings.getString("RECURSOS_CarpetaImagenesParticulas",      "Particles/Images/");
 
         //XML
         XML_DataTipoSpells          = settings.getString("XML_DataTipoSpells",         "DataTipoSpells.xml");
@@ -46,14 +48,15 @@ public class Settings
         XML_DataBDebuffs            = settings.getString("XML_DataBDebuffs",           "DataBDebuffs.xml");
         XML_DataTerrenos            = settings.getString("XML_DataTerrenos",           "DataTerrenos.xml");
         XML_DataAcciones            = settings.getString("XML_DataAcciones",           "DataAcciones.xml");
-        XML_TexturasAtlas           = settings.getString("XML_TexturasAtlas",          "TexturasAtlas.xml");
 
+        XML_TexturasAtlas           = settings.getString("XML_TexturasAtlas",          "TexturasAtlas.xml");
         XML_TexturasMisc            = settings.getString("XML_TexturasMisc",           "Texturas.xml");
         XML_TexturasIconosAcciones  = settings.getString("XML_TexturasIconosAcciones", "Texturas.xml");
         XML_TexturasIconoSpells     = settings.getString("XML_TexturasIconoSpells",    "Texturas.xml");
         XML_TexturasTerrenos        = settings.getString("XML_TexturasTerrenos",       "Texturas.xml");
         XML_TexturasFuentes         = settings.getString("XML_TexturasFuentes",        "Texturas.xml");
 
+        XML_Particulas              = settings.getString("XML_Particulas",             "Particulas.xml");
         XML_PixieSlot               = settings.getString("XML_PixieSlot",              "PixieSlot.xml");
         XML_AnimacionesCasteo       = settings.getString("XML_AnimacionesCasteo",      "AnimacionesCasteo.xml");
         XML_AnimacionesProyectil    = settings.getString("XML_AnimacionesProyectil",   "AnimacionesProyectil.xml");
@@ -142,6 +145,8 @@ public class Settings
     public static String RECURSOS_Atlas_Carpeta_Imagenes_Origen;
     public static String RECURSOS_Atlas_Carpeta_Imagenes_Destino;
     public static String RECURSOS_Atlas_Atlas_Extension;
+    public static String RECURSOS_CarpetaParticulas;
+    public static String RECURSOS_CarpetaImagesParticulas;
 
     //XML
     public static String XML_DataTipoSpells;
@@ -150,15 +155,18 @@ public class Settings
     public static String XML_DataBDebuffs;
     public static String XML_DataTerrenos;
     public static String XML_DataAcciones;
+
     public static String XML_TexturasAtlas;
-    public static String XML_TexturasIconosAcciones;
-    public static String XML_TexturasFuentes;
     public static String XML_TexturasMisc;
+    public static String XML_TexturasIconosAcciones;
     public static String XML_TexturasIconoSpells;
     public static String XML_TexturasTerrenos;
+    public static String XML_TexturasFuentes;
+
+    public static String XML_Particulas;
+    public static String XML_PixieSlot;
     public static String XML_AnimacionesCasteo;
     public static String XML_AnimacionesProyectil;
-    public static String XML_PixieSlot;
 
     //Mobiles Recursos:
     public static boolean ATLAS_GenerarAtlas;

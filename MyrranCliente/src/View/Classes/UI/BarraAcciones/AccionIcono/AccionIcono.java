@@ -6,7 +6,7 @@ import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Interfaces.UI.BarraAcciones.ListaAccionesI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
-import View.Classes.Graficos.Texto;
+import View.Classes.Actores.Texto;
 import View.Classes.UI.Icono.Icono;
 import View.Classes.UI.Icono.IconoSource;
 import com.badlogic.gdx.graphics.Color;

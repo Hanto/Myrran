@@ -5,7 +5,7 @@ import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosXML;
 
 public enum TerrenoRecursosDAOFactory
 {
-    LOCAL("LOCAL")
+    XML("XML")
     {
         @Override
         public TerrenoRecursosDAO getTerrenoRecursosDAO()

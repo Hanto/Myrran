@@ -4,7 +4,7 @@ import DB.RSC;
 import DB.Recursos.PixiePCRecursos.DTO.PixieRecursos;
 import DB.Recursos.PixiePCRecursos.PixiePCRecursosXMLDB;
 import Data.Settings;
-import View.Classes.Graficos.Pixie;
+import View.Classes.Actores.Pixie;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 

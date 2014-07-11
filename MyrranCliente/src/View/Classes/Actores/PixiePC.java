@@ -1,4 +1,4 @@
-package View.Classes.Graficos;
+package View.Classes.Actores;
 
 import Data.Settings;
 import DB.Recursos.PixiePCRecursos.DAO.PixiePCRecursosDAO;

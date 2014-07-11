@@ -4,7 +4,7 @@ import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
 import Data.Settings;
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
-import View.Classes.Graficos.Pixie;
+import View.Classes.Actores.Pixie;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

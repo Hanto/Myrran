@@ -63,6 +63,7 @@ public class Vista
         uiView.dispose();
         RSC.atlasRecursosDAO.getAtlasRecursosDAO().dispose();
         RSC.fuenteRecursosDAO.getFuentesRecursosDAO().dispose();
+        RSC.particulaRecursoDAO.getParticulaRecursosDAO().dispose();
     }
 
     public void aplicarZoom(int incrementoZoom)

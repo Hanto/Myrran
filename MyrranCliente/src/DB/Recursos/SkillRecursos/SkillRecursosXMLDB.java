@@ -4,7 +4,7 @@ import DB.RSC;
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
 import Data.Settings;
-import View.Classes.Graficos.Pixie;
+import View.Classes.Actores.Pixie;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;

@@ -5,7 +5,7 @@ import Data.Settings;
 import Model.Classes.UI.BarraTerrenos;
 import Model.DTO.BarraTerrenosDTO;
 import DB.RSC;
-import View.Classes.Graficos.Texto;
+import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraTerrenos.TerrenoView.TerrenoIcono;
 import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;

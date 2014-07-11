@@ -7,7 +7,7 @@ import Interfaces.EntidadesPropiedades.CasterConTalentos;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
 import Interfaces.UI.BarraAcciones.ControladorSpellTooltipI;
-import View.Classes.Graficos.Texto;
+import View.Classes.Actores.Texto;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;

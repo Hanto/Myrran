@@ -1,4 +1,4 @@
-package View.Classes.Graficos;
+package View.Classes.Actores;
 // @author Ivan Delgado Huerta
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;

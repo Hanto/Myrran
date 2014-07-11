@@ -1,6 +1,6 @@
 package DB.Recursos.SkillRecursos.DTO;// Created by Hanto on 30/04/2014.
 
-import View.Classes.Graficos.Pixie;
+import View.Classes.Actores.Pixie;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 

@@ -1,6 +1,6 @@
 package DB.Recursos.PixiePCRecursos.DAO;// Created by Hanto on 01/05/2014.
 
-import View.Classes.Graficos.Pixie;
+import View.Classes.Actores.Pixie;
 
 public interface PixiePCRecursosDAO
 {

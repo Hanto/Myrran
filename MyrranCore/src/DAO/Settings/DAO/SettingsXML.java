@@ -30,28 +30,28 @@ public class SettingsXML implements SettingsDAO
     {
         String string = strings.get(key);
         if (string != null) { return string; }
-        else { logger.warn("{} no encontrado, usando valor por defecto: {}", key, defaultValue); return defaultValue; }
+        else { logger.warn("[{}] no encontrado, usando valor por defecto: {}", key, defaultValue); return defaultValue; }
     }
 
     @Override public float getFloat(String key, float defaultValue)
     {
         Float f = floats.get(key);
         if (f != null) { return f; }
-        else { logger.warn("{} no encontrado, usando valor por defecto: {}", key, defaultValue); return defaultValue; }
+        else { logger.warn("[{}] no encontrado, usando valor por defecto: {}", key, defaultValue); return defaultValue; }
     }
 
     @Override public int getInt(String key, int defaultValue)
     {
         Integer i = ints.get(key);
         if (i != null) { return i; }
-        else { logger.warn("{} no encontrado, usando valor por defecto: {}", key, defaultValue); return defaultValue; }
+        else { logger.warn("[{}] no encontrado, usando valor por defecto: {}", key, defaultValue); return defaultValue; }
     }
 
     @Override public boolean getBoolean(String key, boolean defaultValue)
     {
         Boolean b = booleans.get(key);
         if (b != null) { return b; }
-        else { logger.warn("{} no encontrado, usando valor por defecto: {}", key, defaultValue); return defaultValue; }
+        else { logger.warn("[{}] no encontrado, usando valor por defecto: {}", key, defaultValue); return defaultValue; }
     }
 
     @Override public void setString(String key, String value)   { strings.put(key, value); settings.salvarDatos(); }
