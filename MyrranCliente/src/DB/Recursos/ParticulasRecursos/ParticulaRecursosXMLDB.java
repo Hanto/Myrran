@@ -59,9 +59,9 @@ public class ParticulaRecursosXMLDB
             logger.trace("");
 
             if (listaParticleEffects.size == 0)
-                logger.error("No se han encontrado datos validos en el fichero {}", ficheroParticulas);
+                logger.error("No se han encontrado datos validos de [PARTICULAS] en el fichero {}", ficheroParticulas);
         }
-        catch (Exception e) {logger.error("ERROR: con el fichero XML de datos de {}", ficheroParticulas, e); }
+        catch (Exception e) {logger.error("ERROR: con el fichero [PARTICULAS] de {}", ficheroParticulas, e); }
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

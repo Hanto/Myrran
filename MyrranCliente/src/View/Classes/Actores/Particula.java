@@ -2,10 +2,13 @@ package View.Classes.Actores;// Created by Hanto on 09/07/2014.
 
 
 import Data.Settings;
+import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
@@ -29,6 +32,12 @@ public class Particula extends Actor implements Poolable
     //si la particula viene de un pool guardamos una referencia de este para poderla liberar (free)
     private ParticleEffect effect;
     private PoolParticulas poolParticulas;
+
+    //Provisional(BORRAR)
+    public  PointLight luz;
+    public Vector3 posicion = new Vector3();
+    public Camera camara;
+
 
     public Particula(ParticleEffect effect)
     {
@@ -96,7 +105,14 @@ public class Particula extends Actor implements Poolable
     public void act(float delta)
     {
         super.act(delta);
-        effect.setPosition(Gdx.input.getX(), Settings.GDX_Vertical_Resolution-Gdx.input.getY());
+
+        posicion.x = Gdx.input.getX();
+        posicion.y = Gdx.input.getY();
+
+        camara.unproject(posicion);
+
+        luz.setPosition(posicion.x *Settings.PIXEL_METROS, posicion.y*Settings.PIXEL_METROS);
+        effect.setPosition(posicion.x, posicion.y);
     }
 
     public void free()

@@ -6,7 +6,6 @@ import Data.Settings;
 import Model.Classes.UI.BarraAcciones;
 import Model.DTO.BarraAccionesDTO;
 import Model.GameState.UI;
-import View.Classes.Actores.Particula;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraAcciones.ConjuntoBarraAccionesView;
 import View.Classes.UI.BarraTerrenos.BarraTerrenosView;
@@ -41,13 +40,6 @@ public class UIView extends Stage implements PropertyChangeListener
         addActor(fps);
 
         ui.conjuntoBarraAcciones.añadirObservador(this);
-
-        RSC.particulaRecursoDAO.getParticulaRecursosDAO().crearPool("prueba", 10, 10);
-        Particula par = RSC.particulaRecursoDAO.getParticulaRecursosDAO().obtain("prueba");
-        par.setScale(0.1f);
-
-        this.addActor(par);
-        par.toFront();
     }
 
     public void resize (int anchura, int altura)

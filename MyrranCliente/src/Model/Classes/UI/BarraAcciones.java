@@ -4,7 +4,6 @@ import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterConTalentos;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.Acciones.AccionI;
-import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.Classes.Input.InputManager;
 import Model.DTO.BarraAccionesDTO;
@@ -17,20 +16,6 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     private CasterConTalentos caster;
 
     private InputManager inputManager;
-
-    public static class Casilla implements CasillaI
-    {
-        private AccionI accion = null;
-        private String keybind;
-        private int keycode;
-
-        @Override public void setAccion(AccionI accion)   { this.accion = accion; }
-        @Override public void setKeybind(String keybind)  { this.keybind = keybind; }
-        @Override public void setKeycode(int keycode)     { this.keycode = keycode; }
-        @Override public AccionI getAccion()              { return accion; }
-        @Override public String getKeybind()              { return keybind; }
-        @Override public int getKeycode()                 { return keycode; }
-    }
 
     @Override public int getID(){ return iD; }
     public void setID(int i)    { iD = i; }

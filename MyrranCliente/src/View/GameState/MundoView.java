@@ -1,14 +1,17 @@
 package View.GameState;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
+import DB.RSC;
 import DTO.NetDTO;
 import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
 import Model.GameState.Mundo;
+import View.Classes.Actores.Particula;
 import View.Classes.Geo.MapaView;
 import View.Classes.Mobiles.PCView;
 import View.Classes.Mobiles.PlayerView;
+import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
@@ -75,8 +78,15 @@ public class MundoView extends Stage implements PropertyChangeListener
 
         getViewport().setCamera(camara);
 
-        //controlador.addInputProcessor(this);
         mundo.añadirObservador(this);
+
+        RSC.particulaRecursoDAO.getParticulaRecursosDAO().crearPool("prueba", 10, 10);
+        Particula par = RSC.particulaRecursoDAO.getParticulaRecursosDAO().obtain("prueba");
+        par.setScale(0.1f);
+        par.camara = getCamara();
+        par.luz = new PointLight(getRayHandler(), 300, new Color(0.7f,0.3f,0.3f,0.7f), 350 *PIXEL_METROS, 0, 0);
+
+        this.addActor(par);
     }
 
     @Override public void draw ()
