@@ -34,8 +34,8 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
             Array<Casilla> array = new Array<>();
             for (int j=0; j<numColumnas; j++)
             {
-                Casilla casilla = new Casilla();
-                casilla.accion = null;
+                Casilla casilla = new Casilla(inputManager);
+                casilla.setAccion(null);
 
                 array.add(casilla);
             }
@@ -48,14 +48,14 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     { return caster; }
 
     @Override public String getKeybind (int posX, int posY)
-    {   return barraAcciones.get(posY).get(posX).keybind; }
+    {   return barraAcciones.get(posY).get(posX).getKeybind(); }
 
     public int getKeycode (int posX, int posY)
-    {   return barraAcciones.get(posY).get(posX).keycode; }
+    {   return barraAcciones.get(posY).get(posX).getKeycode(); }
 
 
     public void setKeybind (int posX, int posY, int keycode)
-    {   barraAcciones.get(posY).get(posX).keybind = Settings.keycodeNames.get(keycode); }
+    {   barraAcciones.get(posY).get(posX).setKeybind(Settings.keycodeNames.get(keycode)); }
 
     public void setBind (int keycode, AccionI accion)
     {   inputManager.salvarKeybind(keycode, accion.getID()); }
@@ -64,7 +64,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     {   inputManager.eliminarKeybind(keycode); }
 
     @Override public AccionI getAccion(int posX, int posY)
-    {   return barraAcciones.get(posY).get(posX).accion; }
+    {   return barraAcciones.get(posY).get(posX).getAccion(); }
 
 
     @Override public void setKeycode (int posX, int posY, int keycode)
@@ -72,7 +72,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         eliminarKeycode(keycode);
 
         inputManager.eliminarKeybind(getKeycode(posX, posY));
-        barraAcciones.get(posY).get(posX).keycode = keycode;
+        barraAcciones.get(posY).get(posX).setKeycode(keycode);
         setKeybind(posX, posY, keycode);
         if (getAccion(posX, posY) != null) setBind(keycode, getAccion(posX, posY));
 
@@ -86,10 +86,10 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         {
             for (int x=0; x< barraAcciones.get(y).size; x++)
             {
-                if (barraAcciones.get(y).get(x).keycode == keycode)
+                if (barraAcciones.get(y).get(x).getKeycode() == keycode)
                 {
-                    barraAcciones.get(y).get(x).keycode = 0;
-                    barraAcciones.get(y).get(x).keybind = "";
+                    barraAcciones.get(y).get(x).setKeycode(0);
+                    barraAcciones.get(y).get(x).setKeybind("");
 
                     Object setKeycode = new BarraAccionesDTO.SetAccionDTO(x,y);
                     notificarActualizacion("eliminarKeycode", null, setKeycode);
@@ -122,7 +122,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
 
     @Override public void eliminarAccion(int posX, int posY)
     {
-        barraAcciones.get(posY).get(posX).accion = null;
+        barraAcciones.get(posY).get(posX).setAccion(null);
         eliminarBind(getKeycode(posX, posY));
 
         Object removeAccionDTO = new BarraAccionesDTO.EliminarAccionDTO(posX, posY);
@@ -174,7 +174,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     {
         Array<Casilla> array = barraAcciones.peek();
         for (int i=0; i<array.size; i++)
-        {   inputManager.eliminarKeybind(array.get(i).keycode); }
+        {   inputManager.eliminarKeybind(array.get(i).getKeycode()); }
 
         barraAcciones.removeIndex(barraAcciones.size-1);
     }
@@ -184,8 +184,8 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         Array<Casilla> array = new Array<>();
         for (int i=0; i<barraAcciones.first().size; i++)
         {
-            Casilla casilla = new Casilla();
-            casilla.accion = null;
+            Casilla casilla = new Casilla(inputManager);
+            casilla.setAccion(null);
             array.add(casilla);
         }
         barraAcciones.add(array);
@@ -194,14 +194,14 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     private void eliminarColumna()
     {
         for (int y=0; y<barraAcciones.size; y++)
-        {   inputManager.eliminarKeybind(barraAcciones.get(y).pop().keycode);}
+        {   inputManager.eliminarKeybind(barraAcciones.get(y).pop().getKeycode());}
     }
 
     private void añadirColumna()
     {
         for (int y=0; y<barraAcciones.size; y++)
         {
-            Casilla casilla = new Casilla();
+            Casilla casilla = new Casilla(inputManager);
             barraAcciones.get(y).add(casilla);
         }
     }
