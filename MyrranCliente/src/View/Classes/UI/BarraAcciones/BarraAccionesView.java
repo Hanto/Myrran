@@ -5,7 +5,7 @@ import Data.Settings;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Model.Classes.UI.BarraAcciones;
 import Model.DTO.BarraAccionesDTO;
-import View.Classes.UI.BarraAcciones.AccionIcono.AccionIcono;
+import View.Classes.UI.BarraAcciones.AccionIcono.CasillaView;
 import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import View.Classes.UI.Ventana.VentanaResizeListener;
@@ -32,7 +32,7 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
     private Image redimensionarBarra;
     private Image eliminarBarra;
 
-    private Array<Array<AccionIcono>> barraIconos = new Array<>();
+    private Array<Array<CasillaView>> barraIconos = new Array<>();
 
     public float getEsquinaSupIzdaX()                       { return this.getX(); }
     public float getEsquinaSupIzdaY()                       { return this.getY() + this.getHeight(); }
@@ -85,11 +85,11 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
         recrearTabla();
     }
 
-    private AccionIcono crearIcono (int posX, int posY)
+    private CasillaView crearIcono (int posX, int posY)
     {
-        AccionIcono icono = new AccionIcono(barraModel, controlador, posX, posY);
+        CasillaView icono = new CasillaView(barraModel.getCasilla(posX, posY), barraModel.getCaster(), controlador);
         icono.addDragAndDrop(dad, controlador);
-        icono.addListener(new BAccionesRebindListener(icono, conjuntoBarraAccionesView, controlador));
+        icono.addListener(new BAccionRebindListener(icono, conjuntoBarraAccionesView, controlador));
         return icono;
     }
 
@@ -108,7 +108,7 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
         {
             for (int x = 0; x < barraIconos.get(y).size; x++)
             {
-                AccionIcono icono = barraIconos.get(y).get(x);
+                CasillaView icono = barraIconos.get(y).get(x);
                 this.add(icono).left().height(Settings.BARRASPELLS_Alto_Casilla).width(Settings.BARRASPELLS_Ancho_Casilla);
             }
             this.row();
@@ -163,11 +163,11 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
     private void añadirFila()
     {
         int y = barraIconos.size;
-        Array<AccionIcono>array = new Array<>();
+        Array<CasillaView>array = new Array<>();
 
         for (int x = 0; x< barraModel.getNumColumnas(); x++)
         {
-            AccionIcono icono = crearIcono(x, y);
+            CasillaView icono = crearIcono(x, y);
             array.add(icono);
         }
         barraIconos.add(array);
@@ -178,14 +178,14 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
         for (int y=0; y< barraIconos.size; y++)
         {
             int x = barraIconos.get(y).size;
-            AccionIcono icono = crearIcono(x, y);
+            CasillaView icono = crearIcono(x, y);
             barraIconos.get(y).add(icono);
         }
     }
 
     private void eliminarFila ()
     {
-        Array<AccionIcono> array = barraIconos.peek();
+        Array<CasillaView> array = barraIconos.peek();
         for (int i=0; i< array.size; i++)
         {   array.get(i).eliminarIcono(dad); }
         barraIconos.removeIndex(barraIconos.size - 1);
@@ -195,7 +195,7 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
     {
         for (int y=0; y< barraIconos.size; y++)
         {
-            AccionIcono icono = barraIconos.get(y).pop();
+            CasillaView icono = barraIconos.get(y).pop();
             icono.eliminarIcono(dad);
         }
     }
@@ -209,11 +209,11 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
     }
 
 
-    private void actualizarApariencia(AccionIcono icono)
+    private void actualizarApariencia(CasillaView icono)
     {
         icono.actualizarApariencia();
-        if (barraModel.getKeybind(icono.getPosX(), icono.getPosY()) != null)
-        {   icono.setTexto(barraModel.getKeybind(icono.getPosX(), icono.getPosY())); }
+        if (icono.getCasilla().getKeybind() != null)
+        {   icono.setTexto(icono.getCasilla().getKeybind()); }
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt)

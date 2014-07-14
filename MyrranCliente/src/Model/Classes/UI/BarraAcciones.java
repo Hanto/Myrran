@@ -4,6 +4,7 @@ import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterConTalentos;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.Acciones.AccionI;
+import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.Classes.Input.InputManager;
 import Model.DTO.BarraAccionesDTO;
@@ -43,6 +44,9 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         }
     }
 
+
+    public CasillaI getCasilla(int posX, int posY)
+    {   return barraAcciones.get(posY).get(posX); }
 
     @Override public CasterConTalentos getCaster()
     { return caster; }

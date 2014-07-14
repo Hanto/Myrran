@@ -37,11 +37,13 @@ public class CasillaTarget extends Target
         AccionI accionDestino = destinoC.getAccion();
 
 
-        if (accionOrigen == null) origenC.eliminarAccion();
+        if (accionDestino == null) origenC.eliminarAccion();
         else origenC.setAccion(accionDestino);
 
-        if (accionDestino == null) destinoC.eliminarAccion();
+        if (accionOrigen == null) destinoC.eliminarAccion();
         else destinoC.setAccion(accionOrigen);
 
+        origen.actualizarApariencia();
+        casillaView.actualizarApariencia();
     }
 }

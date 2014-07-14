@@ -36,8 +36,10 @@ public class Casilla extends AbstractModel implements CasillaI
 
     @Override public void setKeycode(int keycode)
     {
+        inputManager.eliminarKeybind(this.keycode);
         this.keycode = keycode;
         this.keybind = Settings.keycodeNames.get(keycode);
+        if (accion != null) inputManager.salvarKeybind(keycode, accion.getID());
     }
 
     @Override public void setKeybind (String keybind)

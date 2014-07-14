@@ -74,6 +74,7 @@ public class CasillaView extends Actor implements Icono, PropertyChangeListener
             if (accion instanceof SeleccionarSpell) { casillaIcono = RSC.skillRecursosDAO.getSpellRecursosDAO().getSpellRecursos(accion.getID()).getIcono(); }
             else { casillaIcono = RSC.accionRecursosDAO.getAccionRecursosDAO().getAccionRecurso(accion.getID()).getTextura(); }
         }
+        setTexto(casilla.getKeybind());
     }
 
     @Override public boolean tieneDatos()
