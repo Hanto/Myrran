@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraAcciones;// Created by Hanto on 08/05/2014.
+package View.Classes.UI.BarraAccionesView;// Created by Hanto on 08/05/2014.
 
 import Data.Settings;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;

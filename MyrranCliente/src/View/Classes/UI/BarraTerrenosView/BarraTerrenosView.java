@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraTerrenos;// Created by Hanto on 14/05/2014.
+package View.Classes.UI.BarraTerrenosView;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
 import Data.Settings;
@@ -6,7 +6,7 @@ import Model.Classes.UI.BarraTerrenos;
 import Model.DTO.BarraTerrenosDTO;
 import DB.RSC;
 import View.Classes.Actores.Texto;
-import View.Classes.UI.BarraTerrenos.TerrenoView.TerrenoView;
+import View.Classes.UI.BarraTerrenosView.TerrenoView.TerrenoView;
 import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import View.Classes.UI.Ventana.VentanaResizeListener;

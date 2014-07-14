@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraAcciones;// Created by Hanto on 06/05/2014.
+package View.Classes.UI.BarraAccionesView;// Created by Hanto on 06/05/2014.
 
 import DB.RSC;
 import Data.Settings;
@@ -6,7 +6,7 @@ import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Model.Classes.UI.BarraAcciones;
 import Model.DTO.BarraAccionesDTO;
-import View.Classes.UI.BarraAcciones.CasillaView.CasillaView;
+import View.Classes.UI.BarraAccionesView.CasillaView.CasillaView;
 import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import View.Classes.UI.Ventana.VentanaResizeListener;
@@ -90,7 +90,7 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
     {
         CasillaView icono = new CasillaView(barraModel.getCasilla(posX, posY), barraModel.getCaster(), controlador);
         icono.addDragAndDrop(dad, controlador);
-        icono.addListener(new BarraAccionesRebindListener(icono, conjuntoBarraAccionesView, controlador));
+        icono.addListener(new BarraAccionesViewRebindListener(icono, conjuntoBarraAccionesView, controlador));
         return icono;
     }
 

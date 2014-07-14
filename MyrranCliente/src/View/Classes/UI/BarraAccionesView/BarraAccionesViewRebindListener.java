@@ -1,19 +1,19 @@
-package View.Classes.UI.BarraAcciones;// Created by Hanto on 13/07/2014.
+package View.Classes.UI.BarraAccionesView;// Created by Hanto on 13/07/2014.
 
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
-import View.Classes.UI.BarraAcciones.CasillaView.CasillaView;
+import View.Classes.UI.BarraAccionesView.CasillaView.CasillaView;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public class BarraAccionesRebindListener extends InputListener
+public class BarraAccionesViewRebindListener extends InputListener
 {
     private ConjuntoBarraAccionesView conjuntoBarraAccionesView;
     private CasillaView icono;
     private ControladorBarraAccionI controlador;
 
 
-    public BarraAccionesRebindListener(CasillaView icono, ConjuntoBarraAccionesView conjuntoBarraAccionesView, ControladorBarraAccionI controlador)
+    public BarraAccionesViewRebindListener(CasillaView icono, ConjuntoBarraAccionesView conjuntoBarraAccionesView, ControladorBarraAccionI controlador)
     {
         this.conjuntoBarraAccionesView = conjuntoBarraAccionesView;
         this.icono = icono;

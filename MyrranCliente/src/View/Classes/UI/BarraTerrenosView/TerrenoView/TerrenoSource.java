@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraTerrenos.TerrenoView;// Created by Hanto on 13/05/2014.
+package View.Classes.UI.BarraTerrenosView.TerrenoView;// Created by Hanto on 13/05/2014.
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;

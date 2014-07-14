@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraTerrenos.TerrenoView;// Created by Hanto on 14/05/2014.
+package View.Classes.UI.BarraTerrenosView.TerrenoView;// Created by Hanto on 14/05/2014.
 
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosDAO;

@@ -1,8 +1,8 @@
-package View.Classes.UI.BarraAcciones.CasillaView;// Created by Hanto on 13/07/2014.
+package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/07/2014.
 
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
-import View.Classes.UI.BarraAcciones.SpellTooltip.SpellView;
+import View.Classes.UI.SpellView.SpellView;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;

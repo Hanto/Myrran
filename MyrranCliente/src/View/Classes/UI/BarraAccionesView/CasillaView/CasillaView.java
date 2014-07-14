@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraAcciones.CasillaView;// Created by Hanto on 13/07/2014.
+package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/07/2014.
 
 import DB.RSC;
 import Data.Settings;

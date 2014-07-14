@@ -149,6 +149,8 @@ public class Controlador implements ControladorUI
     @Override public void barraEliminarColumna (BarraAccionesI barra, int numColumnas)  { barra.eliminarColumna(numColumnas); }
     @Override public void barraAccionMoverAccion(CasillaI origen, CasillaI destino)     { ui.moverAccion(origen, destino); }
     @Override public void barraAccionRebindear(CasillaI casilla, int keycode)           { ui.rebindearCasilla(casilla, keycode); }
+
+    //SpellTooltip:
     @Override public void decrementarSkillTalento(String skillID, int statID)
     {
         int valor = mundo.getPlayer().getSkillPersonalizado(skillID).getNumTalentos(statID) -1;

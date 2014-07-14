@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraAcciones.SpellTooltip;// Created by Hanto on 27/06/2014.
+package View.Classes.UI.SpellView;// Created by Hanto on 27/06/2014.
 
 import DB.RSC;
 import DTO.NetDTO;

@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraAcciones.CasillaView;// Created by Hanto on 14/07/2014.
+package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 14/07/2014.
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
