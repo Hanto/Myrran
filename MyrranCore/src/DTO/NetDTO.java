@@ -119,7 +119,6 @@ public class NetDTO
     {
         public int connectionID;
         public float HPs;
-
         public ModificarHPsPPC() {}
         public ModificarHPsPPC(MobPC pc, float HPs)
         {

@@ -1,26 +1,29 @@
 package Core.Skills;// Created by Hanto on 25/06/2014.
 
+import DTO.NetDTO;
+import Interfaces.BDebuff.BDebuffI;
+import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillI;
 import Interfaces.Skill.SkillPersonalizadoI;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class SkillPersonalizado implements SkillPersonalizadoI
+public class SkillPersonalizado extends AbstractModel implements SkillPersonalizadoI
 {
     private String id;
     private SkillI skill;
     private SkillMod[] skillMods;
 
     //SET:
-    public void setID(String id)                            { this.id = id; }
-    public void setNumTalentos(int statID, int valor)       { skillMods[statID].setNumTalentos(valor); }
-    public void setBonosPorObjetos(int statID, float valor) { skillMods[statID].setBonosPorObjetos(valor); }
+    public void setID(String id)                                        { this.id = id; }
+    @Override public void setBonosPorObjetos(int statID, float valor)   { skillMods[statID].setBonosPorObjetos(valor); }
 
     //GET:
     @Override public String getID()                         { return id; }
     @Override public String getNombre()                     { return skill.getNombre(); }
     @Override public int getNumSkillStats()                 { return skill.getNumSkillStats(); }
+    @Override public boolean isDebuff()                     { return (skill instanceof BDebuffI ? true : false); }
 
     @Override public String getNombre(int statID)           { return skill.getSkillStat(statID).getNombre(); }
     @Override public int getNumTalentos(int statID)         { return skillMods[statID].getNumTalentos(); }
@@ -44,4 +47,12 @@ public class SkillPersonalizado implements SkillPersonalizadoI
 
     @Override public float getValorTotal(int statID)
     {   return (getValorBase(statID) + getNumTalentos(statID) * getBonoTalento(statID) + getBonosPorObjetos(statID)); }
+
+    @Override public void setNumTalentos(int statID, int valor)
+    {
+        skillMods[statID].setNumTalentos(valor);
+
+        Object modificarNumTalentos = new NetDTO.ModificarNumTalentosSkillPersonalizadoPPC(skill.getID(), statID, valor);
+        notificarActualizacion("setNumTalentosSkillPersonalizado", null, modificarNumTalentos);
+    }
 }

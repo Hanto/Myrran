@@ -1,7 +1,6 @@
 package Model.Classes.Mobiles;// Created by Hanto on 07/04/2014.
 
 
-import Core.Skills.SkillPersonalizado;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
@@ -49,8 +48,8 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
     protected Object parametrosSpell;
 
     private List<AuraI>listaDeAuras = new ArrayList<>();
-    private Map<String, SkillPersonalizado> listaSkillsPersonalizados = new HashMap<>();
-    private Map<String, SpellPersonalizado> listaSpellsPersonalizados = new HashMap<>();
+    private Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
+    private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
     //Constructor:
     public PC(int connectionID, Mapa mapa)
@@ -106,10 +105,10 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
         listaSpellsPersonalizados.put(spellPersonalizado.getID(), spellPersonalizado);
 
         listaSkillsPersonalizados.put(spellPersonalizado.getCustomSpell().getID(), spellPersonalizado.getCustomSpell());
-        Iterator<SkillPersonalizado> iterator = spellPersonalizado.getIteratorCustomDebuffsRW();
+        Iterator<SkillPersonalizadoI> iterator = spellPersonalizado.getIteratorCustomDebuffs();
         while(iterator.hasNext())
         {
-            SkillPersonalizado skillPersonalizado = iterator.next();
+            SkillPersonalizadoI skillPersonalizado = iterator.next();
             listaSkillsPersonalizados.put(skillPersonalizado.getID(), skillPersonalizado);
         }
 
@@ -119,7 +118,7 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
 
     @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
     {
-        SkillPersonalizado skillPersonalizado = listaSkillsPersonalizados.get(skillID);
+        SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
         if (skillPersonalizado == null) { System.out.println("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: " + skillID); return; }
         else
         {
@@ -127,8 +126,6 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
             if (valor > skillPersonalizado.getTalentoMaximo(statID)) return;
         }
         skillPersonalizado.setNumTalentos(statID, valor);
-        Object modificarNumTalentos = new NetDTO.ModificarNumTalentosSkillPersonalizadoPPC(skillID, statID, valor);
-        notificarActualizacion("setNumTalentosSkillPersonalizado", null, modificarNumTalentos);
     }
 
     @Override public void modificarHPs(float HPs)

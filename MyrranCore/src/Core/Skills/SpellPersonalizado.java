@@ -5,6 +5,7 @@ import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
 
+import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -19,8 +20,6 @@ public class SpellPersonalizado implements SpellPersonalizadoI
     @Override public SkillPersonalizado getCustomSpell()                        { return customSpell; }
     @Override public Iterator<SkillPersonalizadoI> getIteratorCustomDebuffs()   { return Arrays.<SkillPersonalizadoI>asList(listaCustomDebuffs).iterator(); }
     @Override public int getNumDebuffsQueAplica()                               { return listaCustomDebuffs.length; }
-
-    public Iterator<SkillPersonalizado> getIteratorCustomDebuffsRW()            { return Arrays.asList(listaCustomDebuffs).iterator(); }
 
 
     //Constructor:
@@ -59,6 +58,22 @@ public class SpellPersonalizado implements SpellPersonalizadoI
         while (skill.hasNext())
         {   talentosTotales += sumarCosteTotalTalentos(skill.next()); }
         return talentosTotales;
+    }
+
+    @Override public void añadirObservador(PropertyChangeListener observador)
+    {
+        customSpell.añadirObservador(observador);
+        Iterator<SkillPersonalizadoI> iterator = getIteratorCustomDebuffs();
+        while (iterator.hasNext())
+        {   iterator.next().añadirObservador(observador); }
+    }
+
+    @Override public void eliminarObservador(PropertyChangeListener observador)
+    {
+        customSpell.eliminarObservador(observador);
+        Iterator<SkillPersonalizadoI> iterator = getIteratorCustomDebuffs();
+        while (iterator.hasNext())
+        {   iterator.next().eliminarObservador(observador); }
     }
 
 

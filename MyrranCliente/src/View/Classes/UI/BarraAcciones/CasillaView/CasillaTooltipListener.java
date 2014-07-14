@@ -2,7 +2,7 @@ package View.Classes.UI.BarraAcciones.CasillaView;// Created by Hanto on 13/07/2
 
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
-import View.Classes.UI.BarraAcciones.SpellTooltip.SpellTooltip;
+import View.Classes.UI.BarraAcciones.SpellTooltip.SpellView;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class CasillaTooltipListener extends InputListener
 {
     private CasillaView casillaView;
-    private SpellTooltip tooltip;
+    private SpellView tooltip;
 
     public CasillaTooltipListener(CasillaView casillaView)
     {   this.casillaView = casillaView; }
@@ -25,7 +25,7 @@ public class CasillaTooltipListener extends InputListener
 
             if (accion instanceof SeleccionarSpell && tooltip == null)
             {
-                tooltip = new SpellTooltip(accion.getID(), casillaView.getCaster(), casillaView.getControlador());
+                tooltip = new SpellView(accion.getID(), casillaView.getCaster(), casillaView.getControlador());
                 casillaView.setTooltip(tooltip);
             }
         }
@@ -48,7 +48,7 @@ public class CasillaTooltipListener extends InputListener
 
             if (accion instanceof SeleccionarSpell)
             {
-                SpellTooltip tooltipMovible = new SpellTooltip(accion.getID(), casillaView.getCaster(), casillaView.getControlador());
+                SpellView tooltipMovible = new SpellView(accion.getID(), casillaView.getCaster(), casillaView.getControlador());
                 event.getStage().addActor(tooltipMovible);
                 Vector2 clickPos = getPosicionClick(event, x, y);
                 tooltipMovible.setPosition(clickPos.x +16 , clickPos.y +16 -tooltipMovible.getHeight());

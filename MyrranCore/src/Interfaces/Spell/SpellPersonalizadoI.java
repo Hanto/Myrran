@@ -2,6 +2,7 @@ package Interfaces.Spell;// Created by Hanto on 30/06/2014.
 
 import Interfaces.Skill.SkillPersonalizadoI;
 
+import java.beans.PropertyChangeListener;
 import java.util.Iterator;
 
 public interface SpellPersonalizadoI
@@ -12,6 +13,9 @@ public interface SpellPersonalizadoI
     public SkillPersonalizadoI getSkillPersonalizado(String skillID);
     public SkillPersonalizadoI getDebuffPersonalizado(String debuffID);
     public Iterator<SkillPersonalizadoI> getIteratorCustomDebuffs();
+
+    public void añadirObservador(PropertyChangeListener observador);
+    public void eliminarObservador(PropertyChangeListener observador);
 
     public int getCosteTotalTalentos();
     public int getNumDebuffsQueAplica();

@@ -2,7 +2,7 @@
 <BDebuffs>
   <Debuff ID="Bomba" nombre="Bomba" isDebuff="true" stacksMaximos="5" tipoBDebuff="BOMBA">
     <Descripcion>Hace explotar al cabo de su duracion por cada stack acumulado.</Descripcion>
-    <SkillStat ID="0" nombre="tiempo hasta explosion" valorBase="10.0" isMejorable="true" costeTalento="1" bonoTalento="-0.1" talentoMaximo="50" />
+    <SkillStat ID="0" nombre="Tiempo hasta explosion" valorBase="10.0" isMejorable="true" costeTalento="1" bonoTalento="-0.1" talentoMaximo="50" />
     <SkillStat ID="1" nombre="Daño al explotar" valorBase="10.0" isMejorable="true" costeTalento="2" bonoTalento="1.25" talentoMaximo="50" />
   </Debuff>
   <Debuff ID="Hot" nombre="Hot" isDebuff="false" stacksMaximos="5" tipoBDebuff="HOT">

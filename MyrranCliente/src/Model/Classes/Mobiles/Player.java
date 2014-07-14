@@ -1,6 +1,5 @@
 package Model.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
-import Core.Skills.SkillPersonalizado;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
@@ -57,8 +56,8 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
     protected Object parametrosSpell;
 
     private Array<AuraI> listaDeAuras = new Array<>();
-    private Map<String, SkillPersonalizado> listaSkillsPersonalizados = new HashMap<>();
-    private Map<String, SpellPersonalizado> listaSpellsPersonalizados = new HashMap<>();
+    private Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
+    private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
     protected boolean irArriba = false;
     protected boolean irAbajo = false;
@@ -136,21 +135,19 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
         listaSpellsPersonalizados.put(spellPersonalizado.getID(), spellPersonalizado);
 
         listaSkillsPersonalizados.put(spellPersonalizado.getCustomSpell().getID(), spellPersonalizado.getCustomSpell());
-        Iterator<SkillPersonalizado> iterator = spellPersonalizado.getIteratorCustomDebuffsRW();
+        Iterator<SkillPersonalizadoI> iterator = spellPersonalizado.getIteratorCustomDebuffs();
         while(iterator.hasNext())
         {
-            SkillPersonalizado skillPersonalizado = iterator.next();
+            SkillPersonalizadoI skillPersonalizado = iterator.next();
             listaSkillsPersonalizados.put(skillPersonalizado.getID(), skillPersonalizado);
         }
     }
 
     @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
     {
-        SkillPersonalizado skillPersonalizado = listaSkillsPersonalizados.get(skillID);
+        SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
         if (skillPersonalizado == null) { System.out.println("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: " + skillID); return; }
         skillPersonalizado.setNumTalentos(statID, valor);
-        Object modificarNumTalentos = new NetDTO.ModificarNumTalentosSkillPersonalizadoPPC(skillID, statID, valor);
-        notificarActualizacion("RECEPCION: setNumTalentosSkillPersonalizado", null, modificarNumTalentos);
     }
 
     @Override public void modificarHPs(float HPs)
