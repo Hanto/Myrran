@@ -1,19 +1,20 @@
 package Interfaces.UI.BarraAcciones;// Created by Hanto on 13/05/2014.
 
-import Interfaces.UI.Acciones.AccionI;
+import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.Model.ModelI;
+import Interfaces.UI.Acciones.CasillaI;
 
-public interface BarraAccionesI extends ListaAccionesI
+public interface BarraAccionesI extends ModelI
 {
     public int getID();
-    public void eliminar();
+    public int getNumFilas();
+    public int getNumColumnas();
+    public CasillaI getCasilla(int posX, int posY);
+    public CasterConTalentos getCaster();
 
-    public void setAccion(int posX, int posY, AccionI accion);
-    public void eliminarAccion(int posX, int posY);
-
-    public String getKeybind (int posX, int posY);
-    public void setKeycode (int posX, int posY, int keycode);
+    //Metodos:
     public void eliminarKeycode(int keycode);
-
+    public void eliminar();
     public void eliminarFila(int numFilas);
     public void añadirFila(int numFilas);
     public void eliminarColumna(int numColumnas);

@@ -1,8 +1,8 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
 import DTO.NetDTO;
+import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
-import Interfaces.UI.BarraAcciones.ListaAccionesI;
 import Interfaces.UI.ControladorUI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.GameState.Mundo;
@@ -40,22 +40,22 @@ public class Controlador implements ControladorUI
         añadirPlayer(cliente.getID());
 
         ui.añadirBarraAcciones(3, 9);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setKeycode(1, 0, 9);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setKeycode(2, 0, 10);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setKeycode(3, 0, 11);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setKeycode(4, 0, 12);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setKeycode(5, 0, 13);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setKeycode(6, 0, 14);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setKeycode(7, 0, 15);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setKeycode(8, 0, 16);
+        ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(1,0).setKeycode(9);
+        ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(2,0).setKeycode(10);
+        ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(3,0).setKeycode(11);
+        ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(4,0).setKeycode(12);
+        ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(5,0).setKeycode(13);
+        ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(6,0).setKeycode(14);
+        ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(7,0).setKeycode(15);
+        ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(8,0).setKeycode(16);
 
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setAccion(0, 0, "Terraformar", 8);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setAccion(1, 0, "Heal", 9);
+        ui.crearCasilla(0, 0, 0, "Terraformar", 8);
+        ui.crearCasilla(0, 1, 0, "Heal", 9);
 
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setAccion(1, 1, "IrNorte", 51);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setAccion(1, 2, "IrSur", 47);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setAccion(2, 2, "IrEste", 32);
-        ui.conjuntoBarraAcciones.getBarraAcciones(0).setAccion(0, 2, "IrOeste", 29);
+        ui.crearCasilla(0, 1, 1, "IrNorte", 51);
+        ui.crearCasilla(0, 1, 2, "IrSur", 47);
+        ui.crearCasilla(0, 2, 2, "IrEste", 32);
+        ui.crearCasilla(0, 0, 2, "IrOeste", 29);
 
         //moverPPC(mundo.getPlayer().getConnectionID(), 21000, 20000);
     }
@@ -147,10 +147,8 @@ public class Controlador implements ControladorUI
     @Override public void barraAñadirColumna(BarraAccionesI barra, int numColumnas)     { barra.añadirColumna(numColumnas); }
     @Override public void barraEliminarFila (BarraAccionesI barra, int numFilas)        { barra.eliminarFila(numFilas); }
     @Override public void barraEliminarColumna (BarraAccionesI barra, int numColumnas)  { barra.eliminarColumna(numColumnas); }
-    @Override public void barraAccionMoverAccion(ListaAccionesI barraOrigen, int posXOrigen, int posYOrigen, ListaAccionesI barraDestino,int posXDestino, int posYDestino)
-    {   ui.moverAccion(barraOrigen, posXOrigen, posYOrigen, barraDestino, posXDestino, posYDestino);}
-    @Override public void barraAccionRebindear(BarraAccionesI barra, int posX, int posY, int keycode)
-    {   ui.setKeyCode(barra, posX, posY, keycode);}
+    @Override public void barraAccionMoverAccion(CasillaI origen, CasillaI destino)     { ui.moverAccion(origen, destino); }
+    @Override public void barraAccionRebindear(CasillaI casilla, int keycode)           { ui.rebindearCasilla(casilla, keycode); }
     @Override public void decrementarSkillTalento(String skillID, int statID)
     {
         int valor = mundo.getPlayer().getSkillPersonalizado(skillID).getNumTalentos(statID) -1;

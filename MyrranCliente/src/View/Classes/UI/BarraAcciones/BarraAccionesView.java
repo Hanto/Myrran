@@ -2,10 +2,11 @@ package View.Classes.UI.BarraAcciones;// Created by Hanto on 06/05/2014.
 
 import DB.RSC;
 import Data.Settings;
+import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Model.Classes.UI.BarraAcciones;
 import Model.DTO.BarraAccionesDTO;
-import View.Classes.UI.BarraAcciones.AccionIcono.CasillaView;
+import View.Classes.UI.BarraAcciones.CasillaView.CasillaView;
 import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import View.Classes.UI.Ventana.VentanaResizeListener;
@@ -22,7 +23,7 @@ import java.beans.PropertyChangeListener;
 
 public class BarraAccionesView extends Table implements PropertyChangeListener, Ventana
 {
-    private BarraAcciones barraModel;
+    private BarraAccionesI barraModel;
     private Stage stage;
     private DragAndDrop dad;
     private ConjuntoBarraAccionesView conjuntoBarraAccionesView;
@@ -89,7 +90,7 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
     {
         CasillaView icono = new CasillaView(barraModel.getCasilla(posX, posY), barraModel.getCaster(), controlador);
         icono.addDragAndDrop(dad, controlador);
-        icono.addListener(new BAccionRebindListener(icono, conjuntoBarraAccionesView, controlador));
+        icono.addListener(new BarraAccionesRebindListener(icono, conjuntoBarraAccionesView, controlador));
         return icono;
     }
 
@@ -208,30 +209,8 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
         stage.getRoot().removeActor(this);
     }
 
-
-    private void actualizarApariencia(CasillaView icono)
-    {
-        icono.actualizarApariencia();
-        if (icono.getCasilla().getKeybind() != null)
-        {   icono.setTexto(icono.getCasilla().getKeybind()); }
-    }
-
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof BarraAccionesDTO.EliminarAccionDTO)
-        {
-            int posX = ((BarraAccionesDTO.EliminarAccionDTO) evt.getNewValue()).posX;
-            int posY = ((BarraAccionesDTO.EliminarAccionDTO) evt.getNewValue()).posY;
-            actualizarApariencia(barraIconos.get(posY).get(posX));
-        }
-
-        if (evt.getNewValue() instanceof BarraAccionesDTO.SetAccionDTO)
-        {
-            int posX = ((BarraAccionesDTO.SetAccionDTO) evt.getNewValue()).posX;
-            int posY = ((BarraAccionesDTO.SetAccionDTO) evt.getNewValue()).posY;
-            actualizarApariencia(barraIconos.get(posY).get(posX));
-        }
-
         if  (evt.getNewValue() instanceof BarraAccionesDTO.EliminarFilaDTO)
         {
             int numFilas = ((BarraAccionesDTO.EliminarFilaDTO) evt.getNewValue()).numFilas;

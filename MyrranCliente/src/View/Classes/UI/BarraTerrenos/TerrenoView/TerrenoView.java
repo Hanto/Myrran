@@ -1,12 +1,10 @@
 package View.Classes.UI.BarraTerrenos.TerrenoView;// Created by Hanto on 14/05/2014.
 
+import DB.RSC;
+import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosDAO;
 import Data.Settings;
 import Interfaces.UI.BarraTerrenos.ControladorBarraTerrenosI;
 import Model.Classes.UI.BarraTerrenos;
-import DB.RSC;
-import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosDAO;
-import View.Classes.UI.Icono.Icono;
-import View.Classes.UI.Icono.IconoSource;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
-public class TerrenoIcono implements Icono
+public class TerrenoView
 {
     protected BarraTerrenos barraTerrenos;
     protected int posX;
@@ -24,7 +22,7 @@ public class TerrenoIcono implements Icono
     public int getPosX()                        { return posX; }
 
     //Constructor:
-    public TerrenoIcono(BarraTerrenos barraTerrenos, int posX)
+    public TerrenoView(BarraTerrenos barraTerrenos, int posX)
     {
         this.barraTerrenos = barraTerrenos;
         this.posX = posX;
@@ -33,7 +31,7 @@ public class TerrenoIcono implements Icono
     }
 
 
-    @Override public Group getApariencia()          { return apariencia; }
+    public Group getApariencia()          { return apariencia; }
     public void actualizarApariencia()    { actualizarApariencia(apariencia); }
 
     private void actualizarApariencia(Group group)
@@ -52,14 +50,14 @@ public class TerrenoIcono implements Icono
     }
 
 
-    @Override public Group getDragActor()
+    public Group getDragActor()
     {
         Group group = new Group();
         actualizarApariencia(group);
         return group;
     }
 
-    @Override public boolean tieneDatos()
+    public boolean tieneDatos()
     {
         if (barraTerrenos.getTerrenoID(posX) >= 0) return true;
         else return false;
@@ -77,7 +75,7 @@ public class TerrenoIcono implements Icono
     }
 
     public void addSource(DragAndDrop dad)
-    {   dad.addSource(new IconoSource(this, dad)); }
+    {   dad.addSource(new TerrenoSource(this, dad)); }
 
     public void addTarget(DragAndDrop dad, ControladorBarraTerrenosI controlador)
     {   dad.addTarget(new TerrenoTarget(this, controlador));}

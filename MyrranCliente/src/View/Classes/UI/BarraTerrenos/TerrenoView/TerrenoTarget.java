@@ -7,13 +7,13 @@ import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 
 public class TerrenoTarget extends Target
 {
-    private TerrenoIcono terrenoIcono;
+    private TerrenoView terrenoView;
     private ControladorBarraTerrenosI controlador;
 
-    public TerrenoTarget(TerrenoIcono terrenoIcono, ControladorBarraTerrenosI controlador)
+    public TerrenoTarget(TerrenoView terrenoView, ControladorBarraTerrenosI controlador)
     {
-        super(terrenoIcono.getApariencia());
-        this.terrenoIcono = terrenoIcono;
+        super(terrenoView.getApariencia());
+        this.terrenoView = terrenoView;
         this.controlador = controlador;
     }
 
@@ -22,7 +22,7 @@ public class TerrenoTarget extends Target
 
     @Override public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer)
     {
-        TerrenoIcono origen = (TerrenoIcono)payload.getObject();
-        controlador.barraTerrenosMoverTerreno(origen.getPosX(), terrenoIcono.getPosX());
+        TerrenoView origen = (TerrenoView)payload.getObject();
+        controlador.barraTerrenosMoverTerreno(origen.getPosX(), terrenoView.getPosX());
     }
 }

@@ -1,4 +1,4 @@
-package View.Classes.UI.Icono;// Created by Hanto on 13/05/2014.
+package View.Classes.UI.BarraTerrenos.TerrenoView;// Created by Hanto on 13/05/2014.
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -7,12 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 
-public class IconoSource extends Source
+public class TerrenoSource extends Source
 {
-    private Icono icono;
+    private TerrenoView icono;
     private DragAndDrop dad;
 
-    public IconoSource(Icono icono, DragAndDrop dad)
+    public TerrenoSource(TerrenoView icono, DragAndDrop dad)
     {
         super(icono.getApariencia());
         this.icono = icono;

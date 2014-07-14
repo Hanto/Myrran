@@ -1,4 +1,4 @@
-package View.Classes.UI.BarraAcciones.AccionIcono;// Created by Hanto on 13/07/2014.
+package View.Classes.UI.BarraAcciones.CasillaView;// Created by Hanto on 13/07/2014.
 
 import DB.RSC;
 import Data.Settings;
@@ -7,9 +7,8 @@ import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
+import Model.DTO.BarraAccionesDTO;
 import View.Classes.Actores.Texto;
-import View.Classes.UI.Icono.Icono;
-import View.Classes.UI.Icono.IconoSource;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -22,8 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class CasillaView extends Actor implements Icono, PropertyChangeListener
+public class CasillaView extends Actor implements PropertyChangeListener
 {
+    //Model:
     protected CasillaI casilla;
     protected CasterConTalentos caster;
     protected ControladorBarraAccionI controlador;
@@ -32,15 +32,15 @@ public class CasillaView extends Actor implements Icono, PropertyChangeListener
     protected TextureRegion casillaIcono;
     protected Texto keybind;
     protected Actor tooltip;
-    protected IconoSource source;
+    protected CasillaSource source;
     protected CasillaTarget target;
 
     public AccionI getAccion()                      { return casilla.getAccion(); }
     public CasillaI getCasilla()                    { return casilla; }
     public CasterConTalentos getCaster()            { return caster; }
     public ControladorBarraAccionI getControlador() { return controlador; }
-    @Override public Actor getApariencia()          { return this; }
-    @Override public Actor getDragActor()           { return new Image(casillaIcono);}
+    public Actor getApariencia()                    { return this; }
+    public Actor getDragActor()                     { return new Image(casillaIcono);}
 
     //SET:
     public void setTooltip(Actor tooltip)           { this.tooltip = tooltip; }
@@ -58,12 +58,13 @@ public class CasillaView extends Actor implements Icono, PropertyChangeListener
 
         this.addCaptureListener(new CasillaTooltipListener(this));
         this.setBounds(0, 0, Settings.ICONO_Accion_Ancho, Settings.ICONO_Accion_Alto);
-        this.actualizarApariencia();
+        this.setIcono();
+        this.setTexto(casilla.getKeybind());
 
         casilla.añadirObservador(this);
     }
 
-    public void actualizarApariencia()
+    public void setIcono()
     {
         AccionI accion = getAccion();
 
@@ -74,10 +75,9 @@ public class CasillaView extends Actor implements Icono, PropertyChangeListener
             if (accion instanceof SeleccionarSpell) { casillaIcono = RSC.skillRecursosDAO.getSpellRecursosDAO().getSpellRecursos(accion.getID()).getIcono(); }
             else { casillaIcono = RSC.accionRecursosDAO.getAccionRecursosDAO().getAccionRecurso(accion.getID()).getTextura(); }
         }
-        setTexto(casilla.getKeybind());
     }
 
-    @Override public boolean tieneDatos()
+    public boolean tieneDatos()
     {
         if (getAccion() != null) return true;
         else return false;
@@ -85,7 +85,7 @@ public class CasillaView extends Actor implements Icono, PropertyChangeListener
 
     public void addDragAndDrop(DragAndDrop dad, ControladorBarraAccionI controlador)
     {
-        source = new IconoSource(this, dad);
+        source = new CasillaSource(this, dad);
         dad.addSource(source);
 
         target = new CasillaTarget(this, dad, controlador);
@@ -115,6 +115,10 @@ public class CasillaView extends Actor implements Icono, PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
+        if (evt.getNewValue() instanceof BarraAccionesDTO.ActualizarCasillaAccion)
+        {   setIcono(); }
 
+        if (evt.getNewValue() instanceof BarraAccionesDTO.ActualizarCasillaKey)
+        {   setTexto(casilla.getKeybind()); }
     }
 }

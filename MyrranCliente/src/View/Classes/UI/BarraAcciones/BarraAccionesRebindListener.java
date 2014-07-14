@@ -1,19 +1,19 @@
 package View.Classes.UI.BarraAcciones;// Created by Hanto on 13/07/2014.
 
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
-import View.Classes.UI.BarraAcciones.AccionIcono.CasillaView;
+import View.Classes.UI.BarraAcciones.CasillaView.CasillaView;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public class BAccionRebindListener extends InputListener
+public class BarraAccionesRebindListener extends InputListener
 {
     private ConjuntoBarraAccionesView conjuntoBarraAccionesView;
     private CasillaView icono;
     private ControladorBarraAccionI controlador;
 
 
-    public BAccionRebindListener(CasillaView icono, ConjuntoBarraAccionesView conjuntoBarraAccionesView, ControladorBarraAccionI controlador)
+    public BarraAccionesRebindListener(CasillaView icono, ConjuntoBarraAccionesView conjuntoBarraAccionesView, ControladorBarraAccionI controlador)
     {
         this.conjuntoBarraAccionesView = conjuntoBarraAccionesView;
         this.icono = icono;
@@ -37,8 +37,7 @@ public class BAccionRebindListener extends InputListener
     //Capturamos que tecla aprieta el player para rebindearla
     @Override public boolean keyDown(InputEvent event, int keycode)
     {   //Solo rebindeamos los skills, si esta activado el boton de rebindear
-        icono.getCasilla().setKeycode(keycode);
-        icono.actualizarApariencia();
+        controlador.barraAccionRebindear(icono.getCasilla(), keycode);
         return true;
     }
 

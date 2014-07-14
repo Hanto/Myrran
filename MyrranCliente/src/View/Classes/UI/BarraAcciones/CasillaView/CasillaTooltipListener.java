@@ -1,32 +1,32 @@
-package View.Classes.UI.BarraAcciones.AccionIcono;// Created by Hanto on 19/06/2014.
+package View.Classes.UI.BarraAcciones.CasillaView;// Created by Hanto on 13/07/2014.
 
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
-import View.Classes.UI.SpellTooltip.SpellTooltip;
+import View.Classes.UI.BarraAcciones.SpellTooltip.SpellTooltip;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public class AccionTooltipListener extends InputListener
+public class CasillaTooltipListener extends InputListener
 {
-    private AccionIcono accionIcono;
+    private CasillaView casillaView;
     private SpellTooltip tooltip;
 
-    public AccionTooltipListener(AccionIcono accionIcono)
-    {   this.accionIcono = accionIcono; }
+    public CasillaTooltipListener(CasillaView casillaView)
+    {   this.casillaView = casillaView; }
 
     @Override public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor)
     {
         if (pointer <0)
         {
-            AccionI accion = accionIcono.getAccion();
+            AccionI accion = casillaView.getAccion();
 
             if (accion instanceof SeleccionarSpell && tooltip == null)
             {
-                tooltip = new SpellTooltip(accion.getID(), accionIcono.getBarra().getCaster(), accionIcono.getControlador());
-                accionIcono.setTooltip(tooltip);
+                tooltip = new SpellTooltip(accion.getID(), casillaView.getCaster(), casillaView.getControlador());
+                casillaView.setTooltip(tooltip);
             }
         }
     }
@@ -35,7 +35,7 @@ public class AccionTooltipListener extends InputListener
     {
         if (pointer <0)
         {
-            accionIcono.setTooltip(null);
+            casillaView.setTooltip(null);
             if (tooltip != null) { tooltip.dispose(); tooltip = null; }
         }
     }
@@ -44,11 +44,11 @@ public class AccionTooltipListener extends InputListener
     {
         if (button == Input.Buttons.RIGHT && tooltip != null)
         {
-            AccionI accion = accionIcono.getAccion();
+            AccionI accion = casillaView.getAccion();
 
             if (accion instanceof SeleccionarSpell)
             {
-                SpellTooltip tooltipMovible = new SpellTooltip(accion.getID(), accionIcono.getBarra().getCaster(), accionIcono.getControlador());
+                SpellTooltip tooltipMovible = new SpellTooltip(accion.getID(), casillaView.getCaster(), casillaView.getControlador());
                 event.getStage().addActor(tooltipMovible);
                 Vector2 clickPos = getPosicionClick(event, x, y);
                 tooltipMovible.setPosition(clickPos.x +16 , clickPos.y +16 -tooltipMovible.getHeight());

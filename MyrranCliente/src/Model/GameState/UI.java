@@ -1,15 +1,16 @@
 package Model.GameState;// Created by Hanto on 06/05/2014.
 
 import Controller.Controlador;
+import Interfaces.UI.Acciones.AccionI;
+import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
-import Interfaces.UI.BarraAcciones.ListaAccionesI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.Classes.Input.InputManager;
-import Model.Classes.Mobiles.Player;
-import Model.Classes.UI.ConjuntoBarraAcciones;
-import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.Input.PlayerEstado;
 import Model.Classes.Input.PlayerIO;
+import Model.Classes.Mobiles.Player;
+import Model.Classes.UI.BarraTerrenos;
+import Model.Classes.UI.ConjuntoBarraAcciones;
 
 
 public class UI
@@ -47,11 +48,38 @@ public class UI
     public void eliminarBarraAcciones(BarraAccionesI barra)
     {   conjuntoBarraAcciones.eliminarBarraAccion(barra); }
 
-    public void moverAccion (ListaAccionesI barraOrigen, int posXOrigen, int posYOrigen, ListaAccionesI barraDestino,int posXDestino, int posYDestino)
-    {   conjuntoBarraAcciones.moverAccion(barraOrigen, posXOrigen, posYOrigen, barraDestino, posXDestino, posYDestino);}
-    public void setKeyCode (BarraAccionesI barra, int posX, int posY, int keycode)
-    {   conjuntoBarraAcciones.setKeycode(barra, posX, posY, keycode); }
-
     public void barraTerrenosMoverTerreno(int posOrigen, int posDestino)
     {   barraTerrenos.moverTerreno(posOrigen, posDestino); }
+
+    public void moverAccion (CasillaI casillaOrigen, CasillaI casillaDestino)
+    {
+        AccionI accionOrigen = casillaOrigen.getAccion();
+        AccionI accionDestino = casillaDestino.getAccion();
+
+        //El origen solo se machaca si los dos son movibles;
+        if (casillaOrigen.getMovible() && casillaDestino.getMovible())
+        {
+            if (accionDestino == null) casillaOrigen.eliminarAccion();
+            else casillaOrigen.setAccion(accionDestino);
+        }
+
+        //el destino solo se machaca si el destino es movible:
+        if (casillaDestino.getMovible())
+        {
+            if (accionOrigen == null) casillaDestino.eliminarAccion();
+            else casillaDestino.setAccion(accionOrigen);
+        }
+    }
+
+    public void rebindearCasilla (CasillaI casilla, int keycode)
+    {   conjuntoBarraAcciones.eliminarKeycode(keycode);
+        casilla.setKeycode(keycode);
+    }
+
+    public void crearCasilla (int barraID, int posX, int posY, String skillID, int keycode)
+    {
+        CasillaI casilla = conjuntoBarraAcciones.getBarraAcciones(barraID).getCasilla(posX, posY);
+        rebindearCasilla(casilla, keycode);
+        casilla.setAccion(skillID);
+    }
 }

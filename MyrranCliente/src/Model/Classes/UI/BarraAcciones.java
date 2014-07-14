@@ -1,6 +1,5 @@
 package Model.Classes.UI;// Created by Hanto on 06/05/2014.
 
-import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterConTalentos;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.Acciones.AccionI;
@@ -18,10 +17,15 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
 
     private InputManager inputManager;
 
-    @Override public int getID(){ return iD; }
+    //SET:
     public void setID(int i)    { iD = i; }
-    public int getNumFilas()    { return barraAcciones.size; }
-    public int getNumColumnas() { return (barraAcciones.size == 0) ? 0 : barraAcciones.first().size; }
+
+    //GET:
+    @Override public int getID()                                { return iD; }
+    @Override public int getNumFilas()                          { return barraAcciones.size; }
+    @Override public int getNumColumnas()                       { return (barraAcciones.size == 0) ? 0 : barraAcciones.first().size; }
+    @Override public CasillaI getCasilla(int posX, int posY)    { return barraAcciones.get(posY).get(posX); }
+    @Override public CasterConTalentos getCaster()              { return caster; }
 
     //CONSTRUCTOR:
     public BarraAcciones(CasterConTalentos caster, InputManager inputManager, int id, int numFilas, int numColumnas)
@@ -36,7 +40,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
             for (int j=0; j<numColumnas; j++)
             {
                 Casilla casilla = new Casilla(inputManager);
-                casilla.setAccion(null);
+                casilla.setAccion((AccionI)null);
 
                 array.add(casilla);
             }
@@ -45,44 +49,9 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     }
 
 
-    public CasillaI getCasilla(int posX, int posY)
-    {   return barraAcciones.get(posY).get(posX); }
-
-    @Override public CasterConTalentos getCaster()
-    { return caster; }
-
-    @Override public String getKeybind (int posX, int posY)
-    {   return barraAcciones.get(posY).get(posX).getKeybind(); }
-
-    public int getKeycode (int posX, int posY)
-    {   return barraAcciones.get(posY).get(posX).getKeycode(); }
 
 
-    public void setKeybind (int posX, int posY, int keycode)
-    {   barraAcciones.get(posY).get(posX).setKeybind(Settings.keycodeNames.get(keycode)); }
 
-    public void setBind (int keycode, AccionI accion)
-    {   inputManager.salvarKeybind(keycode, accion.getID()); }
-
-    public void eliminarBind (int keycode)
-    {   inputManager.eliminarKeybind(keycode); }
-
-    @Override public AccionI getAccion(int posX, int posY)
-    {   return barraAcciones.get(posY).get(posX).getAccion(); }
-
-
-    @Override public void setKeycode (int posX, int posY, int keycode)
-    {
-        eliminarKeycode(keycode);
-
-        inputManager.eliminarKeybind(getKeycode(posX, posY));
-        barraAcciones.get(posY).get(posX).setKeycode(keycode);
-        setKeybind(posX, posY, keycode);
-        if (getAccion(posX, posY) != null) setBind(keycode, getAccion(posX, posY));
-
-        Object setKeycode = new BarraAccionesDTO.SetAccionDTO(posX, posY);
-        notificarActualizacion("barraAccionRebindear", null, setKeycode);
-    }
 
     @Override public void eliminarKeycode(int keycode)
     {
@@ -94,46 +63,13 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
                 {
                     barraAcciones.get(y).get(x).setKeycode(0);
                     barraAcciones.get(y).get(x).setKeybind("");
-
-                    Object setKeycode = new BarraAccionesDTO.SetAccionDTO(x,y);
-                    notificarActualizacion("eliminarKeycode", null, setKeycode);
                 }
             }
         }
     }
 
 
-    public void setAccion(int posX, int posY, String idAccion, int keycode)
-    {
-        setAccion(posX, posY, idAccion);
-        setKeycode(posX, posY, keycode);
-    }
-
-    public void setAccion(int posX, int posY, String idAccion)
-    {
-        AccionI accion = inputManager.getAccion(idAccion);
-        setAccion(posX, posY, accion);
-    }
-
-    @Override public void setAccion(int posX, int posY, AccionI accion)
-    {
-        barraAcciones.get(posY).get(posX).setAccion(accion);
-        setBind(getKeycode(posX, posY), accion);
-
-        Object setAccionDTO = new BarraAccionesDTO.SetAccionDTO(posX, posY);
-        notificarActualizacion("setAccion", null, setAccionDTO);
-    }
-
-    @Override public void eliminarAccion(int posX, int posY)
-    {
-        barraAcciones.get(posY).get(posX).setAccion(null);
-        eliminarBind(getKeycode(posX, posY));
-
-        Object removeAccionDTO = new BarraAccionesDTO.EliminarAccionDTO(posX, posY);
-        notificarActualizacion("eliminarAccion", null, removeAccionDTO);
-    }
-
-
+    //MODIFICACION TAMAÑO DE LA BARRA::
 
     @Override public void eliminar()
     {   eliminarFila(barraAcciones.size); }
@@ -189,7 +125,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         for (int i=0; i<barraAcciones.first().size; i++)
         {
             Casilla casilla = new Casilla(inputManager);
-            casilla.setAccion(null);
+            casilla.setAccion((AccionI)null);
             array.add(casilla);
         }
         barraAcciones.add(array);
