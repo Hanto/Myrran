@@ -20,16 +20,17 @@ public class SkillPersonalizado extends AbstractModel implements SkillPersonaliz
     @Override public void setBonosPorObjetos(int statID, float valor)   { skillMods[statID].setBonosPorObjetos(valor); }
 
     //GET:
+    @Override public int getNumTalentos(int statID)         { return skillMods[statID].getNumTalentos(); }
+    @Override public float getBonosPorObjetos(int statID)   { return skillMods[statID].getBonosPorObjetos(); }
+
+    @Override public boolean isDebuff()                     { return (skill instanceof BDebuffI ? true : false); }
     @Override public String getID()                         { return id; }
     @Override public String getNombre()                     { return skill.getNombre(); }
     @Override public int getNumSkillStats()                 { return skill.getNumSkillStats(); }
-    @Override public boolean isDebuff()                     { return (skill instanceof BDebuffI ? true : false); }
-
     @Override public String getNombre(int statID)           { return skill.getSkillStat(statID).getNombre(); }
-    @Override public int getNumTalentos(int statID)         { return skillMods[statID].getNumTalentos(); }
+
     @Override public float getValorBase(int statID)         { return skill.getSkillStat(statID).getValorBase(); }
     @Override public float getBonoTalento (int statID)      { return skill.getSkillStat(statID).getBonoTalento(); }
-    @Override public float getBonosPorObjetos(int statID)   { return skillMods[statID].getBonosPorObjetos(); }
     @Override public int getCosteTalento(int statID)        { return skill.getSkillStat(statID).getCosteTalento(); }
     @Override public int getTalentoMaximo(int statID)       { return skill.getSkillStat(statID).getTalentoMaximo(); }
     @Override public boolean getIsMejorable(int statID)     { return skill.getSkillStat(statID).getisMejorable(); }

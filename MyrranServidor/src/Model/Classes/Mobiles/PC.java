@@ -95,7 +95,7 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
     @Override public void setActualHPs(float HPs)                       { modificarHPs(HPs - actualHPs); }
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID){ return listaSkillsPersonalizados.get(skillID); }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID) { return listaSpellsPersonalizados.get(spellID); }
-
+    public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
     @Override public void añadirSkillsPersonalizados(String spellID)
     {
         SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(spellID);
@@ -133,6 +133,7 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
         actualHPs += HPs;
         if (actualHPs > maxHPs) actualHPs = maxHPs;
         else if (actualHPs < 0) actualHPs = 0;
+
         Object modificarHPs = new NetDTO.ModificarHPsPPC(this, HPs);
         notificarActualizacion("modificarHPs", null, modificarHPs);
     }
@@ -148,6 +149,7 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
     @Override public void setPosition(float x, float y)
     {
         this.x = x; this.y = y;
+
         Object posicionDTO = new NetDTO.PosicionPPC(this);
         notificarActualizacion("setPosition", null, posicionDTO);
     }
@@ -157,6 +159,7 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
         if (this.numAnimacion != numAnimacion)
         {
             this.numAnimacion = numAnimacion;
+
             Object animacionDTO = new NetDTO.AnimacionPPC(this);
             notificarActualizacion("setNumAnimacion", null, animacionDTO);
         }

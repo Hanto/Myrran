@@ -4,12 +4,14 @@ import Controller.Controlador;
 import DTO.NetDTO;
 import Data.Settings;
 import Interfaces.EntidadesTipos.MobPC;
+import Interfaces.Spell.SpellPersonalizadoI;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class PcView implements PropertyChangeListener
@@ -135,17 +137,27 @@ public class PcView implements PropertyChangeListener
     private void setAnimacion(NetDTO.AnimacionPPC animacion)
     {   actualizarPlayersCercanos(animacion); }
     private void modificarSkillTalento(NetDTO.ModificarNumTalentosSkillPersonalizadoPPC skillTalento)
-    {   actualizarPlayer(skillTalento); }
-    private void añadirSkillTalento(NetDTO.AñadirSpellPersonalizadoPPC spell)
-    {   actualizarPlayer(spell); }
+    {   actualizarPlayer(skillTalento); System.out.println(skillTalento.skillID); }
+    private void añadirSpellPersonalizado(NetDTO.AñadirSpellPersonalizadoPPC spell)
+    {
+        PC.getSpellPersonalizado(spell.spellID).añadirObservador(this);
+        actualizarPlayer(spell);
+    }
     private void modificarHPs(NetDTO.ModificarHPsPPC HPs)
-    {   actualizarPlayersCercanos(HPs);
+    {
+        actualizarPlayersCercanos(HPs);
         actualizarPlayer(HPs);
     }
     private void eliminar(NetDTO.EliminarPPC eliminarPPC)
     {
+        //Dejamos de observar al mundo colindante por cambios (para la edicion de terreno):
         mundo.getMapa().eliminarObservador(this);
+        //Dejamos de observar al PC:
         PC.eliminarObservador(this);
+        //Dejamos de observar a cada uno de los Spells Personalizados del PC:
+        Iterator<SpellPersonalizadoI> iSpell = PC.getIteratorSpellPersonalizado();
+        while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
+        //eliminamos la vista y transmitimos la informacion al resto de clientes:
         vista.listaPcViews.remove(this);
         actualizarPlayersCercanos(eliminarPPC);
     }
@@ -168,7 +180,7 @@ public class PcView implements PropertyChangeListener
         {   eliminar((NetDTO.EliminarPPC)evt.getNewValue()); }
 
         if (evt.getNewValue() instanceof NetDTO.AñadirSpellPersonalizadoPPC)
-        {   añadirSkillTalento((NetDTO.AñadirSpellPersonalizadoPPC)evt.getNewValue());}
+        {   añadirSpellPersonalizado((NetDTO.AñadirSpellPersonalizadoPPC) evt.getNewValue());}
 
         if (evt.getNewValue() instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
         {   modificarSkillTalento((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)evt.getNewValue()); }

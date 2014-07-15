@@ -9,11 +9,12 @@ import Interfaces.BDebuff.TipoBDebuffI;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.CasterConTalentos;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.Model.AbstractModel;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class BDebuff implements BDebuffI
+public class BDebuff extends AbstractModel implements BDebuffI
 {
     protected final int STAT_Duracion = 0;
 
