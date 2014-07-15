@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Java Tween-Engine">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/MyrranCore/lib/Java Tween-Engine" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/MyrranCore/lib/Java Tween-Engine" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/MyrranCore/lib/Java Tween-Engine" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/MyrranCore/lib/Java Tween-Engine" recursive="false" type="SOURCES" />
+  </library>
+</component>

@@ -4,6 +4,7 @@ import Controller.Controlador;
 import DB.RSC;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
+import Tweens.TweenEng;
 import View.GameState.MundoView;
 import View.GameState.UIView;
 import com.badlogic.gdx.Gdx;
@@ -12,10 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class Vista
 {
-    public Controlador controlador;
-
-    public Mundo mundo;
-    public UI ui;
+    private Controlador controlador;
+    private Mundo mundo;
+    private UI ui;
 
     private MundoView mundoView;
     private UIView uiView;
@@ -38,6 +38,7 @@ public class Vista
         Gdx.gl.glClearColor(0/2.55f, 0/2.55f, 0/2.55f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        TweenEng.getTweenManager().update(delta);
         mundo.act(delta);
 
         mundoView.act(delta);

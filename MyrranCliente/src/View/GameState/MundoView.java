@@ -7,10 +7,14 @@ import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
 import Model.GameState.Mundo;
+import Tweens.CamaraTween;
+import Tweens.TweenEng;
 import View.Classes.Actores.Particula;
 import View.Classes.Geo.MapaView;
 import View.Classes.Mobiles.PCView;
 import View.Classes.Mobiles.PlayerView;
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenEquations;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import ch.qos.logback.classic.Logger;
@@ -149,8 +153,9 @@ public class MundoView extends Stage implements PropertyChangeListener
         if (nivelDeZoom < 0) zoom = 1f/(Math.abs(nivelDeZoom)+1f);
         if (nivelDeZoom ==0) zoom = 1f;
         if (nivelDeZoom > 0) zoom = 1f+ nivelDeZoom *0.2f;
-        camara.zoom = zoom;
-        boxCamara.zoom = zoom;
+
+        Tween.to(camara, CamaraTween.ZOOM, 0.4f).target(zoom).ease(TweenEquations.easeOutBounce).start(TweenEng.getTweenManager());
+        Tween.to(boxCamara, CamaraTween.ZOOM, 0.4f).target(zoom).ease(TweenEquations.easeOutBounce).start(TweenEng.getTweenManager());
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt)

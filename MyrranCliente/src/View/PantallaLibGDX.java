@@ -25,7 +25,6 @@ public class PantallaLibGDX implements Screen
 {
     private MyrranClient myrranCliente;
     private Controlador controlador;
-
     private Logger logger = (Logger)LoggerFactory.getLogger(this.getClass());
 
     public PantallaLibGDX(MyrranClient myrranCliente)
@@ -49,8 +48,6 @@ public class PantallaLibGDX implements Screen
 
         Mundo mundo = new Mundo();
         controlador = new Controlador(mundo);
-
-
     }
 
     @Override public void show()
