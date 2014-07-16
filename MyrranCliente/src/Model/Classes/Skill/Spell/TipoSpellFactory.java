@@ -7,8 +7,7 @@ public enum TipoSpellFactory
 {
     EDITARTERRENO("Editar Terreno")
     {
-        @Override
-        public TipoSpell nuevo()
+        @Override public TipoSpell nuevo()
         {   return new EditarTerreno(); }
     },
     HEAL("Heal")
@@ -18,7 +17,5 @@ public enum TipoSpellFactory
     };
 
     public abstract TipoSpell nuevo();
-
-    private String nombre;
-    private TipoSpellFactory(String nombre) { this.nombre = nombre; }
+    private TipoSpellFactory(String nombre) {}
 }

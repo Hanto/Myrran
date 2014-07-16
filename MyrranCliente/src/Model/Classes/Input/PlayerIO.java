@@ -14,6 +14,7 @@ public class PlayerIO implements PlayerIOI
     public boolean disparar = false;
     public boolean startCastear = false;
     public boolean stopCastear = false;
+    public String spellID = null;
     public int numAnimacion = 5;
 
     @Override public void setScreenX(int screenX)           { this.screenX = screenX; }
@@ -25,6 +26,7 @@ public class PlayerIO implements PlayerIOI
     @Override public void setDisparar(boolean b)            { disparar = b; }
     @Override public void setStartCastear(boolean b)        { startCastear = b; }
     @Override public void setStopCastear(boolean b)         { stopCastear = b; }
+    @Override public void setSpellID(String s)              { spellID = s; }
     @Override public void setNumAnimacion(int numAnimacion) { this.numAnimacion = numAnimacion; }
 
     @Override public int getScreenX()                       { return screenX; }
@@ -36,6 +38,7 @@ public class PlayerIO implements PlayerIOI
     @Override public boolean getDisparar()                  { return disparar; }
     @Override public boolean getStartCastear()              { return startCastear; }
     @Override public boolean getStopCastear()               { return stopCastear; }
+    @Override public String getSpellID()                    { return spellID; }
     @Override public int getNumAnimacion()                  { return numAnimacion; }
 
     @Override public boolean estaQuieto()

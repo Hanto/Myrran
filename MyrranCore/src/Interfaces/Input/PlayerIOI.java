@@ -12,6 +12,7 @@ public interface PlayerIOI
     public boolean getDisparar();
     public boolean getStartCastear();
     public boolean getStopCastear();
+    public String getSpellID();
     public int getNumAnimacion();
 
     //SET:
@@ -24,6 +25,7 @@ public interface PlayerIOI
     public void setDisparar(boolean b);
     public void setStartCastear(boolean b);
     public void setStopCastear(boolean b);
+    public void setSpellID(String s);
     public void setNumAnimacion(int numAnimacion);
 
     //METODO:

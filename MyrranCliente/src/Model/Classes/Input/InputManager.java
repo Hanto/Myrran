@@ -75,6 +75,7 @@ public class InputManager implements InputProcessor, GestureListener
         playerE.getPlayerI().setScreenX(screenX);
         playerE.getPlayerI().setScreenY(screenY);
         playerE.getPlayerI().setStartCastear(true);
+        playerE.getPlayerI().setStopCastear(false);
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
         return true;
@@ -85,6 +86,7 @@ public class InputManager implements InputProcessor, GestureListener
         playerE.getPlayerI().setScreenX(screenX);
         playerE.getPlayerI().setScreenY(screenY);
         playerE.getPlayerI().setStopCastear(true);
+        playerE.getPlayerI().setStartCastear(false);
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
         return true;
@@ -95,6 +97,7 @@ public class InputManager implements InputProcessor, GestureListener
         playerE.getPlayerI().setScreenX(screenX);
         playerE.getPlayerI().setScreenY(screenY);
         playerE.getPlayerI().setStartCastear(true);
+        playerE.getPlayerI().setStopCastear(false);
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
         return false;

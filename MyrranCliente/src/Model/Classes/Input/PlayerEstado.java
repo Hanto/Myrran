@@ -54,10 +54,10 @@ public class PlayerEstado implements PlayerEstadoI
         @Override public void procesarInput(PlayerEstado playerE)
         {
             playerE.playerO.startCastear = playerE.playerI.startCastear;
-            playerE.playerI.startCastear = false;
+            //playerE.playerI.startCastear = false;
 
             playerE.playerO.stopCastear = playerE.playerI.stopCastear;
-            playerE.playerI.stopCastear = false;
+            //playerE.playerI.stopCastear = false;
 
             playerE.playerO.screenX = playerE.playerI.screenX;
             playerE.playerO.screenY = playerE.playerI.screenY;
