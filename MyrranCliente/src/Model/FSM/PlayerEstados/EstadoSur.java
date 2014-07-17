@@ -13,21 +13,22 @@ public class EstadoSur extends PlayerEstado
         output.setIrAbajo(input.getIrAbajo());
         output.setirDerecha(input.getIrDerecha());
         output.setIrIzquierda(input.getirIzquierda());
-        output.setNumAnimacion(0);
+        output.setNumAnimacion(3);
     }
 
     @Override public void update(float deltaTime)
     {
         output.setStartCastear(input.getStartCastear());
         output.setStopCastear(input.getStopCastear());
+        output.setSpellID(input.getSpellID());
         output.setScreenX(input.getScreenX());
-        output.setScreenX(input.getScreenY());
+        output.setScreenY(input.getScreenY());
 
-        if (input.getIrArriba())        { fsm.setEstadoSiguiente(EstadoNorte.class); return; }
+        if (input.getIrArriba())        { maquinaEstados.setEstadoSiguiente(EstadoNorte.class); return; }
         if (!input.getIrAbajo())
         {
-            if (input.getIrDerecha())   { fsm.setEstadoSiguiente(EstadoEste.class); return; }
-            if (input.getirIzquierda()) { fsm.setEstadoSiguiente(EstadoOeste.class); return; }
+            if (input.getIrDerecha())   { maquinaEstados.setEstadoSiguiente(EstadoEste.class); return; }
+            if (input.getirIzquierda()) { maquinaEstados.setEstadoSiguiente(EstadoOeste.class); return; }
         }
         if (input.getIrAbajo())
         {
@@ -35,7 +36,7 @@ public class EstadoSur extends PlayerEstado
             output.setIrIzquierda(input.getirIzquierda()); return;
         }
         if (!input.getIrDerecha() && !input.getirIzquierda() && !input.getIrArriba() && !input.getIrAbajo())
-        {   fsm.setEstadoSiguiente(EstadoQuieto.class); return; }
+        {   maquinaEstados.setEstadoSiguiente(EstadoQuieto.class); return; }
     }
 
     @Override public void exit()

@@ -4,6 +4,7 @@ import DTO.NetDTO;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Model.AbstractModel;
+import Model.Classes.Cuerpo.BodyFactory;
 import com.badlogic.gdx.physics.box2d.*;
 
 import static Data.Settings.PIXEL_METROS;
@@ -49,30 +50,8 @@ public class PC extends AbstractModel implements Vulnerable, MobPC
     public PC(int connectionID, World world)
     {
         this.connectionID = connectionID;
-        crearBody(world);
+        body = BodyFactory.crearCuerpo.RECTANGULAR.nuevo(world, 48, 48);
     }
-
-    public void crearBody (World world)
-    {
-        BodyDef bd = new BodyDef();
-        bd.position.set((getX()+24) *PIXEL_METROS , (getY()*24) *PIXEL_METROS ) ;
-        bd.type = BodyDef.BodyType.KinematicBody;
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(19f *PIXEL_METROS, 24f *PIXEL_METROS);
-
-        //CircleShape shape = new CircleShape();
-        //shape.setRadius(24f *PIXEL_METROS);
-
-        FixtureDef fixDef = new FixtureDef();
-        fixDef.shape = shape;
-
-        body = world.createBody(bd);
-        body.createFixture(fixDef);
-
-        shape.dispose();
-    }
-
 
     @Override public void setPosition (float x, float y)
     {

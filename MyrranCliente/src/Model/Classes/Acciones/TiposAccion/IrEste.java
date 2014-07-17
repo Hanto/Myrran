@@ -1,8 +1,9 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 07/05/2014.
 
+import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.EntidadesTipos.MobPlayer;
-import Interfaces.UI.ControladorUI;
 import Interfaces.Input.PlayerEstadoI;
+import Interfaces.UI.ControladorUI;
 import Model.Classes.Acciones.Accion;
 
 public class IrEste extends Accion
@@ -14,6 +15,8 @@ public class IrEste extends Accion
     {   playerE.getPlayerI().setirDerecha(true);;
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
+
+        ((Maquinable)player).getInput().setirDerecha(true);
     }
 
     @Override public void accionKeyUp(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador)
@@ -21,5 +24,6 @@ public class IrEste extends Accion
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
 
+        ((Maquinable)player).getInput().setirDerecha(false);
     }
 }

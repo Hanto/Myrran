@@ -20,13 +20,14 @@ public class EstadoQuieto extends PlayerEstado
     {
         output.setStartCastear(input.getStartCastear());
         output.setStopCastear(input.getStopCastear());
+        output.setSpellID(input.getSpellID());
         output.setScreenX(input.getScreenX());
-        output.setScreenX(input.getScreenY());
+        output.setScreenY(input.getScreenY());
 
-        if (input.getIrDerecha())       { fsm.setEstadoSiguiente(EstadoEste.class); return; }
-        if (input.getirIzquierda())     { fsm.setEstadoSiguiente(EstadoOeste.class); return; }
-        if (input.getIrArriba())        { fsm.setEstadoSiguiente(EstadoNorte.class); return; }
-        if (input.getIrAbajo())         { fsm.setEstadoSiguiente(EstadoSur.class); return; }
+        if (input.getIrDerecha())       { maquinaEstados.setEstadoSiguiente(EstadoEste.class); return; }
+        if (input.getirIzquierda())     { maquinaEstados.setEstadoSiguiente(EstadoOeste.class); return; }
+        if (input.getIrArriba())        { maquinaEstados.setEstadoSiguiente(EstadoNorte.class); return; }
+        if (input.getIrAbajo())         { maquinaEstados.setEstadoSiguiente(EstadoSur.class); return; }
     }
 
     @Override public void exit()

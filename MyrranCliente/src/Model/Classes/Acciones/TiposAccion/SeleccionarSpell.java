@@ -3,6 +3,7 @@ package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 05/05/2014.
 import DB.DAO;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.EntidadesTipos.MobPlayer;
 import Interfaces.Input.PlayerEstadoI;
 import Interfaces.Spell.SpellI;
@@ -30,6 +31,8 @@ public class SeleccionarSpell extends Accion
 
         if (player instanceof Caster)
             ((Caster)player).setSpellIDSeleccionado(iD);
+
+        ((Maquinable)player).getInput().setSpellID(iD);
     }
 
     @Override public void accionKeyUp(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador)

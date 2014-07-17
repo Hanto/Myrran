@@ -6,16 +6,15 @@ public class PlayerIO implements PlayerIOI
 {
     public int screenX;
     public int screenY;
-
     public boolean irArriba = false;
     public boolean irAbajo = false;
     public boolean irDerecha = false;
     public boolean irIzquierda = false;
-    public boolean disparar = false;
     public boolean startCastear = false;
     public boolean stopCastear = false;
     public String spellID = null;
     public int numAnimacion = 5;
+    public boolean disparar = false;
 
     @Override public void setScreenX(int screenX)           { this.screenX = screenX; }
     @Override public void setScreenY(int screenY)           { this.screenY = screenY; }

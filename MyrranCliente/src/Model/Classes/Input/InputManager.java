@@ -1,6 +1,7 @@
 package Model.Classes.Input;// Created by Hanto on 05/05/2014.
 
 import Controller.Controlador;
+import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Mobiles.Player;
 import com.badlogic.gdx.InputProcessor;
@@ -78,6 +79,11 @@ public class InputManager implements InputProcessor, GestureListener
         playerE.getPlayerI().setStopCastear(false);
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
+
+        ((Maquinable)player).getInput().setScreenX(screenX);
+        ((Maquinable)player).getInput().setScreenY(screenY);
+        ((Maquinable)player).getInput().setStartCastear(true);
+        ((Maquinable)player).getInput().setStopCastear(false);
         return true;
     }
 
@@ -89,6 +95,11 @@ public class InputManager implements InputProcessor, GestureListener
         playerE.getPlayerI().setStartCastear(false);
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
+
+        ((Maquinable)player).getInput().setScreenX(screenX);
+        ((Maquinable)player).getInput().setScreenY(screenY);
+        ((Maquinable)player).getInput().setStartCastear(false);
+        ((Maquinable)player).getInput().setStopCastear(true);
         return true;
     }
 
@@ -100,6 +111,11 @@ public class InputManager implements InputProcessor, GestureListener
         playerE.getPlayerI().setStopCastear(false);
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
+
+        ((Maquinable)player).getInput().setScreenX(screenX);
+        ((Maquinable)player).getInput().setScreenY(screenY);
+        ((Maquinable)player).getInput().setStartCastear(true);
+        ((Maquinable)player).getInput().setStopCastear(false);
         return false;
     }
 

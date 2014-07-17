@@ -137,7 +137,7 @@ public class PcView implements PropertyChangeListener
     private void setAnimacion(NetDTO.AnimacionPPC animacion)
     {   actualizarPlayersCercanos(animacion); }
     private void modificarSkillTalento(NetDTO.ModificarNumTalentosSkillPersonalizadoPPC skillTalento)
-    {   actualizarPlayer(skillTalento); System.out.println(skillTalento.skillID); }
+    {   actualizarPlayer(skillTalento); }
     private void añadirSpellPersonalizado(NetDTO.AñadirSpellPersonalizadoPPC spell)
     {
         PC.getSpellPersonalizado(spell.spellID).añadirObservador(this);

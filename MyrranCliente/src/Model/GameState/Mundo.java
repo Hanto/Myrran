@@ -59,15 +59,29 @@ public class Mundo extends AbstractModel
         pc.dispose();
     }
 
-    public void act(float delta)
+    public void actualizarFisica(float delta)
     {
+        //Salvamos los ultimos valores para poder interpolarlos
+        player.getObjetoDinamico().copiarUltimosDatos();
+        //calculamos los nuevos:
         world.step(delta, 8, 6);
-        //Actualizar al Player
+    }
+
+    public void actualizarUnidades(float delta)
+    {
+        //Actualizar a todas las unidades a partir de los datos ya interpolados
         player.actualizar(delta);
         //Actualizar a los demas jugador multiplayer:
         for (PC pc: listaPlayers)
         {   pc.actualizar(delta); }
     }
+
+    public void interpolacionEspacial(float alpha)
+    {
+        //Interpolamos las posiciones y angulos con el resto del TimeStep:
+        player.interpolacionEspacial(alpha);
+    }
+
 
     public void actualizarMapa (NetDTO.ActualizarMapa mapaServidor)
     {

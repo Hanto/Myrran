@@ -19,6 +19,7 @@ public class Settings
         TILESIZE                    = settings.getInt("TILESIZE", 24);
 
         //BOX2d:
+        FIXED_TimeStep              = settings.getFloat("FIXED_TimeStep", 30f/1000f);
         PIXEL_METROS                = settings.getFloat("PIXEL_METROS", 0.01f);
         METROS_PIXEL                = settings.getFloat("METROS_PIXEL", 100f);
 
@@ -126,6 +127,7 @@ public class Settings
     public static int TILESIZE;
 
     //BOX2d:
+    public static float FIXED_TimeStep;
     public static float PIXEL_METROS;
     public static float METROS_PIXEL;
 

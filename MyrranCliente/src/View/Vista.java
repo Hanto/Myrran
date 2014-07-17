@@ -11,6 +11,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
+import static Data.Settings.FIXED_TimeStep;
+
 public class Vista
 {
     private Controlador controlador;
@@ -19,6 +21,7 @@ public class Vista
 
     private MundoView mundoView;
     private UIView uiView;
+    private float timeStep = 0f;
 
     public UIView getUiView()       { return uiView; }
     public MundoView getMundoView() { return mundoView; }
@@ -38,8 +41,19 @@ public class Vista
         Gdx.gl.glClearColor(0/2.55f, 0/2.55f, 0/2.55f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //para evitar la Spiral of Death:
+        if (delta > 2.0f) delta = 2.0f;
+
+        timeStep += delta;
+        while (timeStep >= FIXED_TimeStep)
+        {
+            mundo.actualizarFisica(FIXED_TimeStep);
+            mundo.actualizarUnidades(FIXED_TimeStep);
+            timeStep -= FIXED_TimeStep;
+        }
+        mundo.interpolacionEspacial(timeStep / FIXED_TimeStep);
+
         TweenEng.getTweenManager().update(delta);
-        mundo.act(delta);
 
         mundoView.act(delta);
         mundoView.draw();

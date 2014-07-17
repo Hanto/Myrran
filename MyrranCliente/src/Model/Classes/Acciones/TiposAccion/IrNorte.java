@@ -1,5 +1,6 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 05/05/2014.
 
+import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.EntidadesTipos.MobPlayer;
 import Interfaces.UI.ControladorUI;
 import Interfaces.Input.PlayerEstadoI;
@@ -14,6 +15,8 @@ public class IrNorte extends Accion
     {   playerE.getPlayerI().setIrArriba(true);;
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
+
+        ((Maquinable)player).getInput().setIrArriba(true);
     }
 
     @Override public void accionKeyUp(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador)
@@ -21,5 +24,6 @@ public class IrNorte extends Accion
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
 
+        ((Maquinable)player).getInput().setIrArriba(false);
     }
 }

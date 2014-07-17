@@ -8,18 +8,18 @@ import org.slf4j.LoggerFactory;
 
 public class MaquinaEstados
 {
-    private ObjectMap<Class<? extends PlayerEstado>, PlayerEstado> estados = new ObjectMap<>();
-    private PlayerEstado estadoInicial;
-    private PlayerEstado estadoActual;
-    private PlayerEstado estadoSiguiente;
-    private Maquinable entidad;
+    private Estado estadoInicial;
+    private Estado estadoActual;
+    private Estado estadoSiguiente;
+    private Maquinable maquinable;
+    private ObjectMap<Class<? extends Estado>, Estado> estados = new ObjectMap<>();
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public PlayerEstado getEstado()       { return estadoActual; }
-    public Maquinable getEntidad()  { return entidad; }
+    public Estado getEstado()           { return estadoActual; }
+    public Maquinable getMaquinable()   { return maquinable; }
 
-    public MaquinaEstados(Maquinable entidad)
-    {   this.entidad = entidad; }
+    public MaquinaEstados(Maquinable maquinable)
+    {   this.maquinable = maquinable; }
 
     public void addEstado(PlayerEstado estado)
     {

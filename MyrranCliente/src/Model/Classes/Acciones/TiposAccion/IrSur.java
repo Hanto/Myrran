@@ -1,5 +1,6 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 13/05/2014.
 
+import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.EntidadesTipos.MobPlayer;
 import Interfaces.UI.ControladorUI;
 import Interfaces.Input.PlayerEstadoI;
@@ -14,11 +15,15 @@ public class IrSur extends Accion
     {   playerE.getPlayerI().setIrAbajo(true);
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
+
+        ((Maquinable)player).getInput().setIrAbajo(true);
     }
 
     @Override public void accionKeyUp(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador)
     {   playerE.getPlayerI().setIrAbajo(false);
         playerE.procesarInput();
         player.setInput(playerE.getPlayerO());
+
+        ((Maquinable)player).getInput().setIrAbajo(false);
     }
 }

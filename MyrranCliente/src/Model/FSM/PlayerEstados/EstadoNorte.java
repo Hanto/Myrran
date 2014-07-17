@@ -20,14 +20,15 @@ public class EstadoNorte extends PlayerEstado
     {
         output.setStartCastear(input.getStartCastear());
         output.setStopCastear(input.getStopCastear());
+        output.setSpellID(input.getSpellID());
         output.setScreenX(input.getScreenX());
-        output.setScreenX(input.getScreenY());
+        output.setScreenY(input.getScreenY());
 
-        if (input.getIrAbajo())         { fsm.setEstadoSiguiente(EstadoSur.class); return; }
+        if (input.getIrAbajo())         { maquinaEstados.setEstadoSiguiente(EstadoSur.class); return; }
         if (!input.getIrArriba())
         {
-            if (input.getIrDerecha())   { fsm.setEstadoSiguiente(EstadoEste.class); return; }
-            if (input.getirIzquierda()) { fsm.setEstadoSiguiente(EstadoOeste.class); return; }
+            if (input.getIrDerecha())   { maquinaEstados.setEstadoSiguiente(EstadoEste.class); return; }
+            if (input.getirIzquierda()) { maquinaEstados.setEstadoSiguiente(EstadoOeste.class); return; }
         }
         if (input.getIrArriba())
         {
@@ -35,7 +36,7 @@ public class EstadoNorte extends PlayerEstado
             output.setirDerecha(input.getIrDerecha()); return;
         }
         if (!input.getIrDerecha() && !input.getirIzquierda() && !input.getIrArriba() && !input.getIrAbajo())
-        {   fsm.setEstadoSiguiente(EstadoQuieto.class); return; }
+        {   maquinaEstados.setEstadoSiguiente(EstadoQuieto.class); return; }
     }
 
     @Override public void exit()

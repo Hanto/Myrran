@@ -75,7 +75,7 @@ public class PlayerView extends Group implements PropertyChangeListener
         this.addActor(nombre);
 
         luz = new PointLight(mundoView.getRayHandler(), 300, new Color(0.3f,0.3f,0.3f,1.0f), 350 *PIXEL_METROS, 0, 0);
-        luz.attachToBody(player.getBody(), 0, 0);
+        luz.attachToBody(player.getObjetoDinamico().getBody(), 0, 0);
     }
 
 

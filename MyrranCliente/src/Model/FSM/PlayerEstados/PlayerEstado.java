@@ -12,7 +12,7 @@ public abstract class PlayerEstado extends Estado
     public PlayerEstado(MaquinaEstados maquinaEstados)
     {
         super(maquinaEstados);
-        input = (PlayerIOI)fsm.getEntidad().getInput();
-        output = (PlayerIOI)fsm.getEntidad().getOutput();
+        input = (PlayerIOI) this.maquinaEstados.getMaquinable().getInput();
+        output = (PlayerIOI) this.maquinaEstados.getMaquinable().getOutput();
     }
 }
