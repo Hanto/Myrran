@@ -4,7 +4,7 @@ import DTO.NetDTO;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Model.AbstractModel;
-import Model.Classes.Cuerpo.BodyFactory;
+import Core.Cuerpos.BodyFactory;
 import com.badlogic.gdx.physics.box2d.*;
 
 import static Data.Settings.PIXEL_METROS;
@@ -29,6 +29,7 @@ public class PC extends AbstractModel implements Vulnerable, MobPC
 
 
     //TODO
+    public int getTimestamp()                                   { return 0; }
     @Override public float getActualHPs()                       { return actualHPs; }
     @Override public float getMaxHPs()                          { return maxHPs; }
     @Override public void setActualHPs(float HPs)               { modificarHPs(HPs - actualHPs);}
@@ -44,7 +45,7 @@ public class PC extends AbstractModel implements Vulnerable, MobPC
     @Override public void setVelocidaMod(float velocidadMod)    {}
     @Override public void setVelocidadMax(float velocidadMax)   {}
     @Override public void setDireccion(double direccion)        {}
-
+    public void setTimestamp(int timestamp)                     {}
 
     //Constructor:
     public PC(int connectionID, World world)

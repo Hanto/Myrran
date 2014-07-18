@@ -13,6 +13,8 @@
     <orderEntry type="library" name="Java JDom" level="project" />
     <orderEntry type="library" name="Java Kryonet" level="project" />
     <orderEntry type="library" name="Java SLF4J" level="project" />
+    <orderEntry type="library" name="gdx-box2d" level="project" />
+    <orderEntry type="library" name="Java LibGDX" level="project" />
   </component>
 </module>
 

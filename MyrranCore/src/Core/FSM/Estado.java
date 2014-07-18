@@ -1,4 +1,4 @@
-package Model.FSM;// Created by Hanto on 16/07/2014.
+package Core.FSM;// Created by Hanto on 16/07/2014.
 
 public abstract class Estado
 {

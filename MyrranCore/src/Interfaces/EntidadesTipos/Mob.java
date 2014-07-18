@@ -5,6 +5,7 @@ import Interfaces.Model.ModelI;
 public interface Mob extends ModelI
 {
     //GET:
+    public int getTimestamp();
     public float getX();
     public float getY();
     public float getVelocidadMod();
@@ -15,6 +16,7 @@ public interface Mob extends ModelI
     public void setNumAnimacion(int numAnimacion);
 
     //SET:
+    public void setTimestamp(int timestap);
     public void setPosition(float x, float y);
     public void setVelocidaMod(float velocidadMod);
     public void setVelocidadMax(float velocidadMax);

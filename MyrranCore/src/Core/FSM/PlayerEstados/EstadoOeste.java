@@ -1,6 +1,8 @@
-package Model.FSM.PlayerEstados;// Created by Hanto on 16/07/2014.
+package Core.FSM.PlayerEstados;// Created by Hanto on 16/07/2014.
 
-import Model.FSM.MaquinaEstados;
+import Core.FSM.MaquinaEstados;
+import Core.FSM.PlayerEstados.EstadoEste;
+import Core.FSM.PlayerEstados.EstadoNorte;
 
 public class EstadoOeste extends PlayerEstado
 {

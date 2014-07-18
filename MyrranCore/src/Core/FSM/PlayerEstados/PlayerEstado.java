@@ -1,8 +1,8 @@
-package Model.FSM.PlayerEstados;// Created by Hanto on 15/07/2014.
+package Core.FSM.PlayerEstados;// Created by Hanto on 15/07/2014.
 
 import Interfaces.Input.PlayerIOI;
-import Model.FSM.Estado;
-import Model.FSM.MaquinaEstados;
+import Core.FSM.Estado;
+import Core.FSM.MaquinaEstados;
 
 public abstract class PlayerEstado extends Estado
 {

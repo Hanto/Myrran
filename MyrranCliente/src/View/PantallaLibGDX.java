@@ -17,15 +17,29 @@ import DB.Recursos.TerrenoRecursos.TerrenoRecursosXMLDB;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.utils.TimeUtils;
 import org.slf4j.LoggerFactory;
 import zMain.MyrranClient;
+
+import static Data.Settings.FIXED_TimeStep;
 
 
 public class PantallaLibGDX implements Screen
 {
     private MyrranClient myrranCliente;
     private Controlador controlador;
+    private Mundo mundo;
     private Logger logger = (Logger)LoggerFactory.getLogger(this.getClass());
+
+    private double timeStep = 0f;
+
+    private double newTime;
+    private double currentTime;
+    private double deltaTime;
+
+    private int contador = 0;
+    private float total = 0;
+    private float media;
 
     public PantallaLibGDX(MyrranClient myrranCliente)
     {
@@ -46,15 +60,39 @@ public class PantallaLibGDX implements Screen
         SkillRecursosXMLDB.get();
         ParticulaRecursosXMLDB.get();
 
-        Mundo mundo = new Mundo();
+        mundo = new Mundo();
         controlador = new Controlador(mundo);
+
+        currentTime = TimeUtils.nanoTime() / 1000000.0;
     }
 
     @Override public void show()
     {   logger.trace("SHOW (Inicializando Screen):"); }
 
     @Override public void render(float delta)
-    {   controlador.render(delta); }
+    {
+        newTime = TimeUtils.nanoTime() / 1000000.0;
+        deltaTime = (newTime - currentTime);
+        currentTime = newTime;
+
+        total += deltaTime;
+
+        timeStep += deltaTime;
+
+        while (timeStep >= 30)
+        {
+            timeStep -= 30;
+            mundo.actualizarFisica(FIXED_TimeStep);
+            mundo.actualizarUnidades(FIXED_TimeStep);
+
+            contador++;
+            media = total/contador;
+            System.out.println(media);
+        }
+        mundo.interpolacionEspacial((float)timeStep/30f);
+
+        controlador.render(delta);
+    }
 
     @Override public void resize(int anchura, int altura)
     {   logger.trace("RESIZE (Redimensionando Screen) a: {} x {}", anchura, altura);

@@ -1,34 +1,44 @@
 package Model.Classes.Mobiles;// Created by Hanto on 07/04/2014.
 
 
+import Core.Cuerpos.BodyFactory;
+import Core.Cuerpos.ObjetoDinamico;
+import Core.FSM.IO.PlayerIO;
+import Core.FSM.MaquinaEstados;
+import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterConTalentos;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Geo.MapaI;
+import Interfaces.Input.PlayerIOI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.Classes.Geo.Mapa;
+import Model.GameState.Mundo;
 
 import java.util.*;
 
-public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulnerable, Debuffeable
+import static Data.Settings.PIXEL_METROS;
+
+public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulnerable, Debuffeable, Maquinable
 {
+    protected Mundo mundo;                                      //mapaI al que pertecene el Player
+    protected MapaI mapa;
     protected int connectionID;                                 //ID de la conexion con el servidor
-    protected MapaI mapaI;                                      //mapaI al que pertecene el Player
 
     protected float x;                                          //Coordenadas X:
     protected float y;                                          //Coordenadas Y:
     protected int numAnimacion = 5;
 
-    protected float velocidadMod=1.0f;                          //Modificadores de Velocidad: debido a Snares, a Sprints, Roots
-    protected float velocidadMax;                               //Velocidad Maxima:
+    protected float velocidadMod = 1.0f;                        //Modificadores de Velocidad: debido a Snares, a Sprints, Roots
+    protected float velocidadMax = 80.0f;                       //Velocidad Maxima:
     protected double direccion;                                 //Direccion Actual en Radianes
 
     protected String nombre = "Hanto";
@@ -51,14 +61,25 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
     private Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
     private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
+    protected ObjetoDinamico cuerpo;
+    protected MaquinaEstados fsm;
+    protected PlayerIO input = new PlayerIO();
+    protected PlayerIO output = new PlayerIO();
+
     //Constructor:
-    public PC(int connectionID, Mapa mapa)
+    public PC(int connectionID, Mundo mundo)
     {
+        fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
+        cuerpo = new ObjetoDinamico(mundo.getWorld(), 48, 48);
+        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
+
         this.connectionID = connectionID;
-        this.mapaI = mapa;
+        this.mapa = mundo.getMapa();
     }
 
     //GET:
+    public ObjetoDinamico getObjetoDinamico()                           { return cuerpo; }
+    public int getTimestamp()                                           { return cuerpo.getTimeStamp(); }
     @Override public int getConnectionID ()                             { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
@@ -70,15 +91,18 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
     @Override public int getNivel()                                     { return nivel; }
     @Override public float getActualHPs()                               { return actualHPs; }
     @Override public float getMaxHPs()                                  { return maxHPs; }
-    @Override public MapaI getMapa()                                    { return mapaI; }
+    @Override public MapaI getMapa()                                    { return mapa; }
     @Override public boolean isCasteando()                              { if (actualCastingTime >0) return true; else return false; }
     @Override public float getActualCastingTime()                       { return actualCastingTime; }
     @Override public float getTotalCastingTime()                        { return totalCastingTime; }
     @Override public String getSpellIDSeleccionado()                    { return spellIDSeleccionado; }
     @Override public Object getParametrosSpell()                        { return parametrosSpell; }
+    @Override public PlayerIOI getInput()                               { return input; }
+    @Override public PlayerIOI getOutput()                              { return output; }
 
 
     //SET:
+    public void setTimestamp(int timestamp)                             { cuerpo.setTimeStamp(timestamp); }
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
     @Override public void setTotalCastingTime(float castingTime)        { actualCastingTime = 0.01f; totalCastingTime = castingTime;}
     @Override public void setVelocidaMod(float velocidadMod)            { this.velocidadMod = velocidadMod; }
@@ -210,10 +234,56 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
         }
     }
 
+    private void moverse ()
+    {
+        //Sur
+        if (output.irAbajo && !output.irDerecha && !output.irIzquierda)
+        {   cuerpo.getBody().setLinearVelocity(0, -velocidadMax * PIXEL_METROS); }
+        //Norte
+        else if (output.irArriba && !output.irDerecha && !output.irIzquierda)
+        {   cuerpo.getBody().setLinearVelocity(0, velocidadMax * PIXEL_METROS);}
+        //Este
+        else if (output.irDerecha && !output.irArriba && !output.irAbajo)
+        {   cuerpo.getBody().setLinearVelocity(velocidadMax * PIXEL_METROS, 0);}
+        //Oeste
+        else if (output.irIzquierda && !output.irArriba && !output.irAbajo)
+        {   cuerpo.getBody().setLinearVelocity(-velocidadMax * PIXEL_METROS, 0);}
+        //SurOeste
+        else if (output.irAbajo&& output.irIzquierda)
+        {   cuerpo.getBody().setLinearVelocity(-velocidadMax * 0.707f * PIXEL_METROS, -velocidadMax * 0.707f * PIXEL_METROS); }
+        //SurEste
+        else if (output.irAbajo && output.irDerecha)
+        {   cuerpo.getBody().setLinearVelocity(velocidadMax * 0.707f * PIXEL_METROS, -velocidadMax * 0.707f * PIXEL_METROS); }
+        //NorOeste
+        else if (output.irArriba && output.irIzquierda)
+        {   cuerpo.getBody().setLinearVelocity(-velocidadMax * 0.707f * PIXEL_METROS, velocidadMax * 0.707f * PIXEL_METROS); }
+        //NorEste
+        else if (output.irArriba && output.irDerecha)
+        {   cuerpo.getBody().setLinearVelocity(velocidadMax * 0.707f * PIXEL_METROS, velocidadMax * 0.707f * PIXEL_METROS); }
+        else if (!output.irAbajo && !output.irArriba && !output.irDerecha && !output.irIzquierda)
+        {   cuerpo.getBody().setLinearVelocity(0, 0); }
+    }
+
+
+    public void aplicarInput(PlayerIO input)
+    {   this.input.getPlayerIO(input); }
+
+    public void procesarInput(float delta)
+    {   fsm.actualizar(delta); }
+
     public void actualizar(float delta)
     {
         actualizarCastingTime(delta);
+        moverse();
+        setNumAnimacion(output.getNumAnimacion());
         actualizarAuras(delta);
         if (castear) castear();
+    }
+
+    public void enviarPlayerSnapshot()
+    {
+        Object playerSnapShot = new NetDTO.PlayerSnapshot(cuerpo);
+        notificarActualizacion("enviarPlayerSnapshot", null, playerSnapShot);
+        cuerpo.timeStamp++;
     }
 }

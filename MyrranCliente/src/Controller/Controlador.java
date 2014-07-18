@@ -36,7 +36,7 @@ public class Controlador implements ControladorUI
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         cliente = new Cliente(this);
-
+        mundo.setCliente(cliente);
         añadirPlayer(cliente.getID());
 
         ui.añadirBarraAcciones(3, 9);
@@ -51,7 +51,6 @@ public class Controlador implements ControladorUI
 
         ui.crearCasilla(0, 0, 0, "Terraformar", 8);
         ui.crearCasilla(0, 1, 0, "Heal", 9);
-
         ui.crearCasilla(0, 1, 1, "IrNorte", 51);
         ui.crearCasilla(0, 1, 2, "IrSur", 47);
         ui.crearCasilla(0, 2, 2, "IrEste", 32);
@@ -104,11 +103,17 @@ public class Controlador implements ControladorUI
             ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo(spellID));
         }
     }
+    public void comprobarPlayerSnapshot(int connectionID, NetDTO.PlayerSnapshot snapshot)
+    {
+        if (connectionID == mundo.getPlayer().getConnectionID())
+        {   mundo.getPlayer().comprobarSnapshop(snapshot); }
+    }
 
     public void actualizarPPC(NetDTO.ActualizarPPC updatePlayer)
     {
         if (updatePlayer.connectionID == mundo.getPlayer().getConnectionID())
         {
+            mundo.getPlayer().setTimestamp(updatePlayer.timestamp);
             mundo.getPlayer().setNombre(updatePlayer.nombre);
             mundo.getPlayer().setNivel(updatePlayer.nivel);
             mundo.getPlayer().setMaxHPs(updatePlayer.maxHPs);

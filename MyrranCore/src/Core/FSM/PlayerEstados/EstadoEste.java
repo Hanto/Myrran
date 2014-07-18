@@ -1,6 +1,6 @@
-package Model.FSM.PlayerEstados;// Created by Hanto on 16/07/2014.
+package Core.FSM.PlayerEstados;// Created by Hanto on 16/07/2014.
 
-import Model.FSM.*;
+import Core.FSM.MaquinaEstados;
 
 public class EstadoEste extends PlayerEstado
 {

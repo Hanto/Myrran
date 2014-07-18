@@ -1,5 +1,10 @@
 package Model.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
+import Core.Cuerpos.BodyFactory;
+import Core.Cuerpos.ObjetoDinamico;
+import Core.FSM.IO.PlayerIO;
+import Core.FSM.MaquinaEstados;
+import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
@@ -15,14 +20,12 @@ import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.Classes.Cuerpo.BodyFactory;
-import Model.Classes.Cuerpo.ObjetoDinamico;
-import Model.Classes.Input.PlayerIO;
 import Model.DTO.PlayerDTO;
-import Model.FSM.MaquinaEstados;
-import Model.FSM.MaquinaEstadosFactory;
-import com.badlogic.gdx.physics.box2d.World;
+import Model.GameState.Mundo;
+import ch.qos.logback.classic.Logger;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,6 +35,8 @@ import static Data.Settings.PIXEL_METROS;
 
 public class Player extends AbstractModel implements MobPlayer, CasterConTalentos, Vulnerable, Debuffeable, Maquinable
 {
+    protected Mundo mundo;
+
     protected int connectionID;
     protected MapaI mapaI;                         //mapaI al que pertecene el Player
 
@@ -57,24 +62,28 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
     protected float totalCastingTime = 0.0f;
     protected Object parametrosSpell;
 
+    protected Array<AuraI> listaDeAuras = new Array<>();
+    protected Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
+    protected Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
+
+    protected ObjetoDinamico cuerpo;
     protected MaquinaEstados fsm;
     protected PlayerIO input = new PlayerIO();
     protected PlayerIO output = new PlayerIO();
 
-    private Array<AuraI> listaDeAuras = new Array<>();
-    private Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
-    private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    protected ObjetoDinamico cuerpo;
-
-    public Player(World world)
+    public Player(Mundo mundo)
     {
+        this.mundo = mundo;
         fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
-        cuerpo = new ObjetoDinamico(world, 48, 48);
+        cuerpo = new ObjetoDinamico(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
+        cuerpo.setPosition(x, y);
     }
 
     //GET:
+    public int getTimestamp()                                           { return cuerpo.getTimeStamp(); }
     public ObjetoDinamico getObjetoDinamico()                           { return cuerpo; }
     @Override public int getConnectionID()                              { return connectionID; }
     @Override public float getX()                                       { return x; }
@@ -97,6 +106,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
     @Override public PlayerIOI getOutput()                              { return output; }
 
     //SET:
+    public void setTimestamp(int timestamp)                             { cuerpo.setTimeStamp(timestamp); }
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
     @Override public void setTotalCastingTime(float castingTime)        { this.actualCastingTime = 0.01f; totalCastingTime = castingTime;}
     @Override public void setVelocidaMod(float velocidadMod)            { this.velocidadMod = velocidadMod; }
@@ -197,10 +207,10 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
 
     private void setBodyPosition()
     {
-        if (Math.abs(this.cuerpo.getX()-x) >= 1 || Math.abs(this.cuerpo.getY()-y) >= 1)
+        if (Math.abs(this.cuerpo.getXinterpolada()-x) >= 1 || Math.abs(this.cuerpo.getYinterpolada()-y) >= 1)
         {
-            this.x = cuerpo.getX();
-            this.y = cuerpo.getY();
+            this.x = cuerpo.getXinterpolada();
+            this.y = cuerpo.getYinterpolada();
             Object posicionDTO = new NetDTO.PosicionPPC(this);
             notificarActualizacion("ENVIO: setPosition", null, posicionDTO);
         }
@@ -271,6 +281,31 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
         else if (playerInput.getStartCastear()) setCastear (true, playerInput.getScreenX(), playerInput.getScreenY());
     }*/
 
+    public void comprobarSnapshop(NetDTO.PlayerSnapshot snapshot)
+    {
+        System.out.println("CLIENTE: "+cuerpo.getTimeStamp() +" "+ "SERVIDOR: "+snapshot.timeStamp);
+
+        try
+        {
+            int pos;
+            int posS = snapshot.x;
+            Vector2 vector = cuerpo.listaPosiciones.get(snapshot.timeStamp);
+            if (vector != null) {
+                pos = (int)vector.x;
+                if (pos != posS)
+                    logger.trace("{} - {}", pos, posS);
+            }
+            else logger.info("NULL???");
+
+
+
+        }
+        catch (Exception e)
+        {   logger.error("", e);}
+
+
+    }
+
     public void setInput (PlayerIOI p) {}
 
     private void moverse ()
@@ -319,12 +354,6 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
         }
     }
 
-    public void interpolacionEspacial(float alpha)
-    {
-        cuerpo.interpolar(alpha);
-        setBodyPosition();
-    }
-
     public void actualizar (float delta)
     {
         fsm.actualizar(delta);
@@ -333,5 +362,18 @@ public class Player extends AbstractModel implements MobPlayer, CasterConTalento
         setNumAnimacion(output.getNumAnimacion());
         if (output.getStartCastear()) startCastear();
         else if (output.getStopCastear()) stopCastear();
+    }
+
+    public void enviarComandosAServidor()
+    {
+        input.setTimeStamp(cuerpo.getTimeStamp());
+        if (mundo.getCliente() != null)
+            mundo.getCliente().enviarAServidor(input);
+    }
+
+    public void interpolacionEspacial(float alpha)
+    {
+        cuerpo.interpolar(alpha);
+        setBodyPosition();
     }
 }

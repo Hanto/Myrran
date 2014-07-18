@@ -1,11 +1,10 @@
 package Controller;// Created by Hanto on 09/04/2014.
 
 import Data.Settings;
-import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Updater implements Runnable
@@ -14,6 +13,22 @@ public class Updater implements Runnable
     private Mundo mundo;
     protected final List<Runnable> runnables = new ArrayList<>();
     protected final List<Runnable> executedRunnables = new ArrayList<>();
+
+    private double timeStep = 0;
+
+    private double newTime;
+    private double currentTime;
+    private double deltaTime;
+
+
+    private double newTimeC;
+    private double currentTimeC;
+    private double deltaTimeC;
+
+
+    private int contador = 0;
+    private double total = 0;
+    private float media;
 
     public void postRunnable(Runnable runnable)
     {
@@ -26,6 +41,8 @@ public class Updater implements Runnable
         this.controlador = controlador;
         this.mundo = mundo;
 
+        currentTime = TimeUtils.nanoTime() / 1000000.0;
+
         new Thread(this).start();
     }
 
@@ -33,14 +50,39 @@ public class Updater implements Runnable
     {
         while (true)
         {
-            executeRunnables();
+            newTime = TimeUtils.nanoTime() / 1000000.0;
+            deltaTime = (newTime - currentTime);
+            //if (deltaTime > 1)
+            //    System.out.println("DeltaTime: "+deltaTime);
+            currentTime = newTime;
 
-            synchronized (mundo)
+            total += deltaTime;
+
+            timeStep += deltaTime;
+
+            while (timeStep >= 30)
             {
-                mundoUpdate(Settings.NETWORK_Delta_Time);
+                contador++;
+                media = (float)total/(float)contador;
+                System.out.println(media);
+
+                timeStep -= 30;
+
+                executeRunnables();
+                mundo.procesarInputs(Settings.FIXED_TimeStep);
+                mundo.actualizarFisica(Settings.FIXED_TimeStep);
+                mundo.actualizarUnidades(Settings.FIXED_TimeStep);
+                mundo.enviarSnapshots();
                 netUpdate();
             }
-            try { Thread.sleep(Settings.NETWORK_Update_Time); }
+
+
+            currentTimeC = TimeUtils.nanoTime();
+            newTimeC = TimeUtils.nanoTime();
+            deltaTimeC = (newTimeC - currentTimeC);
+            //System.out.println("process Time: "+ deltaTimeC/1000000);
+
+            try { Thread.sleep((long)(1)); }
             catch (InterruptedException e) { System.out.println("ERROR: Updateando la red: "+e); return; }
         }
     }
@@ -48,13 +90,6 @@ public class Updater implements Runnable
     private void netUpdate()
     {   controlador.netUpdater(); }
 
-    private void mundoUpdate(float delta)
-    {
-        //actualizar PCs
-        Iterator<PC> iteratorPCs = mundo.getIteratorListaPlayers();
-        while (iteratorPCs.hasNext())
-        {   iteratorPCs.next().actualizar(delta); }
-    }
 
     private boolean executeRunnables()
     {
@@ -63,8 +98,10 @@ public class Updater implements Runnable
             runnables.clear();
         }
         if (executedRunnables.size() == 0) return false;
+
         for (int i=0; i< executedRunnables.size(); i++)
         {   executedRunnables.get(i).run(); }
+
         executedRunnables.clear();
         return true;
     }

@@ -1,7 +1,8 @@
-package Model.FSM;// Created by Hanto on 16/07/2014.
+package Core.FSM;// Created by Hanto on 16/07/2014.
 
+import Core.FSM.MaquinaEstados;
+import Core.FSM.PlayerEstados.*;
 import Interfaces.EntidadesPropiedades.Maquinable;
-import Model.FSM.PlayerEstados.*;
 
 public enum MaquinaEstadosFactory
 {

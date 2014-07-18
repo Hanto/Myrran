@@ -102,6 +102,9 @@ public class Cliente extends Client
             int valor = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) obj).valor;
             controlador.modificarnumTalentosSkillPersonalizadoCC(con.getID(), skillID, statID, valor);
         }
+
+        if (obj instanceof NetDTO.PlayerSnapshot)
+        {   controlador.comprobarPlayerSnapshot(con.getID(), (NetDTO.PlayerSnapshot)obj); }
     }
 
     public void enviarAServidor(Object obj)

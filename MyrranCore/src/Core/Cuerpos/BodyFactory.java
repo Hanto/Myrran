@@ -1,4 +1,4 @@
-package Model.Classes.Cuerpo;// Created by Hanto on 16/07/2014.
+package Core.Cuerpos;// Created by Hanto on 16/07/2014.
 
 import com.badlogic.gdx.physics.box2d.*;
 

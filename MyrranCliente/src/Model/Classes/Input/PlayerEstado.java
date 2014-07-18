@@ -1,6 +1,7 @@
 package Model.Classes.Input;
 // @author Ivan Delgado Huertaimp
 
+import Core.FSM.IO.PlayerIO;
 import Interfaces.Input.PlayerEstadoI;
 
 public class PlayerEstado implements PlayerEstadoI
@@ -109,7 +110,7 @@ public class PlayerEstado implements PlayerEstadoI
                 if (playerE.playerI.irIzquierda)    { playerE.estado = new Oeste(playerE); return; }
                 if (playerE.playerI.irArriba)       { playerE.estado = new Norte(playerE); return; }
                 if (playerE.playerI.irAbajo)        { playerE.estado = new Sur(playerE); return; }
-                if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); }
+                //if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); }
             }
         }   //como mientras disparamos vamos apuntando, hay que actualizar la animacion todo el rato:
         @Override public void actualizar(PlayerEstado playerE)
@@ -151,7 +152,7 @@ public class PlayerEstado implements PlayerEstadoI
                 if (playerE.playerI.irDerecha)  { playerE.estado = new Este(playerE); return; }
                 if (playerE.playerI.irIzquierda){ playerE.estado = new Oeste(playerE); return; }
             }
-            if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); return; }
+            //if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); return; }
             if (playerE.playerI.irArriba)
             {   //Si vamos hacia arriba, pero cambia el movimiento lateral, mantenemos el estado y cambiamos el rumbo
                 playerE.playerO.irIzquierda = playerE.playerI.irIzquierda;
@@ -190,7 +191,7 @@ public class PlayerEstado implements PlayerEstadoI
                 if (playerE.playerI.irDerecha)   { playerE.estado = new Este(playerE); return; }
                 if (playerE.playerI.irIzquierda) { playerE.estado = new Oeste(playerE); return; }
             }
-            if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); return; }
+            //if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); return; }
             else if (playerE.playerI.irAbajo)
             {   //Si vamos hacia la direccion del Estado, pero cambia el movimiento lateral, solo cambiamos el rumbo
                 playerE.playerO.irIzquierda = playerE.playerI.irIzquierda;
@@ -230,7 +231,7 @@ public class PlayerEstado implements PlayerEstadoI
                 if (playerE.playerI.irArriba)    { playerE.estado = new Norte(playerE); return; }
                 if (playerE.playerI.irAbajo)     { playerE.estado = new Sur(playerE); return; }
             }
-            if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); }
+            //if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); }
             else if (playerE.playerI.irIzquierda)
             {   //Si vamos hacia la direccion del Estado, pero cambia el movimiento lateral, solo cambiamos el rumbo
                 playerE.playerO.irArriba = playerE.playerI.irArriba;
@@ -269,7 +270,7 @@ public class PlayerEstado implements PlayerEstadoI
                 if (playerE.playerI.irArriba)   { playerE.estado = new Norte(playerE); return; }
                 if (playerE.playerI.irAbajo)    { playerE.estado = new Sur(playerE); return; }
             }
-            if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); }
+            //if (playerE.playerI.estaQuieto())   { playerE.estado = new Quieto(playerE); }
             else if (playerE.playerI.irDerecha)
             {   //Si vamos hacia la direccion del Estado, pero cambia el movimiento lateral, solo cambiamos el rumbo
                 playerE.playerO.irArriba = playerE.playerI.irArriba;

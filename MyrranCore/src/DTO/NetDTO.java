@@ -1,6 +1,8 @@
 package DTO;// Created by Hanto on 07/04/2014.
 
 
+import Core.Cuerpos.ObjetoDinamico;
+import Core.FSM.IO.PlayerIO;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Vulnerable;
@@ -18,8 +20,12 @@ public class NetDTO
     public static void register (EndPoint endPoint)
     {
         Kryo kryo = endPoint.getKryo();
-        kryo.register(AñadirPPC.class);
+        kryo.register(PlayerIO.class);
+        kryo.register(PlayerInput.class);
+        kryo.register(PlayerSnapshot.class);
 
+
+        kryo.register(AñadirPPC.class);
         kryo.register(ActualizarPPC.class);
         kryo.register(PosicionPPC.class);
         kryo.register(AnimacionPPC.class);
@@ -51,6 +57,52 @@ public class NetDTO
     }
 
     //Network DTOs:
+    public static class PlayerInput
+    {
+        public int screenX;
+        public int screenY;
+        public boolean irArriba = false;
+        public boolean irAbajo = false;
+        public boolean irDerecha = false;
+        public boolean irIzquierda = false;
+        public boolean startCastear = false;
+        public boolean stopCastear = false;
+        public String spellID = null;
+        public int numAnimacion = 5;
+        public boolean disparar = false;
+
+        public PlayerInput() {}
+        public PlayerInput(PlayerIO playerIO)
+        {
+            this.screenX = playerIO.getScreenX();
+            this.screenY = playerIO.getScreenY();
+            this.irArriba = playerIO.getIrArriba();
+            this.irAbajo = playerIO.getIrAbajo();
+            this.irDerecha = playerIO.getIrDerecha();
+            this.irIzquierda = playerIO.getirIzquierda();
+            this.startCastear = playerIO.getStartCastear();
+            this.stopCastear = playerIO.getStopCastear();
+            this.spellID = playerIO.getSpellID();
+            this.numAnimacion = playerIO.getNumAnimacion();
+            this.disparar = playerIO.getDisparar();
+        }
+    }
+
+    public static class PlayerSnapshot
+    {
+        public int timeStamp;
+        public int x;
+        public int y;
+        public float angulo;
+        public PlayerSnapshot() {}
+        public PlayerSnapshot(ObjetoDinamico objetoDinamico)
+        {   timeStamp = objetoDinamico.getTimeStamp();
+            x = objetoDinamico.getX();
+            y = objetoDinamico.getY();
+            angulo =  objetoDinamico.getAngulo();
+        }
+    }
+
     public static class AñadirPPC
     {
         public int connectionID;
@@ -63,6 +115,7 @@ public class NetDTO
     public static class ActualizarPPC
     {
         public int connectionID;
+        public int timestamp;
         public String nombre;
         public int nivel;
         public float actualHPs;
@@ -74,6 +127,7 @@ public class NetDTO
         public ActualizarPPC(MobPC pc)
         {
             connectionID = pc.getConnectionID();
+            timestamp = pc.getTimestamp();
             nombre = pc.getNombre();
             nivel = pc.getNivel();
             actualHPs = ((Vulnerable)pc).getActualHPs();

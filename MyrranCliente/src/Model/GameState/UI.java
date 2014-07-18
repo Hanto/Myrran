@@ -7,7 +7,7 @@ import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.Classes.Input.InputManager;
 import Model.Classes.Input.PlayerEstado;
-import Model.Classes.Input.PlayerIO;
+import Core.FSM.IO.PlayerIO;
 import Model.Classes.Mobiles.Player;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;

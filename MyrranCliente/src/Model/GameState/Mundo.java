@@ -1,5 +1,6 @@
 package Model.GameState;// Created by Hanto on 08/04/2014.
 
+import Controller.Cliente;
 import DTO.NetDTO;
 import Data.Settings;
 import Interfaces.Model.AbstractModel;
@@ -16,6 +17,8 @@ import java.util.Map;
 
 public class Mundo extends AbstractModel
 {
+    private Cliente cliente;
+
     private List<PC> listaPlayers = new ArrayList<>();
     private Map<Integer,PC> mapaPlayers = new HashMap<>();
 
@@ -32,11 +35,15 @@ public class Mundo extends AbstractModel
     public Player getPlayer()                       { return player; }
     public Mapa getMapa()                           { return mapa; }
     public World getWorld()                         { return world; }
+    public Cliente getCliente()                     { return cliente; }
+
+    //SET:
+    public void setCliente(Cliente cliente)         { this.cliente = cliente; }
 
     public Mundo()
     {
         world = new World(new Vector2(0, 0), false);
-        player = new Player(world);
+        player = new Player(this);
         mapa = new Mapa(player);
     }
 
@@ -65,16 +72,20 @@ public class Mundo extends AbstractModel
         player.getObjetoDinamico().copiarUltimosDatos();
         //calculamos los nuevos:
         world.step(delta, 8, 6);
+        //salvamos cada posicion Calculada:
+        player.getObjetoDinamico().copiarHistorialPosiciones();
     }
 
     public void actualizarUnidades(float delta)
     {
         //Actualizar a todas las unidades a partir de los datos ya interpolados
         player.actualizar(delta);
+        player.enviarComandosAServidor();
         //Actualizar a los demas jugador multiplayer:
         for (PC pc: listaPlayers)
         {   pc.actualizar(delta); }
     }
+
 
     public void interpolacionEspacial(float alpha)
     {

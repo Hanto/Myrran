@@ -1,19 +1,20 @@
-package Model.FSM.PlayerEstados;// Created by Hanto on 16/07/2014.
+package Core.FSM.PlayerEstados;// Created by Hanto on 16/07/2014.
 
-import Model.FSM.MaquinaEstados;
+import Core.FSM.MaquinaEstados;
+import Core.FSM.PlayerEstados.EstadoEste;
 
-public class EstadoSur extends PlayerEstado
+public class EstadoNorte extends PlayerEstado
 {
-    public EstadoSur(MaquinaEstados maquinaEstados)
+    public EstadoNorte(MaquinaEstados maquinaEstados)
     {   super(maquinaEstados); }
 
     @Override public void enter()
     {
-        output.setIrArriba(false);
-        output.setIrAbajo(input.getIrAbajo());
+        output.setIrArriba(input.getIrArriba());
+        output.setIrAbajo(false);
         output.setirDerecha(input.getIrDerecha());
         output.setIrIzquierda(input.getirIzquierda());
-        output.setNumAnimacion(3);
+        output.setNumAnimacion(2);
     }
 
     @Override public void update(float deltaTime)
@@ -24,16 +25,16 @@ public class EstadoSur extends PlayerEstado
         output.setScreenX(input.getScreenX());
         output.setScreenY(input.getScreenY());
 
-        if (input.getIrArriba())        { maquinaEstados.setEstadoSiguiente(EstadoNorte.class); return; }
-        if (!input.getIrAbajo())
+        if (input.getIrAbajo())         { maquinaEstados.setEstadoSiguiente(EstadoSur.class); return; }
+        if (!input.getIrArriba())
         {
             if (input.getIrDerecha())   { maquinaEstados.setEstadoSiguiente(EstadoEste.class); return; }
             if (input.getirIzquierda()) { maquinaEstados.setEstadoSiguiente(EstadoOeste.class); return; }
         }
-        if (input.getIrAbajo())
+        if (input.getIrArriba())
         {
-            output.setirDerecha(input.getIrDerecha());
-            output.setIrIzquierda(input.getirIzquierda()); return;
+            output.setIrIzquierda(input.getirIzquierda());
+            output.setirDerecha(input.getIrDerecha()); return;
         }
         if (!input.getIrDerecha() && !input.getirIzquierda() && !input.getIrArriba() && !input.getIrAbajo())
         {   maquinaEstados.setEstadoSiguiente(EstadoQuieto.class); return; }

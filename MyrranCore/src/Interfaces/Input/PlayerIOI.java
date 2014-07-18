@@ -27,7 +27,4 @@ public interface PlayerIOI
     public void setStopCastear(boolean b);
     public void setSpellID(String s);
     public void setNumAnimacion(int numAnimacion);
-
-    //METODO:
-    public boolean estaQuieto();
 }

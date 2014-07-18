@@ -1,6 +1,6 @@
-package Model.FSM.PlayerEstados;// Created by Hanto on 15/07/2014.
+package Core.FSM.PlayerEstados;// Created by Hanto on 15/07/2014.
 
-import Model.FSM.MaquinaEstados;
+import Core.FSM.MaquinaEstados;
 
 public class EstadoQuieto extends PlayerEstado
 {

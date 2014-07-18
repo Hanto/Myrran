@@ -1,5 +1,6 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
+import Core.FSM.IO.PlayerIO;
 import DTO.NetDTO;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
@@ -12,10 +13,10 @@ public class Servidor extends Server
     public Controlador controlador;
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public Servidor (Controlador control)
+    public Servidor (Controlador controlador)
     {
         super(512*1024, 4*1024);
-        this.controlador = control;
+        this.controlador = controlador;
 
         NetDTO.register(this);
         this.start();
@@ -23,18 +24,22 @@ public class Servidor extends Server
         //Para activar el log completo de mensajes:
         //Log.TRACE();
 
-        synchronized (controlador.getMundo())
-        {
+        //synchronized (this.controlador.getMundo())
+        //{
 
             this.addListener
-                (new Listener.ThreadedListener
+                (new Listener.QueuedListener
                     (new Listener()
                     {
-                        public void connected (Connection con)              { controlador.añadirPC(con.getID()); }
-                        public void disconnected (Connection con)           { controlador.eliminarPC(con.getID()); }
+                        public void connected (Connection con)              { Servidor.this.controlador.añadirPC(con.getID()); }
+                        public void disconnected (Connection con)           { Servidor.this.controlador.eliminarPC(con.getID()); }
                         public void received (Connection con, Object obj)   { procesarMensajeCliente(con, obj); }
-                    }));
-        }
+                    })
+                {
+                    @Override protected void queue(Runnable runnable)
+                    {   Servidor.this.controlador.postRunnable(runnable); }
+                });
+        //}
 
 
         try { this.bind(NetDTO.puertoTCP, NetDTO.puertoUDP); }
@@ -89,6 +94,9 @@ public class Servidor extends Server
             int valor = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) obj).valor;
             controlador.modificarSkillTalentoPC(conID, skillID, statID, valor);
         }
+
+        if (obj instanceof PlayerIO)
+        {   controlador.aplicarInputPC(con.getID(), (PlayerIO)obj); }
     }
 
     public void enviarACliente(int connectionID, Object obj)
