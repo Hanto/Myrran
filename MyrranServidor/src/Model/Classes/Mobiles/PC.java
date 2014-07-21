@@ -1,8 +1,7 @@
 package Model.Classes.Mobiles;// Created by Hanto on 07/04/2014.
 
-
 import Core.Cuerpos.BodyFactory;
-import Core.Cuerpos.ObjetoDinamico;
+import Core.Cuerpos.Cuerpo;
 import Core.FSM.IO.PlayerIO;
 import Core.FSM.MaquinaEstados;
 import Core.FSM.MaquinaEstadosFactory;
@@ -10,10 +9,9 @@ import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
 import Interfaces.BDebuff.AuraI;
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Maquinable;
-import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Geo.MapaI;
 import Interfaces.Input.PlayerIOI;
@@ -27,19 +25,18 @@ import java.util.*;
 
 import static Data.Settings.PIXEL_METROS;
 
-public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulnerable, Debuffeable, Maquinable
+public class PC extends AbstractModel implements MobPC, CasterPersonalizable, Debuffeable, Maquinable
 {
     protected Mundo mundo;                                      //mapaI al que pertecene el Player
-    protected MapaI mapa;
     protected int connectionID;                                 //ID de la conexion con el servidor
+    protected MapaI mapa;
 
     protected float x;                                          //Coordenadas X:
     protected float y;                                          //Coordenadas Y:
     protected int numAnimacion = 5;
 
-    protected float velocidadMod = 1.0f;                        //Modificadores de Velocidad: debido a Snares, a Sprints, Roots
     protected float velocidadMax = 80.0f;                       //Velocidad Maxima:
-    protected double direccion;                                 //Direccion Actual en Radianes
+    protected float velocidadMod = 1.0f;                        //Modificadores de Velocidad: debido a Snares, a Sprints, Roots
 
     protected String nombre = "Hanto";
     protected int nivel = 1;
@@ -61,7 +58,7 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
     private Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
     private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
-    protected ObjetoDinamico cuerpo;
+    protected Cuerpo cuerpo;
     protected MaquinaEstados fsm;
     protected PlayerIO input = new PlayerIO();
     protected PlayerIO output = new PlayerIO();
@@ -69,24 +66,22 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
     //Constructor:
     public PC(int connectionID, Mundo mundo)
     {
-        fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
-        cuerpo = new ObjetoDinamico(mundo.getWorld(), 48, 48);
-        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
-
+        this.mundo = mundo;
         this.connectionID = connectionID;
         this.mapa = mundo.getMapa();
+
+        fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
+        cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
+        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
     }
 
     //GET:
-    public ObjetoDinamico getObjetoDinamico()                           { return cuerpo; }
-    public int getTimestamp()                                           { return cuerpo.getTimeStamp(); }
     @Override public int getConnectionID ()                             { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
     @Override public int getNumAnimacion()                              { return numAnimacion; }
     @Override public float getVelocidadMod()                            { return velocidadMod; }
     @Override public float getVelocidadMax()                            { return velocidadMax; }
-    @Override public double getDireccion()                              { return direccion; }
     @Override public String getNombre()                                 { return nombre; }
     @Override public int getNivel()                                     { return nivel; }
     @Override public float getActualHPs()                               { return actualHPs; }
@@ -102,12 +97,13 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
 
 
     //SET:
-    public void setTimestamp(int timestamp)                             { cuerpo.setTimeStamp(timestamp); }
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
+    @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
+    @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
+    @Override public void setVectorDireccion(float x, float y)          { cuerpo.setVectorDireccion(x, y); }
     @Override public void setTotalCastingTime(float castingTime)        { actualCastingTime = 0.01f; totalCastingTime = castingTime;}
     @Override public void setVelocidaMod(float velocidadMod)            { this.velocidadMod = velocidadMod; }
     @Override public void setVelocidadMax(float velocidadMax)           { this.velocidadMax = velocidadMax; }
-    @Override public void setDireccion(double direccion)                { this.direccion = direccion; }
     @Override public void setSpellIDSeleccionado(String spellID)        { spellIDSeleccionado = spellID; }
     @Override public void setParametrosSpell(Object parametros)         { parametrosSpell = parametros; }
     @Override public void setNombre(String nombre)                      { this.nombre = nombre; }
@@ -162,7 +158,7 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
         notificarActualizacion("modificarHPs", null, modificarHPs);
     }
 
-    @Override public void setCastear (boolean castear, int targetX, int targetY)
+    public void setCastear (boolean castear, int targetX, int targetY)
     {
         this.castear = castear;
         this.targetX = targetX;
@@ -284,6 +280,5 @@ public class PC extends AbstractModel implements MobPC, CasterConTalentos, Vulne
     {
         Object playerSnapShot = new NetDTO.PlayerSnapshot(cuerpo);
         notificarActualizacion("enviarPlayerSnapshot", null, playerSnapShot);
-        cuerpo.timeStamp++;
     }
 }

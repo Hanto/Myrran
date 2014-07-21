@@ -10,6 +10,7 @@ import Model.GameState.UI;
 import View.Vista;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 //CLIENTE:
 public class Controlador implements ControladorUI
@@ -22,6 +23,8 @@ public class Controlador implements ControladorUI
 
     //Input:
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
+    public Cliente getCliente()                 { return cliente; }
 
     public Controlador (Mundo mundo)
     {
@@ -113,7 +116,6 @@ public class Controlador implements ControladorUI
     {
         if (updatePlayer.connectionID == mundo.getPlayer().getConnectionID())
         {
-            mundo.getPlayer().setTimestamp(updatePlayer.timestamp);
             mundo.getPlayer().setNombre(updatePlayer.nombre);
             mundo.getPlayer().setNivel(updatePlayer.nivel);
             mundo.getPlayer().setMaxHPs(updatePlayer.maxHPs);
@@ -139,6 +141,7 @@ public class Controlador implements ControladorUI
     public void actualizarMapa(NetDTO.ActualizarMapa mapaServidor)                      { mundo.actualizarMapa(mapaServidor); }
     public void setTerreno(int celdaX, int celdaY, int numCapa, short iDTerreno)        { mundo.getMapa().setTerreno(celdaX, celdaY, numCapa, iDTerreno); }
     public void aplicarZoom(int incrementoZoom)                                         { vista.aplicarZoom(incrementoZoom); }
+    public OrthographicCamera getCamara()                                               { return vista.getMundoView().getCamara(); }
 
     //BarraTerrenos:
     @Override public void mostrarBarraTerrenos()                                        { vista.getUiView().mostrarBarraTerreno(); }

@@ -1,7 +1,7 @@
 package DTO;// Created by Hanto on 07/04/2014.
 
 
-import Core.Cuerpos.ObjetoDinamico;
+import Core.Cuerpos.Cuerpo;
 import Core.FSM.IO.PlayerIO;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
@@ -90,16 +90,14 @@ public class NetDTO
 
     public static class PlayerSnapshot
     {
-        public int timeStamp;
         public int x;
         public int y;
         public float angulo;
         public PlayerSnapshot() {}
-        public PlayerSnapshot(ObjetoDinamico objetoDinamico)
-        {   timeStamp = objetoDinamico.getTimeStamp();
-            x = objetoDinamico.getX();
-            y = objetoDinamico.getY();
-            angulo =  objetoDinamico.getAngulo();
+        public PlayerSnapshot(Cuerpo cuerpo)
+        {   x = cuerpo.getX();
+            y = cuerpo.getY();
+            angulo =  cuerpo.getAngulo();
         }
     }
 
@@ -115,7 +113,6 @@ public class NetDTO
     public static class ActualizarPPC
     {
         public int connectionID;
-        public int timestamp;
         public String nombre;
         public int nivel;
         public float actualHPs;
@@ -127,7 +124,6 @@ public class NetDTO
         public ActualizarPPC(MobPC pc)
         {
             connectionID = pc.getConnectionID();
-            timestamp = pc.getTimestamp();
             nombre = pc.getNombre();
             nivel = pc.getNivel();
             actualHPs = ((Vulnerable)pc).getActualHPs();
@@ -224,8 +220,8 @@ public class NetDTO
     {
         public float castingTimePercent;
         public CastingTimePercent() {}
-        public CastingTimePercent(Caster caster)
-        {   this.castingTimePercent = caster.getActualCastingTime() == 0 && caster.getTotalCastingTime() == 0 ? 100 : caster.getActualCastingTime() / caster.getTotalCastingTime(); }
+        public CastingTimePercent(Caster Caster)
+        {   this.castingTimePercent = Caster.getActualCastingTime() == 0 && Caster.getTotalCastingTime() == 0 ? 100 : Caster.getActualCastingTime() / Caster.getTotalCastingTime(); }
     }
 
     public static class SetTerreno

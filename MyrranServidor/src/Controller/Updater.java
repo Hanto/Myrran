@@ -50,38 +50,36 @@ public class Updater implements Runnable
     {
         while (true)
         {
-            newTime = TimeUtils.nanoTime() / 1000000.0;
-            deltaTime = (newTime - currentTime);
-            //if (deltaTime > 1)
-            //    System.out.println("DeltaTime: "+deltaTime);
-            currentTime = newTime;
-
-            total += deltaTime;
-
-            timeStep += deltaTime;
-
-            while (timeStep >= 30)
+            synchronized (mundo)
             {
-                contador++;
-                media = (float)total/(float)contador;
-                System.out.println(media);
+                newTime = TimeUtils.nanoTime() / 1000000.0;
+                deltaTime = (newTime - currentTime);
+                currentTime = newTime;
 
-                timeStep -= 30;
+                total += deltaTime;
+                timeStep += deltaTime;
 
-                executeRunnables();
-                mundo.procesarInputs(Settings.FIXED_TimeStep);
-                mundo.actualizarFisica(Settings.FIXED_TimeStep);
-                mundo.actualizarUnidades(Settings.FIXED_TimeStep);
-                mundo.enviarSnapshots();
-                netUpdate();
+                while (timeStep >= 30)
+                {
+                    contador++;
+                    media = (float) total / (float) contador;
+                    //System.out.println(media);
+
+                    timeStep -= 30;
+
+                    executeRunnables();
+                    mundo.procesarInputs(Settings.FIXED_TimeStep);
+                    mundo.actualizarUnidades(Settings.FIXED_TimeStep);
+                    mundo.actualizarFisica(Settings.FIXED_TimeStep);
+                    //mundo.enviarSnapshots();
+                    netUpdate();
+                }
+
+                currentTimeC = TimeUtils.nanoTime();
+                newTimeC = TimeUtils.nanoTime();
+                deltaTimeC = (newTimeC - currentTimeC);
+                //System.out.println("process Time: "+ deltaTimeC/1000000);
             }
-
-
-            currentTimeC = TimeUtils.nanoTime();
-            newTimeC = TimeUtils.nanoTime();
-            deltaTimeC = (newTimeC - currentTimeC);
-            //System.out.println("process Time: "+ deltaTimeC/1000000);
-
             try { Thread.sleep((long)(1)); }
             catch (InterruptedException e) { System.out.println("ERROR: Updateando la red: "+e); return; }
         }

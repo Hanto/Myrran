@@ -24,5 +24,5 @@ public interface TipoSpellI
 
     //METODOS:
     public void inicializarSkillStats();
-    public void ejecutarCasteo(SpellI spell, Caster caster, int targetX, int targetY);
+    public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY);
 }

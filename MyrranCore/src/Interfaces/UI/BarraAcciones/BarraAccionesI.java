@@ -1,6 +1,6 @@
 package Interfaces.UI.BarraAcciones;// Created by Hanto on 13/05/2014.
 
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Model.ModelI;
 import Interfaces.UI.Acciones.CasillaI;
 
@@ -10,7 +10,7 @@ public interface BarraAccionesI extends ModelI
     public int getNumFilas();
     public int getNumColumnas();
     public CasillaI getCasilla(int posX, int posY);
-    public CasterConTalentos getCaster();
+    public CasterPersonalizable getCaster();
 
     //Metodos:
     public void eliminarKeycode(int keycode);

@@ -2,7 +2,7 @@ package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/
 
 import DB.RSC;
 import Data.Settings;
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
@@ -25,7 +25,7 @@ public class CasillaView extends Actor implements PropertyChangeListener
 {
     //Model:
     protected CasillaI casilla;
-    protected CasterConTalentos caster;
+    protected CasterPersonalizable caster;
     protected ControladorBarraAccionI controlador;
 
     //View:
@@ -37,7 +37,7 @@ public class CasillaView extends Actor implements PropertyChangeListener
 
     public AccionI getAccion()                      { return casilla.getAccion(); }
     public CasillaI getCasilla()                    { return casilla; }
-    public CasterConTalentos getCaster()            { return caster; }
+    public CasterPersonalizable getCaster()            { return caster; }
     public ControladorBarraAccionI getControlador() { return controlador; }
     public Actor getApariencia()                    { return this; }
     public Actor getDragActor()                     { return new Image(casillaIcono);}
@@ -47,7 +47,7 @@ public class CasillaView extends Actor implements PropertyChangeListener
     public void setTexto(String texto)              { this.keybind.setTexto(texto); }
 
     //Constructor:
-    public CasillaView(CasillaI casilla, CasterConTalentos caster, ControladorBarraAccionI controlador)
+    public CasillaView(CasillaI casilla, CasterPersonalizable caster, ControladorBarraAccionI controlador)
     {
         this.casilla = casilla;
         this.caster = caster;

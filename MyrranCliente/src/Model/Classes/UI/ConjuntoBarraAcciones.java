@@ -1,6 +1,6 @@
 package Model.Classes.UI;// Created by Hanto on 08/05/2014.
 
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.Classes.Input.InputManager;
@@ -13,12 +13,12 @@ public class ConjuntoBarraAcciones extends AbstractModel
 {
     protected InputManager inputManager;
     protected Map<Integer, BarraAcciones> listaDeBarraAcciones = new HashMap<>();
-    protected CasterConTalentos caster;
+    protected CasterPersonalizable caster;
 
 
 
 
-    public ConjuntoBarraAcciones(CasterConTalentos caster, InputManager inputManager)
+    public ConjuntoBarraAcciones(CasterPersonalizable caster, InputManager inputManager)
     {
         this.caster = caster;
         this.inputManager = inputManager;

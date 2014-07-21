@@ -2,7 +2,6 @@ package Interfaces.UI.Acciones;// Created by Hanto on 05/05/2014.
 
 import Interfaces.EntidadesTipos.MobPlayer;
 import Interfaces.UI.ControladorUI;
-import Interfaces.Input.PlayerEstadoI;
 
 public interface AccionI
 {
@@ -10,6 +9,6 @@ public interface AccionI
     public String getID();
 
     //METODOS:
-    public void accionKeyDown(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador);
-    public void accionKeyUp(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador);
+    public void accionKeyDown(MobPlayer player, ControladorUI controlador);
+    public void accionKeyUp(MobPlayer player, ControladorUI controlador);
 }

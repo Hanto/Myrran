@@ -10,7 +10,7 @@ public class BodyFactory
     {
         RECTANGULAR
         {
-            @Override public void nuevo(ObjetoDinamico obj)
+            @Override public void nuevo(Cuerpo obj)
             {
                 BodyDef bd = new BodyDef();
                 bd.type = BodyDef.BodyType.KinematicBody;
@@ -31,7 +31,7 @@ public class BodyFactory
         },
         CIRCLE
         {
-            @Override public void nuevo(ObjetoDinamico obj)
+            @Override public void nuevo(Cuerpo obj)
             {
                 BodyDef bd = new BodyDef();
                 bd.type = BodyDef.BodyType.KinematicBody;
@@ -51,7 +51,7 @@ public class BodyFactory
             }
         };
 
-        public abstract void nuevo(ObjetoDinamico obj);
+        public abstract void nuevo(Cuerpo obj);
 
         private darCuerpo() {}
     }

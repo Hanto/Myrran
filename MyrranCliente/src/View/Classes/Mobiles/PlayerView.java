@@ -37,12 +37,8 @@ public class PlayerView extends Group implements PropertyChangeListener
     public Texto nombre;
     public PointLight luz;
 
-    //Datos
-    public Integer nivel;
-    public String spellIDSeleccionado;
-
-    public float getCenterX()               { return (this.getX()+this.getWidth()/2); }
-    public float getCenterY()               { return (this.getY()+this.getHeight()/2); }
+    public float getCenterX()               { return (player.getX()+this.getWidth()/2); }
+    public float getCenterY()               { return (player.getY()+this.getHeight()/2); }
 
     public PlayerView (Player player, MundoView mundoView, Controlador controlador)
     {
@@ -75,9 +71,8 @@ public class PlayerView extends Group implements PropertyChangeListener
         this.addActor(nombre);
 
         luz = new PointLight(mundoView.getRayHandler(), 300, new Color(0.3f,0.3f,0.3f,1.0f), 350 *PIXEL_METROS, 0, 0);
-        luz.attachToBody(player.getObjetoDinamico().getBody(), 0, 0);
+        luz.attachToBody(player.getBody(), 0, 0);
     }
-
 
 
     //VISTA:
@@ -92,32 +87,17 @@ public class PlayerView extends Group implements PropertyChangeListener
         texto.scrollingCombatText(this, 2f);
     }
 
-
-
-
-
-    //VISTA / ENVIODATOS:
     public void setPosition (int x, int y)
     {
         if (Math.abs(this.getX()-x) >= 1 || Math.abs(this.getY()-y) >= 1)
-        {
-            super.setPosition(x, y);
-            NetDTO.PosicionPPC moverPlayer = new NetDTO.PosicionPPC(player.getConnectionID(), getX(), getY());
-            controlador.enviarAServidor(moverPlayer);
-        }
+        {   super.setPosition(x, y); }
     }
 
     @Override public void setPosition (float x, float y)
-    {   //Muy importante, la posX en pantalla que sea en Pixels siempre, o sea sin decimales, o el sprite parpadea
-        setPosition((int)x, (int)y);
-    }
+    {   setPosition((int)x, (int)y); }
 
     public void setAnimacion (int numAnimacion)
-    {
-        actor.setAnimacion(numAnimacion, false);
-        NetDTO.AnimacionPPC animacionPPC = new NetDTO.AnimacionPPC(player.getConnectionID(), numAnimacion);
-        controlador.enviarAServidor(animacionPPC);
-    }
+    {   actor.setAnimacion(numAnimacion, false); }
 
 
 
@@ -129,22 +109,6 @@ public class PlayerView extends Group implements PropertyChangeListener
         Vector2 targetMundo = convertirCoordenadasPantallaAMundo(targetX, targetY);
         NetDTO.CastearPPC castearNDTO = new NetDTO.CastearPPC(castear, (int)targetMundo.x, (int)targetMundo.y);
         controlador.enviarAServidor(castearNDTO);
-    }
-
-    public void setSpellIDSeleccionado(String spellID)
-    {
-        if (spellIDSeleccionado != spellID)
-        {
-            spellIDSeleccionado = spellID;
-            NetDTO.SetSpellIDSeleccionado setSpellIDSeleccionado = new NetDTO.SetSpellIDSeleccionado(spellID, player.getParametrosSpell());
-            controlador.enviarAServidor(setSpellIDSeleccionado);
-        }
-    }
-
-    public void setParametrosSpell()
-    {
-        NetDTO.SetParametrosSpell setSpellIDSeleccionado = new NetDTO.SetParametrosSpell(player.getParametrosSpell());
-        controlador.enviarAServidor(setSpellIDSeleccionado);
     }
 
     public Vector2 convertirCoordenadasPantallaAMundo (int screenX, int screenY)
@@ -181,8 +145,8 @@ public class PlayerView extends Group implements PropertyChangeListener
             setNombre(nuevoNombre);
         }
 
-        if (evt.getNewValue() instanceof PlayerDTO.NivelPlayer)
-        {   nivel = ((PlayerDTO.NivelPlayer) evt.getNewValue()).nivel; }
+        if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
+        {   modificarHPs((NetDTO.ModificarHPsPPC)evt.getNewValue()); }
 
         if (evt.getNewValue() instanceof NetDTO.CastearPPC)
         {
@@ -191,17 +155,5 @@ public class PlayerView extends Group implements PropertyChangeListener
             int targetY = ((NetDTO.CastearPPC) evt.getNewValue()).targetY;
             setCastear(castear, targetX, targetY);
         }
-
-        if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
-        {   modificarHPs((NetDTO.ModificarHPsPPC)evt.getNewValue()); }
-
-        if (evt.getNewValue() instanceof PlayerDTO.SetSpellIDSeleccionado)
-        {
-            String spellID = ((PlayerDTO.SetSpellIDSeleccionado) evt.getNewValue()).spellID;
-            setSpellIDSeleccionado(spellID);
-        }
-
-        if (evt.getNewValue() instanceof PlayerDTO.SetParametrosSpell)
-        {   setParametrosSpell(); }
     }
 }

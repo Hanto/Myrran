@@ -24,22 +24,19 @@ public class Servidor extends Server
         //Para activar el log completo de mensajes:
         //Log.TRACE();
 
-        //synchronized (this.controlador.getMundo())
-        //{
+        synchronized (this.controlador.getMundo())
+        {
 
             this.addListener
-                (new Listener.QueuedListener
+                (new Listener.ThreadedListener
                     (new Listener()
                     {
                         public void connected (Connection con)              { Servidor.this.controlador.añadirPC(con.getID()); }
                         public void disconnected (Connection con)           { Servidor.this.controlador.eliminarPC(con.getID()); }
                         public void received (Connection con, Object obj)   { procesarMensajeCliente(con, obj); }
-                    })
-                {
-                    @Override protected void queue(Runnable runnable)
-                    {   Servidor.this.controlador.postRunnable(runnable); }
-                });
-        //}
+                    }));
+
+        }
 
 
         try { this.bind(NetDTO.puertoTCP, NetDTO.puertoUDP); }

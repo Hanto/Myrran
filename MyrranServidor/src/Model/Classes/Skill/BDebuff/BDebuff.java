@@ -7,9 +7,9 @@ import Core.Skills.SkillStat;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.BDebuff.TipoBDebuffI;
-import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Model.AbstractModel;
 
 import java.util.Arrays;
@@ -71,7 +71,7 @@ public class BDebuff extends AbstractModel implements BDebuffI
     public BDebuff (String tipoBDebuffID)
     {   this(DAO.tipoBDebuffDAOFactory.getTipoBDebuffDAO().getTipoBDebuff(tipoBDebuffID)); }
 
-    private AuraI auraExisteYEsDelCaster(Caster caster, Debuffeable target)
+    private AuraI auraExisteYEsDelCaster(Caster Caster, Debuffeable target)
     {
         AuraI aura;
         Iterator<AuraI> iterator = target.getAuras();
@@ -79,22 +79,22 @@ public class BDebuff extends AbstractModel implements BDebuffI
         while (iterator.hasNext())
         {
             aura = iterator.next();
-            if (aura.getDebuff().getID().equals(id) && aura.getCaster() == caster)
+            if (aura.getDebuff().getID().equals(id) && aura.getCaster() == Caster)
             {   return aura; }
         }
         return null;
     }
 
-    @Override public float getValorTotal(Caster caster, int statID)
+    @Override public float getValorTotal(Caster Caster, int statID)
     {
-        if (caster instanceof CasterConTalentos)
-        {   return ((CasterConTalentos)caster).getSkillPersonalizado(id).getValorTotal(statID); }
+        if (Caster instanceof CasterPersonalizable)
+        {   return ((CasterPersonalizable) Caster).getSkillPersonalizado(id).getValorTotal(statID); }
         else return getSkillStat(statID).getValorBase();
     }
 
-    @Override public void aplicarDebuff(Caster caster, Debuffeable target)
+    @Override public void aplicarDebuff(Caster Caster, Debuffeable target)
     {
-        AuraI aura = auraExisteYEsDelCaster(caster, target);
+        AuraI aura = auraExisteYEsDelCaster(Caster, target);
 
         if (aura != null)
         {
@@ -104,8 +104,8 @@ public class BDebuff extends AbstractModel implements BDebuffI
         }
         else
         {
-            aura = new Aura(this, caster, target);
-            aura.setDuracionMax(getValorTotal(caster, STAT_Duracion));
+            aura = new Aura(this, Caster, target);
+            aura.setDuracionMax(getValorTotal(Caster, STAT_Duracion));
             target.añadirAura(aura);
         }
     }

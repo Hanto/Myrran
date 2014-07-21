@@ -69,11 +69,9 @@ public class Mundo extends AbstractModel
     public void actualizarFisica(float delta)
     {
         //Salvamos los ultimos valores para poder interpolarlos
-        player.getObjetoDinamico().copiarUltimosDatos();
+        player.copiarUltimaPosicion();
         //calculamos los nuevos:
         world.step(delta, 8, 6);
-        //salvamos cada posicion Calculada:
-        player.getObjetoDinamico().copiarHistorialPosiciones();
     }
 
     public void actualizarUnidades(float delta)
@@ -86,11 +84,10 @@ public class Mundo extends AbstractModel
         {   pc.actualizar(delta); }
     }
 
-
-    public void interpolacionEspacial(float alpha)
+    public void interpolarPosicion(float alpha)
     {
         //Interpolamos las posiciones y angulos con el resto del TimeStep:
-        player.interpolacionEspacial(alpha);
+        player.interpolarPosicion(alpha);
     }
 
 

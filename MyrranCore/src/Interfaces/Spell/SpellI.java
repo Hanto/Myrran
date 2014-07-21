@@ -2,8 +2,8 @@ package Interfaces.Spell;// Created by Hanto on 09/06/2014.
 
 import Core.Skills.SkillStat;
 import Interfaces.BDebuff.BDebuffI;
-import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Skill.SkillI;
 
 import java.util.Iterator;
@@ -21,7 +21,7 @@ public interface SpellI extends SkillI
     public String getNombre ();
     public String getDescripcion ();
     public TipoSpellI getTipoSpell();
-    public float getValorTotal(Caster caster, int statID);
+    public float getValorTotal(Caster Caster, int statID);
     public SkillStat getSkillStat(int statID);
     public Iterator<SkillStat> getSkillStats();
     public Iterator<BDebuffI> getDebuffsQueAplica();
@@ -32,6 +32,6 @@ public interface SpellI extends SkillI
     //METODOS:
     public void añadirDebuff (BDebuffI debuff);
     public void añadirDebuff (String debuffID);
-    public void castear (Caster caster, int targetX, int targetY);
-    public void aplicarDebuffs (Caster caster, Debuffeable target);
+    public void castear (Caster Caster, int targetX, int targetY);
+    public void aplicarDebuffs (Caster Caster, Debuffeable target);
 }

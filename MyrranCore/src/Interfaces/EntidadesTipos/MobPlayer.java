@@ -4,5 +4,5 @@ import Interfaces.Input.PlayerIOI;
 
 public interface MobPlayer extends MobPC
 {
-    public void setInput (PlayerIOI playerInput);
+    public PlayerIOI getInput ();
 }

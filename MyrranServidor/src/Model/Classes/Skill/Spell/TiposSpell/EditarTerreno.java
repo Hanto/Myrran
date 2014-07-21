@@ -16,7 +16,7 @@ public class EditarTerreno extends TipoSpell
         setNumSkillStats(1);
     }
 
-    @Override public void ejecutarCasteo(SpellI skill, Caster caster, int targetX, int targetY)
+    @Override public void ejecutarCasteo(SpellI skill, Caster Caster, int targetX, int targetY)
     {
         int tileX = (targetX / Settings.TILESIZE);
         int tileY = (targetY / Settings.TILESIZE);
@@ -24,12 +24,12 @@ public class EditarTerreno extends TipoSpell
         int numCapa = 0;
         short iDTerreno = 0;
 
-        if (caster.getParametrosSpell() instanceof ParametrosEditarTerreno)
+        if (Caster.getParametrosSpell() instanceof ParametrosEditarTerreno)
         {
-            numCapa = ((ParametrosEditarTerreno) caster.getParametrosSpell()).capaTerrenoSeleccionada;
-            iDTerreno = ((ParametrosEditarTerreno) caster.getParametrosSpell()).terrenoIDSeleccionado;
+            numCapa = ((ParametrosEditarTerreno) Caster.getParametrosSpell()).capaTerrenoSeleccionada;
+            iDTerreno = ((ParametrosEditarTerreno) Caster.getParametrosSpell()).terrenoIDSeleccionado;
         }
 
-        caster.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);
+        Caster.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);
     }
 }

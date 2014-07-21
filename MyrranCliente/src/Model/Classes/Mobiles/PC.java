@@ -1,15 +1,15 @@
 package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
+import Core.Cuerpos.BodyFactory;
 import DTO.NetDTO;
-import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Model.AbstractModel;
-import Core.Cuerpos.BodyFactory;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 
 import static Data.Settings.PIXEL_METROS;
 
-public class PC extends AbstractModel implements Vulnerable, MobPC
+public class PC extends AbstractModel implements MobPC
 {
     protected Integer connectionID;
     //Posicion:
@@ -38,13 +38,15 @@ public class PC extends AbstractModel implements Vulnerable, MobPC
     @Override public int getNivel()                             { return 0; }
     @Override public float getVelocidadMod()                    { return 0; }
     @Override public float getVelocidadMax()                    { return 0; }
-    @Override public double getDireccion()                      { return 0; }
     @Override public void setConnectionID (int connectionID)    { this.connectionID = connectionID; }
     @Override public void setNombre (String nombre)             {}
     @Override public void setNivel (int nivel)                  {}
     @Override public void setVelocidaMod(float velocidadMod)    {}
     @Override public void setVelocidadMax(float velocidadMax)   {}
-    @Override public void setDireccion(double direccion)        {}
+    @Override public void setDireccion(float x, float y)        {}
+    @Override public void setDireccion(float grados)            {}
+    @Override public void setVectorDireccion(float x, float y)  {}
+
     public void setTimestamp(int timestamp)                     {}
 
     //Constructor:

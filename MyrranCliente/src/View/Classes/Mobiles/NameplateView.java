@@ -20,7 +20,7 @@ public class NameplateView extends Actor implements PropertyChangeListener
 {
     //Model:
     protected Vulnerable vulnerable;
-    protected Caster caster;
+    protected Caster Caster;
     protected ModelI model;
 
     protected boolean isCaster = false;
@@ -42,21 +42,21 @@ public class NameplateView extends Actor implements PropertyChangeListener
 
         if (vulnerable instanceof Caster)
         {
-            this.caster = (Caster)vulnerable;
+            this.Caster = (Caster)vulnerable;
             this.isCaster = true;
         }
         crearActor();
     }
 
-    public NameplateView(Caster caster)
+    public NameplateView(Caster Caster)
     {
-        this.model = caster;
-        this.caster = caster;
+        this.model = Caster;
+        this.Caster = Caster;
         this.isCaster = true;
 
-        if (caster instanceof Vulnerable)
+        if (Caster instanceof Vulnerable)
         {
-            this.vulnerable = (Vulnerable)caster;
+            this.vulnerable = (Vulnerable) Caster;
             this.isVulnerable = true;
         }
         crearActor();

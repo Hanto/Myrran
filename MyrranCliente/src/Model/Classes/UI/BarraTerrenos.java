@@ -15,7 +15,7 @@ import static DTO.ParametrosSpellDTO.ParametrosEditarTerreno;
 public class BarraTerrenos extends AbstractModel
 {
     private Array<Short>barraTerrenos = new Array<>();
-    private Caster caster;
+    private Caster Caster;
 
     private short parametroTerrenoID = 0;
     private int parametroNumCapa = 0;
@@ -26,7 +26,7 @@ public class BarraTerrenos extends AbstractModel
     public BarraTerrenos (Caster player)
     {
         crearBarraTerrenos();
-        this.caster = player;
+        this.Caster = player;
     }
 
     public void crearBarraTerrenos()
@@ -66,7 +66,7 @@ public class BarraTerrenos extends AbstractModel
             ParametrosEditarTerreno editarTerreno = new ParametrosEditarTerreno(parametroNumCapa, terrenoID);
             parametroTerrenoID = terrenoID;
             //editarTerreno.terrenoIDSeleccionado = terrenoID;
-            caster.setParametrosSpell(editarTerreno);
+            Caster.setParametrosSpell(editarTerreno);
         }
     }
 
@@ -78,7 +78,7 @@ public class BarraTerrenos extends AbstractModel
             ParametrosEditarTerreno editarTerreno = new ParametrosEditarTerreno(numCapa, parametroTerrenoID);
             parametroNumCapa = numCapa;
             //editarTerreno.capaTerrenoSeleccionada = numCapa;
-            caster.setParametrosSpell(editarTerreno);
+            Caster.setParametrosSpell(editarTerreno);
         }
     }
 }

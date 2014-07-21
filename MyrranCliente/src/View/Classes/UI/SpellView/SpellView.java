@@ -3,7 +3,7 @@ package View.Classes.UI.SpellView;// Created by Hanto on 19/06/2014.
 import DB.RSC;
 import DTO.NetDTO;
 import Data.Settings;
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
 import Interfaces.UI.BarraAcciones.ControladorSpellTooltipI;
@@ -29,7 +29,7 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
 {
     //Model:
     private SpellPersonalizadoI spell;
-    private CasterConTalentos caster;
+    private CasterPersonalizable caster;
     private ControladorSpellTooltipI controlador;
 
     //View:
@@ -43,7 +43,7 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
     private final int ANCHO_Descripcion = 80;
     private int textoSobresalePorArriba;
 
-    public SpellView(String spellID, CasterConTalentos caster, ControladorSpellTooltipI controlador)
+    public SpellView(String spellID, CasterPersonalizable caster, ControladorSpellTooltipI controlador)
     {
         this.caster = caster;
         this.controlador = controlador;

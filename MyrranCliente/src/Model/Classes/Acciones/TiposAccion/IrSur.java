@@ -3,7 +3,6 @@ package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 13/05/2014.
 import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.EntidadesTipos.MobPlayer;
 import Interfaces.UI.ControladorUI;
-import Interfaces.Input.PlayerEstadoI;
 import Model.Classes.Acciones.Accion;
 
 public class IrSur extends Accion
@@ -11,19 +10,9 @@ public class IrSur extends Accion
     public IrSur()
     {   iD = getClass().getSimpleName(); }
 
-    @Override public void accionKeyDown(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador)
-    {   playerE.getPlayerI().setIrAbajo(true);
-        playerE.procesarInput();
-        player.setInput(playerE.getPlayerO());
+    @Override public void accionKeyDown(MobPlayer player, ControladorUI controlador)
+    {   ((Maquinable)player).getInput().setIrAbajo(true); }
 
-        ((Maquinable)player).getInput().setIrAbajo(true);
-    }
-
-    @Override public void accionKeyUp(MobPlayer player, PlayerEstadoI playerE, ControladorUI controlador)
-    {   playerE.getPlayerI().setIrAbajo(false);
-        playerE.procesarInput();
-        player.setInput(playerE.getPlayerO());
-
-        ((Maquinable)player).getInput().setIrAbajo(false);
-    }
+    @Override public void accionKeyUp(MobPlayer player, ControladorUI controlador)
+    {   ((Maquinable)player).getInput().setIrAbajo(false); }
 }

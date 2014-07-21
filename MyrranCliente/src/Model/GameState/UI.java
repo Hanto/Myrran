@@ -6,8 +6,6 @@ import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.Classes.Input.InputManager;
-import Model.Classes.Input.PlayerEstado;
-import Core.FSM.IO.PlayerIO;
 import Model.Classes.Mobiles.Player;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
@@ -16,10 +14,6 @@ import Model.Classes.UI.ConjuntoBarraAcciones;
 public class UI
 {
     protected InputManager inputManager;
-    protected PlayerIO playerInput = new PlayerIO();
-    protected PlayerIO playerOutput = new PlayerIO();
-    protected PlayerEstado playerEstado = new PlayerEstado(playerInput, playerOutput);
-
     public ConjuntoBarraAcciones conjuntoBarraAcciones;
     public BarraTerrenos barraTerrenos;
 
@@ -28,7 +22,7 @@ public class UI
 
     public UI (Player player, Controlador controlador)
     {
-        inputManager = new InputManager(player, playerEstado, controlador);
+        inputManager = new InputManager(player, controlador);
         conjuntoBarraAcciones = new ConjuntoBarraAcciones(player, inputManager);
         barraTerrenos  = new BarraTerrenos(player);
 

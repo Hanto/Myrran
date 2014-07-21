@@ -40,5 +40,5 @@ public abstract class TipoSpell extends AbstractModel implements TipoSpellI
         inicializarSkillStats();
     }
 
-    @Override public void ejecutarCasteo(SpellI spell, Caster caster, int targetX, int targetY) {}
+    @Override public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY) {}
 }

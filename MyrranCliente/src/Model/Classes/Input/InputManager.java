@@ -15,7 +15,6 @@ public class InputManager implements InputProcessor, GestureListener
 {
     //Model:
     private Player player;
-    private PlayerEstado playerE;
     private Controlador controlador;
 
     //Datos:
@@ -23,10 +22,9 @@ public class InputManager implements InputProcessor, GestureListener
     private Map<String, AccionI> listaDeAcciones = new HashMap<>();
 
     //Constructor:
-    public InputManager(Player player, PlayerEstado playerE, Controlador controlador)
+    public InputManager(Player player, Controlador controlador)
     {
         this.player = player;
-        this.playerE = playerE;
         this.controlador = controlador;
     }
 
@@ -55,7 +53,7 @@ public class InputManager implements InputProcessor, GestureListener
         {
             String idAccion = listaDeBinds.get(keycode);
             AccionI accion = listaDeAcciones.get(idAccion);
-            if (accion != null) accion.accionKeyDown(player, playerE, controlador);
+            if (accion != null) accion.accionKeyDown(player, controlador);
         }
         return false;
     }
@@ -66,20 +64,13 @@ public class InputManager implements InputProcessor, GestureListener
         {
             String idAccion = listaDeBinds.get(keycode);
             AccionI accion = listaDeAcciones.get(idAccion);
-            if (accion != null) accion.accionKeyUp(player, playerE, controlador);
+            if (accion != null) accion.accionKeyUp(player, controlador);
         }
         return false;
     }
 
     @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        playerE.getPlayerI().setScreenX(screenX);
-        playerE.getPlayerI().setScreenY(screenY);
-        playerE.getPlayerI().setStartCastear(true);
-        playerE.getPlayerI().setStopCastear(false);
-        playerE.procesarInput();
-        player.setInput(playerE.getPlayerO());
-
         ((Maquinable)player).getInput().setScreenX(screenX);
         ((Maquinable)player).getInput().setScreenY(screenY);
         ((Maquinable)player).getInput().setStartCastear(true);
@@ -89,13 +80,6 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
-        playerE.getPlayerI().setScreenX(screenX);
-        playerE.getPlayerI().setScreenY(screenY);
-        playerE.getPlayerI().setStopCastear(true);
-        playerE.getPlayerI().setStartCastear(false);
-        playerE.procesarInput();
-        player.setInput(playerE.getPlayerO());
-
         ((Maquinable)player).getInput().setScreenX(screenX);
         ((Maquinable)player).getInput().setScreenY(screenY);
         ((Maquinable)player).getInput().setStartCastear(false);
@@ -105,13 +89,6 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean touchDragged(int screenX, int screenY, int pointer)
     {
-        playerE.getPlayerI().setScreenX(screenX);
-        playerE.getPlayerI().setScreenY(screenY);
-        playerE.getPlayerI().setStartCastear(true);
-        playerE.getPlayerI().setStopCastear(false);
-        playerE.procesarInput();
-        player.setInput(playerE.getPlayerO());
-
         ((Maquinable)player).getInput().setScreenX(screenX);
         ((Maquinable)player).getInput().setScreenY(screenY);
         ((Maquinable)player).getInput().setStartCastear(true);

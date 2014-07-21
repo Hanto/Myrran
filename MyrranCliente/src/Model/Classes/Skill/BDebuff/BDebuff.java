@@ -6,9 +6,9 @@ import DB.DAO;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.BDebuff.TipoBDebuffI;
-import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Model.AbstractModel;
 
 import java.util.Arrays;
@@ -69,17 +69,17 @@ public class BDebuff extends AbstractModel implements BDebuffI
     public BDebuff (String tipoBDebuffID)
     {   this(DAO.tipoBDebuffDAOFactory.getTipoBDebuffDAO().getTipoBDebuff(tipoBDebuffID)); }
 
-    @Override public float getValorTotal(Caster caster, int statID)
+    @Override public float getValorTotal(Caster Caster, int statID)
     {
-        if (caster instanceof CasterConTalentos)
-        {   return ((CasterConTalentos)caster).getSkillPersonalizado(id).getValorTotal(statID); }
+        if (Caster instanceof CasterPersonalizable)
+        {   return ((CasterPersonalizable) Caster).getSkillPersonalizado(id).getValorTotal(statID); }
         else return getSkillStat(statID).getValorBase();
     }
 
-    @Override public void aplicarDebuff(Caster caster, Debuffeable target)
+    @Override public void aplicarDebuff(Caster Caster, Debuffeable target)
     {
-        AuraI aura = new Aura(this, caster, target);
-        aura.setDuracionMax(getValorTotal(caster, STAT_Duracion));
+        AuraI aura = new Aura(this, Caster, target);
+        aura.setDuracionMax(getValorTotal(Caster, STAT_Duracion));
         target.añadirAura(aura);
     }
 

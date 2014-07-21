@@ -12,7 +12,7 @@ public interface SkillI extends ModelI
     public void setNombre (String nombre);
     public void setDescripcion (String descripcion);
 
-    public float getValorTotal(Caster caster, int statID);
+    public float getValorTotal(Caster Caster, int statID);
     public String getID();
     public String getNombre ();
     public String getDescripcion ();

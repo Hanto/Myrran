@@ -1,6 +1,6 @@
 package Model.Classes.UI;// Created by Hanto on 06/05/2014.
 
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
@@ -13,7 +13,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
 {
     private int iD;
     private Array<Array<Casilla>> barraAcciones = new Array<>();
-    private CasterConTalentos caster;
+    private CasterPersonalizable caster;
 
     private InputManager inputManager;
 
@@ -25,10 +25,10 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     @Override public int getNumFilas()                          { return barraAcciones.size; }
     @Override public int getNumColumnas()                       { return (barraAcciones.size == 0) ? 0 : barraAcciones.first().size; }
     @Override public CasillaI getCasilla(int posX, int posY)    { return barraAcciones.get(posY).get(posX); }
-    @Override public CasterConTalentos getCaster()              { return caster; }
+    @Override public CasterPersonalizable getCaster()              { return caster; }
 
     //CONSTRUCTOR:
-    public BarraAcciones(CasterConTalentos caster, InputManager inputManager, int id, int numFilas, int numColumnas)
+    public BarraAcciones(CasterPersonalizable caster, InputManager inputManager, int id, int numFilas, int numColumnas)
     {
         this.caster = caster;
         this.inputManager = inputManager;

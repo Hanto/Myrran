@@ -15,7 +15,6 @@ public interface Caster extends ModelI
     public Object getParametrosSpell();
 
     //SET:
-    public void setCastear(boolean castear, int targetX, int targetY);
     public void setTotalCastingTime(float castingTime);
     public void setSpellIDSeleccionado(String spellID);
     public void setParametrosSpell (Object parametrosDTO);

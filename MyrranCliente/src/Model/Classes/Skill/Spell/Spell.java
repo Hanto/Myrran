@@ -4,9 +4,9 @@ package Model.Classes.Skill.Spell;
 import Core.Skills.SkillStat;
 import DB.DAO;
 import Interfaces.BDebuff.BDebuffI;
-import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.CasterConTalentos;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillI;
 import Interfaces.Spell.SpellI;
@@ -97,21 +97,21 @@ public class Spell extends AbstractModel implements SpellI
     @Override public void añadirDebuff (String debuffID)
     {   añadirDebuff(DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(debuffID)); }
 
-    @Override public void aplicarDebuffs (Caster caster, Debuffeable target) {}
+    @Override public void aplicarDebuffs (Caster Caster, Debuffeable target) {}
 
-    @Override public float getValorTotal(Caster caster, int statID)
+    @Override public float getValorTotal(Caster Caster, int statID)
     {
-        if (caster instanceof CasterConTalentos)
-        {   return ((CasterConTalentos)caster).getSkillPersonalizado(id).getValorTotal(statID); }
+        if (Caster instanceof CasterPersonalizable)
+        {   return ((CasterPersonalizable) Caster).getSkillPersonalizado(id).getValorTotal(statID); }
         else return getSkillStat(statID).getValorBase();
     }
 
-    @Override public void castear (Caster caster, int targetX, int targetY)
+    @Override public void castear (Caster Caster, int targetX, int targetY)
     {
-        if (caster.isCasteando()) { }
+        if (Caster.isCasteando()) { }
         else 
         {   //Marcamos al personaje como Casteando, y actualizamos su tiempo de casteo con el que marque el Spell (Stat Slot 0)
-            caster.setTotalCastingTime(getValorTotal(caster, STAT_Cast));
+            Caster.setTotalCastingTime(getValorTotal(Caster, STAT_Cast));
         }
     }
 }

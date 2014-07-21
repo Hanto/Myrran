@@ -1,24 +1,10 @@
 package Interfaces.EntidadesTipos;// Created by Ladrim on 18/04/2014.
 
+import Interfaces.EntidadesPropiedades.Dinamico;
+import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.Model.ModelI;
 
-public interface Mob extends ModelI
+public interface Mob extends ModelI, Espacial, Dinamico
 {
-    //GET:
-    public int getTimestamp();
-    public float getX();
-    public float getY();
-    public float getVelocidadMod();
-    public float getVelocidadMax();
-    public double getDireccion();
 
-    public int getNumAnimacion();
-    public void setNumAnimacion(int numAnimacion);
-
-    //SET:
-    public void setTimestamp(int timestap);
-    public void setPosition(float x, float y);
-    public void setVelocidaMod(float velocidadMod);
-    public void setVelocidadMax(float velocidadMax);
-    public void setDireccion(double direccion);
 }

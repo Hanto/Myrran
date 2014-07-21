@@ -76,20 +76,19 @@ public class PantallaLibGDX implements Screen
         currentTime = newTime;
 
         total += deltaTime;
-
         timeStep += deltaTime;
 
         while (timeStep >= 30)
         {
             timeStep -= 30;
-            mundo.actualizarFisica(FIXED_TimeStep);
             mundo.actualizarUnidades(FIXED_TimeStep);
+            mundo.actualizarFisica(FIXED_TimeStep);
 
             contador++;
             media = total/contador;
-            System.out.println(media);
+            //System.out.println(media);
         }
-        mundo.interpolacionEspacial((float)timeStep/30f);
+        mundo.interpolarPosicion((float) timeStep / 30f);
 
         controlador.render(delta);
     }
@@ -105,7 +104,6 @@ public class PantallaLibGDX implements Screen
     @Override public void resume()
     {   logger.trace("RESUME (Pantalla reanudada):"); }
 
-    //El metodo Hide se ejecuta al cerrar la pantalla
     @Override public void hide()
     {   //Despues de cerrar la pantalla es neccesario liberar la memoria de todas las texturas que hayamos usado, por eso llamamos al metodo Dispose
         logger.trace("HIDE (Cerrando pantalla):");

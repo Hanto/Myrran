@@ -1,7 +1,7 @@
 package Interfaces.BDebuff;// Created by Hanto on 09/06/2014.
 
-import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.EntidadesPropiedades.Caster;
 
 public interface AuraI
 {    //SET:
@@ -18,7 +18,7 @@ public interface AuraI
     public void setTicksAplicados(byte b);
     public void setDuracion(float f);
     public void setDuracionMax(float f);
-    public void setCaster(Caster caster);
+    public void setCaster(Caster Caster);
     public void setTarget(Debuffeable target);
     public void setDebuff(BDebuffI debuff);
 
