@@ -52,9 +52,9 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
 
     protected boolean castearInterrumpible = false;
     protected String spellIDSeleccionado;
+    protected Object parametrosSpell;
     protected float actualCastingTime = 0.0f;
     protected float totalCastingTime = 0.0f;
-    protected Object parametrosSpell;
 
     protected Array<AuraI> listaDeAuras = new Array<>();
     protected Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
@@ -137,7 +137,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         }
     }
 
-    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+    public void setNumTalentosSkillPersonalizadoFromServer(String skillID, int statID, int valor)
     {
         SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
         if (skillPersonalizado == null) { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
@@ -187,6 +187,12 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
 
     //ENVIO DATOS:
     //-------------------------------------------------------------------------------------------------------------------
+
+
+    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+    {   //Servidor:
+        netPlayer.setNumTalentosSkillPersonalizado(skillID, statID, valor);
+    }
 
     @Override public void setNumAnimacion(int numAnimacion)
     {
@@ -303,12 +309,6 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         setSpellIDSeleccionado(output.getSpellID());
         if (output.getStartCastear()) startCastear();
         else if (output.getStopCastear()) stopCastear();
-    }
-
-    public void enviarComandosAServidor()
-    {
-        if (mundo.getCliente() != null)
-            mundo.getCliente().enviarAServidor(input);
     }
 
     public void copiarUltimaPosicion()

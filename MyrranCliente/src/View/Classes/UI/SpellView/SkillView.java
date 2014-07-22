@@ -3,8 +3,8 @@ package View.Classes.UI.SpellView;// Created by Hanto on 27/06/2014.
 import DB.RSC;
 import DTO.NetDTO;
 import Data.Settings;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Skill.SkillPersonalizadoI;
-import Interfaces.UI.BarraAcciones.ControladorSpellTooltipI;
 import View.Classes.Actores.Texto;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -20,7 +20,7 @@ public class SkillView implements PropertyChangeListener, Disposable
 {
     //Model:
     private SkillPersonalizadoI skill;
-    private ControladorSpellTooltipI controlador;
+    private CasterPersonalizable caster;
 
     private static class SkillStatsView
     {
@@ -58,10 +58,10 @@ public class SkillView implements PropertyChangeListener, Disposable
     public void setBonoTalentos(int statID, Texto bonoTalento)                  { skillStat[statID].bonoTalento = bonoTalento; }
     public void setMaxTalentos(int statID, Texto maxTalentos)                   { skillStat[statID].maxTalentos = maxTalentos; }
 
-    public SkillView (SkillPersonalizadoI skill, ControladorSpellTooltipI controlador)
+    public SkillView (SkillPersonalizadoI skill, CasterPersonalizable caster)
     {
         this.skill = skill;
-        this.controlador = controlador;
+        this.caster = caster;
 
         skillStat = new SkillStatsView[skill.getNumSkillStats()];
         for (int i=0; i<skill.getNumSkillStats(); i++) skillStat[i] = new SkillStatsView();
@@ -107,7 +107,7 @@ public class SkillView implements PropertyChangeListener, Disposable
             setValorBase(statID, texto);
 
             //CASILLERO
-            setCasilleroTalentos(statID, new CasilleroTalentos(controlador, skill.getID(), statID, skill.getNumTalentos(statID)));
+            setCasilleroTalentos(statID, new CasilleroTalentos(caster, skill.getID(), statID, skill.getNumTalentos(statID)));
 
             //VALOR TOTAL: (redondeamos a 2 decimales maximo)
             texto = new Texto(df.format(skill.getValorTotal(statID)),

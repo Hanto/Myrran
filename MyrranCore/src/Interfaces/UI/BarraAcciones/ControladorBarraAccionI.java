@@ -3,7 +3,7 @@ package Interfaces.UI.BarraAcciones;// Created by Hanto on 14/05/2014.
 
 import Interfaces.UI.Acciones.CasillaI;
 
-public interface ControladorBarraAccionI extends ControladorSpellTooltipI
+public interface ControladorBarraAccionI
 {
     public void añadirBarraAcciones(int filas, int columnas);
     public void eliminarBarraAcciones(BarraAccionesI barra);

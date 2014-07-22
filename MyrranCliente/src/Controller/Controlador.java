@@ -1,6 +1,7 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
 import DTO.NetDTO;
+import DTO.NetPlayer.LogIn;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.ControladorUI;
@@ -23,7 +24,6 @@ public class Controlador implements ControladorUI
 
     //Input:
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
-
     public Cliente getCliente()                 { return cliente; }
 
     public Controlador (Mundo mundo)
@@ -31,7 +31,6 @@ public class Controlador implements ControladorUI
         this.cliente = new Cliente(this);
         this.mundo = mundo;
         añadirPlayer(cliente.getID());
-        mundo.setCliente(cliente);
 
         ui = new UI(mundo.getPlayer(), this);
         vista = new Vista(this, ui, mundo);
@@ -58,7 +57,7 @@ public class Controlador implements ControladorUI
         ui.crearCasilla(0, 2, 2, "IrEste", 32);
         ui.crearCasilla(0, 0, 2, "IrOeste", 29);
 
-        mundo.getPlayer().getNetPlayer().setLogin(true);
+        enviarAServidor(new LogIn());
         //moverPPC(mundo.getPlayer().getConnectionID(), 21000, 20000);
     }
 
@@ -96,7 +95,7 @@ public class Controlador implements ControladorUI
     }
     public void modificarnumTalentosSkillPersonalizadoCC(int connectionID, String skillID, int statID, int valor)
     {
-        if (connectionID == mundo.getPlayer().getConnectionID()) { mundo.getPlayer().setNumTalentosSkillPersonalizado(skillID, statID, valor);}
+        if (connectionID == mundo.getPlayer().getConnectionID()) { mundo.getPlayer().setNumTalentosSkillPersonalizadoFromServer(skillID, statID, valor);}
     }
     public void añadirSkillPersonalizadoPPC(int connectionID, String spellID)
     {
@@ -157,23 +156,4 @@ public class Controlador implements ControladorUI
     @Override public void barraEliminarColumna (BarraAccionesI barra, int numColumnas)  { barra.eliminarColumna(numColumnas); }
     @Override public void barraAccionMoverAccion(CasillaI origen, CasillaI destino)     { ui.moverAccion(origen, destino); }
     @Override public void barraAccionRebindear(CasillaI casilla, int keycode)           { ui.rebindearCasilla(casilla, keycode); }
-
-    //SpellTooltip:
-    @Override public void decrementarSkillTalento(String skillID, int statID)
-    {
-        int valor = mundo.getPlayer().getSkillPersonalizado(skillID).getNumTalentos(statID) -1;
-        Object enviarModificarSkillTalento = new NetDTO.ModificarNumTalentosSkillPersonalizadoPPC(skillID, statID, valor);
-        enviarAServidor(enviarModificarSkillTalento);
-    }
-    @Override public void aumentarSkillTalento(String skillID, int statID)
-    {
-        int valor = mundo.getPlayer().getSkillPersonalizado(skillID).getNumTalentos(statID) +1;
-        Object enviarModificarSkillTalento = new NetDTO.ModificarNumTalentosSkillPersonalizadoPPC(skillID, statID, valor);
-        enviarAServidor(enviarModificarSkillTalento);
-    }
-    @Override public void setSkillTalento(String skillID, int statID, int valor)
-    {
-        Object enviarModificarSkillTalento = new NetDTO.ModificarNumTalentosSkillPersonalizadoPPC(skillID, statID, valor);
-        enviarAServidor(enviarModificarSkillTalento);
-    }
 }

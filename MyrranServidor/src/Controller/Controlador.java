@@ -1,7 +1,6 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
 import Controller.Inputs.ControlaPC;
-import Core.FSM.IO.PlayerIO;
 import Model.GameState.Mundo;
 import View.Vista;
 
@@ -32,12 +31,6 @@ public class Controlador
 
     public void eliminarPC (int connectionID)
     {   mundo.eliminarPC(connectionID); }
-
-    public void modificarSkillTalentoPC(int connectionID, String skillID, int statID, int valor)
-    {   mundo.getPC(connectionID).setNumTalentosSkillPersonalizado(skillID, statID, valor);}
-
-    public void aplicarInputPC(int connectionID, PlayerIO input)
-    {   mundo.getPC(connectionID).aplicarInput(input); }
 
     public void postRunnable(Runnable runnable)
     {   updater.postRunnable(runnable); }

@@ -1,33 +1,86 @@
 package DTO;// Created by Hanto on 21/07/2014.
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.badlogic.gdx.utils.ObjectMap;
 
 public class NetPlayer
 {
-    private int connectionID;
-    private boolean logIn = false;
-    private ArrayList<Object> listaDTOs = new ArrayList<>();
+    private Animacion animacion = new Animacion();
+    private Posicion posicion = new Posicion();
+    private ParametrosSpell parametrosSpell = new ParametrosSpell();
+    private SpellSeleccionado spellSeleccionado = new SpellSeleccionado();
+    private StopCastear stopCastear = new StopCastear();
+    private StartCastear startCastear = new StartCastear();
+    private NumTalentosSkillPersonalizado numTalentosSkillPersonalizado = new NumTalentosSkillPersonalizado();
+    private ObjectMap<Class, Object> listaDTOs = new ObjectMap<>();
 
-    public int getConnectionID()            { return connectionID; }
-    public boolean isLogIn()                { return logIn; }
-    public Iterator<Object>getListaDTOs()   { return listaDTOs.iterator(); }
-    public boolean contieneDatos()          { return (!listaDTOs.isEmpty() || logIn); }
+    private DTOs dtos = new DTOs();
+    public static class DTOs
+    {   public Object[] listaDTOs; }
 
-    public void setConnectionID(int conID)  { connectionID = conID; }
-    public void clear()                     { listaDTOs.clear(); logIn = false; }
+    public boolean contieneDatos()          { return (listaDTOs.size >0); }
 
-
-
-    public void setLogin(boolean login)
-    {   this.logIn = login; }
-
+    public DTOs getDTOs()
+    {
+        dtos.listaDTOs = new Object[listaDTOs.size];
+        ObjectMap.Values values = listaDTOs.values();
+        int i=0;
+        while (values.hasNext())
+        {   dtos.listaDTOs[i] = values.next(); i++; }
+        listaDTOs.clear();
+        return dtos;
+    }
 
     public void setNumAnimacion(int numAnimacion)
     {
-        Animacion animacion = new Animacion(numAnimacion);
-        listaDTOs.add(animacion);
+        animacion.animacion = numAnimacion;
+        listaDTOs.put(Animacion.class, animacion);
     }
+
+    public void setPosition(float x, float y)
+    {
+        posicion.posX = (int)x;
+        posicion.posY = (int)y;
+        listaDTOs.put(Posicion.class, posicion);
+    }
+
+    public void setParametrosSpell(Object parametros)
+    {
+        parametrosSpell.parametros = parametros;
+        listaDTOs.put(ParametrosSpell.class, parametrosSpell);
+    }
+
+    public void setSpellIDSeleccionado(String spellID, Object parametrosSpell)
+    {
+        spellSeleccionado.spellIDSeleccionado = spellID;
+        spellSeleccionado.parametrosSpell = parametrosSpell;
+        listaDTOs.put(SpellSeleccionado.class, spellSeleccionado);
+    }
+
+    public void setStopCastear(int screenX, int screenY)
+    {
+        stopCastear.screenX = screenX;
+        stopCastear.screenY = screenY;
+        listaDTOs.put(StopCastear.class, stopCastear);
+    }
+
+    public void setStartCastear(int screenX, int screenY)
+    {
+        startCastear.screenX = screenX;
+        startCastear.screenY = screenY;
+        listaDTOs.put(StartCastear.class, startCastear);
+    }
+
+    public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+    {
+        numTalentosSkillPersonalizado.skillID = skillID;
+        numTalentosSkillPersonalizado.statID = statID;
+        numTalentosSkillPersonalizado.valor = valor;
+        listaDTOs.put(NumTalentosSkillPersonalizado.class, numTalentosSkillPersonalizado);
+    }
+
+    public static class LogIn
+    {   public LogIn() {} }
+
     public static class Animacion
     {
         public int animacion;
@@ -36,11 +89,6 @@ public class NetPlayer
         {   this.animacion = animacion; }
     }
 
-    public void setPosition(float x, float y)
-    {
-        Posicion posicion = new Posicion((int)x, (int)y);
-        listaDTOs.add(posicion);
-    }
     public static class Posicion
     {
         public int posX;
@@ -50,24 +98,14 @@ public class NetPlayer
         {   this.posX = x; this.posY = y; }
     }
 
-    public void setParametrosSpell(Object parametros)
-    {
-        ParametrosSpell parametrosSpell = new ParametrosSpell(parametros);
-        listaDTOs.add(parametrosSpell);
-    }
     public static class ParametrosSpell
     {
-        public Object parametrosSpell;
+        public Object parametros;
         public ParametrosSpell() {}
-        public ParametrosSpell(Object parametrosSpell)
-        {   this.parametrosSpell = parametrosSpell; }
+        public ParametrosSpell(Object parametros)
+        {   this.parametros = parametros; }
     }
 
-    public void setSpellIDSeleccionado(String spellID, Object parametrosSpell)
-    {
-        SpellSeleccionado spellIDSeleccionado = new SpellSeleccionado(spellID, parametrosSpell);
-        listaDTOs.add(spellIDSeleccionado);
-    }
     public static class SpellSeleccionado
     {
         public Object parametrosSpell;
@@ -77,11 +115,6 @@ public class NetPlayer
         {   this.spellIDSeleccionado= spellID; this.parametrosSpell = parametros; }
     }
 
-    public void setStopCastear(int screenX, int screenY)
-    {
-        StopCastear stopCastear = new StopCastear(screenX, screenY);
-        listaDTOs.add(stopCastear);
-    }
     public static class StopCastear
     {
         public int screenX;
@@ -91,11 +124,6 @@ public class NetPlayer
         {   this.screenX = screenX; this.screenY = screenY; }
     }
 
-    public void setStartCastear(int screenX, int screenY)
-    {
-        StartCastear startCastear = new StartCastear(screenX, screenY);
-        listaDTOs.add(startCastear);
-    }
     public static class StartCastear
     {
         public int screenX;
@@ -103,5 +131,15 @@ public class NetPlayer
         public StartCastear() {}
         public StartCastear(int screenX, int screenY)
         {   this.screenX = screenX; this.screenY = screenY; }
+    }
+
+    public static class NumTalentosSkillPersonalizado
+    {
+        public String skillID;
+        public int statID;
+        public int valor;
+        public NumTalentosSkillPersonalizado() {}
+        public NumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+        {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
     }
 }

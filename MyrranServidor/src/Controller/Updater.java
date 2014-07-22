@@ -68,7 +68,6 @@ public class Updater implements Runnable
                     timeStep -= 30;
 
                     executeRunnables();
-                    mundo.procesarInputs(Settings.FIXED_TimeStep);
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep);
                     mundo.actualizarFisica(Settings.FIXED_TimeStep);
                     //mundo.enviarSnapshots();

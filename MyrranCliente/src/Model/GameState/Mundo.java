@@ -17,8 +17,6 @@ import java.util.Map;
 
 public class Mundo extends AbstractModel
 {
-    private Cliente cliente;
-
     private List<PC> listaPlayers = new ArrayList<>();
     private Map<Integer,PC> mapaPlayers = new HashMap<>();
 
@@ -35,10 +33,6 @@ public class Mundo extends AbstractModel
     public Player getPlayer()                       { return player; }
     public Mapa getMapa()                           { return mapa; }
     public World getWorld()                         { return world; }
-    public Cliente getCliente()                     { return cliente; }
-
-    //SET:
-    public void setCliente(Cliente cliente)         { this.cliente = cliente; }
 
     public Mundo()
     {
@@ -74,15 +68,10 @@ public class Mundo extends AbstractModel
         world.step(delta, 8, 6);
     }
 
-    public void enviarDatosAServidor()
+    public void enviarDatosAServidor(Cliente cliente)
     {
         if (player.getNetPlayer().contieneDatos())
-        {
-            player.getNetPlayer().setConnectionID(cliente.getID());
-            cliente.enviarAServidor(player.getNetPlayer());
-            player.getNetPlayer().clear();
-        }
-        player.enviarComandosAServidor();
+        {   cliente.enviarAServidor(player.getNetPlayer().getDTOs()); }
     }
 
     public void actualizarUnidades(float delta)

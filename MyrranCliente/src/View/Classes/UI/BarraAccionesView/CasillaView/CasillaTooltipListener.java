@@ -25,7 +25,7 @@ public class CasillaTooltipListener extends InputListener
 
             if (accion instanceof SeleccionarSpell && tooltip == null)
             {
-                tooltip = new SpellView(accion.getID(), casillaView.getCaster(), casillaView.getControlador());
+                tooltip = new SpellView(accion.getID(), casillaView.getCaster());
                 casillaView.setTooltip(tooltip);
             }
         }
@@ -48,7 +48,7 @@ public class CasillaTooltipListener extends InputListener
 
             if (accion instanceof SeleccionarSpell)
             {
-                SpellView tooltipMovible = new SpellView(accion.getID(), casillaView.getCaster(), casillaView.getControlador());
+                SpellView tooltipMovible = new SpellView(accion.getID(), casillaView.getCaster());
                 event.getStage().addActor(tooltipMovible);
                 Vector2 clickPos = getPosicionClick(event, x, y);
                 tooltipMovible.setPosition(clickPos.x +16 , clickPos.y +16 -tooltipMovible.getHeight());

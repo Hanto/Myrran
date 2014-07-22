@@ -1,14 +1,11 @@
 package Controller.Inputs;// Created by Hanto on 22/07/2014.
 
 import Controller.Controlador;
-import DTO.NetPlayer;
 import DTO.NetPlayer.*;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Iterator;
 
 public class ControlaPC
 {
@@ -22,27 +19,16 @@ public class ControlaPC
         this.controlador = controlador;
     }
 
-    public void procesarInput(NetPlayer netPlayer)
+    public void procesarInput(int connectionID, DTOs netPlayer)
     {
-        if (netPlayer.isLogIn())
-        {
-            mundo.añadirPC(netPlayer.getConnectionID());
-
-            mundo.getPC(netPlayer.getConnectionID()).añadirSkillsPersonalizados("Terraformar");
-            mundo.getPC(netPlayer.getConnectionID()).añadirSkillsPersonalizados("Heal");
-            mundo.getPC(netPlayer.getConnectionID()).setNumTalentosSkillPersonalizado("Heal", 0, 10);
-            mundo.getPC(netPlayer.getConnectionID()).setNumTalentosSkillPersonalizado("Heal", 1, 17);
-            mundo.getPC(netPlayer.getConnectionID()).setNumTalentosSkillPersonalizado("Hot", 1, 10);
-        }
-
-        PC player = mundo.getPC(netPlayer.getConnectionID());
-        if (player == null) { logger.error("ERROR: no existe Player con este ID: {}", netPlayer.getConnectionID()); return; }
+        PC player = mundo.getPC(connectionID);
+        if (player == null) { logger.error("ERROR: no existe Player con este ID: {}", connectionID); return; }
         Object dto;
 
-        Iterator<Object>iteratorDTOs = netPlayer.getListaDTOs();
-        while (iteratorDTOs.hasNext())
+
+        for (int i=0; i<netPlayer.listaDTOs.length; i++)
         {
-            dto = iteratorDTOs.next();
+            dto = netPlayer.listaDTOs[i];
 
             if (dto instanceof Animacion)
             {   player.setNumAnimacion(((Animacion) dto).animacion); }
@@ -51,7 +37,7 @@ public class ControlaPC
             {   player.setPosition(((Posicion) dto).posX, ((Posicion) dto).posY); }
 
             else if (dto instanceof ParametrosSpell)
-            {   player.setParametrosSpell(((ParametrosSpell) dto).parametrosSpell); }
+            {   player.setParametrosSpell(((ParametrosSpell) dto).parametros); }
 
             else if (dto instanceof SpellSeleccionado)
             {
@@ -63,6 +49,23 @@ public class ControlaPC
 
             else if (dto instanceof StartCastear)
             {   player.setCastear(true, ((StartCastear) dto).screenX, ((StartCastear) dto).screenY); }
+
+            else if (dto instanceof NumTalentosSkillPersonalizado)
+            {
+                player.setNumTalentosSkillPersonalizado(((NumTalentosSkillPersonalizado) dto).skillID,
+                ((NumTalentosSkillPersonalizado) dto).statID, ((NumTalentosSkillPersonalizado) dto).valor);
+            }
         }
+    }
+
+    public void procesarLogIn(int connectionID)
+    {
+        mundo.añadirPC(connectionID);
+
+        mundo.getPC(connectionID).añadirSkillsPersonalizados("Terraformar");
+        mundo.getPC(connectionID).añadirSkillsPersonalizados("Heal");
+        mundo.getPC(connectionID).setNumTalentosSkillPersonalizado("Heal", 0, 10);
+        mundo.getPC(connectionID).setNumTalentosSkillPersonalizado("Heal", 1, 17);
+        mundo.getPC(connectionID).setNumTalentosSkillPersonalizado("Hot", 1, 10);
     }
 }

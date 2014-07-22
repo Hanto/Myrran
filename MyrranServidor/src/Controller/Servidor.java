@@ -1,6 +1,5 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
-import Core.FSM.IO.PlayerIO;
 import DTO.NetDTO;
 import DTO.NetPlayer;
 import ch.qos.logback.classic.Logger;
@@ -46,20 +45,11 @@ public class Servidor extends Server
 
     private void procesarMensajeCliente(Connection con, Object obj)
     {
-        if (obj instanceof NetPlayer)
-        {   controlador.controlaPC.procesarInput((NetPlayer)obj); }
+        if (obj instanceof NetPlayer.DTOs)
+        {   controlador.controlaPC.procesarInput(con.getID(), (NetPlayer.DTOs)obj); }
 
-        if (obj instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
-        {
-            int conID = con.getID();
-            String skillID = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) obj).skillID;
-            int statID = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) obj).statID;
-            int valor = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) obj).valor;
-            controlador.modificarSkillTalentoPC(conID, skillID, statID, valor);
-        }
-
-        if (obj instanceof PlayerIO)
-        {   controlador.aplicarInputPC(con.getID(), (PlayerIO)obj); }
+        if (obj instanceof NetPlayer.LogIn)
+        {   controlador.controlaPC.procesarLogIn(con.getID());}
     }
 
     public void enviarACliente(int connectionID, Object obj)

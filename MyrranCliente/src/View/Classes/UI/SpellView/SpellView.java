@@ -6,7 +6,6 @@ import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Interfaces.UI.BarraAcciones.ControladorSpellTooltipI;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import com.badlogic.gdx.Input;
@@ -30,7 +29,6 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
     //Model:
     private SpellPersonalizadoI spell;
     private CasterPersonalizable caster;
-    private ControladorSpellTooltipI controlador;
 
     //View:
     private Image background;
@@ -43,10 +41,9 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
     private final int ANCHO_Descripcion = 80;
     private int textoSobresalePorArriba;
 
-    public SpellView(String spellID, CasterPersonalizable caster, ControladorSpellTooltipI controlador)
+    public SpellView(String spellID, CasterPersonalizable caster)
     {
         this.caster = caster;
-        this.controlador = controlador;
         this.spell = caster.getSpellPersonalizado(spellID);
         this.setTransform(false);
 
@@ -105,7 +102,7 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
 
         //SPELL:
         skill = spell.getCustomSpell();
-        skillView = new SkillView(skill, controlador);
+        skillView = new SkillView(skill, caster);
         añadirSkillView(skillView);
 
         //DEBUFFS:
@@ -113,7 +110,7 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
         while (debuffIIterator.hasNext())
         {
             skill = debuffIIterator.next();
-            skillView = new SkillView(skill, controlador);
+            skillView = new SkillView(skill, caster);
             añadirSkillView(skillView);
         }
 

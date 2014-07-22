@@ -2,19 +2,14 @@ package Model.Classes.Mobiles;// Created by Hanto on 07/04/2014.
 
 import Core.Cuerpos.BodyFactory;
 import Core.Cuerpos.Cuerpo;
-import Core.FSM.IO.PlayerIO;
-import Core.FSM.MaquinaEstados;
-import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
-import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Geo.MapaI;
-import Interfaces.Input.PlayerIOI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
@@ -23,11 +18,11 @@ import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 
-import static Data.Settings.PIXEL_METROS;
-
-public class PC extends AbstractModel implements MobPC, CasterPersonalizable, Debuffeable, Maquinable
+public class PC extends AbstractModel implements PropertyChangeListener, MobPC, CasterPersonalizable, Debuffeable
 {
     protected Mundo mundo;                                      //mapaI al que pertecene el Player
     protected int connectionID;                                 //ID de la conexion con el servidor
@@ -46,24 +41,20 @@ public class PC extends AbstractModel implements MobPC, CasterPersonalizable, De
     protected float actualHPs=1;
     protected float maxHPs=2000;
 
-    protected boolean castear = false;
-
     protected int targetX = 0;
     protected int targetY = 0;
+    protected boolean castear = false;
 
-    protected float actualCastingTime = 0.0f;
-    protected float totalCastingTime = 0.0f;
     protected String spellIDSeleccionado = null;
     protected Object parametrosSpell;
+    protected float actualCastingTime = 0.0f;
+    protected float totalCastingTime = 0.0f;
 
     private List<AuraI>listaDeAuras = new ArrayList<>();
     private Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
     private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
     protected Cuerpo cuerpo;
-    protected MaquinaEstados fsm;
-    protected PlayerIO input = new PlayerIO();
-    protected PlayerIO output = new PlayerIO();
 
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -74,7 +65,6 @@ public class PC extends AbstractModel implements MobPC, CasterPersonalizable, De
         this.connectionID = connectionID;
         this.mapa = mundo.getMapa();
 
-        fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
         cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
     }
@@ -96,8 +86,6 @@ public class PC extends AbstractModel implements MobPC, CasterPersonalizable, De
     @Override public float getTotalCastingTime()                        { return totalCastingTime; }
     @Override public String getSpellIDSeleccionado()                    { return spellIDSeleccionado; }
     @Override public Object getParametrosSpell()                        { return parametrosSpell; }
-    @Override public PlayerIOI getInput()                               { return input; }
-    @Override public PlayerIOI getOutput()                              { return output; }
 
 
     //SET:
@@ -237,55 +225,15 @@ public class PC extends AbstractModel implements MobPC, CasterPersonalizable, De
         }
     }
 
-    private void moverse ()
-    {
-        //Sur
-        if (output.irAbajo && !output.irDerecha && !output.irIzquierda)
-        {   cuerpo.getBody().setLinearVelocity(0, -velocidadMax * PIXEL_METROS); }
-        //Norte
-        else if (output.irArriba && !output.irDerecha && !output.irIzquierda)
-        {   cuerpo.getBody().setLinearVelocity(0, velocidadMax * PIXEL_METROS);}
-        //Este
-        else if (output.irDerecha && !output.irArriba && !output.irAbajo)
-        {   cuerpo.getBody().setLinearVelocity(velocidadMax * PIXEL_METROS, 0);}
-        //Oeste
-        else if (output.irIzquierda && !output.irArriba && !output.irAbajo)
-        {   cuerpo.getBody().setLinearVelocity(-velocidadMax * PIXEL_METROS, 0);}
-        //SurOeste
-        else if (output.irAbajo&& output.irIzquierda)
-        {   cuerpo.getBody().setLinearVelocity(-velocidadMax * 0.707f * PIXEL_METROS, -velocidadMax * 0.707f * PIXEL_METROS); }
-        //SurEste
-        else if (output.irAbajo && output.irDerecha)
-        {   cuerpo.getBody().setLinearVelocity(velocidadMax * 0.707f * PIXEL_METROS, -velocidadMax * 0.707f * PIXEL_METROS); }
-        //NorOeste
-        else if (output.irArriba && output.irIzquierda)
-        {   cuerpo.getBody().setLinearVelocity(-velocidadMax * 0.707f * PIXEL_METROS, velocidadMax * 0.707f * PIXEL_METROS); }
-        //NorEste
-        else if (output.irArriba && output.irDerecha)
-        {   cuerpo.getBody().setLinearVelocity(velocidadMax * 0.707f * PIXEL_METROS, velocidadMax * 0.707f * PIXEL_METROS); }
-        else if (!output.irAbajo && !output.irArriba && !output.irDerecha && !output.irIzquierda)
-        {   cuerpo.getBody().setLinearVelocity(0, 0); }
-    }
-
-
-    public void aplicarInput(PlayerIO input)
-    {   this.input.getPlayerIO(input); }
-
-    public void procesarInput(float delta)
-    {   fsm.actualizar(delta); }
-
     public void actualizar(float delta)
     {
         actualizarCastingTime(delta);
-        moverse();
-        setNumAnimacion(output.getNumAnimacion());
         actualizarAuras(delta);
         if (castear) castear();
     }
 
-    public void enviarPlayerSnapshot()
+    @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        Object playerSnapShot = new NetDTO.PlayerSnapshot(cuerpo);
-        notificarActualizacion("enviarPlayerSnapshot", null, playerSnapShot);
+
     }
 }

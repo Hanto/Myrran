@@ -2,7 +2,7 @@ package View.Classes.UI.SpellView;// Created by Hanto on 27/06/2014.
 
 import DB.RSC;
 import Data.Settings;
-import Interfaces.UI.BarraAcciones.ControladorSpellTooltipI;
+import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,12 +19,12 @@ public class CasilleroTalentos extends Actor
     private int ancho50;
     private int numTalentos = 0;
 
-    private ControladorSpellTooltipI controlador;
+    private CasterPersonalizable caster;
 
 
-    public CasilleroTalentos(ControladorSpellTooltipI controladorI, final String skillID, final int skillStatID, int numTalentos)
+    public CasilleroTalentos(CasterPersonalizable caster, final String skillID, final int skillStatID, int numTalentos)
     {
-        this.controlador = controladorI;
+        this.caster = caster;
 
         fondo = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_SPELLTOOLTIP_TalentoFondo);
         frente = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_SPELLTOOLTIP_Talento);
@@ -38,13 +38,23 @@ public class CasilleroTalentos extends Actor
             {
                 if (button == Input.Buttons.LEFT)
                 {
-                    if (x < getWidth() / 2)                             controlador.decrementarSkillTalento(skillID, skillStatID);
-                    else if (x > getWidth() / 2)                        controlador.aumentarSkillTalento(skillID, skillStatID);
+                    if (x < getWidth() / 2)
+                    {
+                        int valor = CasilleroTalentos.this.caster.getSkillPersonalizado(skillID).getNumTalentos(skillStatID);
+                        CasilleroTalentos.this.caster.setNumTalentosSkillPersonalizado(skillID, skillStatID, valor-1);
+                    }
+                    else if (x > getWidth() / 2)
+                    {
+                        {
+                            int valor = CasilleroTalentos.this.caster.getSkillPersonalizado(skillID).getNumTalentos(skillStatID);
+                            CasilleroTalentos.this.caster.setNumTalentosSkillPersonalizado(skillID, skillStatID, valor+1);
+                        }
+                    }
                 }
                 if (button == Input.Buttons.RIGHT)
                 {
-                    if (CasilleroTalentos.this.numTalentos <= 25)       controlador.setSkillTalento(skillID, skillStatID, (int)(x/3));
-                    else if (CasilleroTalentos.this.numTalentos > 25)   controlador.setSkillTalento(skillID, skillStatID, (int)(x/3) + 25);
+                    if (CasilleroTalentos.this.numTalentos <= 25)       CasilleroTalentos.this.caster.setNumTalentosSkillPersonalizado(skillID, skillStatID, (int)(x/3));
+                    else if (CasilleroTalentos.this.numTalentos > 25)   CasilleroTalentos.this.caster.setNumTalentosSkillPersonalizado(skillID, skillStatID, (int)(x/3) + 25);
                 }
                 return true;
             }

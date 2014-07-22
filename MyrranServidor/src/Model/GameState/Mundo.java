@@ -55,14 +55,6 @@ public class Mundo extends AbstractModel
     public PC getPC (int connectionID)
     {   return mapaPlayers.get(connectionID); }
 
-
-    public void procesarInputs (float delta)
-    {
-        Iterator<PC> iteratorPCs = getIteratorListaPlayers();
-        while (iteratorPCs.hasNext())
-        {   iteratorPCs.next().procesarInput(delta); }
-    }
-
     public void actualizarFisica(float delta)
     {   world.step(delta, 8, 6); }
 
@@ -72,12 +64,5 @@ public class Mundo extends AbstractModel
         Iterator<PC> iteratorPCs = getIteratorListaPlayers();
         while (iteratorPCs.hasNext())
         {   iteratorPCs.next().actualizar(delta); }
-    }
-
-    public void enviarSnapshots()
-    {
-        Iterator<PC> iteratorPCs = getIteratorListaPlayers();
-        while (iteratorPCs.hasNext())
-        {   iteratorPCs.next().enviarPlayerSnapshot(); }
     }
 }

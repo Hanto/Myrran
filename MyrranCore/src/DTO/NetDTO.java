@@ -8,10 +8,9 @@ import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Spell.SpellI;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
-
-import java.util.ArrayList;
 
 public class NetDTO
 {
@@ -22,14 +21,18 @@ public class NetDTO
     public static void register (EndPoint endPoint)
     {
         Kryo kryo = endPoint.getKryo();
-        kryo.register(NetPlayer.class);
-        kryo.register(ArrayList.class);
+        kryo.register(ObjectMap.class);
+        kryo.register(Object[].class);
+        kryo.register(Class.class);
+        kryo.register(NetPlayer.DTOs.class);
+        kryo.register(NetPlayer.LogIn.class);
         kryo.register(NetPlayer.Animacion.class);
         kryo.register(NetPlayer.Posicion.class);
         kryo.register(NetPlayer.ParametrosSpell.class);
         kryo.register(NetPlayer.SpellSeleccionado.class);
         kryo.register(NetPlayer.StopCastear.class);
         kryo.register(NetPlayer.StartCastear.class);
+        kryo.register(NetPlayer.NumTalentosSkillPersonalizado.class);
 
         kryo.register(PlayerIO.class);
         kryo.register(PlayerInput.class);

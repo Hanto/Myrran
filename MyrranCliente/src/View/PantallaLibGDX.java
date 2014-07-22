@@ -1,5 +1,6 @@
 package View;// Created by Hanto on 08/04/2014.
 
+import Controller.Cliente;
 import Controller.Controlador;
 import DB.Datos.BDebuff.BDebuffXMLDB;
 import DB.Datos.Spell.SpellXMLDB;
@@ -27,6 +28,7 @@ import static Data.Settings.FIXED_TimeStep;
 public class PantallaLibGDX implements Screen
 {
     private MyrranClient myrranCliente;
+    private Cliente cliente;
     private Controlador controlador;
     private Mundo mundo;
     private Logger logger = (Logger)LoggerFactory.getLogger(this.getClass());
@@ -62,6 +64,7 @@ public class PantallaLibGDX implements Screen
 
         mundo = new Mundo();
         controlador = new Controlador(mundo);
+        cliente = controlador.getCliente();
 
         currentTime = TimeUtils.nanoTime() / 1000000.0;
     }
@@ -83,7 +86,7 @@ public class PantallaLibGDX implements Screen
             timeStep -= 30;
             mundo.actualizarUnidades(FIXED_TimeStep);
             mundo.actualizarFisica(FIXED_TimeStep);
-            mundo.enviarDatosAServidor();
+            mundo.enviarDatosAServidor(cliente);
 
             contador++;
             media = total/contador;

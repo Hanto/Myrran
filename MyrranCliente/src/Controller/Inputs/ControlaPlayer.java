@@ -9,8 +9,6 @@ import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
-
 public class ControlaPlayer
 {
     private Mundo mundo;
@@ -23,15 +21,14 @@ public class ControlaPlayer
         this.controlador = controlador;
     }
 
-    public void procesarInput(NetPlayer netPlayer)
+    public void procesarInput(NetPlayer.DTOs netPlayer)
     {
         Player player = mundo.getPlayer();
         Object dto;
 
-        Iterator<Object> iteratorDTOs = netPlayer.getListaDTOs();
-        while (iteratorDTOs.hasNext())
+        for (int i=0; i<netPlayer.listaDTOs.length; i++)
         {
-            dto = iteratorDTOs.next();
+            dto = netPlayer.listaDTOs[i];
 
             if (dto instanceof Animacion)
             {   player.setNumAnimacion(((Animacion) dto).animacion); }
