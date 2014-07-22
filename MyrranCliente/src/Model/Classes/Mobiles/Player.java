@@ -8,6 +8,7 @@ import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
+import DTO.NetPlayer;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -64,6 +65,8 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     protected PlayerIO input = new PlayerIO();
     protected PlayerIO output = new PlayerIO();
 
+    protected NetPlayer netPlayer = new NetPlayer();
+
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public Player(Mundo mundo)
@@ -78,6 +81,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
 
     //GET:
     public Body getBody()                                               { return cuerpo.getBody(); }
+    public NetPlayer getNetPlayer()                                     { return netPlayer; }
     @Override public int getConnectionID()                              { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
@@ -166,6 +170,21 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         notificarActualizacion("RECEPCION: setMaxHPs", null, mHPsDTO);
     }
 
+    private void actualizarCastingTime(float delta)
+    {   //Vista:
+        if (isCasteando())
+        {
+            actualCastingTime += delta;
+            if (actualCastingTime >= totalCastingTime)
+            {
+                actualCastingTime = 0f;
+                totalCastingTime = 0f;
+            }
+            Object castingTimePercent = new NetDTO.CastingTimePercent(this);
+            notificarActualizacion("actualizarCastingTime", null, castingTimePercent);
+        }
+    }
+
     //ENVIO DATOS:
     //-------------------------------------------------------------------------------------------------------------------
 
@@ -178,8 +197,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
             Object AnimacionDTO = new NetDTO.AnimacionPPC(this);
             notificarActualizacion("ENVIO: setTipoAnimacion", null, AnimacionDTO);
             //Servidor:
-            Object animacionPPC = new NetDTO.AnimacionPPC(connectionID, numAnimacion);
-            mundo.getCliente().enviarAServidor(animacionPPC);
+            netPlayer.setNumAnimacion(numAnimacion);
         }
     }
 
@@ -194,8 +212,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
             Object posicionDTO = new NetDTO.PosicionPPC(this);
             notificarActualizacion("ENVIO: setPosition", null, posicionDTO);
             //Servidor:
-            Object moverPlayer = new NetDTO.PosicionPPC(connectionID, getX(), getY());
-            mundo.getCliente().enviarAServidor(moverPlayer);
+            netPlayer.setPosition(getX(), getY());
         }
     }
 
@@ -209,8 +226,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
             Object posicionDTO = new NetDTO.PosicionPPC(this);
             notificarActualizacion("ENVIO: setPosition", null, posicionDTO);
             //Servidor:
-            Object moverPlayer = new NetDTO.PosicionPPC(connectionID, this.x, this.y);
-            mundo.getCliente().enviarAServidor(moverPlayer);
+            netPlayer.setPosition(getX(), getY());
         }
     }
 
@@ -220,8 +236,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         {
             parametrosSpell = parametros;
             //Servidor:
-            Object setSpellIDSeleccionado = new NetDTO.SetParametrosSpell(getParametrosSpell());
-            mundo.getCliente().enviarAServidor(setSpellIDSeleccionado);
+            netPlayer.setParametrosSpell(parametros);
         }
     }
 
@@ -231,8 +246,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         {
             spellIDSeleccionado = spellID;
             //Servidor:
-            Object spellIDSeleccionadoDTO = new NetDTO.SetSpellIDSeleccionado(spellID, getParametrosSpell());
-            mundo.getCliente().enviarAServidor(spellIDSeleccionadoDTO);
+            netPlayer.setSpellIDSeleccionado(spellID, getParametrosSpell());
         }
     }
 
@@ -240,9 +254,9 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     {
         if (castearInterrumpible)
         {
-            Object castearDTO = new NetDTO.CastearPPC(false, output.getScreenX(), output.getScreenY());
-            notificarActualizacion("ENVIO: setCastear", null, castearDTO);
             castearInterrumpible = false;
+            //Servidor:
+            netPlayer.setStopCastear(output.getScreenX(), output.getScreenY());
         }
     }
 
@@ -253,10 +267,10 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
             SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(output.getSpellID());
             if (spell != null)
             {
-                Object castearDTO = new NetDTO.CastearPPC(true, output.getScreenX(), output.getScreenY());
-                notificarActualizacion("ENVIO: setCastear", null, castearDTO);
-                //actualCastingTime += 0.01f;
                 castearInterrumpible = true;
+                //Servidor:
+                netPlayer.setStartCastear(output.getScreenX(), output.getScreenY());
+                //actualCastingTime += 0.01f;
             }
         }
     }
@@ -278,22 +292,6 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         else if (output.irArriba && output.irDerecha)                           { cuerpo.setVectorDireccion( +0.707f, +0.707f); } //NorEste
         else if (!output.irAbajo && !output.irArriba && !output.irDerecha && !output.irIzquierda)
         {   cuerpo.setLinearVelocity(0f); }
-    }
-
-    private void actualizarCastingTime(float delta)
-    {
-        if (isCasteando())
-        {
-            actualCastingTime += delta;
-            if (actualCastingTime >= totalCastingTime)
-            {
-                actualCastingTime = 0f;
-                totalCastingTime = 0f;
-            }
-
-            Object castingTimePercent = new NetDTO.CastingTimePercent(this);
-            notificarActualizacion("actualizarCastingTime", null, castingTimePercent);
-        }
     }
 
     public void actualizar (float delta)

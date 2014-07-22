@@ -26,8 +26,6 @@ public class UI
         conjuntoBarraAcciones = new ConjuntoBarraAcciones(player, inputManager);
         barraTerrenos  = new BarraTerrenos(player);
 
-
-
         inputManager.añadirAccion(AccionFactory.accionComando.IRNORTE.nuevo());
         inputManager.añadirAccion(AccionFactory.accionComando.IRSUR.nuevo());
         inputManager.añadirAccion(AccionFactory.accionComando.IRESTE.nuevo());

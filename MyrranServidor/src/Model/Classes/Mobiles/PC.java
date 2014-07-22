@@ -20,6 +20,8 @@ import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
 import Model.GameState.Mundo;
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -62,6 +64,8 @@ public class PC extends AbstractModel implements MobPC, CasterPersonalizable, De
     protected MaquinaEstados fsm;
     protected PlayerIO input = new PlayerIO();
     protected PlayerIO output = new PlayerIO();
+
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     //Constructor:
     public PC(int connectionID, Mundo mundo)
@@ -116,10 +120,13 @@ public class PC extends AbstractModel implements MobPC, CasterPersonalizable, De
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID){ return listaSkillsPersonalizados.get(skillID); }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID) { return listaSpellsPersonalizados.get(spellID); }
     public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
+
+
+
     @Override public void añadirSkillsPersonalizados(String spellID)
     {
         SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(spellID);
-        if (spell == null) { System.out.println("ERROR: añadirSkillsPersonalizados: spellID no encontrado: " + spellID ); return; }
+        if (spell == null) { logger.error("ERROR: añadirSkillsPersonalizados: spellID no encontrado: {}", spellID); return; }
 
         SpellPersonalizado spellPersonalizado = new SpellPersonalizado(spell);
         listaSpellsPersonalizados.put(spellPersonalizado.getID(), spellPersonalizado);
@@ -139,7 +146,7 @@ public class PC extends AbstractModel implements MobPC, CasterPersonalizable, De
     @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
     {
         SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
-        if (skillPersonalizado == null) { System.out.println("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: " + skillID); return; }
+        if (skillPersonalizado == null) { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
         else
         {
             if (valor <0) return;

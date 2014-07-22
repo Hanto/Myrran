@@ -83,6 +83,7 @@ public class PantallaLibGDX implements Screen
             timeStep -= 30;
             mundo.actualizarUnidades(FIXED_TimeStep);
             mundo.actualizarFisica(FIXED_TimeStep);
+            mundo.enviarDatosAServidor();
 
             contador++;
             media = total/contador;

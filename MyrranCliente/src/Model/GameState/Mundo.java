@@ -74,11 +74,21 @@ public class Mundo extends AbstractModel
         world.step(delta, 8, 6);
     }
 
+    public void enviarDatosAServidor()
+    {
+        if (player.getNetPlayer().contieneDatos())
+        {
+            player.getNetPlayer().setConnectionID(cliente.getID());
+            cliente.enviarAServidor(player.getNetPlayer());
+            player.getNetPlayer().clear();
+        }
+        player.enviarComandosAServidor();
+    }
+
     public void actualizarUnidades(float delta)
     {
         //Actualizar a todas las unidades a partir de los datos ya interpolados
         player.actualizar(delta);
-        player.enviarComandosAServidor();
         //Actualizar a los demas jugador multiplayer:
         for (PC pc: listaPlayers)
         {   pc.actualizar(delta); }

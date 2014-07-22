@@ -28,7 +28,10 @@ public class Controlador implements ControladorUI
 
     public Controlador (Mundo mundo)
     {
+        this.cliente = new Cliente(this);
         this.mundo = mundo;
+        añadirPlayer(cliente.getID());
+        mundo.setCliente(cliente);
 
         ui = new UI(mundo.getPlayer(), this);
         vista = new Vista(this, ui, mundo);
@@ -37,10 +40,6 @@ public class Controlador implements ControladorUI
         inputMultiplexer.addProcessor(vista.getMundoView());
         inputMultiplexer.addProcessor(ui.getInputManager());
         Gdx.input.setInputProcessor(inputMultiplexer);
-
-        cliente = new Cliente(this);
-        mundo.setCliente(cliente);
-        añadirPlayer(cliente.getID());
 
         ui.añadirBarraAcciones(3, 9);
         ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(1,0).setKeycode(9);
@@ -59,6 +58,7 @@ public class Controlador implements ControladorUI
         ui.crearCasilla(0, 2, 2, "IrEste", 32);
         ui.crearCasilla(0, 0, 2, "IrOeste", 29);
 
+        mundo.getPlayer().getNetPlayer().setLogin(true);
         //moverPPC(mundo.getPlayer().getConnectionID(), 21000, 20000);
     }
 

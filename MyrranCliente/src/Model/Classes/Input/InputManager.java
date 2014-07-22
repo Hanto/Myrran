@@ -7,6 +7,7 @@ import Model.Classes.Mobiles.Player;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class InputManager implements InputProcessor, GestureListener
     //Model:
     private Player player;
     private Controlador controlador;
+    private Vector3 coordenadasMundo;
 
     //Datos:
     private Map<Integer, String> listaDeBinds = new HashMap<>();
@@ -26,6 +28,7 @@ public class InputManager implements InputProcessor, GestureListener
     {
         this.player = player;
         this.controlador = controlador;
+        this.coordenadasMundo = new Vector3();
     }
 
 
@@ -71,8 +74,9 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        ((Maquinable)player).getInput().setScreenX(screenX);
-        ((Maquinable)player).getInput().setScreenY(screenY);
+        coordenadasScreenAMundo(screenX, screenY);
+        ((Maquinable)player).getInput().setScreenX((int)coordenadasMundo.x);
+        ((Maquinable)player).getInput().setScreenY((int)coordenadasMundo.y);
         ((Maquinable)player).getInput().setStartCastear(true);
         ((Maquinable)player).getInput().setStopCastear(false);
         return true;
@@ -80,8 +84,9 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
-        ((Maquinable)player).getInput().setScreenX(screenX);
-        ((Maquinable)player).getInput().setScreenY(screenY);
+        coordenadasScreenAMundo(screenX, screenY);
+        ((Maquinable)player).getInput().setScreenX((int)coordenadasMundo.x);
+        ((Maquinable)player).getInput().setScreenY((int)coordenadasMundo.y);
         ((Maquinable)player).getInput().setStartCastear(false);
         ((Maquinable)player).getInput().setStopCastear(true);
         return true;
@@ -89,8 +94,9 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean touchDragged(int screenX, int screenY, int pointer)
     {
-        ((Maquinable)player).getInput().setScreenX(screenX);
-        ((Maquinable)player).getInput().setScreenY(screenY);
+        coordenadasScreenAMundo(screenX, screenY);
+        ((Maquinable)player).getInput().setScreenX((int)coordenadasMundo.x);
+        ((Maquinable)player).getInput().setScreenY((int)coordenadasMundo.y);
         ((Maquinable)player).getInput().setStartCastear(true);
         ((Maquinable)player).getInput().setStopCastear(false);
         return false;
@@ -108,6 +114,12 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean keyTyped(char character)
     {   return false; }
+
+    private void coordenadasScreenAMundo(int screenX, int screenY)
+    {
+        coordenadasMundo.set(screenX, screenY,0);
+        controlador.getCamara().unproject(coordenadasMundo);
+    }
 
     //GESTURE LISTENER:
     @Override public boolean touchDown(float x, float y, int pointer, int button) { return false; }

@@ -12,8 +12,6 @@ import View.Classes.Actores.Texto;
 import View.GameState.MundoView;
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -103,26 +101,6 @@ public class PlayerView extends Group implements PropertyChangeListener
 
 
 
-    //EMVIODATOS:
-    public void setCastear (boolean castear, int targetX, int targetY)
-    {
-        Vector2 targetMundo = convertirCoordenadasPantallaAMundo(targetX, targetY);
-        NetDTO.CastearPPC castearNDTO = new NetDTO.CastearPPC(castear, (int)targetMundo.x, (int)targetMundo.y);
-        controlador.enviarAServidor(castearNDTO);
-    }
-
-    public Vector2 convertirCoordenadasPantallaAMundo (int screenX, int screenY)
-    {
-        Vector3 destino = new Vector3(screenX, screenY, 0);
-        mundoView.getCamera().unproject(destino);
-        return new Vector2(destino.x, destino.y);
-    }
-
-
-
-
-
-
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
@@ -147,13 +125,5 @@ public class PlayerView extends Group implements PropertyChangeListener
 
         if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
         {   modificarHPs((NetDTO.ModificarHPsPPC)evt.getNewValue()); }
-
-        if (evt.getNewValue() instanceof NetDTO.CastearPPC)
-        {
-            boolean castear = ((NetDTO.CastearPPC) evt.getNewValue()).castear;
-            int targetX = ((NetDTO.CastearPPC) evt.getNewValue()).targetX;
-            int targetY = ((NetDTO.CastearPPC) evt.getNewValue()).targetY;
-            setCastear(castear, targetX, targetY);
-        }
     }
 }

@@ -11,6 +11,8 @@ import Interfaces.Spell.SpellI;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 
+import java.util.ArrayList;
+
 public class NetDTO
 {
     public static final int puertoTCP = Settings.NETWORK_PuertoTCP;
@@ -20,6 +22,15 @@ public class NetDTO
     public static void register (EndPoint endPoint)
     {
         Kryo kryo = endPoint.getKryo();
+        kryo.register(NetPlayer.class);
+        kryo.register(ArrayList.class);
+        kryo.register(NetPlayer.Animacion.class);
+        kryo.register(NetPlayer.Posicion.class);
+        kryo.register(NetPlayer.ParametrosSpell.class);
+        kryo.register(NetPlayer.SpellSeleccionado.class);
+        kryo.register(NetPlayer.StopCastear.class);
+        kryo.register(NetPlayer.StartCastear.class);
+
         kryo.register(PlayerIO.class);
         kryo.register(PlayerInput.class);
         kryo.register(PlayerSnapshot.class);
@@ -31,16 +42,12 @@ public class NetDTO
         kryo.register(AnimacionPPC.class);
         kryo.register(ModificarHPsPPC.class);
         kryo.register(EliminarPPC.class);
-        kryo.register(CastearPPC.class);
         kryo.register(AñadirSpellPersonalizadoPPC.class);
         kryo.register(ModificarNumTalentosSkillPersonalizadoPPC.class);
 
 
         kryo.register(CastingTimePercent.class);
-
         kryo.register(SetTerreno.class);
-        kryo.register(SetSpellIDSeleccionado.class);
-        kryo.register(SetParametrosSpell.class);
 
         kryo.register(boolean[].class);
         kryo.register(boolean[][].class);
@@ -188,16 +195,6 @@ public class NetDTO
         {   this.connectionID = connectionID; }
     }
 
-    public static class CastearPPC
-    {
-        public Boolean castear;
-        public int targetX;
-        public int targetY;
-        public CastearPPC() {}
-        public CastearPPC(Boolean castear, int x, int y)
-        {   this.castear = castear; targetX = x; targetY = y; }
-    }
-
     public static class AñadirSpellPersonalizadoPPC
     {
         public String spellID;
@@ -233,23 +230,6 @@ public class NetDTO
         public SetTerreno() {}
         public SetTerreno(int celdaX, int celdaY, int numCapa, short iDTerreno)
         {   this.celdaX = celdaX; this.celdaY = celdaY; this.numCapa = numCapa; this.iDTerreno = iDTerreno; }
-    }
-
-    public static class SetSpellIDSeleccionado
-    {
-        public String spellID;
-        public Object parametrosSpell;
-        public SetSpellIDSeleccionado() {}
-        public SetSpellIDSeleccionado(String spellID, Object parametrosSpell)
-        {   this.spellID = spellID; this.parametrosSpell = parametrosSpell; }
-    }
-
-    public static class SetParametrosSpell
-    {
-        public Object parametrosSpell;
-        public SetParametrosSpell() {}
-        public SetParametrosSpell(Object parametrosSpell)
-        {   this.parametrosSpell = parametrosSpell; }
     }
 
     public static class MapTilesAdyacentesEnCliente

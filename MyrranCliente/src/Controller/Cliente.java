@@ -1,15 +1,19 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
 import DTO.NetDTO;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import org.slf4j.LoggerFactory;
 
 public class Cliente extends Client
 {
     public Controlador controlador;
     public String host;
+
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public Cliente (Controlador controlador)
     {
@@ -38,7 +42,7 @@ public class Cliente extends Client
         host = "localhost"; //(String) JOptionPane.showInputDialog(null, "Host:", "Connect to server", JOptionPane.QUESTION_MESSAGE, null, null, "localhost");
 
         try { this.connect(NetDTO.timeout, host, NetDTO.puertoTCP, NetDTO.puertoUDP); }
-        catch (Exception IOException) { System.out.println("ERROR: Imposible conectar cliente: "+IOException); }
+        catch (Exception IOException) { logger.error("ERROR: Imposible conectar con el Servidor: ", IOException); }
     }
 
     private void procesarMensajeServidor (Connection con, Object obj)
@@ -108,5 +112,5 @@ public class Cliente extends Client
     }
 
     public void enviarAServidor(Object obj)
-    {   this.sendTCP(obj); }
+    {   logger.trace("ENVIAR: {} {} bytes", obj.getClass().getSimpleName(), this.sendTCP(obj)); }
 }

@@ -2,6 +2,7 @@ package Controller;// Created by Hanto on 07/04/2014.
 
 import Core.FSM.IO.PlayerIO;
 import DTO.NetDTO;
+import DTO.NetPlayer;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -31,7 +32,7 @@ public class Servidor extends Server
                 (new Listener.ThreadedListener
                     (new Listener()
                     {
-                        public void connected (Connection con)              { Servidor.this.controlador.añadirPC(con.getID()); }
+                        public void connected (Connection con)              {  }
                         public void disconnected (Connection con)           { Servidor.this.controlador.eliminarPC(con.getID()); }
                         public void received (Connection con, Object obj)   { procesarMensajeCliente(con, obj); }
                     }));
@@ -45,43 +46,8 @@ public class Servidor extends Server
 
     private void procesarMensajeCliente(Connection con, Object obj)
     {
-        if (obj instanceof NetDTO.PosicionPPC)
-        {
-            int conID = con.getID();
-            float x = ((NetDTO.PosicionPPC) obj).x;
-            float y = ((NetDTO.PosicionPPC) obj).y;
-
-            controlador.moverPC(conID, x, y);
-        }
-
-        if (obj instanceof NetDTO.AnimacionPPC)
-        {
-            int conID = ((NetDTO.AnimacionPPC) obj).connectionID;
-            int numAnimacion = ((NetDTO.AnimacionPPC) obj).numAnimacion;
-            controlador.cambiarAnimacionPC(conID, numAnimacion);
-        }
-
-        if (obj instanceof NetDTO.CastearPPC)
-        {
-            int conID = con.getID();
-            boolean castear = ((NetDTO.CastearPPC) obj).castear;
-            int targetX = ((NetDTO.CastearPPC) obj).targetX;
-            int targetY = ((NetDTO.CastearPPC) obj).targetY;
-            controlador.castear(conID, castear, targetX, targetY);
-        }
-
-        if (obj instanceof NetDTO.SetSpellIDSeleccionado)
-        {
-            String spellID = ((NetDTO.SetSpellIDSeleccionado) obj).spellID;
-            Object parametros = ((NetDTO.SetSpellIDSeleccionado) obj).parametrosSpell;
-            controlador.cambiarSpellSeleccionado(con.getID(), spellID, parametros);
-        }
-
-        if (obj instanceof NetDTO.SetParametrosSpell)
-        {
-            Object parametros = ((NetDTO.SetParametrosSpell) obj).parametrosSpell;
-            controlador.cambiarParametrosSpell(con.getID(), parametros);
-        }
+        if (obj instanceof NetPlayer)
+        {   controlador.controlaPC.procesarInput((NetPlayer)obj); }
 
         if (obj instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
         {
