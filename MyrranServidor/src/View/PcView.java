@@ -2,6 +2,7 @@ package View;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.NetDTO;
+import DTO.NetPCServidor;
 import Data.Settings;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Spell.SpellPersonalizadoI;
@@ -17,52 +18,47 @@ import java.util.List;
 public class PcView implements PropertyChangeListener
 {
     //Model:
-    public PC PC;
-    public Vista vista;
-    public Mundo mundo;
-    public Controlador controlador;
+    private PC pc;
+    private Vista vista;
+    private Mundo mundo;
+    private Controlador controlador;
 
     //Datos:
     private List<MobPC> listaPCsCercanos = new ArrayList<>();
-    public boolean positionChanged = false;
-    public float x;
-    public float y;
+    private float x;
+    private float y;
 
-    public MapaView mapaView;
+    private MapaView mapaView;
+    private NetPCServidor netPCServidor;
 
     //Constructor:
-    public PcView(PC PC, Vista vista)
+    public PcView(PC pc, Vista vista)
     {
-        this.PC = PC;
+        this.pc = pc;
         this.vista = vista;
         this.controlador = vista.controlador;
-        mundo = vista.mundo;
+        this.netPCServidor = new NetPCServidor(pc.getConnectionID());
+        this.mundo = vista.mundo;
 
-        x = PC.getX();
-        y = PC.getY();
+        x = pc.getX();
+        y = pc.getY();
 
         mundo.getMapa().añadirObservador(this);
-        PC.añadirObservador(this);
+        pc.añadirObservador(this);
 
-        NetDTO.ActualizarPPC actualizarPPC = new NetDTO.ActualizarPPC(PC);
-        actualizarPlayer(actualizarPPC);
+        netPCServidor.setPosition(x, y);
+        netPCServidor.setNombre(pc.getNombre());
 
         quienMeVe();
 
-        mapaView = new MapaView(PC, mundo, controlador);
+        mapaView = new MapaView(pc, mundo, controlador);
     }
 
-    public void netUpdate()
+    public void enviarDatosAClientes()
     {
-        if (isVisible())
-        {
-            if (positionChanged)
-            {
-                NetDTO.PosicionPPC posicionPPC = new NetDTO.PosicionPPC(PC.getConnectionID(), x, y);
-                actualizarPlayersCercanos(posicionPPC);
-            }
-            positionChanged = false;
-        }
+        netPCServidor.getDTOs();
+        if (netPCServidor.contieneDatosDTOPersonal()) actualizarPlayer(netPCServidor.dtoPersonal);
+        if (netPCServidor.contieneDatosDTOGlobal() && isVisible()) actualizarPlayersCercanos(netPCServidor.dtoGlobal);
     }
     private void actualizarPlayersCercanos (Object obj)
     {
@@ -70,20 +66,16 @@ public class PcView implements PropertyChangeListener
             controlador.enviarACliente(PCCercanos.getConnectionID(), obj);
     }
     private void actualizarPlayer (Object obj)
-    {   controlador.enviarACliente(PC.getConnectionID(), obj); }
+    {   controlador.enviarACliente(pc.getConnectionID(), obj); }
 
     private boolean isVisible()
     {   return !listaPCsCercanos.isEmpty(); }
 
-
-    private void setPosition (float x, float y)
+    private void setPosition (float posX, float posY)
     {
-        this.x = x; this.y = y;
-        this.quienMeVe();
-
-        if (isVisible()) positionChanged = true;
-        else positionChanged = false;
-
+        x = posX; y = posY;
+        netPCServidor.setPosition(posX, posY);
+        quienMeVe();
         mapaView.comprobarVistaMapa();
     }
 
@@ -91,12 +83,12 @@ public class PcView implements PropertyChangeListener
     {
         for (PcView pcCercanos : vista.listaPcViews)
         {
-            MobPC PCCercano = pcCercanos.PC;
+            MobPC pcCercano = pcCercanos.pc;
 
-            if (PCCercano.getConnectionID() != PC.getConnectionID())
+            if (pcCercano.getConnectionID() != pc.getConnectionID())
             {
-                if (Math.abs(PCCercano.getX()- PC.getX()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Horizontal_Resolution /2 &&
-                    Math.abs(PCCercano.getY()- PC.getY()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Vertical_Resolution /2     )
+                if (Math.abs(pcCercano.getX()- pc.getX()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Horizontal_Resolution /2 &&
+                    Math.abs(pcCercano.getY()- pc.getY()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Vertical_Resolution /2     )
                 {
                     añadirPCVisible(pcCercanos);
                     pcCercanos.añadirPCVisible(this);
@@ -112,50 +104,45 @@ public class PcView implements PropertyChangeListener
 
     private void añadirPCVisible (PcView pcview)
     {
-        if (!listaPCsCercanos.contains(pcview.PC))
+        if (!listaPCsCercanos.contains(pcview.pc))
         {
-            listaPCsCercanos.add(pcview.PC);
-            NetDTO.ActualizarPPC añadirPC = new NetDTO.ActualizarPPC(pcview.PC);
-            actualizarPlayer(añadirPC);
+            listaPCsCercanos.add(pcview.pc);
+            netPCServidor.añadirCrearPC(pcview.pc);
         }
     }
 
     private void eliminarPCVisible (PcView pcView)
     {
-        if (listaPCsCercanos.contains(pcView.PC))
+        if (listaPCsCercanos.contains(pcView.pc))
         {
-            listaPCsCercanos.remove(pcView.PC);
-            NetDTO.EliminarPPC eliminarPPC = new NetDTO.EliminarPPC(pcView.PC);
-            actualizarPlayer(eliminarPPC);
+            listaPCsCercanos.remove(pcView.pc);
+            netPCServidor.añadirtEliminarPC(pcView.pc.getConnectionID());
         }
     }
 
 
 
 
-    private void setAnimacion(NetDTO.AnimacionPPC animacion)
-    {   actualizarPlayersCercanos(animacion); }
-    private void modificarSkillTalento(NetDTO.ModificarNumTalentosSkillPersonalizadoPPC skillTalento)
-    {   actualizarPlayer(skillTalento); }
-    private void añadirSpellPersonalizado(NetDTO.AñadirSpellPersonalizadoPPC spell)
+    private void setAnimacion(int numAnimacion)
+    {   netPCServidor.setNumAnimacion(numAnimacion); }
+    private void modificarSkillTalento(String skillID, int statID, int valor)
+    {   netPCServidor.añadirNumTalentosSkillPersonalizado(skillID, statID, valor); }
+    private void añadirSpellPersonalizado(String spellID)
     {
-        PC.getSpellPersonalizado(spell.spellID).añadirObservador(this);
-        actualizarPlayer(spell);
+        pc.getSpellPersonalizado(spellID).añadirObservador(this);
+        netPCServidor.añadirSkillPersonalizado(spellID);
     }
-    private void modificarHPs(NetDTO.ModificarHPsPPC HPs)
-    {
-        actualizarPlayersCercanos(HPs);
-        actualizarPlayer(HPs);
-    }
+    private void modificarHPs(float HPs)
+    {   netPCServidor.añadirModificarHPs(HPs); }
 
     private void eliminar(NetDTO.EliminarPPC eliminarPPC)
     {
         //Dejamos de observar al mundo colindante por cambios (para la edicion de terreno):
         mundo.getMapa().eliminarObservador(this);
-        //Dejamos de observar al PC:
-        PC.eliminarObservador(this);
-        //Dejamos de observar a cada uno de los Spells Personalizados del PC:
-        Iterator<SpellPersonalizadoI> iSpell = PC.getIteratorSpellPersonalizado();
+        //Dejamos de observar al pc:
+        pc.eliminarObservador(this);
+        //Dejamos de observar a cada uno de los Spells Personalizados del pc:
+        Iterator<SpellPersonalizadoI> iSpell = pc.getIteratorSpellPersonalizado();
         while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
         //eliminamos la vista y transmitimos la informacion al resto de clientes:
         vista.listaPcViews.remove(this);
@@ -174,23 +161,22 @@ public class PcView implements PropertyChangeListener
             setPosition(x, y);
         }
         if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
-        {   modificarHPs((NetDTO.ModificarHPsPPC)evt.getNewValue()); }
+        {   modificarHPs(((NetDTO.ModificarHPsPPC) evt.getNewValue()).HPs); }
 
         if (evt.getNewValue() instanceof NetDTO.EliminarPPC)
         {   eliminar((NetDTO.EliminarPPC)evt.getNewValue()); }
 
         if (evt.getNewValue() instanceof NetDTO.AñadirSpellPersonalizadoPPC)
-        {   añadirSpellPersonalizado((NetDTO.AñadirSpellPersonalizadoPPC) evt.getNewValue());}
+        {   añadirSpellPersonalizado(((NetDTO.AñadirSpellPersonalizadoPPC) evt.getNewValue()).spellID);}
 
         if (evt.getNewValue() instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
-        {   modificarSkillTalento((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)evt.getNewValue()); }
-
-
-        if (isVisible())
-        {
-            if (evt.getNewValue() instanceof NetDTO.AnimacionPPC)
-            {   setAnimacion((NetDTO.AnimacionPPC)evt.getNewValue()); }
+        {   modificarSkillTalento(((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) evt.getNewValue()).skillID,
+                ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) evt.getNewValue()).statID,
+                ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) evt.getNewValue()).valor);
         }
+
+        if (evt.getNewValue() instanceof NetDTO.AnimacionPPC)
+        {   setAnimacion(((NetDTO.AnimacionPPC) evt.getNewValue()).numAnimacion); }
 
         //TERRENOS:
         if (evt.getNewValue() instanceof NetDTO.SetTerreno)

@@ -70,8 +70,8 @@ public class Updater implements Runnable
                     executeRunnables();
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep);
                     mundo.actualizarFisica(Settings.FIXED_TimeStep);
+                    controlador.vista.enviarDatosAClientes();
                     //mundo.enviarSnapshots();
-                    netUpdate();
                 }
 
                 currentTimeC = TimeUtils.nanoTime();
@@ -83,9 +83,6 @@ public class Updater implements Runnable
             catch (InterruptedException e) { System.out.println("ERROR: Updateando la red: "+e); return; }
         }
     }
-
-    private void netUpdate()
-    {   controlador.netUpdater(); }
 
 
     private boolean executeRunnables()

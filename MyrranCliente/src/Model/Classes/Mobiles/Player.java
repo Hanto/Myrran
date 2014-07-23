@@ -196,61 +196,46 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
 
     @Override public void setNumAnimacion(int numAnimacion)
     {
-        if (this.numAnimacion != numAnimacion)
-        {
-            this.numAnimacion = numAnimacion;
-            //Servidor:
-            netPlayer.setNumAnimacion(numAnimacion);
-            //Vista:
-            notificarActualizacion("ENVIO: setTipoAnimacion", null, netPlayer.animacion);
-        }
+        this.numAnimacion = numAnimacion;
+        //Servidor:
+        netPlayer.setNumAnimacion(numAnimacion);
+        //Vista:
+        notificarActualizacion("ENVIO: setTipoAnimacion", null, netPlayer.animacion);
     }
 
     @Override public void setPosition (float x, float y)
     {
-        if (Math.abs(this.x-x) >= 1 || Math.abs(this.y-y) >= 1)
-        {
-            cuerpo.setPosition(x, y);
-            this.x = x;
-            this.y = y;
-            //Servidor:
-            netPlayer.setPosition(getX(), getY());
-            //Vista:
-            notificarActualizacion("ENVIO: setPosition", null, netPlayer.posicion);
-        }
+        cuerpo.setPosition(x, y);
+        this.x = x;
+        this.y = y;
+        //Servidor:
+        netPlayer.setPosition(getX(), getY());
+        //Vista:
+        notificarActualizacion("ENVIO: setPosition", null, netPlayer.posicion);
     }
 
     private void getPosicionInterpoladaCuerpo()
     {
-        if (Math.abs(this.cuerpo.getXinterpolada()-x) >= 1 || Math.abs(this.cuerpo.getYinterpolada()-y) >= 1)
-        {
-            this.x = cuerpo.getXinterpolada();
-            this.y = cuerpo.getYinterpolada();
-            //Servidor:
-            netPlayer.setPosition(getX(), getY());
-            //Vista:
-            notificarActualizacion("ENVIO: setPosition", null, netPlayer.posicion);
-        }
+        this.x = cuerpo.getXinterpolada();
+        this.y = cuerpo.getYinterpolada();
+        //Servidor:
+        netPlayer.setPosition(getX(), getY());
+        //Vista:
+        notificarActualizacion("ENVIO: setPosition", null, netPlayer.posicion);
     }
 
     @Override public void setParametrosSpell(Object parametros)
     {
-        if (parametrosSpell != parametros)
-        {
-            parametrosSpell = parametros;
-            //Servidor:
-            netPlayer.setParametrosSpell(parametros);
-        }
+        parametrosSpell = parametros;
+        //Servidor:
+        netPlayer.setParametrosSpell(parametros);
     }
 
     @Override public void setSpellIDSeleccionado(String spellID)
     {
-        if (spellIDSeleccionado != spellID)
-        {
-            spellIDSeleccionado = spellID;
-            //Servidor:
-            netPlayer.setSpellIDSeleccionado(spellID, getParametrosSpell());
-        }
+        spellIDSeleccionado = spellID;
+        //Servidor:
+        netPlayer.setSpellIDSeleccionado(spellID, getParametrosSpell());
     }
 
     private void stopCastear()

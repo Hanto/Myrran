@@ -5,8 +5,6 @@ import Core.Cuerpos.Cuerpo;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
-import DTO.NetPCServidor;
-import Data.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -58,9 +56,9 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
     protected Cuerpo cuerpo;
 
-    private List<MobPC> listaPCsCercanos = new ArrayList<>();
+    //private List<MobPC> listaPCsCercanos = new ArrayList<>();
 
-    protected NetPCServidor netPCServidor = new NetPCServidor();
+    //protected NetPCServidor netPCServidor = new NetPCServidor();
 
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -114,7 +112,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
 
-        mundo.getMapa().añadirObservador(this);
+        //mundo.getMapa().añadirObservador(this);
 
         //quienMeVe();
     }
@@ -122,7 +120,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
     public void dispose()
     {
         //Dejamos de observar al mundo colindante por cambios (para la edicion de terreno):
-        mundo.getMapa().eliminarObservador(this);
+        //mundo.getMapa().eliminarObservador(this);
 
         Object eliminarDTO = new NetDTO.EliminarPPC(this);
         notificarActualizacion("dispose", null, eliminarDTO);
@@ -242,11 +240,11 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         actualizarAuras(delta);
         if (castear) castear();
     }
-
+/*
     private void quienMeVe()
     {
-        PC pcCercano;
-        Iterator<PC> iteratorPCs = mundo.getIteratorListaPlayers();
+        pc pcCercano;
+        Iterator<pc> iteratorPCs = mundo.getIteratorListaPlayers();
         while (iteratorPCs.hasNext())
         {
             pcCercano = iteratorPCs.next();
@@ -267,7 +265,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         }
     }
 
-    private void añadirPCVisible (PC pc)
+    private void añadirPCVisible (pc pc)
     {
         if (!listaPCsCercanos.contains(pc))
         {
@@ -277,7 +275,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         }
     }
 
-    private void eliminarPCVisible (PC pc)
+    private void eliminarPCVisible (pc pc)
     {
         if (listaPCsCercanos.contains(pc))
         {
@@ -286,7 +284,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
             //actualizarPlayer(eliminarPPC);
         }
     }
-
+*/
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {

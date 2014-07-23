@@ -1,11 +1,12 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
+import Controller.Inputs.ControlaPlayer;
 import DTO.NetDTO;
 import DTO.NetPlayerCliente.LogIn;
+import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.ControladorUI;
-import Model.Classes.Acciones.AccionFactory;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
 import View.Vista;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 public class Controlador implements ControladorUI
 {
     protected Cliente cliente;
+    protected ControlaPlayer controlaPlayer;
 
     protected Mundo mundo;
     protected UI ui;
@@ -25,10 +27,12 @@ public class Controlador implements ControladorUI
     //Input:
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
     public Cliente getCliente()                 { return cliente; }
+    public UI getUI()                           { return ui; }
 
     public Controlador (Mundo mundo)
     {
         this.cliente = new Cliente(this);
+        this.controlaPlayer = new ControlaPlayer(mundo, this);
         this.mundo = mundo;
         añadirPlayer(cliente.getID());
 
@@ -68,68 +72,13 @@ public class Controlador implements ControladorUI
 
     //Kryo:
     public void enviarAServidor(Object obj)                                             { cliente.enviarAServidor(obj); }
+    public void añadirAccion(AccionI accion)
+    {   ui.getInputManager().añadirAccion(accion); }
 
     //Entidades:
     public void añadirPlayer(int connectionID)
     {   mundo.getPlayer().setConnectionID(connectionID); }
 
-    public void modificarHPsPPC(int connectionID, float HPs)
-    {
-        if (connectionID == mundo.getPlayer().getConnectionID()) mundo.getPlayer().modificarHPs(HPs);
-        else mundo.getPC(connectionID).modificarHPs(HPs);
-    }
-    public void moverPPC(int connectionID, float x, float y)
-    {
-        if (connectionID == mundo.getPlayer().getConnectionID()) mundo.getPlayer().setPosition(x, y);
-        else mundo.getPC(connectionID).setPosition(x, y);
-    }
-    public void cambiarAnimacionPPC(int connectionID, int numAnimacion)
-    {
-        if (connectionID == mundo.getPlayer().getConnectionID()) mundo.getPlayer().setNumAnimacion(numAnimacion);
-        else mundo.getPC(connectionID).setNumAnimacion(numAnimacion);
-    }
-    public void eliminarPPC(int connectionID)
-    {
-        if (connectionID == mundo.getPlayer().getConnectionID()) {}
-        else mundo.eliminarPC(connectionID);
-    }
-    public void modificarnumTalentosSkillPersonalizadoCC(int connectionID, String skillID, int statID, int valor)
-    {
-        if (connectionID == mundo.getPlayer().getConnectionID()) { mundo.getPlayer().setNumTalentosSkillPersonalizadoFromServer(skillID, statID, valor);}
-    }
-    public void añadirSkillPersonalizadoPPC(int connectionID, String spellID)
-    {
-        if (connectionID == mundo.getPlayer().getConnectionID())
-        {
-            mundo.getPlayer().añadirSkillsPersonalizados(spellID);
-            ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo(spellID));
-        }
-    }
-
-    public void actualizarPPC(NetDTO.ActualizarPPC updatePlayer)
-    {
-        if (updatePlayer.connectionID == mundo.getPlayer().getConnectionID())
-        {
-            mundo.getPlayer().setNombre(updatePlayer.nombre);
-            mundo.getPlayer().setNivel(updatePlayer.nivel);
-            mundo.getPlayer().setMaxHPs(updatePlayer.maxHPs);
-            mundo.getPlayer().setActualHPs(updatePlayer.actualHPs);
-            //mundo.getPlayer().setPosition(updatePlayer.x, updatePlayer.y);
-            mundo.getPlayer().setNumAnimacion(updatePlayer.numAnimacion);
-        }
-        else
-        {
-            if (mundo.getPC(updatePlayer.connectionID) == null)
-            {   mundo.añadirPC(updatePlayer.connectionID, updatePlayer.x, updatePlayer.y); }
-
-            mundo.getPC(updatePlayer.connectionID).setNombre(updatePlayer.nombre);
-            mundo.getPC(updatePlayer.connectionID).setNivel(updatePlayer.nivel);
-            mundo.getPC(updatePlayer.connectionID).setMaxHPs(updatePlayer.maxHPs);
-            mundo.getPC(updatePlayer.connectionID).setActualHPs(updatePlayer.actualHPs);
-            mundo.getPC(updatePlayer.connectionID).setPosition(updatePlayer.x, updatePlayer.y);
-            mundo.getPC(updatePlayer.connectionID).setNumAnimacion(updatePlayer.numAnimacion);
-        }
-    }
 
     public void actualizarMapTilesCargados (NetDTO.MapTilesAdyacentesEnCliente ady)     { mundo.mapTilesCargados = ady.mapaAdyacencias; }
     public void actualizarMapa(NetDTO.ActualizarMapa mapaServidor)                      { mundo.actualizarMapa(mapaServidor); }

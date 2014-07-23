@@ -1,10 +1,8 @@
 package DTO;// Created by Hanto on 07/04/2014.
 
 
-import Core.FSM.IO.PlayerIO;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Spell.SpellI;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -23,7 +21,7 @@ public class NetDTO
         kryo.register(ObjectMap.class);
         kryo.register(Object[].class);
         kryo.register(Class.class);
-        kryo.register(NetPlayerCliente.DTOs.class);
+        kryo.register(NetPlayerCliente.PlayerDTOs.class);
         kryo.register(NetPlayerCliente.LogIn.class);
         kryo.register(NetPlayerCliente.Animacion.class);
         kryo.register(NetPlayerCliente.Posicion.class);
@@ -33,17 +31,24 @@ public class NetDTO
         kryo.register(NetPlayerCliente.StartCastear.class);
         kryo.register(NetPlayerCliente.NumTalentosSkillPersonalizado.class);
 
-        kryo.register(PlayerIO.class);
+        kryo.register(NetPCServidor.PCDTOs.class);
+        kryo.register(NetPCServidor.CrearPC.class);
+        kryo.register(NetPCServidor.Posicion.class);
+        kryo.register(NetPCServidor.Animacion.class);
+        kryo.register(NetPCServidor.EliminarPC.class);
+        kryo.register(NetPCServidor.Nombre.class);
+        kryo.register(NetPCServidor.ModificarHPs.class);
+        kryo.register(NetPCServidor.SkillPersonalizado.class);
+        kryo.register(NetPCServidor.NumTalentosSkillPersonalizado.class);
+
 
         kryo.register(AñadirPPC.class);
-        kryo.register(ActualizarPPC.class);
         kryo.register(PosicionPPC.class);
         kryo.register(AnimacionPPC.class);
         kryo.register(ModificarHPsPPC.class);
         kryo.register(EliminarPPC.class);
         kryo.register(AñadirSpellPersonalizadoPPC.class);
         kryo.register(ModificarNumTalentosSkillPersonalizadoPPC.class);
-
 
         kryo.register(CastingTimePercent.class);
         kryo.register(SetTerreno.class);
@@ -69,30 +74,6 @@ public class NetDTO
         public AñadirPPC() {}
         public AñadirPPC(MobPC pc)
         {   connectionID = pc.getConnectionID(); }
-    }
-
-    public static class ActualizarPPC
-    {
-        public int connectionID;
-        public String nombre;
-        public int nivel;
-        public float actualHPs;
-        public float maxHPs;
-        public float x;
-        public float y;
-        public int numAnimacion;
-        public ActualizarPPC() {}
-        public ActualizarPPC(MobPC pc)
-        {
-            connectionID = pc.getConnectionID();
-            nombre = pc.getNombre();
-            nivel = pc.getNivel();
-            actualHPs = ((Vulnerable)pc).getActualHPs();
-            maxHPs = ((Vulnerable)pc).getMaxHPs();
-            x = pc.getX();
-            y = pc.getY();
-            numAnimacion = pc.getNumAnimacion();
-        }
     }
 
     public static class PosicionPPC

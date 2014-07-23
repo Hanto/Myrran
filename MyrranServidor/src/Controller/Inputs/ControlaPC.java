@@ -19,7 +19,7 @@ public class ControlaPC
         this.controlador = controlador;
     }
 
-    public void procesarInput(int connectionID, DTOs netPlayer)
+    public void procesarInput(int connectionID, PlayerDTOs netPlayer)
     {
         PC player = mundo.getPC(connectionID);
         if (player == null) { logger.error("ERROR: no existe Player con este ID: {}", connectionID); return; }
@@ -49,6 +49,7 @@ public class ControlaPC
 
             else if (dto instanceof StartCastear)
             {   player.setCastear(true, ((StartCastear) dto).screenX, ((StartCastear) dto).screenY); }
+
 
             else if (dto instanceof NumTalentosSkillPersonalizado)
             {

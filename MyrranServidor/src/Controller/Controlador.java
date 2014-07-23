@@ -35,6 +35,4 @@ public class Controlador
     public void postRunnable(Runnable runnable)
     {   updater.postRunnable(runnable); }
 
-    public void netUpdater ()
-    {   vista.netUpdate(); }
 }

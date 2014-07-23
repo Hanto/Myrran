@@ -1,6 +1,8 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
 import DTO.NetDTO;
+import DTO.NetPCServidor.PCDTOs;
+import DTO.NetPlayerCliente;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Client;
@@ -10,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public class Cliente extends Client
 {
-    public Controlador controlador;
+    private Controlador controlador;
     public String host;
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -47,36 +49,8 @@ public class Cliente extends Client
 
     private void procesarMensajeServidor (Connection con, Object obj)
     {
-        if (obj instanceof NetDTO.ActualizarPPC)
-        {   controlador.actualizarPPC((NetDTO.ActualizarPPC) obj); }
-
-        if (obj instanceof NetDTO.PosicionPPC)
-        {
-            int conID = ((NetDTO.PosicionPPC) obj).connectionID;
-            float x = ((NetDTO.PosicionPPC) obj).x;
-            float y = ((NetDTO.PosicionPPC) obj).y;
-            controlador.moverPPC(conID, x, y);
-        }
-
-        if (obj instanceof NetDTO.AnimacionPPC)
-        {
-            int conID = ((NetDTO.AnimacionPPC) obj).connectionID;
-            int numAnimacion = ((NetDTO.AnimacionPPC) obj).numAnimacion;
-            controlador.cambiarAnimacionPPC(conID, numAnimacion);
-        }
-
-        if (obj instanceof NetDTO.ModificarHPsPPC)
-        {
-            int conID = ((NetDTO.ModificarHPsPPC) obj).connectionID;
-            float modHPs = ((NetDTO.ModificarHPsPPC) obj).HPs;
-            controlador.modificarHPsPPC(conID, modHPs);
-        }
-
-        if (obj instanceof NetDTO.EliminarPPC)
-        {
-            int conID = ((NetDTO.EliminarPPC) obj).connectionID;
-            controlador.eliminarPPC(conID);
-        }
+        if (obj instanceof PCDTOs)
+        {   controlador.controlaPlayer.procesarInput( (PCDTOs) obj);}
 
         if (obj instanceof NetDTO.SetTerreno)
         {
@@ -87,27 +61,25 @@ public class Cliente extends Client
             controlador.setTerreno(celdaX, celdaY, numCapa, iDTerreno);
         }
 
+        if (obj instanceof NetDTO.EliminarPPC)
+        {   controlador.mundo.eliminarPC( ((NetDTO.EliminarPPC) obj).connectionID);}
+
         if (obj instanceof NetDTO.ActualizarMapa)
         {   controlador.actualizarMapa((NetDTO.ActualizarMapa)obj); }
 
         if (obj instanceof NetDTO.MapTilesAdyacentesEnCliente)
         {   controlador.actualizarMapTilesCargados((NetDTO.MapTilesAdyacentesEnCliente)obj); }
-
-        if (obj instanceof NetDTO.AñadirSpellPersonalizadoPPC)
-        {
-            String spellID = ((NetDTO.AñadirSpellPersonalizadoPPC) obj).spellID;
-            controlador.añadirSkillPersonalizadoPPC(con.getID(), spellID);
-        }
-
-        if (obj instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
-        {
-            String skillID = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) obj).skillID;
-            int statID = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) obj).statID;
-            int valor = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) obj).valor;
-            controlador.modificarnumTalentosSkillPersonalizadoCC(con.getID(), skillID, statID, valor);
-        }
     }
 
     public void enviarAServidor(Object obj)
-    {   logger.trace("ENVIAR: {} {} bytes", obj.getClass().getSimpleName(), this.sendTCP(obj)); }
+    {
+        String nombreDTOs ="";
+        if (obj instanceof NetPlayerCliente.PlayerDTOs)
+        {
+            NetPlayerCliente.PlayerDTOs dtos = (NetPlayerCliente.PlayerDTOs)obj;
+            for (int i=0; i< dtos.listaDTOs.length; i++)
+            {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
+        }
+        logger.trace("ENVIAR: {} {} bytes"+nombreDTOs, obj.getClass().getSimpleName(), this.sendTCP(obj));
+    }
 }

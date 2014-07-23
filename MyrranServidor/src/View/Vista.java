@@ -25,10 +25,10 @@ public class Vista implements PropertyChangeListener
         this.mundo = mundo;
     }
 
-    public void netUpdate()
+    public void enviarDatosAClientes()
     {
         for (PcView pcView: listaPcViews)
-            pcView.netUpdate();
+            pcView.enviarDatosAClientes();
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt)
