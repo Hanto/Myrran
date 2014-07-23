@@ -1,10 +1,8 @@
 package Controller.Inputs;// Created by Hanto on 22/07/2014.
 
 import Controller.Controlador;
-import DTO.NetPlayer;
-import DTO.NetPlayer.Animacion;
-import DTO.NetPlayer.Posicion;
-import Model.Classes.Mobiles.Player;
+import DTO.NetPCServidor;
+import Interfaces.EntidadesTipos.MobPC;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,20 +19,26 @@ public class ControlaPlayer
         this.controlador = controlador;
     }
 
-    public void procesarInput(NetPlayer.DTOs netPlayer)
+    public void procesarInput(NetPCServidor.DTOs netPlayer)
     {
-        Player player = mundo.getPlayer();
+        MobPC player;
+        if (controlador.getCliente().getID() == netPlayer.connectionID) { player = mundo.getPlayer(); }
+        else { player = mundo.getPC(netPlayer.connectionID); }
+
         Object dto;
 
         for (int i=0; i<netPlayer.listaDTOs.length; i++)
         {
             dto = netPlayer.listaDTOs[i];
 
-            if (dto instanceof Animacion)
-            {   player.setNumAnimacion(((Animacion) dto).animacion); }
+            if (dto instanceof NetPCServidor.Posicion)
+            {   player.setPosition(((NetPCServidor.Posicion) dto).posX, ((NetPCServidor.Posicion) dto).posY); }
 
-            else if (dto instanceof Posicion)
-            {   player.setPosition(((Posicion) dto).posX, ((Posicion) dto).posY); }
+            if (dto instanceof NetPCServidor.Nombre)
+            {   player.setNombre(((NetPCServidor.Nombre) dto).nombre); }
+
+            if (dto instanceof NetPCServidor.ActualHPs)
+            {   player.setActualHPs(((NetPCServidor.ActualHPs) dto).HPs);}
         }
     }
 }

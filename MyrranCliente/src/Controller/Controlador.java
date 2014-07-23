@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
 import DTO.NetDTO;
-import DTO.NetPlayer.LogIn;
+import DTO.NetPlayerCliente.LogIn;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.ControladorUI;
@@ -104,11 +104,6 @@ public class Controlador implements ControladorUI
             mundo.getPlayer().añadirSkillsPersonalizados(spellID);
             ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo(spellID));
         }
-    }
-    public void comprobarPlayerSnapshot(int connectionID, NetDTO.PlayerSnapshot snapshot)
-    {
-        if (connectionID == mundo.getPlayer().getConnectionID())
-        {   mundo.getPlayer().comprobarSnapshop(snapshot); }
     }
 
     public void actualizarPPC(NetDTO.ActualizarPPC updatePlayer)

@@ -1,7 +1,6 @@
 package DTO;// Created by Hanto on 07/04/2014.
 
 
-import Core.Cuerpos.Cuerpo;
 import Core.FSM.IO.PlayerIO;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
@@ -24,20 +23,17 @@ public class NetDTO
         kryo.register(ObjectMap.class);
         kryo.register(Object[].class);
         kryo.register(Class.class);
-        kryo.register(NetPlayer.DTOs.class);
-        kryo.register(NetPlayer.LogIn.class);
-        kryo.register(NetPlayer.Animacion.class);
-        kryo.register(NetPlayer.Posicion.class);
-        kryo.register(NetPlayer.ParametrosSpell.class);
-        kryo.register(NetPlayer.SpellSeleccionado.class);
-        kryo.register(NetPlayer.StopCastear.class);
-        kryo.register(NetPlayer.StartCastear.class);
-        kryo.register(NetPlayer.NumTalentosSkillPersonalizado.class);
+        kryo.register(NetPlayerCliente.DTOs.class);
+        kryo.register(NetPlayerCliente.LogIn.class);
+        kryo.register(NetPlayerCliente.Animacion.class);
+        kryo.register(NetPlayerCliente.Posicion.class);
+        kryo.register(NetPlayerCliente.ParametrosSpell.class);
+        kryo.register(NetPlayerCliente.SpellSeleccionado.class);
+        kryo.register(NetPlayerCliente.StopCastear.class);
+        kryo.register(NetPlayerCliente.StartCastear.class);
+        kryo.register(NetPlayerCliente.NumTalentosSkillPersonalizado.class);
 
         kryo.register(PlayerIO.class);
-        kryo.register(PlayerInput.class);
-        kryo.register(PlayerSnapshot.class);
-
 
         kryo.register(AñadirPPC.class);
         kryo.register(ActualizarPPC.class);
@@ -64,51 +60,6 @@ public class NetDTO
 
 
         kryo.register(ParametrosSpellDTO.ParametrosEditarTerreno.class);
-    }
-
-    //Network DTOs:
-    public static class PlayerInput
-    {
-        public int screenX;
-        public int screenY;
-        public boolean irArriba = false;
-        public boolean irAbajo = false;
-        public boolean irDerecha = false;
-        public boolean irIzquierda = false;
-        public boolean startCastear = false;
-        public boolean stopCastear = false;
-        public String spellID = null;
-        public int numAnimacion = 5;
-        public boolean disparar = false;
-
-        public PlayerInput() {}
-        public PlayerInput(PlayerIO playerIO)
-        {
-            this.screenX = playerIO.getScreenX();
-            this.screenY = playerIO.getScreenY();
-            this.irArriba = playerIO.getIrArriba();
-            this.irAbajo = playerIO.getIrAbajo();
-            this.irDerecha = playerIO.getIrDerecha();
-            this.irIzquierda = playerIO.getirIzquierda();
-            this.startCastear = playerIO.getStartCastear();
-            this.stopCastear = playerIO.getStopCastear();
-            this.spellID = playerIO.getSpellID();
-            this.numAnimacion = playerIO.getNumAnimacion();
-            this.disparar = playerIO.getDisparar();
-        }
-    }
-
-    public static class PlayerSnapshot
-    {
-        public int x;
-        public int y;
-        public float angulo;
-        public PlayerSnapshot() {}
-        public PlayerSnapshot(Cuerpo cuerpo)
-        {   x = cuerpo.getX();
-            y = cuerpo.getY();
-            angulo =  cuerpo.getAngulo();
-        }
     }
 
     public static class AñadirPPC

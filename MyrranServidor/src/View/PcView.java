@@ -30,7 +30,6 @@ public class PcView implements PropertyChangeListener
 
     public MapaView mapaView;
 
-
     //Constructor:
     public PcView(PC PC, Vista vista)
     {
@@ -148,8 +147,7 @@ public class PcView implements PropertyChangeListener
         actualizarPlayersCercanos(HPs);
         actualizarPlayer(HPs);
     }
-    private void enviarSnapshot(NetDTO.PlayerSnapshot snapshot)
-    {   actualizarPlayer(snapshot);}
+
     private void eliminar(NetDTO.EliminarPPC eliminarPPC)
     {
         //Dejamos de observar al mundo colindante por cambios (para la edicion de terreno):
@@ -187,8 +185,6 @@ public class PcView implements PropertyChangeListener
         if (evt.getNewValue() instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
         {   modificarSkillTalento((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)evt.getNewValue()); }
 
-        if (evt.getNewValue() instanceof NetDTO.PlayerSnapshot)
-        {   enviarSnapshot((NetDTO.PlayerSnapshot)evt.getNewValue());}
 
         if (isVisible())
         {

@@ -8,7 +8,7 @@ import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
-import DTO.NetPlayer;
+import DTO.NetPlayerCliente;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -65,7 +65,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     protected PlayerIO input = new PlayerIO();
     protected PlayerIO output = new PlayerIO();
 
-    protected NetPlayer netPlayer = new NetPlayer();
+    protected NetPlayerCliente netPlayer = new NetPlayerCliente();
 
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -81,7 +81,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
 
     //GET:
     public Body getBody()                                               { return cuerpo.getBody(); }
-    public NetPlayer getNetPlayer()                                     { return netPlayer; }
+    public NetPlayerCliente getNetPlayer()                                     { return netPlayer; }
     @Override public int getConnectionID()                              { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
@@ -116,6 +116,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     @Override public void setActualHPs (float hps)                      { modificarHPs(hps - actualHPs); }
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID){ return listaSkillsPersonalizados.get(skillID); }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID){ return listaSpellsPersonalizados.get(spellID); }
+    public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
 
     //RECEPCION DATOS:
     //-------------------------------------------------------------------------------------------------------------------
@@ -159,8 +160,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     @Override public void setNombre (String nombre)
     {   //Vista:
         this.nombre = nombre;
-        Object nombreDTO = new PlayerDTO.NombrePlayer(nombre);
-        notificarActualizacion("RECEPCION: setNombre", null, nombreDTO);
+        notificarActualizacion("RECEPCION: setNombre", null, new NetPlayerCliente.Nombre(nombre));
     }
 
     @Override public void setMaxHPs (float mHps)
@@ -199,11 +199,10 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         if (this.numAnimacion != numAnimacion)
         {
             this.numAnimacion = numAnimacion;
-            //Vista:
-            Object AnimacionDTO = new NetDTO.AnimacionPPC(this);
-            notificarActualizacion("ENVIO: setTipoAnimacion", null, AnimacionDTO);
             //Servidor:
             netPlayer.setNumAnimacion(numAnimacion);
+            //Vista:
+            notificarActualizacion("ENVIO: setTipoAnimacion", null, netPlayer.animacion);
         }
     }
 
@@ -214,11 +213,10 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
             cuerpo.setPosition(x, y);
             this.x = x;
             this.y = y;
-            //Vista:
-            Object posicionDTO = new NetDTO.PosicionPPC(this);
-            notificarActualizacion("ENVIO: setPosition", null, posicionDTO);
             //Servidor:
             netPlayer.setPosition(getX(), getY());
+            //Vista:
+            notificarActualizacion("ENVIO: setPosition", null, netPlayer.posicion);
         }
     }
 
@@ -228,11 +226,10 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         {
             this.x = cuerpo.getXinterpolada();
             this.y = cuerpo.getYinterpolada();
-            //vista:
-            Object posicionDTO = new NetDTO.PosicionPPC(this);
-            notificarActualizacion("ENVIO: setPosition", null, posicionDTO);
             //Servidor:
             netPlayer.setPosition(getX(), getY());
+            //Vista:
+            notificarActualizacion("ENVIO: setPosition", null, netPlayer.posicion);
         }
     }
 
@@ -280,10 +277,6 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
             }
         }
     }
-
-
-    public void comprobarSnapshop(NetDTO.PlayerSnapshot snapshot)
-    {    }
 
     private void moverse ()
     {

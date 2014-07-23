@@ -3,10 +3,12 @@ package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.NetDTO;
+import DTO.NetPlayerCliente.Animacion;
+import DTO.NetPlayerCliente.Nombre;
+import DTO.NetPlayerCliente.Posicion;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Mobiles.Player;
-import Model.DTO.PlayerDTO;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
 import View.GameState.MundoView;
@@ -104,24 +106,14 @@ public class PlayerView extends Group implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.PosicionPPC)
-        {
-            float x = ((NetDTO.PosicionPPC) evt.getNewValue()).x;
-            float y = ((NetDTO.PosicionPPC) evt.getNewValue()).y;
-            setPosition(x, y);
-        }
+        if (evt.getNewValue() instanceof Posicion)
+        {   setPosition(((Posicion) evt.getNewValue()).posX, ((Posicion) evt.getNewValue()).posY); }
 
-        if (evt.getNewValue() instanceof NetDTO.AnimacionPPC)
-        {
-            int numAnimacion = ((NetDTO.AnimacionPPC) evt.getNewValue()).numAnimacion;
-            setAnimacion(numAnimacion);
-        }
+        if (evt.getNewValue() instanceof Animacion)
+        {   setAnimacion(((Animacion) evt.getNewValue()).animacion); }
 
-        if (evt.getNewValue() instanceof PlayerDTO.NombrePlayer)
-        {
-            String nuevoNombre = ((PlayerDTO.NombrePlayer) evt.getNewValue()).nombre;
-            setNombre(nuevoNombre);
-        }
+        if (evt.getNewValue() instanceof Nombre)
+        {   setNombre(((Nombre) evt.getNewValue()).nombre); }
 
         if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
         {   modificarHPs((NetDTO.ModificarHPsPPC)evt.getNewValue()); }

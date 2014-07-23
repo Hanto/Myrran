@@ -1,7 +1,7 @@
 package Controller.Inputs;// Created by Hanto on 22/07/2014.
 
 import Controller.Controlador;
-import DTO.NetPlayer.*;
+import DTO.NetPlayerCliente.*;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;

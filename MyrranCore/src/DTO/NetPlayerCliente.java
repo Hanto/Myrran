@@ -2,16 +2,16 @@ package DTO;// Created by Hanto on 21/07/2014.
 
 import com.badlogic.gdx.utils.ObjectMap;
 
-public class NetPlayer
+public class NetPlayerCliente
 {
-    private Animacion animacion = new Animacion();
-    private Posicion posicion = new Posicion();
-    private ParametrosSpell parametrosSpell = new ParametrosSpell();
-    private SpellSeleccionado spellSeleccionado = new SpellSeleccionado();
-    private StopCastear stopCastear = new StopCastear();
-    private StartCastear startCastear = new StartCastear();
-    private NumTalentosSkillPersonalizado numTalentosSkillPersonalizado = new NumTalentosSkillPersonalizado();
-    private ObjectMap<Class, Object> listaDTOs = new ObjectMap<>();
+    public Animacion animacion = new Animacion();
+    public Posicion posicion = new Posicion();
+    public ParametrosSpell parametrosSpell = new ParametrosSpell();
+    public SpellSeleccionado spellSeleccionado = new SpellSeleccionado();
+    public StopCastear stopCastear = new StopCastear();
+    public StartCastear startCastear = new StartCastear();
+    public NumTalentosSkillPersonalizado numTalentosSkillPersonalizado = new NumTalentosSkillPersonalizado();
+    public ObjectMap<Class, Object> listaDTOs = new ObjectMap<>();
 
     private DTOs dtos = new DTOs();
     public static class DTOs
@@ -141,5 +141,13 @@ public class NetPlayer
         public NumTalentosSkillPersonalizado() {}
         public NumTalentosSkillPersonalizado(String skillID, int statID, int valor)
         {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
+    }
+
+    public static class Nombre
+    {
+        public String nombre;
+        public Nombre() {}
+        public Nombre(String nombre)
+        {   this.nombre = nombre; }
     }
 }

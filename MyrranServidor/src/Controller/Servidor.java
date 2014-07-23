@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
 import DTO.NetDTO;
-import DTO.NetPlayer;
+import DTO.NetPlayerCliente;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -45,10 +45,10 @@ public class Servidor extends Server
 
     private void procesarMensajeCliente(Connection con, Object obj)
     {
-        if (obj instanceof NetPlayer.DTOs)
-        {   controlador.controlaPC.procesarInput(con.getID(), (NetPlayer.DTOs)obj); }
+        if (obj instanceof NetPlayerCliente.DTOs)
+        {   controlador.controlaPC.procesarInput(con.getID(), (NetPlayerCliente.DTOs)obj); }
 
-        if (obj instanceof NetPlayer.LogIn)
+        if (obj instanceof NetPlayerCliente.LogIn)
         {   controlador.controlaPC.procesarLogIn(con.getID());}
     }
 

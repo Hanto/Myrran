@@ -49,7 +49,7 @@ public class Mundo extends AbstractModel
         PC PC = mapaPlayers.get(connectionID);
         listaPlayers.remove(PC);
         mapaPlayers.remove(connectionID);
-        PC.eliminar();
+        PC.dispose();
     }
 
     public PC getPC (int connectionID)

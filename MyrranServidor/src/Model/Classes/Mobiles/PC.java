@@ -5,6 +5,8 @@ import Core.Cuerpos.Cuerpo;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.NetDTO;
+import DTO.NetPCServidor;
+import Data.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -24,16 +26,16 @@ import java.util.*;
 
 public class PC extends AbstractModel implements PropertyChangeListener, MobPC, CasterPersonalizable, Debuffeable
 {
-    protected Mundo mundo;                                      //mapaI al que pertecene el Player
-    protected int connectionID;                                 //ID de la conexion con el servidor
+    protected Mundo mundo;
+    protected int connectionID;
     protected MapaI mapa;
 
-    protected float x;                                          //Coordenadas X:
-    protected float y;                                          //Coordenadas Y:
+    protected float x;
+    protected float y;
     protected int numAnimacion = 5;
 
-    protected float velocidadMax = 80.0f;                       //Velocidad Maxima:
-    protected float velocidadMod = 1.0f;                        //Modificadores de Velocidad: debido a Snares, a Sprints, Roots
+    protected float velocidadMax = 80.0f;
+    protected float velocidadMod = 1.0f;
 
     protected String nombre = "Hanto";
     protected int nivel = 1;
@@ -56,18 +58,11 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
     protected Cuerpo cuerpo;
 
+    private List<MobPC> listaPCsCercanos = new ArrayList<>();
+
+    protected NetPCServidor netPCServidor = new NetPCServidor();
+
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-
-    //Constructor:
-    public PC(int connectionID, Mundo mundo)
-    {
-        this.mundo = mundo;
-        this.connectionID = connectionID;
-        this.mapa = mundo.getMapa();
-
-        cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
-        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
-    }
 
     //GET:
     @Override public int getConnectionID ()                             { return connectionID; }
@@ -109,7 +104,29 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID) { return listaSpellsPersonalizados.get(spellID); }
     public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
 
+    //Constructor:
+    public PC(int connectionID, Mundo mundo)
+    {
+        this.mundo = mundo;
+        this.connectionID = connectionID;
+        this.mapa = mundo.getMapa();
 
+        cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
+        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
+
+        mundo.getMapa().añadirObservador(this);
+
+        //quienMeVe();
+    }
+
+    public void dispose()
+    {
+        //Dejamos de observar al mundo colindante por cambios (para la edicion de terreno):
+        mundo.getMapa().eliminarObservador(this);
+
+        Object eliminarDTO = new NetDTO.EliminarPPC(this);
+        notificarActualizacion("dispose", null, eliminarDTO);
+    }
 
     @Override public void añadirSkillsPersonalizados(String spellID)
     {
@@ -180,12 +197,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         }
     }
 
-    public void eliminar()
-    {
-        Object eliminarDTO = new NetDTO.EliminarPPC(this);
-        notificarActualizacion("eliminar", null, eliminarDTO);
-    }
-
     private void castear()
     {
         if (!isCasteando())
@@ -231,6 +242,51 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         actualizarAuras(delta);
         if (castear) castear();
     }
+
+    private void quienMeVe()
+    {
+        PC pcCercano;
+        Iterator<PC> iteratorPCs = mundo.getIteratorListaPlayers();
+        while (iteratorPCs.hasNext())
+        {
+            pcCercano = iteratorPCs.next();
+            if (pcCercano.getConnectionID() != this.getConnectionID())
+            {
+                if (Math.abs(pcCercano.getX()- this.getX()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Horizontal_Resolution /2 &&
+                    Math.abs(pcCercano.getY()- this.getY()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Vertical_Resolution /2     )
+                {
+                    añadirPCVisible(pcCercano);
+                    pcCercano.añadirPCVisible(this);
+                }
+                else
+                {
+                    eliminarPCVisible(pcCercano);
+                    pcCercano.eliminarPCVisible(this);
+                }
+            }
+        }
+    }
+
+    private void añadirPCVisible (PC pc)
+    {
+        if (!listaPCsCercanos.contains(pc))
+        {
+            listaPCsCercanos.add(pc);
+            NetDTO.ActualizarPPC añadirPC = new NetDTO.ActualizarPPC(pc);
+            //actualizarPlayer(añadirPC);
+        }
+    }
+
+    private void eliminarPCVisible (PC pc)
+    {
+        if (listaPCsCercanos.contains(pc))
+        {
+            listaPCsCercanos.remove(pc);
+            NetDTO.EliminarPPC eliminarPPC = new NetDTO.EliminarPPC(pc);
+            //actualizarPlayer(eliminarPPC);
+        }
+    }
+
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
