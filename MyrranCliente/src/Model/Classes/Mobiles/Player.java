@@ -7,8 +7,7 @@ import Core.FSM.MaquinaEstados;
 import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
-import DTO.NetDTO;
-import DTO.NetPlayerCliente;
+import DTO.Remote.NotificadorPlayerCliente;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -20,7 +19,6 @@ import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.DTO.PlayerDTO;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -65,7 +63,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     protected PlayerIO input = new PlayerIO();
     protected PlayerIO output = new PlayerIO();
 
-    protected NetPlayerCliente netPlayer = new NetPlayerCliente();
+    protected NotificadorPlayerCliente notificador;
 
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -73,15 +71,16 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     {
         this.mundo = mundo;
 
-        fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
-        cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
+        this.notificador = new NotificadorPlayerCliente(this);
+        this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
+        this.cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
         cuerpo.setPosition(x, y);
     }
 
     //GET:
     public Body getBody()                                               { return cuerpo.getBody(); }
-    public NetPlayerCliente getNetPlayer()                                     { return netPlayer; }
+    public NotificadorPlayerCliente getNotificador()                    { return notificador; }
     @Override public int getConnectionID()                              { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
@@ -119,7 +118,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
 
     //RECEPCION DATOS:
-    //-------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override public void añadirSkillsPersonalizados(String spellID)
     {
@@ -145,33 +144,35 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         skillPersonalizado.setNumTalentos(statID, valor);
     }
 
-    //NOTITIFACION VISTA:
-    //-------------------------------------------------------------------------------------------------------------------
+    //  NOTITIFACION VISTA:
+    //------------------------------------------------------------------------------------------------------------------
 
+    //Vista:
     @Override public void modificarHPs(float HPs)
-    {   //Vista:
+    {
         actualHPs += HPs;
         if (actualHPs > maxHPs) actualHPs = maxHPs;
         else if (actualHPs < 0) actualHPs = 0f;
-        Object modificarHPs = new NetDTO.ModificarHPsPPC(this, HPs);
-        notificarActualizacion("RECEPCION: modificarHPs", null, modificarHPs);
+        notificador.setModificarHPs(HPs);
     }
 
+    //Vista:
     @Override public void setNombre (String nombre)
-    {   //Vista:
+    {
         this.nombre = nombre;
-        notificarActualizacion("RECEPCION: setNombre", null, new NetPlayerCliente.Nombre(nombre));
+        notificador.setNombre(nombre);
     }
 
+    //Vista:
     @Override public void setMaxHPs (float mHps)
-    {   //Vista:
+    {
         maxHPs = mHps;
-        Object mHPsDTO = new PlayerDTO.MaxHPs(mHps);
-        notificarActualizacion("RECEPCION: setMaxHPs", null, mHPsDTO);
+        notificador.setMaxHPs(maxHPs);
     }
 
+    //Vista:
     private void actualizarCastingTime(float delta)
-    {   //Vista:
+    {
         if (isCasteando())
         {
             actualCastingTime += delta;
@@ -180,74 +181,66 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
                 actualCastingTime = 0f;
                 totalCastingTime = 0f;
             }
-            Object castingTimePercent = new NetDTO.CastingTimePercent(this);
-            notificarActualizacion("actualizarCastingTime", null, castingTimePercent);
+            notificador.setCastingTime(this);
         }
     }
 
-    //ENVIO DATOS:
-    //-------------------------------------------------------------------------------------------------------------------
+    //  ENVIO DATOS:
+    //------------------------------------------------------------------------------------------------------------------
 
-
-    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
-    {   //Servidor:
-        netPlayer.setNumTalentosSkillPersonalizado(skillID, statID, valor);
-    }
-
+    //Vista - Servidor:
     @Override public void setNumAnimacion(int numAnimacion)
     {
         this.numAnimacion = numAnimacion;
-        //Servidor:
-        netPlayer.setNumAnimacion(numAnimacion);
-        //Vista:
-        notificarActualizacion("ENVIO: setTipoAnimacion", null, netPlayer.animacion);
+        notificador.setNumAnimacion(numAnimacion);
     }
 
+    //Vista - Servidor:
     @Override public void setPosition (float x, float y)
     {
         cuerpo.setPosition(x, y);
         this.x = x;
         this.y = y;
-        //Servidor:
-        netPlayer.setPosition(getX(), getY());
-        //Vista:
-        notificarActualizacion("ENVIO: setPosition", null, netPlayer.posicion);
+        notificador.setPosition(x, y);
     }
 
+    //Vista - Servidor:
     private void getPosicionInterpoladaCuerpo()
     {
         this.x = cuerpo.getXinterpolada();
         this.y = cuerpo.getYinterpolada();
-        //Servidor:
-        netPlayer.setPosition(getX(), getY());
-        //Vista:
-        notificarActualizacion("ENVIO: setPosition", null, netPlayer.posicion);
+        notificador.setPosition(x, y);
     }
 
+    //Servidor:
+    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+    {   notificador.setNumTalentosSkillPersonalizado(skillID, statID, valor); }
+
+    //Servidor:
     @Override public void setParametrosSpell(Object parametros)
     {
         parametrosSpell = parametros;
-        //Servidor:
-        netPlayer.setParametrosSpell(parametros);
+        notificador.setParametrosSpell(parametros);
     }
 
+    //Servidor:
     @Override public void setSpellIDSeleccionado(String spellID)
     {
         spellIDSeleccionado = spellID;
-        //Servidor:
-        netPlayer.setSpellIDSeleccionado(spellID, getParametrosSpell());
+        notificador.setSpellIDSeleccionado(spellID, getParametrosSpell());
     }
 
+    //Servidor:
     private void stopCastear()
     {
         if (castearInterrumpible)
         {
             castearInterrumpible = false;
-            //Servidor:
-            netPlayer.setStopCastear(output.getScreenX(), output.getScreenY());
+            notificador.setStopCastear(output.getScreenX(), output.getScreenY());
         }
     }
 
+    //Servidor:
     private void startCastear()
     {
         if (!isCasteando())
@@ -255,9 +248,9 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
             SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(output.getSpellID());
             if (spell != null)
             {
+                spell.castear(this, output.getScreenX(), output.getScreenY());
                 castearInterrumpible = true;
-                //Servidor:
-                netPlayer.setStartCastear(output.getScreenX(), output.getScreenY());
+                notificador.setStartCastear(output.getScreenX(), output.getScreenY());
                 //actualCastingTime += 0.01f;
             }
         }

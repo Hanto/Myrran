@@ -122,4 +122,7 @@ public class Cuerpo
             }
         }
     }
+
+    public void dispose()
+    {   world.destroyBody(body); }
 }

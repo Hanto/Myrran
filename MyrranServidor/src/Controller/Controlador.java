@@ -1,6 +1,6 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
-import Controller.Inputs.ControlaPC;
+import Controller.Inputs.ControlaPlayer;
 import Model.GameState.Mundo;
 import View.Vista;
 
@@ -9,7 +9,7 @@ public class Controlador
     protected Servidor servidor;                  //Input principal de la simulacion
     protected Updater updater;
 
-    protected ControlaPC controlaPC;
+    protected ControlaPlayer controlaPlayer;
 
     protected Mundo mundo;
     protected Vista vista;
@@ -20,7 +20,7 @@ public class Controlador
     {
         this.mundo = mundo;
 
-        controlaPC = new ControlaPC(mundo, this);
+        controlaPlayer = new ControlaPlayer(mundo, this);
         vista = new Vista(this, mundo);
         servidor = new Servidor(this);
         updater = new Updater(this, mundo);
@@ -34,5 +34,4 @@ public class Controlador
 
     public void postRunnable(Runnable runnable)
     {   updater.postRunnable(runnable); }
-
 }

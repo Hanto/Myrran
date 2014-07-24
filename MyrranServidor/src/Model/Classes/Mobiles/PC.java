@@ -55,11 +55,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
     private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
     protected Cuerpo cuerpo;
-
-    //private List<MobPC> listaPCsCercanos = new ArrayList<>();
-
-    //protected NetPCServidor netPCServidor = new NetPCServidor();
-
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     //GET:
@@ -111,17 +106,10 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
         cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
-
-        //mundo.getMapa().añadirObservador(this);
-
-        //quienMeVe();
     }
 
     public void dispose()
     {
-        //Dejamos de observar al mundo colindante por cambios (para la edicion de terreno):
-        //mundo.getMapa().eliminarObservador(this);
-
         Object eliminarDTO = new NetDTO.EliminarPPC(this);
         notificarActualizacion("dispose", null, eliminarDTO);
     }
@@ -168,14 +156,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         notificarActualizacion("modificarHPs", null, modificarHPs);
     }
 
-    public void setCastear (boolean castear, int targetX, int targetY)
-    {
-        this.castear = castear;
-        this.targetX = targetX;
-        this.targetY = targetY;
-        if (castear) castear();
-    }
-
     @Override public void setPosition(float x, float y)
     {
         this.x = x; this.y = y;
@@ -186,13 +166,18 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
     @Override public void setNumAnimacion(int numAnimacion)
     {
-        if (this.numAnimacion != numAnimacion)
-        {
-            this.numAnimacion = numAnimacion;
+        this.numAnimacion = numAnimacion;
 
-            Object animacionDTO = new NetDTO.AnimacionPPC(this);
-            notificarActualizacion("setNumAnimacion", null, animacionDTO);
-        }
+        Object animacionDTO = new NetDTO.AnimacionPPC(this);
+        notificarActualizacion("setNumAnimacion", null, animacionDTO);
+    }
+
+    public void setCastear (boolean castear, int targetX, int targetY)
+    {
+        this.castear = castear;
+        this.targetX = targetX;
+        this.targetY = targetY;
+        if (castear) castear();
     }
 
     private void castear()
@@ -240,51 +225,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         actualizarAuras(delta);
         if (castear) castear();
     }
-/*
-    private void quienMeVe()
-    {
-        pc pcCercano;
-        Iterator<pc> iteratorPCs = mundo.getIteratorListaPlayers();
-        while (iteratorPCs.hasNext())
-        {
-            pcCercano = iteratorPCs.next();
-            if (pcCercano.getConnectionID() != this.getConnectionID())
-            {
-                if (Math.abs(pcCercano.getX()- this.getX()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Horizontal_Resolution /2 &&
-                    Math.abs(pcCercano.getY()- this.getY()) <=  Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Vertical_Resolution /2     )
-                {
-                    añadirPCVisible(pcCercano);
-                    pcCercano.añadirPCVisible(this);
-                }
-                else
-                {
-                    eliminarPCVisible(pcCercano);
-                    pcCercano.eliminarPCVisible(this);
-                }
-            }
-        }
-    }
-
-    private void añadirPCVisible (pc pc)
-    {
-        if (!listaPCsCercanos.contains(pc))
-        {
-            listaPCsCercanos.add(pc);
-            NetDTO.ActualizarPPC añadirPC = new NetDTO.ActualizarPPC(pc);
-            //actualizarPlayer(añadirPC);
-        }
-    }
-
-    private void eliminarPCVisible (pc pc)
-    {
-        if (listaPCsCercanos.contains(pc))
-        {
-            listaPCsCercanos.remove(pc);
-            NetDTO.EliminarPPC eliminarPPC = new NetDTO.EliminarPPC(pc);
-            //actualizarPlayer(eliminarPPC);
-        }
-    }
-*/
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {

@@ -1,35 +1,32 @@
 package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
 import Core.Cuerpos.BodyFactory;
-import DTO.NetDTO;
+import Core.Cuerpos.Cuerpo;
+import DTO.Remote.notificadorPCCliente;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Model.AbstractModel;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-
-import static Data.Settings.PIXEL_METROS;
 
 public class PC extends AbstractModel implements MobPC
 {
-    protected Integer connectionID;
-    //Posicion:
-    protected float x;                      //Coordenadas X:
-    protected float y;                      //Coordenadas Y:
+    protected int connectionID;
+
+    protected float x;
+    protected float y;
     protected int numAnimacion = 5;
 
     protected float actualHPs;
     protected float maxHPs;
 
-    protected Body body;
+    protected Cuerpo cuerpo;
+    public notificadorPCCliente notificador;
 
     public int getConnectionID()            { return connectionID; }
     public int getNumAnimacion()            { return numAnimacion; }
     public float getX()                     { return x; }
     public float getY()                     { return y; }
 
-
     //TODO
-    public int getTimestamp()                                   { return 0; }
     @Override public float getActualHPs()                       { return actualHPs; }
     @Override public float getMaxHPs()                          { return maxHPs; }
     @Override public void setActualHPs(float HPs)               { modificarHPs(HPs - actualHPs);}
@@ -47,47 +44,41 @@ public class PC extends AbstractModel implements MobPC
     @Override public void setDireccion(float grados)            {}
     @Override public void setVectorDireccion(float x, float y)  {}
 
-    public void setTimestamp(int timestamp)                     {}
-
     //Constructor:
     public PC(int connectionID, World world)
     {
+        this.notificador = new notificadorPCCliente(this);
         this.connectionID = connectionID;
-        body = BodyFactory.crearCuerpo.RECTANGULAR.nuevo(world, 48, 48);
+        this.cuerpo = new Cuerpo(world, 48, 48);
+        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
     }
 
     @Override public void setPosition (float x, float y)
     {
-        body.setTransform((x+24) * PIXEL_METROS, (y+24) * PIXEL_METROS, 0);
+        cuerpo.setPosition(x, y);
 
         this.x = x; this.y = y;
-        Object posicionDTO = new NetDTO.PosicionPPC(this);
-        notificarActualizacion("setPosition", null, posicionDTO);
+        notificador.setPosition(x, y);
     }
 
     @Override public void setNumAnimacion(int numAnimacion)
     {
         this.numAnimacion = numAnimacion;
-        Object AnimacionDTO = new NetDTO.AnimacionPPC(this);
-        notificarActualizacion("setTipoAnimacion", null, AnimacionDTO);
-        //System.out.println("model animacion a ["+numAnimacion+"]");
+        notificador.setNumAnimacion(numAnimacion);
     }
 
     public void dispose()
     {
-        body.getWorld().destroyBody(body);
-        Object eliminarPC = new NetDTO.EliminarPPC(connectionID);
-        notificarActualizacion("eliminarPC", null, eliminarPC);
+        cuerpo.dispose();
+        notificador.setDispose();
     }
-
 
     @Override public void modificarHPs(float HPs)
     {
         actualHPs += HPs;
         if (actualHPs > maxHPs) actualHPs = maxHPs;
         else if (actualHPs < 0) actualHPs = 0;
-        Object modificarHPs = new NetDTO.ModificarHPsPPC(this, HPs);
-        notificarActualizacion("modificarHPs", null, modificarHPs);
+        notificador.setModificarHPs(HPs);
     }
 
     public void actualizar (float delta)

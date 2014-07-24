@@ -1,8 +1,7 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
 import DTO.NetDTO;
-import DTO.NetPCServidor;
-import DTO.NetPlayerCliente;
+import DTO.Remote.DTOs;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -44,21 +43,26 @@ public class Servidor extends Server
         catch (Exception e) { System.out.println("ERROR: Inicio Servidor: "+e); }
     }
 
+    // DTOS de Entrada:
+    //------------------------------------------------------------------------------------------------------------------
+
     private void procesarMensajeCliente(Connection con, Object obj)
     {
-        if (obj instanceof NetPlayerCliente.PlayerDTOs)
-        {   controlador.controlaPC.procesarInput(con.getID(), (NetPlayerCliente.PlayerDTOs)obj); }
+        if (obj instanceof DTOs.PlayerDTOs)
+        {   controlador.controlaPlayer.procesarInput(con.getID(), (DTOs.PlayerDTOs)obj); }
 
-        if (obj instanceof NetPlayerCliente.LogIn)
-        {   controlador.controlaPC.procesarLogIn(con.getID());}
+        if (obj instanceof DTOs.LogIn)
+        {   controlador.controlaPlayer.procesarLogIn(con.getID());}
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public void enviarACliente(int connectionID, Object obj)
     {
         String nombreDTOs ="";
-        if (obj instanceof NetPCServidor.PCDTOs)
+        if (obj instanceof DTOs.PCDTOs)
         {
-            NetPCServidor.PCDTOs dtos = (NetPCServidor.PCDTOs)obj;
+            DTOs.PCDTOs dtos = (DTOs.PCDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }

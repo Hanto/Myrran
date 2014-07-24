@@ -2,7 +2,8 @@ package View.Classes.Mobiles;
 
 import DB.RSC;
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;
-import DTO.NetDTO;
+import DTO.Remote.DTOs;
+import DTO.Remote.DTOs.CastingTimePercent;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Vulnerable;
@@ -150,10 +151,13 @@ public class NameplateView extends Actor implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
+        if (evt.getNewValue() instanceof DTOs.ModificarHPs)
         { setHPsPercent();}
 
-        if (evt.getNewValue() instanceof NetDTO.CastingTimePercent)
-        { setCastingTimePercent(((NetDTO.CastingTimePercent) evt.getNewValue()).castingTimePercent); }
+        if (evt.getNewValue() instanceof DTOs.MaxHPs)
+        { setHPsPercent();}
+
+        if (evt.getNewValue() instanceof CastingTimePercent)
+        { setCastingTimePercent(((CastingTimePercent) evt.getNewValue()).castingTimePercent); }
     }
 }

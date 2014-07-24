@@ -2,10 +2,7 @@ package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
 import Controller.Controlador;
 import DB.RSC;
-import DTO.NetDTO;
-import DTO.NetPlayerCliente.Animacion;
-import DTO.NetPlayerCliente.Nombre;
-import DTO.NetPlayerCliente.Posicion;
+import DTO.Remote.DTOs;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Mobiles.Player;
@@ -79,10 +76,10 @@ public class PlayerView extends Group implements PropertyChangeListener
     public void setNombre (String nuevoNombre)
     {   nombre.setTexto(nuevoNombre); }
 
-    public void modificarHPs(NetDTO.ModificarHPsPPC HPs)
+    public void modificarHPs(float HPs)
     {
-        Texto texto = new Texto(Integer.toString((int) HPs.HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
-                HPs.HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
+        Texto texto = new Texto(Integer.toString((int) HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
+                HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
         texto.setPosition(this.getWidth() / 2 + (float) Math.random() * 30 - 15, this.getHeight() + 15);
         texto.scrollingCombatText(this, 2f);
     }
@@ -106,16 +103,16 @@ public class PlayerView extends Group implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof Posicion)
-        {   setPosition(((Posicion) evt.getNewValue()).posX, ((Posicion) evt.getNewValue()).posY); }
+        if (evt.getNewValue() instanceof DTOs.Posicion)
+        {   setPosition(((DTOs.Posicion) evt.getNewValue()).posX, ((DTOs.Posicion) evt.getNewValue()).posY); }
 
-        if (evt.getNewValue() instanceof Animacion)
-        {   setAnimacion(((Animacion) evt.getNewValue()).animacion); }
+        if (evt.getNewValue() instanceof DTOs.Animacion)
+        {   setAnimacion(((DTOs.Animacion) evt.getNewValue()).numAnimacion); }
 
-        if (evt.getNewValue() instanceof Nombre)
-        {   setNombre(((Nombre) evt.getNewValue()).nombre); }
+        if (evt.getNewValue() instanceof DTOs.Nombre)
+        {   setNombre(((DTOs.Nombre) evt.getNewValue()).nombre); }
 
-        if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
-        {   modificarHPs((NetDTO.ModificarHPsPPC)evt.getNewValue()); }
+        if (evt.getNewValue() instanceof DTOs.ModificarHPs)
+        {   modificarHPs(((DTOs.ModificarHPs) evt.getNewValue()).HPs); }
     }
 }

@@ -2,7 +2,8 @@ package View.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
 import Controller.Controlador;
 import DB.RSC;
-import DTO.NetDTO;
+import DTO.Remote.DTOs;
+import DTO.Remote.DTOs.Dispose;
 import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import View.Classes.Actores.PixiePC;
@@ -74,10 +75,10 @@ public class PCView extends Group implements PropertyChangeListener
         //setPosition(x,y);
     }
 
-    public void modificarHPs(NetDTO.ModificarHPsPPC HPs)
+    public void modificarHPs(int HPs)
     {
-        Texto texto = new Texto(Integer.toString((int) HPs.HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
-                HPs.HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
+        Texto texto = new Texto(Integer.toString(HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
+                HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
         texto.setPosition(this.getWidth() / 2 + (float) Math.random() * 30 - 15, this.getHeight() + 15);
         texto.scrollingCombatText(this, 2f);
     }
@@ -87,23 +88,16 @@ public class PCView extends Group implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.PosicionPPC)
-        {
-            float x = ((NetDTO.PosicionPPC) evt.getNewValue()).x;
-            float y = ((NetDTO.PosicionPPC) evt.getNewValue()).y;
-            mover((int) x, (int) y);
-        }
+        if (evt.getNewValue() instanceof DTOs.Posicion)
+        {   mover( ((DTOs.Posicion) evt.getNewValue()).posX,  ((DTOs.Posicion) evt.getNewValue()).posY ); }
 
-        if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
-        {   modificarHPs((NetDTO.ModificarHPsPPC)evt.getNewValue()); }
+        if (evt.getNewValue() instanceof DTOs.ModificarHPs)
+        {   modificarHPs( (int) (((DTOs.ModificarHPs) evt.getNewValue()).HPs) ); }
 
-        if (evt.getNewValue() instanceof NetDTO.AnimacionPPC)
-        {
-            int numAnimacion = ((NetDTO.AnimacionPPC) evt.getNewValue()).numAnimacion;
-            setAnimacion(numAnimacion);
-        }
+        if (evt.getNewValue() instanceof DTOs.Animacion)
+        {   setAnimacion(((DTOs.Animacion) evt.getNewValue()).numAnimacion); }
 
-        if (evt.getNewValue() instanceof NetDTO.EliminarPPC)
+        if (evt.getNewValue() instanceof Dispose)
         {   dispose(); }
     }
 }

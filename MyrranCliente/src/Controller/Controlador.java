@@ -2,7 +2,7 @@ package Controller;// Created by Hanto on 08/04/2014.
 
 import Controller.Inputs.ControlaPlayer;
 import DTO.NetDTO;
-import DTO.NetPlayerCliente.LogIn;
+import DTO.Remote.DTOs.LogIn;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
@@ -79,10 +79,8 @@ public class Controlador implements ControladorUI
     public void añadirPlayer(int connectionID)
     {   mundo.getPlayer().setConnectionID(connectionID); }
 
-
     public void actualizarMapTilesCargados (NetDTO.MapTilesAdyacentesEnCliente ady)     { mundo.mapTilesCargados = ady.mapaAdyacencias; }
     public void actualizarMapa(NetDTO.ActualizarMapa mapaServidor)                      { mundo.actualizarMapa(mapaServidor); }
-    public void setTerreno(int celdaX, int celdaY, int numCapa, short iDTerreno)        { mundo.getMapa().setTerreno(celdaX, celdaY, numCapa, iDTerreno); }
     public void aplicarZoom(int incrementoZoom)                                         { vista.aplicarZoom(incrementoZoom); }
     public OrthographicCamera getCamara()                                               { return vista.getMundoView().getCamara(); }
 

@@ -1,8 +1,8 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
 import DTO.NetDTO;
-import DTO.NetPCServidor.PCDTOs;
-import DTO.NetPlayerCliente;
+import DTO.Remote.DTOs;
+import DTO.Remote.DTOs.PCDTOs;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Client;
@@ -47,22 +47,13 @@ public class Cliente extends Client
         catch (Exception IOException) { logger.error("ERROR: Imposible conectar con el Servidor: ", IOException); }
     }
 
+    // DTOS de entrada:
+    //------------------------------------------------------------------------------------------------------------------
+
     private void procesarMensajeServidor (Connection con, Object obj)
     {
         if (obj instanceof PCDTOs)
         {   controlador.controlaPlayer.procesarInput( (PCDTOs) obj);}
-
-        if (obj instanceof NetDTO.SetTerreno)
-        {
-            int celdaX = ((NetDTO.SetTerreno) obj).celdaX;
-            int celdaY = ((NetDTO.SetTerreno) obj).celdaY;
-            int numCapa = ((NetDTO.SetTerreno) obj).numCapa;
-            short iDTerreno = ((NetDTO.SetTerreno) obj).iDTerreno;
-            controlador.setTerreno(celdaX, celdaY, numCapa, iDTerreno);
-        }
-
-        if (obj instanceof NetDTO.EliminarPPC)
-        {   controlador.mundo.eliminarPC( ((NetDTO.EliminarPPC) obj).connectionID);}
 
         if (obj instanceof NetDTO.ActualizarMapa)
         {   controlador.actualizarMapa((NetDTO.ActualizarMapa)obj); }
@@ -71,12 +62,14 @@ public class Cliente extends Client
         {   controlador.actualizarMapTilesCargados((NetDTO.MapTilesAdyacentesEnCliente)obj); }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public void enviarAServidor(Object obj)
     {
         String nombreDTOs ="";
-        if (obj instanceof NetPlayerCliente.PlayerDTOs)
+        if (obj instanceof DTOs.PlayerDTOs)
         {
-            NetPlayerCliente.PlayerDTOs dtos = (NetPlayerCliente.PlayerDTOs)obj;
+            DTOs.PlayerDTOs dtos = (DTOs.PlayerDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }

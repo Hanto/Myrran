@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 public class MapaView
 {
     private PC PC;
+    private PcView pcView;
     private Mundo mundo;
     private Controlador controlador;
 
@@ -32,9 +33,10 @@ public class MapaView
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MapaView (PC pc, Mundo mundo, Controlador controlador)
+    public MapaView (PC pc, PcView pcView, Mundo mundo, Controlador controlador)
     {
         this.PC = pc;
+        this.pcView = pcView;
         this.mundo = mundo;
         this.controlador = controlador;
 
@@ -164,7 +166,6 @@ public class MapaView
         mapTileCentroX += incX;
         mapTileCentroY += incY;
 
-        //System.out.println("MAPTILE: ["+mapTileCentroX+" "+mapTileCentroY+"]");
         enviarMapTilesAdyancentes();
     }
 
@@ -238,8 +239,7 @@ public class MapaView
         {
             if (getMapaEnviado(offsetX, offsetY))
             {
-                NetDTO.SetTerreno setTerreno = new NetDTO.SetTerreno(tileX,tileY,numCapa,iDTerreno);
-                controlador.enviarACliente(PC.getConnectionID(), setTerreno);
+                pcView.notificador.añadirCambioTerreno(tileX, tileY, numCapa, iDTerreno);
                 logger.trace("Editando SetTerreno: ["+tileX+"]["+tileY+"]");
             }
         }

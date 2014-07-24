@@ -1,11 +1,10 @@
 package DTO;// Created by Hanto on 07/04/2014.
 
 
+import DTO.Remote.DTOs;
 import Data.Settings;
-import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Spell.SpellI;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 
@@ -18,40 +17,30 @@ public class NetDTO
     public static void register (EndPoint endPoint)
     {
         Kryo kryo = endPoint.getKryo();
-        kryo.register(ObjectMap.class);
+
         kryo.register(Object[].class);
-        kryo.register(Class.class);
-        kryo.register(NetPlayerCliente.PlayerDTOs.class);
-        kryo.register(NetPlayerCliente.LogIn.class);
-        kryo.register(NetPlayerCliente.Animacion.class);
-        kryo.register(NetPlayerCliente.Posicion.class);
-        kryo.register(NetPlayerCliente.ParametrosSpell.class);
-        kryo.register(NetPlayerCliente.SpellSeleccionado.class);
-        kryo.register(NetPlayerCliente.StopCastear.class);
-        kryo.register(NetPlayerCliente.StartCastear.class);
-        kryo.register(NetPlayerCliente.NumTalentosSkillPersonalizado.class);
+        //Player Cliente:
+        kryo.register(DTOs.PlayerDTOs.class);
+        //Player Servidor:
+        kryo.register(DTOs.PCDTOs.class);
 
-        kryo.register(NetPCServidor.PCDTOs.class);
-        kryo.register(NetPCServidor.CrearPC.class);
-        kryo.register(NetPCServidor.Posicion.class);
-        kryo.register(NetPCServidor.Animacion.class);
-        kryo.register(NetPCServidor.EliminarPC.class);
-        kryo.register(NetPCServidor.Nombre.class);
-        kryo.register(NetPCServidor.ModificarHPs.class);
-        kryo.register(NetPCServidor.SkillPersonalizado.class);
-        kryo.register(NetPCServidor.NumTalentosSkillPersonalizado.class);
+        //Contenido Player:
+        kryo.register(DTOs.LogIn.class);
+        kryo.register(DTOs.Animacion.class);
+        kryo.register(DTOs.Posicion.class);
+        kryo.register(DTOs.ParametrosSpell.class);
+        kryo.register(DTOs.SpellSeleccionado.class);
+        kryo.register(DTOs.StopCastear.class);
+        kryo.register(DTOs.StartCastear.class);
+        kryo.register(DTOs.NumTalentosSkillPersonalizado.class);
+        kryo.register(DTOs.CrearPC.class);
+        kryo.register(DTOs.EliminarPC.class);
+        kryo.register(DTOs.Nombre.class);
+        kryo.register(DTOs.HPs.class);
+        kryo.register(DTOs.ModificarHPs.class);
+        kryo.register(DTOs.SkillPersonalizado.class);
+        kryo.register(DTOs.CambioTerreno.class);
 
-
-        kryo.register(AñadirPPC.class);
-        kryo.register(PosicionPPC.class);
-        kryo.register(AnimacionPPC.class);
-        kryo.register(ModificarHPsPPC.class);
-        kryo.register(EliminarPPC.class);
-        kryo.register(AñadirSpellPersonalizadoPPC.class);
-        kryo.register(ModificarNumTalentosSkillPersonalizadoPPC.class);
-
-        kryo.register(CastingTimePercent.class);
-        kryo.register(SetTerreno.class);
 
         kryo.register(boolean[].class);
         kryo.register(boolean[][].class);
@@ -146,14 +135,6 @@ public class NetDTO
         public ModificarNumTalentosSkillPersonalizadoPPC() {}
         public ModificarNumTalentosSkillPersonalizadoPPC(String skillID, int statID, int valor)
         {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
-    }
-
-    public static class CastingTimePercent
-    {
-        public float castingTimePercent;
-        public CastingTimePercent() {}
-        public CastingTimePercent(Caster Caster)
-        {   this.castingTimePercent = Caster.getActualCastingTime() == 0 && Caster.getTotalCastingTime() == 0 ? 100 : Caster.getActualCastingTime() / Caster.getTotalCastingTime(); }
     }
 
     public static class SetTerreno

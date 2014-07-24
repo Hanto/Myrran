@@ -2,7 +2,7 @@ package View;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.NetDTO;
-import DTO.NetPCServidor;
+import DTO.Remote.notificadorPCServidor;
 import Data.Settings;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Spell.SpellPersonalizadoI;
@@ -28,8 +28,8 @@ public class PcView implements PropertyChangeListener
     private float x;
     private float y;
 
-    private MapaView mapaView;
-    private NetPCServidor netPCServidor;
+    protected MapaView mapaView;
+    protected notificadorPCServidor notificador;
 
     //Constructor:
     public PcView(PC pc, Vista vista)
@@ -37,7 +37,7 @@ public class PcView implements PropertyChangeListener
         this.pc = pc;
         this.vista = vista;
         this.controlador = vista.controlador;
-        this.netPCServidor = new NetPCServidor(pc.getConnectionID());
+        this.notificador = new notificadorPCServidor(pc.getConnectionID());
         this.mundo = vista.mundo;
 
         x = pc.getX();
@@ -46,20 +46,27 @@ public class PcView implements PropertyChangeListener
         mundo.getMapa().añadirObservador(this);
         pc.añadirObservador(this);
 
-        netPCServidor.setPosition(x, y);
-        netPCServidor.setNombre(pc.getNombre());
+        notificador.setPosition(x, y);
+        notificador.setNombre(pc.getNombre());
+        notificador.setHPs(pc.getActualHPs(), pc.getMaxHPs());
 
         quienMeVe();
 
-        mapaView = new MapaView(pc, mundo, controlador);
+        mapaView = new MapaView(pc, this, mundo, controlador);
     }
 
-    public void enviarDatosAClientes()
+    //Separamos los eventos Personales de los globales y mandamos los Personales de todas las unidades antes que los globales para
+    //que los mensajes de creacion de unidades (Personales) tengan preferencia sobre los de alteracion de unidades ajenas (Globales)
+    //y asi no nos suceda que se nos pida alterar la posicion de una unidad que aun no esta creada, generando un error
+    public void enviarDatosPersonales()
     {
-        netPCServidor.getDTOs();
-        if (netPCServidor.contieneDatosDTOPersonal()) actualizarPlayer(netPCServidor.dtoPersonal);
-        if (netPCServidor.contieneDatosDTOGlobal() && isVisible()) actualizarPlayersCercanos(netPCServidor.dtoGlobal);
+        notificador.getDTOs();
+        if (notificador.contieneDatosDTOPersonal()) actualizarPlayer(notificador.dtoPersonal);
     }
+
+    public void enviarDatosGlobales()
+    {   if (notificador.contieneDatosDTOGlobal() && isVisible()) actualizarPlayersCercanos(notificador.dtoGlobal); }
+
     private void actualizarPlayersCercanos (Object obj)
     {
         for (MobPC PCCercanos : listaPCsCercanos)
@@ -74,7 +81,7 @@ public class PcView implements PropertyChangeListener
     private void setPosition (float posX, float posY)
     {
         x = posX; y = posY;
-        netPCServidor.setPosition(posX, posY);
+        notificador.setPosition(posX, posY);
         quienMeVe();
         mapaView.comprobarVistaMapa();
     }
@@ -107,7 +114,7 @@ public class PcView implements PropertyChangeListener
         if (!listaPCsCercanos.contains(pcview.pc))
         {
             listaPCsCercanos.add(pcview.pc);
-            netPCServidor.añadirCrearPC(pcview.pc);
+            notificador.añadirVeAlPC(pcview.pc);
         }
     }
 
@@ -116,37 +123,40 @@ public class PcView implements PropertyChangeListener
         if (listaPCsCercanos.contains(pcView.pc))
         {
             listaPCsCercanos.remove(pcView.pc);
-            netPCServidor.añadirtEliminarPC(pcView.pc.getConnectionID());
+            notificador.añadirNoVeAlPC(pcView.pc.getConnectionID());
         }
     }
 
-
-
-
     private void setAnimacion(int numAnimacion)
-    {   netPCServidor.setNumAnimacion(numAnimacion); }
+    {   notificador.setNumAnimacion(numAnimacion); }
+
     private void modificarSkillTalento(String skillID, int statID, int valor)
-    {   netPCServidor.añadirNumTalentosSkillPersonalizado(skillID, statID, valor); }
+    {   notificador.añadirNumTalentosSkillPersonalizado(skillID, statID, valor); }
+
     private void añadirSpellPersonalizado(String spellID)
     {
         pc.getSpellPersonalizado(spellID).añadirObservador(this);
-        netPCServidor.añadirSkillPersonalizado(spellID);
+        notificador.añadirSkillPersonalizado(spellID);
     }
-    private void modificarHPs(float HPs)
-    {   netPCServidor.añadirModificarHPs(HPs); }
 
-    private void eliminar(NetDTO.EliminarPPC eliminarPPC)
+    private void modificarHPs(float HPs)
+    {   notificador.añadirModificarHPs(HPs); }
+
+    private void dispose()
     {
         //Dejamos de observar al mundo colindante por cambios (para la edicion de terreno):
         mundo.getMapa().eliminarObservador(this);
-        //Dejamos de observar al pc:
+        //Dejamos de observar al model:
         pc.eliminarObservador(this);
-        //Dejamos de observar a cada uno de los Spells Personalizados del pc:
+        //Dejamos de observar a cada uno de los Spells Personalizados del model:
         Iterator<SpellPersonalizadoI> iSpell = pc.getIteratorSpellPersonalizado();
         while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
         //eliminamos la vista y transmitimos la informacion al resto de clientes:
         vista.listaPcViews.remove(this);
-        actualizarPlayersCercanos(eliminarPPC);
+
+        notificador.añadirEliminarPC(pc.getConnectionID());
+        enviarDatosPersonales();
+        enviarDatosGlobales();
     }
 
 
@@ -164,7 +174,7 @@ public class PcView implements PropertyChangeListener
         {   modificarHPs(((NetDTO.ModificarHPsPPC) evt.getNewValue()).HPs); }
 
         if (evt.getNewValue() instanceof NetDTO.EliminarPPC)
-        {   eliminar((NetDTO.EliminarPPC)evt.getNewValue()); }
+        {   dispose(); }
 
         if (evt.getNewValue() instanceof NetDTO.AñadirSpellPersonalizadoPPC)
         {   añadirSpellPersonalizado(((NetDTO.AñadirSpellPersonalizadoPPC) evt.getNewValue()).spellID);}

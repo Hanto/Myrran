@@ -70,8 +70,8 @@ public class Mundo extends AbstractModel
 
     public void enviarDatosAServidor(Cliente cliente)
     {
-        if (player.getNetPlayer().contieneDatos())
-        {   cliente.enviarAServidor(player.getNetPlayer().getDTOs()); }
+        if (player.getNotificador().contieneDatos())
+        {   cliente.enviarAServidor(player.getNotificador().getDTOs()); }
     }
 
     public void actualizarUnidades(float delta)

@@ -28,8 +28,12 @@ public class Vista implements PropertyChangeListener
     public void enviarDatosAClientes()
     {
         for (PcView pcView: listaPcViews)
-            pcView.enviarDatosAClientes();
+            pcView.enviarDatosPersonales();
+
+        for (PcView pcView: listaPcViews)
+            pcView.enviarDatosGlobales();
     }
+
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
