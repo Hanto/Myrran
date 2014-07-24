@@ -1,9 +1,10 @@
-package DTO.Remote;// Created by Hanto on 24/07/2014.
+package DTO;// Created by Hanto on 24/07/2014.
 
+import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesTipos.MobPC;
 
-public class DTOs
+public class DTOsPC
 {
     //  DTOS: PLAYER:
     //------------------------------------------------------------------------------------------------------------------
@@ -141,9 +142,9 @@ public class DTOs
         public short numCapa;
         public short iDTerreno;
         public CambioTerreno() {}
-        public CambioTerreno(int tileX, int tileY, short numCapa, short iDTerreno)
+        public CambioTerreno(int tileX, int tileY, int numCapa, short iDTerreno)
         {   this.tileX = tileX; this.tileY = tileY;
-            this.numCapa = numCapa; this.iDTerreno = iDTerreno; }
+            this.numCapa = (short)numCapa; this.iDTerreno = iDTerreno; }
     }
 
     public static class Nombre
@@ -162,6 +163,46 @@ public class DTOs
         {   this.HPs = HPs; }
     }
 
+    public static class CastingTimePercent
+    {
+        public float castingTimePercent;
+        public CastingTimePercent() {}
+        public CastingTimePercent(Caster Caster)
+        {   this.castingTimePercent = Caster.getActualCastingTime() == 0 && Caster.getTotalCastingTime() == 0 ? 100 :
+                Caster.getActualCastingTime() / Caster.getTotalCastingTime(); }
+    }
+
+    public static class MapTilesAdyacentes
+    {
+        public boolean[][] mapaAdyacencias;
+        public MapTilesAdyacentes() {}
+        public MapTilesAdyacentes(boolean[][] mapaAdyacencias)
+        {   this.mapaAdyacencias = mapaAdyacencias; }
+    }
+
+    public static class Mapa
+    {
+        public static class Celda
+        {   public short[] celda= new short[Settings.MAPA_Max_Capas_Terreno];
+            public Celda() { }
+        }
+
+        public int esquinaInfIzdaX;
+        public int esquinaInfIzdaY;
+        public Celda[][] mapa;
+        public Mapa() {}
+        public Mapa(int esquinaInfIzdaX, int esquinaInfIzdaY, int tamañoX, int tamañoY)
+        {
+            this.esquinaInfIzdaX = esquinaInfIzdaX;
+            this.esquinaInfIzdaY = esquinaInfIzdaY;
+            mapa = new Celda[tamañoX][tamañoY];
+            for (Celda[] fila: mapa)
+            {   for (int i=0; i<fila.length; i++)
+                {   fila[i] = new Celda(); }
+            }
+        }
+    }
+
     //  DTOS: no registrados (uso Local)
     //------------------------------------------------------------------------------------------------------------------
 
@@ -171,15 +212,6 @@ public class DTOs
         public MaxHPs () {}
         public MaxHPs(float maxHPs)
         {   this.maxHPs = maxHPs; }
-    }
-
-    public static class CastingTimePercent
-    {
-        public float castingTimePercent;
-        public CastingTimePercent() {}
-        public CastingTimePercent(Caster Caster)
-        {   this.castingTimePercent = Caster.getActualCastingTime() == 0 && Caster.getTotalCastingTime() == 0 ? 100 :
-                Caster.getActualCastingTime() / Caster.getTotalCastingTime(); }
     }
 
     public static class Dispose

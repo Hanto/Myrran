@@ -1,25 +1,22 @@
 package View;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
-import DTO.NetDTO;
-import DTO.Remote.notificadorPCServidor;
+import DTO.DTOsPC;
 import Data.Settings;
 import Interfaces.EntidadesTipos.MobPC;
-import Interfaces.Spell.SpellPersonalizadoI;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class PcView implements PropertyChangeListener
 {
     //Model:
     private PC pc;
-    private Vista vista;
+    private MundoView mundoView;
     private Mundo mundo;
     private Controlador controlador;
 
@@ -29,21 +26,20 @@ public class PcView implements PropertyChangeListener
     private float y;
 
     protected MapaView mapaView;
-    protected notificadorPCServidor notificador;
+    protected PCViewNotificador notificador;
 
     //Constructor:
-    public PcView(PC pc, Vista vista)
+    public PcView(PC pc, MundoView mundoView)
     {
         this.pc = pc;
-        this.vista = vista;
-        this.controlador = vista.controlador;
-        this.notificador = new notificadorPCServidor(pc.getConnectionID());
-        this.mundo = vista.mundo;
+        this.mundoView = mundoView;
+        this.controlador = mundoView.controlador;
+        this.notificador = new PCViewNotificador(pc.getConnectionID());
+        this.mundo = mundoView.mundo;
 
         x = pc.getX();
         y = pc.getY();
 
-        mundo.getMapa().añadirObservador(this);
         pc.añadirObservador(this);
 
         notificador.setPosition(x, y);
@@ -88,7 +84,7 @@ public class PcView implements PropertyChangeListener
 
     private void quienMeVe()
     {
-        for (PcView pcCercanos : vista.listaPcViews)
+        for (PcView pcCercanos : mundoView.listaPcViews)
         {
             MobPC pcCercano = pcCercanos.pc;
 
@@ -130,30 +126,25 @@ public class PcView implements PropertyChangeListener
     private void setAnimacion(int numAnimacion)
     {   notificador.setNumAnimacion(numAnimacion); }
 
-    private void modificarSkillTalento(String skillID, int statID, int valor)
+    private void añadirModificarSkillTalento(String skillID, int statID, int valor)
     {   notificador.añadirNumTalentosSkillPersonalizado(skillID, statID, valor); }
 
     private void añadirSpellPersonalizado(String spellID)
-    {
-        pc.getSpellPersonalizado(spellID).añadirObservador(this);
-        notificador.añadirSkillPersonalizado(spellID);
-    }
+    {   notificador.añadirSkillPersonalizado(spellID); }
 
-    private void modificarHPs(float HPs)
+    private void añadirModificarHPs(float HPs)
     {   notificador.añadirModificarHPs(HPs); }
+
 
     private void dispose()
     {
-        //Dejamos de observar al mundo colindante por cambios (para la edicion de terreno):
-        mundo.getMapa().eliminarObservador(this);
+        //para que deje de observar el Mapa Model
+        mapaView.dispose();
         //Dejamos de observar al model:
         pc.eliminarObservador(this);
-        //Dejamos de observar a cada uno de los Spells Personalizados del model:
-        Iterator<SpellPersonalizadoI> iSpell = pc.getIteratorSpellPersonalizado();
-        while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
         //eliminamos la vista y transmitimos la informacion al resto de clientes:
-        vista.listaPcViews.remove(this);
-
+        mundoView.listaPcViews.remove(this);
+        //transmitimos los mensajes que tuvieramos pendientes sin esperar al siguiente ciclo(Esto incluye el mensaje de eliminacion):
         notificador.añadirEliminarPC(pc.getConnectionID());
         enviarDatosPersonales();
         enviarDatosGlobales();
@@ -164,38 +155,27 @@ public class PcView implements PropertyChangeListener
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         //MOBILES:
-        if (evt.getNewValue() instanceof NetDTO.PosicionPPC)
-        {
-            x = ((NetDTO.PosicionPPC) evt.getNewValue()).x;
-            y = ((NetDTO.PosicionPPC) evt.getNewValue()).y;
-            setPosition(x, y);
-        }
-        if (evt.getNewValue() instanceof NetDTO.ModificarHPsPPC)
-        {   modificarHPs(((NetDTO.ModificarHPsPPC) evt.getNewValue()).HPs); }
+        if (evt.getNewValue() instanceof DTOsPC.Posicion)
+        {   setPosition(((DTOsPC.Posicion) evt.getNewValue()).posX, ((DTOsPC.Posicion) evt.getNewValue()).posY); }
 
-        if (evt.getNewValue() instanceof NetDTO.EliminarPPC)
+        if (evt.getNewValue() instanceof DTOsPC.Animacion)
+        {   setAnimacion(((DTOsPC.Animacion) evt.getNewValue()).numAnimacion); }
+
+        if (evt.getNewValue() instanceof DTOsPC.ModificarHPs)
+        {   añadirModificarHPs(((DTOsPC.ModificarHPs) evt.getNewValue()).HPs); }
+
+        if (evt.getNewValue() instanceof DTOsPC.SkillPersonalizado)
+        {   añadirSpellPersonalizado(((DTOsPC.SkillPersonalizado) evt.getNewValue()).skillID);}
+
+
+        if (evt.getNewValue() instanceof DTOsPC.Dispose)
         {   dispose(); }
 
-        if (evt.getNewValue() instanceof NetDTO.AñadirSpellPersonalizadoPPC)
-        {   añadirSpellPersonalizado(((NetDTO.AñadirSpellPersonalizadoPPC) evt.getNewValue()).spellID);}
-
-        if (evt.getNewValue() instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
-        {   modificarSkillTalento(((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) evt.getNewValue()).skillID,
-                ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) evt.getNewValue()).statID,
-                ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) evt.getNewValue()).valor);
-        }
-
-        if (evt.getNewValue() instanceof NetDTO.AnimacionPPC)
-        {   setAnimacion(((NetDTO.AnimacionPPC) evt.getNewValue()).numAnimacion); }
-
-        //TERRENOS:
-        if (evt.getNewValue() instanceof NetDTO.SetTerreno)
-        {
-            int celdaX = ((NetDTO.SetTerreno) evt.getNewValue()).celdaX;
-            int celdaY = ((NetDTO.SetTerreno) evt.getNewValue()).celdaY;
-            int numCapa = ((NetDTO.SetTerreno) evt.getNewValue()).numCapa;
-            short iDTerreno = ((NetDTO.SetTerreno) evt.getNewValue()).iDTerreno;
-            mapaView.cambioTerreno(celdaX, celdaY, numCapa, iDTerreno);
+        if (evt.getNewValue() instanceof DTOsPC.NumTalentosSkillPersonalizado)
+        {   añadirModificarSkillTalento(
+                ((DTOsPC.NumTalentosSkillPersonalizado) evt.getNewValue()).skillID,
+                ((DTOsPC.NumTalentosSkillPersonalizado) evt.getNewValue()).statID,
+                ((DTOsPC.NumTalentosSkillPersonalizado) evt.getNewValue()).valor);
         }
     }
 }

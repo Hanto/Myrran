@@ -1,14 +1,18 @@
 package View;// Created by Hanto on 20/05/2014.
 
 import Controller.Controlador;
-import DTO.NetDTO;
+import DTO.DTOsPC;
+import DTO.DTOsMapa;
 import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MapaView
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class MapaView implements PropertyChangeListener
 {
     private PC PC;
     private PcView pcView;
@@ -42,7 +46,12 @@ public class MapaView
 
         this.numTilesX = (int)Math.ceil((double) Settings.MAPTILE_Horizontal_Resolution /(double) Settings.TILESIZE);
         this.numTilesY = (int)Math.ceil((double) Settings.MAPTILE_Vertical_Resolution /(double) Settings.TILESIZE);
+
+        mundo.getMapa().añadirObservador(this);
     }
+
+    public void dispose()
+    {   mundo.getMapa().eliminarObservador(this); }
 
     private void init ()
     {
@@ -61,7 +70,7 @@ public class MapaView
 
     private void enviarMapTilesAdyancentes()
     {
-        NetDTO.MapTilesAdyacentesEnCliente maptilesAdyacentes = new NetDTO.MapTilesAdyacentesEnCliente(mapaEnviado);
+        DTOsPC.MapTilesAdyacentes maptilesAdyacentes = new DTOsPC.MapTilesAdyacentes(mapaEnviado);
         controlador.enviarACliente(PC.getConnectionID(), maptilesAdyacentes);
     }
 
@@ -218,7 +227,7 @@ public class MapaView
         int esquinaInfIzdaX = mapTileInicialX*numTilesX-reborde;
         int esquinaInfIzdaY = mapTileInicialY*numTilesY-reborde;
 
-        NetDTO.ActualizarMapa actualizarMapa = new NetDTO.ActualizarMapa(esquinaInfIzdaX, esquinaInfIzdaY, ancho, alto);
+        DTOsPC.Mapa actualizarMapa = new DTOsPC.Mapa(esquinaInfIzdaX, esquinaInfIzdaY, ancho, alto);
         for (int x=0; x< ancho; x++)
         {
             for (int y = 0; y< alto; y++)
@@ -242,6 +251,19 @@ public class MapaView
                 pcView.notificador.añadirCambioTerreno(tileX, tileY, numCapa, iDTerreno);
                 logger.trace("Editando SetTerreno: ["+tileX+"]["+tileY+"]");
             }
+        }
+    }
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {
+        //TERRENOS:
+        if (evt.getNewValue() instanceof DTOsPC.CambioTerreno)
+        {
+            cambioTerreno(
+                ((DTOsMapa.SetTerreno) evt.getNewValue()).tileX,
+                ((DTOsMapa.SetTerreno) evt.getNewValue()).tileY,
+                ((DTOsMapa.SetTerreno) evt.getNewValue()).numCapa,
+                ((DTOsMapa.SetTerreno) evt.getNewValue()).iDTerreno);
         }
     }
 }

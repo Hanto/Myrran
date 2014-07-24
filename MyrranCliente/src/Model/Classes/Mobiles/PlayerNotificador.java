@@ -1,38 +1,39 @@
-package DTO.Remote;// Created by Hanto on 21/07/2014.
+package Model.Classes.Mobiles;// Created by Hanto on 21/07/2014.
 
+import DTO.DTOsPC;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Model.AbstractModel;
 import com.badlogic.gdx.utils.ObjectMap;
 import java.util.ArrayList;
 
-public class NotificadorPlayerCliente
+public class PlayerNotificador
 {
     public AbstractModel model;
 
     //Stats Excluyentes para enviar por RED al servidor::
-    public DTOs.Animacion animacion = new DTOs.Animacion();
-    public DTOs.Posicion posicion = new DTOs.Posicion();
-    public DTOs.ParametrosSpell parametrosSpell = new DTOs.ParametrosSpell();
-    public DTOs.SpellSeleccionado spellSeleccionado = new DTOs.SpellSeleccionado();
-    public DTOs.StopCastear stopCastear = new DTOs.StopCastear();
-    public DTOs.StartCastear startCastear = new DTOs.StartCastear();
+    public DTOsPC.Animacion animacion = new DTOsPC.Animacion();
+    public DTOsPC.Posicion posicion = new DTOsPC.Posicion();
+    public DTOsPC.ParametrosSpell parametrosSpell = new DTOsPC.ParametrosSpell();
+    public DTOsPC.SpellSeleccionado spellSeleccionado = new DTOsPC.SpellSeleccionado();
+    public DTOsPC.StopCastear stopCastear = new DTOsPC.StopCastear();
+    public DTOsPC.StartCastear startCastear = new DTOsPC.StartCastear();
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
-    public DTOs.CastingTimePercent castingTime = new DTOs.CastingTimePercent();
-    public DTOs.ModificarHPs modificarHPs = new DTOs.ModificarHPs();
+    public DTOsPC.CastingTimePercent castingTime = new DTOsPC.CastingTimePercent();
+    public DTOsPC.ModificarHPs modificarHPs = new DTOsPC.ModificarHPs();
 
     protected ObjectMap<Class, Object> cambiosExcluyentes = new ObjectMap<>();
     protected ArrayList<Object> cambiosAcumulativos = new ArrayList<>();
 
-    protected DTOs.PlayerDTOs dtos = new DTOs.PlayerDTOs();
+    protected DTOsPC.PlayerDTOs dtos = new DTOsPC.PlayerDTOs();
 
-    public NotificadorPlayerCliente(AbstractModel model)
+    public PlayerNotificador(AbstractModel model)
     {   this.model = model; }
 
 
     public boolean contieneDatos()
     {   return (cambiosExcluyentes.size >0 || cambiosAcumulativos.size() >0); }
 
-    public DTOs.PlayerDTOs getDTOs()
+    public DTOsPC.PlayerDTOs getDTOs()
     {
         dtos.listaDTOs = juntarObjectMapYArrayList(cambiosExcluyentes, cambiosAcumulativos);
         cambiosExcluyentes.clear();
@@ -63,7 +64,7 @@ public class NotificadorPlayerCliente
         if (animacion.numAnimacion != (short)numAnimacion)
         {
             animacion.numAnimacion = (short)numAnimacion;
-            cambiosExcluyentes.put(DTOs.Animacion.class, animacion);
+            cambiosExcluyentes.put(DTOsPC.Animacion.class, animacion);
             model.notificarActualizacion("numAnimacion", null, animacion);
         }
     }
@@ -74,7 +75,7 @@ public class NotificadorPlayerCliente
         {
             posicion.posX = (int) x;
             posicion.posY = (int) y;
-            cambiosExcluyentes.put(DTOs.Posicion.class, posicion);
+            cambiosExcluyentes.put(DTOsPC.Posicion.class, posicion);
             model.notificarActualizacion("posicion", null, posicion);
         }
     }
@@ -84,7 +85,7 @@ public class NotificadorPlayerCliente
         if (parametrosSpell.parametros != parametros)
         {
             parametrosSpell.parametros = parametros;
-            cambiosExcluyentes.put(DTOs.ParametrosSpell.class, parametrosSpell);
+            cambiosExcluyentes.put(DTOsPC.ParametrosSpell.class, parametrosSpell);
         }
     }
 
@@ -94,7 +95,7 @@ public class NotificadorPlayerCliente
         {
             spellSeleccionado.spellIDSeleccionado = spellID;
             spellSeleccionado.parametrosSpell = parametrosSpell;
-            cambiosExcluyentes.put(DTOs.SpellSeleccionado.class, spellSeleccionado);
+            cambiosExcluyentes.put(DTOsPC.SpellSeleccionado.class, spellSeleccionado);
         }
     }
 
@@ -104,7 +105,7 @@ public class NotificadorPlayerCliente
         {
             stopCastear.screenX = screenX;
             stopCastear.screenY = screenY;
-            cambiosExcluyentes.put(DTOs.StopCastear.class, stopCastear);
+            cambiosExcluyentes.put(DTOsPC.StopCastear.class, stopCastear);
         }
     }
 
@@ -114,23 +115,23 @@ public class NotificadorPlayerCliente
         {
             startCastear.screenX = screenX;
             startCastear.screenY = screenY;
-            cambiosExcluyentes.put(DTOs.StartCastear.class, startCastear);
+            cambiosExcluyentes.put(DTOsPC.StartCastear.class, startCastear);
         }
     }
 
     //Cambios Acumulativos:
     //(Se envia cualquier valor, aunque sea repetido)
     public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
-    {   cambiosAcumulativos.add(new DTOs.NumTalentosSkillPersonalizado(skillID, statID, valor)); }
+    {   cambiosAcumulativos.add(new DTOsPC.NumTalentosSkillPersonalizado(skillID, statID, valor)); }
 
     //  NOTIFICACION LOCAL:
     //------------------------------------------------------------------------------------------------------------------
 
     public void setNombre(String nombre)
-    {   model.notificarActualizacion("nombre", null, new DTOs.Nombre(nombre)); }
+    {   model.notificarActualizacion("nombre", null, new DTOsPC.Nombre(nombre)); }
 
     public void setMaxHPs(float HPs)
-    {   model.notificarActualizacion("MaxHPs", null, new DTOs.MaxHPs(HPs)); }
+    {   model.notificarActualizacion("MaxHPs", null, new DTOsPC.MaxHPs(HPs)); }
 
     public void setModificarHPs (float HPs)
     {
@@ -143,7 +144,4 @@ public class NotificadorPlayerCliente
                 caster.getActualCastingTime() / caster.getTotalCastingTime();
         model.notificarActualizacion("CastingTime", null, castingTime);
     }
-
-    public void setDispose()
-    {   model.notificarActualizacion("Eliminar", null, new DTOs.Dispose()); }
 }

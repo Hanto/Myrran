@@ -1,10 +1,10 @@
 package Model.Classes.UI;// Created by Hanto on 08/05/2014.
 
+import DTO.DTOsBarraAcciones;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.Classes.Input.InputManager;
-import Model.DTO.BarraAccionesDTO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +37,7 @@ public class ConjuntoBarraAcciones extends AbstractModel
         BarraAcciones barraAcciones = new BarraAcciones(caster, inputManager, iDMenor, filas, columnas);
         listaDeBarraAcciones.put(barraAcciones.getID(), barraAcciones);
 
-        Object añadirBarraAccionesDTO = new BarraAccionesDTO.AñadirBarraAcciones(barraAcciones);
+        Object añadirBarraAccionesDTO = new DTOsBarraAcciones.AñadirBarraAcciones(barraAcciones);
         notificarActualizacion("añadirBarraAcciones", null, añadirBarraAccionesDTO);
     }
 

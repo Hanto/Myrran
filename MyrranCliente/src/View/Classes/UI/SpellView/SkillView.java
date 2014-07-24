@@ -1,7 +1,7 @@
 package View.Classes.UI.SpellView;// Created by Hanto on 27/06/2014.
 
 import DB.RSC;
-import DTO.NetDTO;
+import DTO.DTOsSkillPersonalizado;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Skill.SkillPersonalizadoI;
@@ -153,10 +153,10 @@ public class SkillView implements PropertyChangeListener, Disposable
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
+        if (evt.getNewValue() instanceof DTOsSkillPersonalizado.SetNumTalentos)
         {
-            int statID = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) evt.getNewValue()).statID;
-            int valor = ((NetDTO.ModificarNumTalentosSkillPersonalizadoPPC) evt.getNewValue()).valor;
+            int statID = ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).statID;
+            int valor = ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).valor;
             modificarNumTalentos(statID, valor);
         }
     }

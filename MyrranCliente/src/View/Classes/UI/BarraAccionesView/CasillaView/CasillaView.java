@@ -1,13 +1,13 @@
 package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/07/2014.
 
 import DB.RSC;
+import DTO.DTOsBarraAcciones;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
-import Model.DTO.BarraAccionesDTO;
 import View.Classes.Actores.Texto;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -115,10 +115,10 @@ public class CasillaView extends Actor implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof BarraAccionesDTO.ActualizarCasillaAccion)
+        if (evt.getNewValue() instanceof DTOsBarraAcciones.ActualizarCasillaAccion)
         {   setIcono(); }
 
-        if (evt.getNewValue() instanceof BarraAccionesDTO.ActualizarCasillaKey)
+        if (evt.getNewValue() instanceof DTOsBarraAcciones.ActualizarCasillaKey)
         {   setTexto(casilla.getKeybind()); }
     }
 }

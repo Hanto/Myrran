@@ -1,16 +1,16 @@
 package View;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
-import DTO.NetDTO;
-import Model.GameState.Mundo;
+import DTO.DTOsMundo;
 import Model.Classes.Mobiles.PC;
+import Model.GameState.Mundo;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vista implements PropertyChangeListener
+public class MundoView implements PropertyChangeListener
 {
     public Controlador controlador;
     public Mundo mundo;
@@ -18,7 +18,7 @@ public class Vista implements PropertyChangeListener
     public List<PcView> listaPcViews = new ArrayList<>();
 
     //Constructor:
-    public Vista (Controlador controlador, Mundo mundo)
+    public MundoView(Controlador controlador, Mundo mundo)
     {
         mundo.añadirObservador(this);
         this.controlador = controlador;
@@ -37,11 +37,9 @@ public class Vista implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.AñadirPPC)
+        if (evt.getNewValue() instanceof DTOsMundo.NuevoPlayer)
         {
-            PC pc = mundo.getPC(((NetDTO.AñadirPPC) evt.getNewValue()).connectionID);
-
-            pc.eliminarObservador(this);
+            PC pc = mundo.getPC(((DTOsMundo.NuevoPlayer) evt.getNewValue()).connectionID);
             PcView pcView = new PcView(pc, this);
             listaPcViews.add(pcView);
         }

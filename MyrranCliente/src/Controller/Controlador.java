@@ -1,8 +1,7 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
-import Controller.Inputs.ControlaPlayer;
-import DTO.NetDTO;
-import DTO.Remote.DTOs.LogIn;
+import DTO.DTOsPC;
+import DTO.DTOsPC.LogIn;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
@@ -69,20 +68,20 @@ public class Controlador implements ControladorUI
     public void render (float delta)                                                    { vista.render(delta); }
     public void dispose()                                                               { vista.dispose(); }
     public void resize(int anchura, int altura)                                         { vista.resize(anchura, altura);}
+    public OrthographicCamera getCamara()                                               { return vista.getMundoView().getCamara(); }
 
     //Kryo:
     public void enviarAServidor(Object obj)                                             { cliente.enviarAServidor(obj); }
-    public void añadirAccion(AccionI accion)
-    {   ui.getInputManager().añadirAccion(accion); }
+
+    //UI:
+    public void añadirAccion(AccionI accion)                                            { ui.getInputManager().añadirAccion(accion); }
 
     //Entidades:
-    public void añadirPlayer(int connectionID)
-    {   mundo.getPlayer().setConnectionID(connectionID); }
+    public void añadirPlayer(int connectionID)                                          { mundo.getPlayer().setConnectionID(connectionID); }
 
-    public void actualizarMapTilesCargados (NetDTO.MapTilesAdyacentesEnCliente ady)     { mundo.mapTilesCargados = ady.mapaAdyacencias; }
-    public void actualizarMapa(NetDTO.ActualizarMapa mapaServidor)                      { mundo.actualizarMapa(mapaServidor); }
+    public void actualizarMapa(DTOsPC.Mapa mapaServidor)                                  { mundo.actualizarMapa(mapaServidor); }
+    public void actualizarMapTilesAdyacentes(DTOsPC.MapTilesAdyacentes mapTiles)          { mundo.mapTilesCargados = mapTiles.mapaAdyacencias; }
     public void aplicarZoom(int incrementoZoom)                                         { vista.aplicarZoom(incrementoZoom); }
-    public OrthographicCamera getCamara()                                               { return vista.getMundoView().getCamara(); }
 
     //BarraTerrenos:
     @Override public void mostrarBarraTerrenos()                                        { vista.getUiView().mostrarBarraTerreno(); }

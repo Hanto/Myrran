@@ -1,7 +1,7 @@
 package View.Classes.Geo;// Created by Hanto on 15/04/2014.
 
+import DTO.DTOTerrenoView;
 import Data.Settings;
-import Model.DTO.TerrenoDTO;
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DTO.TerrenoRecursos;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,9 +15,9 @@ public class TerrenoView
     public TextureRegion cuadranteSE;
     public TextureRegion cuadranteSO;
 
-    TerrenoDTO.Adyacencias ad;
+    DTOTerrenoView.Adyacencias ad;
 
-    public TerrenoView(TerrenoDTO.Adyacencias adyacencias)
+    public TerrenoView(DTOTerrenoView.Adyacencias adyacencias)
     {
         this.ad = adyacencias;
         generarTextura();

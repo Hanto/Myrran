@@ -6,7 +6,7 @@ import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Spell.SpellI;
 import Model.Classes.Skill.Spell.TipoSpell;
 
-import static DTO.ParametrosSpellDTO.ParametrosEditarTerreno;
+import static DTO.DTOsParametrosSpell.ParametrosEditarTerreno;
 
 public class EditarTerreno extends TipoSpell
 {

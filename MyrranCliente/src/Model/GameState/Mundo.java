@@ -1,10 +1,10 @@
 package Model.GameState;// Created by Hanto on 08/04/2014.
 
 import Controller.Cliente;
-import DTO.NetDTO;
+import DTO.DTOsPC;
+import DTO.DTOsMundo;
 import Data.Settings;
 import Interfaces.Model.AbstractModel;
-import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
 import com.badlogic.gdx.math.Vector2;
@@ -21,7 +21,7 @@ public class Mundo extends AbstractModel
     private Map<Integer,PC> mapaPlayers = new HashMap<>();
 
     private Player player;
-    private Mapa mapa;
+    private Model.Classes.Geo.Mapa mapa;
     private World world;
 
     public boolean[][] mapTilesCargados = new boolean[3][3];
@@ -31,14 +31,14 @@ public class Mundo extends AbstractModel
     public List<? extends PC> listaPlayers()        { return listaPlayers; }
     public PC getPC (int connectionID)              { return mapaPlayers.get(connectionID); }
     public Player getPlayer()                       { return player; }
-    public Mapa getMapa()                           { return mapa; }
+    public Model.Classes.Geo.Mapa getMapa()                           { return mapa; }
     public World getWorld()                         { return world; }
 
     public Mundo()
     {
         world = new World(new Vector2(0, 0), false);
         player = new Player(this);
-        mapa = new Mapa(player);
+        mapa = new Model.Classes.Geo.Mapa(player);
     }
 
     //SE NOTIFICA:
@@ -48,8 +48,8 @@ public class Mundo extends AbstractModel
         pc.setPosition(x, y);
         listaPlayers.add(pc);
         mapaPlayers.put(pc.getConnectionID(), pc);
-        Object añadirPC = new NetDTO.AñadirPPC(pc);
-        notificarActualizacion("añadirPC", null, añadirPC);
+        Object nuevoPlayer = new DTOsMundo.NuevoPlayer(pc);
+        notificarActualizacion("añadirPC", null, nuevoPlayer);
     }
 
     public void eliminarPC (int connectionID)
@@ -90,7 +90,7 @@ public class Mundo extends AbstractModel
     }
 
 
-    public void actualizarMapa (NetDTO.ActualizarMapa mapaServidor)
+    public void actualizarMapa (DTOsPC.Mapa mapaServidor)
     {
         for (int y=0; y< mapaServidor.mapa[0].length; y++)
         {

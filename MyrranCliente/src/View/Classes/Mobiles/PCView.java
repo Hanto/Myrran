@@ -2,8 +2,8 @@ package View.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
 import Controller.Controlador;
 import DB.RSC;
-import DTO.Remote.DTOs;
-import DTO.Remote.DTOs.Dispose;
+import DTO.DTOsPC;
+import DTO.DTOsPC.Dispose;
 import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import View.Classes.Actores.PixiePC;
@@ -88,14 +88,14 @@ public class PCView extends Group implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOs.Posicion)
-        {   mover( ((DTOs.Posicion) evt.getNewValue()).posX,  ((DTOs.Posicion) evt.getNewValue()).posY ); }
+        if (evt.getNewValue() instanceof DTOsPC.Posicion)
+        {   mover( ((DTOsPC.Posicion) evt.getNewValue()).posX,  ((DTOsPC.Posicion) evt.getNewValue()).posY ); }
 
-        if (evt.getNewValue() instanceof DTOs.ModificarHPs)
-        {   modificarHPs( (int) (((DTOs.ModificarHPs) evt.getNewValue()).HPs) ); }
+        if (evt.getNewValue() instanceof DTOsPC.ModificarHPs)
+        {   modificarHPs( (int) (((DTOsPC.ModificarHPs) evt.getNewValue()).HPs) ); }
 
-        if (evt.getNewValue() instanceof DTOs.Animacion)
-        {   setAnimacion(((DTOs.Animacion) evt.getNewValue()).numAnimacion); }
+        if (evt.getNewValue() instanceof DTOsPC.Animacion)
+        {   setAnimacion(((DTOsPC.Animacion) evt.getNewValue()).numAnimacion); }
 
         if (evt.getNewValue() instanceof Dispose)
         {   dispose(); }

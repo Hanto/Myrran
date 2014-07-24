@@ -2,9 +2,9 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
 import DB.RSC;
+import DTO.DTOsBarraAcciones;
 import Data.Settings;
-import Model.Classes.UI.BarraAcciones;
-import Model.DTO.BarraAccionesDTO;
+import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.GameState.UI;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraAccionesView.ConjuntoBarraAccionesView;
@@ -47,9 +47,9 @@ public class UIView extends Stage implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof BarraAccionesDTO.AñadirBarraAcciones)
+        if (evt.getNewValue() instanceof DTOsBarraAcciones.AñadirBarraAcciones)
         {
-            BarraAcciones barraAcciones = ((BarraAccionesDTO.AñadirBarraAcciones) evt.getNewValue()).barraAcciones;
+            BarraAccionesI barraAcciones = ((DTOsBarraAcciones.AñadirBarraAcciones) evt.getNewValue()).barraAcciones;
             conjuntoBarraAccionesView.añadirBarraAccionesView(barraAcciones);
         }
     }

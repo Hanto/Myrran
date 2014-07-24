@@ -4,7 +4,7 @@ import Core.Cuerpos.BodyFactory;
 import Core.Cuerpos.Cuerpo;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
-import DTO.NetDTO;
+import DTO.DTOsSkillPersonalizado;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -55,6 +55,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
     private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
     protected Cuerpo cuerpo;
+    protected PCNotificador notificador;
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     //GET:
@@ -103,6 +104,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         this.mundo = mundo;
         this.connectionID = connectionID;
         this.mapa = mundo.getMapa();
+        this.notificador = new PCNotificador(this);
 
         cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
@@ -110,8 +112,11 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
     public void dispose()
     {
-        Object eliminarDTO = new NetDTO.EliminarPPC(this);
-        notificarActualizacion("dispose", null, eliminarDTO);
+        //Dejamos de observar a cada uno de los Spells Personalizados:
+        Iterator<SpellPersonalizadoI> iSpell = getIteratorSpellPersonalizado();
+        while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
+        //le decimos a la vista que desaparezca:
+        notificador.setDispose();
     }
 
     @Override public void añadirSkillsPersonalizados(String spellID)
@@ -130,20 +135,16 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
             listaSkillsPersonalizados.put(skillPersonalizado.getID(), skillPersonalizado);
         }
 
-        Object añadirSpellPersonalizado = new NetDTO.AñadirSpellPersonalizadoPPC(spell);
-        notificarActualizacion("añadirSkillsPersonalizados", null, añadirSpellPersonalizado);
+        spellPersonalizado.añadirObservador(this);
+        notificador.añadirSkillPersonalizado(spell.getID());
     }
 
     @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
     {
         SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
         if (skillPersonalizado == null) { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
-        else
-        {
-            if (valor <0) return;
-            if (valor > skillPersonalizado.getTalentoMaximo(statID)) return;
-        }
-        skillPersonalizado.setNumTalentos(statID, valor);
+        else if (valor > 0 && valor < skillPersonalizado.getTalentoMaximo(statID))
+            skillPersonalizado.setNumTalentos(statID, valor);
     }
 
     @Override public void modificarHPs(float HPs)
@@ -151,25 +152,19 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         actualHPs += HPs;
         if (actualHPs > maxHPs) actualHPs = maxHPs;
         else if (actualHPs < 0) actualHPs = 0;
-
-        Object modificarHPs = new NetDTO.ModificarHPsPPC(this, HPs);
-        notificarActualizacion("modificarHPs", null, modificarHPs);
+        notificador.añadirModificarHPs(HPs);
     }
 
     @Override public void setPosition(float x, float y)
     {
         this.x = x; this.y = y;
-
-        Object posicionDTO = new NetDTO.PosicionPPC(this);
-        notificarActualizacion("setPosition", null, posicionDTO);
+        notificador.setPosition(x, y);
     }
 
     @Override public void setNumAnimacion(int numAnimacion)
     {
         this.numAnimacion = numAnimacion;
-
-        Object animacionDTO = new NetDTO.AnimacionPPC(this);
-        notificarActualizacion("setNumAnimacion", null, animacionDTO);
+        notificador.setNumAnimacion(numAnimacion);
     }
 
     public void setCastear (boolean castear, int targetX, int targetY)
@@ -228,6 +223,15 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
+        if (evt.getNewValue() instanceof DTOsSkillPersonalizado.SetNumTalentos)
+        {
+            //Si alguien cambia mis Skills Personalizados de cualquier manera (hay varios metodos de hacerlo, se notifica
+            //a la vista para que envie el mensaje al cliente:
+            notificador.añadirNumTalentosSkillPersonalizado(
+                ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).skillID,
+                ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).statID,
+                ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).valor);
+        }
 
     }
 }

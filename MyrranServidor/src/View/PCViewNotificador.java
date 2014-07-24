@@ -1,32 +1,31 @@
-package DTO.Remote;// Created by Hanto on 22/07/2014.
+package View;// Created by Hanto on 22/07/2014.
 
+import DTO.DTOsPC;
 import Interfaces.EntidadesTipos.MobPC;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.ArrayList;
 
-public class notificadorPCServidor
+public class PCViewNotificador
 {
-    private int connectionID;
-    private DTOs.Posicion posicion = new DTOs.Posicion();
-    private DTOs.Animacion animacion = new DTOs.Animacion();
-    private DTOs.HPs hps = new DTOs.HPs();
-    private DTOs.Nombre nombre = new DTOs.Nombre();
+    private DTOsPC.Posicion posicion = new DTOsPC.Posicion();
+    private DTOsPC.Animacion animacion = new DTOsPC.Animacion();
+    private DTOsPC.HPs hps = new DTOsPC.HPs();
+    private DTOsPC.Nombre nombre = new DTOsPC.Nombre();
 
     private ObjectMap<Class, Object> cambiosExcluyentesPersonal = new ObjectMap<>();
     private ObjectMap<Class, Object> cambiosExcluyentesGlobal = new ObjectMap<>();
     private ArrayList<Object> cambiosAcumulativosPersonal = new ArrayList<>();
     private ArrayList<Object> cambiosAcumulativosGlobal = new ArrayList<>();
 
-    public DTOs.PCDTOs dtoPersonal;
-    public DTOs.PCDTOs dtoGlobal;
+    public DTOsPC.PCDTOs dtoPersonal;
+    public DTOsPC.PCDTOs dtoGlobal;
 
 
-    public notificadorPCServidor(int connectionID)
+    public PCViewNotificador(int connectionID)
     {
-        this.connectionID = connectionID;
-        this.dtoPersonal = new DTOs.PCDTOs(connectionID);
-        this.dtoGlobal = new DTOs.PCDTOs(connectionID);
+        this.dtoPersonal = new DTOsPC.PCDTOs(connectionID);
+        this.dtoGlobal = new DTOsPC.PCDTOs(connectionID);
     }
 
     public void getDTOs()
@@ -58,79 +57,79 @@ public class notificadorPCServidor
     //  NOTIFICACION REMOTA:
     //------------------------------------------------------------------------------------------------------------------
 
-    //Global (excluyente)
+    //(Excluyente): Global
     public void setPosition(float x, float y)
     {
         if (posicion.posX != (int)x || posicion.posY != (int)y)
         {
             posicion.posX = (int) x;
             posicion.posY = (int) y;
-            cambiosExcluyentesGlobal.put(DTOs.Posicion.class, posicion);
+            cambiosExcluyentesGlobal.put(DTOsPC.Posicion.class, posicion);
         }
     }
 
-    //Global (excluyente)
+    //(Excluyente): Global
     public void setNumAnimacion(int numAnimacion)
     {
         if (animacion.numAnimacion != (short)numAnimacion)
         {
             animacion.numAnimacion = (short)numAnimacion;
-            cambiosExcluyentesGlobal.put(DTOs.Animacion.class, animacion);
+            cambiosExcluyentesGlobal.put(DTOsPC.Animacion.class, animacion);
         }
     }
 
-    //Global - Personal (excluyente)
-    public void setNombre(String s)
+    //(Excluyente): Global - Personal
+    public void setNombre(String nombre)
     {
-        if (nombre.nombre != s)
+        if (this.nombre.nombre != nombre)
         {
-            nombre.nombre = s;
-            cambiosExcluyentesPersonal.put(DTOs.Nombre.class, nombre);
-            cambiosExcluyentesGlobal.put(DTOs.Nombre.class, nombre);
+            this.nombre.nombre = nombre;
+            cambiosExcluyentesPersonal.put(DTOsPC.Nombre.class, this.nombre);
+            cambiosExcluyentesGlobal.put(DTOsPC.Nombre.class, this.nombre);
         }
     }
 
-    //Global - Personal (Excluyente)
+    //(Excluyente): Global - Personal
     public void setHPs(float actualHPs, float maxHPs)
     {
         if (hps.actualHPs != actualHPs || hps.maxHPs != maxHPs)
         {
             hps.actualHPs = actualHPs;
             hps.maxHPs = maxHPs;
-            cambiosExcluyentesPersonal.put(DTOs.HPs.class, hps);
-            cambiosExcluyentesGlobal.put(DTOs.HPs.class, hps);
+            cambiosExcluyentesPersonal.put(DTOsPC.HPs.class, hps);
+            cambiosExcluyentesGlobal.put(DTOsPC.HPs.class, hps);
         }
     }
 
-    //Global - Personal (Acumulativo)
+    //(Acumulativo): Global - Personal
     public void añadirModificarHPs(float HPs)
     {
-        Object modificarHPs = new DTOs.ModificarHPs(HPs);
+        Object modificarHPs = new DTOsPC.ModificarHPs(HPs);
         cambiosAcumulativosPersonal.add(modificarHPs);
         cambiosAcumulativosGlobal.add(modificarHPs);
     }
 
-    //Global (Acumulativo)
+    //(Acumulativo): Global
     public void añadirEliminarPC(int connectionID)
-    {   cambiosAcumulativosGlobal.add(new DTOs.EliminarPC(connectionID)); }
+    {   cambiosAcumulativosGlobal.add(new DTOsPC.EliminarPC(connectionID)); }
 
-    //Personal (Acumulativo)
+    //(Acumulativo): Personal
     public void añadirNoVeAlPC(int connectionID)
-    {   cambiosAcumulativosPersonal.add(new DTOs.EliminarPC(connectionID)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPC.EliminarPC(connectionID)); }
 
-    //Personal (Acumulativo)
+    //(Acumulativo): Personal
     public void añadirVeAlPC(MobPC pc)
-    {   cambiosAcumulativosPersonal.add(new DTOs.CrearPC(pc)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPC.CrearPC(pc)); }
 
-    //Personal (Acumulativo)
+    //(Acumulativo): Personal
     public void añadirSkillPersonalizado(String skillID)
-    {   cambiosAcumulativosPersonal.add(new DTOs.SkillPersonalizado(skillID)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPC.SkillPersonalizado(skillID)); }
 
-    //Personal (Acumulativo)
+    //(Acumulativo): Personal
     public void añadirNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
-    {   cambiosAcumulativosPersonal.add(new DTOs.NumTalentosSkillPersonalizado(skillID, statID, valor)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPC.NumTalentosSkillPersonalizado(skillID, statID, valor)); }
 
-    //Personal (Acumulativo)
+    //(Acumulativo): Personal
     public void añadirCambioTerreno(int tileX, int tileY, int numCapa, short iDTerreno)
-    {   cambiosAcumulativosPersonal.add(new DTOs.CambioTerreno(tileX, tileY, (short)numCapa, iDTerreno)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPC.CambioTerreno(tileX, tileY, numCapa, iDTerreno)); }
 }

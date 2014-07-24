@@ -1,9 +1,9 @@
 package View.Classes.UI.BarraAccionesView;// Created by Hanto on 08/05/2014.
 
-import Data.Settings;
-import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
-import Model.Classes.UI.BarraAcciones;
 import DB.RSC;
+import Data.Settings;
+import Interfaces.UI.BarraAcciones.BarraAccionesI;
+import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -31,7 +31,7 @@ public class ConjuntoBarraAccionesView
         crearBotonesRebind();
     }
 
-    public void añadirBarraAccionesView(BarraAcciones barracciones)
+    public void añadirBarraAccionesView(BarraAccionesI barracciones)
     {
         BarraAccionesView barraAccionesView = new BarraAccionesView(barracciones, this, stage, controlador);
         listaBarraAccionesView.add(barraAccionesView);

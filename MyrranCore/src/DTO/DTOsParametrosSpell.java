@@ -1,6 +1,6 @@
 package DTO;// Created by Hanto on 16/05/2014.
 
-public class ParametrosSpellDTO
+public class DTOsParametrosSpell
 {
     public static class ParametrosEditarTerreno
     {

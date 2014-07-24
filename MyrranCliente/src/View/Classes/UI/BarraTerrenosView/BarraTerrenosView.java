@@ -1,9 +1,9 @@
 package View.Classes.UI.BarraTerrenosView;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
+import DTO.DTOsBarraTerrenos;
 import Data.Settings;
 import Model.Classes.UI.BarraTerrenos;
-import Model.DTO.BarraTerrenosDTO;
 import DB.RSC;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraTerrenosView.TerrenoView.TerrenoView;
@@ -200,13 +200,13 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof BarraTerrenosDTO.SetTerreno)
+        if (evt.getNewValue() instanceof DTOsBarraTerrenos.SetTerreno)
         {
-            int posX = ((BarraTerrenosDTO.SetTerreno) evt.getNewValue()).posX;
+            int posX = ((DTOsBarraTerrenos.SetTerreno) evt.getNewValue()).posX;
             actualizarApariencia(barraIconos.get(posX));
         }
 
-        if (evt.getNewValue() instanceof BarraTerrenosDTO.CrearBarraTerreno)
+        if (evt.getNewValue() instanceof DTOsBarraTerrenos.CrearBarraTerreno)
         {   crearBarraIconos(); }
     }
 }

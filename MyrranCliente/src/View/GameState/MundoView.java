@@ -2,7 +2,7 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
 import DB.RSC;
-import DTO.NetDTO;
+import DTO.DTOsMundo;
 import Data.Settings;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
@@ -134,6 +134,7 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     @Override public void dispose ()
     {
+        mundo.eliminarObservador(this);
         super.dispose();
 
         logger.trace("DISPOSE: Liberando SpriteBatch");
@@ -160,11 +161,9 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.AñadirPPC)
+        if (evt.getNewValue() instanceof DTOsMundo.NuevoPlayer)
         {
-            PC pc = mundo.getPC(((NetDTO.AñadirPPC) evt.getNewValue()).connectionID);
-
-            pc.eliminarObservador(this);
+            PC pc = mundo.getPC(((DTOsMundo.NuevoPlayer) evt.getNewValue()).connectionID);
             PCView pcView = new PCView(pc, this, controlador);
             listaPCViews.add(pcView);
         }

@@ -7,7 +7,6 @@ import Core.FSM.MaquinaEstados;
 import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
-import DTO.Remote.NotificadorPlayerCliente;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -63,7 +62,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     protected PlayerIO input = new PlayerIO();
     protected PlayerIO output = new PlayerIO();
 
-    protected NotificadorPlayerCliente notificador;
+    protected PlayerNotificador notificador;
 
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -71,7 +70,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     {
         this.mundo = mundo;
 
-        this.notificador = new NotificadorPlayerCliente(this);
+        this.notificador = new PlayerNotificador(this);
         this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
         this.cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
@@ -80,7 +79,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
 
     //GET:
     public Body getBody()                                               { return cuerpo.getBody(); }
-    public NotificadorPlayerCliente getNotificador()                    { return notificador; }
+    public PlayerNotificador getNotificador()                           { return notificador; }
     @Override public int getConnectionID()                              { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }

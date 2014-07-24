@@ -1,8 +1,8 @@
 package View.Classes.Geo;// Created by Hanto on 15/04/2014.
 
+import DTO.DTOTerrenoView;
 import Data.Settings;
 import Model.Classes.Geo.Mapa;
-import Model.DTO.TerrenoDTO;
 import DB.RSC;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -51,7 +51,7 @@ public class SubMapaView extends TiledMap
 
         Cell cell;
         StaticTiledMapTile tileNO, tileNE, tileSO, tileSE;
-        TerrenoDTO.Adyacencias adyacencias;
+        DTOTerrenoView.Adyacencias adyacencias;
         TerrenoView terrenoView;
 
         for (int numCapa = 0; numCapa< Settings.MAPA_Max_Capas_Terreno; numCapa++)
@@ -113,9 +113,9 @@ public class SubMapaView extends TiledMap
             getLayers().remove(0);
     }
 
-    private TerrenoDTO.Adyacencias calcularAdyacencias (int X, int Y, int capa)
+    private DTOTerrenoView.Adyacencias calcularAdyacencias (int X, int Y, int capa)
     {
-        TerrenoDTO.Adyacencias ad = new TerrenoDTO.Adyacencias();
+        DTOTerrenoView.Adyacencias ad = new DTOTerrenoView.Adyacencias();
 
         ad.iDTerreno = mapa.getTerrenoID(X,Y,capa);
 
@@ -197,7 +197,7 @@ public class SubMapaView extends TiledMap
 
         if (mapa.getTerrenoID(tileX, tileY, numCapa) >= 0)
         {
-            TerrenoDTO.Adyacencias adyacencias = calcularAdyacencias(tileX,tileY,numCapa);
+            DTOTerrenoView.Adyacencias adyacencias = calcularAdyacencias(tileX,tileY,numCapa);
             TerrenoView terrenoView = new TerrenoView(adyacencias);
 
             StaticTiledMapTile tileNO = new StaticTiledMapTile(terrenoView.cuadranteNO);

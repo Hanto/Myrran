@@ -1,11 +1,10 @@
 package View.Classes.UI.BarraAccionesView;// Created by Hanto on 06/05/2014.
 
 import DB.RSC;
+import DTO.DTOsBarraAcciones;
 import Data.Settings;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
-import Model.Classes.UI.BarraAcciones;
-import Model.DTO.BarraAccionesDTO;
 import View.Classes.UI.BarraAccionesView.CasillaView.CasillaView;
 import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;
@@ -40,7 +39,7 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
     @Override public float getAnchoElemento()               { return Settings.BARRASPELLS_Ancho_Casilla; }
     @Override public float getAltoElemento()                { return Settings.BARRASPELLS_Alto_Casilla; }
 
-    public BarraAccionesView(BarraAcciones barraAcciones, ConjuntoBarraAccionesView conjuntoBarraAccionesView, Stage stage, ControladorBarraAccionI controller)
+    public BarraAccionesView(BarraAccionesI barraAcciones, ConjuntoBarraAccionesView conjuntoBarraAccionesView, Stage stage, ControladorBarraAccionI controller)
     {
         this.barraModel = barraAcciones;
         this.stage = stage;
@@ -211,27 +210,27 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if  (evt.getNewValue() instanceof BarraAccionesDTO.EliminarFilaDTO)
+        if  (evt.getNewValue() instanceof DTOsBarraAcciones.EliminarFila)
         {
-            int numFilas = ((BarraAccionesDTO.EliminarFilaDTO) evt.getNewValue()).numFilas;
+            int numFilas = ((DTOsBarraAcciones.EliminarFila) evt.getNewValue()).numFilas;
             eliminarFila(numFilas);
         }
 
-        if (evt.getNewValue() instanceof BarraAccionesDTO.AñadirFilaDTO)
+        if (evt.getNewValue() instanceof DTOsBarraAcciones.AñadirFila)
         {
-            int numFilas = ((BarraAccionesDTO.AñadirFilaDTO) evt.getNewValue()).numFilas;
+            int numFilas = ((DTOsBarraAcciones.AñadirFila) evt.getNewValue()).numFilas;
             añadirFila(numFilas);
         }
 
-        if (evt.getNewValue() instanceof BarraAccionesDTO.EliminarColumnaDTO)
+        if (evt.getNewValue() instanceof DTOsBarraAcciones.EliminarColumna)
         {
-            int numColumnas = ((BarraAccionesDTO.EliminarColumnaDTO) evt.getNewValue()).numColumnas;
+            int numColumnas = ((DTOsBarraAcciones.EliminarColumna) evt.getNewValue()).numColumnas;
             eliminarColumna(numColumnas);
         }
 
-        if (evt.getNewValue() instanceof BarraAccionesDTO.AñadirColumnaDTO)
+        if (evt.getNewValue() instanceof DTOsBarraAcciones.AñadirColumna)
         {
-            int numColumnas = ((BarraAccionesDTO.AñadirColumnaDTO) evt.getNewValue()).numColumnas;
+            int numColumnas = ((DTOsBarraAcciones.AñadirColumna) evt.getNewValue()).numColumnas;
             añadirColumna(numColumnas);
         }
     }

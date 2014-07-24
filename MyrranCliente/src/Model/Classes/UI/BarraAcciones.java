@@ -1,12 +1,12 @@
 package Model.Classes.UI;// Created by Hanto on 06/05/2014.
 
+import DTO.DTOsBarraAcciones;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.Classes.Input.InputManager;
-import Model.DTO.BarraAccionesDTO;
 import com.badlogic.gdx.utils.Array;
 
 public class BarraAcciones extends AbstractModel implements BarraAccionesI
@@ -79,7 +79,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         for (int i=0; i<numFilas;i++)
             eliminarFila();
 
-        Object eliminarFilaDTO = new BarraAccionesDTO.EliminarFilaDTO(numFilas);
+        Object eliminarFilaDTO = new DTOsBarraAcciones.EliminarFila(numFilas);
         notificarActualizacion("eliminarFila", null, eliminarFilaDTO);
     }
 
@@ -88,7 +88,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         for (int i=0; i<numFilas;i++)
             añadirFila();
 
-        Object añadirFilaDTO = new BarraAccionesDTO.AñadirFilaDTO(numFilas);
+        Object añadirFilaDTO = new DTOsBarraAcciones.AñadirFila(numFilas);
         notificarActualizacion("añadirFila", null, añadirFilaDTO);
     }
 
@@ -97,7 +97,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         for (int i=0; i<numColumnas;i++)
             eliminarColumna();
 
-        Object eliminarColumnaDTO = new BarraAccionesDTO.EliminarColumnaDTO(numColumnas);
+        Object eliminarColumnaDTO = new DTOsBarraAcciones.EliminarColumna(numColumnas);
         notificarActualizacion("eliminarColumna", null, eliminarColumnaDTO);
     }
 
@@ -106,7 +106,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
         for (int i=0; i<numColumnas;i++)
             añadirColumna();
 
-        Object añadirColumnaDTO = new BarraAccionesDTO.AñadirColumnaDTO(numColumnas);
+        Object añadirColumnaDTO = new DTOsBarraAcciones.AñadirColumna(numColumnas);
         notificarActualizacion("añadirColumna", null, añadirColumnaDTO);
     }
 

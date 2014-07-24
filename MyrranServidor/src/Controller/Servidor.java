@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
-import DTO.NetDTO;
-import DTO.Remote.DTOs;
+import DTO.DTOsPC;
+import DTO.NetDTOs;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -18,7 +18,7 @@ public class Servidor extends Server
         super(512*1024, 4*1024);
         this.controlador = controlador;
 
-        NetDTO.register(this);
+        NetDTOs.register(this);
         this.start();
 
         //Para activar el log completo de mensajes:
@@ -39,7 +39,7 @@ public class Servidor extends Server
         }
 
 
-        try { this.bind(NetDTO.puertoTCP, NetDTO.puertoUDP); }
+        try { this.bind(NetDTOs.puertoTCP, NetDTOs.puertoUDP); }
         catch (Exception e) { System.out.println("ERROR: Inicio Servidor: "+e); }
     }
 
@@ -48,10 +48,10 @@ public class Servidor extends Server
 
     private void procesarMensajeCliente(Connection con, Object obj)
     {
-        if (obj instanceof DTOs.PlayerDTOs)
-        {   controlador.controlaPlayer.procesarInput(con.getID(), (DTOs.PlayerDTOs)obj); }
+        if (obj instanceof DTOsPC.PlayerDTOs)
+        {   controlador.controlaPlayer.procesarInput(con.getID(), (DTOsPC.PlayerDTOs)obj); }
 
-        if (obj instanceof DTOs.LogIn)
+        if (obj instanceof DTOsPC.LogIn)
         {   controlador.controlaPlayer.procesarLogIn(con.getID());}
     }
 
@@ -60,9 +60,9 @@ public class Servidor extends Server
     public void enviarACliente(int connectionID, Object obj)
     {
         String nombreDTOs ="";
-        if (obj instanceof DTOs.PCDTOs)
+        if (obj instanceof DTOsPC.PCDTOs)
         {
-            DTOs.PCDTOs dtos = (DTOs.PCDTOs)obj;
+            DTOsPC.PCDTOs dtos = (DTOsPC.PCDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }

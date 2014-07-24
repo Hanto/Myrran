@@ -2,7 +2,6 @@ package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
 import Core.Cuerpos.BodyFactory;
 import Core.Cuerpos.Cuerpo;
-import DTO.Remote.notificadorPCCliente;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Model.AbstractModel;
 import com.badlogic.gdx.physics.box2d.World;
@@ -19,7 +18,7 @@ public class PC extends AbstractModel implements MobPC
     protected float maxHPs;
 
     protected Cuerpo cuerpo;
-    public notificadorPCCliente notificador;
+    public PCNotificador notificador;
 
     public int getConnectionID()            { return connectionID; }
     public int getNumAnimacion()            { return numAnimacion; }
@@ -47,7 +46,7 @@ public class PC extends AbstractModel implements MobPC
     //Constructor:
     public PC(int connectionID, World world)
     {
-        this.notificador = new notificadorPCCliente(this);
+        this.notificador = new PCNotificador(this);
         this.connectionID = connectionID;
         this.cuerpo = new Cuerpo(world, 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);

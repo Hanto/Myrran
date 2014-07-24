@@ -1,8 +1,7 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
-import Controller.Inputs.ControlaPlayer;
 import Model.GameState.Mundo;
-import View.Vista;
+import View.MundoView;
 
 public class Controlador
 {
@@ -12,7 +11,7 @@ public class Controlador
     protected ControlaPlayer controlaPlayer;
 
     protected Mundo mundo;
-    protected Vista vista;
+    protected MundoView mundoView;
 
     public Mundo getMundo()         { return mundo; }
 
@@ -21,7 +20,7 @@ public class Controlador
         this.mundo = mundo;
 
         controlaPlayer = new ControlaPlayer(mundo, this);
-        vista = new Vista(this, mundo);
+        mundoView = new MundoView(this, mundo);
         servidor = new Servidor(this);
         updater = new Updater(this, mundo);
     }

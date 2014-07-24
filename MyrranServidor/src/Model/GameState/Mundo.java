@@ -1,6 +1,6 @@
 package Model.GameState;// Created by Hanto on 07/04/2014.
 
-import DTO.NetDTO;
+import DTO.DTOsMundo;
 import Data.Settings;
 import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
@@ -40,8 +40,8 @@ public class Mundo extends AbstractModel
         PC pc = new PC(connectionID, this);
         listaPlayers.add(pc);
         mapaPlayers.put(pc.getConnectionID(), pc);
-        Object añadirPC = new NetDTO.AñadirPPC(pc);
-        notificarActualizacion("añadirPC", null, añadirPC);
+        Object nuevoPlayer = new DTOsMundo.NuevoPlayer(pc);
+        notificarActualizacion("añadirPC", null, nuevoPlayer);
     }
 
     public void eliminarPC (int connectionID)

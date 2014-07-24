@@ -1,8 +1,8 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
-import DTO.NetDTO;
-import DTO.Remote.DTOs;
-import DTO.Remote.DTOs.PCDTOs;
+import DTO.DTOsPC;
+import DTO.NetDTOs;
+import DTO.DTOsPC.PCDTOs;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Client;
@@ -22,7 +22,7 @@ public class Cliente extends Client
         super(16*1024, 128*1024);
         this.controlador = controlador;
 
-        NetDTO.register(this);
+        NetDTOs.register(this);
         this.start();
 
         //Para activar el log completo de mensajes:
@@ -43,7 +43,7 @@ public class Cliente extends Client
 
         host = "localhost"; //(String) JOptionPane.showInputDialog(null, "Host:", "Connect to server", JOptionPane.QUESTION_MESSAGE, null, null, "localhost");
 
-        try { this.connect(NetDTO.timeout, host, NetDTO.puertoTCP, NetDTO.puertoUDP); }
+        try { this.connect(NetDTOs.timeout, host, NetDTOs.puertoTCP, NetDTOs.puertoUDP); }
         catch (Exception IOException) { logger.error("ERROR: Imposible conectar con el Servidor: ", IOException); }
     }
 
@@ -55,11 +55,11 @@ public class Cliente extends Client
         if (obj instanceof PCDTOs)
         {   controlador.controlaPlayer.procesarInput( (PCDTOs) obj);}
 
-        if (obj instanceof NetDTO.ActualizarMapa)
-        {   controlador.actualizarMapa((NetDTO.ActualizarMapa)obj); }
+        if (obj instanceof DTOsPC.Mapa)
+        {   controlador.actualizarMapa((DTOsPC.Mapa)obj); }
 
-        if (obj instanceof NetDTO.MapTilesAdyacentesEnCliente)
-        {   controlador.actualizarMapTilesCargados((NetDTO.MapTilesAdyacentesEnCliente)obj); }
+        if (obj instanceof DTOsPC.MapTilesAdyacentes)
+        {   controlador.actualizarMapTilesAdyacentes(((DTOsPC.MapTilesAdyacentes) obj));}
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -67,9 +67,9 @@ public class Cliente extends Client
     public void enviarAServidor(Object obj)
     {
         String nombreDTOs ="";
-        if (obj instanceof DTOs.PlayerDTOs)
+        if (obj instanceof DTOsPC.PlayerDTOs)
         {
-            DTOs.PlayerDTOs dtos = (DTOs.PlayerDTOs)obj;
+            DTOsPC.PlayerDTOs dtos = (DTOsPC.PlayerDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }

@@ -2,7 +2,7 @@ package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
 import Controller.Controlador;
 import DB.RSC;
-import DTO.Remote.DTOs;
+import DTO.DTOsPC;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Mobiles.Player;
@@ -103,16 +103,16 @@ public class PlayerView extends Group implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOs.Posicion)
-        {   setPosition(((DTOs.Posicion) evt.getNewValue()).posX, ((DTOs.Posicion) evt.getNewValue()).posY); }
+        if (evt.getNewValue() instanceof DTOsPC.Posicion)
+        {   setPosition(((DTOsPC.Posicion) evt.getNewValue()).posX, ((DTOsPC.Posicion) evt.getNewValue()).posY); }
 
-        if (evt.getNewValue() instanceof DTOs.Animacion)
-        {   setAnimacion(((DTOs.Animacion) evt.getNewValue()).numAnimacion); }
+        if (evt.getNewValue() instanceof DTOsPC.Animacion)
+        {   setAnimacion(((DTOsPC.Animacion) evt.getNewValue()).numAnimacion); }
 
-        if (evt.getNewValue() instanceof DTOs.Nombre)
-        {   setNombre(((DTOs.Nombre) evt.getNewValue()).nombre); }
+        if (evt.getNewValue() instanceof DTOsPC.Nombre)
+        {   setNombre(((DTOsPC.Nombre) evt.getNewValue()).nombre); }
 
-        if (evt.getNewValue() instanceof DTOs.ModificarHPs)
-        {   modificarHPs(((DTOs.ModificarHPs) evt.getNewValue()).HPs); }
+        if (evt.getNewValue() instanceof DTOsPC.ModificarHPs)
+        {   modificarHPs(((DTOsPC.ModificarHPs) evt.getNewValue()).HPs); }
     }
 }

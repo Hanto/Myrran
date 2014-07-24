@@ -1,11 +1,11 @@
 package Model.Classes.UI;// Created by Hanto on 11/07/2014.
 
+import DTO.DTOsBarraAcciones;
 import Data.Settings;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Model.Classes.Input.InputManager;
-import Model.DTO.BarraAccionesDTO;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class Casilla extends AbstractModel implements CasillaI
     {
         this.accion = accion;
         if (accion != null) inputManager.salvarKeybind(keycode, accion.getID());
-        Object actualizarCasilla = new BarraAccionesDTO.ActualizarCasillaAccion();
+        Object actualizarCasilla = new DTOsBarraAcciones.ActualizarCasillaAccion();
         notificarActualizacion("setAccion", null, actualizarCasilla);
     }
 
@@ -50,7 +50,7 @@ public class Casilla extends AbstractModel implements CasillaI
     {
         accion = null;
         inputManager.eliminarKeybind(keycode);
-        Object actualizarCasilla = new BarraAccionesDTO.ActualizarCasillaAccion();
+        Object actualizarCasilla = new DTOsBarraAcciones.ActualizarCasillaAccion();
         notificarActualizacion("setAccion", null, actualizarCasilla);
     }
 
@@ -60,13 +60,13 @@ public class Casilla extends AbstractModel implements CasillaI
         this.keycode = keycode;
         this.keybind = Settings.keycodeNames.get(keycode);
         if (accion != null) inputManager.salvarKeybind(keycode, accion.getID());
-        Object actualizarCasillaKey = new BarraAccionesDTO.ActualizarCasillaKey();
+        Object actualizarCasillaKey = new DTOsBarraAcciones.ActualizarCasillaKey();
         notificarActualizacion("setAccion", null, actualizarCasillaKey);
     }
 
     @Override public void setKeybind (String keybind)
     {   this.keybind = keybind;
-        Object actualizarCasillaKey = new BarraAccionesDTO.ActualizarCasillaKey();
+        Object actualizarCasillaKey = new DTOsBarraAcciones.ActualizarCasillaKey();
         notificarActualizacion("setAccion", null, actualizarCasillaKey);
     }
 }

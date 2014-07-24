@@ -1,7 +1,7 @@
 package View.Classes.UI.SpellView;// Created by Hanto on 19/06/2014.
 
 import DB.RSC;
-import DTO.NetDTO;
+import DTO.DTOsSkillPersonalizado;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Skill.SkillPersonalizadoI;
@@ -225,7 +225,7 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.ModificarNumTalentosSkillPersonalizadoPPC)
+        if (evt.getNewValue() instanceof DTOsSkillPersonalizado.SetNumTalentos)
         {   modificarTalentosTotales(); }
     }
 }

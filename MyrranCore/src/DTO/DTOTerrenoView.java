@@ -1,6 +1,6 @@
-package Model.DTO;// Created by Hanto on 15/04/2014.
+package DTO;// Created by Hanto on 15/04/2014.
 
-public class TerrenoDTO
+public class DTOTerrenoView
 {
     public static class Adyacencias
     {

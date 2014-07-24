@@ -1,6 +1,6 @@
 package Core.Skills;// Created by Hanto on 25/06/2014.
 
-import DTO.NetDTO;
+import DTO.DTOsSkillPersonalizado;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillI;
@@ -53,7 +53,7 @@ public class SkillPersonalizado extends AbstractModel implements SkillPersonaliz
     {
         skillMods[statID].setNumTalentos(valor);
 
-        Object modificarNumTalentos = new NetDTO.ModificarNumTalentosSkillPersonalizadoPPC(skill.getID(), statID, valor);
+        Object modificarNumTalentos = new DTOsSkillPersonalizado.SetNumTalentos(skill.getID(), statID, valor);
         notificarActualizacion("setNumTalentosSkillPersonalizado", null, modificarNumTalentos);
     }
 }

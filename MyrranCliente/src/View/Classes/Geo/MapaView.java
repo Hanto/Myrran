@@ -1,6 +1,6 @@
 package View.Classes.Geo;// Created by Hanto on 16/04/2014.
 
-import DTO.NetDTO;
+import DTO.DTOsMapa;
 import Data.Settings;
 import Model.Classes.Geo.Mapa;
 import View.GameState.MundoView;
@@ -172,14 +172,12 @@ public class MapaView implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.SetTerreno)
-        {
-            int celdaX = ((NetDTO.SetTerreno) evt.getNewValue()).celdaX;
-            int celdaY = ((NetDTO.SetTerreno) evt.getNewValue()).celdaY;
-            int numCapa = ((NetDTO.SetTerreno) evt.getNewValue()).numCapa;
+        if (evt.getNewValue() instanceof DTOsMapa.SetTerreno)
+        {   setTerreno(
+                ((DTOsMapa.SetTerreno) evt.getNewValue()).tileX,
+                ((DTOsMapa.SetTerreno) evt.getNewValue()).tileY,
+                ((DTOsMapa.SetTerreno) evt.getNewValue()).numCapa);
 
-            synchronized (listaSubMapas)
-            {   setTerreno(celdaX, celdaY, numCapa); }
         }
     }
 }

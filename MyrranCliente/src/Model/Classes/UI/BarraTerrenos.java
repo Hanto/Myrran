@@ -2,15 +2,15 @@ package Model.Classes.UI;// Created by Hanto on 14/05/2014.
 
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
+import DTO.DTOsBarraTerrenos;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Geo.TerrenoI;
 import Interfaces.Model.AbstractModel;
-import Model.DTO.BarraTerrenosDTO;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
 
-import static DTO.ParametrosSpellDTO.ParametrosEditarTerreno;
+import static DTO.DTOsParametrosSpell.ParametrosEditarTerreno;
 
 public class BarraTerrenos extends AbstractModel
 {
@@ -39,7 +39,7 @@ public class BarraTerrenos extends AbstractModel
         while (iterator.hasNext())
         {   barraTerrenos.add(iterator.next().getID()); }
 
-        Object crearBarraTerrenos = new BarraTerrenosDTO.CrearBarraTerreno();
+        Object crearBarraTerrenos = new DTOsBarraTerrenos.CrearBarraTerreno();
         notificarActualizacion("crearBarraTerrenos", null, crearBarraTerrenos);
     }
 
@@ -54,7 +54,7 @@ public class BarraTerrenos extends AbstractModel
     {
         barraTerrenos.set(posX, terrenoID);
 
-        Object setTerrenoDTO = new BarraTerrenosDTO.SetTerreno(posX);
+        Object setTerrenoDTO = new DTOsBarraTerrenos.SetTerreno(posX);
         notificarActualizacion("setTerreno", null, setTerrenoDTO);
     }
 

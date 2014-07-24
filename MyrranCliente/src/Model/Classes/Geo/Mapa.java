@@ -2,7 +2,8 @@ package Model.Classes.Geo;// Created by Hanto on 19/05/2014.
 
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
-import DTO.NetDTO;
+import DTO.DTOsPC;
+import DTO.DTOsMapa;
 import Data.Settings;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Geo.MapaI;
@@ -86,8 +87,8 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
             if (celda.getTerreno(numCapa) != terreno)
             {
                 celda.setTerreno(numCapa, terreno);
-                NetDTO.SetTerreno setTerreno = new NetDTO.SetTerreno(tileX,tileY,numCapa,terreno.getID());
-                notificarActualizacion("setTerreno", null, setTerreno);
+                DTOsMapa.SetTerreno cambioTerreno = new DTOsMapa.SetTerreno(tileX,tileY,numCapa,terreno.getID());
+                notificarActualizacion("setTerreno", null, cambioTerreno);
                 return true;
             }
             else return true;
@@ -105,8 +106,8 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
             {
                 if (celda.setTerreno(numCapa, iDTerreno))
                 {
-                    NetDTO.SetTerreno setTerreno = new NetDTO.SetTerreno(tileX,tileY,numCapa,iDTerreno);
-                    notificarActualizacion("setTerreno", null, setTerreno);
+                    DTOsMapa.SetTerreno cambioTerreno = new DTOsMapa.SetTerreno(tileX,tileY,numCapa,iDTerreno);
+                    notificarActualizacion("setTerreno", null, cambioTerreno);
                     return true;
                 }
                 else return false;
@@ -176,8 +177,7 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof NetDTO.PosicionPPC)
+        if (evt.getNewValue() instanceof DTOsPC.Posicion)
         {   comprobarCambioDeMapTile(); }
-
     }
 }
