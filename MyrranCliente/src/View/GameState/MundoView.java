@@ -89,6 +89,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         par.setScale(0.1f);
         par.camara = getCamara();
         par.luz = new PointLight(getRayHandler(), 300, new Color(0.7f,0.3f,0.3f,0.7f), 350 *PIXEL_METROS, 0, 0);
+        par.luz.setSoft(true);
 
         this.addActor(par);
     }

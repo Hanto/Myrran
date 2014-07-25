@@ -10,17 +10,17 @@ import static Data.Settings.PIXEL_METROS;
 
 public class Cuerpo
 {
-    protected World world;
-    protected Body body;
+    private World world;
+    private Body body;
 
-    protected float ancho;
-    protected float alto;
-    protected Vector2 direccion;
+    private float ancho;
+    private float alto;
+    private Vector2 direccion;
 
-    protected Vector2 posicionInterpolada;
-    protected Vector2 posicionAnterior;
-    protected float anguloInterpolado;
-    protected float anguloAnterior;
+    private Vector2 posicionInterpolada;
+    private Vector2 posicionAnterior;
+    private float anguloInterpolado;
+    private float anguloAnterior;
 
     public World getWorld()                         { return world; }
     public Body getBody()                           { return body; }

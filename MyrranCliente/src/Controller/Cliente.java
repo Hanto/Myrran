@@ -1,5 +1,6 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
+import DTO.DTOsMapView;
 import DTO.DTOsPC;
 import DTO.NetDTOs;
 import DTO.DTOsPC.PCDTOs;
@@ -55,11 +56,11 @@ public class Cliente extends Client
         if (obj instanceof PCDTOs)
         {   controlador.clienteInputs.procesarInput( (PCDTOs) obj);}
 
-        if (obj instanceof DTOsPC.Mapa)
-        {   controlador.actualizarMapa((DTOsPC.Mapa)obj); }
+        if (obj instanceof DTOsMapView.Mapa)
+        {   controlador.actualizarMapa((DTOsMapView.Mapa)obj); }
 
-        if (obj instanceof DTOsPC.MapTilesAdyacentes)
-        {   controlador.actualizarMapTilesAdyacentes(((DTOsPC.MapTilesAdyacentes) obj));}
+        if (obj instanceof DTOsMapView.MapTilesAdyacentes)
+        {   controlador.actualizarMapTilesAdyacentes(((DTOsMapView.MapTilesAdyacentes) obj));}
     }
 
     //------------------------------------------------------------------------------------------------------------------

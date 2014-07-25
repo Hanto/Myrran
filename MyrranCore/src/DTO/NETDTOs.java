@@ -21,7 +21,7 @@ public class NetDTOs
         //Player Servidor:
         kryo.register(DTOsPC.PCDTOs.class);
 
-        //Contenido Player:
+        //Player:
         kryo.register(DTOsPC.LogIn.class);
         kryo.register(DTOsPC.Animacion.class);
         kryo.register(DTOsPC.Posicion.class);
@@ -38,17 +38,17 @@ public class NetDTOs
         kryo.register(DTOsPC.SkillPersonalizado.class);
         kryo.register(DTOsPC.CambioTerreno.class);
         kryo.register(DTOsPC.CastingTimePercent.class);
+        //Parametros Spell:
+        kryo.register(DTOsParametrosSpell.ParametrosEditarTerreno.class);
 
+        //MapView:
         kryo.register(boolean[].class);
         kryo.register(boolean[][].class);
-        kryo.register(DTOsPC.MapTilesAdyacentes.class);
-
+        kryo.register(DTOsMapView.MapTilesAdyacentes.class);
         kryo.register(short[].class);
-        kryo.register(DTOsPC.Mapa.Celda.class);
-        kryo.register(DTOsPC.Mapa.Celda[].class);
-        kryo.register(DTOsPC.Mapa.Celda[][].class);
-        kryo.register(DTOsPC.Mapa.class);
-
-        kryo.register(DTOsParametrosSpell.ParametrosEditarTerreno.class);
+        kryo.register(DTOsMapView.Mapa.Celda.class);
+        kryo.register(DTOsMapView.Mapa.Celda[].class);
+        kryo.register(DTOsMapView.Mapa.Celda[][].class);
+        kryo.register(DTOsMapView.Mapa.class);
     }
 }

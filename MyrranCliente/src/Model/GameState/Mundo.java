@@ -1,7 +1,7 @@
 package Model.GameState;// Created by Hanto on 08/04/2014.
 
 import Controller.Cliente;
-import DTO.DTOsPC;
+import DTO.DTOsMapView;
 import DTO.DTOsMundo;
 import Data.Settings;
 import Interfaces.Model.AbstractModel;
@@ -89,7 +89,7 @@ public class Mundo extends AbstractModel
         player.interpolarPosicion(alpha);
     }
 
-    public void actualizarMapa (DTOsPC.Mapa mapaServidor)
+    public void actualizarMapa (DTOsMapView.Mapa mapaServidor)
     {
         for (int y=0; y< mapaServidor.mapa[0].length; y++)
         {

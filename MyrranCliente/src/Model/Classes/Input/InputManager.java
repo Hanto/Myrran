@@ -1,8 +1,8 @@
 package Model.Classes.Input;// Created by Hanto on 05/05/2014.
 
 import Controller.Controlador;
+import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.UI.Acciones.AccionI;
-import Model.Classes.Mobiles.Player;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class InputManager implements InputProcessor, GestureListener
 {
     //Model:
-    private Player player;
+    private MaquinablePlayer player;
     private Controlador controlador;
     private Vector3 coordenadasMundo;
 
@@ -23,7 +23,7 @@ public class InputManager implements InputProcessor, GestureListener
     private Map<String, AccionI> listaDeAcciones = new HashMap<>();
 
     //Constructor:
-    public InputManager(Player player, Controlador controlador)
+    public InputManager(MaquinablePlayer player, Controlador controlador)
     {
         this.player = player;
         this.controlador = controlador;

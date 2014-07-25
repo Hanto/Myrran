@@ -90,7 +90,7 @@ public class PantallaLibGDX implements Screen
             mundo.actualizarFisica(FIXED_TimeStep);
             mundo.enviarDatosAServidor(cliente);
         }
-        mundo.interpolarPosicion((float) timeStep / 30f);
+        mundo.interpolarPosicion((float) timeStep / FIXED_TimeStep);
         controlador.render(delta);
     }
 

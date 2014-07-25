@@ -34,7 +34,7 @@ public class Particula extends Actor implements Poolable
     private PoolParticulas poolParticulas;
 
     //Provisional(BORRAR)
-    public  PointLight luz;
+    public PointLight luz;
     public Vector3 posicion = new Vector3();
     public Camera camara;
 

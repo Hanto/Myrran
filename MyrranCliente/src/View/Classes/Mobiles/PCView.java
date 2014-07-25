@@ -71,7 +71,7 @@ public class PCView extends Group implements PropertyChangeListener
     {
         //TODO hay que hacerlo por setPosition y en cambio mover el model interpoladamente, el destino sin decimales
         this.clearActions();
-        this.addAction(Actions.moveTo(x, y, Settings.FIXED_TimeStep, Interpolation.linear));
+        this.addAction(Actions.moveTo(x, y, Settings.FIXED_TimeStep+0.03f, Interpolation.linear));
         //setPosition(x,y);
     }
 

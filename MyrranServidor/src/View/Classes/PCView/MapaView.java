@@ -1,6 +1,7 @@
 package View.Classes.PCView;// Created by Hanto on 20/05/2014.
 
 import Controller.Controlador;
+import DTO.DTOsMapView;
 import DTO.DTOsPC;
 import DTO.DTOsMapa;
 import Data.Settings;
@@ -70,7 +71,7 @@ public class MapaView implements PropertyChangeListener
 
     private void enviarMapTilesAdyancentes()
     {
-        DTOsPC.MapTilesAdyacentes maptilesAdyacentes = new DTOsPC.MapTilesAdyacentes(mapaEnviado);
+        DTOsMapView.MapTilesAdyacentes maptilesAdyacentes = new DTOsMapView.MapTilesAdyacentes(mapaEnviado);
         controlador.enviarACliente(PC.getConnectionID(), maptilesAdyacentes);
     }
 
@@ -227,7 +228,7 @@ public class MapaView implements PropertyChangeListener
         int esquinaInfIzdaX = mapTileInicialX*numTilesX-reborde;
         int esquinaInfIzdaY = mapTileInicialY*numTilesY-reborde;
 
-        DTOsPC.Mapa actualizarMapa = new DTOsPC.Mapa(esquinaInfIzdaX, esquinaInfIzdaY, ancho, alto);
+        DTOsMapView.Mapa actualizarMapa = new DTOsMapView.Mapa(esquinaInfIzdaX, esquinaInfIzdaY, ancho, alto);
         for (int x=0; x< ancho; x++)
         {
             for (int y = 0; y< alto; y++)
