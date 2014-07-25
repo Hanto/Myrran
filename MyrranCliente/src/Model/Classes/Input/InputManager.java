@@ -1,7 +1,6 @@
 package Model.Classes.Input;// Created by Hanto on 05/05/2014.
 
 import Controller.Controlador;
-import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Mobiles.Player;
 import com.badlogic.gdx.InputProcessor;
@@ -75,30 +74,30 @@ public class InputManager implements InputProcessor, GestureListener
     @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
         coordenadasScreenAMundo(screenX, screenY);
-        ((Maquinable)player).getInput().setScreenX((int)coordenadasMundo.x);
-        ((Maquinable)player).getInput().setScreenY((int)coordenadasMundo.y);
-        ((Maquinable)player).getInput().setStartCastear(true);
-        ((Maquinable)player).getInput().setStopCastear(false);
+        player.getInput().setScreenX((int)coordenadasMundo.x);
+        player.getInput().setScreenY((int)coordenadasMundo.y);
+        player.getInput().setStartCastear(true);
+        player.getInput().setStopCastear(false);
         return true;
     }
 
     @Override public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
         coordenadasScreenAMundo(screenX, screenY);
-        ((Maquinable)player).getInput().setScreenX((int)coordenadasMundo.x);
-        ((Maquinable)player).getInput().setScreenY((int)coordenadasMundo.y);
-        ((Maquinable)player).getInput().setStartCastear(false);
-        ((Maquinable)player).getInput().setStopCastear(true);
+        player.getInput().setScreenX((int)coordenadasMundo.x);
+        player.getInput().setScreenY((int)coordenadasMundo.y);
+        player.getInput().setStartCastear(false);
+        player.getInput().setStopCastear(true);
         return true;
     }
 
     @Override public boolean touchDragged(int screenX, int screenY, int pointer)
     {
         coordenadasScreenAMundo(screenX, screenY);
-        ((Maquinable)player).getInput().setScreenX((int)coordenadasMundo.x);
-        ((Maquinable)player).getInput().setScreenY((int)coordenadasMundo.y);
-        ((Maquinable)player).getInput().setStartCastear(true);
-        ((Maquinable)player).getInput().setStopCastear(false);
+        player.getInput().setScreenX((int)coordenadasMundo.x);
+        player.getInput().setScreenY((int)coordenadasMundo.y);
+        player.getInput().setStartCastear(true);
+        player.getInput().setStopCastear(false);
         return false;
     }
 

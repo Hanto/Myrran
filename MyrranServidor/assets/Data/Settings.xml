@@ -12,7 +12,6 @@
   <int key="NETWORK_PuertoUDP"              value="54777" />
   <int key="NETWORK_Client_Timeout"         value="50000000" />
   <float key="NETWORK_DistanciaVisionMobs"  value="1.2" />
-  <int key="NETWORK_Update_Time"            value="40" />
   
   <float key="BDEBUFF_DuracionTick"         value="1.0" />
   

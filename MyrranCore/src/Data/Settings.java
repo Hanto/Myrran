@@ -28,8 +28,6 @@ public class Settings
         NETWORK_PuertoUDP           = settings.getInt("NETWORK_PuertoUDP", 54777);
         NETWORK_Client_Timeout      = settings.getInt("NETWORK_Client_Timeout", 5000*10000);
         NETWORK_DistanciaVisionMobs = settings.getFloat("NETWORK_DistanciaVisionMobs",1.2f );
-        NETWORK_Update_Time         = settings.getInt("NETWORK_Update_Time", 40);
-        NETWORK_Delta_Time          = NETWORK_Update_Time/1000f;
 
         //Spells, Debuffs:
         BDEBUFF_DuracionTick        = settings.getFloat("BDEBUFF_DuracionTick",1.0f);
@@ -135,8 +133,6 @@ public class Settings
     public static int NETWORK_PuertoTCP;
     public static int NETWORK_PuertoUDP;
     public static int NETWORK_Client_Timeout;
-    public static int NETWORK_Update_Time;
-    public static float NETWORK_Delta_Time = NETWORK_Update_Time;
     public static float NETWORK_DistanciaVisionMobs;
 
     //Spells, Debuffs:

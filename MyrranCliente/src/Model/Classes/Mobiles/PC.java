@@ -55,7 +55,6 @@ public class PC extends AbstractModel implements MobPC
     @Override public void setPosition (float x, float y)
     {
         cuerpo.setPosition(x, y);
-
         this.x = x; this.y = y;
         notificador.setPosition(x, y);
     }

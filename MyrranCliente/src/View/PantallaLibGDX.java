@@ -39,9 +39,9 @@ public class PantallaLibGDX implements Screen
     private double currentTime;
     private double deltaTime;
 
-    private int contador = 0;
-    private float total = 0;
-    private float media;
+    //private int contador = 0;
+    //private float total = 0;
+    //private float media;
 
     public PantallaLibGDX(MyrranClient myrranCliente)
     {
@@ -66,41 +66,36 @@ public class PantallaLibGDX implements Screen
         controlador = new Controlador(mundo);
         cliente = controlador.getCliente();
 
-        currentTime = TimeUtils.nanoTime() / 1000000.0;
+        currentTime = TimeUtils.nanoTime() / 1000000000.0;
+    }
+
+    @Override public void render(float delta)
+    {
+        newTime = TimeUtils.nanoTime() / 1000000000.0;
+        deltaTime = (newTime - currentTime);
+        currentTime = newTime;
+
+        //total += deltaTime;
+        timeStep += deltaTime;
+
+        while (timeStep >= FIXED_TimeStep)
+        {
+            //contador++;
+            //media = total/contador;
+            //logger.trace("TimeStep Medio: {}",media);
+
+            timeStep -= FIXED_TimeStep;
+
+            mundo.actualizarUnidades(FIXED_TimeStep);
+            mundo.actualizarFisica(FIXED_TimeStep);
+            mundo.enviarDatosAServidor(cliente);
+        }
+        mundo.interpolarPosicion((float) timeStep / 30f);
+        controlador.render(delta);
     }
 
     @Override public void show()
     {   logger.trace("SHOW (Inicializando Screen):"); }
-
-    @Override public void render(float delta)
-    {
-        newTime = TimeUtils.nanoTime() / 1000000.0;
-        deltaTime = (newTime - currentTime);
-        currentTime = newTime;
-
-        total += deltaTime;
-        timeStep += deltaTime;
-
-        while (timeStep >= 30)
-        {
-            timeStep -= 30;
-            mundo.actualizarUnidades(FIXED_TimeStep);
-            mundo.actualizarFisica(FIXED_TimeStep);
-            mundo.enviarDatosAServidor(cliente);
-
-            contador++;
-            media = total/contador;
-            //System.out.println(media);
-        }
-        mundo.interpolarPosicion((float) timeStep / 30f);
-
-        controlador.render(delta);
-    }
-
-    @Override public void resize(int anchura, int altura)
-    {   logger.trace("RESIZE (Redimensionando Screen) a: {} x {}", anchura, altura);
-        controlador.resize(anchura, altura);
-    }
 
     @Override public void pause()
     {   logger.trace("PAUSE (Pausando pantalla):"); }
@@ -108,15 +103,21 @@ public class PantallaLibGDX implements Screen
     @Override public void resume()
     {   logger.trace("RESUME (Pantalla reanudada):"); }
 
+    @Override public void resize(int anchura, int altura)
+    {
+        logger.trace("RESIZE (Redimensionando Screen) a: {} x {}", anchura, altura);
+        controlador.resize(anchura, altura);
+    }
+
     @Override public void hide()
-    {   //Despues de cerrar la pantalla es neccesario liberar la memoria de todas las texturas que hayamos usado, por eso llamamos al metodo Dispose
+    {
         logger.trace("HIDE (Cerrando pantalla):");
         dispose();
     }
 
-    //Es el metodo para liberar los recursos usados
     @Override public void dispose()
-    {   logger.trace("DISPOSE (Liberando memoria):");
+    {
+        logger.trace("DISPOSE (Liberando memoria):");
         controlador.dispose();
     }
 }

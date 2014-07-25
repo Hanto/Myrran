@@ -2,7 +2,6 @@ package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 05/05/2014.
 
 import DB.DAO;
 import Data.Settings;
-import Interfaces.EntidadesPropiedades.Maquinable;
 import Interfaces.EntidadesTipos.MobPlayer;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.ControladorUI;
@@ -27,7 +26,7 @@ public class SeleccionarSpell extends Accion
     {
         if (parametros.equals(Settings.BARRATERRENOS_EditarTerrenoID)) { controlador.mostrarBarraTerrenos(); /*player.setParametrosSpell(new ParametrosEditarTerreno());*/}
 
-        ((Maquinable)player).getInput().setSpellID(iD);
+        player.getInput().setSpellID(iD);
     }
 
     @Override public void accionKeyUp(MobPlayer player, ControladorUI controlador)

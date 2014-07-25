@@ -2,7 +2,9 @@ package Controller;// Created by Hanto on 09/04/2014.
 
 import Data.Settings;
 import Model.GameState.Mundo;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ public class Updater implements Runnable
 {
     private Controlador controlador;
     private Mundo mundo;
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
     protected final List<Runnable> runnables = new ArrayList<>();
     protected final List<Runnable> executedRunnables = new ArrayList<>();
 
@@ -20,15 +23,9 @@ public class Updater implements Runnable
     private double currentTime;
     private double deltaTime;
 
-
-    private double newTimeC;
-    private double currentTimeC;
-    private double deltaTimeC;
-
-
-    private int contador = 0;
-    private double total = 0;
-    private float media;
+    //private int contador = 0;
+    //private double total = 0;
+    //private float media;
 
     public void postRunnable(Runnable runnable)
     {
@@ -56,14 +53,14 @@ public class Updater implements Runnable
                 deltaTime = (newTime - currentTime);
                 currentTime = newTime;
 
-                total += deltaTime;
+                //total += deltaTime;
                 timeStep += deltaTime;
 
                 while (timeStep >= Settings.FIXED_TimeStep)
                 {
-                    contador++;
-                    media = (float) total / (float) contador;
-                    //System.out.println(media);
+                    //contador++;
+                    //media = (float) total / (float) contador;
+                    //logger.trace("TimeStep Medio: {}",media);
 
                     timeStep -= Settings.FIXED_TimeStep;
 
@@ -71,16 +68,10 @@ public class Updater implements Runnable
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep);
                     mundo.actualizarFisica(Settings.FIXED_TimeStep);
                     controlador.mundoView.enviarDatosAClientes();
-                    //mundo.enviarSnapshots();
                 }
-
-                currentTimeC = TimeUtils.nanoTime();
-                newTimeC = TimeUtils.nanoTime();
-                deltaTimeC = (newTimeC - currentTimeC);
-                //System.out.println("process Time: "+ deltaTimeC/1000000);
             }
             try { Thread.sleep((long)(1)); }
-            catch (InterruptedException e) { System.out.println("ERROR: Updateando la red: "+e); return; }
+            catch (InterruptedException e) { logger.error("ERROR: Updateando la red: ", e); return; }
         }
     }
 

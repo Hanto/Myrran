@@ -2,7 +2,6 @@ package Model.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
 import Core.Cuerpos.BodyFactory;
 import Core.Cuerpos.Cuerpo;
-import Core.FSM.IO.PlayerIO;
 import Core.FSM.MaquinaEstados;
 import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
@@ -10,7 +9,7 @@ import DB.DAO;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
-import Interfaces.EntidadesPropiedades.Maquinable;
+import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.MobPlayer;
 import Interfaces.Geo.MapaI;
 import Interfaces.Input.PlayerIOI;
@@ -28,7 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Player extends AbstractModel implements MobPlayer, CasterPersonalizable, Debuffeable, Maquinable
+public class Player extends AbstractModel implements MobPlayer, CasterPersonalizable, Debuffeable, MaquinablePlayer
 {
     protected Mundo mundo;
     protected int connectionID;
@@ -60,8 +59,8 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     //Atributos exclusivos del Cliente:
     protected boolean castearInterrumpible = false;
     protected MaquinaEstados fsm;
-    protected PlayerIO input = new PlayerIO();
-    protected PlayerIO output = new PlayerIO();
+    protected Core.FSM.IO.PlayerIO input = new Core.FSM.IO.PlayerIO();
+    protected Core.FSM.IO.PlayerIO output = new Core.FSM.IO.PlayerIO();
 
     //
     //------------------------------------------------------------------------------------------------------------------
@@ -85,8 +84,8 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     @Override public float getTotalCastingTime()                        { return totalCastingTime; }
     @Override public String getSpellIDSeleccionado()                    { return spellIDSeleccionado; }
     @Override public Object getParametrosSpell()                        { return parametrosSpell; }
-    @Override public PlayerIOI getInput()                               { return input; }
-    @Override public PlayerIOI getOutput()                              { return output; }
+    @Override public PlayerIOI getInput()                                { return input; }
+    @Override public PlayerIOI getOutput()                               { return output; }
 
     //SET:
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
