@@ -2,6 +2,7 @@ package Model.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
 import Core.Cuerpos.BodyFactory;
 import Core.Cuerpos.Cuerpo;
+import Core.FSM.IO.PlayerIO;
 import Core.FSM.MaquinaEstados;
 import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
@@ -59,8 +60,8 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     //Atributos exclusivos del Cliente:
     protected boolean castearInterrumpible = false;
     protected MaquinaEstados fsm;
-    protected Core.FSM.IO.PlayerIO input = new Core.FSM.IO.PlayerIO();
-    protected Core.FSM.IO.PlayerIO output = new Core.FSM.IO.PlayerIO();
+    protected PlayerIO input = new PlayerIO();
+    protected PlayerIO output = new PlayerIO();
 
     //
     //------------------------------------------------------------------------------------------------------------------

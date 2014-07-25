@@ -1,12 +1,10 @@
-package View;// Created by Hanto on 08/04/2014.
+package View.GameState;// Created by Hanto on 08/04/2014.
 
 import Controller.Controlador;
 import DB.RSC;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
 import Tweens.TweenEng;
-import View.GameState.MundoView;
-import View.GameState.UIView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;

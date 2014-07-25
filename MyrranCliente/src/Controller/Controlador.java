@@ -8,7 +8,7 @@ import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.ControladorUI;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
-import View.Vista;
+import View.GameState.Vista;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;

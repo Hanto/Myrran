@@ -1,5 +1,6 @@
 package Tweens;// Created by Hanto on 15/07/2014.
 
+import Interfaces.EntidadesPropiedades.Espacial;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -13,5 +14,8 @@ public enum TweenEng
 
     //Aqui se registran todos los Accessors del Tween-Engine:
     private TweenEng()
-    {   Tween.registerAccessor(OrthographicCamera.class, new CamaraTween()); }
+    {
+        Tween.registerAccessor(Espacial.class.getDeclaringClass(), new EspacialTween());
+        Tween.registerAccessor(OrthographicCamera.class, new CamaraTween());
+    }
 }

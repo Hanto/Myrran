@@ -1,7 +1,6 @@
 package zMain;// Created by Hanto on 08/04/2014.
 
 import Data.Settings;
-import View.PantallaLibGDX;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;

@@ -1,4 +1,4 @@
-package View.Classes.PCView;// Created by Hanto on 07/04/2014.
+package View.Gamestate.Vistas;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.DTOsPC;
@@ -23,8 +23,6 @@ public class PcView implements PropertyChangeListener
 
     //Datos:
     private List<MobPC> listaPCsCercanos = new ArrayList<>();
-    private float x;
-    private float y;
 
     protected MapaView mapaView;
     protected PCViewNotificador notificador;
@@ -38,18 +36,14 @@ public class PcView implements PropertyChangeListener
         this.notificador = new PCViewNotificador(pc.getConnectionID());
         this.mundo = mundoView.mundo;
 
-        x = pc.getX();
-        y = pc.getY();
-
-        pc.añadirObservador(this);
-
-        notificador.setPosition(x, y);
+        notificador.setPosition(pc.getX(), pc.getY());
         notificador.setNombre(pc.getNombre());
         notificador.setHPs(pc.getActualHPs(), pc.getMaxHPs());
 
         quienMeVe();
 
         mapaView = new MapaView(pc, this, mundo, controlador);
+        pc.añadirObservador(this);
     }
 
     //Separamos los eventos Personales de los globales y mandamos los Personales de todas las unidades antes que los globales para
@@ -75,7 +69,6 @@ public class PcView implements PropertyChangeListener
     //cerca susceptibles de ser añadidos a la lista de PCsCercanos, que luego se usara para retransmitir las notificaciones globales
     private void setPosition (float posX, float posY)
     {
-        x = posX; y = posY;
         notificador.setPosition(posX, posY);
         quienMeVe();
         mapaView.comprobarVistaMapa();

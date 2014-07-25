@@ -100,7 +100,7 @@ public class Cuerpo
     {
         if (body != null)
         {
-            if (body.isActive() == true) // && body.getType() == BodyDef.BodyType.DynamicBody
+            if (body.isActive()) // && body.getType() == BodyDef.BodyType.DynamicBody
             {
                 posicionAnterior.x = body.getPosition().x;
                 posicionAnterior.y = body.getPosition().y;
@@ -113,7 +113,7 @@ public class Cuerpo
     {
         if (body != null)
         {
-            if (body.isActive() == true) // && body.getType() == BodyDef.BodyType.DynamicBody
+            if (body.isActive()) // && body.getType() == BodyDef.BodyType.DynamicBody
             {
                 posicionInterpolada.x = posicionAnterior.x + (body.getPosition().x - posicionAnterior.x) * alpha;
                 posicionInterpolada.y = posicionAnterior.y + (body.getPosition().y - posicionAnterior.y) * alpha;

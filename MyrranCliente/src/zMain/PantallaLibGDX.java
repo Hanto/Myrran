@@ -1,4 +1,4 @@
-package View;// Created by Hanto on 08/04/2014.
+package zMain;// Created by Hanto on 08/04/2014.
 
 import Controller.Cliente;
 import Controller.Controlador;
@@ -20,7 +20,6 @@ import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.slf4j.LoggerFactory;
-import zMain.MyrranClient;
 
 import static Data.Settings.FIXED_TimeStep;
 

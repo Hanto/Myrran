@@ -1,4 +1,4 @@
-package View.Classes.PCView;// Created by Hanto on 22/07/2014.
+package View.Gamestate.Vistas;// Created by Hanto on 22/07/2014.
 
 import DTO.DTOsPC;
 import Interfaces.EntidadesTipos.MobPC;
