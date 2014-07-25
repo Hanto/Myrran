@@ -49,10 +49,10 @@ public class Servidor extends Server
     private void procesarMensajeCliente(Connection con, Object obj)
     {
         if (obj instanceof DTOsPC.PlayerDTOs)
-        {   controlador.controlaPlayer.procesarInput(con.getID(), (DTOsPC.PlayerDTOs)obj); }
+        {   controlador.servidorInputs.procesarInput(con.getID(), (DTOsPC.PlayerDTOs)obj); }
 
         if (obj instanceof DTOsPC.LogIn)
-        {   controlador.controlaPlayer.procesarLogIn(con.getID());}
+        {   controlador.servidorInputs.procesarLogIn(con.getID());}
     }
 
     //------------------------------------------------------------------------------------------------------------------

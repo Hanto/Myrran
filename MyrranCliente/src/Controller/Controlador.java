@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 public class Controlador implements ControladorUI
 {
     protected Cliente cliente;
-    protected ControlaPlayer controlaPlayer;
+    protected ClienteInputs clienteInputs;
 
     protected Mundo mundo;
     protected UI ui;
@@ -31,7 +31,7 @@ public class Controlador implements ControladorUI
     public Controlador (Mundo mundo)
     {
         this.cliente = new Cliente(this);
-        this.controlaPlayer = new ControlaPlayer(mundo, this);
+        this.clienteInputs = new ClienteInputs(mundo, this);
         this.mundo = mundo;
         añadirPlayer(cliente.getID());
 

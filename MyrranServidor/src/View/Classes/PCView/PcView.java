@@ -1,4 +1,4 @@
-package View;// Created by Hanto on 07/04/2014.
+package View.Classes.PCView;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.DTOsPC;
@@ -6,6 +6,7 @@ import Data.Settings;
 import Interfaces.EntidadesTipos.MobPC;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
+import View.Gamestate.MundoView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -54,26 +55,24 @@ public class PcView implements PropertyChangeListener
     //Separamos los eventos Personales de los globales y mandamos los Personales de todas las unidades antes que los globales para
     //que los mensajes de creacion de unidades (Personales) tengan preferencia sobre los de alteracion de unidades ajenas (Globales)
     //y asi no nos suceda que se nos pida alterar la posicion de una unidad que aun no esta creada, generando un error
+
+    public void generarDTOs()
+    {   notificador.generarDTOs(); }
+
     public void enviarDatosPersonales()
-    {
-        notificador.getDTOs();
-        if (notificador.contieneDatosDTOPersonal()) actualizarPlayer(notificador.dtoPersonal);
-    }
+    {   if (notificador.contieneDatosDTOPersonal()) controlador.enviarACliente(pc.getConnectionID(), notificador.dtoPersonal); }
 
     public void enviarDatosGlobales()
-    {   if (notificador.contieneDatosDTOGlobal() && isVisible()) actualizarPlayersCercanos(notificador.dtoGlobal); }
-
-    private void actualizarPlayersCercanos (Object obj)
     {
-        for (MobPC PCCercanos : listaPCsCercanos)
-            controlador.enviarACliente(PCCercanos.getConnectionID(), obj);
+        if (notificador.contieneDatosDTOGlobal() && !listaPCsCercanos.isEmpty())
+        {   for (MobPC PCCercanos : listaPCsCercanos) controlador.enviarACliente(PCCercanos.getConnectionID(), notificador.dtoGlobal); }
     }
-    private void actualizarPlayer (Object obj)
-    {   controlador.enviarACliente(pc.getConnectionID(), obj); }
 
-    private boolean isVisible()
-    {   return !listaPCsCercanos.isEmpty(); }
+    // NOTIFICADORES
+    //------------------------------------------------------------------------------------------------------------------
 
+    //El notificador de posicion es especial, ya que cada vez que cambia la posicion se tiene que comprobar si hay nuevos players
+    //cerca susceptibles de ser añadidos a la lista de PCsCercanos, que luego se usara para retransmitir las notificaciones globales
     private void setPosition (float posX, float posY)
     {
         x = posX; y = posY;
@@ -135,7 +134,6 @@ public class PcView implements PropertyChangeListener
     private void añadirModificarHPs(float HPs)
     {   notificador.añadirModificarHPs(HPs); }
 
-
     private void dispose()
     {
         //para que deje de observar el Mapa Model
@@ -146,6 +144,7 @@ public class PcView implements PropertyChangeListener
         mundoView.listaPcViews.remove(this);
         //transmitimos los mensajes que tuvieramos pendientes sin esperar al siguiente ciclo(Esto incluye el mensaje de eliminacion):
         notificador.añadirEliminarPC(pc.getConnectionID());
+        generarDTOs();
         enviarDatosPersonales();
         enviarDatosGlobales();
     }

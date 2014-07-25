@@ -1,11 +1,8 @@
 package Interfaces.Input;// Created by Hanto on 10/06/2014.
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
-
 public interface PlayerIOI
 {
     //GET:
-    public OrthographicCamera getCamara();
     public int getScreenX();
     public int getScreenY();
     public boolean getIrArriba();
@@ -19,7 +16,6 @@ public interface PlayerIOI
     public int getNumAnimacion();
 
     //SET:
-    public void setCamara(OrthographicCamera camara);
     public void setScreenX(int screenX);
     public void setScreenY(int screenY);
     public void setIrArriba(boolean b);

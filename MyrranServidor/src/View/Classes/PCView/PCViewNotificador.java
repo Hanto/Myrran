@@ -1,4 +1,4 @@
-package View;// Created by Hanto on 22/07/2014.
+package View.Classes.PCView;// Created by Hanto on 22/07/2014.
 
 import DTO.DTOsPC;
 import Interfaces.EntidadesTipos.MobPC;
@@ -28,7 +28,7 @@ public class PCViewNotificador
         this.dtoGlobal = new DTOsPC.PCDTOs(connectionID);
     }
 
-    public void getDTOs()
+    public void generarDTOs()
     {
         dtoPersonal.listaDTOs = juntarObjectMapYArrayList(cambiosExcluyentesPersonal, cambiosAcumulativosPersonal);
         dtoGlobal.listaDTOs = juntarObjectMapYArrayList(cambiosExcluyentesGlobal, cambiosAcumulativosGlobal);

@@ -31,32 +31,34 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
     protected float x;
     protected float y;
     protected int numAnimacion = 5;
-
     protected float velocidadMax = 80.0f;
     protected float velocidadMod = 1.0f;
-
     protected String nombre = "Hanto";
     protected int nivel = 1;
-
     protected float actualHPs=1;
     protected float maxHPs=2000;
-
-    protected int targetX = 0;
-    protected int targetY = 0;
-    protected boolean castear = false;
 
     protected String spellIDSeleccionado = null;
     protected Object parametrosSpell;
     protected float actualCastingTime = 0.0f;
     protected float totalCastingTime = 0.0f;
-
     private List<AuraI>listaDeAuras = new ArrayList<>();
     private Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
     private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
     protected Cuerpo cuerpo;
     protected PCNotificador notificador;
+
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+
+    //Atributos exclusivos del Servidor:
+    protected int targetX = 0;
+    protected int targetY = 0;
+    protected boolean castear = false;
+
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
 
     //GET:
     @Override public int getConnectionID ()                             { return connectionID; }
@@ -110,6 +112,40 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
     }
 
+    //Este metodo no es el que notifica de la modificacion de los talentos del skill personalizado, ya que hay mas modos de modificarlos
+    //como pidiendo directamente un skillPersonalizado al HashMap y modificandolo. Por tanto el player observa directamente la fuente
+    //(el propio Skill Personalizado), y si se modifica se le hace saber al player y es entonces cuando este manda la notifcacion al cliente
+    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+    {
+        SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
+        if (skillPersonalizado == null) { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
+        else if (valor > 0 && valor < skillPersonalizado.getTalentoMaximo(statID))
+            skillPersonalizado.setNumTalentos(statID, valor);
+    }
+
+    // NOTIFICACIONES VISTA:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void setPosition(float x, float y)
+    {
+        this.x = x; this.y = y;
+        notificador.setPosition(x, y);
+    }
+
+    @Override public void setNumAnimacion(int numAnimacion)
+    {
+        this.numAnimacion = numAnimacion;
+        notificador.setNumAnimacion(numAnimacion);
+    }
+
+    @Override public void modificarHPs(float HPs)
+    {
+        actualHPs += HPs;
+        if (actualHPs > maxHPs) actualHPs = maxHPs;
+        else if (actualHPs < 0) actualHPs = 0;
+        notificador.añadirModificarHPs(HPs);
+    }
+
     public void dispose()
     {
         //Dejamos de observar a cada uno de los Spells Personalizados:
@@ -139,33 +175,8 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         notificador.añadirSkillPersonalizado(spell.getID());
     }
 
-    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
-    {
-        SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
-        if (skillPersonalizado == null) { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
-        else if (valor > 0 && valor < skillPersonalizado.getTalentoMaximo(statID))
-            skillPersonalizado.setNumTalentos(statID, valor);
-    }
-
-    @Override public void modificarHPs(float HPs)
-    {
-        actualHPs += HPs;
-        if (actualHPs > maxHPs) actualHPs = maxHPs;
-        else if (actualHPs < 0) actualHPs = 0;
-        notificador.añadirModificarHPs(HPs);
-    }
-
-    @Override public void setPosition(float x, float y)
-    {
-        this.x = x; this.y = y;
-        notificador.setPosition(x, y);
-    }
-
-    @Override public void setNumAnimacion(int numAnimacion)
-    {
-        this.numAnimacion = numAnimacion;
-        notificador.setNumAnimacion(numAnimacion);
-    }
+    // METODOS ACTUALIZACION:
+    //------------------------------------------------------------------------------------------------------------------
 
     public void setCastear (boolean castear, int targetX, int targetY)
     {

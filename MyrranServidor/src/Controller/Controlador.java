@@ -1,14 +1,13 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
 import Model.GameState.Mundo;
-import View.MundoView;
+import View.Gamestate.MundoView;
 
 public class Controlador
 {
     protected Servidor servidor;                  //Input principal de la simulacion
+    protected ServidorInputs servidorInputs;
     protected Updater updater;
-
-    protected ControlaPlayer controlaPlayer;
 
     protected Mundo mundo;
     protected MundoView mundoView;
@@ -19,7 +18,7 @@ public class Controlador
     {
         this.mundo = mundo;
 
-        controlaPlayer = new ControlaPlayer(mundo, this);
+        servidorInputs = new ServidorInputs(mundo, this);
         mundoView = new MundoView(this, mundo);
         servidor = new Servidor(this);
         updater = new Updater(this, mundo);

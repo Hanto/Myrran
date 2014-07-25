@@ -1,4 +1,4 @@
-package View;// Created by Hanto on 20/05/2014.
+package View.Classes.PCView;// Created by Hanto on 20/05/2014.
 
 import Controller.Controlador;
 import DTO.DTOsPC;

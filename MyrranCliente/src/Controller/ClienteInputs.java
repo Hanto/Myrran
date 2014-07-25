@@ -10,13 +10,13 @@ import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ControlaPlayer
+public class ClienteInputs
 {
     private Mundo mundo;
     private Controlador controlador;
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public ControlaPlayer(Mundo mundo, Controlador controlador)
+    public ClienteInputs(Mundo mundo, Controlador controlador)
     {
         this.mundo = mundo;
         this.controlador = controlador;

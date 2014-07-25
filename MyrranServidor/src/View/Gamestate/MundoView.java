@@ -1,9 +1,10 @@
-package View;// Created by Hanto on 07/04/2014.
+package View.Gamestate;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.DTOsMundo;
 import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
+import View.Classes.PCView.PcView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -28,7 +29,10 @@ public class MundoView implements PropertyChangeListener
     public void enviarDatosAClientes()
     {
         for (PcView pcView: listaPcViews)
+        {
+            pcView.generarDTOs();
             pcView.enviarDatosPersonales();
+        }
 
         for (PcView pcView: listaPcViews)
             pcView.enviarDatosGlobales();

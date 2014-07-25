@@ -41,7 +41,7 @@ public class Updater implements Runnable
         this.controlador = controlador;
         this.mundo = mundo;
 
-        currentTime = TimeUtils.nanoTime() / 1000000.0;
+        currentTime = TimeUtils.nanoTime() / 1000000000.0;
 
         new Thread(this).start();
     }
@@ -52,20 +52,20 @@ public class Updater implements Runnable
         {
             synchronized (mundo)
             {
-                newTime = TimeUtils.nanoTime() / 1000000.0;
+                newTime = TimeUtils.nanoTime() / 1000000000.0;
                 deltaTime = (newTime - currentTime);
                 currentTime = newTime;
 
                 total += deltaTime;
                 timeStep += deltaTime;
 
-                while (timeStep >= 30)
+                while (timeStep >= Settings.FIXED_TimeStep)
                 {
                     contador++;
                     media = (float) total / (float) contador;
                     //System.out.println(media);
 
-                    timeStep -= 30;
+                    timeStep -= Settings.FIXED_TimeStep;
 
                     //executeRunnables();
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep);

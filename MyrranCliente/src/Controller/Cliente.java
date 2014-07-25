@@ -53,7 +53,7 @@ public class Cliente extends Client
     private void procesarMensajeServidor (Connection con, Object obj)
     {
         if (obj instanceof PCDTOs)
-        {   controlador.controlaPlayer.procesarInput( (PCDTOs) obj);}
+        {   controlador.clienteInputs.procesarInput( (PCDTOs) obj);}
 
         if (obj instanceof DTOsPC.Mapa)
         {   controlador.actualizarMapa((DTOsPC.Mapa)obj); }

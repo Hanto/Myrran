@@ -1,11 +1,9 @@
 package Core.FSM.IO;// Created by Hanto on 11/04/2014.
 
 import Interfaces.Input.PlayerIOI;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class PlayerIO implements PlayerIOI
 {
-    public OrthographicCamera camara;
     public int screenX;
     public int screenY;
     public boolean irArriba = false;
@@ -18,7 +16,6 @@ public class PlayerIO implements PlayerIOI
     public int numAnimacion = 5;
     public boolean disparar = false;
 
-    public void setCamara(OrthographicCamera camara)        { this.camara = camara; }
     @Override public void setScreenX(int screenX)           { this.screenX = screenX; }
     @Override public void setScreenY(int screenY)           { this.screenY = screenY; }
     @Override public void setIrArriba(boolean b)            { irArriba = b; }
@@ -31,7 +28,6 @@ public class PlayerIO implements PlayerIOI
     @Override public void setSpellID(String s)              { spellID = s; }
     @Override public void setNumAnimacion(int numAnimacion) { this.numAnimacion = numAnimacion; }
 
-    public OrthographicCamera getCamara()                   { return camara; }
     @Override public int getScreenX()                       { return screenX; }
     @Override public int getScreenY()                       { return screenY; }
     @Override public boolean getIrArriba()                  { return irArriba; }

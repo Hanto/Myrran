@@ -60,6 +60,15 @@ public class Mundo extends AbstractModel
         pc.dispose();
     }
 
+    public void actualizarUnidades(float delta)
+    {
+        //Actualizar a todas las unidades a partir de los datos ya interpolados
+        player.actualizar(delta);
+        //Actualizar a los demas jugador multiplayer:
+        for (PC pc: listaPlayers)
+        {   pc.actualizar(delta); }
+    }
+
     public void actualizarFisica(float delta)
     {
         //Salvamos los ultimos valores para poder interpolarlos
@@ -74,21 +83,11 @@ public class Mundo extends AbstractModel
         {   cliente.enviarAServidor(player.getNotificador().getDTOs()); }
     }
 
-    public void actualizarUnidades(float delta)
-    {
-        //Actualizar a todas las unidades a partir de los datos ya interpolados
-        player.actualizar(delta);
-        //Actualizar a los demas jugador multiplayer:
-        for (PC pc: listaPlayers)
-        {   pc.actualizar(delta); }
-    }
-
     public void interpolarPosicion(float alpha)
     {
         //Interpolamos las posiciones y angulos con el resto del TimeStep:
         player.interpolarPosicion(alpha);
     }
-
 
     public void actualizarMapa (DTOsPC.Mapa mapaServidor)
     {

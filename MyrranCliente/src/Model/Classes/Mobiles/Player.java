@@ -37,45 +37,34 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     protected float x = 0.0f;
     protected float y = 0.0f;
     protected int numAnimacion = 5;
-
     protected float velocidadMax = 80.0f;
     protected float velocidadMod = 1.0f;
-
     protected String nombre;
     protected int nivel;
-
     protected float actualHPs;
     protected float maxHPs;
 
-    protected boolean castearInterrumpible = false;
     protected String spellIDSeleccionado;
     protected Object parametrosSpell;
     protected float actualCastingTime = 0.0f;
     protected float totalCastingTime = 0.0f;
-
     protected Array<AuraI> listaDeAuras = new Array<>();
     protected Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
     protected Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
     protected Cuerpo cuerpo;
-    protected MaquinaEstados fsm;
-    protected PlayerIO input = new PlayerIO();
-    protected PlayerIO output = new PlayerIO();
-
     protected PlayerNotificador notificador;
 
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public Player(Mundo mundo)
-    {
-        this.mundo = mundo;
+    //Atributos exclusivos del Cliente:
+    protected boolean castearInterrumpible = false;
+    protected MaquinaEstados fsm;
+    protected PlayerIO input = new PlayerIO();
+    protected PlayerIO output = new PlayerIO();
 
-        this.notificador = new PlayerNotificador(this);
-        this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
-        this.cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
-        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
-        cuerpo.setPosition(x, y);
-    }
+    //
+    //------------------------------------------------------------------------------------------------------------------
 
     //GET:
     public Body getBody()                                               { return cuerpo.getBody(); }
@@ -115,6 +104,18 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID){ return listaSkillsPersonalizados.get(skillID); }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID){ return listaSpellsPersonalizados.get(spellID); }
     public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
+
+    //Constructor:
+    public Player(Mundo mundo)
+    {
+        this.mundo = mundo;
+
+        this.notificador = new PlayerNotificador(this);
+        this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
+        this.cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
+        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
+        cuerpo.setPosition(x, y);
+    }
 
     //RECEPCION DATOS:
     //------------------------------------------------------------------------------------------------------------------
@@ -184,7 +185,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         }
     }
 
-    //  ENVIO DATOS:
+    //  ENVIO DATOS: (y en algunos casos notificacion a la vista)
     //------------------------------------------------------------------------------------------------------------------
 
     //Vista - Servidor:
@@ -255,9 +256,12 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         }
     }
 
+    // METODOS DE ACTUALIZACION
+    //------------------------------------------------------------------------------------------------------------------
+
     private void moverse ()
     {
-        cuerpo.setLinearVelocity(velocidadMax);
+        cuerpo.setLinearVelocity(velocidadMax*velocidadMod);
         if      (output.irAbajo && !output.irDerecha && !output.irIzquierda)    { cuerpo.setVectorDireccion(  0,      -1); }      //Sur
         else if (output.irArriba && !output.irDerecha && !output.irIzquierda)   { cuerpo.setVectorDireccion(  0,      +1); }      //Norte
         else if (output.irDerecha && !output.irArriba && !output.irAbajo)       { cuerpo.setVectorDireccion( +1,       0); }      //Este
