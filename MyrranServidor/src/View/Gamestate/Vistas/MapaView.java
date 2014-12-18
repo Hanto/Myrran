@@ -2,7 +2,6 @@ package View.Gamestate.Vistas;// Created by Hanto on 20/05/2014.
 
 import Controller.Controlador;
 import DTO.DTOsMapView;
-import DTO.DTOsPC;
 import DTO.DTOsMapa;
 import Data.Settings;
 import Model.Classes.Mobiles.PC;
@@ -258,7 +257,7 @@ public class MapaView implements PropertyChangeListener
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         //TERRENOS:
-        if (evt.getNewValue() instanceof DTOsPC.CambioTerreno)
+        if (evt.getNewValue() instanceof DTOsMapa.SetTerreno)
         {
             cambioTerreno(
                 ((DTOsMapa.SetTerreno) evt.getNewValue()).tileX,

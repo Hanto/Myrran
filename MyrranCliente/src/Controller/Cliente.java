@@ -2,14 +2,16 @@ package Controller;// Created by Hanto on 08/04/2014.
 
 import DTO.DTOsMapView;
 import DTO.DTOsPC;
-import DTO.NetDTOs;
 import DTO.DTOsPC.PCDTOs;
+import DTO.NetDTOs;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import org.slf4j.LoggerFactory;
+
+import javax.swing.*;
 
 public class Cliente extends Client
 {
@@ -42,7 +44,8 @@ public class Cliente extends Client
                 {   Gdx.app.postRunnable(runnable); }
             });
 
-        host = "localhost"; //(String) JOptionPane.showInputDialog(null, "Host:", "Connect to server", JOptionPane.QUESTION_MESSAGE, null, null, "localhost");
+        //host = "localhost";
+        host = (String) JOptionPane.showInputDialog(null, "Host:", "Connect to server", JOptionPane.QUESTION_MESSAGE, null, null, "localhost");
 
         try { this.connect(NetDTOs.timeout, host, NetDTOs.puertoTCP, NetDTOs.puertoUDP); }
         catch (Exception IOException) { logger.error("ERROR: Imposible conectar con el Servidor: ", IOException); }
