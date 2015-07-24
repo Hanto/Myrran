@@ -1,5 +1,7 @@
 package Interfaces.EntidadesPropiedades;// Created by Hanto on 16/07/2014.
 
-public interface Maquinable
+import Interfaces.Model.ModelI;
+
+public interface Maquinable extends ModelI
 {
 }

@@ -26,9 +26,6 @@ public class MapaView implements PropertyChangeListener
 
     private boolean[][] mapaEnviado = new boolean[3][3];
 
-    private int numTilesX;
-    private int numTilesY;
-
     private final int reborde = 1;
     private final int posHorNeg = Settings.MAPTILE_Horizontal_Resolution /4;
     private final int posHorPos = Settings.MAPTILE_Horizontal_Resolution - Settings.MAPTILE_Horizontal_Resolution /4;
@@ -44,9 +41,6 @@ public class MapaView implements PropertyChangeListener
         this.mundo = mundo;
         this.controlador = controlador;
 
-        this.numTilesX = (int)Math.ceil((double) Settings.MAPTILE_Horizontal_Resolution /(double) Settings.TILESIZE);
-        this.numTilesY = (int)Math.ceil((double) Settings.MAPTILE_Vertical_Resolution /(double) Settings.TILESIZE);
-
         mundo.getMapa().añadirObservador(this);
     }
 
@@ -59,12 +53,11 @@ public class MapaView implements PropertyChangeListener
         {   for (int i=0; i<fila.length; i++)
                 fila[i] = false;
         }
-        mapTileCentroX = getMapTileX();
-        mapTileCentroY = getMapTileY();
+        mapTileCentroX = PC.getMapTileX();
+        mapTileCentroY = PC.getMapTileY();
+
     }
 
-    private int getMapTileX()                                       { return (int)((PC.getX() / (float)(numTilesX * Settings.TILESIZE))); }
-    private int getMapTileY()                                       { return (int)((PC.getY() / (float)(numTilesY * Settings.TILESIZE))); }
     private boolean getMapaEnviado(int offSetX, int offSetY)        { return mapaEnviado[offSetX+1][-offSetY+1]; }
     private void setMapaEnviado(int offSetX, int offSetY, boolean b){ mapaEnviado[offSetX+1][-offSetY+1] = b; }
 
@@ -76,10 +69,10 @@ public class MapaView implements PropertyChangeListener
 
     public void comprobarVistaMapa ()
     {
-        if (Math.abs(getMapTileX()-mapTileCentroX) >1 || Math.abs(getMapTileY()-mapTileCentroY) > 1)  { init(); return; }
+        if (Math.abs(PC.getMapTileX()-mapTileCentroX) >1 || Math.abs(PC.getMapTileY()-mapTileCentroY) > 1)  { init(); return; }
 
-        int distX = (int)PC.getX() -mapTileCentroX*numTilesX* Settings.TILESIZE;
-        int distY = (int)PC.getY() -mapTileCentroY*numTilesY* Settings.TILESIZE;
+        int distX = (int)PC.getX() - mapTileCentroX * Settings.MAPTILE_NumTilesX * Settings.TILESIZE;
+        int distY = (int)PC.getY() - mapTileCentroY * Settings.MAPTILE_NumTilesY * Settings.TILESIZE;
 
         if (distX < posHorNeg)      { posicionHoritontal = -1; }
         else if (distX > posHorPos) { posicionHoritontal = +1; }
@@ -127,10 +120,10 @@ public class MapaView implements PropertyChangeListener
             actualizarMapa(-1, -1);
         }
 
-        if      (getMapTileX() > mapTileCentroX)   { incrementarMapTile(1, 0); }
-        else if (getMapTileX() < mapTileCentroX)   { incrementarMapTile(-1, 0); }
-        else if (getMapTileY() > mapTileCentroY)   { incrementarMapTile(0, 1);  }
-        else if (getMapTileY() < mapTileCentroY)   { incrementarMapTile(0, -1); }
+        if      (PC.getMapTileX() > mapTileCentroX)   { incrementarMapTile(1, 0); }
+        else if (PC.getMapTileX() < mapTileCentroX)   { incrementarMapTile(-1, 0); }
+        else if (PC.getMapTileY() > mapTileCentroY)   { incrementarMapTile(0, 1);  }
+        else if (PC.getMapTileY() < mapTileCentroY)   { incrementarMapTile(0, -1); }
     }
 
     private void actualizarMapa(int x, int y)
@@ -221,11 +214,11 @@ public class MapaView implements PropertyChangeListener
         logger.debug("ENVIAR: "+PC.getConnectionID()+" MapTile: ["+mapTileInicialX+" "+mapTileInicialY+"]");
         if (mapTileInicialX <0 || mapTileInicialY < 0) { return; }
 
-        int ancho = numTilesX+reborde*2;
-        int alto = numTilesY+reborde*2;
+        int ancho = Settings.MAPTILE_NumTilesX + reborde*2;
+        int alto = Settings.MAPTILE_NumTilesY + reborde*2;
 
-        int esquinaInfIzdaX = mapTileInicialX*numTilesX-reborde;
-        int esquinaInfIzdaY = mapTileInicialY*numTilesY-reborde;
+        int esquinaInfIzdaX = mapTileInicialX * Settings.MAPTILE_NumTilesX - reborde;
+        int esquinaInfIzdaY = mapTileInicialY * Settings.MAPTILE_NumTilesY - reborde;
 
         DTOsMapView.Mapa actualizarMapa = new DTOsMapView.Mapa(esquinaInfIzdaX, esquinaInfIzdaY, ancho, alto);
         for (int x=0; x< ancho; x++)

@@ -1,6 +1,8 @@
 package Interfaces.EntidadesPropiedades;// Created by Hanto on 21/07/2014.
 
-public interface PlayerStats
+import Interfaces.Model.ModelI;
+
+public interface PlayerStats extends ModelI
 {
     public int getConnectionID();
     public String getNombre();

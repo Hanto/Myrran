@@ -2,6 +2,7 @@ package DTO;// Created by Hanto on 24/07/2014.
 
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesTipos.MobPC;
+import Interfaces.Model.ModelI;
 
 public class DTOsPC
 {
@@ -182,7 +183,18 @@ public class DTOsPC
         {   this.maxHPs = maxHPs; }
     }
 
+    public static class PosicionPC
+    {
+        public MobPC mobPC;
+        public PosicionPC (MobPC mobPC)
+        {   this.mobPC = mobPC; }
+    }
+
     public static class Dispose
-    {}
+    {
+        public ModelI model;
+        public Dispose (ModelI model)
+        { this.model = model; }
+    }
 
 }

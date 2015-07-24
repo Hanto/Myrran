@@ -2,6 +2,7 @@ package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
 import Core.Cuerpos.BodyFactory;
 import Core.Cuerpos.Cuerpo;
+import Data.Settings;
 import Interfaces.EntidadesTipos.MobPC;
 import Interfaces.Model.AbstractModel;
 import com.badlogic.gdx.physics.box2d.World;
@@ -10,6 +11,8 @@ public class PC extends AbstractModel implements MobPC
 {
     protected int connectionID;
 
+    protected int ultimoMapTileX;
+    protected int ultimoMapTileY;
     protected float x;
     protected float y;
     protected int numAnimacion = 5;
@@ -20,10 +23,14 @@ public class PC extends AbstractModel implements MobPC
     protected Cuerpo cuerpo;
     public PCNotificador notificador;
 
-    public int getConnectionID()            { return connectionID; }
-    public int getNumAnimacion()            { return numAnimacion; }
-    public float getX()                     { return x; }
-    public float getY()                     { return y; }
+    @Override public int getConnectionID()  { return connectionID; }
+    @Override public int getNumAnimacion()  { return numAnimacion; }
+    @Override public float getX()           { return x; }
+    @Override public float getY()           { return y; }
+    @Override public int getUltimoMapTileX(){ return ultimoMapTileX; }
+    @Override public int getUltimoMapTileY(){ return ultimoMapTileY; }
+    @Override public int getMapTileX()      { return (int)(x / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
+    @Override public int getMapTileY()      { return (int)(y / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
 
     //TODO
     @Override public float getActualHPs()                       { return actualHPs; }
@@ -34,6 +41,7 @@ public class PC extends AbstractModel implements MobPC
     @Override public int getNivel()                             { return 0; }
     @Override public float getVelocidadMod()                    { return 0; }
     @Override public float getVelocidadMax()                    { return 0; }
+    @Override public void setUltimoMapTile (int x, int y)       { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setConnectionID (int connectionID)    { this.connectionID = connectionID; }
     @Override public void setNombre (String nombre)             {}
     @Override public void setNivel (int nivel)                  {}

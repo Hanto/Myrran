@@ -5,6 +5,7 @@ import Core.Cuerpos.Cuerpo;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.DTOsSkillPersonalizado;
+import Data.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -28,12 +29,14 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
     protected int connectionID;
     protected MapaI mapa;
 
+    protected int ultimoMapTileX;
+    protected int ultimoMapTileY;
     protected float x;
     protected float y;
     protected int numAnimacion = 5;
     protected float velocidadMax = 80.0f;
     protected float velocidadMod = 1.0f;
-    protected String nombre = "Hanto";
+    protected String nombre = "Player";
     protected int nivel = 1;
     protected float actualHPs=1;
     protected float maxHPs=2000;
@@ -64,6 +67,10 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
     @Override public int getConnectionID ()                             { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
+    @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
+    @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
+    @Override public int getMapTileX()                                  { return (int)(x / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
+    @Override public int getMapTileY()                                  { return (int)(y / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
     @Override public int getNumAnimacion()                              { return numAnimacion; }
     @Override public float getVelocidadMod()                            { return velocidadMod; }
     @Override public float getVelocidadMax()                            { return velocidadMax; }
@@ -80,6 +87,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
 
     //SET:
+    @Override public void setUltimoMapTile (int x, int y)                { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
     @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
     @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }

@@ -7,6 +7,7 @@ import Core.FSM.MaquinaEstados;
 import Core.FSM.MaquinaEstadosFactory;
 import Core.Skills.SpellPersonalizado;
 import DB.DAO;
+import Data.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
@@ -34,6 +35,8 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     protected int connectionID;
     protected MapaI mapaI;
 
+    protected int ultimoMapTileX;
+    protected int ultimoMapTileY;
     protected float x = 0.0f;
     protected float y = 0.0f;
     protected int numAnimacion = 5;
@@ -72,6 +75,10 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     @Override public int getConnectionID()                              { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
+    @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
+    @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
+    @Override public int getMapTileX()                                  { return (int)(x / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
+    @Override public int getMapTileY()                                  { return (int)(y / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
     @Override public int getNumAnimacion()                              { return numAnimacion; }
     @Override public float getVelocidadMod()                            { return velocidadMod; }
     @Override public float getVelocidadMax()                            { return velocidadMax; }
@@ -89,6 +96,7 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     @Override public PlayerIOI getOutput()                               { return output; }
 
     //SET:
+    @Override public void setUltimoMapTile (int x, int y)                { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
     @Override public void setNivel (int nivel)                          { this.nivel = nivel; }
     @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }

@@ -131,7 +131,7 @@ public class PcView implements PropertyChangeListener
     {
         //para que deje de observar el Mapa Model
         mapaView.dispose();
-        //Dejamos de observar al model:
+        //Dejamos de observar al mobPC:
         pc.eliminarObservador(this);
         //eliminamos la vista y transmitimos la informacion al resto de clientes:
         mundoView.listaPcViews.remove(this);
