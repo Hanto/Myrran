@@ -1,4 +1,4 @@
-package View.Gamestate.Vista2;// Created by Hanto on 16/07/2015.
+package Model.GameState;// Created by Hanto on 16/07/2015.
 
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.ListaPorCuadrantesI;
@@ -122,7 +122,6 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
 
     @Override public void clear()
     {   lista.clear(); }
-
 
 
 

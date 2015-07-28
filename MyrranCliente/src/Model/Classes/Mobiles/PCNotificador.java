@@ -1,18 +1,18 @@
 package Model.Classes.Mobiles;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPC;
-import Interfaces.EntidadesTipos.MobPC;
+import Interfaces.EntidadesTipos.PCI;
 
 public class PCNotificador
 {
-    public MobPC mobPC;
+    public PCI mobPC;
 
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
     public DTOsPC.Animacion animacion = new DTOsPC.Animacion();
     public DTOsPC.Posicion posicion = new DTOsPC.Posicion();
     public DTOsPC.ModificarHPs modificarHPs = new DTOsPC.ModificarHPs();
 
-    public PCNotificador(MobPC mobPC)
+    public PCNotificador(PCI mobPC)
     {   this.mobPC = mobPC; }
 
     //  NOTIFICACION LOCAL:
@@ -39,6 +39,6 @@ public class PCNotificador
     {   mobPC.notificarActualizacion("nombre", null, new DTOsPC.Nombre(nombre)); }
 
     public void setDispose()
-    {   mobPC.notificarActualizacion("Eliminar", null, new DTOsPC.Dispose(mobPC)); }
+    {   mobPC.notificarActualizacion("Eliminar", null, new DTOsPC.EliminarPC(mobPC)); }
 
 }

@@ -5,7 +5,7 @@ import DB.DAO;
 import DTO.DTOsPC;
 import DTO.DTOsMapa;
 import Data.Settings;
-import Interfaces.EntidadesTipos.MobPC;
+import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Interfaces.Model.AbstractModel;
@@ -17,7 +17,7 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
 {
     private Celda[][] mapa;
 
-    private MobPC mob;
+    private PCI mob;
 
     public int mapTileCentroX = 0;
     public int mapTileCentroY = 0;
@@ -27,7 +27,7 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
 
     private int reborde = 1;
 
-    public Mapa(MobPC mob)
+    public Mapa(PCI mob)
     {
         this.mob = mob;
         mob.añadirObservador(this);

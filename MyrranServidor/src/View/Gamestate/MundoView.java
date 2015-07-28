@@ -2,7 +2,7 @@ package View.Gamestate;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.DTOsMundo;
-import Model.Classes.Mobiles.PC;
+import Interfaces.EntidadesTipos.PCI;
 import Model.GameState.Mundo;
 import View.Gamestate.Vistas.PcView;
 
@@ -41,9 +41,9 @@ public class MundoView implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsMundo.NuevoPlayer)
+        if (evt.getNewValue() instanceof DTOsMundo.AñadirPC)
         {
-            PC pc = mundo.getPC(((DTOsMundo.NuevoPlayer) evt.getNewValue()).connectionID);
+            PCI pc = ((DTOsMundo.AñadirPC) evt.getNewValue()).pc;
             PcView pcView = new PcView(pc, this);
             listaPcViews.add(pcView);
         }

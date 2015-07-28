@@ -4,7 +4,7 @@ import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsMundo;
 import Data.Settings;
-import Model.Classes.Mobiles.PC;
+import Interfaces.EntidadesTipos.PCI;
 import Model.Classes.Mobiles.Player;
 import Model.GameState.Mundo;
 import Tweens.CamaraTween;
@@ -162,9 +162,9 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsMundo.NuevoPlayer)
+        if (evt.getNewValue() instanceof DTOsMundo.AñadirPC)
         {
-            PC pc = mundo.getPC(((DTOsMundo.NuevoPlayer) evt.getNewValue()).connectionID);
+            PCI pc = ((DTOsMundo.AñadirPC) evt.getNewValue()).pc;
             PCView pcView = new PCView(pc, this, controlador);
             listaPCViews.add(pcView);
         }

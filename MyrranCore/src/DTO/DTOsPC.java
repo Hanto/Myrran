@@ -1,8 +1,7 @@
 package DTO;// Created by Hanto on 24/07/2014.
 
 import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesTipos.MobPC;
-import Interfaces.Model.ModelI;
+import Interfaces.EntidadesTipos.PCI;
 
 public class DTOsPC
 {
@@ -101,7 +100,7 @@ public class DTOsPC
         public float actualHPs;
         public int numAnimacion;
         public CrearPC() {}
-        public CrearPC(MobPC pc)
+        public CrearPC(PCI pc)
         {
             connectionID = pc.getConnectionID(); nombre = pc.getNombre();
             posX = (int)pc.getX(); posY = (int)pc.getY(); nivel = pc.getNivel();
@@ -110,11 +109,11 @@ public class DTOsPC
         }
     }
 
-    public static class EliminarPC
+    public static class EliminarOtroPC
     {
         public int connectionID;
-        public EliminarPC() {}
-        public EliminarPC(int connectionID)
+        public EliminarOtroPC() {}
+        public EliminarOtroPC(int connectionID)
         {   this.connectionID = connectionID; }
     }
 
@@ -185,16 +184,16 @@ public class DTOsPC
 
     public static class PosicionPC
     {
-        public MobPC mobPC;
-        public PosicionPC (MobPC mobPC)
-        {   this.mobPC = mobPC; }
+        public PCI pc;
+        public PosicionPC (PCI pc)
+        {   this.pc = pc; }
     }
 
-    public static class Dispose
+    public static class EliminarPC
     {
-        public ModelI model;
-        public Dispose (ModelI model)
-        { this.model = model; }
+        public PCI pc;
+        public EliminarPC(PCI pc)
+        { this.pc = pc; }
     }
 
 }

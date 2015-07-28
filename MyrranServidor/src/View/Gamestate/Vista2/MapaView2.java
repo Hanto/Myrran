@@ -1,23 +1,26 @@
-package View.Gamestate.Vistas;// Created by Hanto on 20/05/2014.
+package View.Gamestate.Vista2;// Created by Hanto on 20/05/2014.
 
 import Controller.Controlador;
 import DTO.DTOsMapView;
 import DTO.DTOsMapa;
 import Data.Settings;
-import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesPropiedades.Espacial;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
+import com.badlogic.gdx.utils.Disposable;
 import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class MapaView implements PropertyChangeListener
+public class MapaView2 implements PropertyChangeListener, Disposable
 {
-    private PCI pc;
-    private PcView pcView;
+    private Espacial espacial;
+    private int connectionID;
+
     private Mundo mundo;
     private Controlador controlador;
+    private CampoVision campoVision;
 
     private int mapTileCentroX;
     private int mapTileCentroY;
@@ -34,28 +37,30 @@ public class MapaView implements PropertyChangeListener
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MapaView (PCI pc, PcView pcView, Mundo mundo, Controlador controlador)
+    public MapaView2(Espacial espacial, int connectionID, Mundo mundo, Controlador controlador, CampoVision campoVision)
     {
-        this.pc = pc;
-        this.pcView = pcView;
+        this.espacial = espacial;
+        this.connectionID = connectionID;
         this.mundo = mundo;
         this.controlador = controlador;
+        this.campoVision = campoVision;
 
         mundo.getMapa().añadirObservador(this);
     }
 
-    public void dispose()
+    @Override public void dispose()
     {   mundo.getMapa().eliminarObservador(this); }
 
-    private void init ()
+    //
+    //------------------------------------------------------------------------------------------------------------
+    private void resetearEnviados()
     {
         for (boolean[] fila : mapaEnviado)
         {   for (int i=0; i<fila.length; i++)
                 fila[i] = false;
         }
-        mapTileCentroX = pc.getMapTileX();
-        mapTileCentroY = pc.getMapTileY();
-
+        mapTileCentroX = espacial.getMapTileX();
+        mapTileCentroY = espacial.getMapTileY();
     }
 
     private boolean getMapaEnviado(int offSetX, int offSetY)        { return mapaEnviado[offSetX+1][-offSetY+1]; }
@@ -64,15 +69,15 @@ public class MapaView implements PropertyChangeListener
     private void enviarMapTilesAdyancentes()
     {
         DTOsMapView.MapTilesAdyacentes maptilesAdyacentes = new DTOsMapView.MapTilesAdyacentes(mapaEnviado);
-        controlador.enviarACliente(pc.getConnectionID(), maptilesAdyacentes);
+        controlador.enviarACliente(connectionID, maptilesAdyacentes);
     }
 
     public void comprobarVistaMapa ()
-    {
-        if (Math.abs(pc.getMapTileX()-mapTileCentroX) >1 || Math.abs(pc.getMapTileY()-mapTileCentroY) > 1)  { init(); return; }
+    {   //Si las adyacencias tienen mas de uno de distancia, hay que resetearlo tod o para volverlo a enviar:
+        if (Math.abs(espacial.getMapTileX()-mapTileCentroX) >1 || Math.abs(espacial.getMapTileY()-mapTileCentroY) > 1)  { resetearEnviados(); return; }
 
-        int distX = (int) pc.getX() - mapTileCentroX * Settings.MAPTILE_NumTilesX * Settings.TILESIZE;
-        int distY = (int) pc.getY() - mapTileCentroY * Settings.MAPTILE_NumTilesY * Settings.TILESIZE;
+        int distX = (int) espacial.getX() - mapTileCentroX * Settings.MAPTILE_NumTilesX * Settings.TILESIZE;
+        int distY = (int) espacial.getY() - mapTileCentroY * Settings.MAPTILE_NumTilesY * Settings.TILESIZE;
 
         if (distX < posHorNeg)      { posicionHoritontal = -1; }
         else if (distX > posHorPos) { posicionHoritontal = +1; }
@@ -120,10 +125,10 @@ public class MapaView implements PropertyChangeListener
             actualizarMapa(-1, -1);
         }
 
-        if      (pc.getMapTileX() > mapTileCentroX)   { incrementarMapTile(1, 0); }
-        else if (pc.getMapTileX() < mapTileCentroX)   { incrementarMapTile(-1, 0); }
-        else if (pc.getMapTileY() > mapTileCentroY)   { incrementarMapTile(0, 1);  }
-        else if (pc.getMapTileY() < mapTileCentroY)   { incrementarMapTile(0, -1); }
+        if      (espacial.getMapTileX() > mapTileCentroX)   { incrementarMapTile(1, 0); }
+        else if (espacial.getMapTileX() < mapTileCentroX)   { incrementarMapTile(-1, 0); }
+        else if (espacial.getMapTileY() > mapTileCentroY)   { incrementarMapTile(0, 1);  }
+        else if (espacial.getMapTileY() < mapTileCentroY)   { incrementarMapTile(0, -1); }
     }
 
     private void actualizarMapa(int x, int y)
@@ -211,7 +216,7 @@ public class MapaView implements PropertyChangeListener
 
     private void enviarMapa(int mapTileInicialX, int mapTileInicialY)
     {
-        logger.debug("ENVIAR: "+ pc.getConnectionID()+" MapTile: ["+mapTileInicialX+" "+mapTileInicialY+"]");
+        logger.debug("ENVIAR: "+ connectionID+" MapTile: ["+mapTileInicialX+" "+mapTileInicialY+"]");
         if (mapTileInicialX <0 || mapTileInicialY < 0) { return; }
 
         int ancho = Settings.MAPTILE_NumTilesX + reborde*2;
@@ -229,7 +234,7 @@ public class MapaView implements PropertyChangeListener
                 {   actualizarMapa.mapa[x][y].celda[i] = mundo.getMapa().getTerrenoID(x +esquinaInfIzdaX, y +esquinaInfIzdaY, i); }
             }
         }
-        controlador.enviarACliente(pc.getConnectionID(), actualizarMapa);
+        controlador.enviarACliente(connectionID, actualizarMapa);
     }
 
     public void cambioTerreno (int tileX, int tileY, int numCapa, short iDTerreno)
@@ -241,7 +246,7 @@ public class MapaView implements PropertyChangeListener
         {
             if (getMapaEnviado(offsetX, offsetY))
             {
-                pcView.notificador.añadirCambioTerreno(tileX, tileY, numCapa, iDTerreno);
+                campoVision.notificador.addCambioTerreno(tileX, tileY, numCapa, iDTerreno);
                 logger.trace("Editando SetTerreno: ["+tileX+"]["+tileY+"]");
             }
         }

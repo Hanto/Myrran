@@ -7,9 +7,8 @@ import DB.DAO;
 import DTO.DTOsSkillPersonalizado;
 import Data.Settings;
 import Interfaces.BDebuff.AuraI;
-import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
-import Interfaces.EntidadesTipos.MobPC;
+import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
@@ -23,7 +22,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.*;
 
-public class PC extends AbstractModel implements PropertyChangeListener, MobPC, CasterPersonalizable, Debuffeable
+public class PC extends AbstractModel implements PropertyChangeListener, PCI, Debuffeable
 {
     protected Mundo mundo;
     protected int connectionID;
@@ -45,9 +44,9 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
     protected Object parametrosSpell;
     protected float actualCastingTime = 0.0f;
     protected float totalCastingTime = 0.0f;
-    private List<AuraI>listaDeAuras = new ArrayList<>();
-    private Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
-    private Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
+    protected List<AuraI>listaDeAuras = new ArrayList<>();
+    protected Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
+    protected Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
 
     protected Cuerpo cuerpo;
     protected PCNotificador notificador;
@@ -87,7 +86,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
 
     //SET:
-    @Override public void setUltimoMapTile (int x, int y)                { ultimoMapTileX = x; ultimoMapTileY = y; }
+    @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
     @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
     @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
@@ -118,6 +117,15 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
 
         cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
+    }
+
+    @Override public void dispose()
+    {
+        //Dejamos de observar a cada uno de los Spells Personalizados:
+        Iterator<SpellPersonalizadoI> iSpell = getIteratorSpellPersonalizado();
+        while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
+        //le decimos a la vista que desaparezca:
+        notificador.setDispose(this);
     }
 
     //Este metodo no es el que notifica de la modificacion de los talentos del skill personalizado, ya que hay mas modos de modificarlos
@@ -152,15 +160,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         if (actualHPs > maxHPs) actualHPs = maxHPs;
         else if (actualHPs < 0) actualHPs = 0;
         notificador.añadirModificarHPs(HPs);
-    }
-
-    public void dispose()
-    {
-        //Dejamos de observar a cada uno de los Spells Personalizados:
-        Iterator<SpellPersonalizadoI> iSpell = getIteratorSpellPersonalizado();
-        while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
-        //le decimos a la vista que desaparezca:
-        notificador.setDispose();
     }
 
     @Override public void añadirSkillsPersonalizados(String spellID)
@@ -233,7 +232,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, MobPC, 
         }
     }
 
-    public void actualizar(float delta)
+    @Override public void actualizar(float delta)
     {
         actualizarCastingTime(delta);
         actualizarAuras(delta);

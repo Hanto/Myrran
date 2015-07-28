@@ -1,7 +1,7 @@
 package View.Gamestate.Vistas;// Created by Hanto on 22/07/2014.
 
 import DTO.DTOsPC;
-import Interfaces.EntidadesTipos.MobPC;
+import Interfaces.EntidadesTipos.PCI;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.ArrayList;
@@ -111,14 +111,14 @@ public class PCViewNotificador
 
     //(Acumulativo): Global
     public void añadirEliminarPC(int connectionID)
-    {   cambiosAcumulativosGlobal.add(new DTOsPC.EliminarPC(connectionID)); }
+    {   cambiosAcumulativosGlobal.add(new DTOsPC.EliminarOtroPC(connectionID)); }
 
     //(Acumulativo): Personal
     public void añadirNoVeAlPC(int connectionID)
-    {   cambiosAcumulativosPersonal.add(new DTOsPC.EliminarPC(connectionID)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPC.EliminarOtroPC(connectionID)); }
 
     //(Acumulativo): Personal
-    public void añadirVeAlPC(MobPC pc)
+    public void añadirVeAlPC(PCI pc)
     {   cambiosAcumulativosPersonal.add(new DTOsPC.CrearPC(pc)); }
 
     //(Acumulativo): Personal

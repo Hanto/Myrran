@@ -9,10 +9,9 @@ import Core.Skills.SpellPersonalizado;
 import DB.DAO;
 import Data.Settings;
 import Interfaces.BDebuff.AuraI;
-import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
-import Interfaces.EntidadesTipos.MobPlayer;
+import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Input.PlayerIOI;
 import Interfaces.Model.AbstractModel;
@@ -29,7 +28,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Player extends AbstractModel implements MobPlayer, CasterPersonalizable, Debuffeable, MaquinablePlayer
+public class Player extends AbstractModel implements PlayerI, Debuffeable, MaquinablePlayer
 {
     protected Mundo mundo;
     protected int connectionID;
@@ -92,11 +91,11 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     @Override public float getTotalCastingTime()                        { return totalCastingTime; }
     @Override public String getSpellIDSeleccionado()                    { return spellIDSeleccionado; }
     @Override public Object getParametrosSpell()                        { return parametrosSpell; }
-    @Override public PlayerIOI getInput()                                { return input; }
-    @Override public PlayerIOI getOutput()                               { return output; }
+    @Override public PlayerIOI getInput()                               { return input; }
+    @Override public PlayerIOI getOutput()                              { return output; }
 
     //SET:
-    @Override public void setUltimoMapTile (int x, int y)                { ultimoMapTileX = x; ultimoMapTileY = y; }
+    @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
     @Override public void setNivel (int nivel)                          { this.nivel = nivel; }
     @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
@@ -124,6 +123,8 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
         cuerpo.setPosition(x, y);
     }
+
+    @Override public void dispose() {}
 
     //RECEPCION DATOS:
     //------------------------------------------------------------------------------------------------------------------
@@ -300,5 +301,16 @@ public class Player extends AbstractModel implements MobPlayer, CasterPersonaliz
     {
         cuerpo.interpolarPosicion(alpha);
         getPosicionInterpoladaCuerpo();
+    }
+
+    //
+    //-----------------------------------------------------------------------------------------------------------------
+
+    @Override public void setCastear(boolean castear, int screenX, int screenY)
+    {
+        output.setScreenX(screenX);
+        output.setScreenY(screenY);
+        if (castear) startCastear();
+        else stopCastear();
     }
 }

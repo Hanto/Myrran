@@ -3,9 +3,9 @@ package View.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsPC;
-import DTO.DTOsPC.Dispose;
 import Data.Settings;
-import Model.Classes.Mobiles.PC;
+import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesTipos.PCI;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
 import View.GameState.MundoView;
@@ -20,7 +20,7 @@ import java.beans.PropertyChangeListener;
 
 public class PCView extends Group implements PropertyChangeListener
 {
-    public PC pc;
+    public PCI pc;
     public MundoView mundoView;
     public Controlador controlador;
 
@@ -29,7 +29,7 @@ public class PCView extends Group implements PropertyChangeListener
 
 
 
-    public PCView (PC pc, MundoView vista, Controlador controlador)
+    public PCView (PCI pc, MundoView vista, Controlador controlador)
     {
         this.pc = pc;
         this.mundoView = vista;
@@ -52,7 +52,7 @@ public class PCView extends Group implements PropertyChangeListener
         this.setWidth(actor.getWidth());
         this.setHeight(actor.getHeight());
 
-        nameplateView = new NameplateView(pc);
+        nameplateView = new NameplateView((Caster)pc);
         nameplateView.setPosition(this.getWidth()/2 - nameplateView.getWidth() / 2, getHeight());
         this.addActor(nameplateView);
     }
@@ -69,7 +69,7 @@ public class PCView extends Group implements PropertyChangeListener
 
     public void mover(int x, int y)
     {
-        //TODO hay que hacerlo por setPosition y en cambio mover el mobPC interpoladamente, el destino sin decimales
+        //TODO hay que hacerlo por setPosition y en cambio mover el pc interpoladamente, el destino sin decimales
         this.clearActions();
         this.addAction(Actions.moveTo(x, y, Settings.FIXED_TimeStep+0.03f, Interpolation.linear));
         //setPosition(x,y);
@@ -97,7 +97,7 @@ public class PCView extends Group implements PropertyChangeListener
         if (evt.getNewValue() instanceof DTOsPC.Animacion)
         {   setAnimacion(((DTOsPC.Animacion) evt.getNewValue()).numAnimacion); }
 
-        if (evt.getNewValue() instanceof Dispose)
+        if (evt.getNewValue() instanceof DTOsPC.EliminarPC)
         {   dispose(); }
     }
 }

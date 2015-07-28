@@ -1,27 +1,36 @@
 package Model.GameState;// Created by Hanto on 07/04/2014.
 
 import DTO.DTOsMundo;
+import DTO.DTOsPC;
 import Data.Settings;
+import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Geo.MapaI;
+import Interfaces.ListaPorCuadrantesI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.PC;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 
-public class Mundo extends AbstractModel
+public class Mundo extends AbstractModel implements PropertyChangeListener
 {
-    private List<PC> listaPlayers = new ArrayList<>();
-    private Map<Integer, PC> mapaPlayers = new HashMap<>();
+    private Map<Integer, PCI> mapaPlayers = new HashMap<>();
+
+    private List<PCI> listaPCs = new ArrayList<>();
+    private ListaPorCuadrantesI<PCI> mapaPCs = new ListaPorCuadrantes<>();
 
     private Mapa mapa = new Mapa();
     private World world;
 
     public World getWorld()                         { return world; }
     public MapaI getMapa()                          { return mapa; }
-    public Iterator<PC> getIteratorListaPlayers()   { return listaPlayers.iterator(); }
+    public PCI getPC (int connectionID)             { return mapaPlayers.get(connectionID); }
+    public Iterator<PCI> getIteratorListaPCs()      { return listaPCs.iterator(); }
+    public ListaPorCuadrantesI<PCI> getMapaPCs()    { return mapaPCs; }
 
 
     public Mundo()
@@ -35,34 +44,53 @@ public class Mundo extends AbstractModel
         }
     }
 
+    //PLAYERS:
+    //-------------------------------------------------------------------------------------------------------------
     public void añadirPC (int connectionID)
     {
-        PC pc = new PC(connectionID, this);
-        listaPlayers.add(pc);
+        PCI pc = new PC(connectionID, this);
         mapaPlayers.put(pc.getConnectionID(), pc);
-        Object nuevoPlayer = new DTOsMundo.NuevoPlayer(pc);
+        listaPCs.add(pc);
+        mapaPCs.put(pc);
+
+        pc.añadirObservador(this);
+
+        DTOsMundo.AñadirPC nuevoPlayer = new DTOsMundo.AñadirPC(pc);
         notificarActualizacion("añadirPC", null, nuevoPlayer);
     }
 
     public void eliminarPC (int connectionID)
     {
-        PC PC = mapaPlayers.get(connectionID);
-        listaPlayers.remove(PC);
+        PCI pc = mapaPlayers.get(connectionID);
         mapaPlayers.remove(connectionID);
-        PC.dispose();
+        listaPCs.remove(pc);
+        mapaPCs.remove(pc);
+
+        pc.eliminarObservador(this);
+        pc.dispose();
     }
 
-    public PC getPC (int connectionID)
-    {   return mapaPlayers.get(connectionID); }
+    public void posicionPC (PCI pc)
+    {   mapaPCs.update(pc); }
 
+    //IA MUNDO:
+    //-------------------------------------------------------------------------------------------------------------
     public void actualizarFisica(float delta)
     {   world.step(delta, 8, 6); }
 
     public void actualizarUnidades(float delta)
     {
         //actualizar PCs
-        Iterator<PC> iteratorPCs = getIteratorListaPlayers();
+        Iterator<PCI> iteratorPCs = getIteratorListaPCs();
         while (iteratorPCs.hasNext())
         {   iteratorPCs.next().actualizar(delta); }
+    }
+
+    //CAMPOS OBSERVADOS:
+    //-------------------------------------------------------------------------------------------------------------
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {
+        if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
+        {   posicionPC(((DTOsPC.PosicionPC) evt.getNewValue()).pc); }
     }
 }

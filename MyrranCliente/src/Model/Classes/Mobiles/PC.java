@@ -3,11 +3,14 @@ package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 import Core.Cuerpos.BodyFactory;
 import Core.Cuerpos.Cuerpo;
 import Data.Settings;
-import Interfaces.EntidadesTipos.MobPC;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
+import Interfaces.Skill.SkillPersonalizadoI;
+import Interfaces.Spell.SpellPersonalizadoI;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class PC extends AbstractModel implements MobPC
+public class PC extends AbstractModel implements PCI
 {
     protected int connectionID;
 
@@ -41,6 +44,15 @@ public class PC extends AbstractModel implements MobPC
     @Override public int getNivel()                             { return 0; }
     @Override public float getVelocidadMod()                    { return 0; }
     @Override public float getVelocidadMax()                    { return 0; }
+    @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID)  { return null; }
+    @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID)  { return null; }
+    @Override public MapaI getMapa()                            { return null; }
+    @Override public boolean isCasteando()                      { return false; }
+    @Override public float getActualCastingTime()               { return 0; }
+    @Override public float getTotalCastingTime()                { return 0; }
+    @Override public String getSpellIDSeleccionado()            { return null; }
+    @Override public Object getParametrosSpell()                { return null; }
+
     @Override public void setUltimoMapTile (int x, int y)       { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setConnectionID (int connectionID)    { this.connectionID = connectionID; }
     @Override public void setNombre (String nombre)             {}
@@ -50,6 +62,11 @@ public class PC extends AbstractModel implements MobPC
     @Override public void setDireccion(float x, float y)        {}
     @Override public void setDireccion(float grados)            {}
     @Override public void setVectorDireccion(float x, float y)  {}
+    @Override public void setCastear(boolean castear, int screenX, int screenY) {}
+    @Override public void setTotalCastingTime(float castingTime){}
+    @Override public void setSpellIDSeleccionado(String spellID){}
+    @Override public void setParametrosSpell(Object parametrosDTO){}
+    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int talento) {}
 
     //Constructor:
     public PC(int connectionID, World world)
@@ -73,7 +90,7 @@ public class PC extends AbstractModel implements MobPC
         notificador.setNumAnimacion(numAnimacion);
     }
 
-    public void dispose()
+    @Override public void dispose()
     {
         cuerpo.dispose();
         notificador.setDispose();
@@ -87,7 +104,12 @@ public class PC extends AbstractModel implements MobPC
         notificador.setModificarHPs(HPs);
     }
 
-    public void actualizar (float delta)
+    @Override public void añadirSkillsPersonalizados(String spellID)
+    {
+
+    }
+
+    @Override public void actualizar (float delta)
     {
 
     }

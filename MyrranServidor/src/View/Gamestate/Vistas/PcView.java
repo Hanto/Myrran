@@ -3,8 +3,7 @@ package View.Gamestate.Vistas;// Created by Hanto on 07/04/2014.
 import Controller.Controlador;
 import DTO.DTOsPC;
 import Data.Settings;
-import Interfaces.EntidadesTipos.MobPC;
-import Model.Classes.Mobiles.PC;
+import Interfaces.EntidadesTipos.PCI;
 import Model.GameState.Mundo;
 import View.Gamestate.MundoView;
 
@@ -16,19 +15,19 @@ import java.util.List;
 public class PcView implements PropertyChangeListener
 {
     //Model:
-    private PC pc;
+    private PCI pc;
     private MundoView mundoView;
     private Mundo mundo;
     private Controlador controlador;
 
     //Datos:
-    private List<MobPC> listaPCsCercanos = new ArrayList<>();
+    private List<PCI> listaPCsCercanos = new ArrayList<>();
 
     protected MapaView mapaView;
-    protected PCViewNotificador notificador;
+    public PCViewNotificador notificador;
 
     //Constructor:
-    public PcView(PC pc, MundoView mundoView)
+    public PcView(PCI pc, MundoView mundoView)
     {
         this.pc = pc;
         this.mundoView = mundoView;
@@ -59,7 +58,7 @@ public class PcView implements PropertyChangeListener
     public void enviarDatosGlobales()
     {
         if (notificador.contieneDatosDTOGlobal() && !listaPCsCercanos.isEmpty())
-        {   for (MobPC PCCercanos : listaPCsCercanos) controlador.enviarACliente(PCCercanos.getConnectionID(), notificador.dtoGlobal); }
+        {   for (PCI PCCercanos : listaPCsCercanos) controlador.enviarACliente(PCCercanos.getConnectionID(), notificador.dtoGlobal); }
     }
 
     // NOTIFICADORES
@@ -78,7 +77,7 @@ public class PcView implements PropertyChangeListener
     {
         for (PcView pcCercanos : mundoView.listaPcViews)
         {
-            MobPC pcCercano = pcCercanos.pc;
+            PCI pcCercano = pcCercanos.pc;
 
             if (pcCercano.getConnectionID() != pc.getConnectionID())
             {
@@ -131,7 +130,7 @@ public class PcView implements PropertyChangeListener
     {
         //para que deje de observar el Mapa Model
         mapaView.dispose();
-        //Dejamos de observar al mobPC:
+        //Dejamos de observar al pc:
         pc.eliminarObservador(this);
         //eliminamos la vista y transmitimos la informacion al resto de clientes:
         mundoView.listaPcViews.remove(this);
@@ -160,7 +159,7 @@ public class PcView implements PropertyChangeListener
         {   añadirSpellPersonalizado(((DTOsPC.SkillPersonalizado) evt.getNewValue()).skillID);}
 
 
-        if (evt.getNewValue() instanceof DTOsPC.Dispose)
+        if (evt.getNewValue() instanceof DTOsPC.EliminarPC)
         {   dispose(); }
 
         if (evt.getNewValue() instanceof DTOsPC.NumTalentosSkillPersonalizado)

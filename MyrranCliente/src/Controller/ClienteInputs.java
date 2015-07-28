@@ -2,7 +2,7 @@ package Controller;// Created by Hanto on 22/07/2014.
 
 import DB.DAO;
 import DTO.DTOsPC;
-import Interfaces.EntidadesTipos.MobPC;
+import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Acciones.AccionFactory;
@@ -24,7 +24,7 @@ public class ClienteInputs
 
     public void procesarInput(DTOsPC.PCDTOs netPlayer)
     {
-        MobPC player;
+        PCI player;
         if (controlador.getCliente().getID() == netPlayer.connectionID) { player = mundo.getPlayer(); }
         else { player = mundo.getPC(netPlayer.connectionID); }
 
@@ -64,11 +64,11 @@ public class ClienteInputs
                 if (player == null) continue;
                 player.setNombre(((DTOsPC.Nombre) dto).nombre); }
 
-            else if (dto instanceof DTOsPC.EliminarPC)
+            else if (dto instanceof DTOsPC.EliminarOtroPC)
             {
-                MobPC otro = mundo.getPC(((DTOsPC.EliminarPC) dto).connectionID);
-                if (otro == null) { logger.error("No se puede eliminar un PC con ID que no existe: {}", ((DTOsPC.EliminarPC) dto).connectionID); return; }
-                else mundo.eliminarPC(((DTOsPC.EliminarPC) dto).connectionID);
+                PCI otro = mundo.getPC(((DTOsPC.EliminarOtroPC) dto).connectionID);
+                if (otro == null) { logger.error("No se puede eliminar un PC con ID que no existe: {}", ((DTOsPC.EliminarOtroPC) dto).connectionID); return; }
+                else mundo.eliminarPC(((DTOsPC.EliminarOtroPC) dto).connectionID);
             }
 
             else if (dto instanceof DTOsPC.CrearPC)
@@ -78,7 +78,7 @@ public class ClienteInputs
                 if (mundo.getPC(id) == null && mundo.getPlayer().getConnectionID() != id)
                 {
                     mundo.añadirPC(id, ((DTOsPC.CrearPC) dto).posX, ((DTOsPC.CrearPC) dto).posY);
-                    MobPC otro = mundo.getPC(id);
+                    PCI otro = mundo.getPC(id);
                     otro.setNombre(((DTOsPC.CrearPC) dto).nombre);
                     otro.setNivel(((DTOsPC.CrearPC) dto).nivel);
                     otro.setMaxHPs(((DTOsPC.CrearPC) dto).maxHPs);

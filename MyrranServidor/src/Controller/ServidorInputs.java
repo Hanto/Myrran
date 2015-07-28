@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 22/07/2014.
 
 import DTO.DTOsPC;
-import Model.Classes.Mobiles.PC;
+import Interfaces.EntidadesTipos.PCI;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class ServidorInputs
 
     public void procesarInput(int connectionID, DTOsPC.PlayerDTOs netPlayer)
     {
-        PC player = mundo.getPC(connectionID);
+        PCI player = mundo.getPC(connectionID);
         if (player == null) { logger.error("ERROR: no existe Player con este ID: {}", connectionID); return; }
         Object dto;
 
