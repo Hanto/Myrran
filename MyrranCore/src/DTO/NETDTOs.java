@@ -1,5 +1,4 @@
-package DTO;// Created by Hanto on 07/04/2014.
-
+package DTO;
 
 import Data.Settings;
 import com.esotericsoftware.kryo.Kryo;
@@ -31,7 +30,7 @@ public class NetDTOs
         kryo.register(DTOsPC.StartCastear.class);
         kryo.register(DTOsPC.NumTalentosSkillPersonalizado.class);
         kryo.register(DTOsPC.CrearPC.class);
-        kryo.register(DTOsPC.EliminarPC.class);
+        kryo.register(DTOsPC.EliminarOtroPC.class);
         kryo.register(DTOsPC.Nombre.class);
         kryo.register(DTOsPC.HPs.class);
         kryo.register(DTOsPC.ModificarHPs.class);

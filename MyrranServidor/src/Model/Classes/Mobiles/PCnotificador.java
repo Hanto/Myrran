@@ -1,17 +1,18 @@
 package Model.Classes.Mobiles;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPC;
-import Interfaces.Model.AbstractModel;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.Model.ModelI;
 
 public class PCNotificador
 {
-    public AbstractModel model;
+    public ModelI model;
 
     public DTOsPC.Posicion posicion = new DTOsPC.Posicion();
     public DTOsPC.Animacion animacion = new DTOsPC.Animacion();
     public DTOsPC.ModificarHPs modificarHPs = new DTOsPC.ModificarHPs();
 
-    public PCNotificador(AbstractModel model)
+    public PCNotificador(ModelI model)
     {   this.model = model; }
 
     //  NOTIFICACION LOCAL:
@@ -39,8 +40,8 @@ public class PCNotificador
     public void setNombre(String nombre)
     {   model.notificarActualizacion("nombre", null, new DTOsPC.Nombre(nombre)); }
 
-    public void setDispose()
-    {   model.notificarActualizacion("dispose", null, new DTOsPC.Dispose()); }
+    public void setDispose(PCI pc)
+    {   model.notificarActualizacion("dispose", null, new DTOsPC.EliminarPC(pc)); }
 
     public void añadirModificarHPs(float HPs)
     {
