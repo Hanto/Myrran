@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
 import DTO.DTOsMapView;
-import DTO.DTOsPC.LogIn;
+import DTO.DTOsPlayer.LogIn;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
@@ -79,8 +79,8 @@ public class Controlador implements ControladorUI
     //Entidades:
     public void añadirPlayer(int connectionID)                                          { mundo.getPlayer().setConnectionID(connectionID); }
 
-    public void actualizarMapa(DTOsMapView.Mapa mapaServidor)                                  { mundo.actualizarMapa(mapaServidor); }
-    public void actualizarMapTilesAdyacentes(DTOsMapView.MapTilesAdyacentes mapTiles)          { mundo.mapTilesCargados = mapTiles.mapaAdyacencias; }
+    public void actualizarMapa(DTOsMapView.Mapa mapaServidor)                           { mundo.actualizarMapa(mapaServidor); }
+    public void actualizarMapTilesAdyacentes(DTOsMapView.MapTilesAdyacentes mapTiles)   { mundo.mapTilesCargados = mapTiles.mapaAdyacencias; }
     public void aplicarZoom(int incrementoZoom)                                         { vista.aplicarZoom(incrementoZoom); }
 
     //BarraTerrenos:

@@ -2,10 +2,10 @@ package View.Gamestate.Vistas;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.DTOsPC;
+import DTO.DTOsPlayer;
 import Data.Settings;
 import Interfaces.EntidadesTipos.PCI;
 import Model.GameState.Mundo;
-import View.Gamestate.MundoView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -146,27 +146,27 @@ public class PcView implements PropertyChangeListener
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         //MOBILES:
-        if (evt.getNewValue() instanceof DTOsPC.Posicion)
-        {   setPosition(((DTOsPC.Posicion) evt.getNewValue()).posX, ((DTOsPC.Posicion) evt.getNewValue()).posY); }
+        if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
+        {   setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
 
-        if (evt.getNewValue() instanceof DTOsPC.Animacion)
-        {   setAnimacion(((DTOsPC.Animacion) evt.getNewValue()).numAnimacion); }
+        if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
+        {   setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
 
-        if (evt.getNewValue() instanceof DTOsPC.ModificarHPs)
-        {   añadirModificarHPs(((DTOsPC.ModificarHPs) evt.getNewValue()).HPs); }
+        if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
+        {   añadirModificarHPs(((DTOsPlayer.ModificarHPs) evt.getNewValue()).HPs); }
 
-        if (evt.getNewValue() instanceof DTOsPC.SkillPersonalizado)
-        {   añadirSpellPersonalizado(((DTOsPC.SkillPersonalizado) evt.getNewValue()).skillID);}
+        if (evt.getNewValue() instanceof DTOsPlayer.SkillPersonalizado)
+        {   añadirSpellPersonalizado(((DTOsPlayer.SkillPersonalizado) evt.getNewValue()).skillID);}
 
 
         if (evt.getNewValue() instanceof DTOsPC.EliminarPC)
         {   dispose(); }
 
-        if (evt.getNewValue() instanceof DTOsPC.NumTalentosSkillPersonalizado)
+        if (evt.getNewValue() instanceof DTOsPlayer.NumTalentosSkillPersonalizado)
         {   añadirModificarSkillTalento(
-                ((DTOsPC.NumTalentosSkillPersonalizado) evt.getNewValue()).skillID,
-                ((DTOsPC.NumTalentosSkillPersonalizado) evt.getNewValue()).statID,
-                ((DTOsPC.NumTalentosSkillPersonalizado) evt.getNewValue()).valor);
+                ((DTOsPlayer.NumTalentosSkillPersonalizado) evt.getNewValue()).skillID,
+                ((DTOsPlayer.NumTalentosSkillPersonalizado) evt.getNewValue()).statID,
+                ((DTOsPlayer.NumTalentosSkillPersonalizado) evt.getNewValue()).valor);
         }
     }
 }

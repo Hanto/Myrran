@@ -2,7 +2,7 @@ package Model.Classes.Geo;// Created by Hanto on 19/05/2014.
 
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
-import DTO.DTOsPC;
+import DTO.DTOsPlayer;
 import DTO.DTOsMapa;
 import Data.Settings;
 import Interfaces.EntidadesTipos.PCI;
@@ -177,7 +177,7 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsPC.Posicion)
+        if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
         {   comprobarCambioDeMapTile(); }
     }
 }

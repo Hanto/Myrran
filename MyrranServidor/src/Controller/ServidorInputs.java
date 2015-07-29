@@ -1,6 +1,6 @@
 package Controller;// Created by Hanto on 22/07/2014.
 
-import DTO.DTOsPC;
+import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PCI;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
@@ -18,7 +18,7 @@ public class ServidorInputs
         this.controlador = controlador;
     }
 
-    public void procesarInput(int connectionID, DTOsPC.PlayerDTOs netPlayer)
+    public void procesarInput(int connectionID, DTOsPlayer.PlayerDTOs netPlayer)
     {
         PCI player = mundo.getPC(connectionID);
         if (player == null) { logger.error("ERROR: no existe Player con este ID: {}", connectionID); return; }
@@ -29,31 +29,31 @@ public class ServidorInputs
         {
             dto = netPlayer.listaDTOs[i];
 
-            if (dto instanceof DTOsPC.Animacion)
-            {   player.setNumAnimacion(((DTOsPC.Animacion) dto).numAnimacion); }
+            if (dto instanceof DTOsPlayer.Animacion)
+            {   player.setNumAnimacion(((DTOsPlayer.Animacion) dto).numAnimacion); }
 
-            else if (dto instanceof DTOsPC.Posicion)
-            {   player.setPosition(((DTOsPC.Posicion) dto).posX, ((DTOsPC.Posicion) dto).posY); }
+            else if (dto instanceof DTOsPlayer.Posicion)
+            {   player.setPosition(((DTOsPlayer.Posicion) dto).posX, ((DTOsPlayer.Posicion) dto).posY); }
 
-            else if (dto instanceof DTOsPC.ParametrosSpell)
-            {   player.setParametrosSpell(((DTOsPC.ParametrosSpell) dto).parametros); }
+            else if (dto instanceof DTOsPlayer.ParametrosSpell)
+            {   player.setParametrosSpell(((DTOsPlayer.ParametrosSpell) dto).parametros); }
 
-            else if (dto instanceof DTOsPC.SpellSeleccionado)
+            else if (dto instanceof DTOsPlayer.SpellSeleccionado)
             {
-                player.setSpellIDSeleccionado(((DTOsPC.SpellSeleccionado) dto).spellIDSeleccionado);
-                player.setParametrosSpell(((DTOsPC.SpellSeleccionado) dto).parametrosSpell);
+                player.setSpellIDSeleccionado(((DTOsPlayer.SpellSeleccionado) dto).spellIDSeleccionado);
+                player.setParametrosSpell(((DTOsPlayer.SpellSeleccionado) dto).parametrosSpell);
             }
-            else if (dto instanceof DTOsPC.StopCastear)
-            {   player.setCastear(false, ((DTOsPC.StopCastear) dto).screenX, ((DTOsPC.StopCastear) dto).screenY); }
+            else if (dto instanceof DTOsPlayer.StopCastear)
+            {   player.setCastear(false, ((DTOsPlayer.StopCastear) dto).screenX, ((DTOsPlayer.StopCastear) dto).screenY); }
 
-            else if (dto instanceof DTOsPC.StartCastear)
-            {   player.setCastear(true, ((DTOsPC.StartCastear) dto).screenX, ((DTOsPC.StartCastear) dto).screenY); }
+            else if (dto instanceof DTOsPlayer.StartCastear)
+            {   player.setCastear(true, ((DTOsPlayer.StartCastear) dto).screenX, ((DTOsPlayer.StartCastear) dto).screenY); }
 
 
-            else if (dto instanceof DTOsPC.NumTalentosSkillPersonalizado)
+            else if (dto instanceof DTOsPlayer.NumTalentosSkillPersonalizado)
             {
-                player.setNumTalentosSkillPersonalizado(((DTOsPC.NumTalentosSkillPersonalizado) dto).skillID,
-                ((DTOsPC.NumTalentosSkillPersonalizado) dto).statID, ((DTOsPC.NumTalentosSkillPersonalizado) dto).valor);
+                player.setNumTalentosSkillPersonalizado(((DTOsPlayer.NumTalentosSkillPersonalizado) dto).skillID,
+                ((DTOsPlayer.NumTalentosSkillPersonalizado) dto).statID, ((DTOsPlayer.NumTalentosSkillPersonalizado) dto).valor);
             }
         }
     }

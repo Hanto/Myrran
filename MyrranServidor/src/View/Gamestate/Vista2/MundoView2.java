@@ -5,13 +5,14 @@ import DTO.DTOsMundo;
 import Interfaces.EntidadesTipos.CampoVisionI;
 import Interfaces.EntidadesTipos.PCI;
 import Model.GameState.Mundo;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Director implements PropertyChangeListener
+public class MundoView2 implements PropertyChangeListener, Disposable
 {
     public Controlador controlador;
     public Mundo mundo;
@@ -19,12 +20,15 @@ public class Director implements PropertyChangeListener
     private List<CampoVisionI> listaCampoVisiones = new ArrayList<>();
 
     //Constructor:
-    public Director (Controlador controlador, Mundo mundo)
+    public MundoView2(Controlador controlador, Mundo mundo)
     {
         mundo.añadirObservador(this);
         this.controlador = controlador;
         this.mundo = mundo;
     }
+
+    @Override public void dispose()
+    {   mundo.eliminarObservador(this); }
 
     //CAMPO VISION:
     //--------------------------------------------------------------------------------------------------------------
@@ -43,7 +47,7 @@ public class Director implements PropertyChangeListener
         {   campoVision.radar(); }
     }
 
-    public void enviarDatosAClientes()
+    public void enviarDTOs()
     {
         for (CampoVisionI campoVision : listaCampoVisiones)
         {   campoVision.enviarDTOs(); }

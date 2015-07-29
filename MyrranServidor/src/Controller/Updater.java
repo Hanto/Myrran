@@ -67,7 +67,10 @@ public class Updater implements Runnable
                     //executeRunnables();
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep);
                     mundo.actualizarFisica(Settings.FIXED_TimeStep);
-                    controlador.mundoView.enviarDatosAClientes();
+
+                    //controlador.mundoView.enviarDatosAClientes();
+                    controlador.actualizarRadarCampoVisiones();
+                    controlador.enviarDatosAClientes();
                 }
             }
             try { Thread.sleep((long)(1)); }

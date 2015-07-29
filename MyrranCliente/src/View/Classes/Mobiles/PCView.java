@@ -2,7 +2,7 @@ package View.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
 import Controller.Controlador;
 import DB.RSC;
-import DTO.DTOsPC;
+import DTO.DTOsPlayer;
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesTipos.PCI;
@@ -88,16 +88,16 @@ public class PCView extends Group implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsPC.Posicion)
-        {   mover( ((DTOsPC.Posicion) evt.getNewValue()).posX,  ((DTOsPC.Posicion) evt.getNewValue()).posY ); }
+        if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
+        {   mover( ((DTOsPlayer.Posicion) evt.getNewValue()).posX,  ((DTOsPlayer.Posicion) evt.getNewValue()).posY ); }
 
-        if (evt.getNewValue() instanceof DTOsPC.ModificarHPs)
-        {   modificarHPs( (int) (((DTOsPC.ModificarHPs) evt.getNewValue()).HPs) ); }
+        if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
+        {   modificarHPs( (int) (((DTOsPlayer.ModificarHPs) evt.getNewValue()).HPs) ); }
 
-        if (evt.getNewValue() instanceof DTOsPC.Animacion)
-        {   setAnimacion(((DTOsPC.Animacion) evt.getNewValue()).numAnimacion); }
+        if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
+        {   setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
 
-        if (evt.getNewValue() instanceof DTOsPC.EliminarPC)
+        if (evt.getNewValue() instanceof DTOsPlayer.EliminarPC)
         {   dispose(); }
     }
 }

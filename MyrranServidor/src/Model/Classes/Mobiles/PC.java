@@ -28,8 +28,8 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
     protected int connectionID;
     protected MapaI mapa;
 
-    protected int ultimoMapTileX;
-    protected int ultimoMapTileY;
+    protected int ultimoMapTileX = 0;
+    protected int ultimoMapTileY = 0;
     protected float x;
     protected float y;
     protected int numAnimacion = 5;
@@ -125,7 +125,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         Iterator<SpellPersonalizadoI> iSpell = getIteratorSpellPersonalizado();
         while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
         //le decimos a la vista que desaparezca:
-        notificador.setDispose(this);
+        notificador.setDispose();
     }
 
     //Este metodo no es el que notifica de la modificacion de los talentos del skill personalizado, ya que hay mas modos de modificarlos
@@ -145,13 +145,13 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
     @Override public void setPosition(float x, float y)
     {
         this.x = x; this.y = y;
-        notificador.setPosition(x, y);
+        notificador.setPosition();
     }
 
     @Override public void setNumAnimacion(int numAnimacion)
     {
         this.numAnimacion = numAnimacion;
-        notificador.setNumAnimacion(numAnimacion);
+        notificador.setNumAnimacion();
     }
 
     @Override public void modificarHPs(float HPs)
@@ -167,7 +167,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(spellID);
         if (spell == null) { logger.error("ERROR: añadirSkillsPersonalizados: spellID no encontrado: {}", spellID); return; }
 
-        SpellPersonalizado spellPersonalizado = new SpellPersonalizado(spell);
+        SpellPersonalizadoI spellPersonalizado = new SpellPersonalizado(spell);
         listaSpellsPersonalizados.put(spellPersonalizado.getID(), spellPersonalizado);
 
         listaSkillsPersonalizados.put(spellPersonalizado.getCustomSpell().getID(), spellPersonalizado.getCustomSpell());
@@ -179,7 +179,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         }
 
         spellPersonalizado.añadirObservador(this);
-        notificador.añadirSkillPersonalizado(spell.getID());
+        notificador.añadirSpellPersonalizado(spell.getID());
     }
 
     // METODOS ACTUALIZACION:

@@ -1,8 +1,9 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
+import DTO.DTOsCampoVision;
 import DTO.DTOsMapView;
-import DTO.DTOsPC;
-import DTO.DTOsPC.PCDTOs;
+import DTO.DTOsPlayer;
+import DTO.DTOsPlayer.PCDTOs;
 import DTO.NetDTOs;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
@@ -64,6 +65,12 @@ public class Cliente extends Client
 
         if (obj instanceof DTOsMapView.MapTilesAdyacentes)
         {   controlador.actualizarMapTilesAdyacentes(((DTOsMapView.MapTilesAdyacentes) obj));}
+
+        if (obj instanceof DTOsCampoVision.PCDTOs)
+        {   controlador.clienteInputs.procesarActualizacionesPC( (DTOsCampoVision.PCDTOs) obj);}
+
+        if (obj instanceof DTOsCampoVision.MiscDTOs)
+        {   controlador.clienteInputs.procesarActualizacionesMisc( (DTOsCampoVision.MiscDTOs) obj );}
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -71,9 +78,9 @@ public class Cliente extends Client
     public void enviarAServidor(Object obj)
     {
         String nombreDTOs ="";
-        if (obj instanceof DTOsPC.PlayerDTOs)
+        if (obj instanceof DTOsPlayer.PlayerDTOs)
         {
-            DTOsPC.PlayerDTOs dtos = (DTOsPC.PlayerDTOs)obj;
+            DTOsPlayer.PlayerDTOs dtos = (DTOsPlayer.PlayerDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }

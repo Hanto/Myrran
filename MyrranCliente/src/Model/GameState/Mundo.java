@@ -4,7 +4,9 @@ import Controller.Cliente;
 import DTO.DTOsMapView;
 import DTO.DTOsMundo;
 import Data.Settings;
+import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Model.AbstractModel;
+import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
 import com.badlogic.gdx.math.Vector2;
@@ -17,34 +19,34 @@ import java.util.Map;
 
 public class Mundo extends AbstractModel
 {
-    private List<PC> listaPlayers = new ArrayList<>();
-    private Map<Integer,PC> mapaPlayers = new HashMap<>();
+    private List<PCI> listaPlayers = new ArrayList<>();
+    private Map<Integer,PCI> mapaPlayers = new HashMap<>();
 
     private Player player;
-    private Model.Classes.Geo.Mapa mapa;
+    private Mapa mapa;
     private World world;
 
     public boolean[][] mapTilesCargados = new boolean[3][3];
 
 
     //Get:
-    public List<? extends PC> listaPlayers()        { return listaPlayers; }
-    public PC getPC (int connectionID)              { return mapaPlayers.get(connectionID); }
+    public List<? extends PCI> listaPlayers()       { return listaPlayers; }
+    public PCI getPC (int connectionID)             { return mapaPlayers.get(connectionID); }
     public Player getPlayer()                       { return player; }
-    public Model.Classes.Geo.Mapa getMapa()                           { return mapa; }
+    public Mapa getMapa()                           { return mapa; }
     public World getWorld()                         { return world; }
 
     public Mundo()
     {
         world = new World(new Vector2(0, 0), false);
         player = new Player(this);
-        mapa = new Model.Classes.Geo.Mapa(player);
+        mapa = new Mapa(player);
     }
 
     //SE NOTIFICA:
     public void añadirPC (int connectionID, float x, float y)
     {
-        PC pc = new PC(connectionID, world);
+        PCI pc = new PC(connectionID, world);
         pc.setPosition(x, y);
         listaPlayers.add(pc);
         mapaPlayers.put(pc.getConnectionID(), pc);
@@ -54,7 +56,7 @@ public class Mundo extends AbstractModel
 
     public void eliminarPC (int connectionID)
     {
-        PC pc = mapaPlayers.get(connectionID);
+        PCI pc = mapaPlayers.get(connectionID);
         listaPlayers.remove(pc);
         mapaPlayers.remove(connectionID);
         pc.dispose();
@@ -65,7 +67,7 @@ public class Mundo extends AbstractModel
         //Actualizar a todas las unidades a partir de los datos ya interpolados
         player.actualizar(delta);
         //Actualizar a los demas jugador multiplayer:
-        for (PC pc: listaPlayers)
+        for (PCI pc: listaPlayers)
         {   pc.actualizar(delta); }
     }
 

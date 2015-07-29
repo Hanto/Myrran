@@ -1,10 +1,9 @@
-package View.Gamestate;// Created by Hanto on 07/04/2014.
+package View.Gamestate.Vistas;// Created by Hanto on 07/04/2014.
 
 import Controller.Controlador;
 import DTO.DTOsMundo;
 import Interfaces.EntidadesTipos.PCI;
 import Model.GameState.Mundo;
-import View.Gamestate.Vistas.PcView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

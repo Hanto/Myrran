@@ -26,7 +26,7 @@ public class DTOsCampoVision
         public MiscDTOs() {}
     }
 
-    //
+    //PLAYER DTOS:
     //------------------------------------------------------------------------------------------------------------------
     public static class DatosCompletosPC
     {
@@ -101,14 +101,24 @@ public class DTOsCampoVision
         {   this.HPs = HPs; }
     }
 
-    public static class CambioTerreno
+    public static class AñadirSpellPersonalizadoPC
+    {
+        public String spellID;
+        public AñadirSpellPersonalizadoPC() {}
+        public AñadirSpellPersonalizadoPC(String spellID)
+        {   this.spellID = spellID; }
+    }
+
+    //MISC DTOS:
+    //------------------------------------------------------------------------------------------------------------------
+    public static class CambioTerrenoMisc
     {
         public int tileX;
         public int tileY;
         public short numCapa;
         public short iDTerreno;
-        public CambioTerreno() {}
-        public CambioTerreno(int tileX, int tileY, int numCapa, short iDTerreno)
+        public CambioTerrenoMisc() {}
+        public CambioTerrenoMisc(int tileX, int tileY, int numCapa, short iDTerreno)
         {   this.tileX = tileX; this.tileY = tileY;
             this.numCapa = (short)numCapa; this.iDTerreno = iDTerreno; }
     }

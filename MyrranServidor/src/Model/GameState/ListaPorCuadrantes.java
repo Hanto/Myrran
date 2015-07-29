@@ -132,6 +132,7 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
         private int offsetActual = 0;
         private List<T> listaActual;
         private final Vector2[] offsets = new Vector2[9];
+        private Iterator<T> iteratorListaActual;
 
         public IteratorCuadrantes(int mapTileX, int mapTileY)
         {
@@ -157,7 +158,7 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
 
             while (offsetActual <=8)
             {
-                key = (mapTileX+offsets[offsetActual].x)+"-"+(mapTileY+offsets[offsetActual].y);
+                key = (mapTileX+(int)offsets[offsetActual].x)+"-"+(mapTileY+(int)offsets[offsetActual].y);
                 offsetActual++;
 
                 if (lista.containsKey(key))
@@ -165,6 +166,7 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
                     if (!lista.get(key).isEmpty())
                     {
                         listaActual = lista.get(key);
+                        iteratorListaActual = lista.get(key).iterator();
                         break;
                     }
                 }
@@ -175,8 +177,9 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
         {
             if (listaActual == null) return null;
 
-            T next = listaActual.iterator().next();
-            if (!listaActual.iterator().hasNext()) nextLista();
+            T next = iteratorListaActual.next();
+            if (!iteratorListaActual.hasNext())
+                nextLista();
             return next;
         }
 

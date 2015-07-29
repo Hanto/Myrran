@@ -1,7 +1,8 @@
 package Controller;// Created by Hanto on 22/07/2014.
 
 import DB.DAO;
-import DTO.DTOsPC;
+import DTO.DTOsCampoVision;
+import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.Acciones.AccionI;
@@ -22,7 +23,7 @@ public class ClienteInputs
         this.controlador = controlador;
     }
 
-    public void procesarInput(DTOsPC.PCDTOs netPlayer)
+    public void procesarInput(DTOsPlayer.PCDTOs netPlayer)
     {
         PCI player;
         if (controlador.getCliente().getID() == netPlayer.connectionID) { player = mundo.getPlayer(); }
@@ -34,64 +35,64 @@ public class ClienteInputs
         {
             dto = netPlayer.listaDTOs[i];
 
-            if (dto instanceof DTOsPC.Posicion)
+            if (dto instanceof DTOsPlayer.Posicion)
             {
                 if (player == null) continue;
-                player.setPosition(((DTOsPC.Posicion) dto).posX, ((DTOsPC.Posicion) dto).posY);
+                player.setPosition(((DTOsPlayer.Posicion) dto).posX, ((DTOsPlayer.Posicion) dto).posY);
             }
 
-            else if (dto instanceof DTOsPC.Animacion)
+            else if (dto instanceof DTOsPlayer.Animacion)
             {
                 if (player == null) continue;
-                player.setNumAnimacion(((DTOsPC.Animacion) dto).numAnimacion);
+                player.setNumAnimacion(((DTOsPlayer.Animacion) dto).numAnimacion);
             }
 
-            else if (dto instanceof DTOsPC.ModificarHPs)
+            else if (dto instanceof DTOsPlayer.ModificarHPs)
             {
                 if (player == null) continue;
-                player.modificarHPs(( (DTOsPC.ModificarHPs)dto).HPs ); }
+                player.modificarHPs(( (DTOsPlayer.ModificarHPs)dto).HPs ); }
 
 
-            else if (dto instanceof DTOsPC.HPs)
+            else if (dto instanceof DTOsPlayer.HPs)
             {
                 if (player == null) continue;
-                player.setMaxHPs(((DTOsPC.HPs) dto).maxHPs);
-                player.setActualHPs(((DTOsPC.HPs) dto).actualHPs);
+                player.setMaxHPs(((DTOsPlayer.HPs) dto).maxHPs);
+                player.setActualHPs(((DTOsPlayer.HPs) dto).actualHPs);
             }
 
-            else if (dto instanceof DTOsPC.Nombre)
+            else if (dto instanceof DTOsPlayer.Nombre)
             {
                 if (player == null) continue;
-                player.setNombre(((DTOsPC.Nombre) dto).nombre); }
+                player.setNombre(((DTOsPlayer.Nombre) dto).nombre); }
 
-            else if (dto instanceof DTOsPC.EliminarOtroPC)
+            else if (dto instanceof DTOsPlayer.EliminarPC)
             {
-                PCI otro = mundo.getPC(((DTOsPC.EliminarOtroPC) dto).connectionID);
-                if (otro == null) { logger.error("No se puede eliminar un PC con ID que no existe: {}", ((DTOsPC.EliminarOtroPC) dto).connectionID); return; }
-                else mundo.eliminarPC(((DTOsPC.EliminarOtroPC) dto).connectionID);
+                PCI otro = mundo.getPC(((DTOsPlayer.EliminarPC) dto).connectionID);
+                if (otro == null) { logger.error("No se puede eliminar un PC con ID que no existe: {}", ((DTOsPlayer.EliminarPC) dto).connectionID); return; }
+                else mundo.eliminarPC(((DTOsPlayer.EliminarPC) dto).connectionID);
             }
 
-            else if (dto instanceof DTOsPC.CrearPC)
+            else if (dto instanceof DTOsPlayer.CrearPC)
             {
-                int id = ((DTOsPC.CrearPC) dto).connectionID;
+                int id = ((DTOsPlayer.CrearPC) dto).connectionID;
 
                 if (mundo.getPC(id) == null && mundo.getPlayer().getConnectionID() != id)
                 {
-                    mundo.añadirPC(id, ((DTOsPC.CrearPC) dto).posX, ((DTOsPC.CrearPC) dto).posY);
+                    mundo.añadirPC(id, ((DTOsPlayer.CrearPC) dto).posX, ((DTOsPlayer.CrearPC) dto).posY);
                     PCI otro = mundo.getPC(id);
-                    otro.setNombre(((DTOsPC.CrearPC) dto).nombre);
-                    otro.setNivel(((DTOsPC.CrearPC) dto).nivel);
-                    otro.setMaxHPs(((DTOsPC.CrearPC) dto).maxHPs);
-                    otro.setActualHPs(((DTOsPC.CrearPC) dto).actualHPs);
-                    otro.setNumAnimacion(((DTOsPC.CrearPC) dto).numAnimacion);
+                    otro.setNombre(((DTOsPlayer.CrearPC) dto).nombre);
+                    otro.setNivel(((DTOsPlayer.CrearPC) dto).nivel);
+                    otro.setMaxHPs(((DTOsPlayer.CrearPC) dto).maxHPs);
+                    otro.setActualHPs(((DTOsPlayer.CrearPC) dto).actualHPs);
+                    otro.setNumAnimacion(((DTOsPlayer.CrearPC) dto).numAnimacion);
                 }
                 else logger.warn("No se puede Crear PC, ConnectionID: {} pertecene al jugador principal o ya existe", id);
             }
 
-            else if (dto instanceof DTOsPC.SkillPersonalizado)
+            else if (dto instanceof DTOsPlayer.SkillPersonalizado)
             {
-                SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(((DTOsPC.SkillPersonalizado) dto).skillID);
-                if (spell == null) { logger.error("ERROR: no existe Spell con este ID: {}", ((DTOsPC.SkillPersonalizado) dto).skillID); return; }
+                SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(((DTOsPlayer.SkillPersonalizado) dto).skillID);
+                if (spell == null) { logger.error("ERROR: no existe Spell con este ID: {}", ((DTOsPlayer.SkillPersonalizado) dto).skillID); return; }
                 else
                 {
                     logger.debug("Añadido Spell: {}", spell.getID());
@@ -101,23 +102,106 @@ public class ClienteInputs
                 }
             }
 
-            else if (dto instanceof DTOsPC.NumTalentosSkillPersonalizado)
+            else if (dto instanceof DTOsPlayer.NumTalentosSkillPersonalizado)
             {
-                String skillID = ((DTOsPC.NumTalentosSkillPersonalizado) dto).skillID;
-                int statID = ((DTOsPC.NumTalentosSkillPersonalizado) dto).statID;
-                int valor = ((DTOsPC.NumTalentosSkillPersonalizado) dto).valor;
+                String skillID = ((DTOsPlayer.NumTalentosSkillPersonalizado) dto).skillID;
+                int statID = ((DTOsPlayer.NumTalentosSkillPersonalizado) dto).statID;
+                int valor = ((DTOsPlayer.NumTalentosSkillPersonalizado) dto).valor;
 
                 logger.debug("Modificado Spell: {} stat: {} talentos "+valor, skillID, statID);
                 mundo.getPlayer().setNumTalentosSkillPersonalizadoFromServer(skillID, statID, valor);
             }
 
-            else if (dto instanceof DTOsPC.CambioTerreno)
+            else if (dto instanceof DTOsPlayer.CambioTerreno)
             {
-                int tileX = ((DTOsPC.CambioTerreno) dto).tileX;
-                int tileY = ((DTOsPC.CambioTerreno) dto).tileY;
-                int numCapa = (int) ((DTOsPC.CambioTerreno) dto).numCapa;
-                short iDTerreno = ((DTOsPC.CambioTerreno) dto).iDTerreno;
+                int tileX = ((DTOsPlayer.CambioTerreno) dto).tileX;
+                int tileY = ((DTOsPlayer.CambioTerreno) dto).tileY;
+                int numCapa = (int) ((DTOsPlayer.CambioTerreno) dto).numCapa;
+                short iDTerreno = ((DTOsPlayer.CambioTerreno) dto).iDTerreno;
 
+                mundo.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);
+            }
+        }
+    }
+
+    public void procesarActualizacionesPC(DTOsCampoVision.PCDTOs pcDTOs)
+    {
+        PCI pc;
+        Object dto;
+
+        if (pcDTOs.connectionID == mundo.getPlayer().getConnectionID()) pc = mundo.getPlayer();
+        else if (mundo.getPC(pcDTOs.connectionID) == null)
+        {
+            mundo.añadirPC(pcDTOs.connectionID, -5000, -5000);
+            pc = mundo.getPC(pcDTOs.connectionID);
+        }
+        else pc = mundo.getPC(pcDTOs.connectionID);
+
+
+        for (int i=0; i<pcDTOs.listaDTOs.length; i++)
+        {
+            dto = pcDTOs.listaDTOs[i];
+
+            if (dto instanceof DTOsCampoVision.EliminarPC)
+            {   mundo.eliminarPC(pcDTOs.connectionID); }
+
+            else if (dto instanceof DTOsCampoVision.PosicionPC)
+            {   pc.setPosition(((DTOsCampoVision.PosicionPC) dto).posX, ((DTOsCampoVision.PosicionPC) dto).posY); }
+
+            else if (dto instanceof DTOsCampoVision.NumAnimacionPC)
+            {   pc.setNumAnimacion(((DTOsCampoVision.NumAnimacionPC) dto).numAnimacion); }
+
+            else if (dto instanceof DTOsCampoVision.NombrePC)
+            {   pc.setNombre(((DTOsCampoVision.NombrePC) dto).nombre);}
+
+            else if (dto instanceof DTOsCampoVision.ModificarHPsPC)
+            {   pc.modificarHPs(((DTOsCampoVision.ModificarHPsPC) dto).HPs);}
+
+            else if (dto instanceof DTOsCampoVision.HPsPC)
+            {
+                pc.setMaxHPs(((DTOsCampoVision.HPsPC) dto).maxHPs);
+                pc.setActualHPs(((DTOsCampoVision.HPsPC) dto).actualHPs);
+            }
+
+            else if (dto instanceof DTOsCampoVision.AñadirSpellPersonalizadoPC)
+            {
+                SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(((DTOsCampoVision.AñadirSpellPersonalizadoPC) dto).spellID);
+                if (spell == null) { logger.error("ERROR: no existe Spell con este ID: {}", ((DTOsCampoVision.AñadirSpellPersonalizadoPC) dto).spellID); return; }
+                else
+                {
+                    logger.debug("Añadido Spell: {}", spell.getID());
+                    pc.añadirSkillsPersonalizados(spell.getID());
+                    AccionI accion = AccionFactory.accionSpell.SELECCIONARSPELL.nuevo(spell);
+                    controlador.añadirAccion(accion);
+                }
+            }
+
+            else if (dto instanceof DTOsCampoVision.DatosCompletosPC)
+            {
+                pc.setPosition(((DTOsCampoVision.DatosCompletosPC) dto).posX, ((DTOsCampoVision.DatosCompletosPC) dto).posY);
+                pc.setNumAnimacion(((DTOsCampoVision.DatosCompletosPC) dto).numAnimacion);
+                pc.setNombre(((DTOsCampoVision.DatosCompletosPC) dto).nombre);
+                pc.setMaxHPs(((DTOsCampoVision.DatosCompletosPC) dto).maxHPs);
+                pc.setActualHPs(((DTOsCampoVision.DatosCompletosPC) dto).actualHPs);
+                pc.setNivel(((DTOsCampoVision.DatosCompletosPC) dto).nivel);
+            }
+        }
+    }
+
+    public void procesarActualizacionesMisc(DTOsCampoVision.MiscDTOs miscDTOs)
+    {
+        Object dto;
+
+        for (int i=0; i<miscDTOs.listaDTOs.length; i++)
+        {
+            dto = miscDTOs.listaDTOs[i];
+
+            if (dto instanceof DTOsCampoVision.CambioTerrenoMisc)
+            {
+                int tileX = ((DTOsCampoVision.CambioTerrenoMisc) dto).tileX;
+                int tileY = ((DTOsCampoVision.CambioTerrenoMisc) dto).tileY;
+                int numCapa = ((DTOsCampoVision.CambioTerrenoMisc) dto).numCapa;
+                short iDTerreno = ((DTOsCampoVision.CambioTerrenoMisc) dto).iDTerreno;
                 mundo.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);
             }
         }

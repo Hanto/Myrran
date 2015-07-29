@@ -24,7 +24,7 @@ public class TipoSpellRecursos
         id = iDTipoSpell;
 
         tiposAnimacion = new Array[numTiposAnimacion];
-        for (int i=0;i<tiposAnimacion.length;i++)
-        {   tiposAnimacion[i] = new Array<>();}
+        for (int i = 0; i < tiposAnimacion.length; i++)
+        {   tiposAnimacion[i] = new Array<>(); }
     }
 }

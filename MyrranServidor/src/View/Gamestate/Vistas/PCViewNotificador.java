@@ -1,6 +1,6 @@
 package View.Gamestate.Vistas;// Created by Hanto on 22/07/2014.
 
-import DTO.DTOsPC;
+import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PCI;
 import com.badlogic.gdx.utils.ObjectMap;
 
@@ -8,24 +8,24 @@ import java.util.ArrayList;
 
 public class PCViewNotificador
 {
-    private DTOsPC.Posicion posicion = new DTOsPC.Posicion();
-    private DTOsPC.Animacion animacion = new DTOsPC.Animacion();
-    private DTOsPC.HPs hps = new DTOsPC.HPs();
-    private DTOsPC.Nombre nombre = new DTOsPC.Nombre();
+    private DTOsPlayer.Posicion posicion = new DTOsPlayer.Posicion();
+    private DTOsPlayer.Animacion animacion = new DTOsPlayer.Animacion();
+    private DTOsPlayer.HPs hps = new DTOsPlayer.HPs();
+    private DTOsPlayer.Nombre nombre = new DTOsPlayer.Nombre();
 
     private ObjectMap<Class, Object> cambiosExcluyentesPersonal = new ObjectMap<>();
     private ObjectMap<Class, Object> cambiosExcluyentesGlobal = new ObjectMap<>();
     private ArrayList<Object> cambiosAcumulativosPersonal = new ArrayList<>();
     private ArrayList<Object> cambiosAcumulativosGlobal = new ArrayList<>();
 
-    public DTOsPC.PCDTOs dtoPersonal;
-    public DTOsPC.PCDTOs dtoGlobal;
+    public DTOsPlayer.PCDTOs dtoPersonal;
+    public DTOsPlayer.PCDTOs dtoGlobal;
 
 
     public PCViewNotificador(int connectionID)
     {
-        this.dtoPersonal = new DTOsPC.PCDTOs(connectionID);
-        this.dtoGlobal = new DTOsPC.PCDTOs(connectionID);
+        this.dtoPersonal = new DTOsPlayer.PCDTOs(connectionID);
+        this.dtoGlobal = new DTOsPlayer.PCDTOs(connectionID);
     }
 
     public void generarDTOs()
@@ -64,7 +64,7 @@ public class PCViewNotificador
         {
             posicion.posX = (int) x;
             posicion.posY = (int) y;
-            cambiosExcluyentesGlobal.put(DTOsPC.Posicion.class, posicion);
+            cambiosExcluyentesGlobal.put(DTOsPlayer.Posicion.class, posicion);
         }
     }
 
@@ -74,7 +74,7 @@ public class PCViewNotificador
         if (animacion.numAnimacion != (short)numAnimacion)
         {
             animacion.numAnimacion = (short)numAnimacion;
-            cambiosExcluyentesGlobal.put(DTOsPC.Animacion.class, animacion);
+            cambiosExcluyentesGlobal.put(DTOsPlayer.Animacion.class, animacion);
         }
     }
 
@@ -84,8 +84,8 @@ public class PCViewNotificador
         if (this.nombre.nombre != nombre)
         {
             this.nombre.nombre = nombre;
-            cambiosExcluyentesPersonal.put(DTOsPC.Nombre.class, this.nombre);
-            cambiosExcluyentesGlobal.put(DTOsPC.Nombre.class, this.nombre);
+            cambiosExcluyentesPersonal.put(DTOsPlayer.Nombre.class, this.nombre);
+            cambiosExcluyentesGlobal.put(DTOsPlayer.Nombre.class, this.nombre);
         }
     }
 
@@ -96,40 +96,40 @@ public class PCViewNotificador
         {
             hps.actualHPs = actualHPs;
             hps.maxHPs = maxHPs;
-            cambiosExcluyentesPersonal.put(DTOsPC.HPs.class, hps);
-            cambiosExcluyentesGlobal.put(DTOsPC.HPs.class, hps);
+            cambiosExcluyentesPersonal.put(DTOsPlayer.HPs.class, hps);
+            cambiosExcluyentesGlobal.put(DTOsPlayer.HPs.class, hps);
         }
     }
 
     //(Acumulativo): Global - Personal
     public void añadirModificarHPs(float HPs)
     {
-        Object modificarHPs = new DTOsPC.ModificarHPs(HPs);
+        Object modificarHPs = new DTOsPlayer.ModificarHPs(HPs);
         cambiosAcumulativosPersonal.add(modificarHPs);
         cambiosAcumulativosGlobal.add(modificarHPs);
     }
 
     //(Acumulativo): Global
     public void añadirEliminarPC(int connectionID)
-    {   cambiosAcumulativosGlobal.add(new DTOsPC.EliminarOtroPC(connectionID)); }
+    {   cambiosAcumulativosGlobal.add(new DTOsPlayer.EliminarPC(connectionID)); }
 
     //(Acumulativo): Personal
     public void añadirNoVeAlPC(int connectionID)
-    {   cambiosAcumulativosPersonal.add(new DTOsPC.EliminarOtroPC(connectionID)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPlayer.EliminarPC(connectionID)); }
 
     //(Acumulativo): Personal
     public void añadirVeAlPC(PCI pc)
-    {   cambiosAcumulativosPersonal.add(new DTOsPC.CrearPC(pc)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPlayer.CrearPC(pc)); }
 
     //(Acumulativo): Personal
     public void añadirSkillPersonalizado(String skillID)
-    {   cambiosAcumulativosPersonal.add(new DTOsPC.SkillPersonalizado(skillID)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPlayer.SkillPersonalizado(skillID)); }
 
     //(Acumulativo): Personal
     public void añadirNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
-    {   cambiosAcumulativosPersonal.add(new DTOsPC.NumTalentosSkillPersonalizado(skillID, statID, valor)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPlayer.NumTalentosSkillPersonalizado(skillID, statID, valor)); }
 
     //(Acumulativo): Personal
     public void añadirCambioTerreno(int tileX, int tileY, int numCapa, short iDTerreno)
-    {   cambiosAcumulativosPersonal.add(new DTOsPC.CambioTerreno(tileX, tileY, numCapa, iDTerreno)); }
+    {   cambiosAcumulativosPersonal.add(new DTOsPlayer.CambioTerreno(tileX, tileY, numCapa, iDTerreno)); }
 }

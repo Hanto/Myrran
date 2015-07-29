@@ -1,6 +1,7 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
-import DTO.DTOsPC;
+import DTO.DTOsCampoVision;
+import DTO.DTOsPlayer;
 import DTO.NetDTOs;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
@@ -48,10 +49,10 @@ public class Servidor extends Server
 
     private void procesarMensajeCliente(Connection con, Object obj)
     {
-        if (obj instanceof DTOsPC.PlayerDTOs)
-        {   controlador.servidorInputs.procesarInput(con.getID(), (DTOsPC.PlayerDTOs)obj); }
+        if (obj instanceof DTOsPlayer.PlayerDTOs)
+        {   controlador.servidorInputs.procesarInput(con.getID(), (DTOsPlayer.PlayerDTOs)obj); }
 
-        if (obj instanceof DTOsPC.LogIn)
+        if (obj instanceof DTOsPlayer.LogIn)
         {   controlador.servidorInputs.procesarLogIn(con.getID());}
     }
 
@@ -60,9 +61,15 @@ public class Servidor extends Server
     public void enviarACliente(int connectionID, Object obj)
     {
         String nombreDTOs ="";
-        if (obj instanceof DTOsPC.PCDTOs)
+        if (obj instanceof DTOsCampoVision.PCDTOs)
         {
-            DTOsPC.PCDTOs dtos = (DTOsPC.PCDTOs)obj;
+            DTOsCampoVision.PCDTOs dtos = (DTOsCampoVision.PCDTOs)obj;
+            for (int i=0; i< dtos.listaDTOs.length; i++)
+            {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
+        }
+        else if (obj instanceof DTOsCampoVision.MiscDTOs)
+        {
+            DTOsCampoVision.MiscDTOs dtos = (DTOsCampoVision.MiscDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }

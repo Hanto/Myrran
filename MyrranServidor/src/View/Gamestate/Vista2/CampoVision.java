@@ -18,7 +18,7 @@ import java.util.List;
 public class CampoVision extends AbstractModel implements PropertyChangeListener, CampoVisionI
 {
     //Model:
-    protected Director mundoView;
+    protected MundoView2 mundoView;
     protected Mundo mundo;
     protected Controlador controlador;
     protected CampoVisionNotificador notificador;
@@ -41,7 +41,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     @Override public void setCentro (Espacial espacial) { centro = espacial; }
 
     //Constructor:
-    public CampoVision(Espacial centro, PCI pc, Director mundoView)
+    public CampoVision(Espacial centro, PCI pc, MundoView2 mundoView)
     {
         this.mundoView = mundoView;
         this.controlador = mundoView.controlador;
@@ -111,7 +111,6 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         {
             listaPCsCercanos.add(pc);
             pc.añadirObservador(this);
-            //NOTIFICAR CLIENTE:
             notificador.añadirPC(pc);
         }
     }
@@ -123,17 +122,21 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         {
             listaPCsCercanos.remove(pc);
             pc.eliminarObservador(this);
-            //NOTIFICAR CLIENTE:
             notificador.eliminarPC(pc);
         }
     }
 
     private void posicionPC (PCI pc)
     {
-        if (pc.getConnectionID() == this.pc.getConnectionID()) mapaView.comprobarVistaMapa();
-        //NOTIFICAR CLIENTE:
+        if (pc.getConnectionID() == this.pc.getConnectionID()) { mapaView.comprobarVistaMapa(); return; }
         notificador.setPositionPC(pc);
     }
+
+    private void numAnimacionPC (PCI pc)
+    {   notificador.setNumAnimacionPC(pc); }
+
+    private void añadirSpellPersonalizadoPC (PCI pc, String spellID)
+    {   notificador.addAñadirSpellPersonalizado(pc, spellID); }
 
     //CAMPO VISION:
     //--------------------------------------------------------------------------------------------------------------
@@ -151,6 +154,13 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
 
         if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
         {   posicionPC(((DTOsPC.PosicionPC) evt.getNewValue()).pc); }
+
+        if (evt.getNewValue() instanceof DTOsPC.NumAnimacionPC)
+        {   numAnimacionPC(((DTOsPC.NumAnimacionPC) evt.getNewValue()).pc); }
+
+        if (evt.getNewValue() instanceof DTOsPC.AñadirSpellPersonalizadoPC)
+        {   añadirSpellPersonalizadoPC(((DTOsPC.AñadirSpellPersonalizadoPC) evt.getNewValue()).pc,
+                                       ((DTOsPC.AñadirSpellPersonalizadoPC) evt.getNewValue()).spellID);}
     }
 
 

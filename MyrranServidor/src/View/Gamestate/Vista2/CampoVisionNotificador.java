@@ -4,7 +4,10 @@ import Controller.Controlador;
 import DTO.DTOsCampoVision;
 import Interfaces.EntidadesTipos.PCI;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CampoVisionNotificador
 {
@@ -23,7 +26,7 @@ public class CampoVisionNotificador
                 for (int i=0; i< lista.size(); i++)
                 {
                     if (clase.isInstance(lista.get(i)))
-                    {   lista.set(i, dto); break; }
+                    {   lista.set(i, dto); return; }
                 }
                 lista.add(dto);
             }
@@ -51,6 +54,8 @@ public class CampoVisionNotificador
         {   mapDTOs.remove(key); }
     }
 
+    //PC:
+    //------------------------------------------------------------------------------------------------------------------
     public void añadirPC (PCI pc)
     {   setDatosCompletosPC(pc); }
 
@@ -97,9 +102,17 @@ public class CampoVisionNotificador
         mapaDTOsPC.add(pc.getConnectionID(), modificarHPsPC);
     }
 
+    public void addAñadirSpellPersonalizado(PCI pc, String spellID)
+    {
+        DTOsCampoVision.AñadirSpellPersonalizadoPC añadirSpellPersonalizado = new DTOsCampoVision.AñadirSpellPersonalizadoPC(spellID);
+        mapaDTOsPC.add(pc.getConnectionID(), añadirSpellPersonalizado);
+    }
+
+    //MISC:
+    //------------------------------------------------------------------------------------------------------------------
     public void addCambioTerreno (int tileX, int tileY, int numCapa, short iDTerreno)
     {
-        DTOsCampoVision.CambioTerreno cambioTerreno = new DTOsCampoVision.CambioTerreno(tileX, tileY, numCapa, iDTerreno);
+        DTOsCampoVision.CambioTerrenoMisc cambioTerreno = new DTOsCampoVision.CambioTerrenoMisc(tileX, tileY, numCapa, iDTerreno);
         listaDTOsMisc.add(cambioTerreno);
     }
 
