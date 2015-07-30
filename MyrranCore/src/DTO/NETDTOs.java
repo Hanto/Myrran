@@ -16,27 +16,27 @@ public class NetDTOs
 
         kryo.register(Object[].class);
         //Player Cliente:
-        kryo.register(DTOsPC.PlayerDTOs.class);
+        kryo.register(DTOsPlayer.PlayerDTOs.class);
         //Player Servidor:
-        kryo.register(DTOsPC.PCDTOs.class);
+        kryo.register(DTOsPlayer.PCDTOs.class);
 
         //Player:
-        kryo.register(DTOsPC.LogIn.class);
-        kryo.register(DTOsPC.Animacion.class);
-        kryo.register(DTOsPC.Posicion.class);
-        kryo.register(DTOsPC.ParametrosSpell.class);
-        kryo.register(DTOsPC.SpellSeleccionado.class);
-        kryo.register(DTOsPC.StopCastear.class);
-        kryo.register(DTOsPC.StartCastear.class);
-        kryo.register(DTOsPC.NumTalentosSkillPersonalizado.class);
-        kryo.register(DTOsPC.CrearPC.class);
-        kryo.register(DTOsPC.EliminarOtroPC.class);
-        kryo.register(DTOsPC.Nombre.class);
-        kryo.register(DTOsPC.HPs.class);
-        kryo.register(DTOsPC.ModificarHPs.class);
-        kryo.register(DTOsPC.SkillPersonalizado.class);
-        kryo.register(DTOsPC.CambioTerreno.class);
-        kryo.register(DTOsPC.CastingTimePercent.class);
+        kryo.register(DTOsPlayer.LogIn.class);
+        kryo.register(DTOsPlayer.Animacion.class);
+        kryo.register(DTOsPlayer.Posicion.class);
+        kryo.register(DTOsPlayer.ParametrosSpell.class);
+        kryo.register(DTOsPlayer.SpellSeleccionado.class);
+        kryo.register(DTOsPlayer.StopCastear.class);
+        kryo.register(DTOsPlayer.StartCastear.class);
+        kryo.register(DTOsPlayer.NumTalentosSkillPersonalizado.class);
+        kryo.register(DTOsPlayer.CrearPC.class);
+        kryo.register(DTOsPlayer.EliminarPC.class);
+        kryo.register(DTOsPlayer.Nombre.class);
+        kryo.register(DTOsPlayer.HPs.class);
+        kryo.register(DTOsPlayer.ModificarHPs.class);
+        kryo.register(DTOsPlayer.SkillPersonalizado.class);
+        kryo.register(DTOsPlayer.CambioTerreno.class);
+        kryo.register(DTOsPlayer.CastingTimePercent.class);
         //Parametros Spell:
         kryo.register(DTOsParametrosSpell.ParametrosEditarTerreno.class);
 
@@ -49,5 +49,22 @@ public class NetDTOs
         kryo.register(DTOsMapView.Mapa.Celda[].class);
         kryo.register(DTOsMapView.Mapa.Celda[][].class);
         kryo.register(DTOsMapView.Mapa.class);
+
+        //PC
+        kryo.register(DTOsCampoVision.PCDTOs.class);
+        kryo.register(DTOsCampoVision.MiscDTOs.class);
+        kryo.register(DTOsCampoVision.DatosCompletosPC.class);
+        kryo.register(DTOsCampoVision.EliminarPC.class);
+        kryo.register(DTOsCampoVision.PosicionPC.class);
+        kryo.register(DTOsCampoVision.NumAnimacionPC.class);
+        kryo.register(DTOsCampoVision.NombrePC.class);
+        kryo.register(DTOsCampoVision.HPsPC.class);
+        kryo.register(DTOsCampoVision.ModificarHPsPC.class);
+        kryo.register(DTOsCampoVision.AñadirSpellPersonalizadoPC.class);
+        kryo.register(DTOsCampoVision.NumTalentosSkillPersonalizadoPC.class);
+
+        //MISC:
+        kryo.register(DTOsCampoVision.MiscDTOs.class);
+        kryo.register(DTOsCampoVision.CambioTerrenoMisc.class);
     }
 }

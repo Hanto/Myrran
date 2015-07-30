@@ -2,57 +2,58 @@ package Model.Classes.Mobiles;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPC;
 import Interfaces.EntidadesTipos.PCI;
-import Interfaces.Model.ModelI;
 
 public class PCNotificador
 {
-    public ModelI model;
+    public PCI pc;
 
-    public DTOsPC.Posicion posicion = new DTOsPC.Posicion();
-    public DTOsPC.Animacion animacion = new DTOsPC.Animacion();
-    public DTOsPC.ModificarHPs modificarHPs = new DTOsPC.ModificarHPs();
+    public DTOsPC.PosicionPC posicion;
+    public DTOsPC.NumAnimacionPC animacion;
+    public DTOsPC.ModificarHPsPC modificarHPs;
 
-    public PCNotificador(ModelI model)
-    {   this.model = model; }
+    public PCNotificador(PCI pc)
+    {
+        this.pc = pc;
+        posicion = new DTOsPC.PosicionPC(pc);
+        animacion = new DTOsPC.NumAnimacionPC(pc);
+        modificarHPs = new DTOsPC.ModificarHPsPC(pc);
+    }
 
     //  NOTIFICACION LOCAL:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setPosition(float x, float y)
+    public void setPosition()
     {
-        if (posicion.posX != (int)x || posicion.posY != (int)y)
+        if (posicion.posX != (int)pc.getX() || posicion.posY != (int)pc.getY())
         {
-            posicion.posX = (int) x;
-            posicion.posY = (int) y;
-            model.notificarActualizacion("posicion", null, posicion);
+            posicion.posX = (int) pc.getX();
+            posicion.posY = (int) pc.getY();
+            pc.notificarActualizacion("posicion", null, posicion);
         }
     }
 
-    public void setNumAnimacion(int numAnimacion)
+    public void setNumAnimacion()
     {
-        if (animacion.numAnimacion != (short)numAnimacion)
+        if (animacion.numAnimacion != (short)pc.getNumAnimacion())
         {
-            animacion.numAnimacion = (short)numAnimacion;
-            model.notificarActualizacion("numAnimacion", null, animacion);
+            animacion.numAnimacion = (short)pc.getNumAnimacion();
+            pc.notificarActualizacion("numAnimacion", null, animacion);
         }
     }
 
-    public void setNombre(String nombre)
-    {   model.notificarActualizacion("nombre", null, new DTOsPC.Nombre(nombre)); }
+    public void setDispose()
+    {   pc.notificarActualizacion("dispose", null, new DTOsPC.EliminarPC(pc)); }
 
-    public void setDispose(PCI pc)
-    {   model.notificarActualizacion("dispose", null, new DTOsPC.EliminarPC(pc)); }
-
-    public void añadirModificarHPs(float HPs)
+    public void addModificarHPs(float HPs)
     {
         modificarHPs.HPs = HPs;
-        model.notificarActualizacion("modificarHPs", null, modificarHPs);
+        pc.notificarActualizacion("modificarHPs", null, modificarHPs);
     }
 
-    public void añadirSkillPersonalizado(String skillID)
-    {   model.notificarActualizacion("skillPersonalizado", null, new DTOsPC.SkillPersonalizado(skillID)); }
+    public void addSpellPersonalizado(String spellID)
+    {   pc.notificarActualizacion("skillPersonalizado", null, new DTOsPC.AñadirSpellPersonalizadoPC(pc, spellID)); }
 
-    public void añadirNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
-    {   model.notificarActualizacion("numTalentosSkillPersonalizado", null, new DTOsPC.NumTalentosSkillPersonalizado(skillID, statID, valor)); }
+    public void addNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+    {   pc.notificarActualizacion("numTalentosSkillPersonalizado", null, new DTOsPC.NumTalentosSkillPersonalizadoPC(pc, skillID, statID, valor));}
 
 }
