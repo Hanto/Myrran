@@ -2,7 +2,7 @@ package View.Classes.Geo;// Created by Hanto on 16/04/2014.
 
 import DTO.DTOsMapa;
 import Data.Settings;
-import Model.Classes.Geo.Mapa;
+import Interfaces.Geo.MapaI;
 import View.GameState.MundoView;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
@@ -15,7 +15,7 @@ import java.beans.PropertyChangeListener;
 public class MapaView implements PropertyChangeListener
 {
     private MundoView mundoView;
-    private Mapa mapaModel;
+    private MapaI mapaModel;
 
     private OrthographicCamera camara;
 
@@ -37,7 +37,7 @@ public class MapaView implements PropertyChangeListener
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MapaView(Mapa mapaModel, MundoView mundoView, float posInicialX, float posInicialY, int tamañoX, int tamañoY)
+    public MapaView(MapaI mapaModel, MundoView mundoView, float posInicialX, float posInicialY, int tamañoX, int tamañoY)
     {
         this.mapaModel = mapaModel;
         this.mundoView = mundoView;

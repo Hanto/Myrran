@@ -12,4 +12,12 @@ public class DTOsMundo
         public AñadirPC(PCI pc)
         {   this.pc = pc; }
     }
+
+    public static class EliminarPC
+    {
+        public PCI pc;
+        public EliminarPC() {}
+        public EliminarPC(PCI pc)
+        {   this.pc = pc; }
+    }
 }

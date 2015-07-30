@@ -1,12 +1,12 @@
 package Model.GameState;// Created by Hanto on 06/05/2014.
 
 import Controller.Controlador;
+import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.Classes.Input.InputManager;
-import Model.Classes.Mobiles.Player;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
 
@@ -20,7 +20,7 @@ public class UI
     public InputManager getInputManager()       { return inputManager; }
 
 
-    public UI (Player player, Controlador controlador)
+    public UI (PlayerI player, Controlador controlador)
     {
         inputManager = new InputManager(player, controlador);
         conjuntoBarraAcciones = new ConjuntoBarraAcciones(player, inputManager);

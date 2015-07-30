@@ -1,4 +1,4 @@
-package Interfaces;// Created by Hanto on 24/07/2015.
+package Interfaces.GameState;// Created by Hanto on 24/07/2015.
 
 import Interfaces.EntidadesPropiedades.Espacial;
 

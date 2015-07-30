@@ -4,11 +4,11 @@ import DTO.DTOsMundo;
 import DTO.DTOsPC;
 import Data.Settings;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
-import Interfaces.ListaPorCuadrantesI;
+import Interfaces.GameState.ListaPorCuadrantesI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
-import Model.Classes.Mobiles.PC;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -16,7 +16,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.*;
 
-public class Mundo extends AbstractModel implements PropertyChangeListener
+public class Mundo extends AbstractModel implements PropertyChangeListener, MundoI
 {
     private Map<Integer, PCI> mapaPlayers = new HashMap<>();
 
@@ -26,11 +26,11 @@ public class Mundo extends AbstractModel implements PropertyChangeListener
     private Mapa mapa = new Mapa();
     private World world;
 
-    public World getWorld()                         { return world; }
-    public MapaI getMapa()                          { return mapa; }
-    public PCI getPC (int connectionID)             { return mapaPlayers.get(connectionID); }
-    public Iterator<PCI> getIteratorListaPCs()      { return listaPCs.iterator(); }
-    public ListaPorCuadrantesI<PCI> getMapaPCs()    { return mapaPCs; }
+    public World getWorld()                                 { return world; }
+    @Override public MapaI getMapa()                        { return mapa; }
+    @Override public PCI getPC (int connectionID)           { return mapaPlayers.get(connectionID); }
+    @Override public Iterator<PCI> getIteratorListaPCs()    { return listaPCs.iterator(); }
+    public ListaPorCuadrantesI<PCI> getMapaPCs()            { return mapaPCs; }
 
 
     public Mundo()
@@ -46,9 +46,8 @@ public class Mundo extends AbstractModel implements PropertyChangeListener
 
     //PLAYERS:
     //-------------------------------------------------------------------------------------------------------------
-    public void añadirPC (int connectionID)
+    public void añadirPC (PCI pc)
     {
-        PCI pc = new PC(connectionID, this);
         mapaPlayers.put(pc.getConnectionID(), pc);
         listaPCs.add(pc);
         mapaPCs.put(pc);
@@ -68,6 +67,9 @@ public class Mundo extends AbstractModel implements PropertyChangeListener
 
         pc.eliminarObservador(this);
         pc.dispose();
+
+        DTOsMundo.EliminarPC eliminarPlayer = new DTOsMundo.EliminarPC(pc);
+        notificarActualizacion("eliminarPC", null, eliminarPlayer);
     }
 
     public void posicionPC (PCI pc)

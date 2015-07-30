@@ -2,6 +2,7 @@ package Model.Classes.Input;// Created by Hanto on 05/05/2014.
 
 import Controller.Controlador;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
+import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.UI.Acciones.AccionI;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
@@ -23,7 +24,7 @@ public class InputManager implements InputProcessor, GestureListener
     private Map<String, AccionI> listaDeAcciones = new HashMap<>();
 
     //Constructor:
-    public InputManager(MaquinablePlayer player, Controlador controlador)
+    public InputManager(PlayerI player, Controlador controlador)
     {
         this.player = player;
         this.controlador = controlador;

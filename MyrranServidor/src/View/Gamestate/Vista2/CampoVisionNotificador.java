@@ -1,13 +1,13 @@
 package View.Gamestate.Vista2;// Created by Hanto on 24/07/2015.
 
 import Controller.Controlador;
+import Core.Skills.SkillMod;
 import DTO.DTOsCampoVision;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.Skill.SkillPersonalizadoI;
+import Interfaces.Spell.SpellPersonalizadoI;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CampoVisionNotificador
 {
@@ -54,22 +54,15 @@ public class CampoVisionNotificador
         {   mapDTOs.remove(key); }
     }
 
+    public CampoVisionNotificador() {}
+
     //PC:
     //------------------------------------------------------------------------------------------------------------------
-    public void añadirPC (PCI pc)
-    {   setDatosCompletosPC(pc); }
-
     public void eliminarPC(PCI pc)
     {
-        DTOsCampoVision.EliminarPC eliminarPC = new DTOsCampoVision.EliminarPC();
+        DTOsCampoVision.EliminarPC eliminar = new DTOsCampoVision.EliminarPC();
         mapaDTOsPC.remove(pc.getConnectionID());
-        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.EliminarPC.class, eliminarPC);
-    }
-
-    public void setDatosCompletosPC (PCI pc)
-    {
-        DTOsCampoVision.DatosCompletosPC datosCompletos = new DTOsCampoVision.DatosCompletosPC(pc);
-        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.DatosCompletosPC.class, datosCompletos);
+        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.EliminarPC.class, eliminar);
     }
 
     public void setPositionPC (PCI pc)
@@ -82,6 +75,31 @@ public class CampoVisionNotificador
     {
         DTOsCampoVision.NumAnimacionPC numAnumacion = new DTOsCampoVision.NumAnimacionPC(pc);
         mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.NumAnimacionPC.class, numAnumacion);
+    }
+
+    //PC & PLAYER:
+    //------------------------------------------------------------------------------------------------------------------
+    public void setDatosCompletosPC (PCI pc)
+    {
+        DTOsCampoVision.DatosCompletosPC datosCompletos = new DTOsCampoVision.DatosCompletosPC(pc);
+        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.DatosCompletosPC.class, datosCompletos);
+
+        Iterator<SpellPersonalizadoI> iteratorSpell = pc.getIteratorSpellPersonalizado();
+        while (iteratorSpell.hasNext())
+        {   addAñadirSpellPersonalizado(pc, iteratorSpell.next().getID()); }
+
+        Iterator<SkillPersonalizadoI> iteratorSkill = pc.getIteratorSkillPersonalizado();
+        while (iteratorSkill.hasNext())
+        {
+            SkillPersonalizadoI skill = iteratorSkill.next();
+            Iterator<SkillMod> iteratorMod = skill.getIterator();
+            while(iteratorMod.hasNext())
+            {
+                SkillMod skillmod = iteratorMod.next();
+                if (skillmod.getNumTalentos()>0)
+                {   addNumTalentosSkillPersonalizadoPC(pc, skill.getID(), skillmod.getID(), skillmod.getNumTalentos()); }
+            }
+        }
     }
 
     public void setNombrePC (PCI pc)
@@ -106,6 +124,12 @@ public class CampoVisionNotificador
     {
         DTOsCampoVision.AñadirSpellPersonalizadoPC añadirSpellPersonalizado = new DTOsCampoVision.AñadirSpellPersonalizadoPC(spellID);
         mapaDTOsPC.add(pc.getConnectionID(), añadirSpellPersonalizado);
+    }
+
+    public void addNumTalentosSkillPersonalizadoPC(PCI pc, String skillID, int statID, int valor)
+    {
+        DTOsCampoVision.NumTalentosSkillPersonalizadoPC numTalentosSkill = new DTOsCampoVision.NumTalentosSkillPersonalizadoPC(skillID, statID, valor);
+        mapaDTOsPC.add(pc.getConnectionID(), numTalentosSkill);
     }
 
     //MISC:

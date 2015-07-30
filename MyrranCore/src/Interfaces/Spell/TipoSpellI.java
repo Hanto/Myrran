@@ -2,6 +2,7 @@ package Interfaces.Spell;// Created by Hanto on 09/06/2014.
 
 import Core.Skills.SkillStat;
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.GameState.MundoI;
 
 import java.util.Iterator;
 
@@ -24,5 +25,5 @@ public interface TipoSpellI
 
     //METODOS:
     public void inicializarSkillStats();
-    public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY);
+    public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY, MundoI mundo);
 }

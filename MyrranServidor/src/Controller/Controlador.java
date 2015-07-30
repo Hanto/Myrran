@@ -2,7 +2,6 @@ package Controller;// Created by Hanto on 07/04/2014.
 
 import Model.GameState.Mundo;
 import View.Gamestate.Vista2.MundoView2;
-import View.Gamestate.Vistas.MundoView;
 
 public class Controlador
 {
@@ -11,7 +10,6 @@ public class Controlador
     protected Updater updater;
 
     protected Mundo mundo;
-    protected MundoView mundoView;
     protected MundoView2 mundoView2;
 
     public Mundo getMundo()         { return mundo; }
@@ -20,7 +18,6 @@ public class Controlador
     {
         this.mundo = mundo;
 
-        mundoView = new MundoView(this, mundo);
         mundoView2 = new MundoView2(this, mundo);
         servidorInputs = new ServidorInputs(mundo, this);
         servidor = new Servidor(this);

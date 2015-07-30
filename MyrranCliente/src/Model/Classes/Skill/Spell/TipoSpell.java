@@ -2,8 +2,9 @@ package Model.Classes.Skill.Spell;
 // @author Ivan Delgado Huerta
 
 import Core.Skills.SkillStat;
-import Interfaces.Model.AbstractModel;
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.GameState.MundoI;
+import Interfaces.Model.AbstractModel;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.TipoSpellI;
 
@@ -40,5 +41,5 @@ public abstract class TipoSpell extends AbstractModel implements TipoSpellI
         inicializarSkillStats();
     }
 
-    @Override public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY) {}
+    @Override public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY, MundoI mundo) {}
 }

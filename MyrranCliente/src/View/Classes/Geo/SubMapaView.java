@@ -1,9 +1,9 @@
 package View.Classes.Geo;// Created by Hanto on 15/04/2014.
 
+import DB.RSC;
 import DTO.DTOTerrenoView;
 import Data.Settings;
-import Model.Classes.Geo.Mapa;
-import DB.RSC;
+import Interfaces.Geo.MapaI;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -13,7 +13,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 
 public class SubMapaView extends TiledMap
 {
-    private Mapa mapa;
+    private MapaI mapa;
     private OrthogonalTiledMapRenderer mapRenderer;
 
     //mapTile, cuadrante que se renderiza
@@ -35,7 +35,7 @@ public class SubMapaView extends TiledMap
     public void setView(OrthographicCamera camara)  { mapRenderer.setView(camara); }
 
 
-    public SubMapaView(Mapa mapaModel, int tamañoX, int tamañoY)
+    public SubMapaView(MapaI mapaModel, int tamañoX, int tamañoY)
     {
         this.mapa = mapaModel;
         this.mapRenderer = new OrthogonalTiledMapRenderer(this);

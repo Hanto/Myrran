@@ -1,7 +1,7 @@
 package Model.GameState;// Created by Hanto on 16/07/2015.
 
 import Interfaces.EntidadesPropiedades.Espacial;
-import Interfaces.ListaPorCuadrantesI;
+import Interfaces.GameState.ListaPorCuadrantesI;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.*;

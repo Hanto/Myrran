@@ -32,8 +32,6 @@ public class DTOsCampoVision
     {
         public int connectionID;
         public String nombre;
-        public int posX;
-        public int posY;
         public int nivel;
         public float maxHPs;
         public float actualHPs;
@@ -42,7 +40,7 @@ public class DTOsCampoVision
         public DatosCompletosPC(PCI pc)
         {
             connectionID = pc.getConnectionID(); nombre = pc.getNombre();
-            posX = (int)pc.getX(); posY = (int)pc.getY(); nivel = pc.getNivel();
+            nivel = pc.getNivel();
             maxHPs = pc.getMaxHPs(); actualHPs = pc.getActualHPs();
             numAnimacion = pc.getNumAnimacion();
         }
@@ -107,6 +105,16 @@ public class DTOsCampoVision
         public AñadirSpellPersonalizadoPC() {}
         public AñadirSpellPersonalizadoPC(String spellID)
         {   this.spellID = spellID; }
+    }
+
+    public static class NumTalentosSkillPersonalizadoPC
+    {
+        public String skillID;
+        public int statID;
+        public int valor;
+        public NumTalentosSkillPersonalizadoPC() {}
+        public NumTalentosSkillPersonalizadoPC(String skillID, int statID, int valor)
+        {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
     }
 
     //MISC DTOS:

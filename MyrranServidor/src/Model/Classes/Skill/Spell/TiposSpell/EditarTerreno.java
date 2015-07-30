@@ -3,6 +3,7 @@ package Model.Classes.Skill.Spell.TiposSpell;
 
 import Data.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
 import Model.Classes.Skill.Spell.TipoSpell;
 
@@ -16,7 +17,7 @@ public class EditarTerreno extends TipoSpell
         setNumSkillStats(1);
     }
 
-    @Override public void ejecutarCasteo(SpellI skill, Caster Caster, int targetX, int targetY)
+    @Override public void ejecutarCasteo(SpellI skill, Caster Caster, int targetX, int targetY, MundoI mundo)
     {
         int tileX = (targetX / Settings.TILESIZE);
         int tileY = (targetY / Settings.TILESIZE);
@@ -30,6 +31,6 @@ public class EditarTerreno extends TipoSpell
             iDTerreno = ((ParametrosEditarTerreno) Caster.getParametrosSpell()).terrenoIDSeleccionado;
         }
 
-        Caster.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);
+        mundo.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);
     }
 }

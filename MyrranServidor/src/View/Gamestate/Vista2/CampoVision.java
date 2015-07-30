@@ -8,6 +8,7 @@ import Interfaces.EntidadesTipos.CampoVisionI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Model.AbstractModel;
 import Model.GameState.Mundo;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -21,60 +22,67 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     protected MundoView2 mundoView;
     protected Mundo mundo;
     protected Controlador controlador;
+
     protected CampoVisionNotificador notificador;
     protected MapaView2 mapaView;
-
-    protected PCI pc;                                     //Player al que pertecene el Campo de Vision
-    protected Espacial centro;                            //Espacial en el que esta centrado el campo de Vision
+    protected targetLock targetLock;                    //target Espacial al que sigue el campo de vision
+    protected int connectionID;                         //conexion a la que enviar los datos
 
     //UNIDADES QUE OBSERVAMOS:
     private List<PCI> listaPCsCercanos = new ArrayList<>();
 
-    @Override public float getX()                       { return centro != null ? centro.getX() : pc.getX(); }
-    @Override public float getY()                       { return centro != null ? centro.getY() : pc.getY(); }
+    @Override public int getConnectionID()              { return connectionID; }
+    @Override public float getX()                       { return targetLock.getEspacial().getX(); }
+    @Override public float getY()                       { return targetLock.getEspacial().getY(); }
     @Override public int getMapTileX()                  { return (int)(getX() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
     @Override public int getMapTileY()                  { return (int)(getY() / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
-    @Override public int getUltimoMapTileX()            { return centro != null ? centro.getUltimoMapTileX() : pc.getUltimoMapTileX(); }
-    @Override public int getUltimoMapTileY()            { return centro != null ? centro.getUltimoMapTileY() : pc.getUltimoMapTileY(); }
+    @Override public int getUltimoMapTileX()            { return targetLock.getEspacial().getUltimoMapTileX(); }
+    @Override public int getUltimoMapTileY()            { return targetLock.getEspacial().getUltimoMapTileY(); }
     @Override public void setUltimoMapTile(int x, int y){  }
     @Override public void setPosition(float x, float y) {  }
-    @Override public void setCentro (Espacial espacial) { centro = espacial; }
 
     //Constructor:
-    public CampoVision(Espacial centro, PCI pc, MundoView2 mundoView)
+    public CampoVision(Espacial targetCampoVision, int connectionID, MundoView2 mundoView)
     {
         this.mundoView = mundoView;
         this.controlador = mundoView.controlador;
         this.mundo = mundoView.mundo;
-        this.pc = pc;
-        this.centro = centro;
+        this.connectionID = connectionID;
         this.notificador = new CampoVisionNotificador();
-        this.mapaView = new MapaView2(this.centro, this.pc.getConnectionID(), mundo, controlador, this);
-
-        this.pc.añadirObservador(this);
+        this.targetLock = new targetLock(targetCampoVision);
+        this.mapaView = new MapaView2(targetLock.getEspacial(), this.connectionID, mundo, controlador, this);
+        radar();
     }
 
     @Override public void dispose()
-    {   //Dejamos de observar al Player, las entidades cercanas y al Mapa
-        pc.eliminarObservador(this);
+    {
         for (PCI pc : listaPCsCercanos)
         {   pc.eliminarObservador(this); }
         mapaView.dispose();
-        //Eliminamos el campo de vision de la lista de campo de visiones:
-        mundoView.eliminarCampoVision(this);
+        targetLock.dispose();
+    }
+
+    @Override public void setCentro (Espacial espacial)
+    {
+        for (PCI pc : listaPCsCercanos)
+        {   pc.eliminarObservador(this); }
+        listaPCsCercanos.clear();
+        targetLock.setEspacial(espacial);
+        radar();
     }
 
     //CODIGO DE RADAR:
-    //------------------------------------------------------------------------------------------------------------
-    public boolean isVisiblePor(Espacial espacial)
+    //-------------------------------------------------------------------------------------------------------------
+
+    private boolean isVisiblePor(Espacial espacial)
     {
-        if ( Math.abs(espacial.getX()-centro.getX()) <= (Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Horizontal_Resolution/2) &&
-             Math.abs(espacial.getY()-centro.getY()) <= (Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Vertical_Resolution/2))
+        if ( Math.abs(espacial.getX()-targetLock.getEspacial().getX()) <= (Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Horizontal_Resolution/2) &&
+             Math.abs(espacial.getY()-targetLock.getEspacial().getY()) <= (Settings.NETWORK_DistanciaVisionMobs * Settings.MAPTILE_Vertical_Resolution/2))
              return true;
         else return false;
     }
 
-    public void comprobarVisiblidadMobsObservados()
+    private void comprobarVisiblidadMobsObservados()
     {
         Iterator<PCI> iterator = listaPCsCercanos.iterator();
         PCI pc;
@@ -85,7 +93,6 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
             {
                 iterator.remove();
                 pc.eliminarObservador(this);
-                //NOTIFICAR CLIENTE:
                 notificador.eliminarPC(pc);
             }
         }
@@ -94,8 +101,8 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     public void radar()
     {
         comprobarVisiblidadMobsObservados();
-        Iterator<PCI> iteratorPC = mundo.getMapaPCs().getIteratorCuadrantes(getMapTileX(), getMapTileY());
         PCI pc;
+        Iterator<PCI> iteratorPC = mundo.getMapaPCs().getIteratorCuadrantes(getMapTileX(), getMapTileY());
         while (iteratorPC.hasNext())
         {
             pc = iteratorPC.next();
@@ -103,49 +110,58 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         }
     }
 
-    //PLAYERS:
-    //-------------------------------------------------------------------------------------------------------------
+    public void enviarDTOs()
+    {   notificador.enviarDTOS(controlador, connectionID); }
+
+    //PCS:
+    //--------------------------------------------------------------------------------------------------------------
+
     public void añadirPC (PCI pc)
     {
         if (!listaPCsCercanos.contains(pc))
         {
             listaPCsCercanos.add(pc);
             pc.añadirObservador(this);
-            notificador.añadirPC(pc);
+            notificador.setDatosCompletosPC(pc);
+            if (pc.getConnectionID() != connectionID)
+                notificador.setPositionPC(pc);
         }
     }
 
     private void eliminarPC (PCI pc)
     {
-        if (pc.getConnectionID() == this.pc.getConnectionID()) dispose();
-        else if (listaPCsCercanos.contains(pc))
+        if (listaPCsCercanos.contains(pc))
         {
             listaPCsCercanos.remove(pc);
             pc.eliminarObservador(this);
-            notificador.eliminarPC(pc);
+            if (pc.getConnectionID() != connectionID)
+                notificador.eliminarPC(pc);
         }
     }
 
     private void posicionPC (PCI pc)
-    {
-        if (pc.getConnectionID() == this.pc.getConnectionID()) { mapaView.comprobarVistaMapa(); return; }
-        notificador.setPositionPC(pc);
-    }
+    {   if (pc.getConnectionID() != connectionID)
+        notificador.setPositionPC(pc); }
 
     private void numAnimacionPC (PCI pc)
-    {   notificador.setNumAnimacionPC(pc); }
+    {   if (pc.getConnectionID() != connectionID)
+        notificador.setNumAnimacionPC(pc); }
+
+    //PLAYER y PCs:
+    //--------------------------------------------------------------------------------------------------------------
+
+    private void modificarHPsPC (PCI pc, float hps)
+    {   notificador.addModificarHPsPC(pc, hps); }
 
     private void añadirSpellPersonalizadoPC (PCI pc, String spellID)
     {   notificador.addAñadirSpellPersonalizado(pc, spellID); }
 
-    //CAMPO VISION:
-    //--------------------------------------------------------------------------------------------------------------
-    public void enviarDTOs()
-    {   notificador.enviarDTOS(controlador, pc.getConnectionID()); }
-
+    private void numTalentosSkillPersonalizadoPC (PCI pc, String skillID, int statID, int valor)
+    {   notificador.addNumTalentosSkillPersonalizadoPC(pc, skillID, statID, valor); }
 
     //CAMPOS OBSERVADOS:
     //--------------------------------------------------------------------------------------------------------------
+
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         //OBSERVAR A LOS PLAYERS (PC)
@@ -158,10 +174,63 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         if (evt.getNewValue() instanceof DTOsPC.NumAnimacionPC)
         {   numAnimacionPC(((DTOsPC.NumAnimacionPC) evt.getNewValue()).pc); }
 
+        if (evt.getNewValue() instanceof DTOsPC.ModificarHPsPC)
+        {   modificarHPsPC(((DTOsPC.ModificarHPsPC) evt.getNewValue()).pc,
+                           ((DTOsPC.ModificarHPsPC) evt.getNewValue()).HPs); }
+
         if (evt.getNewValue() instanceof DTOsPC.AñadirSpellPersonalizadoPC)
         {   añadirSpellPersonalizadoPC(((DTOsPC.AñadirSpellPersonalizadoPC) evt.getNewValue()).pc,
                                        ((DTOsPC.AñadirSpellPersonalizadoPC) evt.getNewValue()).spellID);}
+
+        if (evt.getNewValue() instanceof DTOsPC.NumTalentosSkillPersonalizadoPC)
+        {   numTalentosSkillPersonalizadoPC(((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).pc,
+                                            ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).skillID,
+                                            ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).statID,
+                                            ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).valor);
+        }
     }
 
+    //TARGET LOCK
+    //-------------------------------------------------------------------------------------------------------------
+    //La observacion del Espacial que hace de referencia del campo de vision, el punto que el campo de vision sigue
+    //se hace desde una inner class para que los eventos no se mezclen y no tengamos que diferenciarlos con IFs guarros
 
+    private class targetLock implements PropertyChangeListener, Disposable
+    {
+        private Espacial espacial;
+
+        public targetLock(Espacial espacial)
+        {
+            this.espacial = espacial;
+            this.espacial.añadirObservador(this);
+        }
+
+        @Override public void dispose()
+        {   espacial.eliminarObservador(this); }
+
+        public Espacial getEspacial()
+        {   return espacial; }
+
+        public void setEspacial(Espacial espacial)
+        {
+            this.espacial.eliminarObservador(this);
+            this.espacial = espacial;
+            this.espacial.añadirObservador(this);
+        }
+        
+        //REACCION A EVENTOS:
+        //---------------------------------------------------------------------------------------------------------
+        
+        private void posicion()
+        {   mapaView.comprobarVistaMapa(); }
+
+        private void eliminar()
+        {   if (mundo.getPC(connectionID) != null) setCentro(mundo.getPC(connectionID)); }
+
+        @Override public void propertyChange(PropertyChangeEvent evt)
+        {
+            if (evt.getNewValue() instanceof DTOsPC.PosicionPC) { posicion(); }
+            if (evt.getNewValue() instanceof DTOsPC.EliminarPC) { eliminar(); }
+        }
+    }
 }

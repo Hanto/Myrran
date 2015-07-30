@@ -4,9 +4,10 @@ package Model.Classes.Skill.Spell;
 import Core.Skills.SkillStat;
 import DB.DAO;
 import Interfaces.BDebuff.BDebuffI;
+import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
-import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.GameState.MundoI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillI;
 import Interfaces.Spell.SpellI;
@@ -106,7 +107,7 @@ public class Spell extends AbstractModel implements SpellI
         else return getSkillStat(statID).getValorBase();
     }
 
-    @Override public void castear (Caster Caster, int targetX, int targetY)
+    @Override public void castear (Caster Caster, int targetX, int targetY, MundoI mundo)
     {
         if (Caster.isCasteando()) { }
         else 

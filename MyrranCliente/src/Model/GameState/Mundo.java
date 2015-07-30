@@ -5,6 +5,8 @@ import DTO.DTOsMapView;
 import DTO.DTOsMundo;
 import Data.Settings;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.GameState.MundoI;
+import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.PC;
@@ -12,12 +14,9 @@ import Model.Classes.Mobiles.Player;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class Mundo extends AbstractModel
+public class Mundo extends AbstractModel implements MundoI
 {
     private List<PCI> listaPlayers = new ArrayList<>();
     private Map<Integer,PCI> mapaPlayers = new HashMap<>();
@@ -28,13 +27,12 @@ public class Mundo extends AbstractModel
 
     public boolean[][] mapTilesCargados = new boolean[3][3];
 
-
     //Get:
-    public List<? extends PCI> listaPlayers()       { return listaPlayers; }
-    public PCI getPC (int connectionID)             { return mapaPlayers.get(connectionID); }
-    public Player getPlayer()                       { return player; }
-    public Mapa getMapa()                           { return mapa; }
-    public World getWorld()                         { return world; }
+    public World getWorld()                                 { return world; }
+    @Override public MapaI getMapa()                        { return mapa; }
+    @Override public PCI getPC (int connectionID)           { return mapaPlayers.get(connectionID); }
+    @Override public Iterator<PCI> getIteratorListaPCs()    { return listaPlayers.iterator(); }
+    public Player getPlayer()                              { return player; }
 
     public Mundo()
     {

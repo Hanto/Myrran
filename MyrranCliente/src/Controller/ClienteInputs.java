@@ -7,6 +7,7 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Acciones.AccionFactory;
+import Model.Classes.Mobiles.Player;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -169,16 +170,25 @@ public class ClienteInputs
                 if (spell == null) { logger.error("ERROR: no existe Spell con este ID: {}", ((DTOsCampoVision.AñadirSpellPersonalizadoPC) dto).spellID); return; }
                 else
                 {
-                    logger.debug("Añadido Spell: {}", spell.getID());
                     pc.añadirSkillsPersonalizados(spell.getID());
                     AccionI accion = AccionFactory.accionSpell.SELECCIONARSPELL.nuevo(spell);
                     controlador.añadirAccion(accion);
                 }
             }
 
+            else if (dto instanceof DTOsCampoVision.NumTalentosSkillPersonalizadoPC)
+            {
+                String skillID = ((DTOsCampoVision.NumTalentosSkillPersonalizadoPC) dto).skillID;
+                int statID = ((DTOsCampoVision.NumTalentosSkillPersonalizadoPC) dto).statID;
+                int valor = ((DTOsCampoVision.NumTalentosSkillPersonalizadoPC) dto).valor;
+
+                logger.debug("Modificado Spell: {} stat: {} talentos "+valor, skillID, statID);
+                if (pc instanceof Player) ((Player) pc).setNumTalentosSkillPersonalizadoFromServer(skillID, statID, valor);
+                else pc.setNumTalentosSkillPersonalizado(skillID, statID, valor);
+            }
+
             else if (dto instanceof DTOsCampoVision.DatosCompletosPC)
             {
-                pc.setPosition(((DTOsCampoVision.DatosCompletosPC) dto).posX, ((DTOsCampoVision.DatosCompletosPC) dto).posY);
                 pc.setNumAnimacion(((DTOsCampoVision.DatosCompletosPC) dto).numAnimacion);
                 pc.setNombre(((DTOsCampoVision.DatosCompletosPC) dto).nombre);
                 pc.setMaxHPs(((DTOsCampoVision.DatosCompletosPC) dto).maxHPs);
@@ -187,6 +197,7 @@ public class ClienteInputs
             }
         }
     }
+
 
     public void procesarActualizacionesMisc(DTOsCampoVision.MiscDTOs miscDTOs)
     {

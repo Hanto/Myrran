@@ -12,7 +12,6 @@ import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.PlayerI;
-import Interfaces.Geo.MapaI;
 import Interfaces.Input.PlayerIOI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
@@ -32,7 +31,6 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
 {
     protected Mundo mundo;
     protected int connectionID;
-    protected MapaI mapaI;
 
     protected int ultimoMapTileX;
     protected int ultimoMapTileY;
@@ -85,7 +83,6 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     @Override public int getNivel()                                     { return nivel; }
     @Override public float getActualHPs()                               { return actualHPs; }
     @Override public float getMaxHPs()                                  { return maxHPs; }
-    @Override public MapaI getMapa()                                    { return mapaI; }
     @Override public boolean isCasteando()                              { if (actualCastingTime >0) return true; else return false; }
     @Override public float getActualCastingTime()                       { return actualCastingTime; }
     @Override public float getTotalCastingTime()                        { return totalCastingTime; }
@@ -110,7 +107,8 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     @Override public void setActualHPs (float hps)                      { modificarHPs(hps - actualHPs); }
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID){ return listaSkillsPersonalizados.get(skillID); }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID){ return listaSpellsPersonalizados.get(spellID); }
-    public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
+    @Override public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
+    @Override public Iterator<SkillPersonalizadoI> getIteratorSkillPersonalizado(){ return listaSkillsPersonalizados.values().iterator(); }
 
     //Constructor:
     public Player(Mundo mundo)
@@ -133,8 +131,9 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     {
         SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(spellID);
         if (spell == null) { logger.error("ERROR: añadirSkillsPersonalizados: spellID no encontrado: {}", spellID ); return; }
+        else logger.debug("Añadido Spell: {}", spell.getID());
 
-        SpellPersonalizado spellPersonalizado = new SpellPersonalizado(spell);
+        SpellPersonalizadoI spellPersonalizado = new SpellPersonalizado(spell);
         listaSpellsPersonalizados.put(spellPersonalizado.getID(), spellPersonalizado);
 
         listaSkillsPersonalizados.put(spellPersonalizado.getCustomSpell().getID(), spellPersonalizado.getCustomSpell());
@@ -257,7 +256,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
             SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(output.getSpellID());
             if (spell != null)
             {
-                spell.castear(this, output.getScreenX(), output.getScreenY());
+                spell.castear(this, output.getScreenX(), output.getScreenY(), mundo);
                 castearInterrumpible = true;
                 notificador.setStartCastear(output.getScreenX(), output.getScreenY());
                 //actualCastingTime += 0.01f;

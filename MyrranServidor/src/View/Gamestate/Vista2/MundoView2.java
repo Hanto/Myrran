@@ -10,14 +10,16 @@ import com.badlogic.gdx.utils.Disposable;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MundoView2 implements PropertyChangeListener, Disposable
 {
-    public Controlador controlador;
-    public Mundo mundo;
+    protected Controlador controlador;
+    protected Mundo mundo;
 
-    private List<CampoVisionI> listaCampoVisiones = new ArrayList<>();
+    protected List<CampoVisionI> listaCampoVisiones = new ArrayList<>();
+
 
     //Constructor:
     public MundoView2(Controlador controlador, Mundo mundo)
@@ -30,16 +32,26 @@ public class MundoView2 implements PropertyChangeListener, Disposable
     @Override public void dispose()
     {   mundo.eliminarObservador(this); }
 
-    //CAMPO VISION:
-    //--------------------------------------------------------------------------------------------------------------
     public void añadirCampoVision(PCI pc)
     {
-        CampoVisionI campoVision = new CampoVision(pc, pc, this);
+        CampoVisionI campoVision = new CampoVision(pc, pc.getConnectionID(), this);
         listaCampoVisiones.add(campoVision);
     }
 
-    public void eliminarCampoVision(CampoVisionI campoVision)
-    {   listaCampoVisiones.remove(campoVision); }
+    public void eliminarCampoVision(int connectionID)
+    {
+        CampoVisionI campoVision;
+        Iterator<CampoVisionI>iterator = listaCampoVisiones.iterator();
+        while (iterator.hasNext())
+        {
+            campoVision = iterator.next();
+            if (campoVision.getConnectionID() == connectionID)
+            {
+                campoVision.dispose();
+                iterator.remove();
+            }
+        }
+    }
 
     public void radar()
     {
@@ -60,5 +72,8 @@ public class MundoView2 implements PropertyChangeListener, Disposable
         //OBSERVAR MUNDO:
         if (evt.getNewValue() instanceof DTOsMundo.AñadirPC)
         {   añadirCampoVision(((DTOsMundo.AñadirPC) evt.getNewValue()).pc); }
+
+        if (evt.getNewValue() instanceof DTOsMundo.EliminarPC)
+        {   eliminarCampoVision(((DTOsMundo.EliminarPC) evt.getNewValue()).pc.getConnectionID());}
     }
 }

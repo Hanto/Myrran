@@ -4,11 +4,12 @@ import Core.Cuerpos.BodyFactory;
 import Core.Cuerpos.Cuerpo;
 import Data.Settings;
 import Interfaces.EntidadesTipos.PCI;
-import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
 import com.badlogic.gdx.physics.box2d.World;
+
+import java.util.Iterator;
 
 public class PC extends AbstractModel implements PCI
 {
@@ -46,7 +47,8 @@ public class PC extends AbstractModel implements PCI
     @Override public float getVelocidadMax()                    { return 0; }
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID)  { return null; }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID)  { return null; }
-    @Override public MapaI getMapa()                            { return null; }
+    @Override public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado() { return null; }
+    @Override public Iterator<SkillPersonalizadoI> getIteratorSkillPersonalizado() { return null; }
     @Override public boolean isCasteando()                      { return false; }
     @Override public float getActualCastingTime()               { return 0; }
     @Override public float getTotalCastingTime()                { return 0; }

@@ -5,6 +5,7 @@ import DB.RSC;
 import DTO.DTOsMundo;
 import Data.Settings;
 import Interfaces.EntidadesTipos.PCI;
+import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Player;
 import Model.GameState.Mundo;
 import Tweens.CamaraTween;
@@ -245,8 +246,8 @@ public class MundoView extends Stage implements PropertyChangeListener
             {
                 if (mundo.mapTilesCargados[x][y] == true)
                 {
-                    int mapTileX = x-1 + mundo.getMapa().mapTileCentroX;
-                    int mapTileY = 1-y + mundo.getMapa().mapTileCentroY;
+                    int mapTileX = x-1 + ((Mapa)mundo.getMapa()).mapTileCentroX;
+                    int mapTileY = 1-y + ((Mapa)mundo.getMapa()).mapTileCentroY;
 
                     shape.rect( mapTileX* Settings.MAPTILE_NumTilesX * Settings.TILESIZE, mapTileY* Settings.MAPTILE_NumTilesY * Settings.TILESIZE,
                             Settings.MAPTILE_NumTilesX * Settings.TILESIZE, Settings.MAPTILE_NumTilesY * Settings.TILESIZE);

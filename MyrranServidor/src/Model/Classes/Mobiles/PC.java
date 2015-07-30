@@ -9,7 +9,6 @@ import Data.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesTipos.PCI;
-import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
@@ -26,7 +25,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
 {
     protected Mundo mundo;
     protected int connectionID;
-    protected MapaI mapa;
 
     protected int ultimoMapTileX = 0;
     protected int ultimoMapTileY = 0;
@@ -77,7 +75,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
     @Override public int getNivel()                                     { return nivel; }
     @Override public float getActualHPs()                               { return actualHPs; }
     @Override public float getMaxHPs()                                  { return maxHPs; }
-    @Override public MapaI getMapa()                                    { return mapa; }
     @Override public boolean isCasteando()                              { if (actualCastingTime >0) return true; else return false; }
     @Override public float getActualCastingTime()                       { return actualCastingTime; }
     @Override public float getTotalCastingTime()                        { return totalCastingTime; }
@@ -105,19 +102,22 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
     @Override public void setActualHPs(float HPs)                       { modificarHPs(HPs - actualHPs); }
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID){ return listaSkillsPersonalizados.get(skillID); }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID) { return listaSpellsPersonalizados.get(spellID); }
-    public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
+    @Override public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
+    @Override public Iterator<SkillPersonalizadoI> getIteratorSkillPersonalizado(){ return listaSkillsPersonalizados.values().iterator(); }
 
     //Constructor:
     public PC(int connectionID, Mundo mundo)
     {
         this.mundo = mundo;
         this.connectionID = connectionID;
-        this.mapa = mundo.getMapa();
         this.notificador = new PCNotificador(this);
 
         cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
     }
+
+    //NOTIFICACIONES CAMPO VISION:
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override public void dispose()
     {
@@ -127,20 +127,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         //le decimos a la vista que desaparezca:
         notificador.setDispose();
     }
-
-    //Este metodo no es el que notifica de la modificacion de los talentos del skill personalizado, ya que hay mas modos de modificarlos
-    //como pidiendo directamente un skillPersonalizado al HashMap y modificandolo. Por tanto el player observa directamente la fuente
-    //(el propio Skill Personalizado), y si se modifica se le hace saber al player y es entonces cuando este manda la notifcacion al cliente
-    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
-    {
-        SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
-        if (skillPersonalizado == null) { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
-        else if (valor > 0 && valor < skillPersonalizado.getTalentoMaximo(statID))
-            skillPersonalizado.setNumTalentos(statID, valor);
-    }
-
-    // NOTIFICACIONES VISTA:
-    //------------------------------------------------------------------------------------------------------------------
 
     @Override public void setPosition(float x, float y)
     {
@@ -159,7 +145,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         actualHPs += HPs;
         if (actualHPs > maxHPs) actualHPs = maxHPs;
         else if (actualHPs < 0) actualHPs = 0;
-        notificador.añadirModificarHPs(HPs);
+        notificador.addModificarHPs(HPs);
     }
 
     @Override public void añadirSkillsPersonalizados(String spellID)
@@ -179,7 +165,19 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         }
 
         spellPersonalizado.añadirObservador(this);
-        notificador.añadirSpellPersonalizado(spell.getID());
+        notificador.addSpellPersonalizado(spell.getID());
+    }
+
+    //Este metodo no es el que notifica de la modificacion de los talentos del skill personalizado, ya que hay mas modos de modificarlos
+    //como pidiendo directamente un skillPersonalizado al HashMap y modificandolo. Por tanto el player observa directamente la fuente
+    //(el propio Skill Personalizado), y si se modifica se le hace saber al player y es entonces cuando este manda la notifcacion al cliente
+
+    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+    {
+        SkillPersonalizadoI skillPersonalizado = listaSkillsPersonalizados.get(skillID);
+        if (skillPersonalizado == null) { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
+        else if (valor >= 0 && valor <= skillPersonalizado.getTalentoMaximo(statID))
+            skillPersonalizado.setNumTalentos(statID, valor);
     }
 
     // METODOS ACTUALIZACION:
@@ -200,7 +198,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
             SpellI spell = DB.DAO.spellDAOFactory.getSpellDAO().getSpell(spellIDSeleccionado);
             if (spell != null)
             {
-                spell.castear(this, targetX, targetY);
+                spell.castear(this, targetX, targetY, mundo);
                 //actualCastingTime += 0.01f;
             }
         }
@@ -245,10 +243,10 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         {
             //Si alguien cambia mis Skills Personalizados de cualquier manera (hay varios metodos de hacerlo, se notifica
             //a la vista para que envie el mensaje al cliente:
-            notificador.añadirNumTalentosSkillPersonalizado(
-                ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).skillID,
-                ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).statID,
-                ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).valor);
+            notificador.addNumTalentosSkillPersonalizado(
+                    ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).skillID,
+                    ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).statID,
+                    ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).valor);
         }
 
     }

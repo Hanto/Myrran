@@ -61,7 +61,7 @@ public class Cliente extends Client
         {   controlador.clienteInputs.procesarInput( (PCDTOs) obj);}
 
         if (obj instanceof DTOsMapView.Mapa)
-        {   controlador.actualizarMapa((DTOsMapView.Mapa)obj); }
+        {   controlador.actualizarMapa((DTOsMapView.Mapa) obj); }
 
         if (obj instanceof DTOsMapView.MapTilesAdyacentes)
         {   controlador.actualizarMapTilesAdyacentes(((DTOsMapView.MapTilesAdyacentes) obj));}

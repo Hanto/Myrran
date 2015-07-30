@@ -1,8 +1,9 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 17/06/2014.
 
-import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Vulnerable;
+import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
 import Model.Classes.Skill.Spell.TipoSpell;
 
@@ -14,7 +15,7 @@ public class Heal extends TipoSpell
         setNumSkillStats(2);
     }
 
-    @Override public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY)
+    @Override public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY, MundoI mundo)
     {
         int STAT_Curacion = 1;
         float curacion = spell.getValorTotal(Caster, STAT_Curacion);

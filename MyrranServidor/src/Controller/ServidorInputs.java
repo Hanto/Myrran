@@ -2,6 +2,7 @@ package Controller;// Created by Hanto on 22/07/2014.
 
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PCI;
+import Model.Classes.Mobiles.PC;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,12 +61,15 @@ public class ServidorInputs
 
     public void procesarLogIn(int connectionID)
     {
-        mundo.añadirPC(connectionID);
+        //CREAR PC: hacerlo desde un DAO Factory, que lea y salve datos desde disco:
+        //-------------------------------------------------------------------------------------------------------------
+        PCI pc = new PC(connectionID, mundo);
+        pc.añadirSkillsPersonalizados("Terraformar");
+        pc.añadirSkillsPersonalizados("Heal");
+        pc.setNumTalentosSkillPersonalizado("Heal", 0, 10);
+        pc.setNumTalentosSkillPersonalizado("Heal", 1, 17);
+        pc.setNumTalentosSkillPersonalizado("Hot", 1, 10);
 
-        mundo.getPC(connectionID).añadirSkillsPersonalizados("Terraformar");
-        mundo.getPC(connectionID).añadirSkillsPersonalizados("Heal");
-        mundo.getPC(connectionID).setNumTalentosSkillPersonalizado("Heal", 0, 10);
-        mundo.getPC(connectionID).setNumTalentosSkillPersonalizado("Heal", 1, 17);
-        mundo.getPC(connectionID).setNumTalentosSkillPersonalizado("Hot", 1, 10);
+        mundo.añadirPC(pc);
     }
 }
