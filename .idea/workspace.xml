@@ -9,10 +9,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7d314d5-d115-4c47-b321-a6ac893ae3ac" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PCNotificador.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java" afterPath="" />
+    <list default="true" id="b7d314d5-d115-4c47-b321-a6ac893ae3ac" name="Default" comment="v1.429 seguimos con los problemas con Github">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MyrranServidor.iws" />
@@ -127,10 +124,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="PCNotificador.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="PCNotificador.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PCNotificador.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.60570306" vertical-offset="0" max-vertical-offset="1017">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="682">
                   <caret line="57" column="1" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
                   <folding />
                 </state>
@@ -167,21 +164,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ServidorInputs.java" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="ServidorInputs.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="792">
+                <state vertical-scroll-proportion="0.7138643" vertical-offset="0" max-vertical-offset="1017">
                   <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="NetDTOs.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="803">
-                  <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
                   <folding />
                 </state>
               </provider>
@@ -266,10 +253,10 @@
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Misc/ListaPorCuadrantes.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/Controlador.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/Servidor.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/Updater.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PCNotificador.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java" />
       </list>
     </option>
   </component>
@@ -2093,7 +2080,11 @@
       <created>1438348438158</created>
       <updated>1438348438158</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="v1.428 seguimos con los problemas con Github">
+      <created>1438348493038</created>
+      <updated>1438348493038</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2118,7 +2109,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32651162" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -2131,13 +2122,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1767442" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.50044763" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32683378" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.20986547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="-1805" y="61" width="795" height="1030" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.20986547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="-1805" y="61" width="795" height="1030" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283721" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1687966" sideWeight="0.49955237" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14749734" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="306" height="1201" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14749734" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="306" height="1201" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.23503521" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="-1074" y="57" width="980" height="1027" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.32960597" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="218" y="362" width="670" height="450" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -2195,8 +2186,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="v1.404 Tooltip y BarrasdeAccion MVC sello de calidad" />
-    <MESSAGE value="v1.405 Bug con el Servidor, el PCView no observaba los SpellsPersonalizados del PCModel" />
     <MESSAGE value="v1.406 Habilitado Tween Engine, ejemplo con la camara" />
     <MESSAGE value="v1.407 creacion Maquina de Estados" />
     <MESSAGE value="v1.408 FixedTimeStep completado, codigo destripado" />
@@ -2220,7 +2209,9 @@
     <MESSAGE value="v1.425 Update de ficheros bugeados" />
     <MESSAGE value="v1.426 CampoVision refactorizacion completada" />
     <MESSAGE value="v1.427 CampoVision completado&#10;-Servidor ahora cuando recibe un evento en lugar de ejcutarlo inmediantamente lo pone en una cola de eventos que ejecuta a la vez en el hilo updater, justo antes de ejecutar la actualizacion de IA/Fisica, de esta manera no hay problema de sincronizacion de hilos" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.427 CampoVision completado&#10;-Servidor ahora cuando recibe un evento en lugar de ejcutarlo inmediantamente lo pone en una cola de eventos que ejecuta a la vez en el hilo updater, justo antes de ejecutar la actualizacion de IA/Fisica, de esta manera no hay problema de sincronizacion de hilos" />
+    <MESSAGE value="v1.428 seguimos con los problemas con Github" />
+    <MESSAGE value="v1.429 seguimos con los problemas con Github" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.429 seguimos con los problemas con Github" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2527,14 +2518,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="803">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/Controlador.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19223301" vertical-offset="0" max-vertical-offset="1030">
@@ -2545,7 +2528,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="792">
+        <state vertical-scroll-proportion="0.7138643" vertical-offset="0" max-vertical-offset="1017">
           <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding />
         </state>
@@ -2609,7 +2592,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PCNotificador.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60570306" vertical-offset="0" max-vertical-offset="1017">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="682">
           <caret line="57" column="1" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
           <folding />
         </state>
