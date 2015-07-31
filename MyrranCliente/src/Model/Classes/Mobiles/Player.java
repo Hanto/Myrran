@@ -1,13 +1,13 @@
 package Model.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
-import Core.Cuerpos.BodyFactory;
-import Core.Cuerpos.Cuerpo;
-import Core.FSM.IO.PlayerIO;
-import Core.FSM.MaquinaEstados;
-import Core.FSM.MaquinaEstadosFactory;
-import Core.Skills.SpellPersonalizado;
+import Model.Cuerpos.BodyFactory;
+import Model.Cuerpos.Cuerpo;
+import Model.FSM.IO.PlayerIO;
+import Model.FSM.MaquinaEstados;
+import Model.FSM.MaquinaEstadosFactory;
+import Model.Skills.SpellPersonalizado;
 import DB.DAO;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;

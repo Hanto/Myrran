@@ -2,7 +2,7 @@ package DB.Recursos.AccionRecursos;// Created by Hanto on 07/05/2014.
 
 import DB.RSC;
 import DB.Recursos.AccionRecursos.DTO.AccionRecursos;
-import Data.Settings;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;

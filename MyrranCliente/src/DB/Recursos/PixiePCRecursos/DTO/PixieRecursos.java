@@ -1,7 +1,7 @@
 package DB.Recursos.PixiePCRecursos.DTO;// Created by Hanto on 13/06/2014.
 
 import DB.RSC;
-import Data.Settings;
+import Model.Settings;
 import View.Classes.Actores.Pixie;
 
 public class PixieRecursos

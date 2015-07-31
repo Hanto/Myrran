@@ -1,7 +1,7 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 05/05/2014.
 
 import DB.DAO;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.ControladorUI;

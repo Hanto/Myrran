@@ -2,7 +2,7 @@ package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 
 import DAO.Terreno.TerrenoDAO;
 import DTO.DTOsMapa;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Interfaces.Model.AbstractModel;

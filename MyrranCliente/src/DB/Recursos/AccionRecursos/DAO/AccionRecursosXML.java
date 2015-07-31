@@ -2,7 +2,7 @@ package DB.Recursos.AccionRecursos.DAO;// Created by Hanto on 07/05/2014.
 
 import DB.Recursos.AccionRecursos.AccionRecursosXMLDB;
 import DB.Recursos.AccionRecursos.DTO.AccionRecursos;
-import Data.Settings;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

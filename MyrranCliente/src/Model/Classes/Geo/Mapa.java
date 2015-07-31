@@ -4,7 +4,7 @@ import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
 import DTO.DTOsPlayer;
 import DTO.DTOsMapa;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;

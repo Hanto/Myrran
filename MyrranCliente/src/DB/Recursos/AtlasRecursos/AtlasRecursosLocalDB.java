@@ -1,6 +1,6 @@
 package DB.Recursos.AtlasRecursos;// Created by Hanto on 10/04/2014.
 
-import Data.Settings;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

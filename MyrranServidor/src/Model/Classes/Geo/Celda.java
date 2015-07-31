@@ -1,7 +1,7 @@
 package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 
 import DAO.Terreno.TerrenoDAO;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.Geo.CeldaI;
 import Interfaces.Geo.TerrenoI;
 import com.esotericsoftware.kryo.Kryo;

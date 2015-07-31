@@ -12,12 +12,15 @@ import org.slf4j.LoggerFactory;
 public class Servidor extends Server
 {
     public Controlador controlador;
+    protected ServidorInputs servidorInputs;
+
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public Servidor (Controlador controlador)
     {
         super(512*1024, 4*1024);
         this.controlador = controlador;
+        this.servidorInputs = new ServidorInputs(controlador);
 
         NetDTOs.register(this);
         this.start();
@@ -33,29 +36,50 @@ public class Servidor extends Server
                     (new Listener()
                     {
                         public void connected (Connection con)              {  }
-                        public void disconnected (Connection con)           { Servidor.this.controlador.eliminarPC(con.getID()); }
-                        public void received (Connection con, Object obj)   { procesarMensajeCliente(con, obj); }
+                        public void disconnected (Connection con)           { procesarDisconnected(con); }
+                        public void received (Connection con, Object obj)   { procesarReceived(con, obj); }
                     }));
 
         }
 
+        //Codigo Alternativo monoHilo:
+        /*
+        this.addListener
+            (new Listener.QueuedListener
+                (new Listener()
+                    {
+                        public void connected (Connection con)              { }
+                        public void disconnected (Connection con)           { procesarDisconnected(con); }
+                        public void received (Connection con, Object obj)   { procesarReceived(con, obj); }
+                    })
+                {
+                    @Override protected void queue(Runnable runnable)
+                    {   Servidor.this.controlador.postRunnable(runnable); }
+                });*/
 
         try { this.bind(NetDTOs.puertoTCP, NetDTOs.puertoUDP); }
         catch (Exception e) { System.out.println("ERROR: Inicio Servidor: "+e); }
     }
 
-    // DTOS de Entrada:
+    // DISCONNECT:
     //------------------------------------------------------------------------------------------------------------------
 
-    private void procesarMensajeCliente(Connection con, Object obj)
+    private void procesarDisconnected(Connection con)
+    {   controlador.eliminarPC(con.getID()); }
+
+    // RECEIVED::
+    //------------------------------------------------------------------------------------------------------------------
+
+    private void procesarReceived(Connection con, Object obj)
     {
         if (obj instanceof DTOsPlayer.PlayerDTOs)
-        {   controlador.servidorInputs.procesarInput(con.getID(), (DTOsPlayer.PlayerDTOs)obj); }
+        {   servidorInputs.procesarInput(con.getID(), (DTOsPlayer.PlayerDTOs)obj); }
 
         if (obj instanceof DTOsPlayer.LogIn)
-        {   controlador.servidorInputs.procesarLogIn(con.getID());}
+        {   servidorInputs.procesarLogIn(con.getID());}
     }
 
+    // ENVIO DE DATOS (con calculo de tamaño de informacion enviada)
     //------------------------------------------------------------------------------------------------------------------
 
     public void enviarACliente(int connectionID, Object obj)

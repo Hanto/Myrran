@@ -1,6 +1,6 @@
 package Interfaces.Spell;// Created by Hanto on 09/06/2014.
 
-import Core.Skills.SkillStat;
+import Model.Skills.SkillStat;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.GameState.MundoI;
 

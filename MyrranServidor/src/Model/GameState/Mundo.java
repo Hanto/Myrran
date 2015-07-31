@@ -2,13 +2,14 @@ package Model.GameState;// Created by Hanto on 07/04/2014.
 
 import DTO.DTOsMundo;
 import DTO.DTOsPC;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
-import Interfaces.GameState.ListaPorCuadrantesI;
+import Interfaces.Misc.ListaPorCuadrantesI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
+import Model.Classes.Misc.ListaPorCuadrantes;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 

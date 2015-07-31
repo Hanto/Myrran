@@ -1,8 +1,8 @@
 package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
-import Core.Cuerpos.BodyFactory;
-import Core.Cuerpos.Cuerpo;
-import Data.Settings;
+import Model.Cuerpos.BodyFactory;
+import Model.Cuerpos.Cuerpo;
+import Model.Settings;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;

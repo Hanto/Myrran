@@ -4,7 +4,7 @@ import DB.RSC;
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;
 import DTO.DTOsPlayer;
 import DTO.DTOsPlayer.CastingTimePercent;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.Model.ModelI;

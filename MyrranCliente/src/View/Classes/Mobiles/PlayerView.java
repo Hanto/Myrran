@@ -3,7 +3,7 @@ package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsPlayer;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Mobiles.Player;
 import View.Classes.Actores.PixiePC;
@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import static Data.Settings.PIXEL_METROS;
+import static Model.Settings.PIXEL_METROS;
 
 public class PlayerView extends Group implements PropertyChangeListener
 {

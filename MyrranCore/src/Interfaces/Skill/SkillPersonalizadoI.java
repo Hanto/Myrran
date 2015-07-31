@@ -1,6 +1,6 @@
 package Interfaces.Skill;// Created by Hanto on 29/06/2014.
 
-import Core.Skills.SkillMod;
+import Model.Skills.SkillMod;
 import Interfaces.Model.ModelI;
 
 import java.util.Iterator;

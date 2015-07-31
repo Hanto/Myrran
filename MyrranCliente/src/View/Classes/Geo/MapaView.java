@@ -1,7 +1,7 @@
 package View.Classes.Geo;// Created by Hanto on 16/04/2014.
 
 import DTO.DTOsMapa;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.Geo.MapaI;
 import View.GameState.MundoView;
 import ch.qos.logback.classic.Logger;

@@ -3,7 +3,7 @@ package DB.Recursos.PixiePCRecursos.DAO;// Created by Hanto on 01/05/2014.
 import DB.RSC;
 import DB.Recursos.PixiePCRecursos.DTO.PixieRecursos;
 import DB.Recursos.PixiePCRecursos.PixiePCRecursosXMLDB;
-import Data.Settings;
+import Model.Settings;
 import View.Classes.Actores.Pixie;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

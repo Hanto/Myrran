@@ -1,7 +1,7 @@
 package View.Classes.Geo;// Created by Hanto on 15/04/2014.
 
 import DTO.DTOTerrenoView;
-import Data.Settings;
+import Model.Settings;
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DTO.TerrenoRecursos;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

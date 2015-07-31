@@ -1,6 +1,6 @@
 package DTO;// Created by Hanto on 25/07/2014.
 
-import Data.Settings;
+import Model.Settings;
 
 public class DTOsMapView
 {

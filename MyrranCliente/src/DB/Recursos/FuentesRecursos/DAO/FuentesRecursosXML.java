@@ -1,7 +1,7 @@
 package DB.Recursos.FuentesRecursos.DAO;// Created by Hanto on 02/05/2014.
 
 import DB.Recursos.FuentesRecursos.FuentesRecursosXMLDB;
-import Data.Settings;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

@@ -1,7 +1,7 @@
 package DB.Recursos.SkillRecursos.DAO;// Created by Hanto on 30/04/2014.
 
 import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
-import Data.Settings;
+import Model.Settings;
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
 import View.Classes.Actores.Pixie;

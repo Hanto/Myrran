@@ -2,7 +2,7 @@ package DB.Recursos.TerrenoRecursos;// Created by Hanto on 15/04/2014.
 
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DTO.TerrenoRecursos;
-import Data.Settings;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;

@@ -1,7 +1,7 @@
 package DB.Recursos.PixiePCRecursos;// Created by Hanto on 01/05/2014.
 
 import DB.Recursos.PixiePCRecursos.DTO.PixieRecursos;
-import Data.Settings;
+import Model.Settings;
 import View.Classes.Actores.Pixie;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;

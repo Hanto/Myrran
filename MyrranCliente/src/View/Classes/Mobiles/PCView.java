@@ -3,7 +3,7 @@ package View.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsPlayer;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesTipos.PCI;
 import View.Classes.Actores.PixiePC;

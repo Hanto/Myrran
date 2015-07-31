@@ -1,6 +1,6 @@
 package View.Classes.UI.Ventana;// Created by Hanto on 13/05/2014.
 
-import Data.Settings;
+import Model.Settings;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;

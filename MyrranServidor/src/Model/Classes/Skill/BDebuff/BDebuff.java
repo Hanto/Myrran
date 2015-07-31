@@ -2,8 +2,8 @@ package Model.Classes.Skill.BDebuff;// Created by Hanto on 04/06/2014.
 
 
 import DB.DAO;
-import Data.Settings;
-import Core.Skills.SkillStat;
+import Model.Settings;
+import Model.Skills.SkillStat;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.BDebuff.TipoBDebuffI;

@@ -1,7 +1,7 @@
 package Model.Classes.UI;// Created by Hanto on 11/07/2014.
 
 import DTO.DTOsBarraAcciones;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.Model.AbstractModel;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;

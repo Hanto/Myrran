@@ -3,7 +3,7 @@ package DB.Recursos.SkillRecursos;// Created by Hanto on 30/04/2014.
 import DB.RSC;
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
-import Data.Settings;
+import Model.Settings;
 import View.Classes.Actores.Pixie;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

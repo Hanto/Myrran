@@ -1,7 +1,7 @@
 package Model.Classes.Skill.Spell;
 // @author Ivan Delgado Huerta
 
-import Core.Skills.SkillStat;
+import Model.Skills.SkillStat;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Spell.TipoSpellI;
 

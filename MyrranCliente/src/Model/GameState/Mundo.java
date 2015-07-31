@@ -3,7 +3,7 @@ package Model.GameState;// Created by Hanto on 08/04/2014.
 import Controller.Cliente;
 import DTO.DTOsMapView;
 import DTO.DTOsMundo;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;

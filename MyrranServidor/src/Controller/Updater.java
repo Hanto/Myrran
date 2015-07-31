@@ -1,6 +1,6 @@
 package Controller;// Created by Hanto on 09/04/2014.
 
-import Data.Settings;
+import Model.Settings;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -65,10 +65,12 @@ public class Updater implements Runnable
                     timeStep -= Settings.FIXED_TimeStep;
 
                     //executeRunnables();
+
+                    //MODEL:
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep);
                     mundo.actualizarFisica(Settings.FIXED_TimeStep);
 
-                    //controlador.mundoView.enviarDatosAClientes();
+                    //VISTA:
                     controlador.actualizarRadarCampoVisiones();
                     controlador.enviarDatosAClientes();
                 }

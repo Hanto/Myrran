@@ -1,6 +1,6 @@
 package DB.Recursos.ParticulasRecursos;// Created by Hanto on 10/07/2014.
 
-import Data.Settings;
+import Model.Settings;
 import View.Classes.Actores.Particula.PoolParticulas;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;

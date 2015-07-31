@@ -2,7 +2,7 @@ package View.Classes.UI.BarraTerrenosView.TerrenoView;// Created by Hanto on 14/
 
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DAO.TerrenoRecursosDAO;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.UI.BarraTerrenos.ControladorBarraTerrenosI;
 import Model.Classes.UI.BarraTerrenos;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

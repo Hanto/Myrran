@@ -21,7 +21,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.slf4j.LoggerFactory;
 
-import static Data.Settings.FIXED_TimeStep;
+import static Model.Settings.FIXED_TimeStep;
 
 
 public class PantallaLibGDX implements Screen

@@ -2,7 +2,7 @@ package View.Classes.UI.BarraAccionesView;// Created by Hanto on 06/05/2014.
 
 import DB.RSC;
 import DTO.DTOsBarraAcciones;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import View.Classes.UI.BarraAccionesView.CasillaView.CasillaView;

@@ -1,6 +1,6 @@
 package Model.Classes.Skill.BDebuff.TiposBDebuff;// Created by Hanto on 26/06/2014.
 
-import Data.Settings;
+import Model.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Skill.BDebuff.TipoBDebuff;

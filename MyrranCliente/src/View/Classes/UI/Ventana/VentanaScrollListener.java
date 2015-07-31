@@ -1,6 +1,6 @@
 package View.Classes.UI.Ventana;// Created by Hanto on 16/05/2014.
 
-import Data.Settings;
+import Model.Settings;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;

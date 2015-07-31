@@ -1,11 +1,11 @@
 package Model.Classes.Mobiles;// Created by Hanto on 07/04/2014.
 
-import Core.Cuerpos.BodyFactory;
-import Core.Cuerpos.Cuerpo;
-import Core.Skills.SpellPersonalizado;
+import Model.Cuerpos.BodyFactory;
+import Model.Cuerpos.Cuerpo;
+import Model.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.DTOsSkillPersonalizado;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesTipos.PCI;

@@ -1,7 +1,7 @@
 package View.Classes.Actores;// Created by Hanto on 09/07/2014.
 
 
-import Data.Settings;
+import Model.Settings;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;

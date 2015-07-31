@@ -1,6 +1,6 @@
 package Interfaces.Skill;// Created by Hanto on 24/06/2014.
 
-import Core.Skills.SkillStat;
+import Model.Skills.SkillStat;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Model.ModelI;
 

@@ -1,7 +1,7 @@
 package DB.Recursos.MiscRecursos;// Created by Hanto on 02/05/2014.
 
 import DB.RSC;
-import Data.Settings;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;

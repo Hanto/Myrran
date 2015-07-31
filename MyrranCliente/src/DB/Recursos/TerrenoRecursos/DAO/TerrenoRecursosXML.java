@@ -2,7 +2,7 @@ package DB.Recursos.TerrenoRecursos.DAO;// Created by Ladrim on 24/04/2014.
 
 import DB.Recursos.TerrenoRecursos.DTO.TerrenoRecursos;
 import DB.Recursos.TerrenoRecursos.TerrenoRecursosXMLDB;
-import Data.Settings;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

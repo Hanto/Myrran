@@ -3,7 +3,7 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsBarraAcciones;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.GameState.UI;
 import View.Classes.Actores.Texto;

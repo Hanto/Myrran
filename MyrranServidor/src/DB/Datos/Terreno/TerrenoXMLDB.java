@@ -1,7 +1,7 @@
 package DB.Datos.Terreno;// Created by Hanto on 15/04/2014.
 
 import DAO.Terreno.TerrenoXMLDBI;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.Geo.TerrenoI;
 import Model.Classes.Geo.Terreno;
 import ch.qos.logback.classic.Logger;

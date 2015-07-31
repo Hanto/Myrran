@@ -1,6 +1,6 @@
 package View.Classes.Actores;
 
-import Data.Settings;
+import Model.Settings;
 import DB.Recursos.PixiePCRecursos.DAO.PixiePCRecursosDAO;
 import DB.RSC;
 import com.badlogic.gdx.graphics.g2d.Batch;

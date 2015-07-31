@@ -6,7 +6,7 @@ import DB.Datos.Spell.SpellXMLDB;
 import DB.Datos.Terreno.TerrenoXMLDB;
 import DB.Datos.TipoBDebuff.TipoBDebuffXMLDB;
 import DB.Datos.TipoSpell.TipoSpellXMLDB;
-import Data.Settings;
+import Model.Settings;
 import Model.GameState.Mundo;
 
 public class MyrranServer

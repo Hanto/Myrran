@@ -3,7 +3,7 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsMundo;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.EntidadesTipos.PCI;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Player;
@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import static Data.Settings.PIXEL_METROS;
+import static Model.Settings.PIXEL_METROS;
 
 public class MundoView extends Stage implements PropertyChangeListener
 {

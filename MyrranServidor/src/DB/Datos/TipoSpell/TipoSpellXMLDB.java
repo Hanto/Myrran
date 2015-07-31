@@ -1,8 +1,8 @@
 package DB.Datos.TipoSpell;// Created by Hanto on 17/04/2014.
 
-import Core.Skills.SkillStat;
+import Model.Skills.SkillStat;
 import DAO.TipoSpell.TipoSpellXMLDBI;
-import Data.Settings;
+import Model.Settings;
 import Interfaces.Spell.TipoSpellI;
 import Model.Classes.Skill.Spell.TipoSpell;
 import Model.Classes.Skill.Spell.TipoSpellFactory;
