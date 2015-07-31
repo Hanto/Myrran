@@ -64,7 +64,8 @@ public class Updater implements Runnable
 
                     timeStep -= Settings.FIXED_TimeStep;
 
-                    //executeRunnables();
+                    //INPUT:
+                    executeRunnables();
 
                     //MODEL:
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep);

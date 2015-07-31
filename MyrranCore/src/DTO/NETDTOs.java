@@ -1,6 +1,6 @@
 package DTO;
 
-import Data.Settings;
+import Model.Settings;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 

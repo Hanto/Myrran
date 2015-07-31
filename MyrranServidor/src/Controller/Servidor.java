@@ -27,7 +27,7 @@ public class Servidor extends Server
 
         //Para activar el log completo de mensajes:
         //Log.TRACE();
-
+/*
         synchronized (this.controlador.getMundo())
         {
 
@@ -40,10 +40,10 @@ public class Servidor extends Server
                         public void received (Connection con, Object obj)   { procesarReceived(con, obj); }
                     }));
 
-        }
+        }*/
 
         //Codigo Alternativo monoHilo:
-        /*
+
         this.addListener
             (new Listener.QueuedListener
                 (new Listener()
@@ -55,7 +55,7 @@ public class Servidor extends Server
                 {
                     @Override protected void queue(Runnable runnable)
                     {   Servidor.this.controlador.postRunnable(runnable); }
-                });*/
+                });
 
         try { this.bind(NetDTOs.puertoTCP, NetDTOs.puertoUDP); }
         catch (Exception e) { System.out.println("ERROR: Inicio Servidor: "+e); }
