@@ -16,28 +16,27 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 //CLIENTE:
 public class Controlador implements ControladorUI
 {
-    protected Cliente cliente;
-    protected ClienteInputs clienteInputs;
-
     protected Mundo mundo;
-    protected UI ui;
     protected Vista vista;
+    protected UI ui;
 
-    //Input:
-    protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
+    protected Cliente cliente;
+    protected InputMultiplexer inputMultiplexer;
+
     public Cliente getCliente()                 { return cliente; }
+    public Mundo getMundo()                     { return mundo; }
     public UI getUI()                           { return ui; }
 
     public Controlador (Mundo mundo)
     {
-        this.cliente = new Cliente(this);
-        this.clienteInputs = new ClienteInputs(mundo, this);
         this.mundo = mundo;
+        this.cliente = new Cliente(this);
         añadirPlayer(cliente.getID());
 
         ui = new UI(mundo.getPlayer(), this);
         vista = new Vista(this, ui, mundo);
 
+        inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(vista.getUiView());
         inputMultiplexer.addProcessor(vista.getMundoView());
         inputMultiplexer.addProcessor(ui.getInputManager());

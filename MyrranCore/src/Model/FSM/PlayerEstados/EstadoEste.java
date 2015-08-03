@@ -24,7 +24,8 @@ public class EstadoEste extends PlayerEstado
         output.setScreenX(input.getScreenX());
         output.setScreenY(input.getScreenY());
 
-        if (input.getirIzquierda())     { maquinaEstados.setEstadoSiguiente(EstadoOeste.class); return; }
+        if ( input.getirIzquierda() &&
+            !input.getIrDerecha())      { maquinaEstados.setEstadoSiguiente(EstadoOeste.class); return; }
         if (!input.getIrDerecha())
         {
             if (input.getIrArriba())    { maquinaEstados.setEstadoSiguiente(EstadoNorte.class); return; }

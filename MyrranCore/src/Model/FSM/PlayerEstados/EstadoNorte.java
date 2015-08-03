@@ -24,7 +24,8 @@ public class EstadoNorte extends PlayerEstado
         output.setScreenX(input.getScreenX());
         output.setScreenY(input.getScreenY());
 
-        if (input.getIrAbajo())         { maquinaEstados.setEstadoSiguiente(EstadoSur.class); return; }
+        if ( input.getIrAbajo() &&
+            !input.getIrArriba())       { maquinaEstados.setEstadoSiguiente(EstadoSur.class); return; }
         if (!input.getIrArriba())
         {
             if (input.getIrDerecha())   { maquinaEstados.setEstadoSiguiente(EstadoEste.class); return; }

@@ -24,7 +24,8 @@ public class EstadoSur extends PlayerEstado
         output.setScreenX(input.getScreenX());
         output.setScreenY(input.getScreenY());
 
-        if (input.getIrArriba())        { maquinaEstados.setEstadoSiguiente(EstadoNorte.class); return; }
+        if ( input.getIrArriba() &&
+            !input.getIrAbajo())        { maquinaEstados.setEstadoSiguiente(EstadoNorte.class); return; }
         if (!input.getIrAbajo())
         {
             if (input.getIrDerecha())   { maquinaEstados.setEstadoSiguiente(EstadoEste.class); return; }

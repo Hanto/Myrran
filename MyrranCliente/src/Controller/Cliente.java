@@ -3,7 +3,6 @@ package Controller;// Created by Hanto on 08/04/2014.
 import DTO.DTOsCampoVision;
 import DTO.DTOsMapView;
 import DTO.DTOsPlayer;
-import DTO.DTOsPlayer.PCDTOs;
 import DTO.NetDTOs;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
@@ -16,7 +15,8 @@ import javax.swing.*;
 
 public class Cliente extends Client
 {
-    private Controlador controlador;
+    protected Controlador controlador;
+    protected ClienteInputs clienteInputs;
     public String host;
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -25,6 +25,7 @@ public class Cliente extends Client
     {
         super(16*1024, 128*1024);
         this.controlador = controlador;
+        this.clienteInputs = new ClienteInputs(controlador);
 
         NetDTOs.register(this);
         this.start();
@@ -37,7 +38,7 @@ public class Cliente extends Client
                 (new Listener()
                 {
                      @Override public void connected (Connection con)   { }
-                     @Override public void received (Connection con, Object obj) { procesarMensajeServidor(con, obj);}
+                     @Override public void received (Connection con, Object obj) { procesarReceived(con, obj);}
                      @Override public void disconnected (Connection con) { }
                 })
             {
@@ -52,14 +53,11 @@ public class Cliente extends Client
         catch (Exception IOException) { logger.error("ERROR: Imposible conectar con el Servidor: ", IOException); }
     }
 
-    // DTOS de entrada:
+    // RECEIVED:
     //------------------------------------------------------------------------------------------------------------------
 
-    private void procesarMensajeServidor (Connection con, Object obj)
+    private void procesarReceived(Connection con, Object obj)
     {
-        if (obj instanceof PCDTOs)
-        {   controlador.clienteInputs.procesarInput( (PCDTOs) obj);}
-
         if (obj instanceof DTOsMapView.Mapa)
         {   controlador.actualizarMapa((DTOsMapView.Mapa) obj); }
 
@@ -67,10 +65,10 @@ public class Cliente extends Client
         {   controlador.actualizarMapTilesAdyacentes(((DTOsMapView.MapTilesAdyacentes) obj));}
 
         if (obj instanceof DTOsCampoVision.PCDTOs)
-        {   controlador.clienteInputs.procesarActualizacionesPC( (DTOsCampoVision.PCDTOs) obj);}
+        {   clienteInputs.procesarActualizacionesPC( (DTOsCampoVision.PCDTOs) obj);}
 
         if (obj instanceof DTOsCampoVision.MiscDTOs)
-        {   controlador.clienteInputs.procesarActualizacionesMisc( (DTOsCampoVision.MiscDTOs) obj );}
+        {   clienteInputs.procesarActualizacionesMisc( (DTOsCampoVision.MiscDTOs) obj );}
     }
 
     //------------------------------------------------------------------------------------------------------------------
