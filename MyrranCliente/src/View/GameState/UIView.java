@@ -3,16 +3,16 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsBarraAcciones;
-import Model.Settings;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Model.GameState.UI;
+import Model.Settings;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraAccionesView.ConjuntoBarraAccionesView;
 import View.Classes.UI.BarraTerrenosView.BarraTerrenosView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.Align;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

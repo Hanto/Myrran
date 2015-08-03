@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="Java LibGDX">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/MyrranCliente/lib/Java LibGDX" />
+      <root url="file://$PROJECT_DIR$/MyrranCore/lib/Java LibGDX" />
     </CLASSES>
     <JAVADOC>
-      <root url="file://$PROJECT_DIR$/MyrranCliente/lib/Java LibGDX/docs/api" />
+      <root url="file://$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/docs/api" />
     </JAVADOC>
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/MyrranCliente/lib/Java LibGDX/sources" />
+      <root url="file://$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/sources" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/MyrranCliente/lib/Java LibGDX" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/MyrranCliente/lib/Java LibGDX/sources" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/MyrranCore/lib/Java LibGDX" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/sources" recursive="false" type="SOURCES" />
   </library>
 </component>

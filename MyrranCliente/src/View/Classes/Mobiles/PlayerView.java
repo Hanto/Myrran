@@ -3,9 +3,9 @@ package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsPlayer;
-import Model.Settings;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Mobiles.Player;
+import Model.Settings;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
 import View.GameState.MundoView;
@@ -13,7 +13,7 @@ import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.Align;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

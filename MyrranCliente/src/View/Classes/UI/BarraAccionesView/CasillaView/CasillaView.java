@@ -2,12 +2,12 @@ package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/
 
 import DB.RSC;
 import DTO.DTOsBarraAcciones;
-import Model.Settings;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
+import Model.Settings;
 import View.Classes.Actores.Texto;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -15,8 +15,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.utils.Align;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

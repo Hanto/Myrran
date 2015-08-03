@@ -130,7 +130,9 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
 
     @Override public void setPosition(float x, float y)
     {
-        this.x = x; this.y = y;
+        cuerpo.setPosition(x, y);
+        this.x = x;
+        this.y = y;
         notificador.setPosition();
     }
 

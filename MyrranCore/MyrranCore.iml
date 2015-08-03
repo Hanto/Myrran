@@ -13,6 +13,6 @@
     <orderEntry type="library" name="Java Tween-Engine" level="project" />
     <orderEntry type="library" name="gdx-box2d" level="project" />
     <orderEntry type="library" name="Java LibGDX" level="project" />
+    <orderEntry type="library" name="com.badlogicgames.gdx:gdx-ai:1.5.0" level="project" />
   </component>
 </module>
-

@@ -2,10 +2,10 @@ package View.Classes.UI.SpellView;// Created by Hanto on 19/06/2014.
 
 import DB.RSC;
 import DTO.DTOsSkillPersonalizado;
-import Model.Settings;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
+import Model.Settings;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import com.badlogic.gdx.Input;
@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 

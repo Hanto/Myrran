@@ -74,8 +74,9 @@ public class MundoView extends Stage implements PropertyChangeListener
         this.mundo = mundo;
 
         RayHandler.useDiffuseLight(true);
+        RayHandler.setGammaCorrection(false);
         rayHandler = new RayHandler(mundo.getWorld());
-        rayHandler.setAmbientLight(0.4f, 0.4f, 0.4f, 1.0f);
+        rayHandler.setAmbientLight(0.6f, 0.6f, 0.6f, 1.0f);
         mapaView = new MapaView(mundo.getMapa(), this, player.getX(), player.getY(), Settings.MAPAVIEW_TamañoX, Settings.MAPAVIEW_TamañoY);
         playerView = new PlayerView(player, this, controlador);
         camara = new OrthographicCamera (Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -118,7 +119,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         super.draw();
 
         //aplicamos las luces:
-        rayHandler.setCombinedMatrix(boxCamara.combined);
+        rayHandler.setCombinedMatrix(boxCamara);
         rayHandler.updateAndRender();
 
         //dibujamos la geometrica fisica de Debug:

@@ -1,10 +1,10 @@
 package View.Classes.UI.BarraTerrenosView;// Created by Hanto on 14/05/2014.
 
 import Controller.Controlador;
-import DTO.DTOsBarraTerrenos;
-import Model.Settings;
-import Model.Classes.UI.BarraTerrenos;
 import DB.RSC;
+import DTO.DTOsBarraTerrenos;
+import Model.Classes.UI.BarraTerrenos;
+import Model.Settings;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraTerrenosView.TerrenoView.TerrenoView;
 import View.Classes.UI.Ventana.Ventana;
@@ -21,8 +21,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import java.beans.PropertyChangeEvent;
