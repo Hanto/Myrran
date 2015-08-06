@@ -50,7 +50,7 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
         background = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura("Casillero2"));
         background.setColor(1f,1f,1f,0.55f);
         tabla = new Table().bottom().left();
-        icono = new Image(RSC.skillRecursosDAO.getSpellRecursosDAO().getSpellRecursos(spell.getID()).getIcono());
+        icono = new Image(RSC.skillRecursosDAO.getSkillRecursosDAO().getSpellRecursos(spell.getID()).getIcono());
         icono.addListener(new VentanaMoverListener(icono, this));
 
         this.addActor(background);

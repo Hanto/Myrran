@@ -4,7 +4,7 @@ import Interfaces.EntidadesPropiedades.*;
 import com.badlogic.gdx.utils.Disposable;
 
 public interface PCI extends Espacial, Dinamico, Animable, PlayerStats, Vulnerable, Disposable, Actualizable,
-                             CasterPersonalizable
+                             CasterPersonalizable, IDentificable
 {
 
 }

@@ -4,7 +4,6 @@ import Interfaces.Model.ModelI;
 
 public interface PlayerStats extends ModelI
 {
-    public int getConnectionID();
     public String getNombre();
     public int getNivel();
 

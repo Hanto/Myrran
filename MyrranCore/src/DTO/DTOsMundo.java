@@ -1,6 +1,7 @@
 package DTO;// Created by Hanto on 24/07/2014.
 
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 
 public class DTOsMundo
 {
@@ -19,5 +20,13 @@ public class DTOsMundo
         public EliminarPC() {}
         public EliminarPC(PCI pc)
         {   this.pc = pc; }
+    }
+
+    public static class AñadirProyectil
+    {
+        public ProyectilI proyectil;
+        public AñadirProyectil() {}
+        public AñadirProyectil(ProyectilI proyectil)
+        {   this.proyectil = proyectil; }
     }
 }

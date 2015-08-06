@@ -28,7 +28,7 @@ public class ClienteInputs
         PCI pc;
         Object dto;
 
-        if (pcDTOs.connectionID == mundo.getPlayer().getConnectionID()) pc = mundo.getPlayer();
+        if (pcDTOs.connectionID == mundo.getPlayer().getID()) pc = mundo.getPlayer();
         else if (mundo.getPC(pcDTOs.connectionID) == null)
         {
             mundo.añadirPC(pcDTOs.connectionID, -5000, -5000);

@@ -7,11 +7,10 @@ public enum SkillRecursosDAOFactory
 {
     XML("XML")
     {
-        @Override
-        public SkillRecursosDAO getSpellRecursosDAO()
+        @Override public SkillRecursosDAO getSkillRecursosDAO()
         {   return new SkillRecursosXML(SkillRecursosXMLDB.get()); }
     };
 
-    public abstract SkillRecursosDAO getSpellRecursosDAO();
+    public abstract SkillRecursosDAO getSkillRecursosDAO();
     private SkillRecursosDAOFactory(String nombre) {}
 }

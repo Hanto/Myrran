@@ -9,4 +9,11 @@
     <Descripcion>Edita el Terreno</Descripcion>
     <SkillStat ID="0" nombre="Castear" valorBase="0.02" isMejorable="false" costeTalento="0" bonoTalento="0.0" talentoMaximo="0" />
   </TipoSpell>
+  <TipoSpell ID="BOLT" nombre="Bolt">
+    <Descripcion>Lanza un proyectil de fuego que todo lo quema y destroza</Descripcion>
+      <SkillStat ID="0" nombre="Casting time" valorBase="1.0" isMejorable="true" costeTalento="1" bonoTalento="-0.01" talentoMaximo="50"></SkillStat>
+      <SkillStat ID="1" nombre="Daño" valorBase="50.0" isMejorable="true" costeTalento="1" bonoTalento="1.0" talentoMaximo="50"></SkillStat>
+      <SkillStat ID="2" nombre="Velocidad" valorBase="5.0" isMejorable="true" costeTalento="1" bonoTalento="0.2" talentoMaximo="50"></SkillStat>
+      <SkillStat ID="3" nombre="Duracion" valorBase="5.0" isMejorable="true" costeTalento="1" bonoTalento="-0.4" talentoMaximo="50"></SkillStat>
+  </TipoSpell>
 </TipoSpells>

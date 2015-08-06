@@ -1,12 +1,8 @@
 package DB.Recursos.SkillRecursos;// Created by Hanto on 30/04/2014.
 
-import DB.RSC;
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
-import DB.Recursos.SkillRecursos.DTO.TipoSpellRecursos;
 import Model.Settings;
-import View.Classes.Actores.Pixie;
 import ch.qos.logback.classic.Logger;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -24,124 +20,26 @@ import java.util.Map;
 
 public class SkillRecursosXMLDB
 {
-    private static class Singleton              { private static final SkillRecursosXMLDB get = new SkillRecursosXMLDB(); }
-    public static SkillRecursosXMLDB get()    { return Singleton.get; }
+    private static class Singleton          { private static final SkillRecursosXMLDB get = new SkillRecursosXMLDB(); }
+    public static SkillRecursosXMLDB get()  { return Singleton.get; }
 
-    private Map<String, TextureRegion> listaDeTexturasIconosSpells = new HashMap<>();
-    private Map<String, Pixie> listaDeAnimaciones = new HashMap<>();
     private Map<String, SpellRecursos> listaSpell = new HashMap<>();
-    private Map<String, TipoSpellRecursos> listaTipoSpell = new HashMap<>();
-
-    private String ficheroRecursos = Settings.RECURSOS_XML+ Settings.XML_DataSpells;
-    private String ficheroTexturas = Settings.RECURSOS_XML+ Settings.XML_TexturasIconoSpells;
+    private String ficheroSpellRecursos = Settings.RECURSOS_XML+ Settings.XML_DataSpells;
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public Map<String, TextureRegion> getListaDeTexturasIconosSpells()  { return listaDeTexturasIconosSpells; }
-    public Map<String, Pixie> getListaDeAnimaciones()                   { return listaDeAnimaciones; }
     public Map<String, SpellRecursos> getListaSpell()                   { return listaSpell; }
-    public Map<String, TipoSpellRecursos> getListaTipoSpell()           { return listaTipoSpell; }
 
     private SkillRecursosXMLDB()
     {   cargarDatos(); }
 
     public void cargarDatos()
-    {
-        cargarTexturasIconos();
-        //cargarAnimacionesCasteo();
-        //cargarAnimacionesProyectil();
-
-        cargarSpellRecursos();
-    }
-
-
-    public void cargarTexturasIconos()
-    {
-        logger.info("Cargando [TEXTURAS ICONOS SPELL] desde {}", ficheroTexturas);
-        SAXBuilder builder = new SAXBuilder();
-        InputStream input = abrirFichero(ficheroTexturas);
-
-        try
-        {
-            Document doc = builder.build(input);
-            List<Element> listaNodos = doc.getRootElement().getChild("TexturasSpells").getChildren("Textura");
-
-            for (int i = 0; i < listaNodos.size(); i++)
-            {
-                Element nodo = listaNodos.get(i);
-                String nombre = nodo.getText();
-
-                TextureRegion textura = new TextureRegion(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_TexturasIconos_LOC + nombre));
-                listaDeTexturasIconosSpells.put(nombre, textura);
-
-                logger.trace("TexturaIconoSpell: " + nombre);
-            }
-            logger.trace("");
-        }
-        catch (Exception e) { logger.error("ERROR: leyendo fichero {}:", ficheroTexturas, e); }
-    }
-
-    public void cargarAnimacionesCasteo()
-    {
-        System.out.println("[CARGANDO ANIMACIONES CASTEO]:");
-        SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = abrirFichero(Settings.RECURSOS_XML + Settings.XML_AnimacionesCasteo);
-
-        try
-        {
-            Document documento = builder.build(fichero);
-            Element rootNode = documento.getRootElement();
-            List listaNodos = rootNode.getChildren("Animacion");
-
-            for (int i = 0; i < listaNodos.size(); i++)
-            {
-                Element nodo = (Element) listaNodos.get(i);
-                String nombre = nodo.getText();
-
-                Pixie pixie = new Pixie(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_AnimacionesSpells_LOC + nombre),1,3);
-                pixie.añadirAnimacion("Casteo", new int[]{0, 1, 2}, 0.15f, false);
-                pixie.animaciones().get(0).animarYEliminar = true;
-                listaDeAnimaciones.put(nombre, pixie);
-
-                System.out.println(" AnimacionCasteo : " + nombre);
-            }
-            System.out.println();
-        }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_AnimacionesCasteo+": "+e); }
-    }
-
-    public void cargarAnimacionesProyectil()
-    {
-        System.out.println("[CARGANDO ANIMACIONES PROYECTIL]:");
-        SAXBuilder builder = new SAXBuilder();
-        InputStream fichero = abrirFichero(Settings.RECURSOS_XML + Settings.XML_AnimacionesProyectil);
-
-        try
-        {
-            Document documento = builder.build(fichero);
-            Element rootNode = documento.getRootElement();
-            List listaNodos = rootNode.getChildren("Animacion");
-
-            for (int i = 0; i < listaNodos.size(); i++)
-            {
-                Element nodo = (Element) listaNodos.get(i);
-                String nombre = nodo.getText();
-
-                Pixie pixie = new Pixie(RSC.atlasRecursosDAO.getAtlasRecursosDAO().getAtlas().findRegion(Settings.ATLAS_AnimacionesSpells_LOC + nombre),1,3);
-                pixie.añadirAnimacion("Proyectil", new int[]{0, 1, 2}, 0.15f, false);
-                listaDeAnimaciones.put(nombre, pixie);
-
-                System.out.println(" AnimacionProyectil : " + nombre);
-            }
-            System.out.println();
-        }
-        catch (Exception e) { System.out.println("ERROR: con el fichero XML de datos de "+ Settings.XML_AnimacionesProyectil+": "+e); }
-    }
+    {   cargarSpellRecursos(); }
 
     public void cargarSpellRecursos()
     {
-        logger.info("Cargando [SPELL RECURSOS] desde {}", ficheroRecursos);
+        logger.info("Cargando [SPELL RECURSOS] desde {}", ficheroSpellRecursos);
         SAXBuilder builder = new SAXBuilder();
-        InputStream input = abrirFichero(ficheroRecursos);
+        InputStream input = abrirFichero(ficheroSpellRecursos);
 
         try
         {
@@ -150,60 +48,43 @@ public class SkillRecursosXMLDB
 
             for (int i = 0; i < listaNodos.size(); i++)
             {
-                Element nodo = listaNodos.get(i).getChild("Recursos");
+                Element nodo = listaNodos.get(i);
 
-                String iD           = listaNodos.get(i).getAttributeValue("ID");
-                String nombreIcono  = nodo.getAttributeValue("icono");
+                String tipoSpell    = nodo.getAttributeValue("tipoSpell");
+                String iDSpell      = nodo.getAttributeValue("ID");
+                String nombreIcono  = nodo.getChild("Recursos").getAttributeValue("icono");
 
-                SpellRecursos spellRecursos =  new SpellRecursos(iD, nombreIcono, listaDeTexturasIconosSpells.get(nombreIcono));
-                listaSpell.put(iD, spellRecursos);
+                SpellRecursos spellRecursos =  new SpellRecursos(iDSpell, tipoSpell, nombreIcono);
 
-                logger.trace("Spell: {}", iD);
+                logger.trace("Spell: {}", iDSpell);
                 logger.trace("Icono: {}", nombreIcono);
+
+                List<Element> listaNodosAnimacion = listaNodos.get(i).getChildren("Animacion");
+
+                for (Element nodoAnimacion : listaNodosAnimacion)
+                {
+                    int tipoAnimacion = nodoAnimacion.getAttribute("TipoAnimacion").getIntValue();
+                    int numAnimacion  = nodoAnimacion.getAttribute("numAnimacion").getIntValue();
+
+                    logger.trace("tipoAnimacion: {}", tipoAnimacion);
+                    logger.trace("numAnimacion:  {}", numAnimacion);
+
+                    spellRecursos.setNumeroAnimacion(tipoAnimacion, numAnimacion);
+                }
+                listaSpell.put(iDSpell, spellRecursos);
             }
             logger.trace("");
         }
-        catch (Exception e) { logger.error("ERROR: leyendo fichero {}:", ficheroTexturas, e); }
-    }
-
-    public void salvarTexturasIconos()
-    {
-        logger.info("Salvando [TEXTURAS ICONOS]s en {}", ficheroTexturas);
-        Element iconoRoot;
-        Element icono;
-
-        SAXBuilder builder = new SAXBuilder();
-        InputStream input = abrirFichero(ficheroTexturas);
-
-        try
-        {
-            Document doc = builder.build(input);
-            doc.getRootElement().removeChildren("TexturasSpells");
-            iconoRoot = new Element("TexturasSpells");
-
-            for (Map.Entry<String, TextureRegion> entry: listaDeTexturasIconosSpells.entrySet())
-            {
-                icono = new Element("Textura");
-                icono.setText(entry.getKey());
-                iconoRoot.addContent(icono);
-                logger.trace("Textura {} salvada", icono.getText());
-            }
-            doc.getRootElement().addContent(iconoRoot);
-
-            XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-            xmlOutputter.output(doc, new FileOutputStream(ficheroTexturas));
-            logger.info("Datos salvados en fichero XML: {}", ficheroTexturas);
-        }
-        catch (Exception e) { logger.error("ERROR: leyendo/parseando el fichero {}"+e, ficheroTexturas);}
+        catch (Exception e) { logger.error("ERROR: leyendo fichero {}:", ficheroSpellRecursos, e); }
     }
 
     public void salvarSpellRecursos()
     {
-        logger.info("Salvando [SPELL RECURSOS] en {}", ficheroRecursos);
+        logger.info("Salvando [SPELL RECURSOS] en {}", ficheroSpellRecursos);
         Document doc;
         Element recurso;
         SAXBuilder builder = new SAXBuilder();
-        InputStream input = abrirFichero(ficheroRecursos);
+        InputStream input = abrirFichero(ficheroSpellRecursos);
 
         try
         {
@@ -223,10 +104,10 @@ public class SkillRecursosXMLDB
             }
 
             XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-            xmlOutputter.output(doc, new FileOutputStream(ficheroRecursos));
-            logger.info("[SPELL RECURSOS] actualizados en fichero XML: {}", ficheroRecursos);
+            xmlOutputter.output(doc, new FileOutputStream(ficheroSpellRecursos));
+            logger.info("[SPELL RECURSOS] actualizados en fichero XML: {}", ficheroSpellRecursos);
         }
-        catch (Exception e) { logger.error("ERROR: leyendo campo Iconos de fichero: {}: "+e, ficheroRecursos);}
+        catch (Exception e) { logger.error("ERROR: leyendo campo Iconos de fichero: {}: "+e, ficheroSpellRecursos);}
     }
 
     public InputStream abrirFichero(String rutaYNombreFichero)

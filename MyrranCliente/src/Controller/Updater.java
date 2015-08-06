@@ -1,30 +1,16 @@
-package zMain;// Created by Hanto on 08/04/2014.
+package Controller;// Created by Hanto on 08/04/2014.
 
-import Controller.Cliente;
-import Controller.Controlador;
-import DB.Datos.BDebuff.BDebuffXMLDB;
-import DB.Datos.Spell.SpellXMLDB;
-import DB.Datos.Terreno.TerrenoXMLDB;
-import DB.Datos.TipoBdDebuff.TipoBDebuffXMLDB;
-import DB.Datos.TipoSpell.TipoSpellXMLDB;
-import DB.Recursos.AccionRecursos.AccionRecursosXMLDB;
-import DB.Recursos.AtlasRecursos.AtlasRecursosLocalDB;
-import DB.Recursos.FuentesRecursos.FuentesRecursosXMLDB;
-import DB.Recursos.MiscRecursos.MiscRecursosXMLDB;
-import DB.Recursos.ParticulasRecursos.ParticulaRecursosXMLDB;
-import DB.Recursos.PixiePCRecursos.PixiePCRecursosXMLDB;
-import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
-import DB.Recursos.TerrenoRecursos.TerrenoRecursosXMLDB;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.slf4j.LoggerFactory;
+import zMain.MyrranClient;
 
 import static Model.Settings.FIXED_TimeStep;
 
 
-public class PantallaLibGDX implements Screen
+public class Updater implements Screen
 {
     private MyrranClient myrranCliente;
     private Cliente cliente;
@@ -42,24 +28,9 @@ public class PantallaLibGDX implements Screen
     //private float total = 0;
     //private float media;
 
-    public PantallaLibGDX(MyrranClient myrranCliente)
+    public Updater(MyrranClient myrranCliente)
     {
         this.myrranCliente = myrranCliente;
-
-        TipoBDebuffXMLDB.get();
-        BDebuffXMLDB.get();
-        TipoSpellXMLDB.get();
-        SpellXMLDB.get();
-        TerrenoXMLDB.get();
-
-        AtlasRecursosLocalDB.get();
-        MiscRecursosXMLDB.get();
-        TerrenoRecursosXMLDB.get();
-        AccionRecursosXMLDB.get();
-        PixiePCRecursosXMLDB.get();
-        FuentesRecursosXMLDB.get();
-        SkillRecursosXMLDB.get();
-        ParticulaRecursosXMLDB.get();
 
         mundo = new Mundo();
         controlador = new Controlador(mundo);

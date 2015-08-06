@@ -3,36 +3,41 @@ package Model.GameState;// Created by Hanto on 08/04/2014.
 import Controller.Cliente;
 import DTO.DTOsMapView;
 import DTO.DTOsMundo;
-import Model.Settings;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
+import Model.Misc.ListaMapa;
+import Model.Settings;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 public class Mundo extends AbstractModel implements MundoI
 {
-    private List<PCI> listaPlayers = new ArrayList<>();
-    private Map<Integer,PCI> mapaPlayers = new HashMap<>();
+    private ListaMapa<PCI> listaMapaPlayers = new ListaMapa<>();
+    private ListaMapa<ProyectilI> listaMapaProyectiles = new ListaMapa<>();
 
     private Player player;
     private Mapa mapa;
     private World world;
 
     public boolean[][] mapTilesCargados = new boolean[3][3];
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     //Get:
-    public World getWorld()                                 { return world; }
+    @Override public World getWorld()                       { return world; }
     @Override public MapaI getMapa()                        { return mapa; }
-    @Override public PCI getPC (int connectionID)           { return mapaPlayers.get(connectionID); }
-    @Override public Iterator<PCI> getIteratorListaPCs()    { return listaPlayers.iterator(); }
-    public Player getPlayer()                              { return player; }
+    @Override public PCI getPC (int connectionID)           { return listaMapaPlayers.get(connectionID); }
+    @Override public Iterator<PCI> getIteratorListaPCs()    { return listaMapaPlayers.iterator(); }
+    public Player getPlayer()                               { return player; }
 
     public Mundo()
     {
@@ -41,53 +46,42 @@ public class Mundo extends AbstractModel implements MundoI
         mapa = new Mapa(player);
     }
 
-    //SE NOTIFICA:
+    // PLAYERS:
+    //------------------------------------------------------------------------------------------------------------------
+
     public void añadirPC (int connectionID, float x, float y)
     {
-        PCI pc = new PC(connectionID, world);
+        PCI pc = new PC(connectionID, this);
         pc.setPosition(x, y);
-        listaPlayers.add(pc);
-        mapaPlayers.put(pc.getConnectionID(), pc);
-        Object nuevoPlayer = new DTOsMundo.AñadirPC(pc);
+        listaMapaPlayers.add(pc);
+
+        DTOsMundo.AñadirPC nuevoPlayer = new DTOsMundo.AñadirPC(pc);
         notificarActualizacion("añadirPC", null, nuevoPlayer);
     }
 
     public void eliminarPC (int connectionID)
     {
-        PCI pc = mapaPlayers.get(connectionID);
-        listaPlayers.remove(pc);
-        mapaPlayers.remove(connectionID);
+        PCI pc = listaMapaPlayers.remove(connectionID);
         pc.dispose();
     }
 
-    public void actualizarUnidades(float delta)
+    // PROYECTILES:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void añadirProyectil(ProyectilI proyectil)
     {
-        //Actualizar a todas las unidades a partir de los datos ya interpolados
-        player.actualizar(delta);
-        //Actualizar a los demas jugador multiplayer:
-        for (PCI pc: listaPlayers)
-        {   pc.actualizar(delta); }
+        listaMapaProyectiles.add(proyectil);
+
+        DTOsMundo.AñadirProyectil nuevoProyectil = new DTOsMundo.AñadirProyectil(proyectil);
+        notificarActualizacion("añadirProyectil", null, nuevoProyectil);
     }
 
-    public void actualizarFisica(float delta)
-    {
-        //Salvamos los ultimos valores para poder interpolarlos
-        player.copiarUltimaPosicion();
-        //calculamos los nuevos:
-        world.step(delta, 8, 6);
-    }
+    @Override public void eliminarProyectil(ProyectilI proyectil)
+    {   listaMapaProyectiles.remove(proyectil); }
 
-    public void enviarDatosAServidor(Cliente cliente)
-    {
-        if (player.getNotificador().contieneDatos())
-        {   cliente.enviarAServidor(player.getNotificador().getDTOs()); }
-    }
 
-    public void interpolarPosicion(float alpha)
-    {
-        //Interpolamos las posiciones y angulos con el resto del TimeStep:
-        player.interpolarPosicion(alpha);
-    }
+    // MAPA:
+    //------------------------------------------------------------------------------------------------------------------
 
     public void actualizarMapa (DTOsMapView.Mapa mapaServidor)
     {
@@ -102,5 +96,58 @@ public class Mundo extends AbstractModel implements MundoI
                 }
             }
         }
+    }
+
+    // UPDATE:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void actualizarUnidades(float delta)
+    {   //Actualizar a todas las unidades a partir de los datos ya interpolados
+
+        //PLAYER:
+        player.actualizar(delta);
+        //PLAYERS:
+        for (PCI pc: listaMapaPlayers)
+        {   pc.actualizar(delta); }
+        //PROYECTILES:
+        Iterator<ProyectilI>iterator = listaMapaProyectiles.iterator(); ProyectilI pro;
+        while (iterator.hasNext())
+        {
+            pro = iterator.next();
+            if (pro.consumirse(delta))
+            {
+                pro.dispose();
+                iterator.remove();
+            }
+        }
+    }
+
+    //Salvamos los ultimos valores para poder interpolarlos
+    public void actualizarFisica(float delta)
+    {
+        //PLAYER:
+        player.copiarUltimaPosicion();
+        //PROYECTILES:
+        for (ProyectilI proyectil: listaMapaProyectiles)
+        {   proyectil.copiarUltimaPosicion(); }
+
+        //calculamos los nuevos:
+        world.step(delta, 8, 6);
+    }
+
+    public void enviarDatosAServidor(Cliente cliente)
+    {
+        if (player.getNotificador().contieneDatos())
+        {   cliente.enviarAServidor(player.getNotificador().getDTOs()); }
+    }
+
+    //Interpolamos las posiciones y angulos con el resto del TimeStep:
+    public void interpolarPosicion(float alpha)
+    {
+        //PLAYER:
+        player.interpolarPosicion(alpha);
+        //PROYECTILES:
+        for (ProyectilI proyectil: listaMapaProyectiles)
+        {   proyectil.interpolarPosicion(alpha); }
     }
 }

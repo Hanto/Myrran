@@ -1,18 +1,19 @@
 package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
-import Model.Cuerpos.BodyFactory;
-import Model.Cuerpos.Cuerpo;
-import Model.Settings;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import com.badlogic.gdx.physics.box2d.World;
+import Model.Cuerpos.BodyFactory;
+import Model.Cuerpos.Cuerpo;
+import Model.GameState.Mundo;
+import Model.Settings;
 
 import java.util.Iterator;
 
 public class PC extends AbstractModel implements PCI
 {
+    protected Mundo mundo;
     protected int connectionID;
 
     protected int ultimoMapTileX;
@@ -27,7 +28,7 @@ public class PC extends AbstractModel implements PCI
     protected Cuerpo cuerpo;
     public PCNotificador notificador;
 
-    @Override public int getConnectionID()  { return connectionID; }
+    @Override public int getID()            { return connectionID; }
     @Override public int getNumAnimacion()  { return numAnimacion; }
     @Override public float getX()           { return x; }
     @Override public float getY()           { return y; }
@@ -71,11 +72,12 @@ public class PC extends AbstractModel implements PCI
     @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int talento) {}
 
     //Constructor:
-    public PC(int connectionID, World world)
+    public PC(int connectionID, Mundo mundo)
     {
+        this.mundo = mundo;
         this.notificador = new PCNotificador(this);
         this.connectionID = connectionID;
-        this.cuerpo = new Cuerpo(world, 48, 48);
+        this.cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
     }
 

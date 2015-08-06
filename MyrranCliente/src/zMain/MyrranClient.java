@@ -1,5 +1,21 @@
 package zMain;// Created by Hanto on 08/04/2014.
 
+import Controller.Updater;
+import DB.Datos.BDebuff.BDebuffXMLDB;
+import DB.Datos.Spell.SpellXMLDB;
+import DB.Datos.Terreno.TerrenoXMLDB;
+import DB.Datos.TipoBdDebuff.TipoBDebuffXMLDB;
+import DB.Datos.TipoSpell.TipoSpellXMLDB;
+import DB.Recursos.AccionRecursos.AccionRecursosXMLDB;
+import DB.Recursos.AtlasRecursos.AtlasRecursosLocalDB;
+import DB.Recursos.FuentesRecursos.FuentesRecursosXMLDB;
+import DB.Recursos.MiscRecursos.MiscRecursosXMLDB;
+import DB.Recursos.ParticulasRecursos.ParticulaRecursosXMLDB;
+import DB.Recursos.PixiePCRecursos.PixiePCRecursosXMLDB;
+import DB.Recursos.SkillBaseRecursos.SkillBaseRecursosXMLDB;
+import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
+import DB.Recursos.TerrenoRecursos.TerrenoRecursosXMLDB;
+import DB.Recursos.TipoSkillRecursos.TipoSkillRecursosXMLDB;
 import Model.Settings;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
@@ -14,9 +30,8 @@ public class MyrranClient extends Game
 
     public static void main (String[] arg)
     {
-        Settings.inicializar();
-
         System.setProperty("user.name", "Myrran");
+        Settings.inicializar();
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Myrran";
@@ -34,7 +49,28 @@ public class MyrranClient extends Game
 
     @Override public void create()
     {
+        cargarDatos();
         nagevarA(tipoPantalla.pantallaJuego);
+    }
+
+    private void cargarDatos()
+    {
+        TipoBDebuffXMLDB.get();
+        BDebuffXMLDB.get();
+        TipoSpellXMLDB.get();
+        SpellXMLDB.get();
+        TerrenoXMLDB.get();
+
+        AtlasRecursosLocalDB.get();
+        MiscRecursosXMLDB.get();
+        TerrenoRecursosXMLDB.get();
+        AccionRecursosXMLDB.get();
+        PixiePCRecursosXMLDB.get();
+        FuentesRecursosXMLDB.get();
+        SkillBaseRecursosXMLDB.get();
+        TipoSkillRecursosXMLDB.get();
+        SkillRecursosXMLDB.get();
+        ParticulaRecursosXMLDB.get();
     }
 
     public void nagevarA (tipoPantalla pantalla)
@@ -42,9 +78,9 @@ public class MyrranClient extends Game
         Screen screen;
         switch (pantalla)
         {
-            case pantallaMenu:  screen = new PantallaLibGDX(this); break;
-            case pantallaJuego: screen = new PantallaLibGDX(this); break;
-            default:            screen = new PantallaLibGDX(this); break;
+            case pantallaMenu:  screen = new Updater(this); break;
+            case pantallaJuego: screen = new Updater(this); break;
+            default:            screen = new Updater(this); break;
         }
         setScreen(screen);
     }

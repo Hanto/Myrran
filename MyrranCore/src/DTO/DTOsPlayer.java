@@ -110,7 +110,7 @@ public class DTOsPlayer
         public CrearPC() {}
         public CrearPC(PCI pc)
         {
-            connectionID = pc.getConnectionID(); nombre = pc.getNombre();
+            connectionID = pc.getID(); nombre = pc.getNombre();
             posX = (int)pc.getX(); posY = (int)pc.getY(); nivel = pc.getNivel();
             maxHPs = pc.getMaxHPs(); actualHPs = pc.getActualHPs();
             numAnimacion = pc.getNumAnimacion();

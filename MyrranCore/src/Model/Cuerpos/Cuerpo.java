@@ -4,11 +4,12 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 
 import static Model.Settings.METROS_PIXEL;
 import static Model.Settings.PIXEL_METROS;
 
-public class Cuerpo
+public class Cuerpo implements Disposable
 {
     private World world;
     private Body body;
@@ -24,6 +25,7 @@ public class Cuerpo
 
     public World getWorld()                         { return world; }
     public Body getBody()                           { return body; }
+    public Vector2 getDireccion()                   { return direccion; }
     public float getAngulo()                        { return anguloInterpolado; }
     public float getBoxAncho()                      { return ancho; }
     public float getBoxAlto()                       { return alto; }
@@ -45,6 +47,9 @@ public class Cuerpo
         this.alto = alto * PIXEL_METROS;
     }
 
+    @Override public void dispose()
+    {   world.destroyBody(body); }
+
     public void setPosition(float x, float y)
     {
         body.setTransform(x *PIXEL_METROS + ancho/2, y *PIXEL_METROS + alto/2, getAngulo());
@@ -63,6 +68,12 @@ public class Cuerpo
 
     public int getY()
     {   return (int)((body.getPosition().y -alto/2) * METROS_PIXEL); }
+
+    public int getCentroXinterpolada()
+    {   return (int)(posicionInterpolada.x * METROS_PIXEL); }
+
+    public int getCentroYinterpolada()
+    {   return (int)(posicionInterpolada.y * METROS_PIXEL); }
 
     public int getCentroX()
     {   return (int)(body.getPosition().x * METROS_PIXEL); }
@@ -85,7 +96,7 @@ public class Cuerpo
 
     public void setDireccion(float x, float y)
     {
-        direccion.set(x-getCentroX(), y-getCentroY());
+        direccion.set(x - getCentroX(), y - getCentroY());
         direccion.nor();
     }
 
@@ -122,7 +133,4 @@ public class Cuerpo
             }
         }
     }
-
-    public void dispose()
-    {   world.destroyBody(body); }
 }

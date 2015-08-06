@@ -1,59 +1,124 @@
 package Model.Classes.Mobiles;// Created by Hanto on 07/04/2014.
 
+import DTO.DTOsProyectil;
+import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.GameState.MundoI;
 import Interfaces.Model.AbstractModel;
+import Interfaces.Spell.SpellI;
+import Model.Cuerpos.BodyFactory;
+import Model.Cuerpos.Cuerpo;
+import Model.Settings;
 
-public class Proyectil extends AbstractModel
+public class Proyectil extends AbstractModel implements ProyectilI
 {
-    //Posicion:
-    protected float x=0.0f;                 //Coordenadas X:
-    protected float y=0.0f;                 //Coordenadas Y:
-    protected float oldPosX;                //Coordenadas X, de la ultima posicion X segura
-    protected float oldPosY;                //Coordenadas Y, de la ultima posicion Y segura
+    protected MundoI mundo;
 
-    //Velocidad y Direccion:
-    protected float velocidadMod=1.0f;      //Modificadores de Velocidad: debido a Snares, a Sprints, Roots
-    protected float velocidadMax;           //Velocidad Maxima:
-    protected float velocidad;              //Velocidad Actual:
-    protected double direccion;             //Direccion Actual en Radianes
+    protected int iD;
+    protected Cuerpo cuerpo;
+    protected SpellI spell;
+    protected Caster owner;
+    protected float daño;
+
+    //Posicion:
+    protected int ultimoMapTileX = 0;
+    protected int ultimoMapTileY = 0;
+    protected float x;
+    protected float y;
+    protected float velocidadMax=0.0f;
+    protected float velocidadMod=1.0f;
 
     //Duracion
     protected float duracionActual = 0.0f;
-    protected float duracionMaxima;
-
+    protected float duracionMaxima = 5f;
 
     //GET:
-    public float getX()                     { return x; }
-    public float getY()                     { return y; }
+    //------------------------------------------------------------------------------------------------------------------
 
-    public Proyectil()
+    @Override public int getID()                                        { return iD; }
+    @Override public float getX()                                       { return x; }
+    @Override public float getY()                                       { return y; }
+    @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
+    @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
+    @Override public int getMapTileX()                                  { return (int)(x / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
+    @Override public int getMapTileY()                                  { return (int)(y / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
+    @Override public float getVelocidadMod()                            { return velocidadMod; }
+    @Override public float getVelocidadMax()                            { return velocidadMax; }
+    @Override public float getDuracionActual()                          { return duracionActual; }
+    @Override public float getDuracionMaxima()                          { return duracionMaxima; }
+    @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
+    @Override public SpellI getSpell()                                  { return spell; }
+    @Override public float getDaño()                                    { return daño; }
+    @Override public Caster getOwner()                                  { return owner; }
+
+    //SET:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
+    @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
+    @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
+    @Override public void setVectorDireccion(float x, float y)          { cuerpo.setVectorDireccion(x, y); }
+    @Override public void setVelocidaMod(float velocidadMod)            { this.velocidadMod = velocidadMod; }
+    @Override public void setVelocidadMax(float velocidadMax)           { this.velocidadMax = velocidadMax; }
+    @Override public void setDuracionActual(float duracionActual)       { this.duracionActual = duracionActual; }
+    @Override public void setDuracionMaxima(float duracionMaxima)       { this.duracionMaxima = duracionMaxima; }
+    @Override public void setSpell(SpellI spell)                        { this.spell = spell; }
+    @Override public void setDaño(float daño)                           { this.daño = daño; }
+    @Override public void setOwner(Caster caster)                       { this.owner = caster; }
+
+    //Constructor:
+    public Proyectil(MundoI mundo)
     {
-
+        this.iD = this.hashCode();
+        this.mundo = mundo;
+        cuerpo = new Cuerpo(mundo.getWorld(), 24, 24);
+        BodyFactory.darCuerpo.CIRCLE.nuevo(cuerpo);
     }
 
-    public void setPosicion (float x, float y)
+    @Override public void dispose()
+    {   cuerpo.dispose(); }
+
+    @Override public void setPosition(float x, float y)
     {
-        this.x = x; this.y = y;
+        cuerpo.setPosition(x, y);
+        this.x = x;
+        this.y = y;
     }
 
-    public void moverse (float delta)
+    public void actualizarPosicion ()
     {
-        oldPosX = x; oldPosY = y;
-        float newPosX =  (float)(x+ (Math.cos(direccion))*velocidad*velocidadMod*delta);
-        float newPosY =  (float)(y+ (Math.sin(direccion))*velocidad*velocidadMod*delta);
-        setPosicion(newPosX, newPosY);
+        x = cuerpo.getX();
+        y = cuerpo.getY();
     }
 
-    public void consumirse (float delta)
+    @Override public boolean consumirse (float delta)
     {
         duracionActual += delta;
-        if (duracionActual > duracionMaxima) {}
+        if (duracionActual > duracionMaxima ) return true;
+        else return false;
     }
 
-    public void actualizar (float delta)
+    private void getPosicionInterpoladaCuerpo()
     {
-        moverse(delta);
+        this.x = cuerpo.getXinterpolada();
+        this.y = cuerpo.getYinterpolada();
+
+        DTOsProyectil.PosicionProyectil posicion = new DTOsProyectil.PosicionProyectil(this);
+        notificarActualizacion("actualizarPosiciojn", null, posicion);
+    }
+
+    @Override public void copiarUltimaPosicion()
+    {   cuerpo.copiarUltimaPosicion(); }
+
+    @Override public void interpolarPosicion(float alpha)
+    {
+        cuerpo.interpolarPosicion(alpha);
+        getPosicionInterpoladaCuerpo();
+    }
+
+    @Override public void actualizar (float delta)
+    {
+        actualizarPosicion();
         consumirse(delta);
     }
-
-
 }

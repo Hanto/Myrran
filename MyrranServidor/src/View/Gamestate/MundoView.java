@@ -35,7 +35,7 @@ public class MundoView implements PropertyChangeListener, Disposable
 
     public void añadirCampoVision(PCI pc)
     {
-        CampoVisionI campoVision = new CampoVision(pc, pc.getConnectionID(), this);
+        CampoVisionI campoVision = new CampoVision(pc, pc.getID(), this);
         listaCampoVisiones.add(campoVision);
     }
 
@@ -75,6 +75,6 @@ public class MundoView implements PropertyChangeListener, Disposable
         {   añadirCampoVision(((DTOsMundo.AñadirPC) evt.getNewValue()).pc); }
 
         if (evt.getNewValue() instanceof DTOsMundo.EliminarPC)
-        {   eliminarCampoVision(((DTOsMundo.EliminarPC) evt.getNewValue()).pc.getConnectionID());}
+        {   eliminarCampoVision(((DTOsMundo.EliminarPC) evt.getNewValue()).pc.getID());}
     }
 }

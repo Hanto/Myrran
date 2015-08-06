@@ -13,4 +13,8 @@
     <SkillStat ID="0" nombre="Casting time" valorBase="1.0" isMejorable="true" costeTalento="1" bonoTalento="-0.02" talentoMaximo="50" />
     <SkillStat ID="1" nombre="Curacion instantanea" valorBase="15.0" isMejorable="true" costeTalento="1" bonoTalento="5.0" talentoMaximo="50" />
   </Spell>
+  <Spell ID="Bolt" nombre="Firebolt" tipoSpell="BOLT">
+    <Recursos icono="FireBall"></Recursos>
+    <Descripcion>Lanza una rafaga de fuego de destruccion</Descripcion>
+  </Spell>
 </Spells>

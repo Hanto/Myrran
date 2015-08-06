@@ -39,6 +39,6 @@ public class PCNotificador
     {   mobPC.notificarActualizacion("nombre", null, new DTOsPlayer.Nombre(nombre)); }
 
     public void setDispose()
-    {   mobPC.notificarActualizacion("Eliminar", null, new DTOsPlayer.EliminarPC(mobPC.getConnectionID())); }
+    {   mobPC.notificarActualizacion("Eliminar", null, new DTOsPlayer.EliminarPC(mobPC.getID())); }
 
 }

@@ -1,12 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <TipoSpells>
   <TipoSpell ID="HEAL" nombre="Heal">
     <Descripcion>Cura los HPs</Descripcion>
+    <Recursos icono="Muros" numAnimaciones="0"></Recursos>
     <SkillStat ID="0" nombre="Castear" valorBase="1.0" isMejorable="true" costeTalento="1" bonoTalento="1.0" talentoMaximo="50" />
     <SkillStat ID="1" nombre="Curacion" valorBase="500.0" isMejorable="true" costeTalento="1" bonoTalento="1.0" talentoMaximo="50" />
   </TipoSpell>
   <TipoSpell ID="EDITARTERRENO" nombre="EditarTerreno">
     <Descripcion>Edita el Terreno</Descripcion>
+    <Recursos icono="Editar" numAnimaciones="0"></Recursos>
     <SkillStat ID="0" nombre="Castear" valorBase="0.02" isMejorable="false" costeTalento="0" bonoTalento="0.0" talentoMaximo="0" />
+  </TipoSpell>
+  <TipoSpell ID="BOLT" nombre="Bolt">
+    <Recursos icono="FireBall" numAnimaciones="1"></Recursos>
+    <Animacion ID="0" Pixie="Fireball02"></Animacion>
+    <Animacion ID="0" Pixie="FrostBolt02"></Animacion>
+    <Descripcion>Lanza un proyectil de fuego que todo lo quema y destroza</Descripcion>
+    <SkillStat ID="0" nombre="Casting time" valorBase="1.0" isMejorable="true" costeTalento="1" bonoTalento="-0.01" talentoMaximo="50"></SkillStat>
+    <SkillStat ID="1" nombre="Daño" valorBase="50.0" isMejorable="true" costeTalento="1" bonoTalento="1.0" talentoMaximo="50"></SkillStat>
+    <SkillStat ID="2" nombre="Velocidad" valorBase="5.0" isMejorable="true" costeTalento="1" bonoTalento="0.2" talentoMaximo="50"></SkillStat>
+    <SkillStat ID="3" nombre="Duracion" valorBase="5.0" isMejorable="true" costeTalento="1" bonoTalento="-0.4" talentoMaximo="50"></SkillStat>
   </TipoSpell>
 </TipoSpells>

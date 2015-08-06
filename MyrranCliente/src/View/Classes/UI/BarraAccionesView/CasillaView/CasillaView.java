@@ -72,7 +72,7 @@ public class CasillaView extends Actor implements PropertyChangeListener
         {   casillaIcono = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRASPELLS_Textura_Casillero); }
         else
         {
-            if (accion instanceof SeleccionarSpell) { casillaIcono = RSC.skillRecursosDAO.getSpellRecursosDAO().getSpellRecursos(accion.getID()).getIcono(); }
+            if (accion instanceof SeleccionarSpell) { casillaIcono = RSC.skillRecursosDAO.getSkillRecursosDAO().getSpellRecursos(accion.getID()).getIcono(); }
             else { casillaIcono = RSC.accionRecursosDAO.getAccionRecursosDAO().getAccionRecurso(accion.getID()).getTextura(); }
         }
     }

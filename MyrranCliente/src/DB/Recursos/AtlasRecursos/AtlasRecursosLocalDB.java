@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 public class AtlasRecursosLocalDB
 {
-    private static class Singleton  { private static final AtlasRecursosLocalDB get = new AtlasRecursosLocalDB(); }
-    public static AtlasRecursosLocalDB get()       { return Singleton.get; }
+    private static class Singleton              { private static final AtlasRecursosLocalDB get = new AtlasRecursosLocalDB(); }
+    public static AtlasRecursosLocalDB get()    { return Singleton.get; }
 
     public TextureAtlas atlas;
 

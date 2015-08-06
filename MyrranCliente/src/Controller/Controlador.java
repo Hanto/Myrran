@@ -6,6 +6,7 @@ import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
 import Interfaces.UI.ControladorUI;
+import Model.Classes.Acciones.AccionFactory;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
 import View.GameState.Vista;
@@ -52,15 +53,24 @@ public class Controlador implements ControladorUI
         ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(7,0).setKeycode(15);
         ui.conjuntoBarraAcciones.getBarraAcciones(0).getCasilla(8,0).setKeycode(16);
 
+        ui.getInputManager().añadirAccion(AccionFactory.accionComando.IRNORTE.nuevo());
+        ui.getInputManager().añadirAccion(AccionFactory.accionComando.IRSUR.nuevo());
+        ui.getInputManager().añadirAccion(AccionFactory.accionComando.IRESTE.nuevo());
+        ui.getInputManager().añadirAccion(AccionFactory.accionComando.IROESTE.nuevo());
+        ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("Terraformar"));
+        ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("Heal"));
+        ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("Bolt"));
+
         ui.crearCasilla(0, 0, 0, "Terraformar", 8);
         ui.crearCasilla(0, 1, 0, "Heal", 9);
+        ui.crearCasilla(0, 2, 0, "Bolt", 10);
         ui.crearCasilla(0, 1, 1, "IrNorte", 51);
         ui.crearCasilla(0, 1, 2, "IrSur", 47);
         ui.crearCasilla(0, 2, 2, "IrEste", 32);
         ui.crearCasilla(0, 0, 2, "IrOeste", 29);
 
         enviarAServidor(new LogIn());
-        //moverPPC(mundo.getPlayer().getConnectionID(), 21000, 20000);
+        //moverPPC(mundo.getPlayer().getID(), 21000, 20000);
     }
 
     //LibGDX:

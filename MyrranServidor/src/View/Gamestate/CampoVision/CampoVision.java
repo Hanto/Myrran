@@ -123,7 +123,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
             listaPCsCercanos.add(pc);
             pc.añadirObservador(this);
             buffer.setDatosCompletosPC(pc);
-            if (pc.getConnectionID() != connectionID)
+            if (pc.getID() != connectionID)
                 buffer.setPositionPC(pc);
         }
     }
@@ -134,17 +134,17 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         {
             listaPCsCercanos.remove(pc);
             pc.eliminarObservador(this);
-            if (pc.getConnectionID() != connectionID)
+            if (pc.getID() != connectionID)
                 buffer.eliminarPC(pc);
         }
     }
 
     private void posicionPC (PCI pc)
-    {   if (pc.getConnectionID() != connectionID)
+    {   if (pc.getID() != connectionID)
         buffer.setPositionPC(pc); }
 
     private void numAnimacionPC (PCI pc)
-    {   if (pc.getConnectionID() != connectionID)
+    {   if (pc.getID() != connectionID)
         buffer.setNumAnimacionPC(pc); }
 
     //PLAYER y PCs:

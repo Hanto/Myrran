@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Spells>
   <Spell ID="Terraformar" nombre="Terraformar" tipoSpell="EDITARTERRENO">
-    <Recursos icono="Editar" />
+    <Recursos icono="Editar"></Recursos>
     <Descripcion>Terraforma el terreno</Descripcion>
     <SkillStat ID="0" nombre="Casting time" valorBase="0.02" isMejorable="false" costeTalento="0" bonoTalento="0.0" talentoMaximo="0" />
   </Spell>
   <Spell ID="Heal" nombre="Heal" tipoSpell="HEAL">
-    <Recursos icono="Muros" />
+    <Recursos icono="Muros"></Recursos>
     <Descripcion>Cura los HPs</Descripcion>
     <Debuff>Hot</Debuff>
     <Debuff>Bomba</Debuff>
     <SkillStat ID="0" nombre="Casting time" valorBase="1.0" isMejorable="true" costeTalento="1" bonoTalento="-0.02" talentoMaximo="50" />
     <SkillStat ID="1" nombre="Curacion instantanea" valorBase="15.0" isMejorable="true" costeTalento="1" bonoTalento="5.0" talentoMaximo="50" />
+  </Spell>
+  <Spell ID="Bolt" nombre="Firebolt" tipoSpell="BOLT">
+    <Recursos icono="FireBall"></Recursos>
+    <Animacion TipoAnimacion="0" numAnimacion="0"></Animacion>
+    <Descripcion>Lanza una rafaga de fuego de destruccion</Descripcion>
   </Spell>
 </Spells>

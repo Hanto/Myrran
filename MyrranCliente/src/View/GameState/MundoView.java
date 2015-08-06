@@ -3,17 +3,20 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsMundo;
-import Model.Settings;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Player;
 import Model.GameState.Mundo;
+import Model.Settings;
 import Tweens.CamaraTween;
 import Tweens.TweenEng;
 import View.Classes.Actores.Particula;
 import View.Classes.Geo.MapaView;
 import View.Classes.Mobiles.PCView;
 import View.Classes.Mobiles.PlayerView;
+import View.Classes.Mobiles.ProyectilView;
+import View.Classes.Mobiles.ProyectilViewFactory;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
 import box2dLight.PointLight;
@@ -46,6 +49,7 @@ public class MundoView extends Stage implements PropertyChangeListener
     protected PlayerView playerView;
     protected MapaView mapaView;
     protected Array<PCView> listaPCViews = new Array<>();
+    protected Array<ProyectilView> listaProyectilViews = new Array<>();
 
     //LibGDX Tools:
     protected SpriteBatch batch = new SpriteBatch();
@@ -57,16 +61,13 @@ public class MundoView extends Stage implements PropertyChangeListener
     protected OrthographicCamera boxCamara;
     protected Box2DDebugRenderer worldRender = new Box2DDebugRenderer();
 
-    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-
     public PlayerView getPlayerView()                   { return playerView; }
     public MapaView getMapaView()                       { return mapaView; }
     public OrthographicCamera getCamara()               { return camara; }
     public RayHandler getRayHandler()                   { return rayHandler; }
     public World getWorld()                             { return mundo.getWorld(); }
 
-    public void eliminarPCView (PCView pcView)
-    {   listaPCViews.removeValue(pcView, true); }
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public MundoView(Controlador controlador, Player player, Mundo mundo)
     {
@@ -96,6 +97,51 @@ public class MundoView extends Stage implements PropertyChangeListener
         this.addActor(par);
     }
 
+    @Override public void dispose ()
+    {
+        mundo.eliminarObservador(this);
+        super.dispose();
+
+        logger.trace("DISPOSE: Liberando SpriteBatch");
+        batch.dispose();
+        logger.trace("DISPOSE: Liberando RayHandler");
+        rayHandler.dispose();
+        logger.trace("DISPOSE: Liberando ShapeRenderer");
+        shape.dispose();
+        mapaView.dispose();
+    }
+
+    // PC
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void añadirPCView (PCI pc)
+    {
+        PCView pcView = new PCView(pc, this, controlador);
+        listaPCViews.add(pcView);
+    }
+
+    public void eliminarPCView (PCView pcView)
+    {   listaPCViews.removeValue(pcView, true); }
+
+    // PROYECTIL
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void añadirProyectilView (ProyectilI proyectil)
+    {
+        ProyectilView proyectilView = ProyectilViewFactory.ILUMINADO.nuevo(proyectil, this);
+        listaProyectilViews.add(proyectilView);
+        this.addActor(proyectilView);
+    }
+
+    public void eliminarProyectilView (ProyectilView proyectilView)
+    {
+        listaProyectilViews.removeValue(proyectilView, true);
+        this.getRoot().removeActor(proyectilView);
+    }
+
+    // RENDER:
+    //------------------------------------------------------------------------------------------------------------------
+
     @Override public void draw ()
     {
         //actualizamos las camaras:
@@ -122,7 +168,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         rayHandler.setCombinedMatrix(boxCamara);
         rayHandler.updateAndRender();
 
-        //dibujamos la geometrica fisica de Debug:
+        //dibujamos la geometrica fisica de DEBUG:
         worldRender.render(getWorld(), boxCamara.combined);
 
         //dibujamos las lineas de debug:
@@ -133,20 +179,6 @@ public class MundoView extends Stage implements PropertyChangeListener
     {
         camara.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    }
-
-    @Override public void dispose ()
-    {
-        mundo.eliminarObservador(this);
-        super.dispose();
-
-        logger.trace("DISPOSE: Liberando SpriteBatch");
-        batch.dispose();
-        logger.trace("DISPOSE: Liberando RayHandler");
-        rayHandler.dispose();
-        logger.trace("DISPOSE: Liberando ShapeRenderer");
-        shape.dispose();
-        mapaView.dispose();
     }
 
     public void aplicarZoom(int incrementoZoom)
@@ -162,16 +194,19 @@ public class MundoView extends Stage implements PropertyChangeListener
         Tween.to(boxCamara, CamaraTween.ZOOM, 0.4f).target(zoom).ease(TweenEquations.easeOutBounce).start(TweenEng.getTweenManager());
     }
 
+    //CAMPOS OBSERVADOS:
+    //------------------------------------------------------------------------------------------------------------------
+
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getNewValue() instanceof DTOsMundo.AñadirPC)
-        {
-            PCI pc = ((DTOsMundo.AñadirPC) evt.getNewValue()).pc;
-            PCView pcView = new PCView(pc, this, controlador);
-            listaPCViews.add(pcView);
-        }
+        {   añadirPCView(((DTOsMundo.AñadirPC) evt.getNewValue()).pc); }
+        else if (evt.getNewValue() instanceof DTOsMundo.AñadirProyectil)
+        {   añadirProyectilView(((DTOsMundo.AñadirProyectil) evt.getNewValue()).proyectil);}
     }
 
+    // CODIGO DEBUG:
+    //------------------------------------------------------------------------------------------------------------------
 
     public void dibujarVision()
     {

@@ -68,20 +68,20 @@ public class BufferCampoVision
     public void eliminarPC(PCI pc)
     {
         DTOsCampoVision.EliminarPC eliminar = new DTOsCampoVision.EliminarPC();
-        mapaDTOsPC.remove(pc.getConnectionID());
-        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.EliminarPC.class, eliminar);
+        mapaDTOsPC.remove(pc.getID());
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.EliminarPC.class, eliminar);
     }
 
     public void setPositionPC (PCI pc)
     {
         DTOsCampoVision.PosicionPC posicion = new DTOsCampoVision.PosicionPC(pc);
-        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.PosicionPC.class, posicion);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.PosicionPC.class, posicion);
     }
 
     public void setNumAnimacionPC (PCI pc)
     {
         DTOsCampoVision.NumAnimacionPC numAnumacion = new DTOsCampoVision.NumAnimacionPC(pc);
-        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.NumAnimacionPC.class, numAnumacion);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NumAnimacionPC.class, numAnumacion);
     }
 
     //PC & PLAYER:
@@ -90,7 +90,7 @@ public class BufferCampoVision
     public void setDatosCompletosPC (PCI pc)
     {
         DTOsCampoVision.DatosCompletosPC datosCompletos = new DTOsCampoVision.DatosCompletosPC(pc);
-        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.DatosCompletosPC.class, datosCompletos);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.DatosCompletosPC.class, datosCompletos);
 
         Iterator<SpellPersonalizadoI> iteratorSpell = pc.getIteratorSpellPersonalizado();
         while (iteratorSpell.hasNext())
@@ -113,31 +113,31 @@ public class BufferCampoVision
     public void setNombrePC (PCI pc)
     {
         DTOsCampoVision.NombrePC nombre = new DTOsCampoVision.NombrePC(pc);
-        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.NombrePC.class, nombre);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NombrePC.class, nombre);
     }
 
     public void setHPsPC (PCI pc)
     {
         DTOsCampoVision.HPsPC hpsPC = new DTOsCampoVision.HPsPC(pc);
-        mapaDTOsPC.set(pc.getConnectionID(), DTOsCampoVision.HPsPC.class, hpsPC);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.HPsPC.class, hpsPC);
     }
 
     public void addModificarHPsPC (PCI pc, float hps)
     {
         DTOsCampoVision.ModificarHPsPC modificarHPsPC = new DTOsCampoVision.ModificarHPsPC(hps);
-        mapaDTOsPC.add(pc.getConnectionID(), modificarHPsPC);
+        mapaDTOsPC.add(pc.getID(), modificarHPsPC);
     }
 
     public void addAñadirSpellPersonalizado(PCI pc, String spellID)
     {
         DTOsCampoVision.AñadirSpellPersonalizadoPC añadirSpellPersonalizado = new DTOsCampoVision.AñadirSpellPersonalizadoPC(spellID);
-        mapaDTOsPC.add(pc.getConnectionID(), añadirSpellPersonalizado);
+        mapaDTOsPC.add(pc.getID(), añadirSpellPersonalizado);
     }
 
     public void addNumTalentosSkillPersonalizadoPC(PCI pc, String skillID, int statID, int valor)
     {
         DTOsCampoVision.NumTalentosSkillPersonalizadoPC numTalentosSkill = new DTOsCampoVision.NumTalentosSkillPersonalizadoPC(skillID, statID, valor);
-        mapaDTOsPC.add(pc.getConnectionID(), numTalentosSkill);
+        mapaDTOsPC.add(pc.getID(), numTalentosSkill);
     }
 
     //MISC:

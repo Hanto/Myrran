@@ -12,15 +12,16 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
     //se encuentren. Todos los Espaciles del MapTileX 0, y MaptileY 0 estaran en un mismo ArrayList, indexado por el
     //String 0-0. Esto permite acotar las busquedas por cercania, haciendolo solo en el subconjunto de los maptiles
     //adyacentes, para esto se implementa el IteratorCuadrantes, que itera las unidades de los cuadrantes adyacentes.
-
-    private Map<String, List<T>> lista = new HashMap<>();
     //Se podria hacer con una Array[][] de ArrayList tambien
+
+    private Map<String, List<T>> mapa = new HashMap<>();
 
     private void put (String key, T valor)
     {
-        if (lista.containsKey(key))
+        //MAPA:
+        if (mapa.containsKey(key))
         {
-            List<T> array = lista.get(key);
+            List<T> array = mapa.get(key);
 
             if (!array.contains(valor))
             {
@@ -32,7 +33,7 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
         {
             List<T> array = new ArrayList<>();
             array.add(valor);
-            lista.put(key, array);
+            mapa.put(key, array);
             valor.setUltimoMapTile(valor.getMapTileX(), valor.getMapTileY());
         }
     }
@@ -45,18 +46,15 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
 
     private void remove (String key, T espacial)
     {
-        if (lista.containsKey(key))
+        //MAPA:
+        if (mapa.containsKey(key))
         {
-            List<T> array = lista.get(key);
+            List<T> array = mapa.get(key);
 
-            if (array.contains(espacial))
-            {
-                array.remove(espacial);
-                //Parte discutile para ahorrar memoria a costa de rendimiento, cuando el arraylist contenedor queda
-                //vacio, se elimina para que no ocupe espacio, ya se volvera a crear si hace falta.
-                if (array.isEmpty())
-                {   lista.remove(key); }
-            }
+            //Parte discutile para ahorrar memoria a costa de rendimiento, cuando el arraylist contenedor queda
+            //vacio, se elimina para que no ocupe espacio, ya se volvera a crear si hace falta.
+            array.remove(espacial);
+            if (array.isEmpty()) mapa.remove(array);
         }
     }
 
@@ -65,19 +63,20 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
         String key = espacial.getMapTileX()+ "-" + espacial.getMapTileY();
         String oldKey =  espacial.getUltimoMapTileX()+ "-" + espacial.getUltimoMapTileY();
 
-        if (lista.containsKey(oldKey))
+        //MAPA:
+        if (mapa.containsKey(oldKey))
         {
-            List<T> array = lista.get(oldKey);
+            List<T> array = mapa.get(oldKey);
 
-            if (array.contains(espacial))
-            {   array.remove(espacial); }
+            array.remove(espacial);
+            if (array.isEmpty()) mapa.remove(array);
         }
-        else if (lista.containsKey(key))
+        else if (mapa.containsKey(key))
         {
-            List<T> array = lista.get(key);
+            List<T> array = mapa.get(key);
 
-            if (array.contains(espacial))
-            {   array.remove(espacial); }
+            array.remove(espacial);
+            if (array.isEmpty()) mapa.remove(array);
         }
     }
 
@@ -98,8 +97,8 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
     {
         String key = mapTileX+ "-"+ mapTileY;
 
-        if (lista.containsKey(key))
-        {   return lista.get(key); }
+        if (mapa.containsKey(key))
+        {   return mapa.get(key); }
         else return null;
     }
 
@@ -107,8 +106,8 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
     {
         String key = mapTileX+ "-"+ mapTileY;
 
-        if (lista.containsKey(key))
-        {   return lista.get(key).iterator();}
+        if (mapa.containsKey(key))
+        {   return mapa.get(key).iterator();}
         else return null;
     }
 
@@ -116,16 +115,16 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
     {   return new IteratorCuadrantes(mapTileX, mapTileY); }
 
     @Override public int size()
-    {   return lista.size(); }
+    {   return mapa.size(); }
 
     @Override public boolean isEmpty()
-    {   return lista.isEmpty(); }
+    {   return mapa.isEmpty(); }
 
     @Override public boolean containsKey(String key)
-    {   return lista.containsKey(key); }
+    {   return mapa.containsKey(key); }
 
     @Override public void clear()
-    {   lista.clear(); }
+    {   mapa.clear(); }
 
     // ITERATOR
     //------------------------------------------------------------------------------------------------------------------
@@ -164,10 +163,10 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
                 key = (mapTileX+(int)offsets[offsetActual].x)+"-"+(mapTileY+(int)offsets[offsetActual].y);
                 offsetActual++;
 
-                if (lista.containsKey(key))
+                if (mapa.containsKey(key))
                 {
-                    if (!lista.get(key).isEmpty())
-                    {   iteratorListaActual = lista.get(key).iterator(); break; }
+                    if (!mapa.get(key).isEmpty())
+                    {   iteratorListaActual = mapa.get(key).iterator(); break; }
                 }
             }
         }
@@ -181,11 +180,11 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
                 key = (mapTileX+(int)offsets[offsetActual].x)+"-"+(mapTileY+(int)offsets[offsetActual].y);
                 offsetActual++;
 
-                if (lista.containsKey(key))
+                if (mapa.containsKey(key))
                 {
-                    if (!lista.get(key).isEmpty())
+                    if (!mapa.get(key).isEmpty())
                     {
-                        iteratorListaActual = lista.get(key).iterator();
+                        iteratorListaActual = mapa.get(key).iterator();
                         return iteratorListaActual.next();
                     }
                 }

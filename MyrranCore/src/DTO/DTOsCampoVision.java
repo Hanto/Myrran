@@ -39,7 +39,7 @@ public class DTOsCampoVision
         public DatosCompletosPC() {}
         public DatosCompletosPC(PCI pc)
         {
-            connectionID = pc.getConnectionID(); nombre = pc.getNombre();
+            connectionID = pc.getID(); nombre = pc.getNombre();
             nivel = pc.getNivel();
             maxHPs = pc.getMaxHPs(); actualHPs = pc.getActualHPs();
             numAnimacion = pc.getNumAnimacion();

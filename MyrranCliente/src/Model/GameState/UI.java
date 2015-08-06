@@ -5,7 +5,6 @@ import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.UI.Acciones.AccionI;
 import Interfaces.UI.Acciones.CasillaI;
 import Interfaces.UI.BarraAcciones.BarraAccionesI;
-import Model.Classes.Acciones.AccionFactory;
 import Model.Classes.Input.InputManager;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
@@ -25,13 +24,6 @@ public class UI
         inputManager = new InputManager(player, controlador);
         conjuntoBarraAcciones = new ConjuntoBarraAcciones(player, inputManager);
         barraTerrenos  = new BarraTerrenos(player);
-
-        inputManager.añadirAccion(AccionFactory.accionComando.IRNORTE.nuevo());
-        inputManager.añadirAccion(AccionFactory.accionComando.IRSUR.nuevo());
-        inputManager.añadirAccion(AccionFactory.accionComando.IRESTE.nuevo());
-        inputManager.añadirAccion(AccionFactory.accionComando.IROESTE.nuevo());
-        inputManager.añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("Terraformar"));
-        inputManager.añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("Heal"));
     }
 
 

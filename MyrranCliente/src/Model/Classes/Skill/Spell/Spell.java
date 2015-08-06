@@ -113,6 +113,7 @@ public class Spell extends AbstractModel implements SpellI
         else 
         {   //Marcamos al personaje como Casteando, y actualizamos su tiempo de casteo con el que marque el Spell (Stat Slot 0)
             Caster.setTotalCastingTime(getValorTotal(Caster, STAT_Cast));
+            tipoSpell.ejecutarCasteo(this, Caster, targetX, targetY, mundo);
         }
     }
 }

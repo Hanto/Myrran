@@ -57,11 +57,10 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
     protected boolean castear = false;
 
 
-    //
+    //GET:
     //------------------------------------------------------------------------------------------------------------------
 
-    //GET:
-    @Override public int getConnectionID ()                             { return connectionID; }
+    @Override public int getID()                                        { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
     @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
@@ -81,8 +80,9 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
     @Override public String getSpellIDSeleccionado()                    { return spellIDSeleccionado; }
     @Override public Object getParametrosSpell()                        { return parametrosSpell; }
 
-
     //SET:
+    //------------------------------------------------------------------------------------------------------------------
+
     @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
     @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }

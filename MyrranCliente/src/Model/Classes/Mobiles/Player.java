@@ -1,13 +1,6 @@
 package Model.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
-import Model.Cuerpos.BodyFactory;
-import Model.Cuerpos.Cuerpo;
-import Model.FSM.IO.PlayerIO;
-import Model.FSM.MaquinaEstados;
-import Model.FSM.MaquinaEstadosFactory;
-import Model.Skills.SpellPersonalizado;
 import DB.DAO;
-import Model.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
@@ -17,9 +10,15 @@ import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
+import Model.Cuerpos.BodyFactory;
+import Model.Cuerpos.Cuerpo;
+import Model.FSM.IO.PlayerIO;
+import Model.FSM.MaquinaEstados;
+import Model.FSM.MaquinaEstadosFactory;
 import Model.GameState.Mundo;
+import Model.Settings;
+import Model.Skills.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import org.slf4j.LoggerFactory;
 
@@ -67,9 +66,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     //------------------------------------------------------------------------------------------------------------------
 
     //GET:
-    public Body getBody()                                               { return cuerpo.getBody(); }
-    public PlayerNotificador getNotificador()                           { return notificador; }
-    @Override public int getConnectionID()                              { return connectionID; }
+    @Override public int getID()                                        { return connectionID; }
     @Override public float getX()                                       { return x; }
     @Override public float getY()                                       { return y; }
     @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
@@ -90,6 +87,8 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     @Override public Object getParametrosSpell()                        { return parametrosSpell; }
     @Override public PlayerIOI getInput()                               { return input; }
     @Override public PlayerIOI getOutput()                              { return output; }
+    @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
+    public PlayerNotificador getNotificador()                           { return notificador; }
 
     //SET:
     @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
@@ -122,7 +121,8 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         cuerpo.setPosition(x, y);
     }
 
-    @Override public void dispose() {}
+    @Override public void dispose()
+    {   cuerpo.dispose();   }
 
     //RECEPCION DATOS:
     //------------------------------------------------------------------------------------------------------------------
@@ -293,10 +293,10 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         else if (output.getStopCastear()) stopCastear();
     }
 
-    public void copiarUltimaPosicion()
+    @Override public void copiarUltimaPosicion()
     {   cuerpo.copiarUltimaPosicion(); }
 
-    public void interpolarPosicion(float alpha)
+    @Override public void interpolarPosicion(float alpha)
     {
         cuerpo.interpolarPosicion(alpha);
         getPosicionInterpoladaCuerpo();
