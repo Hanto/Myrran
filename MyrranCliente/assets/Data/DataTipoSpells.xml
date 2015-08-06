@@ -16,9 +16,9 @@
     <Animacion ID="0" Pixie="Fireball02"></Animacion>
     <Animacion ID="0" Pixie="FrostBolt02"></Animacion>
     <Descripcion>Lanza un proyectil de fuego que todo lo quema y destroza</Descripcion>
-    <SkillStat ID="0" nombre="Casting time" valorBase="1.0" isMejorable="true" costeTalento="1" bonoTalento="-0.01" talentoMaximo="50"></SkillStat>
+    <SkillStat ID="0" nombre="Casting time" valorBase="1.0" isMejorable="true" costeTalento="1" bonoTalento="-0.015" talentoMaximo="50"></SkillStat>
     <SkillStat ID="1" nombre="Daño" valorBase="50.0" isMejorable="true" costeTalento="1" bonoTalento="1.0" talentoMaximo="50"></SkillStat>
-    <SkillStat ID="2" nombre="Velocidad" valorBase="5.0" isMejorable="true" costeTalento="1" bonoTalento="0.2" talentoMaximo="50"></SkillStat>
+    <SkillStat ID="2" nombre="Velocidad" valorBase="100.0" isMejorable="true" costeTalento="1" bonoTalento="15.0" talentoMaximo="50"></SkillStat>
     <SkillStat ID="3" nombre="Duracion" valorBase="5.0" isMejorable="true" costeTalento="1" bonoTalento="-0.4" talentoMaximo="50"></SkillStat>
   </TipoSpell>
 </TipoSpells>

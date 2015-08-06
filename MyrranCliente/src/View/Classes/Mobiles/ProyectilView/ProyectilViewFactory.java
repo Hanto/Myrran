@@ -1,4 +1,4 @@
-package View.Classes.Mobiles;// Created by Hanto on 05/08/2015.
+package View.Classes.Mobiles.ProyectilView;// Created by Hanto on 05/08/2015.
 
 import DB.RSC;
 import Interfaces.EntidadesTipos.ProyectilI;

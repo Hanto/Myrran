@@ -10,7 +10,7 @@ import Interfaces.Geo.MapaI;
 import Interfaces.Misc.ListaPorCuadrantesI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
-import Model.Classes.Misc.ListaPorCuadrantes;
+import Model.Datos.ListaPorCuadrantes;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.math.Vector2;

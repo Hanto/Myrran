@@ -1,4 +1,4 @@
-package Model.Classes.Misc;// Created by Hanto on 16/07/2015.
+package Model.Datos;// Created by Hanto on 16/07/2015.
 
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.Misc.ListaPorCuadrantesI;

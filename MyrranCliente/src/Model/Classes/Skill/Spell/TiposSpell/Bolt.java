@@ -6,7 +6,7 @@ import Interfaces.EntidadesPropiedades.EspacialInterpolado;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
-import Model.Classes.Mobiles.Proyectil;
+import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
 import Model.Classes.Skill.Spell.TipoSpell;
 
 public class Bolt extends TipoSpell
@@ -23,7 +23,7 @@ public class Bolt extends TipoSpell
         int STAT_VELOCIDAD = 2;
         int STAT_DURACION = 3;
 
-        ProyectilI proyectil = new Proyectil(mundo);
+        ProyectilI proyectil = ProyectilFactory.ESFERA24x24.nuevo(mundo);
 
         float origenX, origenY;
 

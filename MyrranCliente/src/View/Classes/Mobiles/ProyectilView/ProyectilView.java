@@ -1,4 +1,4 @@
-package View.Classes.Mobiles;// Created by Hanto on 04/08/2015.
+package View.Classes.Mobiles.ProyectilView;// Created by Hanto on 06/08/2015.
 
 import DTO.DTOsProyectil;
 import Interfaces.EntidadesTipos.ProyectilI;
@@ -91,5 +91,4 @@ public class ProyectilView extends Group implements PropertyChangeListener, Disp
         else if (evt.getNewValue() instanceof DTOsProyectil.DisposeProyectil)
         {   dispose(); }
     }
-
 }

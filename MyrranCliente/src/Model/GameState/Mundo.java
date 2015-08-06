@@ -11,7 +11,7 @@ import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
-import Model.Misc.ListaMapa;
+import Model.Datos.ListaMapa;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.math.Vector2;

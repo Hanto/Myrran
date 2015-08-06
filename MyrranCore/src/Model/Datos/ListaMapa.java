@@ -1,4 +1,4 @@
-package Model.Misc;// Created by Hanto on 06/08/2015.
+package Model.Datos;// Created by Hanto on 06/08/2015.
 
 import Interfaces.EntidadesPropiedades.IDentificable;
 import ch.qos.logback.classic.Logger;

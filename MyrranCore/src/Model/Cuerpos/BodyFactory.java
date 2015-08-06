@@ -59,7 +59,7 @@ public class BodyFactory
     {
         RECTANGULAR
         {
-            @Override public Body nuevo(World world, int ancho, int alto)
+            @Override public Cuerpo nuevo(World world, int ancho, int alto)
             {
                 BodyDef bd = new BodyDef();
                 bd.type = BodyDef.BodyType.KinematicBody;
@@ -75,12 +75,15 @@ public class BodyFactory
                 body.createFixture(fixDef);
 
                 shape.dispose();
-                return body;
+
+                Cuerpo cuerpo = new Cuerpo(world, ancho, alto);
+                cuerpo.setBody(body);
+                return cuerpo;
             }
         },
         CIRCLE
         {
-            @Override public Body nuevo(World world, int ancho, int alto)
+            @Override public Cuerpo nuevo(World world, int ancho, int alto)
             {
                 BodyDef bd = new BodyDef();
                 bd.type = BodyDef.BodyType.KinematicBody;
@@ -96,11 +99,14 @@ public class BodyFactory
                 body.createFixture(fixDef);
 
                 shape.dispose();
-                return body;
+
+                Cuerpo cuerpo = new Cuerpo(world, ancho, alto);
+                cuerpo.setBody(body);
+                return cuerpo;
             }
         };
 
-        public abstract Body nuevo(World world, int ancho, int alto);
+        public abstract Cuerpo nuevo(World world, int ancho, int alto);
 
         private crearCuerpo() {}
     }

@@ -1,4 +1,4 @@
-package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
+package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 08/04/2014.
 
 import DTO.DTOsProyectil;
 import Interfaces.EntidadesPropiedades.Caster;
@@ -6,7 +6,6 @@ import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Spell.SpellI;
-import Model.Cuerpos.BodyFactory;
 import Model.Cuerpos.Cuerpo;
 import Model.Settings;
 
@@ -47,10 +46,10 @@ public class Proyectil extends AbstractModel implements ProyectilI
     @Override public float getVelocidadMax()                            { return velocidadMax; }
     @Override public float getDuracionActual()                          { return duracionActual; }
     @Override public float getDuracionMaxima()                          { return duracionMaxima; }
-    @Override public SpellI getSpell()                                  { return spell; }
     @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
-    @Override public float getDaño()                                    { return daño; }
+    @Override public SpellI getSpell()                                  { return spell; }
     @Override public Caster getOwner()                                  { return owner; }
+    @Override public float getDaño()                                    { return daño; }
 
     //SET:
     //------------------------------------------------------------------------------------------------------------------
@@ -63,16 +62,15 @@ public class Proyectil extends AbstractModel implements ProyectilI
     @Override public void setDuracionActual(float duracionActual)       { this.duracionActual = duracionActual; }
     @Override public void setDuracionMaxima(float duracionMaxima)       { this.duracionMaxima = duracionMaxima; }
     @Override public void setSpell(SpellI spell)                        { this.spell = spell; }
-    @Override public void setDaño(float daño)                           { this.daño = daño; }
     @Override public void setOwner (Caster caster)                      { this.owner = caster; }
+    @Override public void setDaño(float daño)                           { this.daño = daño; }
 
     //Constructor:
-    public Proyectil(MundoI mundo)
+    public Proyectil(MundoI mundo, Cuerpo cuerpo)
     {
         this.iD = this.hashCode();
         this.mundo = mundo;
-        cuerpo = new Cuerpo(mundo.getWorld(), 24, 24);
-        BodyFactory.darCuerpo.CIRCLE.nuevo(cuerpo);
+        this.cuerpo = cuerpo;
     }
 
     @Override public void dispose()
@@ -85,7 +83,7 @@ public class Proyectil extends AbstractModel implements ProyectilI
     @Override public void setVelocidadMax(float velocidadMax)
     {
         this.velocidadMax = velocidadMax;
-        cuerpo.setLinearVelocity(velocidadMax * 10);
+        cuerpo.setLinearVelocity(velocidadMax);
     }
 
     @Override public void setPosition(float x, float y)

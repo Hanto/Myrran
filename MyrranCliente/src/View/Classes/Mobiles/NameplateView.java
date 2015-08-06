@@ -4,10 +4,10 @@ import DB.RSC;
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;
 import DTO.DTOsPlayer;
 import DTO.DTOsPlayer.CastingTimePercent;
-import Model.Settings;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.Model.ModelI;
+import Model.Settings;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -160,4 +160,5 @@ public class NameplateView extends Actor implements PropertyChangeListener
         if (evt.getNewValue() instanceof CastingTimePercent)
         { setCastingTimePercent(((CastingTimePercent) evt.getNewValue()).castingTimePercent); }
     }
+
 }
