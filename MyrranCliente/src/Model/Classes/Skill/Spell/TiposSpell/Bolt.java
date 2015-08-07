@@ -1,8 +1,8 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 04/08/2015.
 
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesPropiedades.Corporal;
 import Interfaces.EntidadesPropiedades.Espacial;
-import Interfaces.EntidadesPropiedades.EspacialInterpolado;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
@@ -23,28 +23,36 @@ public class Bolt extends TipoSpell
         int STAT_VELOCIDAD = 2;
         int STAT_DURACION = 3;
 
-        ProyectilI proyectil = ProyectilFactory.ESFERA24x24.nuevo(mundo);
+        int ANCHO = 24;
+        int ALTO = 24;
 
         float origenX, origenY;
 
-        if (caster instanceof EspacialInterpolado)
+        if (caster instanceof Corporal)
         {
-            origenX = ((EspacialInterpolado) caster).getCuerpo().getCentroXinterpolada() - proyectil.getCuerpo().getAncho()/2;
-            origenY = ((EspacialInterpolado) caster).getCuerpo().getCentroYinterpolada() - proyectil.getCuerpo().getAlto()/2;
+            origenX = ((Corporal) caster).getCuerpo().getCentroXinterpolada() - ANCHO/2;
+            origenY = ((Corporal) caster).getCuerpo().getCentroYinterpolada() - ALTO/2;
         }
         else if (caster instanceof Espacial)
         {
-            origenX = ((Espacial) caster).getX() - proyectil.getCuerpo().getAncho()/2;
-            origenY = ((Espacial) caster).getY() - proyectil.getCuerpo().getAlto()/2;
+            origenX = ((Espacial) caster).getX() - ANCHO/2;
+            origenY = ((Espacial) caster).getY() - ALTO/2;
         }
         else return;
 
-        proyectil.setPosition(origenX, origenY);
-        proyectil.setDireccion(targetX, targetY);
-        proyectil.setSpell(spell);
-        proyectil.setDaño(spell.getValorTotal(caster, STAT_DAÑO));
-        proyectil.setVelocidadMax(spell.getValorTotal(caster, STAT_VELOCIDAD));
-        proyectil.setDuracionMaxima(spell.getValorTotal(caster, STAT_DURACION));
+        ProyectilI proyectil = ProyectilFactory.ESFERA.nuevo(mundo, ANCHO, ALTO)
+                .setSpell(spell)
+                .setOwner(caster)
+                .setID()
+                .setPosition(origenX, origenY)
+                .setDireccion(targetX, targetY)
+                .setDaño(spell.getValorTotal(caster, STAT_DAÑO))
+                .setVelocidad(spell.getValorTotal(caster, STAT_VELOCIDAD))
+                .setDuracion(spell.getValorTotal(caster, STAT_DURACION))
+                .build();
+
         mundo.añadirProyectil(proyectil);
+
+        System.out.println(proyectil.getID());
     }
 }

@@ -2,8 +2,9 @@ package Interfaces.EntidadesPropiedades;// Created by Hanto on 21/07/2014.
 
 import Interfaces.Model.ModelI;
 
-public interface PlayerStats extends ModelI
+public interface PCStats extends ModelI
 {
+    public int getIDProyectiles();
     public String getNombre();
     public int getNivel();
 

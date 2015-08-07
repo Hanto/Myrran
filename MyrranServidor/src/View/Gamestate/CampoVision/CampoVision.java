@@ -2,12 +2,14 @@ package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 
 import Controller.Controlador;
 import DTO.DTOsPC;
-import Model.Settings;
+import DTO.DTOsProyectil;
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesTipos.CampoVisionI;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.GameState.MundoI;
 import Interfaces.Model.AbstractModel;
-import Model.GameState.Mundo;
+import Model.Settings;
 import View.Gamestate.MundoView;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -20,7 +22,7 @@ import java.util.List;
 public class CampoVision extends AbstractModel implements PropertyChangeListener, CampoVisionI
 {
     protected MundoView mundoView;
-    protected Mundo mundo;
+    protected MundoI mundo;
     protected Controlador controlador;
 
     protected BufferCampoVision buffer;
@@ -30,6 +32,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
 
     //UNIDADES QUE OBSERVAMOS:
     private List<PCI> listaPCsCercanos = new ArrayList<>();
+    private List<ProyectilI> listaProyectilesCercanos = new ArrayList<>();
 
     @Override public int getConnectionID()              { return connectionID; }
     @Override public float getX()                       { return targetLock.getEspacial().getX(); }
@@ -62,7 +65,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         targetLock.dispose();
     }
 
-    @Override public void setCentro (Espacial espacial)
+    @Override public void setTargetLock(Espacial espacial)
     {
         for (PCI pc : listaPCsCercanos)
         {   pc.eliminarObservador(this); }
@@ -98,15 +101,40 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         }
     }
 
+    private void comprobarVisibilidadProyectilesObservados()
+    {
+        Iterator<ProyectilI> iterator = listaProyectilesCercanos.iterator();
+        ProyectilI pro;
+        while (iterator.hasNext())
+        {
+            pro = iterator.next();
+            if (!isVisiblePor(pro))
+            {
+                iterator.remove();
+                pro.eliminarObservador(this);
+                //TODO Buffer.EliminarProyectil(pro)
+            }
+        }
+    }
+
     public void radar()
     {
         comprobarVisiblidadMobsObservados();
+        comprobarVisibilidadProyectilesObservados();
         PCI pc;
-        Iterator<PCI> iteratorPC = mundo.getMapaPCs().getIteratorCuadrantes(getMapTileX(), getMapTileY());
+        Iterator<PCI> iteratorPC = mundo.getIteratorPCs(getMapTileX(), getMapTileY());
         while (iteratorPC.hasNext())
         {
             pc = iteratorPC.next();
             if (isVisiblePor(pc)) añadirPC(pc);
+        }
+
+        ProyectilI pro;
+        Iterator<ProyectilI> iteratorPro = mundo.getIteratorProyectiles(getMapTileX(), getMapTileY());
+        while (iteratorPro.hasNext())
+        {
+            pro = iteratorPro.next();
+            if (isVisiblePor(pro)) añadirProyectil(pro);
         }
     }
 
@@ -159,6 +187,30 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     private void numTalentosSkillPersonalizadoPC (PCI pc, String skillID, int statID, int valor)
     {   buffer.addNumTalentosSkillPersonalizadoPC(pc, skillID, statID, valor); }
 
+    // PROYECTILES:
+    //--------------------------------------------------------------------------------------------------------------
+
+    public void añadirProyectil(ProyectilI proyectil)
+    {
+        if (!listaProyectilesCercanos.contains(proyectil))
+        {
+            listaProyectilesCercanos.add(proyectil);
+            proyectil.añadirObservador(this);
+            if (proyectil.getOwner() instanceof PCI & proyectil.getOwner().getID() == connectionID) {}
+            else { buffer.setDatosCompletosProyectil(proyectil); }
+        }
+    }
+
+    public void eliminarProyectil(ProyectilI proyectil)
+    {
+        if (listaProyectilesCercanos.contains(proyectil))
+        {
+            listaProyectilesCercanos.remove(proyectil);
+            proyectil.eliminarObservador(this);
+            //TODO buffer.eliminarProyectil(proyectil)
+        }
+    }
+
     //CAMPOS OBSERVADOS:
     //--------------------------------------------------------------------------------------------------------------
 
@@ -168,26 +220,30 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         if (evt.getNewValue() instanceof DTOsPC.EliminarPC)
         {   eliminarPC(((DTOsPC.EliminarPC) evt.getNewValue()).pc); }
 
-        if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
+        else if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
         {   posicionPC(((DTOsPC.PosicionPC) evt.getNewValue()).pc); }
 
-        if (evt.getNewValue() instanceof DTOsPC.NumAnimacionPC)
+        else if (evt.getNewValue() instanceof DTOsPC.NumAnimacionPC)
         {   numAnimacionPC(((DTOsPC.NumAnimacionPC) evt.getNewValue()).pc); }
 
-        if (evt.getNewValue() instanceof DTOsPC.ModificarHPsPC)
+        else if (evt.getNewValue() instanceof DTOsPC.ModificarHPsPC)
         {   modificarHPsPC(((DTOsPC.ModificarHPsPC) evt.getNewValue()).pc,
                            ((DTOsPC.ModificarHPsPC) evt.getNewValue()).HPs); }
 
-        if (evt.getNewValue() instanceof DTOsPC.AñadirSpellPersonalizadoPC)
+        else if (evt.getNewValue() instanceof DTOsPC.AñadirSpellPersonalizadoPC)
         {   añadirSpellPersonalizadoPC(((DTOsPC.AñadirSpellPersonalizadoPC) evt.getNewValue()).pc,
                                        ((DTOsPC.AñadirSpellPersonalizadoPC) evt.getNewValue()).spellID);}
 
-        if (evt.getNewValue() instanceof DTOsPC.NumTalentosSkillPersonalizadoPC)
+        else if (evt.getNewValue() instanceof DTOsPC.NumTalentosSkillPersonalizadoPC)
         {   numTalentosSkillPersonalizadoPC(((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).pc,
                                             ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).skillID,
                                             ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).statID,
                                             ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).valor);
         }
+
+        //OBSERVAR A LOS PROYECTILES (PROYECTILES)
+        else if (evt.getNewValue() instanceof DTOsProyectil.DisposeProyectil)
+        {   eliminarProyectil(((DTOsProyectil.DisposeProyectil) evt.getNewValue()).proyectil); }
     }
 
     //TARGET LOCK
@@ -225,7 +281,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         {   mapaView.comprobarVistaMapa(); }
 
         private void eliminar()
-        {   if (mundo.getPC(connectionID) != null) setCentro(mundo.getPC(connectionID)); }
+        {   if (mundo.getPC(connectionID) != null) setTargetLock(mundo.getPC(connectionID)); }
 
         @Override public void propertyChange(PropertyChangeEvent evt)
         {

@@ -1,6 +1,7 @@
 package View.Gamestate.CampoVision;// Created by Hanto on 24/07/2015.
 
 import Controller.Controlador;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Skills.SkillMod;
 import DTO.DTOsCampoVision;
 import Interfaces.EntidadesTipos.PCI;
@@ -16,6 +17,7 @@ public class BufferCampoVision
 
     private List<Object> listaDTOsMisc = new ArrayList<>();
     private MapDTOs mapaDTOsPC = new MapDTOs();
+    private MapDTOs mapaDTOsProyectiles = new MapDTOs();
 
     //MANIPULACION DE LAS ESTRUCTURAS DE DATOS:
     //---------------------------------------------------------------------------------------------------------------
@@ -58,6 +60,9 @@ public class BufferCampoVision
 
         public void remove(Integer key)
         {   mapDTOs.remove(key); }
+
+        public void clear()
+        {   mapDTOs.clear(); }
     }
 
     public BufferCampoVision() {}
@@ -140,6 +145,22 @@ public class BufferCampoVision
         mapaDTOsPC.add(pc.getID(), numTalentosSkill);
     }
 
+    //PROYECTILES:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void setDatosCompletosProyectil (ProyectilI proyectil)
+    {
+        DTOsCampoVision.DatosCompletosProyectil datosCompletos = new DTOsCampoVision.DatosCompletosProyectil(proyectil);
+        mapaDTOsProyectiles.set(proyectil.getID(), DTOsCampoVision.DatosCompletosProyectil.class, datosCompletos);
+    }
+
+    public void eliminarProyectil (ProyectilI proyectil)
+    {
+        DTOsCampoVision.EliminarProyectil eliminarProyectil = new DTOsCampoVision.EliminarProyectil(proyectil);
+        mapaDTOsProyectiles.remove(proyectil.getID());
+        mapaDTOsProyectiles.set(proyectil.getID(), DTOsCampoVision.EliminarProyectil.class, eliminarProyectil);
+    }
+
     //MISC:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -164,7 +185,23 @@ public class BufferCampoVision
                 pcDTOs.listaDTOs = array.getValue().toArray();
                 controlador.enviarACliente(conID, pcDTOs);
             }
-            mapaDTOsPC.mapDTOs.clear();
+            mapaDTOsPC.clear();
+        }
+    }
+
+    private void enviarDTOsProyectil (Controlador controlador, int conID)
+    {
+        if (mapaDTOsProyectiles.mapDTOs.size() > 0)
+        {
+            DTOsCampoVision.ProyectilDTOs proyectilDTOs = new DTOsCampoVision.ProyectilDTOs();
+            for (Map.Entry<Integer, ArrayList<Object>> array : mapaDTOsProyectiles.mapDTOs.entrySet())
+            {
+                proyectilDTOs.connectionID = array.getKey();
+                proyectilDTOs.listaDTOs = new Object[array.getValue().size()];
+                proyectilDTOs.listaDTOs = array.getValue().toArray();
+                controlador.enviarACliente(conID, proyectilDTOs);
+            }
+            mapaDTOsProyectiles.clear();
         }
     }
 
@@ -183,6 +220,7 @@ public class BufferCampoVision
     public void enviarDTOS (Controlador controlador, int conID)
     {
         enviarDTOsPC(controlador, conID);
+        enviarDTOsProyectil(controlador, conID);
         enviarDTOsMisc(controlador, conID);
     }
 }

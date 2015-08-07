@@ -43,6 +43,7 @@ public class PC extends AbstractModel implements PCI
     @Override public void setActualHPs(float HPs)               { modificarHPs(HPs - actualHPs);}
     @Override public void setMaxHPs(float HPs)                  { this.maxHPs = HPs; }
     @Override public String getNombre()                         { return null; }
+    @Override public int getIDProyectiles()                     { return 0; }
     @Override public int getNivel()                             { return 0; }
     @Override public float getVelocidadMod()                    { return 0; }
     @Override public float getVelocidadMax()                    { return 0; }
@@ -55,6 +56,7 @@ public class PC extends AbstractModel implements PCI
     @Override public float getTotalCastingTime()                { return 0; }
     @Override public String getSpellIDSeleccionado()            { return null; }
     @Override public Object getParametrosSpell()                { return null; }
+    @Override public Cuerpo getCuerpo()                         { return null; }
 
     @Override public void setUltimoMapTile (int x, int y)       { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setConnectionID (int connectionID)    { this.connectionID = connectionID; }

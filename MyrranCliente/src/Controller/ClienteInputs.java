@@ -3,10 +3,13 @@ package Controller;// Created by Hanto on 22/07/2014.
 import DB.DAO;
 import DTO.DTOsCampoVision;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.Acciones.AccionI;
 import Model.Classes.Acciones.AccionFactory;
+import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
+import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +34,7 @@ public class ClienteInputs
         if (pcDTOs.connectionID == mundo.getPlayer().getID()) pc = mundo.getPlayer();
         else if (mundo.getPC(pcDTOs.connectionID) == null)
         {
-            mundo.añadirPC(pcDTOs.connectionID, -5000, -5000);
+            mundo.añadirPC(new PC(pcDTOs.connectionID, mundo));
             pc = mundo.getPC(pcDTOs.connectionID);
         }
         else pc = mundo.getPC(pcDTOs.connectionID);
@@ -95,11 +98,36 @@ public class ClienteInputs
         }
     }
 
+    public void procesarActualizacionesProyectiles(DTOsCampoVision.ProyectilDTOs proyectilDTOs)
+    {
+        Object dto;
+
+        for (int i=0; i < proyectilDTOs.listaDTOs.length; i++)
+        {
+            dto = proyectilDTOs.listaDTOs[i];
+
+            if (dto instanceof DTOsCampoVision.DatosCompletosProyectil)
+            {
+                System.out.println("Pepo ha llegado: "+ ((DTOsCampoVision.DatosCompletosProyectil) dto).ID);
+                ProyectilI proyectil = ProyectilFactory.ESFERA.nuevo(mundo, ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
+                        .setID(((DTOsCampoVision.DatosCompletosProyectil) dto).ID)
+                        .setSpell(((DTOsCampoVision.DatosCompletosProyectil) dto).spellID)
+                        .setPosition(((DTOsCampoVision.DatosCompletosProyectil) dto).origenX, ((DTOsCampoVision.DatosCompletosProyectil) dto).origenY)
+                        .setDireccionEnGrados(((DTOsCampoVision.DatosCompletosProyectil) dto).direccionEnGrados)
+                        .setVelocidad(((DTOsCampoVision.DatosCompletosProyectil) dto).velocidad)
+                        .setDuracion(((DTOsCampoVision.DatosCompletosProyectil) dto).duracionMax)
+                        .build();
+                proyectil.setDuracionActual(((DTOsCampoVision.DatosCompletosProyectil) dto).duracionActual);
+                mundo.añadirProyectil(proyectil);
+            }
+        }
+    }
+
     public void procesarActualizacionesMisc(DTOsCampoVision.MiscDTOs miscDTOs)
     {
         Object dto;
 
-        for (int i=0; i<miscDTOs.listaDTOs.length; i++)
+        for (int i=0; i < miscDTOs.listaDTOs.length; i++)
         {
             dto = miscDTOs.listaDTOs[i];
 

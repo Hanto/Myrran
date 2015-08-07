@@ -9,7 +9,6 @@ import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
-import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
 import Model.Datos.ListaMapa;
 import Model.Settings;
@@ -18,7 +17,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Iterator;
 
 public class Mundo extends AbstractModel implements MundoI
 {
@@ -29,15 +28,13 @@ public class Mundo extends AbstractModel implements MundoI
     private Mapa mapa;
     private World world;
 
+    public Player getPlayer()                               { return player; }
+    @Override public MapaI getMapa()                        { return mapa; }
+    @Override public World getWorld()                       { return world; }
+
     public boolean[][] mapTilesCargados = new boolean[3][3];
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    //Get:
-    @Override public World getWorld()                       { return world; }
-    @Override public MapaI getMapa()                        { return mapa; }
-    @Override public PCI getPC (int connectionID)           { return listaMapaPlayers.get(connectionID); }
-    @Override public Iterator<PCI> getIteratorListaPCs()    { return listaMapaPlayers.iterator(); }
-    public Player getPlayer()                               { return player; }
 
     public Mundo()
     {
@@ -49,21 +46,28 @@ public class Mundo extends AbstractModel implements MundoI
     // PLAYERS:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void añadirPC (int connectionID, float x, float y)
+    public void añadirPC (PCI pc)
     {
-        PCI pc = new PC(connectionID, this);
-        pc.setPosition(x, y);
         listaMapaPlayers.add(pc);
 
         DTOsMundo.AñadirPC nuevoPlayer = new DTOsMundo.AñadirPC(pc);
         notificarActualizacion("añadirPC", null, nuevoPlayer);
     }
 
-    public void eliminarPC (int connectionID)
+    @Override public void eliminarPC (int connectionID)
     {
         PCI pc = listaMapaPlayers.remove(connectionID);
         pc.dispose();
     }
+
+    @Override public PCI getPC (int connectionID)
+    {   return listaMapaPlayers.get(connectionID); }
+
+    @Override public Iterator<PCI> getIteratorPCs()
+    {   return listaMapaPlayers.iterator(); }
+
+    public Iterator<PCI> getIteratorPCs(int mapTileX, int mapTileY)
+    {   return listaMapaPlayers.iterator(); }
 
     // PROYECTILES:
     //------------------------------------------------------------------------------------------------------------------
@@ -76,9 +80,17 @@ public class Mundo extends AbstractModel implements MundoI
         notificarActualizacion("añadirProyectil", null, nuevoProyectil);
     }
 
-    @Override public void eliminarProyectil(ProyectilI proyectil)
-    {   listaMapaProyectiles.remove(proyectil); }
+    @Override public void eliminarProyectil(int iD)
+    {   listaMapaProyectiles.remove(iD); }
 
+    @Override public ProyectilI getProyectil (int iD)
+    {   return listaMapaProyectiles.get(iD); }
+
+    @Override public Iterator<ProyectilI> getIteratorProyectiles()
+    {   return listaMapaProyectiles.iterator(); }
+
+    @Override public Iterator<ProyectilI> getIteratorProyectiles(int mapTileX, int mapTileY)
+    {   return listaMapaProyectiles.iterator(); }
 
     // MAPA:
     //------------------------------------------------------------------------------------------------------------------
@@ -116,8 +128,8 @@ public class Mundo extends AbstractModel implements MundoI
             pro = iterator.next();
             if (pro.consumirse(delta))
             {
-                pro.dispose();
                 iterator.remove();
+                pro.dispose();
             }
         }
     }
@@ -131,7 +143,7 @@ public class Mundo extends AbstractModel implements MundoI
         for (ProyectilI proyectil: listaMapaProyectiles)
         {   proyectil.copiarUltimaPosicion(); }
 
-        //calculamos los nuevos:
+        //calculamos los nuevos valores:
         world.step(delta, 8, 6);
     }
 

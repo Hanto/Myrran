@@ -2,9 +2,10 @@ package DTO;// Created by Hanto on 06/06/2015.
 
 import Interfaces.EntidadesPropiedades.Animable;
 import Interfaces.EntidadesPropiedades.Espacial;
-import Interfaces.EntidadesPropiedades.PlayerStats;
+import Interfaces.EntidadesPropiedades.PCStats;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 
 public class DTOsCampoVision
 {
@@ -17,6 +18,15 @@ public class DTOsCampoVision
         public Object[] listaDTOs;
         public PCDTOs() {}
         public PCDTOs(int connectionID)
+        {   this.connectionID = connectionID; }
+    }
+
+    public static class ProyectilDTOs
+    {
+        public int connectionID;
+        public Object[] listaDTOs;
+        public ProyectilDTOs() {}
+        public ProyectilDTOs(int connectionID)
         {   this.connectionID = connectionID; }
     }
 
@@ -76,7 +86,7 @@ public class DTOsCampoVision
         public NombrePC() {}
         public NombrePC(String nombre)
         {   this.nombre = nombre; }
-        public NombrePC(PlayerStats pc)
+        public NombrePC(PCStats pc)
         {   this.nombre = pc.getNombre(); }
     }
 
@@ -115,6 +125,46 @@ public class DTOsCampoVision
         public NumTalentosSkillPersonalizadoPC() {}
         public NumTalentosSkillPersonalizadoPC(String skillID, int statID, int valor)
         {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
+    }
+
+    // PROYECTIL DTOS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public static class DatosCompletosProyectil
+    {
+        public int ID;
+        public String spellID;
+        public short ancho;
+        public short alto;
+        public int origenX;
+        public int origenY;
+        public float direccionEnGrados;
+        public float velocidad;
+        public float duracionActual;
+        public float duracionMax;
+
+        public DatosCompletosProyectil() {}
+        public DatosCompletosProyectil(ProyectilI proyectil)
+        {
+            this.ID = proyectil.getID();
+            this.spellID = proyectil.getSpell().getID();
+            this.ancho = (short)proyectil.getCuerpo().getAncho();
+            this.alto = (short)proyectil.getCuerpo().getAlto();
+            this.origenX = (int)proyectil.getX();
+            this.origenY = (int)proyectil.getY();
+            this.direccionEnGrados = proyectil.getCuerpo().getDireccion().angle();
+            this.velocidad = proyectil.getVelocidadMax();
+            this.duracionActual = proyectil.getDuracionActual();
+            this.duracionMax = proyectil.getVelocidadMax();
+        }
+    }
+
+    public static class EliminarProyectil
+    {
+        public int iD;
+        public EliminarProyectil() {}
+        public EliminarProyectil(ProyectilI proyectil)
+        {   this.iD = proyectil.getID(); }
     }
 
     //MISC DTOS:

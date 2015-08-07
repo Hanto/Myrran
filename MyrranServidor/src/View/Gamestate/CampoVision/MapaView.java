@@ -3,9 +3,9 @@ package View.Gamestate.CampoVision;// Created by Hanto on 20/05/2014.
 import Controller.Controlador;
 import DTO.DTOsMapView;
 import DTO.DTOsMapa;
-import Model.Settings;
 import Interfaces.EntidadesPropiedades.Espacial;
-import Model.GameState.Mundo;
+import Interfaces.GameState.MundoI;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.utils.Disposable;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class MapaView implements PropertyChangeListener, Disposable
     private Espacial espacial;
     private int connectionID;
 
-    private Mundo mundo;
+    private MundoI mundo;
     private Controlador controlador;
     private CampoVision campoVision;
 
@@ -37,7 +37,7 @@ public class MapaView implements PropertyChangeListener, Disposable
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MapaView(Espacial espacial, int connectionID, Mundo mundo, Controlador controlador, CampoVision campoVision)
+    public MapaView(Espacial espacial, int connectionID, MundoI mundo, Controlador controlador, CampoVision campoVision)
     {
         this.espacial = espacial;
         this.connectionID = connectionID;

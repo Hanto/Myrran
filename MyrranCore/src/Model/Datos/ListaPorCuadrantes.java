@@ -1,12 +1,13 @@
 package Model.Datos;// Created by Hanto on 16/07/2015.
 
 import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.Misc.ListaPorCuadrantesI;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.*;
 
-public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrantesI<T>
+public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements ListaPorCuadrantesI<T>
 {
     //Estructura de datos que almacena Espaciales en un Hashmap agrupandolos por sectores segun el maptile en el que
     //se encuentren. Todos los Espaciles del MapTileX 0, y MaptileY 0 estaran en un mismo ArrayList, indexado por el
@@ -135,7 +136,7 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
         private int mapTileY;
         private int offsetActual = 0;
         private final Vector2[] offsets = new Vector2[9];
-        private Iterator<T> iteratorListaActual;
+        private Iterator<T> iterator;
 
         public IteratorCuadrantes(int mapTileX, int mapTileY)
         {
@@ -166,7 +167,7 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
                 if (mapa.containsKey(key))
                 {
                     if (!mapa.get(key).isEmpty())
-                    {   iteratorListaActual = mapa.get(key).iterator(); break; }
+                    {   iterator = mapa.get(key).iterator(); break; }
                 }
             }
         }
@@ -184,24 +185,48 @@ public class ListaPorCuadrantes<T extends Espacial> implements ListaPorCuadrante
                 {
                     if (!mapa.get(key).isEmpty())
                     {
-                        iteratorListaActual = mapa.get(key).iterator();
-                        return iteratorListaActual.next();
+                        iterator = mapa.get(key).iterator();
+                        return iterator.next();
                     }
                 }
             }
             return null;
         }
 
+        private boolean hasNextLista()
+        {
+            String key;
+
+            for (int i=offsetActual; i<=8; i++)
+            {
+                key = (mapTileX+(int)offsets[i].x)+"-"+(mapTileY+(int)offsets[i].y);
+                if (mapa.containsKey(key))
+                {
+                    if (!mapa.get(key).isEmpty())
+                        return true;
+                }
+            }
+            return false;
+        }
+
         public T next()
         {
-            if (iteratorListaActual.hasNext()) return iteratorListaActual.next();
+            if (iterator.hasNext()) return iterator.next();
             else return nextLista();
         }
 
         public boolean hasNext()
-        {   return iteratorListaActual.hasNext(); }
+        {
+            if (iterator == null) return false;
+            else
+            {
+                if (iterator.hasNext()) return true;
+                else return hasNextLista();
+            }
+
+        }
 
         @Override public void remove()
-        {   iteratorListaActual.remove(); }
+        {   iterator.remove(); }
     }
 }

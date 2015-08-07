@@ -101,7 +101,7 @@ public class PlayerNotificador
 
     public void setStopCastear(int screenX, int screenY)
     {
-        if (stopCastear.screenX != screenX || stopCastear.screenY != screenY)
+        //if (stopCastear.screenX != screenX || stopCastear.screenY != screenY)
         {
             stopCastear.screenX = screenX;
             stopCastear.screenY = screenY;
@@ -111,7 +111,7 @@ public class PlayerNotificador
 
     public void setStartCastear(int screenX, int screenY)
     {
-        if (startCastear.screenX != screenX || startCastear.screenY != screenY)
+        //if (startCastear.screenX != screenX || startCastear.screenY != screenY)
         {
             startCastear.screenX = screenX;
             startCastear.screenY = screenY;

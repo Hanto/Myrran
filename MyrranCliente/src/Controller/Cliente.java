@@ -61,14 +61,17 @@ public class Cliente extends Client
         if (obj instanceof DTOsMapView.Mapa)
         {   controlador.actualizarMapa((DTOsMapView.Mapa) obj); }
 
-        if (obj instanceof DTOsMapView.MapTilesAdyacentes)
+        else if (obj instanceof DTOsMapView.MapTilesAdyacentes)
         {   controlador.actualizarMapTilesAdyacentes(((DTOsMapView.MapTilesAdyacentes) obj));}
 
-        if (obj instanceof DTOsCampoVision.PCDTOs)
+        else if (obj instanceof DTOsCampoVision.PCDTOs)
         {   clienteInputs.procesarActualizacionesPC( (DTOsCampoVision.PCDTOs) obj);}
 
-        if (obj instanceof DTOsCampoVision.MiscDTOs)
+        else if (obj instanceof DTOsCampoVision.MiscDTOs)
         {   clienteInputs.procesarActualizacionesMisc( (DTOsCampoVision.MiscDTOs) obj );}
+
+        else if (obj instanceof DTOsCampoVision.ProyectilDTOs)
+        {   clienteInputs.procesarActualizacionesProyectiles( (DTOsCampoVision.ProyectilDTOs) obj );}
     }
 
     //------------------------------------------------------------------------------------------------------------------

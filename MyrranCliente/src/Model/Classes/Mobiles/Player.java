@@ -30,6 +30,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
 {
     protected Mundo mundo;
     protected int connectionID;
+    protected int iDProyectiles = 0;
 
     protected int ultimoMapTileX;
     protected int ultimoMapTileY;
@@ -262,6 +263,15 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
                 //actualCastingTime += 0.01f;
             }
         }
+    }
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public int getIDProyectiles()
+    {
+        if (iDProyectiles++ >= (Math.pow(2, 20))) { iDProyectiles = 0; }
+        return iDProyectiles;
     }
 
     // METODOS DE ACTUALIZACION

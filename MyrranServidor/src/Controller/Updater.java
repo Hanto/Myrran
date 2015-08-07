@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 09/04/2014.
 
-import Model.Settings;
 import Model.GameState.Mundo;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.slf4j.LoggerFactory;
@@ -72,9 +72,14 @@ public class Updater implements Runnable
                     mundo.actualizarFisica(Settings.FIXED_TimeStep);
 
                     //VISTA:
-                    controlador.actualizarRadarCampoVisiones();
-                    controlador.enviarDatosAClientes();
+                    //controlador.actualizarRadarCampoVisiones();
+                    //controlador.enviarDatosAClientes();
                 }
+                //VISTA:
+                controlador.actualizarRadarCampoVisiones();
+                controlador.enviarDatosAClientes();
+
+                mundo.interpolarPosicion((float) timeStep / Settings.FIXED_TimeStep);
             }
             try { Thread.sleep((long)(1)); }
             catch (InterruptedException e) { logger.error("ERROR: Updateando la red: ", e); return; }

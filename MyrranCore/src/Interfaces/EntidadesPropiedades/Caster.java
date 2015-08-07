@@ -2,7 +2,7 @@ package Interfaces.EntidadesPropiedades;// Created by Hanto on 17/04/2014.
 
 import Interfaces.Model.ModelI;
 
-public interface Caster extends ModelI
+public interface Caster extends ModelI, IDentificable
 {
     //GET:
     public boolean isCasteando();

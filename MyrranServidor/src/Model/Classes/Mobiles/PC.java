@@ -25,6 +25,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
 {
     protected Mundo mundo;
     protected int connectionID;
+    protected int iDProyectiles = 0;
 
     protected int ultimoMapTileX = 0;
     protected int ultimoMapTileY = 0;
@@ -79,6 +80,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
     @Override public float getTotalCastingTime()                        { return totalCastingTime; }
     @Override public String getSpellIDSeleccionado()                    { return spellIDSeleccionado; }
     @Override public Object getParametrosSpell()                        { return parametrosSpell; }
+    @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
 
     //SET:
     //------------------------------------------------------------------------------------------------------------------
@@ -182,6 +184,15 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
             skillPersonalizado.setNumTalentos(statID, valor);
     }
 
+    //
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public int getIDProyectiles()
+    {
+        if (iDProyectiles++ >= (Math.pow(2, 20))) { iDProyectiles = 0; }
+        return iDProyectiles;
+    }
+
     // METODOS ACTUALIZACION:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -201,6 +212,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
             if (spell != null)
             {
                 spell.castear(this, targetX, targetY, mundo);
+                castear = false;
                 //actualCastingTime += 0.01f;
             }
         }

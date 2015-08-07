@@ -4,5 +4,5 @@ import Interfaces.EntidadesPropiedades.*;
 import com.badlogic.gdx.utils.Disposable;
 
 public interface ProyectilI extends IDentificable, ProyectilStats, Espacial, EspacialInterpolado, Dinamico, Consumible,
-        Actualizable, Disposable
+        Corporal, Actualizable, Disposable
 { }

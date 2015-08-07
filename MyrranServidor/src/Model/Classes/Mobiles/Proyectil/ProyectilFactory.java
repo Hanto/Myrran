@@ -71,5 +71,4 @@ public enum ProyectilFactory
     public abstract ProyectilFactory setDireccion (float destinoX, float destinoY);
     public abstract ProyectilFactory setDireccionEnGrados (float direccion);
     public abstract Proyectil build();
-
 }

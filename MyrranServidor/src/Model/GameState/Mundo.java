@@ -7,40 +7,26 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
-import Interfaces.Misc.ListaPorCuadrantesI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
-import Model.Datos.ListaPorCuadrantes;
+import Model.Datos.ListaMapaCuadrantes;
 import Model.Settings;
-import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.Iterator;
 
 public class Mundo extends AbstractModel implements PropertyChangeListener, MundoI
 {
-    protected Map<Integer, PCI> mapaPlayers = new HashMap<>();
-
-    protected List<PCI> listaPCs = new ArrayList<>();
-    protected List<ProyectilI> listaProyectiles = new ArrayList<>();
-
-    protected ListaPorCuadrantesI<PCI> mapaPCs = new ListaPorCuadrantes<>();
-    protected ListaPorCuadrantesI<ProyectilI> mapaProyectiles = new ListaPorCuadrantes<>();
+    protected ListaMapaCuadrantes<ProyectilI> dataProyectiles = new ListaMapaCuadrantes<>();
+    protected ListaMapaCuadrantes<PCI> dataPCs = new ListaMapaCuadrantes<>();
 
     private Mapa mapa = new Mapa();
     private World world;
-
-    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-
-    @Override public World getWorld()                       { return world; }
     @Override public MapaI getMapa()                        { return mapa; }
-    @Override public PCI getPC (int connectionID)           { return mapaPlayers.get(connectionID); }
-    @Override public Iterator<PCI> getIteratorListaPCs()    { return listaPCs.iterator(); }
-    public ListaPorCuadrantesI<PCI> getMapaPCs()            { return mapaPCs; }
+    @Override public World getWorld()                       { return world; }
 
 
     public Mundo()
@@ -57,31 +43,18 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     //PLAYERS:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void añadirPC (PCI pc)
+    @Override public void añadirPC (PCI pc)
     {
-        if (mapaPlayers.containsKey(pc.getID()))
-        {   logger.error("ERROR: No se puede volver a añadir personaje que ya existe, ID: {}", pc.getID()); return; }
-
-        mapaPlayers.put(pc.getID(), pc);
-        listaPCs.add(pc);
-        mapaPCs.put(pc);
-
+        dataPCs.add(pc);
         pc.añadirObservador(this);
 
         DTOsMundo.AñadirPC nuevoPlayer = new DTOsMundo.AñadirPC(pc);
         notificarActualizacion("añadirPC", null, nuevoPlayer);
     }
 
-    public void eliminarPC (int connectionID)
+    @Override public void eliminarPC (int connectionID)
     {
-        if (!mapaPlayers.containsKey(connectionID))
-        {   logger.error("ERROR: No se puede eliminar personaje. No existe ID: {}", connectionID); return; }
-
-        PCI pc = mapaPlayers.get(connectionID);
-        mapaPlayers.remove(connectionID);
-        listaPCs.remove(pc);
-        mapaPCs.remove(pc);
-
+        PCI pc = dataPCs.remove(connectionID);
         pc.eliminarObservador(this);
         pc.dispose();
 
@@ -89,43 +62,82 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         notificarActualizacion("eliminarPC", null, eliminarPlayer);
     }
 
-    public void posicionPC (PCI pc)
-    {   mapaPCs.update(pc); }
+    @Override public PCI getPC(int connectionID)
+    {   return dataPCs.get(connectionID); }
+
+    @Override public Iterator<PCI> getIteratorPCs()
+    {   return dataPCs.iterator(); }
+
+    @Override public Iterator<PCI> getIteratorPCs(int mapTileX, int mapTileY)
+    {   return dataPCs.getIteratorCuadrantes(mapTileX, mapTileY); }
+
+    private void updatePC(PCI pc)
+    {   dataPCs.update(pc); }
 
     //PROYECTILES:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public void añadirProyectil(ProyectilI proyectil)
     {
-        mapaProyectiles.put(proyectil);
-        listaProyectiles.add(proyectil);
+        dataProyectiles.add(proyectil);
         proyectil.añadirObservador(this);
     }
 
-    @Override public void eliminarProyectil(ProyectilI proyectil)
+    @Override public void eliminarProyectil(int iD)
     {
-        mapaProyectiles.remove(proyectil);
-        listaProyectiles.remove(proyectil);
+        ProyectilI proyectil = dataProyectiles.remove(iD);
         proyectil.eliminarObservador(this);
+        proyectil.dispose();
     }
 
-    public void posicionProyectil(ProyectilI proyectilI)
-    {   mapaProyectiles.update(proyectilI); }
+    @Override public ProyectilI getProyectil (int iD)
+    {   return dataProyectiles.get(iD); }
+
+    @Override public Iterator<ProyectilI> getIteratorProyectiles()
+    {   return dataProyectiles.iterator(); }
+
+    @Override public Iterator<ProyectilI> getIteratorProyectiles(int mapTileX, int mapTileY)
+    {   return dataProyectiles.getIteratorCuadrantes(mapTileX, mapTileY); }
+
+    private void updateProyectil(ProyectilI proyectil)
+    {   dataProyectiles.update(proyectil); }
 
     //IA MUNDO:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void actualizarFisica(float delta)
-    {   world.step(delta, 8, 6); }
-
-    public void actualizarUnidades(float delta)
-    {
-        //actualizar PCs
-        for (PCI pc : listaPCs)
+    @Override public void actualizarUnidades(float delta)
+    {   //PCs
+        for (PCI pc : dataPCs)
         {   pc.actualizar(delta); }
-        //actualizar Proyectiles:
-        for (ProyectilI proyectil : listaProyectiles)
-        {   proyectil.actualizar(delta); }
+        //PROYECTILES:
+        Iterator<ProyectilI>iterator = dataProyectiles.iterator(); ProyectilI pro;
+        while (iterator.hasNext())
+        {
+            pro = iterator.next();
+            if (pro.consumirse(delta))
+            {
+                iterator.remove();
+                pro.eliminarObservador(this);
+                pro.dispose();
+            }
+        }
+    }
+
+    //Salvamos los ultimos valores para poder interpolarlos
+    @Override public void actualizarFisica(float delta)
+    {
+        //PROYECTILES:
+        for (ProyectilI proyectil : dataProyectiles)
+        {   proyectil.copiarUltimaPosicion(); }
+
+        world.step(delta, 8, 6);
+    }
+
+    @Override public void interpolarPosicion(float alpha)
+    {
+        //PROYECTILES:
+        for (ProyectilI proyectil : dataProyectiles)
+        {   proyectil.interpolarPosicion(alpha); }
     }
 
     //CAMPOS OBSERVADOS:
@@ -134,9 +146,9 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
-        {   posicionPC(((DTOsPC.PosicionPC) evt.getNewValue()).pc); }
+        {   updatePC(((DTOsPC.PosicionPC) evt.getNewValue()).pc); }
 
         if (evt.getNewValue() instanceof DTOsProyectil.PosicionProyectil)
-        {   posicionProyectil(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil); }
+        {   updateProyectil(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil); }
     }
 }

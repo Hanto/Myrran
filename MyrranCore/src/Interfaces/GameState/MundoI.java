@@ -12,9 +12,25 @@ public interface MundoI extends ModelI
 {
     public MapaI getMapa();
     public World getWorld();
-    public PCI getPC (int connectionID);
-    public Iterator<PCI> getIteratorListaPCs();
 
+    //PCs:
+    public void añadirPC (PCI pc);
+    public void eliminarPC (int connectionID);
+    public PCI getPC (int connectionID);
+    public Iterator<PCI> getIteratorPCs();
+    public Iterator<PCI> getIteratorPCs(int mapTileX, int mapTileY);
+
+    //PROYECTIL:
     public void añadirProyectil(ProyectilI proyectil);
-    public void eliminarProyectil(ProyectilI proyectil);
+    public void eliminarProyectil(int iD);
+    public ProyectilI getProyectil (int iD);
+    public Iterator<ProyectilI> getIteratorProyectiles();
+    public Iterator<ProyectilI> getIteratorProyectiles(int mapTileX, int mapTileY);
+
+    //IA:
+    public void actualizarUnidades(float delta);
+    public void actualizarFisica(float delta);
+    public void interpolarPosicion(float alpha);
+
+
 }
