@@ -180,4 +180,13 @@ public class DTOsCampoVision
         {   this.tileX = tileX; this.tileY = tileY;
             this.numCapa = (short)numCapa; this.iDTerreno = iDTerreno; }
     }
+
+    public static class MapTilesAdyacentes
+    {
+        public boolean[][] mapaAdyacencias;
+        public MapTilesAdyacentes() {}
+        public MapTilesAdyacentes(boolean[][] mapaAdyacencias)
+        {   this.mapaAdyacencias = mapaAdyacencias; }
+    }
+
 }

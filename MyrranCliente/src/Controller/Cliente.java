@@ -59,19 +59,16 @@ public class Cliente extends Client
     private void procesarReceived(Connection con, Object obj)
     {
         if (obj instanceof DTOsMapView.Mapa)
-        {   controlador.actualizarMapa((DTOsMapView.Mapa) obj); }
-
-        else if (obj instanceof DTOsMapView.MapTilesAdyacentes)
-        {   controlador.actualizarMapTilesAdyacentes(((DTOsMapView.MapTilesAdyacentes) obj));}
+        {   controlador.actualizarMapa(((DTOsMapView.Mapa) obj));}
 
         else if (obj instanceof DTOsCampoVision.PCDTOs)
-        {   clienteInputs.procesarActualizacionesPC( (DTOsCampoVision.PCDTOs) obj);}
+        {   clienteInputs.procesarActualizacionesPC((DTOsCampoVision.PCDTOs) obj);}
 
         else if (obj instanceof DTOsCampoVision.MiscDTOs)
-        {   clienteInputs.procesarActualizacionesMisc( (DTOsCampoVision.MiscDTOs) obj );}
+        {   clienteInputs.procesarActualizacionesMisc((DTOsCampoVision.MiscDTOs) obj);}
 
         else if (obj instanceof DTOsCampoVision.ProyectilDTOs)
-        {   clienteInputs.procesarActualizacionesProyectiles( (DTOsCampoVision.ProyectilDTOs) obj );}
+        {   clienteInputs.procesarActualizacionesProyectiles((DTOsCampoVision.ProyectilDTOs) obj);}
     }
 
     // LOG IN

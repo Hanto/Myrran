@@ -43,7 +43,6 @@ public class NetDTOs
         //MapView:
         kryo.register(boolean[].class);
         kryo.register(boolean[][].class);
-        kryo.register(DTOsMapView.MapTilesAdyacentes.class);
         kryo.register(short[].class);
         kryo.register(DTOsMapView.Mapa.Celda.class);
         kryo.register(DTOsMapView.Mapa.Celda[].class);
@@ -71,5 +70,6 @@ public class NetDTOs
         //MISC:
         kryo.register(DTOsCampoVision.MiscDTOs.class);
         kryo.register(DTOsCampoVision.CambioTerrenoMisc.class);
+        kryo.register(DTOsCampoVision.MapTilesAdyacentes.class);
     }
 }

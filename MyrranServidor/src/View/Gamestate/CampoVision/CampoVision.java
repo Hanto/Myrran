@@ -1,6 +1,5 @@
 package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 
-import Controller.Controlador;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
 import Interfaces.EntidadesPropiedades.Espacial;
@@ -9,6 +8,7 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Model.AbstractModel;
+import Interfaces.Network.ServidorI;
 import Model.Settings;
 import View.Gamestate.MundoView;
 import com.badlogic.gdx.utils.Disposable;
@@ -23,7 +23,6 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
 {
     protected MundoView mundoView;
     protected MundoI mundo;
-    protected Controlador controlador;
 
     protected BufferCampoVision buffer;
     protected MapaView mapaView;
@@ -48,12 +47,11 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     public CampoVision(Espacial targetCampoVision, int connectionID, MundoView mundoView)
     {
         this.mundoView = mundoView;
-        this.controlador = mundoView.controlador;
         this.mundo = mundoView.mundo;
         this.connectionID = connectionID;
         this.buffer = new BufferCampoVision();
         this.targetLock = new targetLock(targetCampoVision);
-        this.mapaView = new MapaView(targetLock.getEspacial(), this.connectionID, mundo, controlador, this);
+        this.mapaView = new MapaView(targetLock.getEspacial(), this.connectionID, mundo, buffer);
         radar();
     }
 
@@ -119,7 +117,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         }
     }
 
-    public void radar()
+    @Override public void radar()
     {
         comprobarVisiblidadMobsObservados();
         comprobarVisibilidadProyectilesObservados();
@@ -140,8 +138,8 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         }
     }
 
-    public void enviarDTOs()
-    {   buffer.enviarDTOS(controlador, connectionID); }
+    @Override public void enviarDTOs(ServidorI servidor)
+    {   buffer.enviarDTOS(servidor, connectionID); }
 
     //PCS:
     //--------------------------------------------------------------------------------------------------------------

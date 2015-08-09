@@ -26,10 +26,7 @@ public class Controlador
     {   mundoView.radar(); }
 
     public void enviarDatosAClientes()
-    {   mundoView.enviarDTOs(); }
-
-    public void enviarACliente(int connectionID, Object obj)
-    {   servidor.enviarACliente(connectionID, obj); }
+    {   mundoView.enviarDTOs(servidor); }
 
     public void eliminarPC (int connectionID)
     {   mundo.eliminarPC(connectionID); }

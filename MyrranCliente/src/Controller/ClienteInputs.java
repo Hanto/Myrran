@@ -138,6 +138,10 @@ public class ClienteInputs
                 short iDTerreno = ((DTOsCampoVision.CambioTerrenoMisc) dto).iDTerreno;
                 mundo.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);
             }
+            else if (dto instanceof DTOsCampoVision.MapTilesAdyacentes)
+            {   controlador.actualizarMapTilesAdyacentes(((DTOsCampoVision.MapTilesAdyacentes) dto));}
+
+
         }
     }
 }

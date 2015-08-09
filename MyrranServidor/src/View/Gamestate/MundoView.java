@@ -3,6 +3,7 @@ package View.Gamestate;// Created by Hanto on 16/07/2015.
 import DTO.DTOsMundo;
 import Interfaces.EntidadesTipos.CampoVisionI;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.Network.ServidorI;
 import Model.GameState.Mundo;
 import View.Gamestate.CampoVision.CampoVision;
 import com.badlogic.gdx.utils.Disposable;
@@ -57,10 +58,10 @@ public class MundoView implements PropertyChangeListener, Disposable
         {   campoVision.radar(); }
     }
 
-    public void enviarDTOs()
+    public void enviarDTOs(ServidorI servidor)
     {
         for (CampoVisionI campoVision : listaCampoVisiones)
-        {   campoVision.enviarDTOs(); }
+        {   campoVision.enviarDTOs(servidor); }
     }
 
     //CAMPOS OBSERVADOS:

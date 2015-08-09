@@ -1,12 +1,13 @@
 package View.Gamestate.CampoVision;// Created by Hanto on 24/07/2015.
 
-import Controller.Controlador;
-import Interfaces.EntidadesTipos.ProyectilI;
-import Model.Skills.SkillMod;
 import DTO.DTOsCampoVision;
+import DTO.DTOsMapView;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.Network.ServidorI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
+import Model.Skills.SkillMod;
 
 import java.util.*;
 
@@ -15,6 +16,7 @@ public class BufferCampoVision
     //Buffer que almacena todos los cambios de las unidades observadas por el cambio de vision durante los updates
     //al final del update se envian todos los datos al player del campo de vision.
 
+    private List<DTOsMapView.Mapa> listaDTOsMapa = new ArrayList<>();
     private List<Object> listaDTOsMisc = new ArrayList<>();
     private MapDTOs mapaDTOsPC = new MapDTOs();
     private MapDTOs mapaDTOsProyectiles = new MapDTOs();
@@ -170,10 +172,22 @@ public class BufferCampoVision
         listaDTOsMisc.add(cambioTerreno);
     }
 
+    public void addMapaAdyacencias(boolean[][] mapaAdyacencias)
+    {
+        DTOsCampoVision.MapTilesAdyacentes mapTilesAdyacentes = new DTOsCampoVision.MapTilesAdyacentes(mapaAdyacencias);
+        listaDTOsMisc.add(mapTilesAdyacentes);
+    }
+
+    // MAPAS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void addMapa (DTOsMapView.Mapa mapa)
+    {   listaDTOsMapa.add(mapa); }
+
     //ENVIAR DATOS A CLIENTE:
     //------------------------------------------------------------------------------------------------------------------
 
-    private void enviarDTOsPC (Controlador controlador, int conID)
+    private void enviarDTOsPC (ServidorI servidor, int conID)
     {
         if (mapaDTOsPC.mapDTOs.size() > 0)
         {
@@ -183,13 +197,13 @@ public class BufferCampoVision
                 pcDTOs.connectionID = array.getKey();
                 pcDTOs.listaDTOs = new Object[array.getValue().size()];
                 pcDTOs.listaDTOs = array.getValue().toArray();
-                controlador.enviarACliente(conID, pcDTOs);
+                servidor.enviarACliente(conID, pcDTOs);
             }
             mapaDTOsPC.clear();
         }
     }
 
-    private void enviarDTOsProyectil (Controlador controlador, int conID)
+    private void enviarDTOsProyectil (ServidorI servidor, int conID)
     {
         if (mapaDTOsProyectiles.mapDTOs.size() > 0)
         {
@@ -199,28 +213,39 @@ public class BufferCampoVision
                 proyectilDTOs.connectionID = array.getKey();
                 proyectilDTOs.listaDTOs = new Object[array.getValue().size()];
                 proyectilDTOs.listaDTOs = array.getValue().toArray();
-                controlador.enviarACliente(conID, proyectilDTOs);
+                servidor.enviarACliente(conID, proyectilDTOs);
             }
             mapaDTOsProyectiles.clear();
         }
     }
 
-    private void enviarDTOsMisc (Controlador controlador, int conID)
+    private void enviarDTOsMisc (ServidorI servidor, int conID)
     {
         if (listaDTOsMisc.size() > 0)
         {
             DTOsCampoVision.MiscDTOs miscDTOs = new DTOsCampoVision.MiscDTOs();
             miscDTOs.listaDTOs = new Object[listaDTOsMisc.size()];
             miscDTOs.listaDTOs = listaDTOsMisc.toArray();
-            controlador.enviarACliente(conID, miscDTOs);
+            servidor.enviarACliente(conID, miscDTOs);
             listaDTOsMisc.clear();
         }
     }
 
-    public void enviarDTOS (Controlador controlador, int conID)
+    private void enviarDTOsMapa(ServidorI servidor, int conID)
     {
-        enviarDTOsPC(controlador, conID);
-        enviarDTOsProyectil(controlador, conID);
-        enviarDTOsMisc(controlador, conID);
+        if (listaDTOsMapa.size() > 0)
+        {
+            for (DTOsMapView.Mapa mapa : listaDTOsMapa)
+            {   servidor.enviarACliente(conID, mapa); }
+            listaDTOsMapa.clear();
+        }
+    }
+
+    public void enviarDTOS (ServidorI servidor, int conID)
+    {
+        enviarDTOsMapa(servidor, conID);
+        enviarDTOsPC(servidor, conID);
+        enviarDTOsProyectil(servidor, conID);
+        enviarDTOsMisc(servidor, conID);
     }
 }

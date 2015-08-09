@@ -1,6 +1,5 @@
 package View.Gamestate.CampoVision;// Created by Hanto on 20/05/2014.
 
-import Controller.Controlador;
 import DTO.DTOsMapView;
 import DTO.DTOsMapa;
 import Interfaces.EntidadesPropiedades.Espacial;
@@ -17,10 +16,8 @@ public class MapaView implements PropertyChangeListener, Disposable
 {
     private Espacial espacial;
     private int connectionID;
-
     private MundoI mundo;
-    private Controlador controlador;
-    private CampoVision campoVision;
+    private BufferCampoVision buffer;
 
     private int mapTileCentroX;
     private int mapTileCentroY;
@@ -37,13 +34,12 @@ public class MapaView implements PropertyChangeListener, Disposable
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MapaView(Espacial espacial, int connectionID, MundoI mundo, Controlador controlador, CampoVision campoVision)
+    public MapaView(Espacial espacial, int connectionID, MundoI mundo, BufferCampoVision buffer)
     {
         this.espacial = espacial;
         this.connectionID = connectionID;
         this.mundo = mundo;
-        this.controlador = controlador;
-        this.campoVision = campoVision;
+        this.buffer = buffer;
 
         mundo.getMapa().añadirObservador(this);
     }
@@ -53,6 +49,7 @@ public class MapaView implements PropertyChangeListener, Disposable
 
     //
     //------------------------------------------------------------------------------------------------------------
+
     private void resetearEnviados()
     {
         for (boolean[] fila : mapaEnviado)
@@ -63,14 +60,14 @@ public class MapaView implements PropertyChangeListener, Disposable
         mapTileCentroY = espacial.getMapTileY();
     }
 
-    private boolean getMapaEnviado(int offSetX, int offSetY)        { return mapaEnviado[offSetX+1][-offSetY+1]; }
-    private void setMapaEnviado(int offSetX, int offSetY, boolean b){ mapaEnviado[offSetX+1][-offSetY+1] = b; }
+    private boolean getMapaEnviado(int offSetX, int offSetY)
+    {   return mapaEnviado[offSetX+1][-offSetY+1]; }
+
+    private void setMapaEnviado(int offSetX, int offSetY, boolean b)
+    {   mapaEnviado[offSetX+1][-offSetY+1] = b; }
 
     private void enviarMapTilesAdyancentes()
-    {
-        DTOsMapView.MapTilesAdyacentes maptilesAdyacentes = new DTOsMapView.MapTilesAdyacentes(mapaEnviado);
-        controlador.enviarACliente(connectionID, maptilesAdyacentes);
-    }
+    {   buffer.addMapaAdyacencias(mapaEnviado); }
 
     public void comprobarVistaMapa ()
     {   //Si las adyacencias tienen mas de uno de distancia, hay que resetearlo tod o para volverlo a enviar:
@@ -234,7 +231,7 @@ public class MapaView implements PropertyChangeListener, Disposable
                 {   actualizarMapa.mapa[x][y].celda[i] = mundo.getMapa().getTerrenoID(x +esquinaInfIzdaX, y +esquinaInfIzdaY, i); }
             }
         }
-        controlador.enviarACliente(connectionID, actualizarMapa);
+        buffer.addMapa(actualizarMapa);
     }
 
     public void cambioTerreno (int tileX, int tileY, int numCapa, short iDTerreno)
@@ -246,7 +243,7 @@ public class MapaView implements PropertyChangeListener, Disposable
         {
             if (getMapaEnviado(offsetX, offsetY))
             {
-                campoVision.buffer.addCambioTerreno(tileX, tileY, numCapa, iDTerreno);
+                buffer.addCambioTerreno(tileX, tileY, numCapa, iDTerreno);
                 logger.trace("Editando SetTerreno: ["+tileX+"]["+tileY+"]");
             }
         }

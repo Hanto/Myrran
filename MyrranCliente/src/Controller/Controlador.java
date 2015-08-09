@@ -1,5 +1,6 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
+import DTO.DTOsCampoVision;
 import DTO.DTOsMapView;
 import Interfaces.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
@@ -67,9 +68,9 @@ public class Controlador
     }
 
     //UI:
-    public void añadirAccion(AccionI accion)                                            { ui.getInputManager().añadirAccion(accion); }
+    public void añadirAccion(AccionI accion)                                                { ui.getInputManager().añadirAccion(accion); }
 
     //Entidades:
-    public void actualizarMapa(DTOsMapView.Mapa mapaServidor)                           { mundo.actualizarMapa(mapaServidor); }
-    public void actualizarMapTilesAdyacentes(DTOsMapView.MapTilesAdyacentes mapTiles)   { mundo.mapTilesCargados = mapTiles.mapaAdyacencias; }
+    public void actualizarMapa(DTOsMapView.Mapa mapaServidor)                               { mundo.actualizarMapa(mapaServidor); }
+    public void actualizarMapTilesAdyacentes(DTOsCampoVision.MapTilesAdyacentes mapTiles)   { mundo.mapTilesCargados = mapTiles.mapaAdyacencias; }
 }

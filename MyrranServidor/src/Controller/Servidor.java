@@ -3,13 +3,14 @@ package Controller;// Created by Hanto on 07/04/2014.
 import DTO.DTOsCampoVision;
 import DTO.DTOsPlayer;
 import DTO.NetDTOs;
+import Interfaces.Network.ServidorI;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import org.slf4j.LoggerFactory;
 
-public class Servidor extends Server
+public class Servidor extends Server implements ServidorI
 {
     public Controlador controlador;
     protected ServidorInputs servidorInputs;
@@ -82,7 +83,7 @@ public class Servidor extends Server
     // ENVIO DE DATOS (con calculo de tamaño de informacion enviada)
     //------------------------------------------------------------------------------------------------------------------
 
-    public void enviarACliente(int connectionID, Object obj)
+    @Override public void enviarACliente(int connectionID, Object obj)
     {
         String nombreDTOs ="";
         if (obj instanceof DTOsCampoVision.PCDTOs)
@@ -108,9 +109,9 @@ public class Servidor extends Server
         }
     }
 
-    public void enviarATodosClientes(Object obj)
+    @Override public void enviarATodosClientes(Object obj)
     {   this.sendToAllTCP(obj); }
 
-    public void enviarATodosClientesMenosUno(int connectionID, Object obj)
+    @Override public void enviarATodosClientesMenosUno(int connectionID, Object obj)
     {   this.sendToAllExceptTCP(connectionID, obj);}
 }
