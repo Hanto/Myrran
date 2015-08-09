@@ -1,49 +1,63 @@
 package Controller;// Created by Hanto on 09/04/2014.
 
+import Interfaces.Network.MainLoopI;
+import Model.Classes.Geo.Mapa;
 import Model.GameState.Mundo;
 import Model.Settings;
+import View.Gamestate.MundoView;
 import ch.qos.logback.classic.Logger;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Updater implements Runnable
+public class Updater implements MainLoopI, Runnable
 {
-    private Controlador controlador;
+    private World world;
+    private Mapa mapa;
     private Mundo mundo;
-    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-    protected final List<Runnable> runnables = new ArrayList<>();
-    protected final List<Runnable> executedRunnables = new ArrayList<>();
+    private MundoView mundoView;
+    private Controlador controlador;
+    private Servidor servidor;
 
     private double timeStep = 0;
-
     private double newTime;
     private double currentTime;
     private double deltaTime;
 
+    protected final List<Runnable> runnables = new ArrayList<>();
+    protected final List<Runnable> executedRunnables = new ArrayList<>();
+
     //private int contador = 0;
     //private double total = 0;
     //private float media;
+    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public void postRunnable(Runnable runnable)
+    public Updater()
     {
-        synchronized (runnables)
-        {   runnables.add(runnable); }
-    }
+        //MODEL:
+        world = new World(new Vector2(0,0), false);
+        mapa = new Mapa();
+        mundo = new Mundo(world, mapa);
 
-    public Updater(Controlador controlador, Mundo mundo)
-    {
-        this.controlador = controlador;
-        this.mundo = mundo;
+        //VISTA:
+        mundoView = new MundoView(mundo);
+
+        //CONTROLADOR:
+        controlador = new Controlador(mundo, mundoView);
+
+        //MULTIPLAYER:
+        servidor = new Servidor(this, controlador);
 
         currentTime = TimeUtils.nanoTime() / 1000000000.0;
 
         new Thread(this).start();
     }
 
-    @Override public void run()
+    public void run()
     {
         while (true)
         {
@@ -76,8 +90,8 @@ public class Updater implements Runnable
                     //controlador.enviarDatosAClientes();
                 }
                 //VISTA:
-                controlador.actualizarRadarCampoVisiones();
-                controlador.enviarDatosAClientes();
+                mundoView.radar();
+                mundoView.enviarDTOs(servidor);
 
                 mundo.interpolarPosicion((float) timeStep / Settings.FIXED_TimeStep);
             }
@@ -86,6 +100,11 @@ public class Updater implements Runnable
         }
     }
 
+    @Override public void postRunnable(Runnable runnable)
+    {
+        synchronized (runnables)
+        {   runnables.add(runnable); }
+    }
 
     private boolean executeRunnables()
     {

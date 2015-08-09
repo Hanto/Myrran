@@ -3,6 +3,7 @@ package Controller;// Created by Hanto on 07/04/2014.
 import DTO.DTOsCampoVision;
 import DTO.DTOsPlayer;
 import DTO.NetDTOs;
+import Interfaces.Network.MainLoopI;
 import Interfaces.Network.ServidorI;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
@@ -13,14 +14,16 @@ import org.slf4j.LoggerFactory;
 public class Servidor extends Server implements ServidorI
 {
     public Controlador controlador;
+    public MainLoopI mainLoop;
     protected ServidorInputs servidorInputs;
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public Servidor (Controlador controlador)
+    public Servidor (MainLoopI mainLoop, Controlador controlador)
     {
         super(512*1024, 4*1024);
         this.controlador = controlador;
+        this.mainLoop = mainLoop;
         this.servidorInputs = new ServidorInputs(controlador);
 
         NetDTOs.register(this);
@@ -55,7 +58,7 @@ public class Servidor extends Server implements ServidorI
                     })
                 {
                     @Override protected void queue(Runnable runnable)
-                    {   Servidor.this.controlador.postRunnable(runnable); }
+                    {   Servidor.this.mainLoop.postRunnable(runnable); }
                 });
 
         try { this.bind(NetDTOs.puertoTCP, NetDTOs.puertoUDP); }

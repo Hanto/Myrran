@@ -1,13 +1,12 @@
 package zMain;
 
-import Controller.Controlador;
+import Controller.Updater;
 import DB.Datos.BDebuff.BDebuffXMLDB;
 import DB.Datos.Spell.SpellXMLDB;
 import DB.Datos.Terreno.TerrenoXMLDB;
 import DB.Datos.TipoBDebuff.TipoBDebuffXMLDB;
 import DB.Datos.TipoSpell.TipoSpellXMLDB;
 import Model.Settings;
-import Model.GameState.Mundo;
 
 public class MyrranServer
 {
@@ -21,7 +20,8 @@ public class MyrranServer
         SpellXMLDB.get();
         TerrenoXMLDB.get();
 
-        Controlador controlador = new Controlador(new Mundo());
+        //Controlador controlador = new Controlador(new Mundo());
+        Updater updater = new Updater();
         while (true) {}
     }
 }

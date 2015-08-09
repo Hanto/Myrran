@@ -11,7 +11,6 @@ import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
 import Model.Datos.ListaMapaCuadrantes;
 import Model.Settings;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.beans.PropertyChangeEvent;
@@ -23,15 +22,16 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     protected ListaMapaCuadrantes<ProyectilI> dataProyectiles = new ListaMapaCuadrantes<>();
     protected ListaMapaCuadrantes<PCI> dataPCs = new ListaMapaCuadrantes<>();
 
-    private Mapa mapa = new Mapa();
+    private Mapa mapa;
     private World world;
     @Override public MapaI getMapa()                        { return mapa; }
     @Override public World getWorld()                       { return world; }
 
 
-    public Mundo()
+    public Mundo(World world, Mapa mapa)
     {
-        world = new World(new Vector2(0,0), false);
+        this.world = world;
+        this.mapa = mapa;
 
         for (int x = 0; x< Settings.MAPA_Max_TilesX; x++)
         {

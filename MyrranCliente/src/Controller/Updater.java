@@ -48,10 +48,13 @@ public class Updater implements Screen
         mapa = new Mapa(player);
         mundo = new Mundo(world, player, mapa);
         ui = new UI(player);
+
         //VISTA:
         vista = new Vista(ui, mundo);
+
         //CONTROLADOR:
         controlador = new Controlador(mundo, ui, vista);
+
         //MULTIPLAYER:
         cliente = new Cliente(controlador);
 
