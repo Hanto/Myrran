@@ -17,7 +17,7 @@ public class Controlador
     {
         this.mundo = mundo;
 
-        mundoView = new MundoView(this, mundo);
+        mundoView = new MundoView(mundo);
         servidor = new Servidor(this);
         updater = new Updater(this, mundo);
     }

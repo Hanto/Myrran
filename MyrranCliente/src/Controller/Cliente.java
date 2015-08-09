@@ -37,7 +37,7 @@ public class Cliente extends Client
             (new Listener.QueuedListener
                 (new Listener()
                 {
-                     @Override public void connected (Connection con)   { }
+                     @Override public void connected (Connection con)   { procesarConnected(con); }
                      @Override public void received (Connection con, Object obj) { procesarReceived(con, obj);}
                      @Override public void disconnected (Connection con) { }
                 })
@@ -72,6 +72,15 @@ public class Cliente extends Client
 
         else if (obj instanceof DTOsCampoVision.ProyectilDTOs)
         {   clienteInputs.procesarActualizacionesProyectiles( (DTOsCampoVision.ProyectilDTOs) obj );}
+    }
+
+    // LOG IN
+    //------------------------------------------------------------------------------------------------------------------
+
+    private void procesarConnected(Connection con)
+    {
+        controlador.getMundo().getPlayer().setConnectionID(this.getID());
+        enviarAServidor(new DTOsPlayer.LogIn());
     }
 
     //------------------------------------------------------------------------------------------------------------------

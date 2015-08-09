@@ -68,7 +68,7 @@ public class Updater implements Runnable
                     executeRunnables();
 
                     //MODEL:
-                    mundo.actualizarUnidades(Settings.FIXED_TimeStep);
+                    mundo.actualizarUnidades(Settings.FIXED_TimeStep, mundo);
                     mundo.actualizarFisica(Settings.FIXED_TimeStep);
 
                     //VISTA:

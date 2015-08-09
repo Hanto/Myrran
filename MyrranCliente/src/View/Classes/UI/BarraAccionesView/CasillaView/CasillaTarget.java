@@ -1,6 +1,6 @@
 package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/07/2014.
 
-import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
+import Interfaces.Controlador.ControladorBarraAccionI;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 

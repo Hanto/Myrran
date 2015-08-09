@@ -3,9 +3,9 @@ package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/
 import DB.RSC;
 import DTO.DTOsBarraAcciones;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
-import Interfaces.UI.Acciones.AccionI;
-import Interfaces.UI.Acciones.CasillaI;
-import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
+import Interfaces.UI.AccionI;
+import Interfaces.UI.CasillaI;
+import Interfaces.Controlador.ControladorBarraAccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
 import Model.Settings;
 import View.Classes.Actores.Texto;
@@ -37,7 +37,7 @@ public class CasillaView extends Actor implements PropertyChangeListener
 
     public AccionI getAccion()                      { return casilla.getAccion(); }
     public CasillaI getCasilla()                    { return casilla; }
-    public CasterPersonalizable getCaster()            { return caster; }
+    public CasterPersonalizable getCaster()         { return caster; }
     public ControladorBarraAccionI getControlador() { return controlador; }
     public Actor getApariencia()                    { return this; }
     public Actor getDragActor()                     { return new Image(casillaIcono);}

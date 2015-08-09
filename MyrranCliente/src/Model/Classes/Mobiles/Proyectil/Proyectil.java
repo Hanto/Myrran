@@ -150,6 +150,6 @@ public class Proyectil extends AbstractModel implements ProyectilI
         getPosicionInterpoladaCuerpo();
     }
 
-    @Override public void actualizar (float delta)
+    @Override public void actualizar (float delta, MundoI mundo)
     { }
 }

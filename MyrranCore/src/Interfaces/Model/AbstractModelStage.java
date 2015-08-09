@@ -1,13 +1,15 @@
-package Interfaces.Model;// Created by Hanto on 09/04/2014.
+package Interfaces.Model;// Created by Hanto on 09/08/2015.
+
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public abstract class AbstractModel implements ModelI
+public class AbstractModelStage extends Stage implements ModelI
 {
     protected PropertyChangeSupport observado;
 
-    public AbstractModel()
+    public AbstractModelStage()
     {   observado = new PropertyChangeSupport(this); }
 
     @Override public void notificarActualizacion(String nombreValor, Object viejoValor, Object nuevoValor)

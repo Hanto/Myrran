@@ -1,7 +1,8 @@
-package Interfaces.UI.BarraAcciones;// Created by Hanto on 14/05/2014.
+package Interfaces.Controlador;// Created by Hanto on 14/05/2014.
 
 
-import Interfaces.UI.Acciones.CasillaI;
+import Interfaces.UI.CasillaI;
+import Interfaces.UI.BarraAccionesI;
 
 public interface ControladorBarraAccionI
 {

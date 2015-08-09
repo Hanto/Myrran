@@ -1,19 +1,20 @@
 package Model.Classes.Mobiles;// Created by Hanto on 07/04/2014.
 
-import Model.Cuerpos.BodyFactory;
-import Model.Cuerpos.Cuerpo;
-import Model.Skills.SpellPersonalizado;
 import DB.DAO;
 import DTO.DTOsSkillPersonalizado;
-import Model.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.GameState.MundoI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
+import Model.Cuerpos.BodyFactory;
+import Model.Cuerpos.Cuerpo;
 import Model.GameState.Mundo;
+import Model.Settings;
+import Model.Skills.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,6 @@ import java.util.*;
 
 public class PC extends AbstractModel implements PropertyChangeListener, PCI, Debuffeable
 {
-    protected Mundo mundo;
     protected int connectionID;
     protected int iDProyectiles = 0;
 
@@ -110,7 +110,6 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
     //Constructor:
     public PC(int connectionID, Mundo mundo)
     {
-        this.mundo = mundo;
         this.connectionID = connectionID;
         this.notificador = new PCNotificador(this);
 
@@ -128,6 +127,7 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
         //le decimos a la vista que desaparezca:
         notificador.setDispose();
+        this.eliminarObservadores();
     }
 
     @Override public void setPosition(float x, float y)
@@ -201,10 +201,11 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         this.castear = castear;
         this.targetX = targetX;
         this.targetY = targetY;
-        if (castear) castear();
+        if (castear) this.castear = true;
+        else this.castear = false;
     }
 
-    private void castear()
+    private void castear(MundoI mundo)
     {
         if (!isCasteando())
         {
@@ -244,11 +245,11 @@ public class PC extends AbstractModel implements PropertyChangeListener, PCI, De
         }
     }
 
-    @Override public void actualizar(float delta)
+    @Override public void actualizar(float delta, MundoI mundo)
     {
         actualizarCastingTime(delta);
         actualizarAuras(delta);
-        if (castear) castear();
+        if (castear) castear(mundo);
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt)

@@ -23,6 +23,7 @@ public class EstadoQuieto extends PlayerEstado
         output.setSpellID(input.getSpellID());
         output.setScreenX(input.getScreenX());
         output.setScreenY(input.getScreenY());
+        output.setMundoXY(input.getMundoX(), input.getMundoY());
 
         if (input.getIrDerecha())       { maquinaEstados.setEstadoSiguiente(EstadoEste.class); return; }
         if (input.getirIzquierda())     { maquinaEstados.setEstadoSiguiente(EstadoOeste.class); return; }

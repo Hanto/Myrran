@@ -1,16 +1,16 @@
 package View.GameState;// Created by Hanto on 08/04/2014.
 
-import Controller.Controlador;
 import DB.RSC;
+import Interfaces.Controlador.ControladorVistaI;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
 import Tweens.TweenEng;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.Disposable;
 
-public class Vista
+public class Vista implements ControladorVistaI, Disposable
 {
-    private Controlador controlador;
     private Mundo mundo;
     private UI ui;
 
@@ -20,14 +20,22 @@ public class Vista
     public UIView getUiView()       { return uiView; }
     public MundoView getMundoView() { return mundoView; }
 
-    public Vista (Controlador controlador, UI ui, Mundo mundo)
+    public Vista (UI ui, Mundo mundo)
     {
-        this.controlador = controlador;
         this.ui = ui;
         this.mundo = mundo;
 
-        mundoView = new MundoView(controlador, mundo.getPlayer(), mundo);
-        uiView = new UIView(controlador, ui);
+        mundoView = new MundoView(mundo.getPlayer(), mundo);
+        uiView = new UIView(this, ui);
+    }
+
+    @Override public void dispose ()
+    {
+        mundoView.dispose();
+        uiView.dispose();
+        RSC.atlasRecursosDAO.getAtlasRecursosDAO().dispose();
+        RSC.fuenteRecursosDAO.getFuentesRecursosDAO().dispose();
+        RSC.particulaRecursoDAO.getParticulaRecursosDAO().dispose();
     }
 
     public void render (float delta)
@@ -52,15 +60,6 @@ public class Vista
         uiView.resize(anchura, altura);
     }
 
-    public void dispose ()
-    {
-        mundoView.dispose();
-        uiView.dispose();
-        RSC.atlasRecursosDAO.getAtlasRecursosDAO().dispose();
-        RSC.fuenteRecursosDAO.getFuentesRecursosDAO().dispose();
-        RSC.particulaRecursoDAO.getParticulaRecursosDAO().dispose();
-    }
-
-    public void aplicarZoom(int incrementoZoom)
+    @Override public void aplicarZoom(int incrementoZoom)
     {   mundoView.aplicarZoom(incrementoZoom); }
 }

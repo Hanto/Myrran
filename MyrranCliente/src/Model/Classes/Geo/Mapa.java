@@ -2,35 +2,33 @@ package Model.Classes.Geo;// Created by Hanto on 19/05/2014.
 
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
-import DTO.DTOsPlayer;
 import DTO.DTOsMapa;
-import Model.Settings;
-import Interfaces.EntidadesTipos.PCI;
+import DTO.DTOsPlayer;
+import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Interfaces.Model.AbstractModel;
+import Model.Settings;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
+public class Mapa extends AbstractModel implements MapaI, PropertyChangeListener, Disposable
 {
     private Celda[][] mapa;
-
-    private PCI mob;
+    private Espacial espacial;
 
     public int mapTileCentroX = 0;
     public int mapTileCentroY = 0;
-
     private int numTilesX;
     private int numTilesY;
-
     private int reborde = 1;
 
-    public Mapa(PCI mob)
+    public Mapa(Espacial espacial)
     {
-        this.mob = mob;
-        mob.añadirObservador(this);
+        this.espacial = espacial;
+        espacial.añadirObservador(this);
 
         this.numTilesX = (int)Math.ceil((double) Settings.MAPTILE_Horizontal_Resolution /(double) Settings.TILESIZE);
         this.numTilesY = (int)Math.ceil((double) Settings.MAPTILE_Vertical_Resolution /(double) Settings.TILESIZE);
@@ -42,10 +40,20 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
         }
     }
 
-    private int getMapTileX()                   { return (int)((mob.getX() / (float)(numTilesX * Settings.TILESIZE))); }
-    private int getMapTileY()                   { return (int)((mob.getY() / (float)(numTilesY * Settings.TILESIZE))); }
-    private int getTileX(int tileX)             { return (tileX - (mapTileCentroX-1)*numTilesX)+reborde; }
-    private int getTileY(int tileY)             { return (tileY - (mapTileCentroY-1)*numTilesY)+reborde; }
+    public void dispose()
+    {   espacial.eliminarObservador(this); }
+
+    private int getMapTileX()
+    {   return (int)((espacial.getX() / (float)(numTilesX * Settings.TILESIZE))); }
+
+    private int getMapTileY()
+    {   return (int)((espacial.getY() / (float)(numTilesY * Settings.TILESIZE))); }
+
+    private int getTileX(int tileX)
+    {   return (tileX - (mapTileCentroX-1)*numTilesX)+reborde; }
+
+    private int getTileY(int tileY)
+    {   return (tileY - (mapTileCentroY-1)*numTilesY)+reborde; }
 
     public Celda getCelda(int tileX, int tileY)
     {
@@ -55,7 +63,6 @@ public class Mapa extends AbstractModel implements MapaI,PropertyChangeListener
         if (x <0 || y <0 || x >= (numTilesX*3+reborde*2) || y >= (numTilesY*3+reborde*2)) return null;
         else return mapa[x][y];
     }
-
 
     @Override public TerrenoI getTerreno (int tileX, int tileY, int numCapa)
     {

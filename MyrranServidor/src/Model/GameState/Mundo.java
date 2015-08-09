@@ -105,10 +105,10 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     //IA MUNDO:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void actualizarUnidades(float delta)
+    @Override public void actualizarUnidades(float delta, MundoI mundo)
     {   //PCs
         for (PCI pc : dataPCs)
-        {   pc.actualizar(delta); }
+        {   pc.actualizar(delta, mundo); }
         //PROYECTILES:
         Iterator<ProyectilI>iterator = dataProyectiles.iterator(); ProyectilI pro;
         while (iterator.hasNext())

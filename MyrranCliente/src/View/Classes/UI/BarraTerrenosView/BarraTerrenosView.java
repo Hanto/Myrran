@@ -1,8 +1,8 @@
 package View.Classes.UI.BarraTerrenosView;// Created by Hanto on 14/05/2014.
 
-import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsBarraTerrenos;
+import Interfaces.Controlador.ControladorBarraTerrenosI;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Settings;
 import View.Classes.Actores.Texto;
@@ -30,7 +30,7 @@ import java.beans.PropertyChangeListener;
 
 public class BarraTerrenosView extends Group implements PropertyChangeListener, Ventana
 {
-    protected Controlador controlador;
+    protected ControladorBarraTerrenosI controlador;
     protected Stage stage;
     protected BarraTerrenos barraTerrenos;
 
@@ -54,7 +54,7 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
     @Override public float getAnchoElemento()           { return Settings.TILESIZE*2; }
     @Override public float getAltoElemento()            { return Settings.TILESIZE*2; }
 
-    public BarraTerrenosView (Controlador controlador, Stage stage, final BarraTerrenos barraTerrenos)
+    public BarraTerrenosView (ControladorBarraTerrenosI controlador, Stage stage, final BarraTerrenos barraTerrenos)
     {
         this.controlador = controlador;
         this.stage = stage;

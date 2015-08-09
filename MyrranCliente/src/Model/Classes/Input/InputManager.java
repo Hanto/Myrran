@@ -1,9 +1,10 @@
 package Model.Classes.Input;// Created by Hanto on 05/05/2014.
 
-import Controller.Controlador;
+import DTO.DTOsInputManager;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.PlayerI;
-import Interfaces.UI.Acciones.AccionI;
+import Interfaces.Model.AbstractModel;
+import Interfaces.UI.AccionI;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
@@ -12,11 +13,10 @@ import com.badlogic.gdx.math.Vector3;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InputManager implements InputProcessor, GestureListener
+public class InputManager extends AbstractModel implements InputProcessor, GestureListener
 {
     //Model:
     private MaquinablePlayer player;
-    private Controlador controlador;
     private Vector3 coordenadasMundo;
 
     //Datos:
@@ -24,10 +24,9 @@ public class InputManager implements InputProcessor, GestureListener
     private Map<String, AccionI> listaDeAcciones = new HashMap<>();
 
     //Constructor:
-    public InputManager(PlayerI player, Controlador controlador)
+    public InputManager(PlayerI player)
     {
         this.player = player;
-        this.controlador = controlador;
         this.coordenadasMundo = new Vector3();
     }
 
@@ -56,7 +55,7 @@ public class InputManager implements InputProcessor, GestureListener
         {
             String idAccion = listaDeBinds.get(keycode);
             AccionI accion = listaDeAcciones.get(idAccion);
-            if (accion != null) accion.accionKeyDown(player, controlador);
+            if (accion != null) accion.accionKeyDown(player, this);
         }
         return false;
     }
@@ -67,16 +66,18 @@ public class InputManager implements InputProcessor, GestureListener
         {
             String idAccion = listaDeBinds.get(keycode);
             AccionI accion = listaDeAcciones.get(idAccion);
-            if (accion != null) accion.accionKeyUp(player, controlador);
+            if (accion != null) accion.accionKeyUp(player, this);
         }
         return false;
     }
 
     @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        coordenadasScreenAMundo(screenX, screenY);
-        player.getInput().setScreenX((int)coordenadasMundo.x);
-        player.getInput().setScreenY((int)coordenadasMundo.y);
+        //coordenadasScreenAMundo(screenX, screenY);
+        //player.getInput().setScreenX((int)coordenadasMundo.x);
+        //player.getInput().setScreenY((int)coordenadasMundo.y);
+        player.getInput().setScreenX(screenX);
+        player.getInput().setScreenY(screenY);
         player.getInput().setStartCastear(true);
         player.getInput().setStopCastear(false);
         return true;
@@ -84,9 +85,11 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
-        coordenadasScreenAMundo(screenX, screenY);
-        player.getInput().setScreenX((int)coordenadasMundo.x);
-        player.getInput().setScreenY((int)coordenadasMundo.y);
+        //coordenadasScreenAMundo(screenX, screenY);
+        //player.getInput().setScreenX((int)coordenadasMundo.x);
+        //player.getInput().setScreenY((int)coordenadasMundo.y);
+        player.getInput().setScreenX(screenX);
+        player.getInput().setScreenY(screenY);
         player.getInput().setStartCastear(false);
         player.getInput().setStopCastear(true);
         return true;
@@ -94,9 +97,11 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean touchDragged(int screenX, int screenY, int pointer)
     {
-        coordenadasScreenAMundo(screenX, screenY);
-        player.getInput().setScreenX((int)coordenadasMundo.x);
-        player.getInput().setScreenY((int)coordenadasMundo.y);
+        //coordenadasScreenAMundo(screenX, screenY);
+        //player.getInput().setScreenX((int)coordenadasMundo.x);
+        //player.getInput().setScreenY((int)coordenadasMundo.y);
+        player.getInput().setScreenX(screenX);
+        player.getInput().setScreenY(screenY);
         player.getInput().setStartCastear(true);
         player.getInput().setStopCastear(false);
         return false;
@@ -104,8 +109,8 @@ public class InputManager implements InputProcessor, GestureListener
 
     @Override public boolean scrolled(int amount)
     {
-        if (amount > 0)  { controlador.aplicarZoom(1); }
-        if (amount < 0)  { controlador.aplicarZoom(-1); }
+        if (amount > 0)  { notificarActualizacion("aplicarZoom", null, new DTOsInputManager.AplicarZoom(1)); }
+        if (amount < 0)  { notificarActualizacion("aplicarZoom", null, new DTOsInputManager.AplicarZoom(-1)); }
         return false;
     }
 
@@ -117,8 +122,8 @@ public class InputManager implements InputProcessor, GestureListener
 
     private void coordenadasScreenAMundo(int screenX, int screenY)
     {
-        coordenadasMundo.set(screenX, screenY,0);
-        controlador.getCamara().unproject(coordenadasMundo);
+        //coordenadasMundo.set(screenX, screenY,0);
+        //controlador.getCamara().unproject(coordenadasMundo);
     }
 
     //GESTURE LISTENER:

@@ -3,7 +3,7 @@ package Model.Classes.UI;// Created by Hanto on 08/05/2014.
 import DTO.DTOsBarraAcciones;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Model.AbstractModel;
-import Interfaces.UI.BarraAcciones.BarraAccionesI;
+import Interfaces.UI.BarraAccionesI;
 import Model.Classes.Input.InputManager;
 
 import java.util.HashMap;

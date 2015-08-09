@@ -82,6 +82,7 @@ public class Proyectil extends AbstractModel implements ProyectilI
         cuerpo.dispose();
         DTOsProyectil.DisposeProyectil dispose = new DTOsProyectil.DisposeProyectil(this);
         notificarActualizacion("dispose", null, dispose);
+        this.eliminarObservadores();
     }
 
     public void setID()
@@ -150,6 +151,6 @@ public class Proyectil extends AbstractModel implements ProyectilI
         getPosicionInterpoladaCuerpo();
     }
 
-    @Override public void actualizar (float delta)
+    @Override public void actualizar (float delta, MundoI mundo)
     { }
 }

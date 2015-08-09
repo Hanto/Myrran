@@ -52,7 +52,5 @@ public class Bolt extends TipoSpell
                 .build();
 
         mundo.añadirProyectil(proyectil);
-
-        System.out.println(proyectil.getID());
     }
 }

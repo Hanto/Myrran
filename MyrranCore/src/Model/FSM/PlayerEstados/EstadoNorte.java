@@ -23,6 +23,7 @@ public class EstadoNorte extends PlayerEstado
         output.setSpellID(input.getSpellID());
         output.setScreenX(input.getScreenX());
         output.setScreenY(input.getScreenY());
+        output.setMundoXY(input.getMundoX(), input.getMundoY());
 
         if ( input.getIrAbajo() &&
             !input.getIrArriba())       { maquinaEstados.setEstadoSiguiente(EstadoSur.class); return; }

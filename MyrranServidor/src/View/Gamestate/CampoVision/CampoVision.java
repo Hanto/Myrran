@@ -61,6 +61,8 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     {
         for (PCI pc : listaPCsCercanos)
         {   pc.eliminarObservador(this); }
+        for (ProyectilI pro : listaProyectilesCercanos)
+        {   pro.eliminarObservador(this); }
         mapaView.dispose();
         targetLock.dispose();
     }

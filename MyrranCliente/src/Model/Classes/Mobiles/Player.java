@@ -5,6 +5,7 @@ import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.PlayerI;
+import Interfaces.GameState.MundoI;
 import Interfaces.Input.PlayerIOI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
@@ -15,10 +16,10 @@ import Model.Cuerpos.Cuerpo;
 import Model.FSM.IO.PlayerIO;
 import Model.FSM.MaquinaEstados;
 import Model.FSM.MaquinaEstadosFactory;
-import Model.GameState.Mundo;
 import Model.Settings;
 import Model.Skills.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,6 @@ import java.util.Map;
 
 public class Player extends AbstractModel implements PlayerI, Debuffeable, MaquinablePlayer
 {
-    protected Mundo mundo;
     protected int connectionID;
     protected int iDProyectiles = 0;
 
@@ -111,13 +111,11 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     @Override public Iterator<SkillPersonalizadoI> getIteratorSkillPersonalizado(){ return listaSkillsPersonalizados.values().iterator(); }
 
     //Constructor:
-    public Player(Mundo mundo)
+    public Player(World world)
     {
-        this.mundo = mundo;
-
         this.notificador = new PlayerNotificador(this);
         this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
-        this.cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
+        this.cuerpo = new Cuerpo(world, 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
         cuerpo.setPosition(x, y);
     }
@@ -245,22 +243,27 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         if (castearInterrumpible)
         {
             castearInterrumpible = false;
-            notificador.setStopCastear(output.getScreenX(), output.getScreenY());
+
+            //TODO PRUEBA
+            notificador.setStopCastear(output.mundoX, output.mundoY);
+            //notificador.setStopCastear(output.getScreenX(), output.getScreenY());
         }
     }
 
     //Servidor:
-    private void startCastear()
+    private void startCastear(MundoI mundo)
     {
         if (!isCasteando())
         {
             SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(output.getSpellID());
             if (spell != null)
             {
-                spell.castear(this, output.getScreenX(), output.getScreenY(), mundo);
+                //TODO PRUEBA
+                spell.castear(this, output.mundoX, output.mundoY, mundo);
+                //spell.castear(this, output.getScreenX(), output.getScreenY(), mundo);
                 castearInterrumpible = true;
-                notificador.setStartCastear(output.getScreenX(), output.getScreenY());
-                //actualCastingTime += 0.01f;
+                notificador.setStartCastear(output.mundoX, output.mundoY);
+                //notificador.setStartCastear(output.getScreenX(), output.getScreenY());
             }
         }
     }
@@ -292,14 +295,14 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         {   cuerpo.setLinearVelocity(0f); }
     }
 
-    public void actualizar (float delta)
+    public void actualizar (float delta, MundoI mundo)
     {
         fsm.actualizar(delta);
         actualizarCastingTime(delta);
         moverse();
         setNumAnimacion(output.getNumAnimacion());
         setSpellIDSeleccionado(output.getSpellID());
-        if (output.getStartCastear()) startCastear();
+        if (output.getStartCastear()) startCastear(mundo);
         else if (output.getStopCastear()) stopCastear();
     }
 
@@ -319,7 +322,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     {
         output.setScreenX(screenX);
         output.setScreenY(screenY);
-        if (castear) startCastear();
-        else stopCastear();
+        if (castear) { output.setStartCastear(true); output.setStopCastear(false); }
+        else { output.setStopCastear(true); output.setStartCastear(false); }
     }
 }

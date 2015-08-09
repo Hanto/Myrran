@@ -155,7 +155,7 @@ public class DTOsCampoVision
             this.direccionEnGrados = proyectil.getCuerpo().getDireccion().angle();
             this.velocidad = proyectil.getVelocidadMax();
             this.duracionActual = proyectil.getDuracionActual();
-            this.duracionMax = proyectil.getVelocidadMax();
+            this.duracionMax = proyectil.getDuracionMaxima();
         }
     }
 

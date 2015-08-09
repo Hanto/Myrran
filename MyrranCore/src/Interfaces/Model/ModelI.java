@@ -7,4 +7,5 @@ public interface ModelI
     public void notificarActualizacion(String nombreValor, Object viejoValor, Object nuevoValor);
     public void añadirObservador(PropertyChangeListener observador);
     public void eliminarObservador(PropertyChangeListener observador);
+    public void eliminarObservadores();
 }

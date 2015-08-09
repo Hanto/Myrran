@@ -1,6 +1,7 @@
 package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.GameState.MundoI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
@@ -100,6 +101,7 @@ public class PC extends AbstractModel implements PCI
     {
         cuerpo.dispose();
         notificador.setDispose();
+        this.eliminarObservadores();
     }
 
     @Override public void modificarHPs(float HPs)
@@ -115,7 +117,7 @@ public class PC extends AbstractModel implements PCI
 
     }
 
-    @Override public void actualizar (float delta)
+    @Override public void actualizar (float delta, MundoI mundo)
     {
 
     }

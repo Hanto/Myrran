@@ -1,6 +1,5 @@
 package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
 
-import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesPropiedades.Vulnerable;
@@ -25,7 +24,6 @@ public class PlayerView extends Group implements PropertyChangeListener
     //Modelo:
     public Player player;
     public MundoView mundoView;
-    public Controlador controlador;
 
     //Vista:
     public PixiePC actor;
@@ -37,11 +35,10 @@ public class PlayerView extends Group implements PropertyChangeListener
     public float getCenterX()               { return (player.getX()+this.getWidth()/2); }
     public float getCenterY()               { return (player.getY()+this.getHeight()/2); }
 
-    public PlayerView (Player player, MundoView mundoView, Controlador controlador)
+    public PlayerView (Player player, MundoView mundoView)
     {
         this.player = player;
         this.mundoView = mundoView;
-        this.controlador = controlador;
 
         crearActor();
 

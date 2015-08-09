@@ -1,8 +1,8 @@
-package Interfaces.UI.BarraAcciones;// Created by Hanto on 13/05/2014.
+package Interfaces.UI;// Created by Hanto on 13/05/2014.
 
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Model.ModelI;
-import Interfaces.UI.Acciones.CasillaI;
+import Interfaces.UI.CasillaI;
 
 public interface BarraAccionesI extends ModelI
 {

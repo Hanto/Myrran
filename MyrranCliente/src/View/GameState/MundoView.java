@@ -1,6 +1,5 @@
 package View.GameState;// Created by Hanto on 14/05/2014.
 
-import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsMundo;
 import Interfaces.EntidadesTipos.PCI;
@@ -42,7 +41,6 @@ import static Model.Settings.PIXEL_METROS;
 public class MundoView extends Stage implements PropertyChangeListener
 {
     //Controlador, Model:
-    protected Controlador controlador;
     protected Mundo mundo;
 
     //View:
@@ -69,9 +67,8 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MundoView(Controlador controlador, Player player, Mundo mundo)
+    public MundoView(Player player, Mundo mundo)
     {
-        this.controlador = controlador;
         this.mundo = mundo;
 
         RayHandler.useDiffuseLight(true);
@@ -79,7 +76,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         rayHandler = new RayHandler(mundo.getWorld());
         rayHandler.setAmbientLight(0.6f, 0.6f, 0.6f, 1.0f);
         mapaView = new MapaView(mundo.getMapa(), this, player.getX(), player.getY(), Settings.MAPAVIEW_TamañoX, Settings.MAPAVIEW_TamañoY);
-        playerView = new PlayerView(player, this, controlador);
+        playerView = new PlayerView(player, this);
         camara = new OrthographicCamera (Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         boxCamara = new OrthographicCamera(Gdx.graphics.getWidth() * PIXEL_METROS, Gdx.graphics.getHeight() * PIXEL_METROS);
 
@@ -116,7 +113,7 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     public void añadirPCView (PCI pc)
     {
-        PCView pcView = new PCView(pc, this, controlador);
+        PCView pcView = new PCView(pc, this);
         listaPCViews.add(pcView);
     }
 

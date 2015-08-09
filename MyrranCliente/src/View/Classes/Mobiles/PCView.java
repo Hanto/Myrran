@@ -1,6 +1,5 @@
 package View.Classes.Mobiles;// Created by Hanto on 08/04/2014.
 
-import Controller.Controlador;
 import DB.RSC;
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesPropiedades.Caster;
@@ -22,18 +21,16 @@ public class PCView extends Group implements PropertyChangeListener
 {
     public PCI pc;
     public MundoView mundoView;
-    public Controlador controlador;
 
     public PixiePC actor;
     public NameplateView nameplateView;
 
 
 
-    public PCView (PCI pc, MundoView vista, Controlador controlador)
+    public PCView (PCI pc, MundoView vista)
     {
         this.pc = pc;
         this.mundoView = vista;
-        this.controlador = controlador;
 
         this.setPosition(pc.getX(), pc.getY());
 

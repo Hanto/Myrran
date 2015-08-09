@@ -23,6 +23,7 @@ public class EstadoOeste extends PlayerEstado
         output.setSpellID(input.getSpellID());
         output.setScreenX(input.getScreenX());
         output.setScreenY(input.getScreenY());
+        output.setMundoXY(input.getMundoX(), input.getMundoY());
 
         if ( input.getIrDerecha() &&
             !input.getirIzquierda())    { maquinaEstados.setEstadoSiguiente(EstadoEste.class); return; }

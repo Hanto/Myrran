@@ -3,8 +3,8 @@ package View.Classes.UI.BarraAccionesView;// Created by Hanto on 06/05/2014.
 import DB.RSC;
 import DTO.DTOsBarraAcciones;
 import Model.Settings;
-import Interfaces.UI.BarraAcciones.BarraAccionesI;
-import Interfaces.UI.BarraAcciones.ControladorBarraAccionI;
+import Interfaces.UI.BarraAccionesI;
+import Interfaces.Controlador.ControladorBarraAccionI;
 import View.Classes.UI.BarraAccionesView.CasillaView.CasillaView;
 import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;

@@ -1,6 +1,5 @@
 package View.Gamestate;// Created by Hanto on 16/07/2015.
 
-import Controller.Controlador;
 import DTO.DTOsMundo;
 import Interfaces.EntidadesTipos.CampoVisionI;
 import Interfaces.EntidadesTipos.PCI;
@@ -16,17 +15,15 @@ import java.util.List;
 
 public class MundoView implements PropertyChangeListener, Disposable
 {
-    public Controlador controlador;
     public Mundo mundo;
 
     protected List<CampoVisionI> listaCampoVisiones = new ArrayList<>();
 
 
     //Constructor:
-    public MundoView(Controlador controlador, Mundo mundo)
+    public MundoView(Mundo mundo)
     {
         mundo.añadirObservador(this);
-        this.controlador = controlador;
         this.mundo = mundo;
     }
 

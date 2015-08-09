@@ -5,7 +5,7 @@ import DTO.DTOsCampoVision;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.Spell.SpellI;
-import Interfaces.UI.Acciones.AccionI;
+import Interfaces.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.Classes.Mobiles.PC;
 import Model.Classes.Mobiles.Player;
@@ -108,7 +108,6 @@ public class ClienteInputs
 
             if (dto instanceof DTOsCampoVision.DatosCompletosProyectil)
             {
-                System.out.println("Pepo ha llegado: "+ ((DTOsCampoVision.DatosCompletosProyectil) dto).ID);
                 ProyectilI proyectil = ProyectilFactory.ESFERA.nuevo(mundo, ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
                         .setID(((DTOsCampoVision.DatosCompletosProyectil) dto).ID)
                         .setSpell(((DTOsCampoVision.DatosCompletosProyectil) dto).spellID)

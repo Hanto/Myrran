@@ -1,6 +1,6 @@
 package View.Classes.UI.BarraTerrenosView.TerrenoView;// Created by Hanto on 14/05/2014.
 
-import Interfaces.UI.BarraTerrenos.ControladorBarraTerrenosI;
+import Interfaces.Controlador.ControladorBarraTerrenosI;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
 import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;

@@ -28,7 +28,7 @@ public interface MundoI extends ModelI
     public Iterator<ProyectilI> getIteratorProyectiles(int mapTileX, int mapTileY);
 
     //IA:
-    public void actualizarUnidades(float delta);
+    public void actualizarUnidades(float delta, MundoI mundo);
     public void actualizarFisica(float delta);
     public void interpolarPosicion(float alpha);
 

@@ -7,7 +7,6 @@ public class AccionFactory
 {
     public enum accionComando
     {
-
         IRESTE("IrEste")
         {
             @Override public Accion nuevo()

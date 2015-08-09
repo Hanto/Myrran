@@ -3,9 +3,9 @@ package Model.Classes.UI;// Created by Hanto on 06/05/2014.
 import DTO.DTOsBarraAcciones;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Model.AbstractModel;
-import Interfaces.UI.Acciones.AccionI;
-import Interfaces.UI.Acciones.CasillaI;
-import Interfaces.UI.BarraAcciones.BarraAccionesI;
+import Interfaces.UI.AccionI;
+import Interfaces.UI.CasillaI;
+import Interfaces.UI.BarraAccionesI;
 import Model.Classes.Input.InputManager;
 import com.badlogic.gdx.utils.Array;
 
@@ -25,7 +25,7 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     @Override public int getNumFilas()                          { return barraAcciones.size; }
     @Override public int getNumColumnas()                       { return (barraAcciones.size == 0) ? 0 : barraAcciones.first().size; }
     @Override public CasillaI getCasilla(int posX, int posY)    { return barraAcciones.get(posY).get(posX); }
-    @Override public CasterPersonalizable getCaster()              { return caster; }
+    @Override public CasterPersonalizable getCaster()           { return caster; }
 
     //CONSTRUCTOR:
     public BarraAcciones(CasterPersonalizable caster, InputManager inputManager, int id, int numFilas, int numColumnas)

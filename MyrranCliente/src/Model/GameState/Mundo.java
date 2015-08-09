@@ -13,7 +13,6 @@ import Model.Classes.Mobiles.Player;
 import Model.Datos.ListaMapa;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import org.slf4j.LoggerFactory;
 
@@ -24,9 +23,9 @@ public class Mundo extends AbstractModel implements MundoI
     private ListaMapa<PCI> listaMapaPlayers = new ListaMapa<>();
     private ListaMapa<ProyectilI> listaMapaProyectiles = new ListaMapa<>();
 
+    private World world;
     private Player player;
     private Mapa mapa;
-    private World world;
 
     public Player getPlayer()                               { return player; }
     @Override public MapaI getMapa()                        { return mapa; }
@@ -36,11 +35,11 @@ public class Mundo extends AbstractModel implements MundoI
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
 
-    public Mundo()
+    public Mundo(World world, Player pc, Mapa map)
     {
-        world = new World(new Vector2(0, 0), false);
-        player = new Player(this);
-        mapa = new Mapa(player);
+        this.world = world;
+        this.player = pc;
+        this.mapa = map;
     }
 
     // PLAYERS:
@@ -113,14 +112,14 @@ public class Mundo extends AbstractModel implements MundoI
     // UPDATE:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void actualizarUnidades(float delta)
+    public void actualizarUnidades(float delta, MundoI mundo)
     {   //Actualizar a todas las unidades a partir de los datos ya interpolados
 
         //PLAYER:
-        player.actualizar(delta);
+        player.actualizar(delta, mundo);
         //PLAYERS:
         for (PCI pc: listaMapaPlayers)
-        {   pc.actualizar(delta); }
+        {   pc.actualizar(delta, mundo); }
         //PROYECTILES:
         Iterator<ProyectilI>iterator = listaMapaProyectiles.iterator(); ProyectilI pro;
         while (iterator.hasNext())

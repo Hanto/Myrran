@@ -1,6 +1,6 @@
 package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/07/2014.
 
-import Interfaces.UI.Acciones.AccionI;
+import Interfaces.UI.AccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
 import View.Classes.UI.SpellView.SpellView;
 import com.badlogic.gdx.Input;
