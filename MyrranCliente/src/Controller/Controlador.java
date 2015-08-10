@@ -30,7 +30,7 @@ public class Controlador
         this.vista = vista;
 
         inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(vista.getUiView());
+        inputMultiplexer.addProcessor(vista.getUiView().getStage());
         inputMultiplexer.addProcessor(vista.getMundoView());
         inputMultiplexer.addProcessor(ui.getInputManager());
         Gdx.input.setInputProcessor(inputMultiplexer);

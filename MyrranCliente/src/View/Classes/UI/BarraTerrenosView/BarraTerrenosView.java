@@ -24,11 +24,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class BarraTerrenosView extends Group implements PropertyChangeListener, Ventana
+public class BarraTerrenosView extends Group implements PropertyChangeListener, Ventana, Disposable
 {
     protected ControladorBarraTerrenosI controlador;
     protected Stage stage;
@@ -54,14 +55,11 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
     @Override public float getAnchoElemento()           { return Settings.TILESIZE*2; }
     @Override public float getAltoElemento()            { return Settings.TILESIZE*2; }
 
-    public BarraTerrenosView (ControladorBarraTerrenosI controlador, Stage stage, final BarraTerrenos barraTerrenos)
+    public BarraTerrenosView (ControladorBarraTerrenosI controlador, final BarraTerrenos barraTerrenos, Stage stage)
     {
         this.controlador = controlador;
-        this.stage = stage;
         this.barraTerrenos = barraTerrenos;
-
-
-        barraTerrenos.añadirObservador(this);
+        this.stage = stage;
 
         scrollPane = new ScrollPane(tablaTerrenos);
         this.addActor(scrollPane);
@@ -79,9 +77,10 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
         this.addActor(botonBorrarTerreno);
         botonBorrarTerreno.addListener(new InputListener()
         {
-            @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
             {
-                barraTerrenos.setParametroTerrenoID((short)-1);
+                barraTerrenos.setParametroTerrenoID((short) -1);
                 return true;
             }
         });
@@ -92,10 +91,15 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
         crearBarraIconos();
         crearBotonCapas();
 
-        setPosition(-getWidth()-redimensionarBarra.getWidth(), 500);
+        setPosition(-getWidth() - redimensionarBarra.getWidth(), 500);
         oldX = moverBarra.getWidth();
         oldY = 500;
+
+        barraTerrenos.añadirObservador(this);
     }
+
+    @Override public void dispose()
+    {   barraTerrenos.eliminarObservador(this); }
 
     private void crearBarraIconos()
     {

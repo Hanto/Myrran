@@ -16,8 +16,6 @@ public class ConjuntoBarraAcciones extends AbstractModel
     protected CasterPersonalizable caster;
 
 
-
-
     public ConjuntoBarraAcciones(CasterPersonalizable caster, InputManager inputManager)
     {
         this.caster = caster;

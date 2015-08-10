@@ -7,12 +7,13 @@ import View.GameState.MundoView;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.Disposable;
 import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class MapaView implements PropertyChangeListener
+public class MapaView implements PropertyChangeListener, Disposable
 {
     private MundoView mundoView;
     private MapaI mapaModel;
@@ -55,6 +56,13 @@ public class MapaView implements PropertyChangeListener
         {   listaSubMapas[i] = new SubMapaView(this.mapaModel, numTilesX, numTilesY); }
 
         setPosition(posInicialX, posInicialY);
+    }
+
+    @Override public void dispose()
+    {
+        for (SubMapaView subMapaView: listaSubMapas)
+        {   subMapaView.dispose(); logger.trace("DISPOSE: Liberando SubMapaView(TiledMap) {}", subMapaView);}
+
     }
 
     public void setPosition(float posX, float posY)
@@ -116,13 +124,6 @@ public class MapaView implements PropertyChangeListener
             setView(subMapaView);
             subMapaView.render();
         }
-    }
-
-    public void dispose()
-    {
-        for (SubMapaView subMapaView: listaSubMapas)
-        {   subMapaView.dispose(); logger.trace("DISPOSE: Liberando SubMapaView(TiledMap) {}", subMapaView);}
-
     }
 
     public void mapaVistaLoader(SubMapaView subMapaView)

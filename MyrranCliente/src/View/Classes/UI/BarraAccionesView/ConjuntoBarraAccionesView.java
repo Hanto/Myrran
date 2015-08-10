@@ -1,6 +1,8 @@
 package View.Classes.UI.BarraAccionesView;// Created by Hanto on 08/05/2014.
 
 import DB.RSC;
+import DTO.DTOsBarraAcciones;
+import Model.Classes.UI.ConjuntoBarraAcciones;
 import Model.Settings;
 import Interfaces.UI.BarraAccionesI;
 import Interfaces.Controlador.ControladorBarraAccionI;
@@ -10,11 +12,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 
-public class ConjuntoBarraAccionesView
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class ConjuntoBarraAccionesView implements PropertyChangeListener, Disposable
 {
     private ControladorBarraAccionI controlador;
     private Stage stage;
+    private ConjuntoBarraAcciones conjuntoBarraAcciones;
 
     private Array<BarraAccionesView> listaBarraAccionesView = new Array<>();
     private DragAndDrop dadAcciones = new DragAndDrop();
@@ -23,13 +30,23 @@ public class ConjuntoBarraAccionesView
     public boolean getRebindearSkills()             { return rebindearSkills; }
     public DragAndDrop getDadAcciones()             { return dadAcciones; }
 
-    public ConjuntoBarraAccionesView(ControladorBarraAccionI controller, Stage stage)
+    public ConjuntoBarraAccionesView(ControladorBarraAccionI controller, ConjuntoBarraAcciones conjuntoBarraAcciones, Stage stage)
     {
-        controlador = controller;
+        this.controlador = controller;
         this.stage = stage;
+        this.conjuntoBarraAcciones = conjuntoBarraAcciones;
+
         dadAcciones.setDragTime(0);
         crearBotonesRebind();
+
+        this.conjuntoBarraAcciones.añadirObservador(this);
     }
+
+    @Override public void dispose()
+    {   this.conjuntoBarraAcciones.eliminarObservador(this); }
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
 
     public void añadirBarraAccionesView(BarraAccionesI barracciones)
     {
@@ -78,5 +95,15 @@ public class ConjuntoBarraAccionesView
                 return true;
             }
         });
+    }
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {
+        //MODEL: OBSERVAMOS BARRA ACCIONES:
+        if (evt.getNewValue() instanceof DTOsBarraAcciones.AñadirBarraAcciones)
+    {
+        BarraAccionesI barraAcciones = ((DTOsBarraAcciones.AñadirBarraAcciones) evt.getNewValue()).barraAcciones;
+        añadirBarraAccionesView(barraAcciones);
+    }
     }
 }

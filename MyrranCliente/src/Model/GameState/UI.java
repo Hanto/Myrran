@@ -1,9 +1,8 @@
 package Model.GameState;// Created by Hanto on 06/05/2014.
 
-import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.UI.AccionI;
-import Interfaces.UI.CasillaI;
 import Interfaces.UI.BarraAccionesI;
+import Interfaces.UI.CasillaI;
 import Model.Classes.Input.InputManager;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
@@ -20,11 +19,11 @@ public class UI
     public BarraTerrenos getBarraTerrenos()                 { return barraTerrenos; }
 
 
-    public UI (PlayerI player)
+    public UI (InputManager inputManager, ConjuntoBarraAcciones conjuntoBarraAcciones, BarraTerrenos barraTerrenos)
     {
-        inputManager = new InputManager(player);
-        conjuntoBarraAcciones = new ConjuntoBarraAcciones(player, inputManager);
-        barraTerrenos  = new BarraTerrenos(player);
+        this.inputManager = inputManager;
+        this.conjuntoBarraAcciones = conjuntoBarraAcciones;
+        this.barraTerrenos  = barraTerrenos;
     }
 
 

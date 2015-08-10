@@ -1,7 +1,6 @@
 package View.GameState;// Created by Hanto on 08/04/2014.
 
 import DB.RSC;
-import Interfaces.Controlador.ControladorVistaI;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
 import Tweens.TweenEng;
@@ -9,7 +8,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Disposable;
 
-public class Vista implements ControladorVistaI, Disposable
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class Vista implements PropertyChangeListener, Disposable
 {
     private Mundo mundo;
     private UI ui;
@@ -20,13 +22,12 @@ public class Vista implements ControladorVistaI, Disposable
     public UIView getUiView()       { return uiView; }
     public MundoView getMundoView() { return mundoView; }
 
-    public Vista (UI ui, Mundo mundo)
+    public Vista (MundoView mundoView, UIView uiView)
     {
-        this.ui = ui;
-        this.mundo = mundo;
+        this.mundoView = mundoView;
+        this.uiView = uiView;
 
-        mundoView = new MundoView(mundo.getPlayer(), mundo);
-        uiView = new UIView(this, ui);
+        uiView.añadirObservador(this);
     }
 
     @Override public void dispose ()
@@ -36,6 +37,7 @@ public class Vista implements ControladorVistaI, Disposable
         RSC.atlasRecursosDAO.getAtlasRecursosDAO().dispose();
         RSC.fuenteRecursosDAO.getFuentesRecursosDAO().dispose();
         RSC.particulaRecursoDAO.getParticulaRecursosDAO().dispose();
+        uiView.eliminarObservador(this);
     }
 
     public void render (float delta)
@@ -60,6 +62,15 @@ public class Vista implements ControladorVistaI, Disposable
         uiView.resize(anchura, altura);
     }
 
-    @Override public void aplicarZoom(int incrementoZoom)
+    public void aplicarZoom(int incrementoZoom)
     {   mundoView.aplicarZoom(incrementoZoom); }
+
+    // LA VISTA OBSERVA A SUS SUBVISTAS. Para capturar eventos que impliquen modificaciones que superen sus ambitos:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {
+        if (evt.getPropertyName().equals("aplicarZoom"))
+            aplicarZoom((int)evt.getNewValue());
+    }
 }
