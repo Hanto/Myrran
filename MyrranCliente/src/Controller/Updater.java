@@ -7,14 +7,18 @@ import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
+import View.Classes.Geo.MapaView;
 import View.Classes.UI.BarraAccionesView.ConjuntoBarraAccionesView;
 import View.Classes.UI.BarraTerrenosView.BarraTerrenosView;
 import View.GameState.MundoView;
 import View.GameState.UIView;
 import View.GameState.UIViewController;
 import View.GameState.Vista;
+import box2dLight.RayHandler;
 import ch.qos.logback.classic.Logger;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -23,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import zMain.MyrranClient;
 
 import static Model.Settings.FIXED_TimeStep;
+import static Model.Settings.PIXEL_METROS;
 
 
 public class Updater implements Screen
@@ -37,16 +42,25 @@ public class Updater implements Screen
     private ConjuntoBarraAcciones conjuntoBarraAcciones;
     private BarraTerrenos barraTerrenos;
     private UI ui;
+
     //VIEW:
-    private MundoView mundoView;
-    private UIViewController uiViewController;
     private Stage uiViewStage;
+    private UIViewController uiViewController;
     private ConjuntoBarraAccionesView conjuntoBarraAccionesView;
     private BarraTerrenosView barraTerrenosView;
     private UIView uiView;
+
+    private RayHandler rayhandler;
+    private OrthographicCamera camara;
+    private OrthographicCamera boxCamara;
+    private MundoView mundoView;
+    private MapaView mapaView;
+
     private Vista vista;
+
     //CONTROLER:
     private Controlador controlador;
+
     //MULTIPLAYER:
     private Cliente cliente;
 
@@ -64,7 +78,9 @@ public class Updater implements Screen
     {
         this.myrranCliente = myrranCliente;
 
-        //MODEL:
+        // MODEL:
+        //--------------------------------------------------------------------------------------------------------------
+
         world = new World(new Vector2(0, 0), false);
         player = new Player(world);
         mapa = new Mapa(player);
@@ -74,20 +90,41 @@ public class Updater implements Screen
         barraTerrenos = new BarraTerrenos(player);
         ui = new UI(inputManager, conjuntoBarraAcciones, barraTerrenos);
 
-        //VISTA:
+        // UIVIEW:
+        //--------------------------------------------------------------------------------------------------------------
+
         uiViewStage = new Stage();
         uiViewController = new UIViewController(ui);
         conjuntoBarraAccionesView = new ConjuntoBarraAccionesView(uiViewController, conjuntoBarraAcciones, uiViewStage);
         barraTerrenosView = new BarraTerrenosView(uiViewController, barraTerrenos, uiViewStage);
         uiView = new UIView(uiViewController, inputManager, conjuntoBarraAccionesView, barraTerrenosView, uiViewStage);
-        mundoView = new MundoView(player, mundo);
+
+        // MUNDOVIEW:
+        //--------------------------------------------------------------------------------------------------------------
+
+        rayhandler = new RayHandler(world);
+        camara = new OrthographicCamera (Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        boxCamara = new OrthographicCamera(Gdx.graphics.getWidth() * PIXEL_METROS, Gdx.graphics.getHeight() * PIXEL_METROS);
+        mapaView = new MapaView(mapa, camara);
+        mundoView = new MundoView(player, mundo, mapaView, camara, boxCamara, rayhandler);
+
+        // VISTA:
+        //--------------------------------------------------------------------------------------------------------------
+
         vista = new Vista(mundoView, uiView);
 
-        //CONTROLADOR:
+        // CONTROLADOR:
+        //--------------------------------------------------------------------------------------------------------------
+
         controlador = new Controlador(mundo, ui, vista);
 
-        //MULTIPLAYER:
+        // MULTIPLAYER:
+        //--------------------------------------------------------------------------------------------------------------
+
         cliente = new Cliente(controlador);
+
+        // Incializacion:
+        //--------------------------------------------------------------------------------------------------------------
 
         currentTime = TimeUtils.nanoTime() / 1000000000.0;
     }
@@ -109,7 +146,7 @@ public class Updater implements Screen
 
             timeStep -= FIXED_TimeStep;
 
-            player.getInput().coordenadasScreenAMundo(vista.getMundoView().getCamara());
+            player.getInput().coordenadasScreenAMundo(camara);
             mundo.actualizarUnidades(FIXED_TimeStep, mundo);
             mundo.actualizarFisica(FIXED_TimeStep);
             mundo.enviarDatosAServidor(cliente);

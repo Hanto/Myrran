@@ -1,10 +1,10 @@
 package View.Classes.Mobiles.ProyectilView;// Created by Hanto on 06/08/2015.
 
 import DTO.DTOsProyectil;
+import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Settings;
 import View.Classes.Actores.Pixie;
-import View.GameState.MundoView;
 import box2dLight.PointLight;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -13,22 +13,23 @@ import com.badlogic.gdx.utils.Disposable;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ProyectilView extends Group implements PropertyChangeListener, Disposable
+public class ProyectilView extends Group implements PropertyChangeListener, IDentificable, Disposable
 {
     protected ProyectilI proyectil;
-    protected MundoView mundoView;
-    //protected Controlador controlador;
-
-    protected Pixie animacionProyectil;
+    protected int iD;
+    protected Pixie actor;
     protected PointLight luz;
 
-    public ProyectilView(ProyectilI proyectil, MundoView mundoView, Pixie animacionProyectil, PointLight luz)
+
+    public ProyectilView(ProyectilI proyectil, Pixie pixieActor, PointLight luz)
     {
         this.proyectil = proyectil;
-        this.mundoView = mundoView;
+        this.iD = proyectil.getID();
+        this.actor = pixieActor;
+        this.luz = luz;
 
-        setAnimacionProyectil(animacionProyectil);
-        setLuz(luz);
+        crearActor();
+        if (luz != null) crearLuz();
 
         this.proyectil.añadirObservador(this);
     }
@@ -37,34 +38,40 @@ public class ProyectilView extends Group implements PropertyChangeListener, Disp
     {
         this.proyectil.eliminarObservador(this);
         this.luz.remove();
-        this.mundoView.eliminarProyectilView(this);
     }
 
-    public void setAnimacionProyectil (Pixie pixie)
+    // CREADORES VIEW:
+    //------------------------------------------------------------------------------------------------------------------
+
+    private void crearActor()
     {
-        animacionProyectil = pixie;
-        animacionProyectil.setOrigin(animacionProyectil.getWidth() / 2, animacionProyectil.getHeight() / 2);
-        this.addActor(animacionProyectil);
-        this.setWidth(animacionProyectil.getWidth());
-        this.setHeight(animacionProyectil.getHeight());
+        actor.setOrigin(actor.getWidth() / 2, actor.getHeight() / 2);
+        this.addActor(actor);
+        this.setWidth(actor.getWidth());
+        this.setHeight(actor.getHeight());
         setDireccion();
         this.setColor(0, 0, 0, 0);
         this.addAction(Actions.fadeIn(0.5f));
     }
 
-    public void setLuz(PointLight luz)
+    private void crearLuz()
     {
-        this.luz = luz;
         luz.setSoft(true);
         luz.setColor(0.6f, 0.0f, 0.0f, 1.0f);
         luz.setDistance(300 * Settings.PIXEL_METROS);
         luz.attachToBody(proyectil.getCuerpo().getBody());
     }
 
+    //
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public int getID()
+    {   return iD;}
+
     public void setDireccion()
     {
         float grados = proyectil.getCuerpo().getDireccion().angle();
-        animacionProyectil.rotateBy(grados);
+        actor.rotateBy(grados);
     }
 
     public void setPosition (int x, int y)
@@ -86,7 +93,7 @@ public class ProyectilView extends Group implements PropertyChangeListener, Disp
         if (evt.getNewValue() instanceof DTOsProyectil.PosicionProyectil)
         {
             setPosition(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil.getX(),
-                    ((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil.getY());
+                        ((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil.getY());
         }
         else if (evt.getNewValue() instanceof DTOsProyectil.DisposeProyectil)
         {   dispose(); }

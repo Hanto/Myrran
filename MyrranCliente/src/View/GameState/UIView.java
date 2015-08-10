@@ -21,7 +21,7 @@ import java.beans.PropertyChangeListener;
 public class UIView extends AbstractModel implements PropertyChangeListener, Disposable
 {
     protected InputManager inputManager;
-    protected UIViewController controller;
+    protected UIViewController uiController;
 
     protected Stage stage;
     protected ConjuntoBarraAccionesView conjuntoBarraAccionesView;
@@ -31,11 +31,11 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
     public void setTextoFPS(String s)                           { fps.setTexto(s); }
     public Stage getStage()                                     { return stage; }
 
-    public UIView(UIViewController controller, InputManager inputManager,
+    public UIView(UIViewController uiController, InputManager inputManager,
                   ConjuntoBarraAccionesView conjuntoBarraAccionesView, BarraTerrenosView barraTerrenosView, Stage stage)
     {
         this.inputManager = inputManager;
-        this.controller = controller;
+        this.uiController = uiController;
         this.conjuntoBarraAccionesView = conjuntoBarraAccionesView;
         this.barraTerrenosView = barraTerrenosView;
         this.stage = stage;
@@ -45,7 +45,7 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
         stage.addActor(fps);
 
         inputManager.añadirObservador(this);
-        controller.añadirObservador(this);
+        uiController.añadirObservador(this);
     }
 
     @Override public void dispose()
@@ -54,7 +54,7 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
         conjuntoBarraAccionesView.dispose();
         barraTerrenosView.dispose();
         inputManager.eliminarObservador(this);
-        controller.eliminarObservador(this);
+        uiController.eliminarObservador(this);
     }
 
     //STAGE:

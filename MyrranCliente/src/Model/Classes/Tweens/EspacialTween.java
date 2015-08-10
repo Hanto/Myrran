@@ -1,4 +1,4 @@
-package Tweens;// Created by Hanto on 25/07/2014.
+package Model.Classes.Tweens;// Created by Hanto on 25/07/2014.
 
 import Interfaces.EntidadesPropiedades.Espacial;
 import aurelienribon.tweenengine.TweenAccessor;

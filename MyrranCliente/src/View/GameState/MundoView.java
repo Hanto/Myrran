@@ -6,14 +6,17 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Player;
+import Model.Classes.Tweens.CamaraTween;
+import Model.Classes.Tweens.TweenEng;
+import Model.Datos.ListaMapa;
 import Model.GameState.Mundo;
 import Model.Settings;
-import Tweens.CamaraTween;
-import Tweens.TweenEng;
 import View.Classes.Actores.Particula;
 import View.Classes.Geo.MapaView;
-import View.Classes.Mobiles.PCView;
-import View.Classes.Mobiles.PlayerView;
+import View.Classes.Mobiles.PCView.PCView;
+import View.Classes.Mobiles.PCView.PCViewFactory;
+import View.Classes.Mobiles.PlayerView.PlayerView;
+import View.Classes.Mobiles.PlayerView.PlayerViewFactory;
 import View.Classes.Mobiles.ProyectilView.ProyectilView;
 import View.Classes.Mobiles.ProyectilView.ProyectilViewFactory;
 import aurelienribon.tweenengine.Tween;
@@ -30,7 +33,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Array;
 import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
@@ -46,8 +48,8 @@ public class MundoView extends Stage implements PropertyChangeListener
     //View:
     protected PlayerView playerView;
     protected MapaView mapaView;
-    protected Array<PCView> listaPCViews = new Array<>();
-    protected Array<ProyectilView> listaProyectilViews = new Array<>();
+    protected ListaMapa<PCView> listaPCViews = new ListaMapa<>();
+    protected ListaMapa<ProyectilView> listaProyectilViews = new ListaMapa<>();
 
     //LibGDX Tools:
     protected SpriteBatch batch = new SpriteBatch();
@@ -67,31 +69,24 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MundoView(Player player, Mundo mundo)
+    public MundoView(Player player, Mundo mundo, MapaView mapaView,
+                     OrthographicCamera camara, OrthographicCamera boxCamara, RayHandler rayHandler)
     {
-        this.mundo = mundo;
-
         RayHandler.useDiffuseLight(true);
         RayHandler.setGammaCorrection(false);
-        rayHandler = new RayHandler(mundo.getWorld());
-        rayHandler.setAmbientLight(0.6f, 0.6f, 0.6f, 1.0f);
-        mapaView = new MapaView(mundo.getMapa(), this, player.getX(), player.getY(), Settings.MAPAVIEW_TamañoX, Settings.MAPAVIEW_TamañoY);
-        playerView = new PlayerView(player, this);
-        camara = new OrthographicCamera (Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        boxCamara = new OrthographicCamera(Gdx.graphics.getWidth() * PIXEL_METROS, Gdx.graphics.getHeight() * PIXEL_METROS);
+        this.rayHandler = rayHandler;
+        this.rayHandler.setAmbientLight(0.6f, 0.6f, 0.6f, 1.0f);
+        this.camara = camara;
+        this.boxCamara = boxCamara;
+        this.mundo = mundo;
+        this.mapaView = mapaView;
 
+        añadirPlayerView(player);
         getViewport().setCamera(camara);
 
         mundo.añadirObservador(this);
 
-        RSC.particulaRecursoDAO.getParticulaRecursosDAO().crearPool("prueba", 10, 10);
-        Particula par = RSC.particulaRecursoDAO.getParticulaRecursosDAO().obtain("prueba");
-        par.setScale(0.1f);
-        par.camara = getCamara();
-        par.luz = new PointLight(getRayHandler(), 300, new Color(0.7f,0.3f,0.3f,0.7f), 350 *PIXEL_METROS, 0, 0);
-        par.luz.setSoft(true);
-
-        this.addActor(par);
+        particleCursor();
     }
 
     @Override public void dispose ()
@@ -99,6 +94,8 @@ public class MundoView extends Stage implements PropertyChangeListener
         mundo.eliminarObservador(this);
         super.dispose();
 
+        logger.trace("DISPOSE: Liberando PlayerView");
+        playerView.dispose();
         logger.trace("DISPOSE: Liberando SpriteBatch");
         batch.dispose();
         logger.trace("DISPOSE: Liberando RayHandler");
@@ -108,31 +105,44 @@ public class MundoView extends Stage implements PropertyChangeListener
         mapaView.dispose();
     }
 
+    // PLAYER
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void añadirPlayerView(Player player)
+    {
+        playerView = PlayerViewFactory.ILUMINADO.nuevo(player, rayHandler);
+        this.addActor(playerView);
+    }
+
     // PC
     //------------------------------------------------------------------------------------------------------------------
 
     public void añadirPCView (PCI pc)
     {
-        PCView pcView = new PCView(pc, this);
+        PCView pcView = PCViewFactory.SINLUZ.nuevo(pc);
         listaPCViews.add(pcView);
+        this.addActor(pcView);
     }
 
-    public void eliminarPCView (PCView pcView)
-    {   listaPCViews.removeValue(pcView, true); }
+    public void eliminarPCView (int iD)
+    {
+        PCView pcView = listaPCViews.remove(iD);
+        this.getRoot().removeActor(pcView);
+    }
 
     // PROYECTIL
     //------------------------------------------------------------------------------------------------------------------
 
     public void añadirProyectilView (ProyectilI proyectil)
     {
-        ProyectilView proyectilView = ProyectilViewFactory.ILUMINADO.nuevo(proyectil, this);
+        ProyectilView proyectilView = ProyectilViewFactory.ILUMINADO.nuevo(proyectil, rayHandler);
         listaProyectilViews.add(proyectilView);
         this.addActor(proyectilView);
     }
 
-    public void eliminarProyectilView (ProyectilView proyectilView)
+    public void eliminarProyectilView (int iD)
     {
-        listaProyectilViews.removeValue(proyectilView, true);
+        ProyectilView proyectilView = listaProyectilViews.remove(iD);
         this.getRoot().removeActor(proyectilView);
     }
 
@@ -196,10 +206,19 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
+        // PC:
         if (evt.getNewValue() instanceof DTOsMundo.AñadirPC)
         {   añadirPCView(((DTOsMundo.AñadirPC) evt.getNewValue()).pc); }
+
+        else if (evt.getNewValue() instanceof DTOsMundo.EliminarPC)
+        {   eliminarPCView(((DTOsMundo.EliminarPC) evt.getNewValue()).pc.getID());}
+
+        //PROYECTIL
         else if (evt.getNewValue() instanceof DTOsMundo.AñadirProyectil)
         {   añadirProyectilView(((DTOsMundo.AñadirProyectil) evt.getNewValue()).proyectil);}
+
+        else if (evt.getNewValue() instanceof DTOsMundo.EliminarProyectil)
+        {   eliminarProyectilView(((DTOsMundo.EliminarProyectil) evt.getNewValue()).proyectil.getID());}
     }
 
     // CODIGO DEBUG:
@@ -288,5 +307,17 @@ public class MundoView extends Stage implements PropertyChangeListener
             }
         }
         shape.end();
+    }
+
+    private void particleCursor()
+    {
+        RSC.particulaRecursoDAO.getParticulaRecursosDAO().crearPool("prueba", 10, 10);
+        Particula par = RSC.particulaRecursoDAO.getParticulaRecursosDAO().obtain("prueba");
+        par.setScale(0.1f);
+        par.camara = getCamara();
+        par.luz = new PointLight(getRayHandler(), 300, new Color(0.7f,0.3f,0.3f,0.7f), 350 *PIXEL_METROS, 0, 0);
+        par.luz.setSoft(true);
+
+        this.addActor(par);
     }
 }

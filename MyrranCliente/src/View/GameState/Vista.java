@@ -3,7 +3,7 @@ package View.GameState;// Created by Hanto on 08/04/2014.
 import DB.RSC;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
-import Tweens.TweenEng;
+import Model.Classes.Tweens.TweenEng;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Disposable;

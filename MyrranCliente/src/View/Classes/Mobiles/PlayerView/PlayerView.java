@@ -1,33 +1,28 @@
-package View.Classes.Mobiles;// Created by Hanto on 10/04/2014.
+package View.Classes.Mobiles.PlayerView;// Created by Hanto on 10/04/2014.
 
 import DB.RSC;
 import DTO.DTOsPlayer;
-import Interfaces.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Mobiles.Player;
 import Model.Settings;
+import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
-import View.GameState.MundoView;
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import static Model.Settings.PIXEL_METROS;
 
-public class PlayerView extends Group implements PropertyChangeListener
+public class PlayerView extends Group implements PropertyChangeListener, Disposable
 {
-    //Modelo:
     public Player player;
-    public MundoView mundoView;
 
-    //Vista:
     public PixiePC actor;
-    public Body body;
     public NameplateView nameplateView;
     public Texto nombre;
     public PointLight luz;
@@ -35,42 +30,65 @@ public class PlayerView extends Group implements PropertyChangeListener
     public float getCenterX()               { return (player.getX()+this.getWidth()/2); }
     public float getCenterY()               { return (player.getY()+this.getHeight()/2); }
 
-    public PlayerView (Player player, MundoView mundoView)
+    public PlayerView (Player player, PixiePC pixieActor, NameplateView nameplate, PointLight luz)
     {
         this.player = player;
-        this.mundoView = mundoView;
+        this.actor = pixieActor;
+        this.nameplateView = nameplate;
+        this.luz = luz;
+        this.setPosition(player.getX(), player.getY());
 
         crearActor();
+        crearNameplate();
+        crearNombre();
+        crearLuz();
 
-        this.setPosition(player.getX(), player.getY());
         player.añadirObservador(this);
     }
 
-    public void crearActor ()
+    @Override public void dispose()
     {
-        mundoView.addActor(this);
+        player.eliminarObservador(this);
 
-        actor = new PixiePC("Golem");
+        luz.remove();
+        nameplateView.dispose();
+    }
+
+    // CREADORES VIEW:
+    //------------------------------------------------------------------------------------------------------------------
+
+    private void crearActor ()
+    {
         actor.setAnimacion(5, false);
         this.addActor(actor);
         this.setWidth(actor.getWidth());
         this.setHeight(actor.getHeight());
+    }
 
-        nameplateView = new NameplateView((Vulnerable)player);
-        nameplateView.setPosition(this.getWidth()/2 - nameplateView.getWidth() / 2, getHeight());
+    private void crearNameplate()
+    {
+        nameplateView.setPosition(this.getWidth() / 2 - nameplateView.getWidth() / 2, getHeight());
         this.addActor(nameplateView);
+    }
 
+    private void crearNombre()
+    {
         nombre = new Texto("Player", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
         nombre.setPosition(actor.getWidth()/2, actor.getHeight()+8);
         this.addActor(nombre);
+    }
 
-        luz = new PointLight(mundoView.getRayHandler(), 300, new Color(0.3f,0.3f,0.3f,1.0f), 350 *PIXEL_METROS, 0, 0);
+    private void crearLuz()
+    {
         luz.setSoft(true);
+        luz.setColor(0.3f, 0.3f, 0.3f, 1.0f);
+        luz.setDistance(350 * PIXEL_METROS);
         luz.attachToBody(player.getCuerpo().getBody(), 0, 0);
     }
 
+    // VISTA:
+    //------------------------------------------------------------------------------------------------------------------
 
-    //VISTA:
     public void setNombre (String nuevoNombre)
     {   nombre.setTexto(nuevoNombre); }
 
@@ -95,22 +113,18 @@ public class PlayerView extends Group implements PropertyChangeListener
     {   actor.setAnimacion(numAnimacion, false); }
 
 
-
-
-
-
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
         {   setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
 
-        if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
+        else if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
         {   setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
 
-        if (evt.getNewValue() instanceof DTOsPlayer.Nombre)
+        else if (evt.getNewValue() instanceof DTOsPlayer.Nombre)
         {   setNombre(((DTOsPlayer.Nombre) evt.getNewValue()).nombre); }
 
-        if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
+        else if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
         {   modificarHPs(((DTOsPlayer.ModificarHPs) evt.getNewValue()).HPs); }
     }
 }

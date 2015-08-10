@@ -1,9 +1,8 @@
 package View.Classes.Geo;// Created by Hanto on 16/04/2014.
 
 import DTO.DTOsMapa;
-import Model.Settings;
 import Interfaces.Geo.MapaI;
-import View.GameState.MundoView;
+import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,10 +14,10 @@ import java.beans.PropertyChangeListener;
 
 public class MapaView implements PropertyChangeListener, Disposable
 {
-    private MundoView mundoView;
     private MapaI mapaModel;
 
     private OrthographicCamera camara;
+    private OrthographicCamera camaraMundoView;
 
     private SubMapaView[] listaSubMapas;
 
@@ -38,12 +37,12 @@ public class MapaView implements PropertyChangeListener, Disposable
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MapaView(MapaI mapaModel, MundoView mundoView, float posInicialX, float posInicialY, int tamañoX, int tamañoY)
+    public MapaView(MapaI mapaModel, OrthographicCamera camaraMundoView)
     {
         this.mapaModel = mapaModel;
-        this.mundoView = mundoView;
-        this.tamañoX = tamañoX;
-        this.tamañoY = tamañoY;
+        this.camaraMundoView = camaraMundoView;
+        this.tamañoX = Settings.MAPAVIEW_TamañoX;
+        this.tamañoY = Settings.MAPAVIEW_TamañoY;
         this.mapaModel.añadirObservador(this);
 
         this.numTilesX = (int)Math.ceil((double) Settings.MAPTILE_Horizontal_Resolution /(double)(tamañoX -1)/(double) Settings.TILESIZE);
@@ -55,7 +54,7 @@ public class MapaView implements PropertyChangeListener, Disposable
         for (int i=0; i<listaSubMapas.length;i++)
         {   listaSubMapas[i] = new SubMapaView(this.mapaModel, numTilesX, numTilesY); }
 
-        setPosition(posInicialX, posInicialY);
+        setPosition(camara.position.x, camara.position.y);
     }
 
     @Override public void dispose()
@@ -64,6 +63,9 @@ public class MapaView implements PropertyChangeListener, Disposable
         {   subMapaView.dispose(); logger.trace("DISPOSE: Liberando SubMapaView(TiledMap) {}", subMapaView);}
 
     }
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
 
     public void setPosition(float posX, float posY)
     {
@@ -101,9 +103,9 @@ public class MapaView implements PropertyChangeListener, Disposable
 
     public void setView (SubMapaView subMapaView)
     {
-        camara.zoom = mundoView.getCamara().zoom;
-        camara.position.x = mundoView.getCamara().position.x - subMapaView.getMapTileX() * numTilesX * Settings.TILESIZE;
-        camara.position.y = mundoView.getCamara().position.y - subMapaView.getMapTileY() * numTilesY * Settings.TILESIZE;
+        camara.zoom = camaraMundoView.zoom;
+        camara.position.x = camaraMundoView.position.x - subMapaView.getMapTileX() * numTilesX * Settings.TILESIZE;
+        camara.position.y = camaraMundoView.position.y - subMapaView.getMapTileY() * numTilesY * Settings.TILESIZE;
         camara.update();
 
         subMapaView.setView(camara);
@@ -111,8 +113,8 @@ public class MapaView implements PropertyChangeListener, Disposable
 
     public void render()
     {
-        xActual = (mundoView.getCamara().position.x );
-        yActual = (mundoView.getCamara().position.y );
+        xActual = (camaraMundoView.position.x );
+        yActual = (camaraMundoView.position.y );
 
         if (Math.abs(listaSubMapas[0].getMapTileX() -  (xActual /  (numTilesX * Settings.TILESIZE))) > tamañoX ||
             Math.abs(listaSubMapas[0].getMapTileY() -  (yActual /  (numTilesY * Settings.TILESIZE))) > tamañoY )

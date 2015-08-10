@@ -29,4 +29,11 @@ public class DTOsMundo
         public AñadirProyectil(ProyectilI proyectil)
         {   this.proyectil = proyectil; }
     }
+
+    public static class EliminarProyectil
+    {
+        public ProyectilI proyectil;
+        public EliminarProyectil(ProyectilI proyectil)
+        {   this.proyectil = proyectil; }
+    }
 }

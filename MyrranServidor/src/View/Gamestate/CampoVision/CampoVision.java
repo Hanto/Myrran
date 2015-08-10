@@ -63,6 +63,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         {   pro.eliminarObservador(this); }
         mapaView.dispose();
         targetLock.dispose();
+        this.eliminarObservadores();
     }
 
     @Override public void setTargetLock(Espacial espacial)

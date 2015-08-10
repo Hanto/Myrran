@@ -1,70 +1,78 @@
-package View.Classes.Mobiles;// Created by Hanto on 08/04/2014.
+package View.Classes.Mobiles.PCView;// Created by Hanto on 08/04/2014.
 
 import DB.RSC;
 import DTO.DTOsPlayer;
-import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.EntidadesTipos.PCI;
 import Model.Settings;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
-import View.GameState.MundoView;
+import View.Classes.Actores.NameplateView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class PCView extends Group implements PropertyChangeListener
+public class PCView extends Group implements PropertyChangeListener, IDentificable, Disposable
 {
-    public PCI pc;
-    public MundoView mundoView;
-
-    public PixiePC actor;
-    public NameplateView nameplateView;
-
+    protected PCI pc;
+    protected int iD;
+    protected PixiePC actor;
+    protected NameplateView nameplateView;
 
 
-    public PCView (PCI pc, MundoView vista)
+    public PCView (PCI pc, PixiePC pixieActor, NameplateView nameplate)
     {
         this.pc = pc;
-        this.mundoView = vista;
-
+        this.iD = pc.getID();
+        this.actor = pixieActor;
+        this.nameplateView = nameplate;
         this.setPosition(pc.getX(), pc.getY());
 
         pc.añadirObservador(this);
 
         crearActor();
+        crearNameplate();
     }
 
-    public void crearActor ()
-    {
-        mundoView.addActor(this);
-
-        actor = new PixiePC("Golem");
-        actor.setAnimacion(5, false);
-        this.addActor(actor);
-        this.setWidth(actor.getWidth());
-        this.setHeight(actor.getHeight());
-
-        nameplateView = new NameplateView((Caster)pc);
-        nameplateView.setPosition(this.getWidth()/2 - nameplateView.getWidth() / 2, getHeight());
-        this.addActor(nameplateView);
-    }
-
-    public void dispose()
+    @Override public void dispose()
     {
         pc.eliminarObservador(this);
-        mundoView.getRoot().removeActor(this);
-        mundoView.eliminarPCView(this);
+
         nameplateView.dispose();
         this.actor = null;
         this.nameplateView = null;
     }
 
-    public void mover(int x, int y)
+    // CREADORES VIEW:
+    //------------------------------------------------------------------------------------------------------------------
+
+    private void crearActor ()
+    {
+        actor.setAnimacion(5, false);
+        this.addActor(actor);
+        this.setWidth(actor.getWidth());
+        this.setHeight(actor.getHeight());
+    }
+
+    private void crearNameplate()
+    {
+        nameplateView.setPosition(this.getWidth() / 2 - nameplateView.getWidth() / 2, getHeight());
+        this.addActor(nameplateView);
+    }
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public int getID()
+    {   return iD; }
+
+    public void setPosition(int x, int y)
     {
         //TODO hay que hacerlo por setPosition y en cambio mover el pc interpoladamente, el destino sin decimales
         this.clearActions();
@@ -83,10 +91,14 @@ public class PCView extends Group implements PropertyChangeListener
     public void setAnimacion (int numAnimacion)
     {   actor.setAnimacion(numAnimacion, false); }
 
+
+    // CAMPOS OBSERVADOS:
+    //------------------------------------------------------------------------------------------------------------------
+
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
-        {   mover( ((DTOsPlayer.Posicion) evt.getNewValue()).posX,  ((DTOsPlayer.Posicion) evt.getNewValue()).posY ); }
+        {   setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
 
         if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
         {   modificarHPs( (int) (((DTOsPlayer.ModificarHPs) evt.getNewValue()).HPs) ); }

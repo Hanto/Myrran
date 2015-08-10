@@ -57,6 +57,9 @@ public class Mundo extends AbstractModel implements MundoI
     {
         PCI pc = listaMapaPlayers.remove(connectionID);
         pc.dispose();
+
+        DTOsMundo.EliminarPC eliminarPC = new DTOsMundo.EliminarPC(pc);
+        notificarActualizacion("eliminarPC", null, eliminarPC);
     }
 
     @Override public PCI getPC (int connectionID)
@@ -80,7 +83,13 @@ public class Mundo extends AbstractModel implements MundoI
     }
 
     @Override public void eliminarProyectil(int iD)
-    {   listaMapaProyectiles.remove(iD); }
+    {
+        ProyectilI proyectil = listaMapaProyectiles.remove(iD);
+        proyectil.dispose();
+
+        DTOsMundo.EliminarProyectil eliminarProyectil = new DTOsMundo.EliminarProyectil(proyectil);
+        notificarActualizacion("eliminarProyectil", null, eliminarProyectil);
+    }
 
     @Override public ProyectilI getProyectil (int iD)
     {   return listaMapaProyectiles.get(iD); }
@@ -129,6 +138,9 @@ public class Mundo extends AbstractModel implements MundoI
             {
                 iterator.remove();
                 pro.dispose();
+
+                DTOsMundo.EliminarProyectil eliminarProyectil = new DTOsMundo.EliminarProyectil(pro);
+                notificarActualizacion("eliminarProyectil", null, eliminarProyectil);
             }
         }
     }

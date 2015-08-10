@@ -1,4 +1,4 @@
-package Tweens;// Created by Hanto on 15/07/2014.
+package Model.Classes.Tweens;// Created by Hanto on 15/07/2014.
 
 import aurelienribon.tweenengine.TweenAccessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;

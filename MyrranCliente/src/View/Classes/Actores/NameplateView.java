@@ -1,4 +1,4 @@
-package View.Classes.Mobiles;
+package View.Classes.Actores;
 
 import DB.RSC;
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;
@@ -12,12 +12,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 // @author Ivan Delgado Huerta
-public class NameplateView extends Actor implements PropertyChangeListener
+public class NameplateView extends Actor implements PropertyChangeListener, Disposable
 {
     //Model:
     protected Vulnerable vulnerable;
@@ -48,6 +49,12 @@ public class NameplateView extends Actor implements PropertyChangeListener
         }
         crearActor();
     }
+
+    public void dispose()
+    {   model.eliminarObservador(this); }
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
 
     public NameplateView(Caster Caster)
     {
@@ -92,9 +99,6 @@ public class NameplateView extends Actor implements PropertyChangeListener
         this.setHeight(alto);
         this.setBounds(0, 0, ancho, alto);
     }
-
-    public void dispose()
-    {   model.eliminarObservador(this); }
 
     private void setHPsPercent ()
     {
@@ -154,10 +158,10 @@ public class NameplateView extends Actor implements PropertyChangeListener
         if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
         { setHPsPercent();}
 
-        if (evt.getNewValue() instanceof DTOsPlayer.MaxHPs)
+        else if (evt.getNewValue() instanceof DTOsPlayer.MaxHPs)
         { setHPsPercent();}
 
-        if (evt.getNewValue() instanceof CastingTimePercent)
+        else if (evt.getNewValue() instanceof CastingTimePercent)
         { setCastingTimePercent(((CastingTimePercent) evt.getNewValue()).castingTimePercent); }
     }
 
