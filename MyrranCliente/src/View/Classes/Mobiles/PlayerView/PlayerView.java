@@ -73,7 +73,7 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
 
     private void crearNombre()
     {
-        nombre = new Texto("Player", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
+        nombre = new Texto("Player"+player.getID(), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
         nombre.setPosition(actor.getWidth()/2, actor.getHeight()+8);
         this.addActor(nombre);
     }
@@ -90,7 +90,7 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
     //------------------------------------------------------------------------------------------------------------------
 
     public void setNombre (String nuevoNombre)
-    {   nombre.setTexto(nuevoNombre); }
+    {   nombre.setTexto(nuevoNombre+player.getID()); }
 
     public void modificarHPs(float HPs)
     {

@@ -24,6 +24,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     protected int iD;
     protected PixiePC actor;
     protected NameplateView nameplateView;
+    protected Texto nombre;
 
 
     public PCView (PCI pc, PixiePC pixieActor, NameplateView nameplate)
@@ -38,6 +39,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
         crearActor();
         crearNameplate();
+        crearNombre();
     }
 
     @Override public void dispose()
@@ -64,6 +66,13 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     {
         nameplateView.setPosition(this.getWidth() / 2 - nameplateView.getWidth() / 2, getHeight());
         this.addActor(nameplateView);
+    }
+
+    private void crearNombre()
+    {
+        nombre = new Texto("Player"+iD, RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
+        nombre.setPosition(actor.getWidth()/2, actor.getHeight()+8);
+        this.addActor(nombre);
     }
 
     //

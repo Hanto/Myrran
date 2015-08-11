@@ -12,7 +12,7 @@ import View.Classes.UI.BarraAccionesView.ConjuntoBarraAccionesView;
 import View.Classes.UI.BarraTerrenosView.BarraTerrenosView;
 import View.GameState.MundoView;
 import View.GameState.UIView;
-import View.GameState.UIViewController;
+import View.Classes.UI.UIViewController;
 import View.GameState.Vista;
 import box2dLight.RayHandler;
 import ch.qos.logback.classic.Logger;

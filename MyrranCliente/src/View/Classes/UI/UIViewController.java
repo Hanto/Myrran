@@ -1,4 +1,4 @@
-package View.GameState;// Created by Hanto on 10/08/2015.
+package View.Classes.UI;// Created by Hanto on 10/08/2015.
 
 import Interfaces.Controlador.ControladorUI;
 import Interfaces.Model.AbstractModel;

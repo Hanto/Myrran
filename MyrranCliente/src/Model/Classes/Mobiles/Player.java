@@ -34,8 +34,8 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
 
     protected int ultimoMapTileX;
     protected int ultimoMapTileY;
-    protected float x = 0.0f;
-    protected float y = 0.0f;
+    //protected float x = 0.0f;
+    //protected float y = 0.0f;
     protected int numAnimacion = 5;
     protected float velocidadMax = 80.0f;
     protected float velocidadMod = 1.0f;
@@ -68,12 +68,12 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
 
     //GET:
     @Override public int getID()                                        { return connectionID; }
-    @Override public float getX()                                       { return x; }
-    @Override public float getY()                                       { return y; }
+    @Override public float getX()                                       { return cuerpo.getXinterpolada(); }
+    @Override public float getY()                                       { return cuerpo.getYinterpolada(); }
     @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
     @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
-    @Override public int getMapTileX()                                  { return (int)(x / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
-    @Override public int getMapTileY()                                  { return (int)(y / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
+    @Override public int getMapTileX()                                  { return (int)(cuerpo.getXinterpolada() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
+    @Override public int getMapTileY()                                  { return (int)(cuerpo.getYinterpolada() / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
     @Override public int getNumAnimacion()                              { return numAnimacion; }
     @Override public float getVelocidadMod()                            { return velocidadMod; }
     @Override public float getVelocidadMax()                            { return velocidadMax; }
@@ -117,7 +117,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
         this.cuerpo = new Cuerpo(world, 48, 48);
         BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
-        cuerpo.setPosition(x, y);
+        cuerpo.setPosition(0, 0);
     }
 
     @Override public void dispose()
@@ -206,17 +206,17 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     @Override public void setPosition (float x, float y)
     {
         cuerpo.setPosition(x, y);
-        this.x = x;
-        this.y = y;
+        //this.x = x;
+        //this.y = y;
         notificador.setPosition(x, y);
     }
 
     //Vista - Servidor:
     private void getPosicionInterpoladaCuerpo()
     {
-        this.x = cuerpo.getXinterpolada();
-        this.y = cuerpo.getYinterpolada();
-        notificador.setPosition(x, y);
+        //this.x = cuerpo.getXinterpolada();
+        //this.y = cuerpo.getYinterpolada();
+        notificador.setPosition(cuerpo.getXinterpolada(), cuerpo.getYinterpolada());
     }
 
     //Servidor:
