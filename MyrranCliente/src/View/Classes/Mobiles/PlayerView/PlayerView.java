@@ -2,7 +2,7 @@ package View.Classes.Mobiles.PlayerView;// Created by Hanto on 10/04/2014.
 
 import DB.RSC;
 import DTO.DTOsPlayer;
-import Model.Classes.Mobiles.Player;
+import Model.Classes.Mobiles.Player.Player;
 import Model.Settings;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;

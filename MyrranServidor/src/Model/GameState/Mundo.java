@@ -1,16 +1,22 @@
 package Model.GameState;// Created by Hanto on 07/04/2014.
 
+import DTO.DTOsMob;
 import DTO.DTOsMundo;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
+import Model.Classes.AI.Steering.SteeringFactory;
 import Model.Classes.Geo.Mapa;
+import Model.Classes.Mobiles.Mob.Mob;
+import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.Datos.ListaMapaCuadrantes;
 import Model.Settings;
+import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.beans.PropertyChangeEvent;
@@ -21,11 +27,15 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 {
     protected ListaMapaCuadrantes<ProyectilI> dataProyectiles = new ListaMapaCuadrantes<>();
     protected ListaMapaCuadrantes<PCI> dataPCs = new ListaMapaCuadrantes<>();
+    protected ListaMapaCuadrantes<MobI> dataMobs = new ListaMapaCuadrantes<>();
 
     private Mapa mapa;
     private World world;
+    private int mobID;
+
     @Override public MapaI getMapa()                        { return mapa; }
     @Override public World getWorld()                       { return world; }
+    public int getMobID()                                   { return mobID++ > Integer.MAX_VALUE ? 0 : mobID; }
 
 
     public Mundo(World world, Mapa mapa)
@@ -40,7 +50,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         }
     }
 
-    //PLAYERS:
+    // PLAYERS:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public void añadirPC (PCI pc)
@@ -50,6 +60,14 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
         DTOsMundo.AñadirPC nuevoPlayer = new DTOsMundo.AñadirPC(pc);
         notificarActualizacion("añadirPC", null, nuevoPlayer);
+
+        Mob mob = MobFactory.NUEVO.nuevo(this);
+        añadirMob(mob);
+
+        Arrive ster = (Arrive)SteeringFactory.Steering2.ARRIVE.nuevo(mob, pc);
+        ster.setDecelerationRadius(0.2f);
+        //ster.setDecelerationRadius(20f);
+        mob.setSteeringBehavior(ster);
     }
 
     @Override public void eliminarPC (int connectionID)
@@ -74,7 +92,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     private void updatePC(PCI pc)
     {   dataPCs.update(pc); }
 
-    //PROYECTILES:
+    // PROYECTILES:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public void añadirProyectil(ProyectilI proyectil)
@@ -102,14 +120,45 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     private void updateProyectil(ProyectilI proyectil)
     {   dataProyectiles.update(proyectil); }
 
+    // MOBS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void añadirMob (MobI mob)
+    {
+        dataMobs.add(mob);
+        mob.añadirObservador(this);
+    }
+
+    public void eliminarMob (int iD)
+    {
+        MobI mob = dataMobs.remove(iD);
+        mob.eliminarObservador(this);
+        mob.dispose();
+    }
+
+    public MobI getMob (int iD)
+    {   return dataMobs.get(iD); }
+
+    public Iterator<MobI> getIteratorMobs()
+    {   return dataMobs.iterator(); }
+
+    public Iterator<MobI> getIteratorMobs(int mapTileX, int mapTileY)
+    {   return dataMobs.getIteratorCuadrantes(mapTileX, mapTileY); }
+
+    private void updateMob(MobI mob)
+    {   dataMobs.update(mob); }
+
     //IA MUNDO:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public void actualizarUnidades(float delta, MundoI mundo)
-    {   //PCs
+    {   // PCS:
         for (PCI pc : dataPCs)
         {   pc.actualizar(delta, mundo); }
-        //PROYECTILES:
+        // MOBS:
+        for (MobI mob : dataMobs)
+        {   mob.actualizar(delta, mundo); }
+        // PROYECTILES:
         Iterator<ProyectilI>iterator = dataProyectiles.iterator(); ProyectilI pro;
         while (iterator.hasNext())
         {
@@ -148,7 +197,10 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
         {   updatePC(((DTOsPC.PosicionPC) evt.getNewValue()).pc); }
 
-        if (evt.getNewValue() instanceof DTOsProyectil.PosicionProyectil)
+        else if (evt.getNewValue() instanceof DTOsProyectil.PosicionProyectil)
         {   updateProyectil(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil); }
+
+        else if (evt.getNewValue() instanceof DTOsMob.PosicionMob)
+        {   updateMob(((DTOsMob.PosicionMob) evt.getNewValue()).mob); }
     }
 }

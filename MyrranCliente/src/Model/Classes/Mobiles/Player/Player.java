@@ -1,4 +1,4 @@
-package Model.Classes.Mobiles;// Created by Hanto on 10/04/2014.
+package Model.Classes.Mobiles.Player;// Created by Hanto on 10/04/2014.
 
 import DB.DAO;
 import Interfaces.BDebuff.AuraI;
@@ -11,7 +11,6 @@ import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.Cuerpos.BodyFactory;
 import Model.Cuerpos.Cuerpo;
 import Model.FSM.IO.PlayerIO;
 import Model.FSM.MaquinaEstados;
@@ -19,7 +18,7 @@ import Model.FSM.MaquinaEstadosFactory;
 import Model.Settings;
 import Model.Skills.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +35,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     protected int ultimoMapTileY;
     //protected float x = 0.0f;
     //protected float y = 0.0f;
+    protected Vector2 velocidad = new Vector2();
     protected int numAnimacion = 5;
     protected float velocidadMax = 80.0f;
     protected float velocidadMod = 1.0f;
@@ -68,15 +68,44 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
 
     //GET:
     @Override public int getID()                                        { return connectionID; }
+    @Override public void setID(int iD)                                 { this.connectionID = iD; }
+
     @Override public float getX()                                       { return cuerpo.getXinterpolada(); }
     @Override public float getY()                                       { return cuerpo.getYinterpolada(); }
     @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
     @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
+    @Override public Vector2 getVelocidad()                             { return velocidad; }
     @Override public int getMapTileX()                                  { return (int)(cuerpo.getXinterpolada() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
     @Override public int getMapTileY()                                  { return (int)(cuerpo.getYinterpolada() / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
     @Override public int getNumAnimacion()                              { return numAnimacion; }
     @Override public float getVelocidadMod()                            { return velocidadMod; }
+
+    @Override
+    public float getVelocidadAngular()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getVelocidadAngularMax()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getAceleracionAngularMax()
+    {
+        return 0;
+    }
+
     @Override public float getVelocidadMax()                            { return velocidadMax; }
+
+    @Override
+    public float getAceleracionMax()
+    {
+        return 0;
+    }
+
     @Override public String getNombre()                                 { return nombre; }
     @Override public int getNivel()                                     { return nivel; }
     @Override public float getActualHPs()                               { return actualHPs; }
@@ -93,14 +122,39 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
 
     //SET:
     @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
-    @Override public void setConnectionID (int connectionID)            { this.connectionID = connectionID; }
     @Override public void setNivel (int nivel)                          { this.nivel = nivel; }
     @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
     @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
-    @Override public void setVectorDireccion(float x, float y)          { cuerpo.setVectorDireccion(x, y); }
     @Override public void setTotalCastingTime(float castingTime)        { this.actualCastingTime = 0.01f; totalCastingTime = castingTime;}
     @Override public void setVelocidaMod(float velocidadMod)            { this.velocidadMod = velocidadMod; }
-    @Override public void setVelocidadMax(float velocidadMax)           { this.velocidadMax = velocidadMax; }              { }
+
+    @Override
+    public void setVelocidadAngular(float velocidadAngular)
+    {
+
+    }
+
+    @Override
+    public void setVelocidadAngularMax(float velocidadAngularMax)
+    {
+
+    }
+
+    @Override
+    public void setAceleracionAngularMax(float aceleracionAngularMax)
+    {
+
+    }
+
+    @Override public void setVelocidadMax(float velocidadMax)           { this.velocidadMax = velocidadMax; }
+
+    @Override
+    public void setAceleracionMax(float aceleracionMax)
+    {
+
+    }
+
+    { }
     @Override public void añadirAura(AuraI aura)                        { listaDeAuras.add(aura); }
     @Override public void eliminarAura(AuraI aura)                      { listaDeAuras.removeValue(aura, true); }
     @Override public Iterator<AuraI> getAuras()                         { return listaDeAuras.iterator(); }
@@ -111,12 +165,11 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     @Override public Iterator<SkillPersonalizadoI> getIteratorSkillPersonalizado(){ return listaSkillsPersonalizados.values().iterator(); }
 
     //Constructor:
-    public Player(World world)
+    public Player(Cuerpo cuerpo)
     {
+        this.cuerpo = cuerpo;
         this.notificador = new PlayerNotificador(this);
         this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
-        this.cuerpo = new Cuerpo(world, 48, 48);
-        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
         cuerpo.setPosition(0, 0);
     }
 
@@ -282,17 +335,16 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
 
     private void moverse ()
     {
-        cuerpo.setLinearVelocity(velocidadMax*velocidadMod);
-        if      (output.irAbajo && !output.irDerecha && !output.irIzquierda)    { cuerpo.setVectorDireccion(  0,      -1); }      //Sur
-        else if (output.irArriba && !output.irDerecha && !output.irIzquierda)   { cuerpo.setVectorDireccion(  0,      +1); }      //Norte
-        else if (output.irDerecha && !output.irArriba && !output.irAbajo)       { cuerpo.setVectorDireccion( +1,       0); }      //Este
-        else if (output.irIzquierda && !output.irArriba && !output.irAbajo)     { cuerpo.setVectorDireccion( -1,       0); }      //Oeste
-        else if (output.irAbajo&& output.irIzquierda)                           { cuerpo.setVectorDireccion( -0.707f, -0.707f); } //SurOeste
-        else if (output.irAbajo && output.irDerecha)                            { cuerpo.setVectorDireccion( +0.707f, -0.707f); } //SurEste
-        else if (output.irArriba && output.irIzquierda)                         { cuerpo.setVectorDireccion( -0.707f, +0.707f); } //NorOeste
-        else if (output.irArriba && output.irDerecha)                           { cuerpo.setVectorDireccion( +0.707f, +0.707f); } //NorEste
+        if      (output.irAbajo && !output.irDerecha && !output.irIzquierda)    { cuerpo.setDireccionNorVelocidad(0, -1, velocidadMax * velocidadMod); }            //Sur
+        else if (output.irArriba && !output.irDerecha && !output.irIzquierda)   { cuerpo.setDireccionNorVelocidad(0, +1, velocidadMax * velocidadMod); }               //Norte
+        else if (output.irDerecha && !output.irArriba && !output.irAbajo)       { cuerpo.setDireccionNorVelocidad(+1, 0, velocidadMax * velocidadMod); }               //Este
+        else if (output.irIzquierda && !output.irArriba && !output.irAbajo)     { cuerpo.setDireccionNorVelocidad(-1, 0, velocidadMax * velocidadMod); }               //Oeste
+        else if (output.irAbajo&& output.irIzquierda)                           { cuerpo.setDireccionNorVelocidad(-0.707f, -0.707f, velocidadMax * velocidadMod); }    //SurOeste
+        else if (output.irAbajo && output.irDerecha)                            { cuerpo.setDireccionNorVelocidad(+0.707f, -0.707f, velocidadMax * velocidadMod); }    //SurEste
+        else if (output.irArriba && output.irIzquierda)                         { cuerpo.setDireccionNorVelocidad(-0.707f, +0.707f, velocidadMax * velocidadMod); }    //NorOeste
+        else if (output.irArriba && output.irDerecha)                           { cuerpo.setDireccionNorVelocidad(+0.707f, +0.707f, velocidadMax * velocidadMod); }    //NorEste
         else if (!output.irAbajo && !output.irArriba && !output.irDerecha && !output.irIzquierda)
-        {   cuerpo.setLinearVelocity(0f); }
+        {   cuerpo.setVelocidad(0f); }
     }
 
     public void actualizar (float delta, MundoI mundo)
@@ -324,5 +376,113 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         output.setScreenY(screenY);
         if (castear) { output.setStartCastear(true); output.setStopCastear(false); }
         else { output.setStopCastear(true); output.setStartCastear(false); }
+    }
+
+    @Override
+    public Vector2 getPosition()
+    {
+        return null;
+    }
+
+    @Override
+    public float getOrientation()
+    {
+        return 0;
+    }
+
+    @Override
+    public Vector2 getLinearVelocity()
+    {
+        return null;
+    }
+
+    @Override
+    public float getAngularVelocity()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getBoundingRadius()
+    {
+        return 0;
+    }
+
+    @Override
+    public boolean isTagged()
+    {
+        return false;
+    }
+
+    @Override
+    public void setTagged(boolean tagged)
+    {
+
+    }
+
+    @Override
+    public Vector2 newVector()
+    {
+        return null;
+    }
+
+    @Override
+    public float vectorToAngle(Vector2 vector)
+    {
+        return 0;
+    }
+
+    @Override
+    public Vector2 angleToVector(Vector2 outVector, float angle)
+    {
+        return null;
+    }
+
+    @Override
+    public float getMaxLinearSpeed()
+    {
+        return 0;
+    }
+
+    @Override
+    public void setMaxLinearSpeed(float maxLinearSpeed)
+    {
+
+    }
+
+    @Override
+    public float getMaxLinearAcceleration()
+    {
+        return 0;
+    }
+
+    @Override
+    public void setMaxLinearAcceleration(float maxLinearAcceleration)
+    {
+
+    }
+
+    @Override
+    public float getMaxAngularSpeed()
+    {
+        return 0;
+    }
+
+    @Override
+    public void setMaxAngularSpeed(float maxAngularSpeed)
+    {
+
+    }
+
+    @Override
+    public float getMaxAngularAcceleration()
+    {
+        return 0;
+    }
+
+    @Override
+    public void setMaxAngularAcceleration(float maxAngularAcceleration)
+    {
+
     }
 }

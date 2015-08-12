@@ -5,6 +5,5 @@ import Interfaces.Model.ModelI;
 public interface Animable extends ModelI
 {
     public int getNumAnimacion();
-
     public void setNumAnimacion(int numAnimacion);
 }

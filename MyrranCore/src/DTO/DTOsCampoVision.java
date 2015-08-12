@@ -4,6 +4,7 @@ import Interfaces.EntidadesPropiedades.Animable;
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesPropiedades.PCStats;
 import Interfaces.EntidadesPropiedades.Vulnerable;
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 
@@ -12,6 +13,7 @@ public class DTOsCampoVision
 
     //CONTENEDORES DE LOS DTOS:
     //------------------------------------------------------------------------------------------------------------------
+
     public static class PCDTOs
     {
         public int connectionID;
@@ -23,11 +25,20 @@ public class DTOsCampoVision
 
     public static class ProyectilDTOs
     {
-        public int connectionID;
+        public int iD;
         public Object[] listaDTOs;
         public ProyectilDTOs() {}
-        public ProyectilDTOs(int connectionID)
-        {   this.connectionID = connectionID; }
+        public ProyectilDTOs(int iD)
+        {   this.iD = iD; }
+    }
+
+    public static class MobDTOs
+    {
+        public int iD;
+        public Object[] listaDTOs;
+        public MobDTOs() {}
+        public MobDTOs(int iD)
+        {   this.iD = iD; }
     }
 
     public static class MiscDTOs
@@ -38,9 +49,9 @@ public class DTOsCampoVision
 
     //PLAYER DTOS:
     //------------------------------------------------------------------------------------------------------------------
+
     public static class DatosCompletosPC
     {
-        public int connectionID;
         public String nombre;
         public int nivel;
         public float maxHPs;
@@ -49,7 +60,7 @@ public class DTOsCampoVision
         public DatosCompletosPC() {}
         public DatosCompletosPC(PCI pc)
         {
-            connectionID = pc.getID(); nombre = pc.getNombre();
+            nombre = pc.getNombre();
             nivel = pc.getNivel();
             maxHPs = pc.getMaxHPs(); actualHPs = pc.getActualHPs();
             numAnimacion = pc.getNumAnimacion();
@@ -127,12 +138,33 @@ public class DTOsCampoVision
         {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
     }
 
+    // MOB DTOS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public static class PosicionMob
+    {
+        public int posX;
+        public int posY;
+        public PosicionMob() {}
+        public PosicionMob(int x, int y)
+        {   this.posX = x; this.posY = y; }
+        public PosicionMob(Espacial mob)
+        {   this.posX = (int) mob.getX(); this.posY = (int) mob.getY(); }
+    }
+
+    public static class OrientacionMob
+    {
+        public float orientacion;
+        public OrientacionMob() {}
+        public OrientacionMob(MobI mob)
+        {   this.orientacion = mob.getOrientation(); }
+    }
+
     // PROYECTIL DTOS:
     //------------------------------------------------------------------------------------------------------------------
 
     public static class DatosCompletosProyectil
     {
-        public int ID;
         public String spellID;
         public short ancho;
         public short alto;
@@ -146,7 +178,6 @@ public class DTOsCampoVision
         public DatosCompletosProyectil() {}
         public DatosCompletosProyectil(ProyectilI proyectil)
         {
-            this.ID = proyectil.getID();
             this.spellID = proyectil.getSpell().getID();
             this.ancho = (short)proyectil.getCuerpo().getAncho();
             this.alto = (short)proyectil.getCuerpo().getAlto();
@@ -169,6 +200,7 @@ public class DTOsCampoVision
 
     //MISC DTOS:
     //------------------------------------------------------------------------------------------------------------------
+
     public static class CambioTerrenoMisc
     {
         public int tileX;

@@ -11,12 +11,11 @@ import Interfaces.Spell.SpellI;
 import Model.Cuerpos.Cuerpo;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
+import com.badlogic.gdx.math.Vector2;
 import org.slf4j.LoggerFactory;
 
 public class Proyectil extends AbstractModel implements ProyectilI
 {
-    protected MundoI mundo;
-
     //ProyectilStats:
     protected int iD;
     protected Cuerpo cuerpo;
@@ -27,8 +26,8 @@ public class Proyectil extends AbstractModel implements ProyectilI
     //Espacial:
     protected int ultimoMapTileX = 0;
     protected int ultimoMapTileY = 0;
-    protected float x;
-    protected float y;
+    protected Vector2 posicion = new Vector2();
+    protected Vector2 velocidad = new Vector2();
     protected float velocidadMax=0.0f;
     protected float velocidadMod=1.0f;
 
@@ -42,14 +41,42 @@ public class Proyectil extends AbstractModel implements ProyectilI
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public int getID()                                        { return iD; }
-    @Override public float getX()                                       { return x; }
-    @Override public float getY()                                       { return y; }
+    @Override public Vector2 getPosition()                              { return posicion; }
+    @Override public float getX()                                       { return posicion.x; }
+    @Override public float getY()                                       { return posicion.y; }
+    @Override public Vector2 getVelocidad()                             { return velocidad; }
     @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
     @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
-    @Override public int getMapTileX()                                  { return (int)(x / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
-    @Override public int getMapTileY()                                  { return (int)(y / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
+    @Override public int getMapTileX()                                  { return (int)(posicion.x / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
+    @Override public int getMapTileY()                                  { return (int)(posicion.y / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
     @Override public float getVelocidadMod()                            { return velocidadMod; }
+
+    @Override
+    public float getVelocidadAngular()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getVelocidadAngularMax()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getAceleracionAngularMax()
+    {
+        return 0;
+    }
+
     @Override public float getVelocidadMax()                            { return velocidadMax; }
+
+    @Override
+    public float getAceleracionMax()
+    {
+        return 0;
+    }
+
     @Override public float getDuracionActual()                          { return duracionActual; }
     @Override public float getDuracionMaxima()                          { return duracionMaxima; }
     @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
@@ -63,19 +90,34 @@ public class Proyectil extends AbstractModel implements ProyectilI
     @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
     @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
     @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
-    @Override public void setVectorDireccion(float x, float y)          { cuerpo.setVectorDireccion(x, y); }
     @Override public void setVelocidaMod(float velocidadMod)            { this.velocidadMod = velocidadMod; }
+
+    @Override
+    public void setVelocidadAngular(float velocidadAngular)
+    {
+
+    }
+
+    @Override
+    public void setVelocidadAngularMax(float velocidadAngularMax)
+    {
+
+    }
+
+    @Override
+    public void setAceleracionAngularMax(float aceleracionAngularMax)
+    {
+
+    }
+
     @Override public void setDuracionActual(float duracionActual)       { this.duracionActual = duracionActual; }
     @Override public void setDuracionMaxima(float duracionMaxima)       { this.duracionMaxima = duracionMaxima; }
     @Override public void setSpell(SpellI spell)                        { this.spell = spell; }
     @Override public void setDaño(float daño)                           { this.daño = daño; }
 
     //Constructor:
-    public Proyectil(MundoI mundo, Cuerpo cuerpo)
-    {
-        this.mundo = mundo;
-        this.cuerpo = cuerpo;
-    }
+    public Proyectil(Cuerpo cuerpo)
+    {   this.cuerpo = cuerpo; }
 
     @Override public void dispose()
     {
@@ -112,14 +154,20 @@ public class Proyectil extends AbstractModel implements ProyectilI
     @Override public void setVelocidadMax(float velocidadMax)
     {
         this.velocidadMax = velocidadMax;
-        cuerpo.setLinearVelocity(velocidadMax);
+        cuerpo.setVelocidad(velocidadMax);
+    }
+
+    @Override
+    public void setAceleracionMax(float aceleracionMax)
+    {
+
     }
 
     @Override public void setPosition(float x, float y)
     {
         cuerpo.setPosition(x, y);
-        this.x = x;
-        this.y = y;
+        this.posicion.x = x;
+        this.posicion.y = y;
 
         DTOsProyectil.PosicionProyectil posicion = new DTOsProyectil.PosicionProyectil(this);
         notificarActualizacion("actualizarPosiciojn", null, posicion);
@@ -134,8 +182,8 @@ public class Proyectil extends AbstractModel implements ProyectilI
 
     private void getPosicionInterpoladaCuerpo()
     {
-        this.x = cuerpo.getXinterpolada();
-        this.y = cuerpo.getYinterpolada();
+        this.posicion.x = cuerpo.getXinterpolada();
+        this.posicion.y = cuerpo.getYinterpolada();
 
         DTOsProyectil.PosicionProyectil posicion = new DTOsProyectil.PosicionProyectil(this);
         notificarActualizacion("actualizarPosiciojn", null, posicion);

@@ -81,6 +81,8 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     @Override public int getID()
     {   return iD; }
 
+
+
     public void setPosition(int x, int y)
     {
         //TODO hay que hacerlo por setPosition y en cambio mover el pc interpoladamente, el destino sin decimales
@@ -117,5 +119,11 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
         if (evt.getNewValue() instanceof DTOsPlayer.EliminarPC)
         {   dispose(); }
+    }
+
+    @Override
+    public void setID(int iD)
+    {
+
     }
 }

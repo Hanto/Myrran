@@ -1,4 +1,4 @@
-package Model.Classes.Mobiles;// Created by Hanto on 24/07/2014.
+package Model.Classes.Mobiles.PC;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PCI;

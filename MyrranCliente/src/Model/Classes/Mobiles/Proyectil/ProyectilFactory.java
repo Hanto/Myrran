@@ -2,10 +2,10 @@ package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 06/08/2015.
 
 import DB.DAO;
 import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
 import Model.Cuerpos.BodyFactory;
 import Model.Cuerpos.Cuerpo;
+import com.badlogic.gdx.physics.box2d.World;
 
 public enum ProyectilFactory
 {
@@ -13,10 +13,10 @@ public enum ProyectilFactory
     {
         Proyectil proyectil;
 
-        @Override public ProyectilFactory nuevo (MundoI mundo, int ancho, int alto)
+        @Override public ProyectilFactory nuevo (World world, int ancho, int alto)
         {
-            Cuerpo cuerpo = BodyFactory.crearCuerpo.CIRCLE.nuevo(mundo.getWorld(), ancho, alto);
-            proyectil = new Proyectil(mundo, cuerpo);
+            Cuerpo cuerpo = BodyFactory.crearCuerpo.CIRCLE.nuevo(world, ancho, alto);
+            proyectil = new Proyectil(cuerpo);
 
             return this;
         }
@@ -58,7 +58,7 @@ public enum ProyectilFactory
         {   return proyectil; }
     };
 
-    public abstract ProyectilFactory nuevo (MundoI mundo, int ancho, int alto);
+    public abstract ProyectilFactory nuevo (World world, int ancho, int alto);
     public abstract ProyectilFactory setID ();
     public abstract ProyectilFactory setID (int ID);
     public abstract ProyectilFactory setOwner (Caster owner);

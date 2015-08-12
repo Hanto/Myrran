@@ -64,6 +64,9 @@ public class Cliente extends Client
         else if (obj instanceof DTOsCampoVision.PCDTOs)
         {   clienteInputs.procesarActualizacionesPC((DTOsCampoVision.PCDTOs) obj);}
 
+        else if (obj instanceof DTOsCampoVision.MobDTOs)
+        {   clienteInputs.procesarActualizacionesMobs( (DTOsCampoVision.MobDTOs)obj );}
+
         else if (obj instanceof DTOsCampoVision.MiscDTOs)
         {   clienteInputs.procesarActualizacionesMisc((DTOsCampoVision.MiscDTOs) obj);}
 
@@ -76,7 +79,7 @@ public class Cliente extends Client
 
     private void procesarConnected(Connection con)
     {
-        controlador.getMundo().getPlayer().setConnectionID(this.getID());
+        controlador.getMundo().getPlayer().setID(this.getID());
         enviarAServidor(new DTOsPlayer.LogIn());
     }
 

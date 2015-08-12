@@ -1,21 +1,19 @@
-package Model.Classes.Mobiles;// Created by Hanto on 08/04/2014.
+package Model.Classes.Mobiles.PC;// Created by Hanto on 08/04/2014.
 
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.Cuerpos.BodyFactory;
 import Model.Cuerpos.Cuerpo;
-import Model.GameState.Mundo;
 import Model.Settings;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.Iterator;
 
 public class PC extends AbstractModel implements PCI
 {
-    protected Mundo mundo;
-    protected int connectionID;
+    protected int iD;
 
     protected int ultimoMapTileX;
     protected int ultimoMapTileY;
@@ -29,7 +27,14 @@ public class PC extends AbstractModel implements PCI
     protected Cuerpo cuerpo;
     public PCNotificador notificador;
 
-    @Override public int getID()            { return connectionID; }
+    @Override public int getID()            { return iD; }
+
+    @Override
+    public void setID(int iD)
+    {
+        this.iD = iD;
+    }
+
     @Override public int getNumAnimacion()  { return numAnimacion; }
     @Override public float getX()           { return x; }
     @Override public float getY()           { return y; }
@@ -46,8 +51,35 @@ public class PC extends AbstractModel implements PCI
     @Override public String getNombre()                         { return null; }
     @Override public int getIDProyectiles()                     { return 0; }
     @Override public int getNivel()                             { return 0; }
+    @Override public Vector2 getVelocidad()                     { return null; }
     @Override public float getVelocidadMod()                    { return 0; }
+
+    @Override
+    public float getVelocidadAngular()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getVelocidadAngularMax()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getAceleracionAngularMax()
+    {
+        return 0;
+    }
+
     @Override public float getVelocidadMax()                    { return 0; }
+
+    @Override
+    public float getAceleracionMax()
+    {
+        return 0;
+    }
+
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID)  { return null; }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID)  { return null; }
     @Override public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado() { return null; }
@@ -60,14 +92,38 @@ public class PC extends AbstractModel implements PCI
     @Override public Cuerpo getCuerpo()                         { return null; }
 
     @Override public void setUltimoMapTile (int x, int y)       { ultimoMapTileX = x; ultimoMapTileY = y; }
-    @Override public void setConnectionID (int connectionID)    { this.connectionID = connectionID; }
     @Override public void setNombre (String nombre)             {}
     @Override public void setNivel (int nivel)                  {}
     @Override public void setVelocidaMod(float velocidadMod)    {}
+
+    @Override
+    public void setVelocidadAngular(float velocidadAngular)
+    {
+
+    }
+
+    @Override
+    public void setVelocidadAngularMax(float velocidadAngularMax)
+    {
+
+    }
+
+    @Override
+    public void setAceleracionAngularMax(float aceleracionAngularMax)
+    {
+
+    }
+
     @Override public void setVelocidadMax(float velocidadMax)   {}
+
+    @Override
+    public void setAceleracionMax(float aceleracionMax)
+    {
+
+    }
+
     @Override public void setDireccion(float x, float y)        {}
     @Override public void setDireccion(float grados)            {}
-    @Override public void setVectorDireccion(float x, float y)  {}
     @Override public void setCastear(boolean castear, int screenX, int screenY) {}
     @Override public void setTotalCastingTime(float castingTime){}
     @Override public void setSpellIDSeleccionado(String spellID){}
@@ -75,13 +131,11 @@ public class PC extends AbstractModel implements PCI
     @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int talento) {}
 
     //Constructor:
-    public PC(int connectionID, Mundo mundo)
+    public PC(int connectionID, Cuerpo cuerpo)
     {
-        this.mundo = mundo;
         this.notificador = new PCNotificador(this);
-        this.connectionID = connectionID;
-        this.cuerpo = new Cuerpo(mundo.getWorld(), 48, 48);
-        BodyFactory.darCuerpo.RECTANGULAR.nuevo(cuerpo);
+        this.iD = connectionID;
+        this.cuerpo = cuerpo;
     }
 
     @Override public void setPosition (float x, float y)
@@ -118,6 +172,113 @@ public class PC extends AbstractModel implements PCI
     }
 
     @Override public void actualizar (float delta, MundoI mundo)
+    {
+
+    }
+
+    @Override
+    public Vector2 getPosition()
+    {
+        return null;
+    }
+
+    @Override
+    public float getOrientation()
+    {
+        return 0;
+    }
+
+    @Override
+    public Vector2 getLinearVelocity()
+    {
+        return null;
+    }
+
+    @Override
+    public float getAngularVelocity()
+    {
+        return 0;
+    }
+
+    @Override
+    public float getBoundingRadius()
+    {
+        return 0;
+    }
+
+    @Override
+    public boolean isTagged()
+    {
+        return false;
+    }
+
+    @Override
+    public void setTagged(boolean tagged)
+    {
+
+    }
+
+    @Override
+    public Vector2 newVector()
+    {
+        return null;
+    }
+
+    @Override
+    public float vectorToAngle(Vector2 vector)
+    {
+        return 0;
+    }
+
+    @Override public Vector2 angleToVector(Vector2 outVector, float angle)
+    {
+        return null;
+    }
+
+    @Override
+    public float getMaxLinearSpeed()
+    {
+        return 0;
+    }
+
+    @Override
+    public void setMaxLinearSpeed(float maxLinearSpeed)
+    {
+
+    }
+
+    @Override
+    public float getMaxLinearAcceleration()
+    {
+        return 0;
+    }
+
+    @Override
+    public void setMaxLinearAcceleration(float maxLinearAcceleration)
+    {
+
+    }
+
+    @Override
+    public float getMaxAngularSpeed()
+    {
+        return 0;
+    }
+
+    @Override
+    public void setMaxAngularSpeed(float maxAngularSpeed)
+    {
+
+    }
+
+    @Override
+    public float getMaxAngularAcceleration()
+    {
+        return 0;
+    }
+
+    @Override
+    public void setMaxAngularAcceleration(float maxAngularAcceleration)
     {
 
     }

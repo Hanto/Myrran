@@ -2,13 +2,15 @@ package Controller;// Created by Hanto on 22/07/2014.
 
 import DB.DAO;
 import DTO.DTOsCampoVision;
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
-import Model.Classes.Mobiles.PC;
-import Model.Classes.Mobiles.Player;
+import Model.Classes.Mobiles.Mob.MobFactory;
+import Model.Classes.Mobiles.PC.PCFactory;
+import Model.Classes.Mobiles.Player.Player;
 import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
@@ -34,8 +36,8 @@ public class ClienteInputs
         if (pcDTOs.connectionID == mundo.getPlayer().getID()) pc = mundo.getPlayer();
         else if (mundo.getPC(pcDTOs.connectionID) == null)
         {
-            mundo.añadirPC(new PC(pcDTOs.connectionID, mundo));
-            pc = mundo.getPC(pcDTOs.connectionID);
+            pc = PCFactory.NORMAL.nuevo(pcDTOs.connectionID, mundo.getWorld());
+            mundo.añadirPC(pc);
         }
         else pc = mundo.getPC(pcDTOs.connectionID);
 
@@ -108,8 +110,8 @@ public class ClienteInputs
 
             if (dto instanceof DTOsCampoVision.DatosCompletosProyectil)
             {
-                ProyectilI proyectil = ProyectilFactory.ESFERA.nuevo(mundo, ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
-                        .setID(((DTOsCampoVision.DatosCompletosProyectil) dto).ID)
+                ProyectilI proyectil = ProyectilFactory.ESFERA.nuevo(mundo.getWorld(), ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
+                        .setID(proyectilDTOs.iD)
                         .setSpell(((DTOsCampoVision.DatosCompletosProyectil) dto).spellID)
                         .setPosition(((DTOsCampoVision.DatosCompletosProyectil) dto).origenX, ((DTOsCampoVision.DatosCompletosProyectil) dto).origenY)
                         .setDireccionEnGrados(((DTOsCampoVision.DatosCompletosProyectil) dto).direccionEnGrados)
@@ -119,6 +121,29 @@ public class ClienteInputs
                 proyectil.setDuracionActual(((DTOsCampoVision.DatosCompletosProyectil) dto).duracionActual);
                 mundo.añadirProyectil(proyectil);
             }
+        }
+    }
+
+    public void procesarActualizacionesMobs(DTOsCampoVision.MobDTOs mobDTOs)
+    {
+        Object dto;
+
+        MobI mob = mundo.getMob(mobDTOs.iD);
+        if (mob == null)
+        {
+            mob = MobFactory.NUEVO.nuevo(mobDTOs.iD, mundo.getWorld());
+            mundo.añadirMob(mob);
+        }
+
+        for (int i=0; i < mobDTOs.listaDTOs.length; i++)
+        {
+            dto = mobDTOs.listaDTOs[i];
+
+            if (dto instanceof DTOsCampoVision.PosicionMob)
+            {   mob.setPosition(((DTOsCampoVision.PosicionMob) dto).posX, ((DTOsCampoVision.PosicionMob) dto).posY); }
+
+            else if (dto instanceof DTOsCampoVision.OrientacionMob)
+            {   mob.setMaxAngularAcceleration(((DTOsCampoVision.OrientacionMob) dto).orientacion);}
         }
     }
 

@@ -1,4 +1,4 @@
-package Model.Classes.Mobiles;// Created by Hanto on 21/07/2014.
+package Model.Classes.Mobiles.Player;// Created by Hanto on 21/07/2014.
 
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesPropiedades.Caster;

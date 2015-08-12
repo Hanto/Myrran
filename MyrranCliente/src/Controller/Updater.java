@@ -2,7 +2,8 @@ package Controller;// Created by Hanto on 08/04/2014.
 
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Input.InputManager;
-import Model.Classes.Mobiles.Player;
+import Model.Classes.Mobiles.Player.Player;
+import Model.Classes.Mobiles.Player.PlayerFactory;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
 import Model.GameState.Mundo;
@@ -82,7 +83,7 @@ public class Updater implements Screen
         //--------------------------------------------------------------------------------------------------------------
 
         world = new World(new Vector2(0, 0), false);
-        player = new Player(world);
+        player = PlayerFactory.GOLEM.nuevo(world);
         mapa = new Mapa(player);
         mundo = new Mundo(world, player, mapa);
         inputManager = new InputManager(player);

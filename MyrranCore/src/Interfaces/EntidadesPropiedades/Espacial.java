@@ -1,10 +1,12 @@
 package Interfaces.EntidadesPropiedades;// Created by Hanto on 21/07/2014.
 
 import Interfaces.Model.ModelI;
+import com.badlogic.gdx.math.Vector2;
 
 public interface Espacial extends ModelI
 {
-    //GET:7
+    //GET:
+    public Vector2 getPosition();
     public float getX();
     public float getY();
     public int getMapTileX();

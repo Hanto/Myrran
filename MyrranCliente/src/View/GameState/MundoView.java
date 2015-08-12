@@ -5,7 +5,7 @@ import DTO.DTOsMundo;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Classes.Geo.Mapa;
-import Model.Classes.Mobiles.Player;
+import Model.Classes.Mobiles.Player.Player;
 import Model.Classes.Tweens.CamaraTween;
 import Model.Classes.Tweens.TweenEng;
 import Model.Datos.ListaMapa;

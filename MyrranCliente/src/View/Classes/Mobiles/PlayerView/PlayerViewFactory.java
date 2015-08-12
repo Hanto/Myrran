@@ -1,7 +1,7 @@
 package View.Classes.Mobiles.PlayerView;// Created by Hanto on 10/08/2015.
 
 import Interfaces.EntidadesPropiedades.Caster;
-import Model.Classes.Mobiles.Player;
+import Model.Classes.Mobiles.Player.Player;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;
 import box2dLight.PointLight;

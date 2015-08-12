@@ -6,76 +6,67 @@ import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
-import Interfaces.Model.AbstractModel;
 import Interfaces.Spell.SpellI;
+import Model.Classes.AI.Steering.SteerableAbstract;
 import Model.Cuerpos.Cuerpo;
-import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Proyectil extends AbstractModel implements ProyectilI
+public class Proyectil extends SteerableAbstract implements ProyectilI
 {
-    protected MundoI mundo;
+    //Identificable:
+    protected int iD;
 
     //ProyectilStats:
-    protected int iD;
-    protected Cuerpo cuerpo;
-    protected SpellI spell;
     protected Caster owner;
+    protected SpellI spell;
     protected float daño;
 
-    //Posicion:
-    protected int ultimoMapTileX = 0;
-    protected int ultimoMapTileY = 0;
-    protected float x;
-    protected float y;
-    protected float velocidadMax=0.0f;
-    protected float velocidadMod=1.0f;
-
-    //Duracion
+    //Consumible:
     protected float duracionActual = 0.0f;
     protected float duracionMaxima = 5f;
 
+    //Corporeol:
+    protected Cuerpo cuerpo;
+
+    //Logger:
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    //GET:
+    // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public int getID()                                        { return iD; }
-    @Override public float getX()                                       { return x; }
-    @Override public float getY()                                       { return y; }
-    @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
-    @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
-    @Override public int getMapTileX()                                  { return (int)(x / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
-    @Override public int getMapTileY()                                  { return (int)(y / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
-    @Override public float getVelocidadMod()                            { return velocidadMod; }
-    @Override public float getVelocidadMax()                            { return velocidadMax; }
-    @Override public float getDuracionActual()                          { return duracionActual; }
-    @Override public float getDuracionMaxima()                          { return duracionMaxima; }
-    @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
-    @Override public SpellI getSpell()                                  { return spell; }
-    @Override public float getDaño()                                    { return daño; }
-    @Override public Caster getOwner()                                  { return owner; }
+    @Override public void setID(int iD)                                 { this.iD = iD; }
 
-    //SET:
+    // PROYECTILSTATS:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
-    @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
-    @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
-    @Override public void setVectorDireccion(float x, float y)          { cuerpo.setVectorDireccion(x, y); }
-    @Override public void setVelocidaMod(float velocidadMod)            { this.velocidadMod = velocidadMod; }
-    @Override public void setDuracionActual(float duracionActual)       { this.duracionActual = duracionActual; }
-    @Override public void setDuracionMaxima(float duracionMaxima)       { this.duracionMaxima = duracionMaxima; }
+    @Override public Caster getOwner()                                  { return owner; }
+    @Override public SpellI getSpell()                                  { return spell; }
+    @Override public float getDaño()                                    { return daño; }
+    @Override public void setOwner(Caster caster)                       { this.owner = caster; }
     @Override public void setSpell(SpellI spell)                        { this.spell = spell; }
     @Override public void setDaño(float daño)                           { this.daño = daño; }
 
-    //Constructor:
-    public Proyectil(MundoI mundo, Cuerpo cuerpo)
-    {
-        this.mundo = mundo;
-        this.cuerpo = cuerpo;
-    }
+    // CONSUMIBLE:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public float getDuracionActual()                          { return duracionActual; }
+    @Override public float getDuracionMaxima()                          { return duracionMaxima; }
+    @Override public void setDuracionActual(float duracionActual)       { this.duracionActual = duracionActual; }
+    @Override public void setDuracionMaxima(float duracionMaxima)       { this.duracionMaxima = duracionMaxima; }
+
+    // CORPOREO:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
+
+
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public Proyectil( Cuerpo cuerpo )
+    {   this.cuerpo = cuerpo; }
 
     @Override public void dispose()
     {
@@ -84,6 +75,8 @@ public class Proyectil extends AbstractModel implements ProyectilI
         notificarActualizacion("dispose", null, dispose);
         this.eliminarObservadores();
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public void setID()
     {
@@ -104,26 +97,26 @@ public class Proyectil extends AbstractModel implements ProyectilI
         {   iD = 0; }
     }
 
-    public void setID(int iD)
-    {   this.iD = iD; }
-
-    @Override public void setOwner(Caster caster)
-    {   this.owner = caster; }
-
     @Override public void setVelocidadMax(float velocidadMax)
     {
         this.velocidadMax = velocidadMax;
-        cuerpo.setLinearVelocity(velocidadMax);
+        cuerpo.setVelocidad(velocidadMax);
     }
+
+    @Override public void setDireccion(float x, float y)
+    {   cuerpo.setDireccion(x, y); }
+
+    @Override public void setDireccion(float grados)
+    {   cuerpo.setDireccion(grados); }
 
     @Override public void setPosition(float x, float y)
     {
         cuerpo.setPosition(x, y);
-        this.x = x;
-        this.y = y;
+        this.posicion.x = x;
+        this.posicion.y = y;
 
         DTOsProyectil.PosicionProyectil posicion = new DTOsProyectil.PosicionProyectil(this);
-        notificarActualizacion("actualizarPosiciojn", null, posicion);
+        notificarActualizacion("actualizarPosicion", null, posicion);
     }
 
     @Override public boolean consumirse (float delta)
@@ -135,8 +128,8 @@ public class Proyectil extends AbstractModel implements ProyectilI
 
     private void getPosicionInterpoladaCuerpo()
     {
-        this.x = cuerpo.getXinterpolada();
-        this.y = cuerpo.getYinterpolada();
+        this.posicion.x = cuerpo.getXinterpolada();
+        this.posicion.y = cuerpo.getYinterpolada();
 
         DTOsProyectil.PosicionProyectil posicion = new DTOsProyectil.PosicionProyectil(this);
         notificarActualizacion("actualizarPosiciojn", null, posicion);
@@ -153,4 +146,6 @@ public class Proyectil extends AbstractModel implements ProyectilI
 
     @Override public void actualizar (float delta, MundoI mundo)
     { }
+
+
 }

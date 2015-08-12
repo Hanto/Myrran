@@ -68,6 +68,8 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
     @Override public int getID()
     {   return iD;}
 
+
+
     public void setDireccion()
     {
         float grados = proyectil.getCuerpo().getDireccion().angle();
@@ -97,5 +99,14 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
         }
         else if (evt.getNewValue() instanceof DTOsProyectil.DisposeProyectil)
         {   dispose(); }
+    }
+
+    @Override public void setID(int iD)
+    {
+
+
+
+
+
     }
 }

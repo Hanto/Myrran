@@ -62,6 +62,11 @@ public class NetDTOs
         kryo.register(DTOsCampoVision.AñadirSpellPersonalizadoPC.class);
         kryo.register(DTOsCampoVision.NumTalentosSkillPersonalizadoPC.class);
 
+        //MOBS:
+        kryo.register(DTOsCampoVision.MobDTOs.class);
+        kryo.register(DTOsCampoVision.PosicionMob.class);
+        kryo.register(DTOsCampoVision.OrientacionMob.class);
+
         //PROYECTILES:
         kryo.register(DTOsCampoVision.ProyectilDTOs.class);
         kryo.register(DTOsCampoVision.DatosCompletosProyectil.class);

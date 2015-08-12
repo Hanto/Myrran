@@ -1,9 +1,11 @@
 package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 
+import DTO.DTOsMob;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesTipos.CampoVisionI;
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
@@ -11,6 +13,7 @@ import Interfaces.Model.AbstractModel;
 import Interfaces.Network.ServidorI;
 import Model.Settings;
 import View.Gamestate.MundoView;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
@@ -32,8 +35,10 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     //UNIDADES QUE OBSERVAMOS:
     private List<PCI> listaPCsCercanos = new ArrayList<>();
     private List<ProyectilI> listaProyectilesCercanos = new ArrayList<>();
+    private List<MobI> listaMobsCercanos = new ArrayList<>();
 
     @Override public int getConnectionID()              { return connectionID; }
+    @Override public Vector2 getPosition()              { return targetLock.getEspacial().getPosition(); }
     @Override public float getX()                       { return targetLock.getEspacial().getX(); }
     @Override public float getY()                       { return targetLock.getEspacial().getY(); }
     @Override public int getMapTileX()                  { return (int)(getX() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
@@ -59,6 +64,8 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     {
         for (PCI pc : listaPCsCercanos)
         {   pc.eliminarObservador(this); }
+        for (MobI mob : listaMobsCercanos)
+        {   mob.eliminarObservador(this); }
         for (ProyectilI pro : listaProyectilesCercanos)
         {   pro.eliminarObservador(this); }
         mapaView.dispose();
@@ -86,7 +93,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         else return false;
     }
 
-    private void comprobarVisiblidadMobsObservados()
+    private void comprobarVisiblidadPCsObservados()
     {
         Iterator<PCI> iterator = listaPCsCercanos.iterator();
         PCI pc;
@@ -98,6 +105,22 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
                 iterator.remove();
                 pc.eliminarObservador(this);
                 buffer.eliminarPC(pc);
+            }
+        }
+    }
+
+    private void comprobarVisibilidadMobsObservados()
+    {
+        Iterator<MobI> iterator = listaMobsCercanos.iterator();
+        MobI mob;
+        while (iterator.hasNext())
+        {
+            mob = iterator.next();
+            if (!isVisiblePor(mob))
+            {
+                iterator.remove();
+                mob.eliminarObservador(this);
+                //TODO buffer.eliminarMob(mob);
             }
         }
     }
@@ -120,14 +143,24 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
 
     @Override public void radar()
     {
-        comprobarVisiblidadMobsObservados();
+        comprobarVisiblidadPCsObservados();
+        comprobarVisibilidadMobsObservados();
         comprobarVisibilidadProyectilesObservados();
+
         PCI pc;
         Iterator<PCI> iteratorPC = mundo.getIteratorPCs(getMapTileX(), getMapTileY());
         while (iteratorPC.hasNext())
         {
             pc = iteratorPC.next();
             if (isVisiblePor(pc)) añadirPC(pc);
+        }
+
+        MobI mob;
+        Iterator<MobI>iteratorMob = mundo.getIteratorMobs(getMapTileX(), getMapTileY());
+        while (iteratorMob.hasNext())
+        {
+            mob = iteratorMob.next();
+            if (isVisiblePor(mob)) añadirMob(mob);
         }
 
         ProyectilI pro;
@@ -188,6 +221,35 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     private void numTalentosSkillPersonalizadoPC (PCI pc, String skillID, int statID, int valor)
     {   buffer.addNumTalentosSkillPersonalizadoPC(pc, skillID, statID, valor); }
 
+    // MOBS:
+    //--------------------------------------------------------------------------------------------------------------
+
+    private void añadirMob (MobI mob)
+    {
+        if (!listaMobsCercanos.contains(mob))
+        {
+            listaMobsCercanos.add(mob);
+            mob.añadirObservador(this);
+            //TODO buffer.setDatosCompletosMob(mob)
+        }
+    }
+
+    private void eliminarMob (MobI mob)
+    {
+        if (listaMobsCercanos.contains(mob))
+        {
+            listaMobsCercanos.remove(mob);
+            mob.eliminarObservador(this);
+            //TODO buffer.eliminarMob(mob)
+        }
+    }
+
+    private void posicionMob (MobI mob)
+    {   buffer.setPosicionMob(mob); }
+
+    private void orientacionMob (MobI mob)
+    {   buffer.setOrientacionMob(mob); }
+
     // PROYECTILES:
     //--------------------------------------------------------------------------------------------------------------
 
@@ -241,6 +303,13 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
                                             ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).statID,
                                             ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).valor);
         }
+
+        //OBSERVAR A LOS MOBS:
+        else if (evt.getNewValue() instanceof DTOsMob.PosicionMob)
+        {   posicionMob(((DTOsMob.PosicionMob) evt.getNewValue()).mob); }
+
+        else if (evt.getNewValue() instanceof DTOsMob.OrientacionMob)
+        {   orientacionMob(((DTOsMob.OrientacionMob) evt.getNewValue()).mob);}
 
         //OBSERVAR A LOS PROYECTILES (PROYECTILES)
         else if (evt.getNewValue() instanceof DTOsProyectil.DisposeProyectil)

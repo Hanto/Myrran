@@ -2,6 +2,7 @@ package View.Gamestate.CampoVision;// Created by Hanto on 24/07/2015.
 
 import DTO.DTOsCampoVision;
 import DTO.DTOsMapView;
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.Network.ServidorI;
@@ -20,6 +21,7 @@ public class BufferCampoVision
     private List<Object> listaDTOsMisc = new ArrayList<>();
     private MapDTOs mapaDTOsPC = new MapDTOs();
     private MapDTOs mapaDTOsProyectiles = new MapDTOs();
+    private MapDTOs mapaDTOsMobs = new MapDTOs();
 
     //MANIPULACION DE LAS ESTRUCTURAS DE DATOS:
     //---------------------------------------------------------------------------------------------------------------
@@ -69,7 +71,7 @@ public class BufferCampoVision
 
     public BufferCampoVision() {}
 
-    //PC:
+    // PC:
     //------------------------------------------------------------------------------------------------------------------
 
     public void eliminarPC(PCI pc)
@@ -91,7 +93,7 @@ public class BufferCampoVision
         mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NumAnimacionPC.class, numAnumacion);
     }
 
-    //PC & PLAYER:
+    // PC & PLAYER:
     //------------------------------------------------------------------------------------------------------------------
 
     public void setDatosCompletosPC (PCI pc)
@@ -147,7 +149,23 @@ public class BufferCampoVision
         mapaDTOsPC.add(pc.getID(), numTalentosSkill);
     }
 
-    //PROYECTILES:
+    // MOBS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void setPosicionMob(MobI mob)
+    {
+        DTOsCampoVision.PosicionMob posicionMob = new DTOsCampoVision.PosicionMob(mob);
+        mapaDTOsMobs.add(mob.getID(), posicionMob);
+    }
+
+    public void setOrientacionMob(MobI mob)
+    {
+        DTOsCampoVision.OrientacionMob orientacionMob = new DTOsCampoVision.OrientacionMob(mob);
+        mapaDTOsMobs.add(mob.getID(), orientacionMob);
+    }
+
+
+    // PROYECTILES:
     //------------------------------------------------------------------------------------------------------------------
 
     public void setDatosCompletosProyectil (ProyectilI proyectil)
@@ -163,7 +181,7 @@ public class BufferCampoVision
         mapaDTOsProyectiles.set(proyectil.getID(), DTOsCampoVision.EliminarProyectil.class, eliminarProyectil);
     }
 
-    //MISC:
+    // MISC:
     //------------------------------------------------------------------------------------------------------------------
 
     public void addCambioTerreno (int tileX, int tileY, int numCapa, short iDTerreno)
@@ -210,12 +228,28 @@ public class BufferCampoVision
             DTOsCampoVision.ProyectilDTOs proyectilDTOs = new DTOsCampoVision.ProyectilDTOs();
             for (Map.Entry<Integer, ArrayList<Object>> array : mapaDTOsProyectiles.mapDTOs.entrySet())
             {
-                proyectilDTOs.connectionID = array.getKey();
+                proyectilDTOs.iD = array.getKey();
                 proyectilDTOs.listaDTOs = new Object[array.getValue().size()];
                 proyectilDTOs.listaDTOs = array.getValue().toArray();
                 servidor.enviarACliente(conID, proyectilDTOs);
             }
             mapaDTOsProyectiles.clear();
+        }
+    }
+
+    private void enviarDTOsMobs (ServidorI servidor, int conID)
+    {
+        if (mapaDTOsMobs.mapDTOs.size() > 0)
+        {
+            DTOsCampoVision.MobDTOs mobDTOs = new DTOsCampoVision.MobDTOs();
+            for (Map.Entry<Integer, ArrayList<Object>> array : mapaDTOsMobs.mapDTOs.entrySet())
+            {
+                mobDTOs.iD = array.getKey();
+                mobDTOs.listaDTOs = new Object[array.getValue().size()];
+                mobDTOs.listaDTOs = array.getValue().toArray();
+                servidor.enviarACliente(conID, mobDTOs);
+            }
+            mapaDTOsMobs.clear();
         }
     }
 
@@ -246,6 +280,7 @@ public class BufferCampoVision
         enviarDTOsMapa(servidor, conID);
         enviarDTOsPC(servidor, conID);
         enviarDTOsProyectil(servidor, conID);
+        enviarDTOsMobs(servidor, conID);
         enviarDTOsMisc(servidor, conID);
     }
 }

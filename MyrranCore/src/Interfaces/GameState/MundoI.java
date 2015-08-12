@@ -1,5 +1,6 @@
 package Interfaces.GameState;// Created by Hanto on 30/07/2015.
 
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.Geo.MapaI;
@@ -26,6 +27,13 @@ public interface MundoI extends ModelI
     public ProyectilI getProyectil (int iD);
     public Iterator<ProyectilI> getIteratorProyectiles();
     public Iterator<ProyectilI> getIteratorProyectiles(int mapTileX, int mapTileY);
+
+    //MOBS:
+    public void añadirMob (MobI mob);
+    public void eliminarMob (int iD);
+    public MobI getMob (int iD);
+    public Iterator<MobI> getIteratorMobs();
+    public Iterator<MobI> getIteratorMobs(int mapTileX, int mapTileY);
 
     //IA:
     public void actualizarUnidades(float delta, MundoI mundo);

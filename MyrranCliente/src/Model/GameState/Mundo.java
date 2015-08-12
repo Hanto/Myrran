@@ -3,13 +3,14 @@ package Model.GameState;// Created by Hanto on 08/04/2014.
 import Controller.Cliente;
 import DTO.DTOsMapView;
 import DTO.DTOsMundo;
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Model.AbstractModel;
 import Model.Classes.Geo.Mapa;
-import Model.Classes.Mobiles.Player;
+import Model.Classes.Mobiles.Player.Player;
 import Model.Datos.ListaMapa;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
@@ -22,6 +23,7 @@ public class Mundo extends AbstractModel implements MundoI
 {
     private ListaMapa<PCI> listaMapaPlayers = new ListaMapa<>();
     private ListaMapa<ProyectilI> listaMapaProyectiles = new ListaMapa<>();
+    private ListaMapa<MobI> listaMapaMobs = new ListaMapa<>();
 
     private World world;
     private Player player;
@@ -45,7 +47,7 @@ public class Mundo extends AbstractModel implements MundoI
     // PLAYERS:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void añadirPC (PCI pc)
+    @Override public void añadirPC (PCI pc)
     {
         listaMapaPlayers.add(pc);
 
@@ -99,6 +101,29 @@ public class Mundo extends AbstractModel implements MundoI
 
     @Override public Iterator<ProyectilI> getIteratorProyectiles(int mapTileX, int mapTileY)
     {   return listaMapaProyectiles.iterator(); }
+
+    // MOBS:
+    //--------------------------------------------------------------------------------------------------------------sw----
+
+    @Override public void añadirMob (MobI mob)
+    {
+        listaMapaMobs.add(mob);
+    }
+
+    @Override public void eliminarMob (int iD)
+    {
+        listaMapaMobs.remove(iD);
+    }
+
+    @Override public MobI getMob (int iD)
+    {   return listaMapaMobs.get(iD); }
+
+    @Override public Iterator<MobI> getIteratorMobs()
+    {
+        return null;
+    }
+    @Override public Iterator<MobI> getIteratorMobs(int mapTileX, int mapTileY) { return null; }
+
 
     // MAPA:
     //------------------------------------------------------------------------------------------------------------------

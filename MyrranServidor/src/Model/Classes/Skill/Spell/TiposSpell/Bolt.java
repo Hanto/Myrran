@@ -1,7 +1,7 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 03/08/2015.
 
 import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.Corporal;
+import Interfaces.EntidadesPropiedades.Corporeo;
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
@@ -28,10 +28,10 @@ public class Bolt extends TipoSpell
 
         float origenX, origenY;
 
-        if (caster instanceof Corporal)
+        if (caster instanceof Corporeo)
         {
-            origenX = ((Corporal) caster).getCuerpo().getCentroXinterpolada() - ANCHO/2;
-            origenY = ((Corporal) caster).getCuerpo().getCentroYinterpolada() - ALTO/2;
+            origenX = ((Corporeo) caster).getCuerpo().getCentroXinterpolada() - ANCHO/2;
+            origenY = ((Corporeo) caster).getCuerpo().getCentroYinterpolada() - ALTO/2;
         }
         else if (caster instanceof Espacial)
         {
@@ -40,7 +40,7 @@ public class Bolt extends TipoSpell
         }
         else return;
 
-        ProyectilI proyectil = ProyectilFactory.ESFERA.nuevo(mundo, ANCHO, ALTO)
+        ProyectilI proyectil = ProyectilFactory.ESFERA.nuevo(mundo.getWorld(), ANCHO, ALTO)
                 .setSpell(spell)
                 .setOwner(caster)
                 .setID()

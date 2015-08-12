@@ -101,6 +101,18 @@ public class Servidor extends Server implements ServidorI
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }
+        else if (obj instanceof DTOsCampoVision.MobDTOs)
+        {
+            DTOsCampoVision.MobDTOs dtos = (DTOsCampoVision.MobDTOs)obj;
+            for (int i=0; i< dtos.listaDTOs.length; i++)
+            {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
+        }
+        else if (obj instanceof DTOsCampoVision.ProyectilDTOs)
+    {
+        DTOsCampoVision.ProyectilDTOs dtos = (DTOsCampoVision.ProyectilDTOs)obj;
+        for (int i=0; i< dtos.listaDTOs.length; i++)
+        {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
+    }
 
         Connection[] connections = this.getConnections();
         for (int i = 0, n = connections.length; i < n; i++) {

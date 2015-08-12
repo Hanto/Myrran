@@ -2,7 +2,7 @@ package Controller;// Created by Hanto on 22/07/2014.
 
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PCI;
-import Model.Classes.Mobiles.PC;
+import Model.Classes.Mobiles.PC.PCFactory;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +58,7 @@ public class ServidorInputs
         //CREAR PC: hacerlo desde un DAO Factory, que lea y salve datos desde disco:
         //-------------------------------------------------------------------------------------------------------------
 
-        PCI pc = new PC(connectionID, controlador.getMundo());
+        PCI pc = PCFactory.NUEVOPC.nuevo(connectionID, controlador.getMundo().getWorld());
         pc.añadirSkillsPersonalizados("Terraformar");
         pc.añadirSkillsPersonalizados("Heal");
         pc.añadirSkillsPersonalizados("Bolt");
