@@ -157,7 +157,7 @@ public class DTOsCampoVision
         public float orientacion;
         public OrientacionMob() {}
         public OrientacionMob(MobI mob)
-        {   this.orientacion = mob.getOrientation(); }
+        {   this.orientacion = mob.getOrientacion(); }
     }
 
     // PROYECTIL DTOS:

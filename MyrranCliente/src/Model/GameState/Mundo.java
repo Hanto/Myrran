@@ -185,8 +185,8 @@ public class Mundo extends AbstractModel implements MundoI
 
     public void enviarDatosAServidor(Cliente cliente)
     {
-        if (player.getNotificador().contieneDatos())
-        {   cliente.enviarAServidor(player.getNotificador().getDTOs()); }
+        if (player.notificadorContieneDatos())
+        {   cliente.enviarAServidor(player.getDTOs()); }
     }
 
     //Interpolamos las posiciones y angulos con el resto del TimeStep:

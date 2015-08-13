@@ -32,7 +32,6 @@ public abstract class MobNotificador extends AbstractSteerable implements MobI
     {
         if (Math.abs(orientacionDTO.orientacion - getOrientacion()) > 0.1f)
         {
-            System.out.println(getOrientacion());
             orientacionDTO.orientacion = getOrientacion();
             notificarActualizacion("orientacionMob", null, orientacionDTO);
         }

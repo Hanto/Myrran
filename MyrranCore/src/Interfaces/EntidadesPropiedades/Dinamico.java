@@ -2,7 +2,7 @@ package Interfaces.EntidadesPropiedades;// Created by Hanto on 21/07/2014.
 
 import com.badlogic.gdx.math.Vector2;
 
-public interface Dinamico extends Espacial
+public interface Dinamico extends Espacial, DinamicoSimple
 {
     //GET:
     public Vector2 getVelocidad();

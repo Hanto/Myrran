@@ -20,50 +20,38 @@ import java.util.*;
 
 public class PC extends PCNotificador implements PropertyChangeListener, PCI, Debuffeable
 {
-    //Identificable:
-    protected int iD;
-
-    //Animable:
-    protected int numAnimacion = 5;
-
-    //Vulnerable:
-    protected float actualHPs=1;
+    protected int iD;                                                                       // Identificable:
+    protected int numAnimacion = 5;                                                         // Animable:
+    protected float actualHPs=1;                                                            // Vulnerable:
     protected float maxHPs=2000;
-
-    //Corporal:
-    protected Cuerpo cuerpo;
-
-    //PCStats:
-    protected int iDProyectiles = 0;
+    protected Cuerpo cuerpo;                                                                // Corporeo:
+    protected int iDProyectiles = 0;                                                        // PCStats:
     protected String nombre = "Player";
     protected int nivel = 1;
-
-    //Caster:
-    protected float actualCastingTime = 0.0f;
+    protected float actualCastingTime = 0.0f;                                               // Caster:
     protected float totalCastingTime = 0.0f;
     protected String spellIDSeleccionado = null;
     protected Object parametrosSpell;
-
-    //CasterPersonalizable:
-    protected Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
+    protected Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>(); // CasterPersonalizable:
     protected Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
-
-    //Debuffeable:
-    protected List<AuraI>listaDeAuras = new ArrayList<>();
-
-    //Atributos exclusivos del Servidor:
-    protected int targetX = 0;
+    protected List<AuraI>listaDeAuras = new ArrayList<>();                                  // Debuffeable:
+    protected int targetX = 0;                                                              // Atributos Servidor:
     protected int targetY = 0;
     protected boolean castear = false;
-
-    //Logger:
-    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());            // Logger:
 
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public int getID()                                            { return iD; }
     @Override public void setID(int iD)                                     { this.iD = iD; }
+
+    // DINAMICO:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void setDireccion(float x, float y)                    { }
+    @Override public void setDireccion(float grados)                        { }
+
 
     // ANIMABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -78,7 +66,7 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
     @Override public void setActualHPs(float HPs)                           { modificarHPs(HPs - actualHPs); }
     @Override public void setMaxHPs(float HPs)                              { maxHPs = HPs; }
 
-    // CORPORAL:
+    // CORPOREO:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public Cuerpo getCuerpo()                                     { return cuerpo; }
@@ -117,12 +105,6 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
     @Override public void añadirAura(AuraI aura)                            { listaDeAuras.add(aura); }
     @Override public void eliminarAura(AuraI aura)                          { listaDeAuras.remove(aura); }
     @Override public Iterator<AuraI> getAuras()                             { return listaDeAuras.iterator(); }
-
-    // DINAMICO:
-    //------------------------------------------------------------------------------------------------------------------
-
-    @Override public void setDireccion(float x, float y)                    { }
-    @Override public void setDireccion(float grados)                        { }
 
 
     // CONSTRUCTOR:

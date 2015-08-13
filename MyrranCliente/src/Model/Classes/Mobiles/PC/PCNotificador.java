@@ -2,43 +2,49 @@ package Model.Classes.Mobiles.PC;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PCI;
+import Model.AbstractClases.AbstractSteerable;
 
-public class PCNotificador
+public abstract class PCNotificador extends AbstractSteerable implements PCI
 {
-    public PCI mobPC;
-
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
-    public DTOsPlayer.Animacion animacion = new DTOsPlayer.Animacion();
-    public DTOsPlayer.Posicion posicion = new DTOsPlayer.Posicion();
-    public DTOsPlayer.ModificarHPs modificarHPs = new DTOsPlayer.ModificarHPs();
+    private DTOsPlayer.Animacion animacionDTO = new DTOsPlayer.Animacion();
+    private DTOsPlayer.Posicion posicionDTO = new DTOsPlayer.Posicion();
+    private DTOsPlayer.ModificarHPs modificarHPsDTO = new DTOsPlayer.ModificarHPs();
 
-    public PCNotificador(PCI mobPC)
-    {   this.mobPC = mobPC; }
+    public PCNotificador()
+    { }
 
     //  NOTIFICACION LOCAL:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setPosition(float x, float y)
+    public void notificarSetPosition()
     {
-        posicion.posX = (int)x; posicion.posY = (int)y;
-        mobPC.notificarActualizacion("posicion", null, posicion);
+        if (posicionDTO.posX != (int)getX() || posicionDTO.posY != (int)getY())
+        {
+            posicionDTO.posX = (int) getX();
+            posicionDTO.posY = (int) getY();
+            notificarActualizacion("posicion", null, posicionDTO);
+        }
     }
 
-    public void setNumAnimacion(int numAnimacion)
+    public void notificarSetNumAnimacion()
     {
-        animacion.numAnimacion = (short)numAnimacion;
-        mobPC.notificarActualizacion("numAnimacion", null, animacion);
+        if (animacionDTO.numAnimacion != (short)getNumAnimacion())
+        {
+            animacionDTO.numAnimacion = (short) getNumAnimacion();
+            notificarActualizacion("numAnimacion", null, animacionDTO);
+        }
     }
 
-    public void setModificarHPs (float HPs)
+    public void notificarSetModificarHPs (float HPs)
     {
-        modificarHPs.HPs = HPs;
-        mobPC.notificarActualizacion("ModificarHPs", null, modificarHPs); }
+        modificarHPsDTO.HPs = HPs;
+        notificarActualizacion("ModificarHPs", null, modificarHPsDTO); }
 
-    public void setNombre(String nombre)
-    {   mobPC.notificarActualizacion("nombre", null, new DTOsPlayer.Nombre(nombre)); }
+    public void notificarSetNombre(String nombre)
+    {   notificarActualizacion("nombre", null, new DTOsPlayer.Nombre(nombre)); }
 
-    public void setDispose()
-    {   mobPC.notificarActualizacion("Eliminar", null, new DTOsPlayer.EliminarPC(mobPC.getID())); }
+    public void notificarSetDispose()
+    {   notificarActualizacion("Eliminar", null, new DTOsPlayer.EliminarPC(getID())); }
 
 }

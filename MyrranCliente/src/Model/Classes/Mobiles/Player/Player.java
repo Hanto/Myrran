@@ -7,7 +7,6 @@ import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Input.PlayerIOI;
-import Model.AbstractClases.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
@@ -15,10 +14,8 @@ import Model.Cuerpos.Cuerpo;
 import Model.FSM.IO.PlayerIO;
 import Model.FSM.MaquinaEstados;
 import Model.FSM.MaquinaEstadosFactory;
-import Model.Settings;
 import Model.Skills.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import org.slf4j.LoggerFactory;
 
@@ -26,149 +23,103 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Player extends AbstractModel implements PlayerI, Debuffeable, MaquinablePlayer
+public class Player extends PlayerNotificador implements PlayerI, Debuffeable, MaquinablePlayer
 {
-    protected int connectionID;
-    protected int iDProyectiles = 0;
-
-    protected int ultimoMapTileX;
-    protected int ultimoMapTileY;
-    //protected float x = 0.0f;
-    //protected float y = 0.0f;
-    protected Vector2 velocidad = new Vector2();
-    protected int numAnimacion = 5;
-    protected float velocidadMax = 80.0f;
-    protected float velocidadMod = 1.0f;
+    protected int iD;                                                                       // Identificable:
+    protected int numAnimacion = 5;                                                         // Animable:
+    protected float actualHPs;                                                              // Vulnerable:
+    protected float maxHPs;
+    protected Cuerpo cuerpo;                                                                // Corporeo:
+    protected int iDProyectiles = 0;                                                        // PCStats:
     protected String nombre;
     protected int nivel;
-    protected float actualHPs;
-    protected float maxHPs;
-
+    protected float actualCastingTime = 0.0f;                                               // Caster:
+    protected float totalCastingTime = 0.0f;
     protected String spellIDSeleccionado;
     protected Object parametrosSpell;
-    protected float actualCastingTime = 0.0f;
-    protected float totalCastingTime = 0.0f;
-    protected Array<AuraI> listaDeAuras = new Array<>();
-    protected Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>();
+    protected Map<String, SkillPersonalizadoI> listaSkillsPersonalizados = new HashMap<>(); // CasterPersonalizado:
     protected Map<String, SpellPersonalizadoI> listaSpellsPersonalizados = new HashMap<>();
-
-    protected Cuerpo cuerpo;
-    protected PlayerNotificador notificador;
-
-    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
-
-    //Atributos exclusivos del Cliente:
-    protected boolean castearInterrumpible = false;
+    protected Array<AuraI> listaDeAuras = new Array<>();                                    // Debuffeable:
+    protected boolean castearInterrumpible = false;                                         // Atributos Cliente:
     protected MaquinaEstados fsm;
     protected PlayerIO input = new PlayerIO();
     protected PlayerIO output = new PlayerIO();
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());            // Logger:
 
-    //
+    // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
 
-    //GET:
-    @Override public int getID()                                        { return connectionID; }
-    @Override public void setID(int iD)                                 { this.connectionID = iD; }
+    @Override public int getID()                                        { return iD; }
+    @Override public void setID(int iD)                                 { this.iD = iD; }
 
-    @Override public float getX()                                       { return cuerpo.getX(); }
-    @Override public float getY()                                       { return cuerpo.getY(); }
-    @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
-    @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
-    @Override public Vector2 getVelocidad()                             { return velocidad; }
-    @Override public int getMapTileX()                                  { return (int)(cuerpo.getX() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
-    @Override public int getMapTileY()                                  { return (int)(cuerpo.getY() / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
+    // DINAMICO:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
+    @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
+
+    // ANIMABLE:
+    //------------------------------------------------------------------------------------------------------------------
+
     @Override public int getNumAnimacion()                              { return numAnimacion; }
-    @Override public float getVelocidadMod()                            { return velocidadMod; }
 
-    @Override
-    public float getVelocidadAngular()
-    {
-        return 0;
-    }
+    // VULNERABLE:
+    //------------------------------------------------------------------------------------------------------------------
 
-    @Override
-    public float getVelocidadAngularMax()
-    {
-        return 0;
-    }
+    @Override public float getActualHPs()                               { return actualHPs; }
+    @Override public float getMaxHPs()                                  { return maxHPs; }
+    @Override public void setActualHPs (float hps)                      { modificarHPs(hps - actualHPs); }
 
-    @Override
-    public float getAceleracionAngularMax()
-    {
-        return 0;
-    }
+    // CORPOREO:
+    //------------------------------------------------------------------------------------------------------------------
 
-    @Override public float getVelocidadMax()                            { return velocidadMax; }
+    @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
 
-    @Override
-    public float getAceleracionMax()
-    {
-        return 0;
-    }
+    // PCSTATS:
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override public String getNombre()                                 { return nombre; }
     @Override public int getNivel()                                     { return nivel; }
-    @Override public float getActualHPs()                               { return actualHPs; }
-    @Override public float getMaxHPs()                                  { return maxHPs; }
+    @Override public void setNivel (int nivel)                          { this.nivel = nivel; }
+
+    // CASTER:
+    //------------------------------------------------------------------------------------------------------------------
+
     @Override public boolean isCasteando()                              { if (actualCastingTime >0) return true; else return false; }
     @Override public float getActualCastingTime()                       { return actualCastingTime; }
     @Override public float getTotalCastingTime()                        { return totalCastingTime; }
     @Override public String getSpellIDSeleccionado()                    { return spellIDSeleccionado; }
     @Override public Object getParametrosSpell()                        { return parametrosSpell; }
-    @Override public PlayerIOI getInput()                               { return input; }
-    @Override public PlayerIOI getOutput()                              { return output; }
-    @Override public Cuerpo getCuerpo()                                 { return cuerpo; }
-    public PlayerNotificador getNotificador()                           { return notificador; }
-
-    //SET:
-    @Override public void setUltimoMapTile (int x, int y)               { ultimoMapTileX = x; ultimoMapTileY = y; }
-    @Override public void setNivel (int nivel)                          { this.nivel = nivel; }
-    @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
-    @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
     @Override public void setTotalCastingTime(float castingTime)        { this.actualCastingTime = 0.01f; totalCastingTime = castingTime;}
-    @Override public void setVelocidaMod(float velocidadMod)            { this.velocidadMod = velocidadMod; }
 
-    @Override
-    public void setVelocidadAngular(float velocidadAngular)
-    {
+    // CASTERPERSONALIZADO:
+    //------------------------------------------------------------------------------------------------------------------
 
-    }
-
-    @Override
-    public void setVelocidadAngularMax(float velocidadAngularMax)
-    {
-
-    }
-
-    @Override
-    public void setAceleracionAngularMax(float aceleracionAngularMax)
-    {
-
-    }
-
-    @Override public void setVelocidadMax(float velocidadMax)           { this.velocidadMax = velocidadMax; }
-
-    @Override
-    public void setAceleracionMax(float aceleracionMax)
-    {
-
-    }
-
-    { }
-    @Override public void añadirAura(AuraI aura)                        { listaDeAuras.add(aura); }
-    @Override public void eliminarAura(AuraI aura)                      { listaDeAuras.removeValue(aura, true); }
-    @Override public Iterator<AuraI> getAuras()                         { return listaDeAuras.iterator(); }
-    @Override public void setActualHPs (float hps)                      { modificarHPs(hps - actualHPs); }
     @Override public SkillPersonalizadoI getSkillPersonalizado(String skillID){ return listaSkillsPersonalizados.get(skillID); }
     @Override public SpellPersonalizadoI getSpellPersonalizado(String spellID){ return listaSpellsPersonalizados.get(spellID); }
     @Override public Iterator<SpellPersonalizadoI> getIteratorSpellPersonalizado(){ return listaSpellsPersonalizados.values().iterator(); }
     @Override public Iterator<SkillPersonalizadoI> getIteratorSkillPersonalizado(){ return listaSkillsPersonalizados.values().iterator(); }
 
-    //Constructor:
+    // DEBUFFEABLE:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void añadirAura(AuraI aura)                        { listaDeAuras.add(aura); }
+    @Override public void eliminarAura(AuraI aura)                      { listaDeAuras.removeValue(aura, true); }
+    @Override public Iterator<AuraI> getAuras()                         { return listaDeAuras.iterator(); }
+
+    // INPUT:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public PlayerIOI getInput()                               { return input; }
+    @Override public PlayerIOI getOutput()                              { return output; }
+
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
+
     public Player(Cuerpo cuerpo)
     {
+        velocidadMax = 80f;
         this.cuerpo = cuerpo;
-        this.notificador = new PlayerNotificador(this);
         this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
         cuerpo.setPosition(0, 0);
         cuerpo.setCalculosInterpolados(true);
@@ -214,21 +165,21 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         actualHPs += HPs;
         if (actualHPs > maxHPs) actualHPs = maxHPs;
         else if (actualHPs < 0) actualHPs = 0f;
-        notificador.setModificarHPs(HPs);
+        notificarSetModificarHPs(HPs);
     }
 
     //Vista:
     @Override public void setNombre (String nombre)
     {
         this.nombre = nombre;
-        notificador.setNombre(nombre);
+        notificarSetNombre();
     }
 
     //Vista:
     @Override public void setMaxHPs (float mHps)
     {
         maxHPs = mHps;
-        notificador.setMaxHPs(maxHPs);
+        notificarSetMaxHPs();
     }
 
     //Vista:
@@ -242,7 +193,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
                 actualCastingTime = 0f;
                 totalCastingTime = 0f;
             }
-            notificador.setCastingTime(this);
+            notificarSetCastingTime();
         }
     }
 
@@ -253,42 +204,40 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     @Override public void setNumAnimacion(int numAnimacion)
     {
         this.numAnimacion = numAnimacion;
-        notificador.setNumAnimacion(numAnimacion);
+        notificarSetNumAnimacion();
     }
 
     //Vista - Servidor:
     @Override public void setPosition (float x, float y)
     {
         cuerpo.setPosition(x, y);
-        //this.x = x;
-        //this.y = y;
-        notificador.setPosition(x, y);
+        posicion.set(x, y);
+        notificarSetPosition();
     }
 
     //Vista - Servidor:
     private void getPosicionInterpoladaCuerpo()
     {
-        //this.x = cuerpo.getX();
-        //this.y = cuerpo.getY();
-        notificador.setPosition(cuerpo.getX(), cuerpo.getY());
+        posicion.set(cuerpo.getX(), cuerpo.getY());
+        notificarSetPosition();
     }
 
     //Servidor:
     @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
-    {   notificador.setNumTalentosSkillPersonalizado(skillID, statID, valor); }
+    {   notificarSetNumTalentosSkillPersonalizado(skillID, statID, valor); }
 
     //Servidor:
     @Override public void setParametrosSpell(Object parametros)
     {
         parametrosSpell = parametros;
-        notificador.setParametrosSpell(parametros);
+        notificarSetParametrosSpell();
     }
 
     //Servidor:
     @Override public void setSpellIDSeleccionado(String spellID)
     {
         spellIDSeleccionado = spellID;
-        notificador.setSpellIDSeleccionado(spellID, getParametrosSpell());
+        notificarSetSpellIDSeleccionado();
     }
 
     //Servidor:
@@ -299,7 +248,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
             castearInterrumpible = false;
 
             //TODO PRUEBA
-            notificador.setStopCastear(output.mundoX, output.mundoY);
+            notificarSetStopCastear(output.mundoX, output.mundoY);
             //notificador.setStopCastear(output.getScreenX(), output.getScreenY());
         }
     }
@@ -316,7 +265,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
                 spell.castear(this, output.mundoX, output.mundoY, mundo);
                 //spell.castear(this, output.getScreenX(), output.getScreenY(), mundo);
                 castearInterrumpible = true;
-                notificador.setStartCastear(output.mundoX, output.mundoY);
+                notificarSetStartCastear(output.mundoX, output.mundoY);
                 //notificador.setStartCastear(output.getScreenX(), output.getScreenY());
             }
         }
@@ -377,113 +326,5 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         output.setScreenY(screenY);
         if (castear) { output.setStartCastear(true); output.setStopCastear(false); }
         else { output.setStopCastear(true); output.setStartCastear(false); }
-    }
-
-    @Override
-    public Vector2 getPosition()
-    {
-        return null;
-    }
-
-    @Override
-    public float getOrientation()
-    {
-        return 0;
-    }
-
-    @Override
-    public Vector2 getLinearVelocity()
-    {
-        return null;
-    }
-
-    @Override
-    public float getAngularVelocity()
-    {
-        return 0;
-    }
-
-    @Override
-    public float getBoundingRadius()
-    {
-        return 0;
-    }
-
-    @Override
-    public boolean isTagged()
-    {
-        return false;
-    }
-
-    @Override
-    public void setTagged(boolean tagged)
-    {
-
-    }
-
-    @Override
-    public Vector2 newVector()
-    {
-        return null;
-    }
-
-    @Override
-    public float vectorToAngle(Vector2 vector)
-    {
-        return 0;
-    }
-
-    @Override
-    public Vector2 angleToVector(Vector2 outVector, float angle)
-    {
-        return null;
-    }
-
-    @Override
-    public float getMaxLinearSpeed()
-    {
-        return 0;
-    }
-
-    @Override
-    public void setMaxLinearSpeed(float maxLinearSpeed)
-    {
-
-    }
-
-    @Override
-    public float getMaxLinearAcceleration()
-    {
-        return 0;
-    }
-
-    @Override
-    public void setMaxLinearAcceleration(float maxLinearAcceleration)
-    {
-
-    }
-
-    @Override
-    public float getMaxAngularSpeed()
-    {
-        return 0;
-    }
-
-    @Override
-    public void setMaxAngularSpeed(float maxAngularSpeed)
-    {
-
-    }
-
-    @Override
-    public float getMaxAngularAcceleration()
-    {
-        return 0;
-    }
-
-    @Override
-    public void setMaxAngularAcceleration(float maxAngularAcceleration)
-    {
-
     }
 }

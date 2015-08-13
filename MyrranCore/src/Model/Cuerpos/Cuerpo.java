@@ -19,6 +19,7 @@ public class Cuerpo implements Disposable
     private float boxAlto;
     private Vector2 boxPosicionInterpolada;
     private Vector2 boxPosicionAnterior;
+    private Vector2 posicionInterpolada;
     private float anguloAnterior;
     private float anguloInterpolado;
 

@@ -143,7 +143,7 @@ public class ClienteInputs
             {   mob.setPosition(((DTOsCampoVision.PosicionMob) dto).posX, ((DTOsCampoVision.PosicionMob) dto).posY); }
 
             else if (dto instanceof DTOsCampoVision.OrientacionMob)
-            {   mob.setMaxAngularAcceleration(((DTOsCampoVision.OrientacionMob) dto).orientacion);}
+            {   mob.setOrientacion(((DTOsCampoVision.OrientacionMob) dto).orientacion);}
         }
     }
 

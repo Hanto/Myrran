@@ -3,37 +3,29 @@ package Model.AbstractClases;// Created by Hanto on 12/08/2015.
 import Interfaces.EntidadesPropiedades.Dinamico;
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesPropiedades.Orientable;
+import Interfaces.EntidadesPropiedades.Steerable2D;
 import Model.Settings;
-import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class AbstractSteerable extends AbstractModel implements Steerable<Vector2>, Espacial, Dinamico, Orientable
+public abstract class AbstractSteerable extends AbstractModel implements Steerable2D, Espacial, Dinamico, Orientable
 {
-    //Espacial:
-    protected Vector2 posicion = new Vector2();
+    protected Vector2 posicion = new Vector2();             // Espacial:
     protected int ultimoMapTileX;
     protected int ultimoMapTileY;
-
-    //Dinamico:
-    protected Vector2 velocidad = new Vector2();
-    protected float velocidadMax = 50f;
+    protected Vector2 velocidad = new Vector2();            // Dinamico:
+    protected float velocidadMax = 40f;
     protected float aceleracionMax = 50f;
-    protected float velocidadMod;
+    protected float velocidadMod = 1.0f;
     protected float velocidadAngular;
     protected float velocidadAngularMax = 5f;
     protected float aceleracionAngularMax = 10f;
-
-    //Orientable:
-    protected float orientacion = 0;
-
-    //Steerable:
-    protected boolean encaramientoIndependiente = false;
+    protected float orientacion = 0;                        // Orientable:
+    protected boolean encaramientoIndependiente = false;    // Steerable:
     protected boolean tagged = false;
-
-    protected SteeringBehavior<Vector2> steeringBehavior;
-    protected SteeringAcceleration<Vector2> steeringOutput = new SteeringAcceleration<Vector2>(new Vector2());
+    protected SteeringBehavior<Vector2> steeringBehavior;   // AbstractSteerable:
+    protected SteeringAcceleration<Vector2> steeringOutput;
 
     // ESPACIAL:
     //------------------------------------------------------------------------------------------------------------------
@@ -72,7 +64,7 @@ public abstract class AbstractSteerable extends AbstractModel implements Steerab
 
 
     public AbstractSteerable()
-    { }
+    {   steeringOutput = new SteeringAcceleration<Vector2>(new Vector2()); }
 
     // STEERABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -111,7 +103,7 @@ public abstract class AbstractSteerable extends AbstractModel implements Steerab
     // TIPO DE STEERING:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setSteeringBehavior(SteeringBehavior<Vector2> steeringBehavior)
+    @Override public void setSteeringBehavior(SteeringBehavior<Vector2> steeringBehavior)
     {   this.steeringBehavior = steeringBehavior; }
 
     // OPERACIONES MATEMATICAS::

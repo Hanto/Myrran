@@ -12,7 +12,6 @@ import Interfaces.Geo.MapaI;
 import Model.AbstractClases.AbstractModel;
 import Model.Classes.AI.Steering.SteeringFactory;
 import Model.Classes.Geo.Mapa;
-import Model.Classes.Mobiles.Mob.Mob;
 import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.Datos.ListaMapaCuadrantes;
 import Model.Settings;
@@ -61,7 +60,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         DTOsMundo.AñadirPC nuevoPlayer = new DTOsMundo.AñadirPC(pc);
         notificarActualizacion("añadirPC", null, nuevoPlayer);
 
-        Mob mob = MobFactory.NUEVO.nuevo(this);
+        MobI mob = MobFactory.NUEVO.nuevo(this);
         añadirMob(mob);
 
         Arrive ster = (Arrive)SteeringFactory.Steering2.ARRIVE.nuevo(mob, pc);

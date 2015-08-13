@@ -1,36 +1,35 @@
 package Model.Classes.Mobiles.Player;// Created by Hanto on 21/07/2014.
 
 import DTO.DTOsPlayer;
-import Interfaces.EntidadesPropiedades.Caster;
-import Model.AbstractClases.AbstractModel;
+import Interfaces.EntidadesTipos.PlayerI;
+import Model.AbstractClases.AbstractSteerable;
 import com.badlogic.gdx.utils.ObjectMap;
+
 import java.util.ArrayList;
 
-public class PlayerNotificador
+public abstract class PlayerNotificador extends AbstractSteerable implements PlayerI
 {
-    public AbstractModel model;
-
     //Stats Excluyentes para enviar por RED al servidor::
-    public DTOsPlayer.Animacion animacion = new DTOsPlayer.Animacion();
-    public DTOsPlayer.Posicion posicion = new DTOsPlayer.Posicion();
-    public DTOsPlayer.ParametrosSpell parametrosSpell = new DTOsPlayer.ParametrosSpell();
-    public DTOsPlayer.SpellSeleccionado spellSeleccionado = new DTOsPlayer.SpellSeleccionado();
-    public DTOsPlayer.StopCastear stopCastear = new DTOsPlayer.StopCastear();
-    public DTOsPlayer.StartCastear startCastear = new DTOsPlayer.StartCastear();
+    private DTOsPlayer.Animacion animacionDTO = new DTOsPlayer.Animacion();
+    private DTOsPlayer.Posicion posicionDTO = new DTOsPlayer.Posicion();
+    private DTOsPlayer.ParametrosSpell parametrosSpellDTO = new DTOsPlayer.ParametrosSpell();
+    private DTOsPlayer.SpellSeleccionado spellSeleccionadoDTO = new DTOsPlayer.SpellSeleccionado();
+    private DTOsPlayer.StopCastear stopCastearDTO = new DTOsPlayer.StopCastear();
+    private DTOsPlayer.StartCastear startCastearDTO = new DTOsPlayer.StartCastear();
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
-    public DTOsPlayer.CastingTimePercent castingTime = new DTOsPlayer.CastingTimePercent();
-    public DTOsPlayer.ModificarHPs modificarHPs = new DTOsPlayer.ModificarHPs();
+    private DTOsPlayer.CastingTimePercent castingTimeDTO = new DTOsPlayer.CastingTimePercent();
+    private DTOsPlayer.ModificarHPs modificarHPsDTO = new DTOsPlayer.ModificarHPs();
 
-    protected ObjectMap<Class, Object> cambiosExcluyentes = new ObjectMap<>();
-    protected ArrayList<Object> cambiosAcumulativos = new ArrayList<>();
+    private ObjectMap<Class, Object> cambiosExcluyentes = new ObjectMap<>();
+    private ArrayList<Object> cambiosAcumulativos = new ArrayList<>();
 
-    protected DTOsPlayer.PlayerDTOs dtos = new DTOsPlayer.PlayerDTOs();
+    private DTOsPlayer.PlayerDTOs dtos = new DTOsPlayer.PlayerDTOs();
 
-    public PlayerNotificador(AbstractModel model)
-    {   this.model = model; }
+    public PlayerNotificador()
+    {}
 
 
-    public boolean contieneDatos()
+    public boolean notificadorContieneDatos()
     {   return (cambiosExcluyentes.size >0 || cambiosAcumulativos.size() >0); }
 
     public DTOsPlayer.PlayerDTOs getDTOs()
@@ -41,7 +40,7 @@ public class PlayerNotificador
         return dtos;
     }
 
-    private Object[] juntarObjectMapYArrayList(ObjectMap<Class, Object> map, ArrayList<Object> array)
+    public Object[] juntarObjectMapYArrayList(ObjectMap<Class, Object> map, ArrayList<Object> array)
     {
         int tamaño = map.size + array.size();
         Object[] fusion = new Object[tamaño];
@@ -59,89 +58,88 @@ public class PlayerNotificador
 
     //Cambios Excluyentes:
     //(Solo se envia el ultimo, y solo si cambia)
-    public void setNumAnimacion(int numAnimacion)
+    public void notificarSetNumAnimacion()
     {
-        if (animacion.numAnimacion != (short)numAnimacion)
+        if (animacionDTO.numAnimacion != (short)getNumAnimacion())
         {
-            animacion.numAnimacion = (short)numAnimacion;
-            cambiosExcluyentes.put(DTOsPlayer.Animacion.class, animacion);
-            model.notificarActualizacion("numAnimacion", null, animacion);
+            animacionDTO.numAnimacion = (short)getNumAnimacion();
+            cambiosExcluyentes.put(DTOsPlayer.Animacion.class, animacionDTO);
+            notificarActualizacion("numAnimacionPlayer", null, animacionDTO);
         }
     }
 
-    public void setPosition(float x, float y)
+    public void notificarSetPosition()
     {
-        if (posicion.posX != (int)x || posicion.posY != (int)y)
+        if (posicionDTO.posX != (int)getX() || posicionDTO.posY != (int)getY())
         {
-            posicion.posX = (int) x;
-            posicion.posY = (int) y;
-            cambiosExcluyentes.put(DTOsPlayer.Posicion.class, posicion);
-            model.notificarActualizacion("posicion", null, posicion);
+            posicionDTO.posX = (int) getX();
+            posicionDTO.posY = (int) getY();
+            cambiosExcluyentes.put(DTOsPlayer.Posicion.class, posicionDTO);
+            notificarActualizacion("posicionPlayer", null, posicionDTO);
         }
     }
 
-    public void setParametrosSpell(Object parametros)
+    public void notificarSetParametrosSpell()
     {
-        if (parametrosSpell.parametros != parametros)
+        if (parametrosSpellDTO.parametros != getParametrosSpell())
         {
-            parametrosSpell.parametros = parametros;
-            cambiosExcluyentes.put(DTOsPlayer.ParametrosSpell.class, parametrosSpell);
+            parametrosSpellDTO.parametros = getParametrosSpell();
+            cambiosExcluyentes.put(DTOsPlayer.ParametrosSpell.class, parametrosSpellDTO);
         }
     }
 
-    public void setSpellIDSeleccionado(String spellID, Object parametrosSpell)
+    public void notificarSetSpellIDSeleccionado()
     {
-        if (spellSeleccionado.spellIDSeleccionado != spellID || spellSeleccionado.parametrosSpell != parametrosSpell)
+        if (spellSeleccionadoDTO.spellIDSeleccionado != getSpellIDSeleccionado() || spellSeleccionadoDTO.parametrosSpell != getParametrosSpell())
         {
-            spellSeleccionado.spellIDSeleccionado = spellID;
-            spellSeleccionado.parametrosSpell = parametrosSpell;
-            cambiosExcluyentes.put(DTOsPlayer.SpellSeleccionado.class, spellSeleccionado);
+            spellSeleccionadoDTO.spellIDSeleccionado = getSpellIDSeleccionado();
+            spellSeleccionadoDTO.parametrosSpell = getParametrosSpell();
+            cambiosExcluyentes.put(DTOsPlayer.SpellSeleccionado.class, spellSeleccionadoDTO);
         }
     }
 
-    public void setStopCastear(int screenX, int screenY)
+    public void notificarSetStopCastear(int screenX, int screenY)
     {
-        //if (stopCastear.screenX != screenX || stopCastear.screenY != screenY)
+        //if (stopCastearDTO.screenX != screenX || stopCastearDTO.screenY != screenY)
         {
-            stopCastear.screenX = screenX;
-            stopCastear.screenY = screenY;
-            cambiosExcluyentes.put(DTOsPlayer.StopCastear.class, stopCastear);
+            stopCastearDTO.screenX = screenX;
+            stopCastearDTO.screenY = screenY;
+            cambiosExcluyentes.put(DTOsPlayer.StopCastear.class, stopCastearDTO);
         }
     }
 
-    public void setStartCastear(int screenX, int screenY)
+    public void notificarSetStartCastear(int screenX, int screenY)
     {
-        //if (startCastear.screenX != screenX || startCastear.screenY != screenY)
+        //if (startCastearDTO.screenX != screenX || startCastearDTO.screenY != screenY)
         {
-            startCastear.screenX = screenX;
-            startCastear.screenY = screenY;
-            cambiosExcluyentes.put(DTOsPlayer.StartCastear.class, startCastear);
+            startCastearDTO.screenX = screenX;
+            startCastearDTO.screenY = screenY;
+            cambiosExcluyentes.put(DTOsPlayer.StartCastear.class, startCastearDTO);
         }
     }
 
     //Cambios Acumulativos:
     //(Se envia cualquier valor, aunque sea repetido)
-    public void setNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+    public void notificarSetNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
     {   cambiosAcumulativos.add(new DTOsPlayer.NumTalentosSkillPersonalizado(skillID, statID, valor)); }
 
     //  NOTIFICACION LOCAL:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setNombre(String nombre)
-    {   model.notificarActualizacion("nombre", null, new DTOsPlayer.Nombre(nombre)); }
+    public void notificarSetNombre()
+    {   notificarActualizacion("nombrePlayer", null, new DTOsPlayer.Nombre(getNombre())); }
 
-    public void setMaxHPs(float HPs)
-    {   model.notificarActualizacion("MaxHPs", null, new DTOsPlayer.MaxHPs(HPs)); }
+    public void notificarSetMaxHPs()
+    {   notificarActualizacion("MaxHPsPlayer", null, new DTOsPlayer.MaxHPs(getMaxHPs())); }
 
-    public void setModificarHPs (float HPs)
+    public void notificarSetModificarHPs (float HPs)
     {
-        modificarHPs.HPs = HPs;
-        model.notificarActualizacion("ModificarHPs", null, modificarHPs); }
+        modificarHPsDTO.HPs = HPs;
+        notificarActualizacion("ModificarHPsPlayer", null, modificarHPsDTO); }
 
-    public void setCastingTime(Caster caster)
+    public void notificarSetCastingTime()
     {
-        castingTime.castingTimePercent = caster.getActualCastingTime() == 0 && caster.getTotalCastingTime() == 0 ? 100 :
-                caster.getActualCastingTime() / caster.getTotalCastingTime();
-        model.notificarActualizacion("CastingTime", null, castingTime);
+        castingTimeDTO.castingTimePercent = getActualCastingTime() == 0 && getTotalCastingTime() == 0 ? 100 : getActualCastingTime() / getTotalCastingTime();
+        notificarActualizacion("CastingTimePlayer", null, castingTimeDTO);
     }
 }
