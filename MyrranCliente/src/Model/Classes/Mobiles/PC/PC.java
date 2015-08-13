@@ -2,9 +2,9 @@ package Model.Classes.Mobiles.PC;// Created by Hanto on 08/04/2014.
 
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
-import Interfaces.Model.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
+import Model.AbstractClases.AbstractModel;
 import Model.Cuerpos.Cuerpo;
 import Model.Settings;
 import com.badlogic.gdx.math.Vector2;

@@ -2,7 +2,7 @@ package Model.Skills;// Created by Hanto on 25/06/2014.
 
 import DTO.DTOsSkillPersonalizado;
 import Interfaces.BDebuff.BDebuffI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Interfaces.Skill.SkillI;
 import Interfaces.Skill.SkillPersonalizadoI;
 

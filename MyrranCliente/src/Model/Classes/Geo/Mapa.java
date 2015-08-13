@@ -7,7 +7,7 @@ import DTO.DTOsPlayer;
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Model.Settings;
 import com.badlogic.gdx.utils.Disposable;
 

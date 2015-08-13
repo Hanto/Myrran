@@ -1,16 +1,15 @@
-package Model.Classes.AI.Steering;// Created by Hanto on 12/08/2015.
+package Model.AbstractClases;// Created by Hanto on 12/08/2015.
 
 import Interfaces.EntidadesPropiedades.Dinamico;
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesPropiedades.Orientable;
-import Interfaces.Model.AbstractModel;
 import Model.Settings;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class SteerableAbstract extends AbstractModel implements Steerable<Vector2>, Espacial, Dinamico, Orientable
+public abstract class AbstractSteerable extends AbstractModel implements Steerable<Vector2>, Espacial, Dinamico, Orientable
 {
     //Espacial:
     protected Vector2 posicion = new Vector2();
@@ -72,7 +71,7 @@ public abstract class SteerableAbstract extends AbstractModel implements Steerab
     @Override public void setOrientacion(float angulo)                      { this.orientacion = angulo; }
 
 
-    public SteerableAbstract()
+    public AbstractSteerable()
     { }
 
     // STEERABLE:
@@ -107,7 +106,7 @@ public abstract class SteerableAbstract extends AbstractModel implements Steerab
     {   this.tagged = tagged; }
 
     @Override public float getBoundingRadius()
-    {   return 0; }
+    {   return 24; }
 
     // TIPO DE STEERING:
     //------------------------------------------------------------------------------------------------------------------

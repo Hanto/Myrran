@@ -13,7 +13,6 @@ public class Cuerpo implements Disposable
 {
     private World world;
     private Body body;
-
     private Vector2 direccion;
     private float boxVelocidad;
     private float boxAncho;
@@ -23,17 +22,17 @@ public class Cuerpo implements Disposable
     private float anguloAnterior;
     private float anguloInterpolado;
 
+    private boolean calculosInterpolados = false;
+
     public World getWorld()                         { return world; }
     public Body getBody()                           { return body; }
-
     public Vector2 getDireccion()                   { return direccion; }
     public float getBoxAncho()                      { return boxAncho; }
     public float getBoxAlto()                       { return boxAlto; }
     public Vector2 getBoxPosicionInterpolada()      { return boxPosicionInterpolada; }
     public float getAnguloInterpolado()             { return anguloInterpolado; }
-
     public void setBody(Body body)                  { this.body = body; }
-
+    public void setCalculosInterpolados(boolean b)  { this.calculosInterpolados = b; }
     
     public Cuerpo(World world, int ancho, int alto)
     {
@@ -53,9 +52,14 @@ public class Cuerpo implements Disposable
 
     public void setPosition(float x, float y)
     {
-        body.setTransform(x * PIXEL_METROS + boxAncho / 2, y * PIXEL_METROS + boxAlto / 2, getAnguloInterpolado());
-        boxPosicionAnterior.set(body.getPosition().x, body.getPosition().y);
-        boxPosicionInterpolada.set(body.getPosition().x, body.getPosition().y);
+        if (calculosInterpolados)
+        {
+            body.setTransform(x * PIXEL_METROS + boxAncho / 2, y * PIXEL_METROS + boxAlto / 2, getAnguloInterpolado());
+            boxPosicionAnterior.set(body.getPosition().x, body.getPosition().y);
+            boxPosicionInterpolada.set(body.getPosition().x, body.getPosition().y);
+        }
+        else
+        {   body.setTransform(x * PIXEL_METROS + boxAncho / 2, y * PIXEL_METROS + boxAlto / 2, body.getAngle()); }
     }
 
     public int getAncho()
@@ -64,23 +68,35 @@ public class Cuerpo implements Disposable
     public int getAlto()
     {   return (int)(boxAlto * METROS_PIXEL); }
 
-    public int getCentroX()
+    public int getBodyCentroX()
     {   return (int)(body.getPosition().x * METROS_PIXEL); }
 
-    public int getCentroY()
+    public int getBodyCentroY()
     {   return (int)(body.getPosition().y * METROS_PIXEL); }
 
-    public int getXinterpolada()
-    {   return (int)((boxPosicionInterpolada.x - boxAncho /2) * METROS_PIXEL); }
+    public int getX()
+    {
+        if (calculosInterpolados) return (int)((boxPosicionInterpolada.x - boxAncho /2) * METROS_PIXEL);
+        else return (int)((body.getPosition().x - boxAncho /2) * METROS_PIXEL);
+    }
 
-    public int getYinterpolada()
-    {   return (int)((boxPosicionInterpolada.y - boxAlto /2) * METROS_PIXEL); }
+    public int getY()
+    {
+        if (calculosInterpolados) return (int)((boxPosicionInterpolada.y - boxAlto /2) * METROS_PIXEL);
+        else return (int)((body.getPosition().y - boxAlto /2) * METROS_PIXEL);
+    }
 
-    public int getCentroXinterpolada()
-    {   return (int)(boxPosicionInterpolada.x * METROS_PIXEL); }
+    public int getCentroX()
+    {
+        if (calculosInterpolados) return (int)(boxPosicionInterpolada.x * METROS_PIXEL);
+        else return (int)(body.getPosition().x * METROS_PIXEL);
+    }
 
-    public int getCentroYinterpolada()
-    {   return (int)(boxPosicionInterpolada.y * METROS_PIXEL); }
+    public int getCentroY()
+    {
+        if (calculosInterpolados) return (int)(boxPosicionInterpolada.y * METROS_PIXEL);
+        else return (int)(body.getPosition().y * METROS_PIXEL);
+    }
 
     public void setDireccion(float grados)
     {
@@ -93,7 +109,7 @@ public class Cuerpo implements Disposable
 
     public void setDireccion(float x, float y)
     {
-        direccion.set(x - getCentroX(), y - getCentroY());
+        direccion.set(x - getBodyCentroX(), y - getBodyCentroY());
         direccion.nor();
 
         body.setLinearVelocity(direccion.x * boxVelocidad, direccion.y * boxVelocidad);
@@ -108,7 +124,7 @@ public class Cuerpo implements Disposable
 
     public void setDireccionVelocidad(float x, float y, float velocidad)
     {
-        direccion.set(x - getCentroX(), y -getCentroY());
+        direccion.set(x - getBodyCentroX(), y - getBodyCentroY());
         direccion.nor();
         boxVelocidad = velocidad * PIXEL_METROS;
 

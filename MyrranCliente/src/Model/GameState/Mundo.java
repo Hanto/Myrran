@@ -8,7 +8,7 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Player.Player;
 import Model.Datos.ListaMapa;

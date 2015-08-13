@@ -18,7 +18,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.*;
 
-public class PC extends PCAbstract implements PropertyChangeListener, PCI, Debuffeable
+public class PC extends PCNotificador implements PropertyChangeListener, PCI, Debuffeable
 {
     //Identificable:
     protected int iD;

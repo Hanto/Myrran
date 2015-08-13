@@ -2,7 +2,7 @@ package Model.Classes.Mobiles.Mob;// Created by Hanto on 11/08/2015.
 
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.GameState.MundoI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Model.Cuerpos.Cuerpo;
 import com.badlogic.gdx.math.Vector2;
 
@@ -78,6 +78,12 @@ public class Mob extends AbstractModel implements MobI
 
     @Override public int getID()
     {   return iD; }
+
+    @Override
+    public void setID(int iD)
+    {
+
+    }
 
     @Override
     public Vector2 getPosition()

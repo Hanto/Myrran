@@ -7,7 +7,7 @@ import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Input.PlayerIOI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
@@ -70,13 +70,13 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     @Override public int getID()                                        { return connectionID; }
     @Override public void setID(int iD)                                 { this.connectionID = iD; }
 
-    @Override public float getX()                                       { return cuerpo.getXinterpolada(); }
-    @Override public float getY()                                       { return cuerpo.getYinterpolada(); }
+    @Override public float getX()                                       { return cuerpo.getX(); }
+    @Override public float getY()                                       { return cuerpo.getY(); }
     @Override public int getUltimoMapTileX()                            { return ultimoMapTileX; }
     @Override public int getUltimoMapTileY()                            { return ultimoMapTileY; }
     @Override public Vector2 getVelocidad()                             { return velocidad; }
-    @Override public int getMapTileX()                                  { return (int)(cuerpo.getXinterpolada() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
-    @Override public int getMapTileY()                                  { return (int)(cuerpo.getYinterpolada() / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
+    @Override public int getMapTileX()                                  { return (int)(cuerpo.getX() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
+    @Override public int getMapTileY()                                  { return (int)(cuerpo.getY() / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
     @Override public int getNumAnimacion()                              { return numAnimacion; }
     @Override public float getVelocidadMod()                            { return velocidadMod; }
 
@@ -171,6 +171,7 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
         this.notificador = new PlayerNotificador(this);
         this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
         cuerpo.setPosition(0, 0);
+        cuerpo.setCalculosInterpolados(true);
     }
 
     @Override public void dispose()
@@ -267,9 +268,9 @@ public class Player extends AbstractModel implements PlayerI, Debuffeable, Maqui
     //Vista - Servidor:
     private void getPosicionInterpoladaCuerpo()
     {
-        //this.x = cuerpo.getXinterpolada();
-        //this.y = cuerpo.getYinterpolada();
-        notificador.setPosition(cuerpo.getXinterpolada(), cuerpo.getYinterpolada());
+        //this.x = cuerpo.getX();
+        //this.y = cuerpo.getY();
+        notificador.setPosition(cuerpo.getX(), cuerpo.getY());
     }
 
     //Servidor:

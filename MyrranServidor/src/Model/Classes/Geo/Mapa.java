@@ -4,7 +4,7 @@ import DAO.Terreno.TerrenoDAO;
 import DTO.DTOsMapa;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Model.Settings;
 
 public class Mapa extends AbstractModel implements MapaI

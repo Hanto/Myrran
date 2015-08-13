@@ -1,18 +1,16 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 07/04/2014.
 
-import DTO.DTOsProyectil;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
-import Model.Classes.AI.Steering.SteerableAbstract;
 import Model.Cuerpos.Cuerpo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Proyectil extends SteerableAbstract implements ProyectilI
+public class Proyectil extends ProyectilNotificador implements ProyectilI
 {
     //Identificable:
     protected int iD;
@@ -66,14 +64,15 @@ public class Proyectil extends SteerableAbstract implements ProyectilI
     //------------------------------------------------------------------------------------------------------------------
 
     public Proyectil( Cuerpo cuerpo )
-    {   this.cuerpo = cuerpo; }
+    {   this.cuerpo = cuerpo;
+        this.cuerpo.setCalculosInterpolados(true);
+    }
 
     @Override public void dispose()
     {
-        cuerpo.dispose();
-        DTOsProyectil.DisposeProyectil dispose = new DTOsProyectil.DisposeProyectil(this);
-        notificarActualizacion("dispose", null, dispose);
         this.eliminarObservadores();
+        cuerpo.dispose();
+        notificarSetDispose();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -114,9 +113,7 @@ public class Proyectil extends SteerableAbstract implements ProyectilI
         cuerpo.setPosition(x, y);
         this.posicion.x = x;
         this.posicion.y = y;
-
-        DTOsProyectil.PosicionProyectil posicion = new DTOsProyectil.PosicionProyectil(this);
-        notificarActualizacion("actualizarPosicion", null, posicion);
+        notificarSetPosition();
     }
 
     @Override public boolean consumirse (float delta)
@@ -128,11 +125,9 @@ public class Proyectil extends SteerableAbstract implements ProyectilI
 
     private void getPosicionInterpoladaCuerpo()
     {
-        this.posicion.x = cuerpo.getXinterpolada();
-        this.posicion.y = cuerpo.getYinterpolada();
-
-        DTOsProyectil.PosicionProyectil posicion = new DTOsProyectil.PosicionProyectil(this);
-        notificarActualizacion("actualizarPosiciojn", null, posicion);
+        this.posicion.x = cuerpo.getX();
+        this.posicion.y = cuerpo.getY();
+        notificarSetPosition();
     }
 
     @Override public void copiarUltimaPosicion()

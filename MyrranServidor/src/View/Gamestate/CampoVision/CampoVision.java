@@ -9,7 +9,7 @@ import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Interfaces.Network.ServidorI;
 import Model.Settings;
 import View.Gamestate.MundoView;

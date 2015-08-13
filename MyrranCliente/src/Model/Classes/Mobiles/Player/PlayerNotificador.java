@@ -2,7 +2,7 @@ package Model.Classes.Mobiles.Player;// Created by Hanto on 21/07/2014.
 
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import com.badlogic.gdx.utils.ObjectMap;
 import java.util.ArrayList;
 

@@ -6,7 +6,7 @@ import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Interfaces.Spell.SpellI;
 import Model.Cuerpos.Cuerpo;
 import Model.Settings;
@@ -117,7 +117,9 @@ public class Proyectil extends AbstractModel implements ProyectilI
 
     //Constructor:
     public Proyectil(Cuerpo cuerpo)
-    {   this.cuerpo = cuerpo; }
+    {   this.cuerpo = cuerpo;
+        this.cuerpo.setCalculosInterpolados(true);
+    }
 
     @Override public void dispose()
     {
@@ -182,8 +184,8 @@ public class Proyectil extends AbstractModel implements ProyectilI
 
     private void getPosicionInterpoladaCuerpo()
     {
-        this.posicion.x = cuerpo.getXinterpolada();
-        this.posicion.y = cuerpo.getYinterpolada();
+        this.posicion.x = cuerpo.getX();
+        this.posicion.y = cuerpo.getY();
 
         DTOsProyectil.PosicionProyectil posicion = new DTOsProyectil.PosicionProyectil(this);
         notificarActualizacion("actualizarPosiciojn", null, posicion);

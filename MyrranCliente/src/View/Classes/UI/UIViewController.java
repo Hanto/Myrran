@@ -1,7 +1,7 @@
 package View.Classes.UI;// Created by Hanto on 10/08/2015.
 
 import Interfaces.Controlador.ControladorUI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Interfaces.UI.BarraAccionesI;
 import Interfaces.UI.CasillaI;
 import Model.GameState.UI;

@@ -9,7 +9,7 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Model.Classes.AI.Steering.SteeringFactory;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Mob.Mob;
@@ -123,26 +123,26 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     // MOBS:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void añadirMob (MobI mob)
+    @Override public void añadirMob (MobI mob)
     {
         dataMobs.add(mob);
         mob.añadirObservador(this);
     }
 
-    public void eliminarMob (int iD)
+    @Override public void eliminarMob (int iD)
     {
         MobI mob = dataMobs.remove(iD);
         mob.eliminarObservador(this);
         mob.dispose();
     }
 
-    public MobI getMob (int iD)
+    @Override public MobI getMob (int iD)
     {   return dataMobs.get(iD); }
 
-    public Iterator<MobI> getIteratorMobs()
+    @Override public Iterator<MobI> getIteratorMobs()
     {   return dataMobs.iterator(); }
 
-    public Iterator<MobI> getIteratorMobs(int mapTileX, int mapTileY)
+    @Override public Iterator<MobI> getIteratorMobs(int mapTileX, int mapTileY)
     {   return dataMobs.getIteratorCuadrantes(mapTileX, mapTileY); }
 
     private void updateMob(MobI mob)

@@ -2,15 +2,15 @@ package Model.Classes.Mobiles.PC;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPC;
 import Interfaces.EntidadesTipos.PCI;
-import Model.Classes.AI.Steering.SteerableAbstract;
+import Model.AbstractClases.AbstractSteerable;
 
-public abstract class PCAbstract extends SteerableAbstract implements PCI
+public abstract class PCNotificador extends AbstractSteerable implements PCI
 {
     private DTOsPC.PosicionPC posicionDTO;
     private DTOsPC.NumAnimacionPC animacionDTO;
     private DTOsPC.ModificarHPsPC modificarHPsDTO;
 
-    public PCAbstract()
+    public PCNotificador()
     {
         posicionDTO = new DTOsPC.PosicionPC(this);
         animacionDTO = new DTOsPC.NumAnimacionPC(this);

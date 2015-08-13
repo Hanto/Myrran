@@ -7,7 +7,10 @@ public class DTOsProyectil
     public static class PosicionProyectil
     {
         public ProyectilI proyectil;
-        public PosicionProyectil (ProyectilI proyectil) { this.proyectil = proyectil;}
+        public int posX;
+        public int posY;
+        public PosicionProyectil (ProyectilI proyectil)
+        {   this.proyectil = proyectil; }
     }
 
     public static class DisposeProyectil

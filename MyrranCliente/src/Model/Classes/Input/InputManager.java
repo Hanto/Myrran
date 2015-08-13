@@ -3,7 +3,7 @@ package Model.Classes.Input;// Created by Hanto on 05/05/2014.
 import DTO.DTOsInputManager;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.PlayerI;
-import Interfaces.Model.AbstractModel;
+import Model.AbstractClases.AbstractModel;
 import Interfaces.UI.AccionI;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;

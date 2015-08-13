@@ -7,8 +7,8 @@ public class DTOsMob
     public static class PosicionMob
     {
         public MobI mob;
-        //public int posX;
-        //public int posY;
+        public int posX;
+        public int posY;
         public PosicionMob(MobI mob)
         {   this.mob = mob; }
     }
@@ -16,6 +16,7 @@ public class DTOsMob
     public static class OrientacionMob
     {
         public MobI mob;
+        public float orientacion;
         public OrientacionMob (MobI mob)
         {   this.mob = mob; }
     }

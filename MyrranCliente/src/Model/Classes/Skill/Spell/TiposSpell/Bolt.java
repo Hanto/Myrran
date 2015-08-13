@@ -30,8 +30,8 @@ public class Bolt extends TipoSpell
 
         if (caster instanceof Corporeo)
         {
-            origenX = ((Corporeo) caster).getCuerpo().getCentroXinterpolada() - ANCHO/2;
-            origenY = ((Corporeo) caster).getCuerpo().getCentroYinterpolada() - ALTO/2;
+            origenX = ((Corporeo) caster).getCuerpo().getCentroX() - ANCHO/2;
+            origenY = ((Corporeo) caster).getCuerpo().getCentroY() - ALTO/2;
         }
         else if (caster instanceof Espacial)
         {
