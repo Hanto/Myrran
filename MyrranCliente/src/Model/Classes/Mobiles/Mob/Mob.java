@@ -31,6 +31,8 @@ public class Mob extends MobNotificador implements MobI
     {
         this.iD = iD;
         this.cuerpo = cuerpo;
+        this.setAncho(cuerpo.getAncho());
+        this.setAlto(cuerpo.getAlto());
     }
 
     @Override public void dispose()

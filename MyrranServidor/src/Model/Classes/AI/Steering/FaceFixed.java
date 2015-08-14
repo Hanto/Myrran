@@ -39,8 +39,6 @@ public class FaceFixed<T extends Vector<T>> extends Face<T>
         float rotation = (targetOrientation - owner.getOrientation()) % MathUtils.PI2;
         if (rotation > MathUtils.PI) rotation -= MathUtils.PI2;
 
-        System.out.println(rotation);
-
         // Absolute rotation
         float rotationSize = rotation < 0f ? -rotation : rotation;
 

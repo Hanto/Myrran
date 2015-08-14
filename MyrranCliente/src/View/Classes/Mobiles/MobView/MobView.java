@@ -62,8 +62,7 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
 
     public void setOrientacion(float angulo)
     {
-        Double grados = (double)Math.toDegrees(angulo);
-        if (grados <0) grados += 360;
+        Double grados = (Math.toDegrees(angulo) + 360) % 360;
 
         if (225 < grados && grados < 315) actor.setAnimacion(0, false);
         if (135 < grados && grados < 225 ) actor.setAnimacion(1, false);

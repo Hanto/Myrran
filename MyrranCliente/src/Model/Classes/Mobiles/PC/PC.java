@@ -86,6 +86,8 @@ public class PC extends PCNotificador implements PCI
     {
         this.iD = connectionID;
         this.cuerpo = cuerpo;
+        this.setAncho(cuerpo.getAncho());
+        this.setAlto(cuerpo.getAlto());
     }
 
     @Override public void setPosition (float x, float y)

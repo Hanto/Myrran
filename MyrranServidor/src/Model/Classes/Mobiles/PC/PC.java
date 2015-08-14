@@ -110,10 +110,12 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public PC(int connectionID, Cuerpo cuerpo)
+    public PC( int connectionID, Cuerpo cuerpo )
     {
         this.iD = connectionID;
         this.cuerpo = cuerpo;
+        this.setAncho(cuerpo.getAncho());
+        this.setAlto(cuerpo.getAlto());
     }
 
     @Override public void dispose()

@@ -1,16 +1,14 @@
 package Model.AbstractClases;// Created by Hanto on 12/08/2015.
 
-import Interfaces.EntidadesPropiedades.Dinamico;
-import Interfaces.EntidadesPropiedades.Espacial;
-import Interfaces.EntidadesPropiedades.Orientable;
-import Interfaces.EntidadesPropiedades.Steerable2D;
+import Interfaces.EntidadesPropiedades.*;
 import Model.Settings;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class AbstractSteerable extends AbstractModel implements Steerable2D, Espacial, Dinamico, Orientable
+public abstract class AbstractSteerable extends AbstractModel implements Espacial, Dinamico, Solido, Orientable,
+                                                                         Steerable2D
 {
     protected Vector2 posicion = new Vector2();             // Espacial:
     protected int ultimoMapTileX;
@@ -22,6 +20,8 @@ public abstract class AbstractSteerable extends AbstractModel implements Steerab
     protected float velocidadAngular;
     protected float velocidadAngularMax = 2;
     protected float aceleracionAngularMax = 2f;
+    protected int ancho;                                    // Solido:
+    protected int alto;
     protected float orientacion = 0;                        // Orientable:
     protected boolean encaramientoIndependiente = false;    // Steerable:
     protected boolean tagged = false;
@@ -57,7 +57,15 @@ public abstract class AbstractSteerable extends AbstractModel implements Steerab
     @Override public void setVelocidadAngularMax(float velocidadAngularMax) { this.velocidadAngularMax = velocidadAngularMax; }
     @Override public void setAceleracionAngularMax(float aceleracionAngularMax){this.aceleracionAngularMax = aceleracionAngularMax; }
 
-    // ORIENTABLE:
+    // SOLIDO:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public int getAncho()                                         { return ancho; }
+    @Override public int getAlto()                                          { return alto; }
+    @Override public void setAncho(int ancho)                               { this.ancho = ancho; }
+    @Override public void setAlto(int alto)                                 { this.alto = alto; }
+
+    // ORIENTABLE: (los angulos mejor que estem siempre normalizados)
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public float getOrientacion()                                 { return orientacion; }
@@ -99,7 +107,7 @@ public abstract class AbstractSteerable extends AbstractModel implements Steerab
     {   this.tagged = tagged; }
 
     @Override public float getBoundingRadius()
-    {   return 24; }
+    {   return (ancho+alto)/4; }
 
     // TIPO DE STEERING:
     //------------------------------------------------------------------------------------------------------------------

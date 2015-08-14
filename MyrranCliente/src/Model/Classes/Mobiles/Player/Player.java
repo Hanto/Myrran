@@ -120,6 +120,8 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable, M
     {
         velocidadMax = 80f;
         this.cuerpo = cuerpo;
+        this.setAncho(cuerpo.getAncho());
+        this.setAlto(cuerpo.getAlto());
         this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
         cuerpo.setPosition(0, 0);
         cuerpo.setCalculosInterpolados(true);

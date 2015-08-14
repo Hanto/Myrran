@@ -64,7 +64,10 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
     //------------------------------------------------------------------------------------------------------------------
 
     public Proyectil( Cuerpo cuerpo )
-    {   this.cuerpo = cuerpo;
+    {
+        this.cuerpo = cuerpo;
+        this.setAncho(cuerpo.getAncho());
+        this.setAlto(cuerpo.getAlto());
         this.cuerpo.setCalculosInterpolados(true);
     }
 

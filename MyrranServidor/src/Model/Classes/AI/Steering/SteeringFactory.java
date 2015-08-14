@@ -86,7 +86,7 @@ public class SteeringFactory
             // zero rotation when it gets there. Like arrive, it uses two radii: deceleration radius for slowing down and
             // align tolerance to make orientations near the target acceptable without letting small errors keep the owner swinging.
             @Override public SteeringBehavior<Vector2> nuevo(Steerable<Vector2> origin, Steerable<Vector2> target)
-            {   return new ReachOrientation<Vector2>(origin, target); }
+            {   return new ReachOrientationFixed<Vector2>(origin, target); }
         },
 
         PURSUE()
@@ -107,7 +107,7 @@ public class SteeringFactory
         {   // behavior makes the owner look at its target. It delegates to the ReachOrientation behavior to perform the
             // rotation but calculates the target orientation first based on target and owner position.
             @Override public SteeringBehavior<Vector2> nuevo(Steerable<Vector2> origin, Steerable<Vector2> target)
-            {   return new Face<Vector2>(origin, target); }
+            {   return new FaceFixed<Vector2>(origin, target); }
         },
 
         MATCH_VELOCITY()

@@ -24,8 +24,12 @@ public class Mob extends MobNotificador implements MobI
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public Mob(int iD)
-    {   this.iD = iD; }
+    public Mob(int iD, int ancho, int alto)
+    {
+        this.iD = iD;
+        this.setAncho(ancho);
+        this.setAlto(alto);
+    }
 
     public void dispose()
     { }

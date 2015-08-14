@@ -4,6 +4,8 @@ import Interfaces.EntidadesPropiedades.*;
 import com.badlogic.gdx.utils.Disposable;
 
 public interface ProyectilI extends
-        IDentificable, Espacial, DinamicoSimple, Disposable, Steerable2D,
+        IDentificable, Espacial, DinamicoSimple, Solido, Orientable, Steerable2D, Disposable,
         Actualizable, ProyectilStats, EspacialInterpolado, Consumible, Corporeo
-{ }
+{
+
+}

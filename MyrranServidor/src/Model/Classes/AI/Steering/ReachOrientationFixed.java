@@ -17,13 +17,12 @@ public class ReachOrientationFixed<T extends Vector<T>> extends ReachOrientation
 
     protected SteeringAcceleration<T> reachOrientation (SteeringAcceleration<T> steering, float targetOrientation) {
         // Get the rotation direction to the target wrapped to the range [-PI, PI]
+
+        //ESTA FUCKING LINEA CORRIGE EL BUG DE TELEPORTACION AL PASAR POR EL EJE 0:
+        //SIEMPRE Y CUANDO LAS ORIENTACIONES ESTEN NORMALIZADAS. RANGO 0-2PI.
+        if (targetOrientation < owner.getOrientation()) targetOrientation = targetOrientation + MathUtils.PI2;
+
         float rotation = (targetOrientation - owner.getOrientation()) % MathUtils.PI2;
-
-        //rotation = Math.min(targetOrientation - owner.getOrientation(), owner.getOrientation() - targetOrientation);
-        //rotation = rotation % MathUtils.PI2;
-
-        System.out.println(rotation);
-
         if (rotation > MathUtils.PI) rotation -= MathUtils.PI2;
 
         // Absolute rotation
