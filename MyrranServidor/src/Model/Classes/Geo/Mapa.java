@@ -5,6 +5,7 @@ import DTO.DTOsMapa;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Model.Classes.GeoGraph.MapaGraph.IndexedMapaGraph;
+import Model.Classes.GeoGraph.NodeGraph.IndexedNodeGraph;
 import Model.Settings;
 
 public class Mapa extends IndexedMapaGraph implements MapaI
@@ -13,10 +14,13 @@ public class Mapa extends IndexedMapaGraph implements MapaI
 
     public Mapa()
     {
+        super(Settings.MAPA_Max_TilesX * Settings.MAPA_Max_TilesY);
+
         for (Celda[] fila: matriz)
         {   for (int i=0; i<fila.length; i++)
             {   fila[i] = new Celda(); }
         }
+        init();
     }
 
     // PATH FINDING INIT:
@@ -24,7 +28,11 @@ public class Mapa extends IndexedMapaGraph implements MapaI
 
     @Override public void init()
     {
-
+        for (int x=0; x < Settings.MAPA_Max_TilesX; x++)
+        {
+            for (int y=0; y < Settings.MAPA_Max_TilesY; y++)
+            {   listaNodos.add(new IndexedNodeGraph(x, y, matriz[x][y], 4)); }
+        }
     }
 
     // MAPAI:

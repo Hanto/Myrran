@@ -7,7 +7,8 @@ import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedGraph;
 import com.badlogic.gdx.utils.Array;
 
-public abstract class AbstractMapaGraph<N extends AbstractNodeGraph<N>> extends AbstractModel implements IndexedGraph<N>
+public abstract class AbstractMapaGraph<N extends AbstractNodeGraph<N>> extends AbstractModel implements
+        IndexedGraph<N>, IndexedMapaGraphI<N>
 {
     protected Array<N> listaNodos;
 
@@ -26,10 +27,10 @@ public abstract class AbstractMapaGraph<N extends AbstractNodeGraph<N>> extends 
 
 
 
-    public N getNode(int x, int y)
+    @Override public N getNode(int x, int y)
     {   return listaNodos.get(x * Settings.MAPA_Max_TilesY + y); }
 
-    public N getNode(int indice)
+    @Override public N getNode(int indice)
     {   return listaNodos.get(indice); }
 
     @Override public Array<Connection<N>> getConnections(N fromNode)

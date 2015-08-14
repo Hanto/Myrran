@@ -12,7 +12,7 @@ public class IndexedNodeGraph extends AbstractNodeGraph<IndexedNodeGraph>
     //public CeldaI celda;
     //protected Array<Connection<IndexedNodeGraph>>connections;
 
-    public IndexedNodeGraph(int x, int y, CeldaI celda, Array<Connection<IndexedNodeGraph>> numeroConexiones)
+    public IndexedNodeGraph(int x, int y, CeldaI celda, int numeroConexiones)
     {   super(x, y, celda, new Array<Connection<IndexedNodeGraph>>(numeroConexiones)); }
 
     @Override public int getIndex()
