@@ -10,7 +10,7 @@ public enum PlayerFactory
     {
         @Override public Player nuevo (World world)
         {
-            Cuerpo cuerpo = BodyFactory.crearCuerpo.RECTANGULAR.nuevo(world, 48, 48);
+            Cuerpo cuerpo = BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 48, 48);
             return new Player(cuerpo);
         }
     };

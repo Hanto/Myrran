@@ -7,6 +7,7 @@ import Interfaces.EntidadesPropiedades.Steerable2D;
 import Model.Settings;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class AbstractSteerable extends AbstractModel implements Steerable2D, Espacial, Dinamico, Orientable
@@ -19,8 +20,8 @@ public abstract class AbstractSteerable extends AbstractModel implements Steerab
     protected float aceleracionMax = 50f;
     protected float velocidadMod = 1.0f;
     protected float velocidadAngular;
-    protected float velocidadAngularMax = 5f;
-    protected float aceleracionAngularMax = 10f;
+    protected float velocidadAngularMax = 2;
+    protected float aceleracionAngularMax = 2f;
     protected float orientacion = 0;                        // Orientable:
     protected boolean encaramientoIndependiente = false;    // Steerable:
     protected boolean tagged = false;
@@ -60,7 +61,7 @@ public abstract class AbstractSteerable extends AbstractModel implements Steerab
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public float getOrientacion()                                 { return orientacion; }
-    @Override public void setOrientacion(float angulo)                      { this.orientacion = angulo; }
+    @Override public void setOrientacion(float radianes)                    { this.orientacion = radianes%MathUtils.PI2; }
 
 
     public AbstractSteerable()
@@ -106,19 +107,25 @@ public abstract class AbstractSteerable extends AbstractModel implements Steerab
     @Override public void setSteeringBehavior(SteeringBehavior<Vector2> steeringBehavior)
     {   this.steeringBehavior = steeringBehavior; }
 
+    @Override public void setEncaramientoIndependiente (boolean b)
+    {   this.encaramientoIndependiente = b; }
+
     // OPERACIONES MATEMATICAS::
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public Vector2 newVector()
     {   return new Vector2(); }
 
-    @Override public float vectorToAngle(Vector2 vector)
-    {   return (float)Math.atan2(-vector.x, vector.y); }
+    @Override public float vectorToAngle(Vector2 vector) //Radianes:
+    {
+        float angulo =(float)Math.atan2(vector.y, vector.x);
+        return (angulo + MathUtils.PI2) % MathUtils.PI2;
+    }
 
     @Override public Vector2 angleToVector(Vector2 outVector, float angle)
     {
-        outVector.x = -(float)Math.sin(angle);
-        outVector.y = (float)Math.cos(angle);
+        outVector.x = (float)Math.cos(angle);
+        outVector.y = (float)Math.sin(angle);
         return outVector;
     }
 

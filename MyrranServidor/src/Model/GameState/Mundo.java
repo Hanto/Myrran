@@ -10,12 +10,15 @@ import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Model.AbstractClases.AbstractModel;
+import Model.Classes.AI.Steering.FaceFixed;
 import Model.Classes.AI.Steering.SteeringFactory;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.Datos.ListaMapaCuadrantes;
 import Model.Settings;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
+import com.badlogic.gdx.ai.steer.behaviors.BlendedSteering;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.beans.PropertyChangeEvent;
@@ -63,9 +66,14 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         MobI mob = MobFactory.NUEVO.nuevo(this);
         añadirMob(mob);
 
-        Arrive ster = (Arrive)SteeringFactory.Steering2.ARRIVE.nuevo(mob, pc);
-        ster.setDecelerationRadius(0.2f);
-        //ster.setDecelerationRadius(20f);
+
+        BlendedSteering ster = (BlendedSteering)SteeringFactory.Steering1.BLEEDED_STEERING.nuevo(mob);
+        Arrive arrive = (Arrive)SteeringFactory.Steering2.ARRIVE.nuevo(mob, pc);
+        FaceFixed<Vector2> face = new FaceFixed(mob, pc);
+        face.setDecelerationRadius(1f);
+        ster.add(arrive, 1f);
+        ster.add(face, 1f);
+        mob.setEncaramientoIndependiente(true);
         mob.setSteeringBehavior(ster);
     }
 

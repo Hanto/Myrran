@@ -108,21 +108,28 @@ public class Mundo extends AbstractModel implements MundoI
     @Override public void añadirMob (MobI mob)
     {
         listaMapaMobs.add(mob);
+
+        DTOsMundo.AñadirMob nuevoMob = new DTOsMundo.AñadirMob(mob);
+        notificarActualizacion("añadirMob", null, nuevoMob);
     }
 
     @Override public void eliminarMob (int iD)
     {
-        listaMapaMobs.remove(iD);
+        MobI mob = listaMapaMobs.remove(iD);
+        mob.dispose();
+
+        DTOsMundo.EliminarMob eliminarMob = new DTOsMundo.EliminarMob(mob);
+        notificarActualizacion("eliminarMob", null, eliminarMob);
     }
 
     @Override public MobI getMob (int iD)
     {   return listaMapaMobs.get(iD); }
 
     @Override public Iterator<MobI> getIteratorMobs()
-    {
-        return null;
-    }
-    @Override public Iterator<MobI> getIteratorMobs(int mapTileX, int mapTileY) { return null; }
+    {   return listaMapaMobs.iterator(); }
+
+    @Override public Iterator<MobI> getIteratorMobs(int mapTileX, int mapTileY)
+    {   return listaMapaMobs.iterator(); }
 
 
     // MAPA:

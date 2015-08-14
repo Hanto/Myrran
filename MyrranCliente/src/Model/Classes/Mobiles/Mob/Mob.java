@@ -1,5 +1,6 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 11/08/2015.
 
+import DTO.DTOsMob;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.GameState.MundoI;
 import Model.Cuerpos.Cuerpo;
@@ -15,21 +16,12 @@ public class Mob extends MobNotificador implements MobI
     @Override public int getID()                                    { return iD; }
     @Override public void setID(int iD)                             { this.iD = iD; }
 
-    // ESPACIAL:
-    //------------------------------------------------------------------------------------------------------------------
-
-    @Override public void setPosition(float x, float y)             { cuerpo.setPosition(x, y); }
-
     // DINAMICO:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public void setDireccion(float x, float y)            { }
     @Override public void setDireccion(float grados)                { }
 
-    // ORIENTABLE:
-    //------------------------------------------------------------------------------------------------------------------
-
-    @Override public void setOrientacion(float angulo)              { cuerpo.getBody().setTransform(cuerpo.getBody().getPosition().x, cuerpo.getBody().getPosition().y, angulo); }
 
 
     // CONSTRUCTOR:
@@ -43,6 +35,25 @@ public class Mob extends MobNotificador implements MobI
 
     @Override public void dispose()
     {   cuerpo.dispose(); }
+
+    @Override public void setPosition(float x, float y)
+    {
+        cuerpo.setPosition(x, y);
+        posicion.set(x, y);
+
+        DTOsMob.PosicionMob posicionMob = new DTOsMob.PosicionMob(this);
+        notificarActualizacion("posicionMob", null, posicionMob);
+    }
+
+    @Override public void setOrientacion(float radianes)
+    {
+        super.setOrientacion(radianes);
+        cuerpo.getBody().setTransform(cuerpo.getBody().getPosition().x, cuerpo.getBody().getPosition().y, radianes);
+
+        DTOsMob.OrientacionMob orientacionMob = new DTOsMob.OrientacionMob(this);
+        notificarActualizacion("orientacionMob", null, orientacionMob);
+    }
+
 
     @Override public void actualizar(float delta, MundoI mundo)
     { }

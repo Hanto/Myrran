@@ -57,6 +57,7 @@ public class Settings
 
         XML_Particulas              = settings.getString("XML_Particulas",             "Particulas.xml");
         XML_PixieSlot               = settings.getString("XML_PixieSlot",              "PixieSlot.xml");
+        XML_PixieMob                = settings.getString("XML_PixieMob",               "PixieMob.xml");
         XML_AnimacionesCasteo       = settings.getString("XML_AnimacionesCasteo",      "AnimacionesCasteo.xml");
         XML_AnimacionesProyectil    = settings.getString("XML_AnimacionesProyectil",   "AnimacionesProyectil.xml");
 
@@ -64,6 +65,7 @@ public class Settings
         ATLAS_GenerarAtlas          = settings.getBoolean("ATLAS_GenerarAtlas",         false);
         ATLAS_PixiePcCuerpos_LOC    = settings.getString("ATLAS_PixiePcCuerpos_LOC",   "PixiePcCuerpos/");
         ATLAS_PixiePcSlots_LOC      = settings.getString("ATLAS_PixiePcSlots_LOC",     "PixiePcSlots/");
+        ATLAS_PixieMObs_LOC         = settings.getString("ATLAS_PixieMobs_LOC",        "PixieMobs/");
         ATLAS_TexturasTerrenos_LOC  = settings.getString("ATLAS_TexturasTerrenos_LOC", "TexturasTerrenos/");
         ATLAS_TexturasIconos_LOC    = settings.getString("ATLAS_TexturasIconos_LOC",   "TexturasIconos/");
         ATLAS_TexturasMisc_LOC      = settings.getString("ATLAS_TexturasMisc_LOC",     "TexturasMisc/");
@@ -71,7 +73,7 @@ public class Settings
         ATLAS_Fuentes_LOC           = settings.getString("ATLAS_Fuentes_LOC",          "Fonts/");
 
         //Pixie:
-        PIXIE_Player_numFilas       = settings.getInt("PIXIE_Player_numFilas", 7);
+        PIXIE_Player_numFilas       = settings.getInt("PIXIE_Player_numFilas", 3);
         PIXIE_Player_numColumnas    = settings.getInt("PIXIE_Player_numColumnas", 6);
 
         //Mapa:
@@ -163,6 +165,7 @@ public class Settings
 
     public static String XML_Particulas;
     public static String XML_PixieSlot;
+    public static String XML_PixieMob;
     public static String XML_AnimacionesCasteo;
     public static String XML_AnimacionesProyectil;
 
@@ -170,6 +173,7 @@ public class Settings
     public static boolean ATLAS_GenerarAtlas;
     public static String ATLAS_PixiePcCuerpos_LOC;
     public static String ATLAS_PixiePcSlots_LOC;
+    public static String ATLAS_PixieMObs_LOC;
     public static String ATLAS_TexturasTerrenos_LOC;
     public static String ATLAS_TexturasIconos_LOC;
     public static String ATLAS_TexturasMisc_LOC;

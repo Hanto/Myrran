@@ -10,7 +10,7 @@ public enum MobFactory
     {
         @Override public Mob nuevo(int iD, World world)
         {
-            Cuerpo cuerpo = BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 48, 48);
+            Cuerpo cuerpo = BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 35, 35);
             return new Mob(iD, cuerpo);
         }
     };

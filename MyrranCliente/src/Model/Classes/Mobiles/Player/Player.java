@@ -285,7 +285,7 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable, M
 
     private void moverse ()
     {
-        if      (output.irAbajo && !output.irDerecha && !output.irIzquierda)    { cuerpo.setDireccionNorVelocidad(0, -1, velocidadMax * velocidadMod); }            //Sur
+        if      (output.irAbajo && !output.irDerecha && !output.irIzquierda)    { cuerpo.setDireccionNorVelocidad(0, -1, velocidadMax * velocidadMod); }                //Sur
         else if (output.irArriba && !output.irDerecha && !output.irIzquierda)   { cuerpo.setDireccionNorVelocidad(0, +1, velocidadMax * velocidadMod); }               //Norte
         else if (output.irDerecha && !output.irArriba && !output.irAbajo)       { cuerpo.setDireccionNorVelocidad(+1, 0, velocidadMax * velocidadMod); }               //Este
         else if (output.irIzquierda && !output.irArriba && !output.irAbajo)     { cuerpo.setDireccionNorVelocidad(-1, 0, velocidadMax * velocidadMod); }               //Oeste

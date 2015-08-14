@@ -26,6 +26,14 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     protected NameplateView nameplateView;
     protected Texto nombre;
 
+    // IDENTIFICABLE:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public int getID()                                            { return iD; }
+    @Override public void setID(int iD)                                     { this.iD = iD; }
+
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
 
     public PCView (PCI pc, PixiePC pixieActor, NameplateView nameplate)
     {
@@ -75,13 +83,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
         this.addActor(nombre);
     }
 
-    //
     //------------------------------------------------------------------------------------------------------------------
-
-    @Override public int getID()
-    {   return iD; }
-
-
 
     public void setPosition(int x, int y)
     {
@@ -119,11 +121,5 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
         if (evt.getNewValue() instanceof DTOsPlayer.EliminarPC)
         {   dispose(); }
-    }
-
-    @Override
-    public void setID(int iD)
-    {
-
     }
 }

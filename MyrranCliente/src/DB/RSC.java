@@ -5,6 +5,7 @@ import DB.Recursos.AtlasRecursos.AtlasRecursosDAOFactory;
 import DB.Recursos.FuentesRecursos.FuentesRecursosDAOFactory;
 import DB.Recursos.MiscRecursos.MiscRecursosDAOFactory;
 import DB.Recursos.ParticulasRecursos.ParticulaRecursosDAOFactory;
+import DB.Recursos.PixieMobRecursos.PixieMobRecursosFactory;
 import DB.Recursos.PixiePCRecursos.PixiePCRecursosDAOFactory;
 import DB.Recursos.SkillBaseRecursos.SkillBaseRecursosDAOFactory;
 import DB.Recursos.SkillRecursos.SkillRecursosDAOFactory;
@@ -18,6 +19,7 @@ public class RSC
     public static final TipoSkillRecursosDAOFactory tipoSkillRecursosDAO = TipoSkillRecursosDAOFactory.XML;
     public static final SkillRecursosDAOFactory skillRecursosDAO = SkillRecursosDAOFactory.XML;
     public static final PixiePCRecursosDAOFactory pixiePCRecursosDAO = PixiePCRecursosDAOFactory.XML;
+    public static final PixieMobRecursosFactory pixieMobRecursosDAO = PixieMobRecursosFactory.XML;
     public static final FuentesRecursosDAOFactory fuenteRecursosDAO = FuentesRecursosDAOFactory.XML;
     public static final MiscRecursosDAOFactory miscRecusosDAO = MiscRecursosDAOFactory.XML;
     public static final AccionRecursosDAOFactory accionRecursosDAO = AccionRecursosDAOFactory.XML;

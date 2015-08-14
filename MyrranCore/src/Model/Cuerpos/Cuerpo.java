@@ -106,6 +106,9 @@ public class Cuerpo implements Disposable
         direccion.y = (float)Math.sin(anguloRadianes);
 
         body.setLinearVelocity(direccion.x * boxVelocidad, direccion.y * boxVelocidad);
+
+        //TODO codigo de prueba:
+        body.setTransform(body.getPosition().x, body.getPosition().y, (float) Math.atan2(direccion.y, direccion.x));
     }
 
     public void setDireccion(float x, float y)
@@ -114,6 +117,9 @@ public class Cuerpo implements Disposable
         direccion.nor();
 
         body.setLinearVelocity(direccion.x * boxVelocidad, direccion.y * boxVelocidad);
+
+        //TODO codigo de prueba:
+        body.setTransform(body.getPosition().x, body.getPosition().y, (float) Math.atan2(direccion.y, direccion.x));
     }
 
     public void setVelocidad(float velocidad)
@@ -130,6 +136,9 @@ public class Cuerpo implements Disposable
         boxVelocidad = velocidad * PIXEL_METROS;
 
         body.setLinearVelocity(direccion.x * velocidad * PIXEL_METROS, direccion.y * velocidad * PIXEL_METROS);
+
+        //TODO codigo de prueba:
+        body.setTransform(body.getPosition().x, body.getPosition().y, (float) Math.atan2(direccion.y, direccion.x));
     }
 
     public void setDireccionNorVelocidad (float x, float y, float velocidad)
@@ -138,6 +147,9 @@ public class Cuerpo implements Disposable
         boxVelocidad = velocidad * PIXEL_METROS;
 
         body.setLinearVelocity(direccion.x * velocidad * PIXEL_METROS, direccion.y * velocidad * PIXEL_METROS);
+
+        //TODO codigo de prueba:
+        body.setTransform(body.getPosition().x, body.getPosition().y, (float)Math.atan2(direccion.y, direccion.x));
     }
 
 

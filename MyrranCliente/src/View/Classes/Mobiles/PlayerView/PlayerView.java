@@ -43,6 +43,12 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
         crearNombre();
         crearLuz();
 
+        actor.setPantalones("PantalonesGolem01");
+        actor.setPeto("PetoGolem01");
+        actor.setGuantes("GuantesGolem01");
+        actor.setBotas("BotasGolem01");
+
+
         player.añadirObservador(this);
     }
 

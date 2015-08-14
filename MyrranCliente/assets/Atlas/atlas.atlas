@@ -1,6 +1,6 @@
 
 atlas.png
-size: 918,800
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -69,7 +69,7 @@ AnimacionesSpells/SpellBalls_04n
   index: -1
 
 atlas2.png
-size: 868,870
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -117,7 +117,7 @@ BAK/Armaduras/Peto1
   index: -1
 
 atlas3.png
-size: 866,578
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -130,7 +130,7 @@ BAK/Armaduras/CapaFrontal1
   index: -1
 
 atlas4.png
-size: 866,578
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -143,7 +143,7 @@ BAK/Armaduras/CapaTrasera1
   index: -1
 
 atlas5.png
-size: 866,578
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -156,7 +156,7 @@ BAK/Armaduras/Casco1
   index: -1
 
 atlas6.png
-size: 921,991
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -239,34 +239,54 @@ BAK/Player Sprites/Sombra
   index: -1
 
 atlas7.png
-size: 966,457
+size: 128,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+PixieMobs/GlowingSpectre
+  rotate: false
+  xy: 2, 262
+  size: 96, 128
+  orig: 96, 128
+  offset: 0, 0
+  index: -1
+PixieMobs/GrimReaper
+  rotate: false
+  xy: 2, 132
+  size: 96, 128
+  orig: 96, 128
+  offset: 0, 0
+  index: -1
+PixieMobs/Momia
+  rotate: false
+  xy: 2, 2
+  size: 96, 128
+  orig: 96, 128
+  offset: 0, 0
+  index: -1
+
+atlas8.png
+size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 PixiePcCuerpos/Golem
-  rotate: false
-  xy: 388, 121
-  size: 288, 336
-  orig: 288, 336
-  offset: 0, 0
-  index: -1
-PixiePcCuerpos/Golem.OLD
-  rotate: false
-  xy: 678, 167
-  size: 288, 144
-  orig: 288, 144
-  offset: 0, 0
-  index: -1
-PixiePcCuerpos/Golem2
   rotate: false
   xy: 2, 55
   size: 288, 144
   orig: 288, 144
   offset: 0, 0
   index: -1
-PixiePcCuerpos/Golem3
+PixiePcCuerpos/Golem.OLD
   rotate: false
   xy: 678, 313
+  size: 288, 144
+  orig: 288, 144
+  offset: 0, 0
+  index: -1
+PixiePcCuerpos/Golem3
+  rotate: false
+  xy: 388, 313
   size: 288, 144
   orig: 288, 144
   offset: 0, 0
@@ -286,8 +306,8 @@ PixiePcCuerpos/Player
   offset: 0, 0
   index: -1
 
-atlas8.png
-size: 1014,436
+atlas9.png
+size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -334,8 +354,8 @@ PixiePcSlots/PetoGolem01
   offset: 0, 0
   index: -1
 
-atlas9.png
-size: 476,34
+atlas10.png
+size: 512,64
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -438,8 +458,8 @@ TexturasIconos/PoisonBolt
   offset: 0, 0
   index: -1
 
-atlas10.png
-size: 246,57
+atlas11.png
+size: 256,64
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -535,8 +555,8 @@ TexturasMisc/Sombra
   offset: 0, 0
   index: -1
 
-atlas11.png
-size: 496,220
+atlas12.png
+size: 512,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

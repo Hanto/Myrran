@@ -47,7 +47,7 @@
   <string key="ATLAS_AnimacionesSpells_LOC" value="AnimacionesSpells/" />
   <string key="ATLAS_Fuentes_LOC"           value="Fonts/" />
     
-  <int key="PIXIE_Player_numFilas"          value="7" />
+  <int key="PIXIE_Player_numFilas"          value="3" />
   <int key="PIXIE_Player_numColumnas"       value="6" />
     
   <int key="MAPTILE_Horizontal_Resolution"  value="1980" />

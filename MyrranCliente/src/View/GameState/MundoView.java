@@ -2,6 +2,7 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 
 import DB.RSC;
 import DTO.DTOsMundo;
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Classes.Geo.Mapa;
@@ -13,6 +14,7 @@ import Model.GameState.Mundo;
 import Model.Settings;
 import View.Classes.Actores.Particula;
 import View.Classes.Geo.MapaView;
+import View.Classes.Mobiles.MobView.MobView;
 import View.Classes.Mobiles.PCView.PCView;
 import View.Classes.Mobiles.PCView.PCViewFactory;
 import View.Classes.Mobiles.PlayerView.PlayerView;
@@ -50,6 +52,7 @@ public class MundoView extends Stage implements PropertyChangeListener
     protected MapaView mapaView;
     protected ListaMapa<PCView> listaPCViews = new ListaMapa<>();
     protected ListaMapa<ProyectilView> listaProyectilViews = new ListaMapa<>();
+    protected ListaMapa<MobView> listaMobsViews = new ListaMapa<>();
 
     //LibGDX Tools:
     protected SpriteBatch batch = new SpriteBatch();
@@ -146,6 +149,22 @@ public class MundoView extends Stage implements PropertyChangeListener
         this.getRoot().removeActor(proyectilView);
     }
 
+    // MOB
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void añadirMobView (MobI mob)
+    {
+        MobView mobView = new MobView(mob);
+        listaMobsViews.add(mobView);
+        this.addActor(mobView);
+    }
+
+    public void eliminarMobView (int iD)
+    {
+        MobView mobView = listaMobsViews.remove(iD);
+        this.getRoot().removeActor(mobView);
+    }
+
     // RENDER:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -213,12 +232,19 @@ public class MundoView extends Stage implements PropertyChangeListener
         else if (evt.getNewValue() instanceof DTOsMundo.EliminarPC)
         {   eliminarPCView(((DTOsMundo.EliminarPC) evt.getNewValue()).pc.getID());}
 
-        //PROYECTIL
+        // PROYECTIL
         else if (evt.getNewValue() instanceof DTOsMundo.AñadirProyectil)
         {   añadirProyectilView(((DTOsMundo.AñadirProyectil) evt.getNewValue()).proyectil);}
 
         else if (evt.getNewValue() instanceof DTOsMundo.EliminarProyectil)
         {   eliminarProyectilView(((DTOsMundo.EliminarProyectil) evt.getNewValue()).proyectil.getID());}
+
+        // MOB:
+        else if (evt.getNewValue() instanceof DTOsMundo.AñadirMob)
+        {   añadirMobView(((DTOsMundo.AñadirMob) evt.getNewValue()).mob); }
+
+        else if (evt.getNewValue() instanceof DTOsMundo.EliminarMob)
+        {   eliminarMobView(((DTOsMundo.EliminarMob) evt.getNewValue()).mob.getID());}
     }
 
     // CODIGO DEBUG:

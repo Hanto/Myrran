@@ -11,18 +11,22 @@
   </Cabeza>
   <Bota>
     <Pixie textura="Desnudo" raza="Golem" />
+    <Pixie textura="BotasGolem01" raza="Golem" />
   </Bota>
   <Yelmo>
     <Pixie textura="Desnudo" raza="Golem" />
   </Yelmo>
   <Peto>
     <Pixie textura="Desnudo" raza="Golem" />
+    <Pixie textura="PetoGolem01" raza="Golem" />
   </Peto>
   <Pantalon>
     <Pixie textura="Desnudo" raza="Golem" />
+    <Pixie textura="PantalonesGolem01" raza="Golem" />
   </Pantalon>
   <Guante>
     <Pixie textura="Desnudo" raza="Golem" />
+    <Pixie textura="GuantesGolem01" raza="Golem" />
   </Guante>
   <Hombrera>
     <Pixie textura="Desnudo" raza="Golem" />

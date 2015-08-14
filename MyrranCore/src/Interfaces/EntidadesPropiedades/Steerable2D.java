@@ -7,4 +7,5 @@ import com.badlogic.gdx.math.Vector2;
 public interface Steerable2D extends Steerable<Vector2>
 {
     public void setSteeringBehavior(SteeringBehavior<Vector2> steeringBehavior);
+    public void setEncaramientoIndependiente(boolean b);
 }

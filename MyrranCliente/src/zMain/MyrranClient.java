@@ -11,6 +11,7 @@ import DB.Recursos.AtlasRecursos.AtlasRecursosLocalDB;
 import DB.Recursos.FuentesRecursos.FuentesRecursosXMLDB;
 import DB.Recursos.MiscRecursos.MiscRecursosXMLDB;
 import DB.Recursos.ParticulasRecursos.ParticulaRecursosXMLDB;
+import DB.Recursos.PixieMobRecursos.PixieMobRecursosXMLDB;
 import DB.Recursos.PixiePCRecursos.PixiePCRecursosXMLDB;
 import DB.Recursos.SkillBaseRecursos.SkillBaseRecursosXMLDB;
 import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
@@ -66,6 +67,7 @@ public class MyrranClient extends Game
         TerrenoRecursosXMLDB.get();
         AccionRecursosXMLDB.get();
         PixiePCRecursosXMLDB.get();
+        PixieMobRecursosXMLDB.get();
         FuentesRecursosXMLDB.get();
         SkillBaseRecursosXMLDB.get();
         TipoSkillRecursosXMLDB.get();
