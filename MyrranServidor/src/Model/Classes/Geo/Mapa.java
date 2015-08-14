@@ -4,10 +4,10 @@ import DAO.Terreno.TerrenoDAO;
 import DTO.DTOsMapa;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
-import Model.AbstractClases.AbstractModel;
+import Model.Classes.GeoGraph.MapaGraph.IndexedMapaGraph;
 import Model.Settings;
 
-public class Mapa extends AbstractModel implements MapaI
+public class Mapa extends IndexedMapaGraph implements MapaI
 {
     private Celda[][] matriz = new Celda[Settings.MAPA_Max_TilesX][Settings.MAPA_Max_TilesY];
 
@@ -18,6 +18,17 @@ public class Mapa extends AbstractModel implements MapaI
             {   fila[i] = new Celda(); }
         }
     }
+
+    // PATH FINDING INIT:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void init()
+    {
+
+    }
+
+    // MAPAI:
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override public TerrenoI getTerreno (int x, int y, int numCapa)
     {
