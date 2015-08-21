@@ -54,7 +54,8 @@ public class Updater implements MainLoopI, Runnable
 
         currentTime = TimeUtils.nanoTime() / 1000000000.0;
 
-        new Thread(this).start();
+        //MONOHILO:
+        //new Thread(this).start();
     }
 
     public void run()

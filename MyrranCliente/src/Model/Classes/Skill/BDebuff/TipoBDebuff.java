@@ -2,7 +2,7 @@ package Model.Classes.Skill.BDebuff;// Created by Hanto on 04/06/2014.
 
 import Model.Skills.SkillStat;
 import Interfaces.BDebuff.AuraI;
-import Model.AbstractClases.AbstractModel;
+import Model.AbstractModel;
 import Interfaces.BDebuff.TipoBDebuffI;
 
 import java.util.Arrays;

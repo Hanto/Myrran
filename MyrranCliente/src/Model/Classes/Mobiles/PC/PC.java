@@ -4,7 +4,7 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.Cuerpos.Cuerpo;
+import Model.Mobiles.Cuerpos.Cuerpo;
 
 import java.util.Iterator;
 

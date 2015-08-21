@@ -3,8 +3,8 @@ package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 06/08/2015.
 import DB.DAO;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Spell.SpellI;
-import Model.Cuerpos.BodyFactory;
-import Model.Cuerpos.Cuerpo;
+import Model.Mobiles.Cuerpos.BodyFactory;
+import Model.Mobiles.Cuerpos.Cuerpo;
 import com.badlogic.gdx.physics.box2d.World;
 
 public enum ProyectilFactory

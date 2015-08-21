@@ -11,8 +11,6 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
-
 public class Cliente extends Client
 {
     protected Controlador controlador;
@@ -46,8 +44,8 @@ public class Cliente extends Client
                 {   Gdx.app.postRunnable(runnable); }
             });
 
-        //host = "localhost";
-        host = (String) JOptionPane.showInputDialog(null, "Host:", "Connect to server", JOptionPane.QUESTION_MESSAGE, null, null, "localhost");
+        host = "localhost";
+        //host = (String) JOptionPane.showInputDialog(null, "Host:", "Connect to server", JOptionPane.QUESTION_MESSAGE, null, null, "localhost");
 
         while (true)
         {

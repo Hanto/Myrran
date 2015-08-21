@@ -4,7 +4,7 @@ package Model.Classes.Skill.Spell;
 import Model.Skills.SkillStat;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.GameState.MundoI;
-import Model.AbstractClases.AbstractModel;
+import Model.AbstractModel;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.TipoSpellI;
 

@@ -118,7 +118,8 @@ public class Servidor extends Server implements ServidorI
         for (int i = 0, n = connections.length; i < n; i++) {
             Connection connection = connections[i];
             if (connection.getID() == connectionID) {
-                logger.trace("ENVIAR: "+connectionID+" {} {} bytes"+nombreDTOs, obj.getClass().getSimpleName(), connection.sendTCP(obj));
+                //logger.trace("ENVIAR: "+connectionID+" {} {} bytes"+nombreDTOs, obj.getClass().getSimpleName(), connection.sendTCP(obj));
+                connection.sendTCP(obj);
                 break;
             }
         }

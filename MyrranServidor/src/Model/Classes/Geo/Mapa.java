@@ -4,8 +4,8 @@ import DAO.Terreno.TerrenoDAO;
 import DTO.DTOsMapa;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
-import Model.Classes.GeoGraph.MapaGraph.IndexedMapaGraph;
-import Model.Classes.GeoGraph.NodeGraph.IndexedNodeGraph;
+import Model.Classes.Geo.GeoGraph.MapaGraph.IndexedMapaGraph;
+import Model.Classes.Geo.GeoGraph.NodeGraph.IndexedNodeGraph;
 import Model.Settings;
 
 public class Mapa extends IndexedMapaGraph implements MapaI

@@ -59,4 +59,7 @@ public class Mob extends MobNotificador implements MobI
             {   notificarSetOrientacion(); }
         }
     }
+
+    @Override public float getX()                                           { return posicion.x - ancho/2; }
+    @Override public float getY()                                           { return posicion.y - alto/2; }
 }

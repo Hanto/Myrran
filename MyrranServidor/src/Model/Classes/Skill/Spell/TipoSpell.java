@@ -2,7 +2,7 @@ package Model.Classes.Skill.Spell;
 // @author Ivan Delgado Huerta
 
 import Model.Skills.SkillStat;
-import Model.AbstractClases.AbstractModel;
+import Model.AbstractModel;
 import Interfaces.Spell.TipoSpellI;
 
 import java.util.Arrays;

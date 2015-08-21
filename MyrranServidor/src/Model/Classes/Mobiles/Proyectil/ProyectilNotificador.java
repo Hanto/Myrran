@@ -2,9 +2,9 @@ package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 13/08/2015.
 
 import DTO.DTOsProyectil;
 import Interfaces.EntidadesTipos.ProyectilI;
-import Model.AbstractClases.AbstractSteerable;
+import Model.AI.Steering.AbstractSteerableAgent;
 
-public abstract class ProyectilNotificador extends AbstractSteerable implements ProyectilI
+public abstract class ProyectilNotificador extends AbstractSteerableAgent implements ProyectilI
 {
     private DTOsProyectil.PosicionProyectil posicionDTO;
 

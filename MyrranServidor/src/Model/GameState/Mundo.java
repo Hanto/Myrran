@@ -9,16 +9,12 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
-import Model.AbstractClases.AbstractModel;
-import Model.Classes.AI.Steering.FaceFixed;
-import Model.Classes.AI.Steering.SteeringFactory;
+import Model.AbstractModel;
+import Model.Classes.AI.Steering.SteeringCompuestoFactory;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Mob.MobFactory;
-import Model.Datos.ListaMapaCuadrantes;
+import Model.EstructurasDatos.ListaMapaCuadrantes;
 import Model.Settings;
-import com.badlogic.gdx.ai.steer.behaviors.Arrive;
-import com.badlogic.gdx.ai.steer.behaviors.BlendedSteering;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.beans.PropertyChangeEvent;
@@ -63,18 +59,11 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         DTOsMundo.AñadirPC nuevoPlayer = new DTOsMundo.AñadirPC(pc);
         notificarActualizacion("añadirPC", null, nuevoPlayer);
 
+
+        //TODO COGIDO PROVISIONAL PARA PROBAR:
         MobI mob = MobFactory.NUEVO.nuevo(this);
         añadirMob(mob);
-
-
-        BlendedSteering ster = (BlendedSteering)SteeringFactory.Steering1.BLEEDED_STEERING.nuevo(mob);
-        Arrive arrive = (Arrive)SteeringFactory.Steering2.ARRIVE.nuevo(mob, pc);
-        FaceFixed<Vector2> face = new FaceFixed(mob, pc);
-        face.setDecelerationRadius(1f);
-        ster.add(arrive, 1f);
-        ster.add(face, 1f);
-        mob.setEncaramientoIndependiente(true);
-        mob.setSteeringBehavior(ster);
+        mob.setSteeringBehavior(SteeringCompuestoFactory.WALL_PURSUE_LOOK.nuevo(mob, pc, this));
     }
 
     @Override public void eliminarPC (int connectionID)

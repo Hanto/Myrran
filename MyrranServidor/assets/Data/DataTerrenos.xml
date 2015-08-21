@@ -27,7 +27,7 @@
   <Terreno ID="8" nombre="Cesped4" isSolido="false">
     <Recursos textura="Cesped4" />
   </Terreno>
-  <Terreno ID="9" nombre="Cesped5" isSolido="false">
+  <Terreno ID="9" nombre="Cesped5" isSolido="true">
     <Recursos textura="Cesped5" />
   </Terreno>
   <Terreno ID="10" nombre="Tierra1" isSolido="false">

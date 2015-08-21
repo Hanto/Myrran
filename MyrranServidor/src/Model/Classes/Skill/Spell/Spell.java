@@ -8,7 +8,7 @@ import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.GameState.MundoI;
-import Model.AbstractClases.AbstractModel;
+import Model.AbstractModel;
 import Interfaces.Skill.SkillI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.TipoSpellI;

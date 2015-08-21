@@ -10,7 +10,7 @@ import Interfaces.BDebuff.TipoBDebuffI;
 import Interfaces.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Caster;
-import Model.AbstractClases.AbstractModel;
+import Model.AbstractModel;
 
 import java.util.Arrays;
 import java.util.Iterator;

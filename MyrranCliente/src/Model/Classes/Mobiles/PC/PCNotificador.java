@@ -2,9 +2,9 @@ package Model.Classes.Mobiles.PC;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PCI;
-import Model.AbstractClases.AbstractSteerable;
+import Model.AI.Steering.AbstractSteerableAgent;
 
-public abstract class PCNotificador extends AbstractSteerable implements PCI
+public abstract class PCNotificador extends AbstractSteerableAgent implements PCI
 {
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
     private DTOsPlayer.Animacion animacionDTO = new DTOsPlayer.Animacion();

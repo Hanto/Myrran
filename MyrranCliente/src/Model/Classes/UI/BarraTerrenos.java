@@ -5,7 +5,7 @@ import DB.DAO;
 import DTO.DTOsBarraTerrenos;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.Geo.TerrenoI;
-import Model.AbstractClases.AbstractModel;
+import Model.AbstractModel;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;

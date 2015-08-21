@@ -56,8 +56,8 @@ public class MapaView implements PropertyChangeListener, Disposable
         {   for (int i=0; i<fila.length; i++)
                 fila[i] = false;
         }
-        mapTileCentroX = espacial.getMapTileX();
-        mapTileCentroY = espacial.getMapTileY();
+        mapTileCentroX = espacial.getCuadranteX();
+        mapTileCentroY = espacial.getCuadranteY();
     }
 
     private boolean getMapaEnviado(int offSetX, int offSetY)
@@ -71,7 +71,7 @@ public class MapaView implements PropertyChangeListener, Disposable
 
     public void comprobarVistaMapa ()
     {   //Si las adyacencias tienen mas de uno de distancia, hay que resetearlo tod o para volverlo a enviar:
-        if (Math.abs(espacial.getMapTileX()-mapTileCentroX) >1 || Math.abs(espacial.getMapTileY()-mapTileCentroY) > 1)  { resetearEnviados(); return; }
+        if (Math.abs(espacial.getCuadranteX()-mapTileCentroX) >1 || Math.abs(espacial.getCuadranteY()-mapTileCentroY) > 1)  { resetearEnviados(); return; }
 
         int distX = (int) espacial.getX() - mapTileCentroX * Settings.MAPTILE_NumTilesX * Settings.TILESIZE;
         int distY = (int) espacial.getY() - mapTileCentroY * Settings.MAPTILE_NumTilesY * Settings.TILESIZE;
@@ -122,10 +122,10 @@ public class MapaView implements PropertyChangeListener, Disposable
             actualizarMapa(-1, -1);
         }
 
-        if      (espacial.getMapTileX() > mapTileCentroX)   { incrementarMapTile(1, 0); }
-        else if (espacial.getMapTileX() < mapTileCentroX)   { incrementarMapTile(-1, 0); }
-        else if (espacial.getMapTileY() > mapTileCentroY)   { incrementarMapTile(0, 1);  }
-        else if (espacial.getMapTileY() < mapTileCentroY)   { incrementarMapTile(0, -1); }
+        if      (espacial.getCuadranteX() > mapTileCentroX)   { incrementarMapTile(1, 0); }
+        else if (espacial.getCuadranteX() < mapTileCentroX)   { incrementarMapTile(-1, 0); }
+        else if (espacial.getCuadranteY() > mapTileCentroY)   { incrementarMapTile(0, 1);  }
+        else if (espacial.getCuadranteY() < mapTileCentroY)   { incrementarMapTile(0, -1); }
     }
 
     private void actualizarMapa(int x, int y)

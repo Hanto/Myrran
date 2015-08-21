@@ -3,7 +3,7 @@ package Model.Classes.Mobiles.Mob;// Created by Hanto on 11/08/2015.
 import DTO.DTOsMob;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.GameState.MundoI;
-import Model.Cuerpos.Cuerpo;
+import Model.Mobiles.Cuerpos.Cuerpo;
 
 public class Mob extends MobNotificador implements MobI
 {

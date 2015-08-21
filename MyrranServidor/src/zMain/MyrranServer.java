@@ -22,6 +22,7 @@ public class MyrranServer
 
         //Controlador controlador = new Controlador(new Mundo());
         Updater updater = new Updater();
-        while (true) {}
+        updater.run();
+        //while (true) {}
     }
 }

@@ -1,7 +1,7 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 11/08/2015.
 
-import Model.Cuerpos.BodyFactory;
-import Model.Cuerpos.Cuerpo;
+import Model.Mobiles.Cuerpos.BodyFactory;
+import Model.Mobiles.Cuerpos.Cuerpo;
 import com.badlogic.gdx.physics.box2d.World;
 
 public enum PCFactory

@@ -9,10 +9,10 @@ public interface Espacial extends ModelI
     public Vector2 getPosition();
     public float getX();
     public float getY();
-    public int getMapTileX();
-    public int getMapTileY();
-    public int getUltimoMapTileX();
-    public int getUltimoMapTileY();
+    public int getCuadranteX();
+    public int getCuadranteY();
+    public int getUltimoCuadranteX();
+    public int getUltimoCuadranteY();
 
     //SET:
     public void setPosition(float x, float y);

@@ -9,7 +9,7 @@ import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.Cuerpos.Cuerpo;
+import Model.Mobiles.Cuerpos.Cuerpo;
 import Model.Skills.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

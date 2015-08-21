@@ -7,7 +7,7 @@ public enum MobFactory
     NUEVO
     {
         @Override public Mob nuevo(Mundo mundo)
-        {   return new Mob(mundo.getMobID(), 35, 35); }
+        {   return new Mob(mundo.getMobID(), 32, 32); }
     };
 
     public abstract Mob nuevo(Mundo mundo);

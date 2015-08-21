@@ -9,7 +9,7 @@ import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
-import Model.AbstractClases.AbstractModel;
+import Model.AbstractModel;
 import Interfaces.Network.ServidorI;
 import Model.Settings;
 import View.Gamestate.MundoView;
@@ -41,10 +41,10 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     @Override public Vector2 getPosition()              { return targetLock.getEspacial().getPosition(); }
     @Override public float getX()                       { return targetLock.getEspacial().getX(); }
     @Override public float getY()                       { return targetLock.getEspacial().getY(); }
-    @Override public int getMapTileX()                  { return (int)(getX() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
-    @Override public int getMapTileY()                  { return (int)(getY() / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
-    @Override public int getUltimoMapTileX()            { return targetLock.getEspacial().getUltimoMapTileX(); }
-    @Override public int getUltimoMapTileY()            { return targetLock.getEspacial().getUltimoMapTileY(); }
+    @Override public int getCuadranteX()                { return (int)(getX() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
+    @Override public int getCuadranteY()                { return (int)(getY() / (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
+    @Override public int getUltimoCuadranteX()          { return targetLock.getEspacial().getUltimoCuadranteX(); }
+    @Override public int getUltimoCuadranteY()          { return targetLock.getEspacial().getUltimoCuadranteY(); }
     @Override public void setUltimoMapTile(int x, int y){  }
     @Override public void setPosition(float x, float y) {  }
 
@@ -148,7 +148,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         comprobarVisibilidadProyectilesObservados();
 
         PCI pc;
-        Iterator<PCI> iteratorPC = mundo.getIteratorPCs(getMapTileX(), getMapTileY());
+        Iterator<PCI> iteratorPC = mundo.getIteratorPCs(getCuadranteX(), getCuadranteY());
         while (iteratorPC.hasNext())
         {
             pc = iteratorPC.next();
@@ -156,7 +156,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         }
 
         MobI mob;
-        Iterator<MobI>iteratorMob = mundo.getIteratorMobs(getMapTileX(), getMapTileY());
+        Iterator<MobI>iteratorMob = mundo.getIteratorMobs(getCuadranteX(), getCuadranteY());
         while (iteratorMob.hasNext())
         {
             mob = iteratorMob.next();
@@ -164,7 +164,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         }
 
         ProyectilI pro;
-        Iterator<ProyectilI> iteratorPro = mundo.getIteratorProyectiles(getMapTileX(), getMapTileY());
+        Iterator<ProyectilI> iteratorPro = mundo.getIteratorProyectiles(getCuadranteX(), getCuadranteY());
         while (iteratorPro.hasNext())
         {
             pro = iteratorPro.next();

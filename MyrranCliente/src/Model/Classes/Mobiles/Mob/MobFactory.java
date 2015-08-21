@@ -1,7 +1,7 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 11/08/2015.
 
-import Model.Cuerpos.BodyFactory;
-import Model.Cuerpos.Cuerpo;
+import Model.Mobiles.Cuerpos.BodyFactory;
+import Model.Mobiles.Cuerpos.Cuerpo;
 import com.badlogic.gdx.physics.box2d.World;
 
 public enum MobFactory
@@ -10,7 +10,7 @@ public enum MobFactory
     {
         @Override public Mob nuevo(int iD, World world)
         {
-            Cuerpo cuerpo = BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 35, 35);
+            Cuerpo cuerpo = BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 32, 32);
             return new Mob(iD, cuerpo);
         }
     };

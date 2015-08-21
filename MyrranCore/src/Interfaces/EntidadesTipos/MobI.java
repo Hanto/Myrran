@@ -4,7 +4,7 @@ import Interfaces.EntidadesPropiedades.*;
 import com.badlogic.gdx.utils.Disposable;
 
 public interface MobI extends
-        IDentificable, Espacial, DinamicoSimple, Solido, Orientable, Steerable2D, Disposable,
+        IDentificable, Espacial, DinamicoSimple, Solido, Orientable, SteerableAgent, Disposable,
         Actualizable
 {
 

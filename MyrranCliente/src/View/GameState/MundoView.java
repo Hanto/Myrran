@@ -9,7 +9,7 @@ import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Player.Player;
 import Model.Classes.Tweens.CamaraTween;
 import Model.Classes.Tweens.TweenEng;
-import Model.Datos.ListaMapa;
+import Model.EstructurasDatos.ListaMapa;
 import Model.GameState.Mundo;
 import Model.Settings;
 import View.Classes.Actores.Particula;
