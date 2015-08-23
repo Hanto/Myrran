@@ -73,7 +73,7 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
 
 
     public AbstractSteerableAgent()
-    {   steeringOutput = new SteeringAcceleration<Vector2>(new Vector2()); }
+    {   steeringOutput = new SteeringAcceleration(new Vector2()); }
 
     // STEERABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -84,6 +84,9 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
     @Override public float getAngularVelocity()         { return getVelocidadAngular(); }
     @Override public float getMaxAngularSpeed()         { return getVelocidadAngularMax(); }
     @Override public float getMaxAngularAcceleration()  { return getAceleracionAngularMax(); }
+    @Override public float getOrientation()             { return getOrientacion(); }
+    @Override public boolean isTagged()                 { return tagged; }
+    @Override public float getBoundingRadius()          { return (ancho+alto)/4; }
 
     @Override public void setMaxLinearSpeed(float maxLinearSpeed)
     {   setVelocidadMax(maxLinearSpeed); }
@@ -97,17 +100,8 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
     @Override public void setMaxAngularAcceleration(float maxAngularAcceleration)
     {   setAceleracionAngularMax(maxAngularAcceleration); }
 
-    @Override public float getOrientation()
-    {   return getOrientacion(); }
-
-    @Override public boolean isTagged()
-    {   return tagged; }
-
     @Override public void setTagged(boolean tagged)
     {   this.tagged = tagged; }
-
-    @Override public float getBoundingRadius()
-    {   return (ancho+alto)/4; }
 
     // TIPO DE STEERING:
     //------------------------------------------------------------------------------------------------------------------
@@ -118,7 +112,7 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
     @Override public void setEncaramientoIndependiente (boolean b)
     {   this.encaramientoIndependiente = b; }
 
-    // OPERACIONES MATEMATICAS::
+    // OPERACIONES MATEMATICAS(Steerable):
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public Vector2 newVector()

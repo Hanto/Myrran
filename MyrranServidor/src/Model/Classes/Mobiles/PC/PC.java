@@ -9,6 +9,8 @@ import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
+import Model.AI.Steering.Huella;
+import Model.AI.Steering.Huellas;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import Model.Skills.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
@@ -39,6 +41,8 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
     protected int targetY = 0;
     protected boolean castear = false;
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());            // Logger:
+
+    public Huellas huellas;
 
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -116,10 +120,14 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
         this.cuerpo = cuerpo;
         this.setAncho(cuerpo.getAncho());
         this.setAlto(cuerpo.getAlto());
+
+        this.huellas = new Huellas(this);
     }
 
     @Override public void dispose()
     {
+        huellas.dispose();
+
         //Dejamos de observar a cada uno de los Spells Personalizados:
         Iterator<SpellPersonalizadoI> iSpell = getIteratorSpellPersonalizado();
         while (iSpell.hasNext()) { iSpell.next().eliminarObservador(this); }
@@ -248,6 +256,7 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
 
     @Override public void actualizar(float delta, MundoI mundo)
     {
+        huellas.actualizar(delta);
         actualizarCastingTime(delta);
         actualizarAuras(delta);
         if (castear) castear(mundo);
@@ -265,4 +274,7 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
                     ((DTOsSkillPersonalizado.SetNumTalentos) evt.getNewValue()).valor);
         }
     }
+
+    @Override public ArrayDeque<Huella> getListaHuellas()
+    {   return huellas.listaHuellas; }
 }

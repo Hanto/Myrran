@@ -10,6 +10,7 @@ import Interfaces.Input.PlayerIOI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
+import Model.AI.Steering.Huella;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import Model.AI.FSM.IO.PlayerIO;
 import Model.AI.FSM.MaquinaEstados;
@@ -19,6 +20,7 @@ import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.utils.Array;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -328,5 +330,11 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable, M
         output.setScreenY(screenY);
         if (castear) { output.setStartCastear(true); output.setStopCastear(false); }
         else { output.setStopCastear(true); output.setStartCastear(false); }
+    }
+
+    @Override
+    public ArrayDeque<Huella> getListaHuellas()
+    {
+        return null;
     }
 }

@@ -1,27 +1,19 @@
-package Model.Classes.AI.Steering.Fixed;
+package Model.Classes.AI.Steering.FixedBehaviors;// Created by Hanto on 14/08/2015.
 
 import com.badlogic.gdx.ai.steer.Limiter;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
-import com.badlogic.gdx.ai.steer.behaviors.LookWhereYouAreGoing;
+import com.badlogic.gdx.ai.steer.behaviors.ReachOrientation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector;
 
-public class LookWhereFixed<T extends Vector<T>> extends LookWhereYouAreGoing<T>
+public class ReachOrientationFixed<T extends Vector<T>> extends ReachOrientation<T>
 {
-    public LookWhereFixed(Steerable<T> owner)
+    public ReachOrientationFixed(Steerable<T> owner)
     {   super(owner); }
 
-    @Override protected SteeringAcceleration<T> calculateRealSteering (SteeringAcceleration<T> steering) {
-        // Check for a zero direction, and return no steering if so
-        if (owner.getLinearVelocity().isZero(MathUtils.FLOAT_ROUNDING_ERROR)) return steering.setZero();
-
-        // Calculate the orientation based on the velocity of the owner
-        float orientation = owner.vectorToAngle(owner.getLinearVelocity());
-
-        // Delegate to ReachOrientation
-        return reachOrientation(steering, orientation);
-    }
+    public ReachOrientationFixed(Steerable<T> owner, Steerable<T> target)
+    {   super(owner, target); }
 
     protected SteeringAcceleration<T> reachOrientation (SteeringAcceleration<T> steering, float targetOrientation) {
         // Get the rotation direction to the target wrapped to the range [-PI, PI]
@@ -67,5 +59,4 @@ public class LookWhereFixed<T extends Vector<T>> extends LookWhereYouAreGoing<T>
         // Output the steering
         return steering;
     }
-
 }

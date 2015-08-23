@@ -1,11 +1,13 @@
 package Model.Classes.AI.Steering;
 
 import Interfaces.EntidadesPropiedades.SteerableAgent;
+import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
-import Model.Classes.AI.Steering.Fixed.LookWhereFixed;
+import Model.Classes.AI.Steering.FixedBehaviors.LookWhereFixed;
+import Model.Classes.AI.Steering.SimpleBehaviors.RayCollisionMuros;
+import Model.Classes.AI.Steering.SimpleBehaviors.SeekPC;
 import com.badlogic.gdx.ai.steer.behaviors.BlendedSteering;
 import com.badlogic.gdx.ai.steer.behaviors.PrioritySteering;
-import com.badlogic.gdx.ai.steer.behaviors.Pursue;
 import com.badlogic.gdx.ai.steer.behaviors.RaycastObstacleAvoidance;
 import com.badlogic.gdx.ai.steer.utils.rays.CentralRayWithWhiskersConfiguration;
 import com.badlogic.gdx.math.MathUtils;
@@ -15,10 +17,13 @@ public enum SteeringCompuestoFactory
 {
     WALL_PURSUE_LOOK
     {
-        @Override public BlendedSteering nuevo(SteerableAgent owner, SteerableAgent target, MundoI mundo)
+        @Override public BlendedSteering nuevo(SteerableAgent owner, PCI target, MundoI mundo)
         {
             //Pursue:
-            Pursue<Vector2> pursue = new Pursue<>(owner, target);
+            //Pursue<Vector2> pursue = new Pursue<>(owner, target);
+
+            RayCollisionMuros rayCastTarget = new RayCollisionMuros(mundo.getMapa());
+            SeekPC pursue = new SeekPC(owner, target, rayCastTarget);
 
             //LookWhereImGoing:
             LookWhereFixed<Vector2> lookWhereYouAreGoing = new LookWhereFixed<>(owner);
@@ -26,8 +31,8 @@ public enum SteeringCompuestoFactory
             lookWhereYouAreGoing.setAlignTolerance(0.1f);
 
             //RayCastWallAvoidance:
-            CentralRayWithWhiskersConfiguration<Vector2> rayConfig = new CentralRayWithWhiskersConfiguration<>(owner, 48f, 24f, 20 * MathUtils.degreesToRadians);
-            RayCastMuros rayCastMuros = new RayCastMuros(mundo);
+            CentralRayWithWhiskersConfiguration<Vector2> rayConfig = new CentralRayWithWhiskersConfiguration<>(owner, 24f, 24f, 30 * MathUtils.degreesToRadians);
+            RayCollisionMuros rayCastMuros = new RayCollisionMuros(mundo.getMapa());
             RaycastObstacleAvoidance wallAvoidance = new RaycastObstacleAvoidance(owner, rayConfig, rayCastMuros, 36);
 
             PrioritySteering<Vector2> pursueAndEvadeWalls = new PrioritySteering<>(owner);
@@ -46,5 +51,5 @@ public enum SteeringCompuestoFactory
         }
     };
 
-    public abstract BlendedSteering nuevo(SteerableAgent owner, SteerableAgent target, MundoI mundo);
+    public abstract BlendedSteering nuevo(SteerableAgent owner, PCI target, MundoI mundo);
 }

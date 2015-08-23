@@ -1,29 +1,23 @@
-package Model.Classes.AI.Steering.Fixed;// Created by Hanto on 14/08/2015.
+package Model.Classes.AI.Steering.FixedBehaviors;
 
 import com.badlogic.gdx.ai.steer.Limiter;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
-import com.badlogic.gdx.ai.steer.behaviors.Face;
+import com.badlogic.gdx.ai.steer.behaviors.LookWhereYouAreGoing;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector;
 
-public class FaceFixed<T extends Vector<T>> extends Face<T>
+public class LookWhereFixed<T extends Vector<T>> extends LookWhereYouAreGoing<T>
 {
-    public FaceFixed(Steerable<T> owner)
+    public LookWhereFixed(Steerable<T> owner)
     {   super(owner); }
 
-    public FaceFixed (Steerable<T> owner, Steerable<T> target)
-    {   super(owner, target); }
-
-    protected SteeringAcceleration<T> face (SteeringAcceleration<T> steering, T targetPosition) {
-        // Get the direction to target
-        T toTarget = steering.linear.set(targetPosition).sub(owner.getPosition());
-
+    @Override protected SteeringAcceleration<T> calculateRealSteering (SteeringAcceleration<T> steering) {
         // Check for a zero direction, and return no steering if so
-        if (toTarget.isZero(MathUtils.FLOAT_ROUNDING_ERROR)) return steering.setZero();
+        if (owner.getLinearVelocity().isZero(MathUtils.FLOAT_ROUNDING_ERROR)) return steering.setZero();
 
-        // Calculate the orientation to face the target
-        float orientation = owner.vectorToAngle(toTarget);
+        // Calculate the orientation based on the velocity of the owner
+        float orientation = owner.vectorToAngle(owner.getLinearVelocity());
 
         // Delegate to ReachOrientation
         return reachOrientation(steering, orientation);
@@ -73,4 +67,5 @@ public class FaceFixed<T extends Vector<T>> extends Face<T>
         // Output the steering
         return steering;
     }
+
 }

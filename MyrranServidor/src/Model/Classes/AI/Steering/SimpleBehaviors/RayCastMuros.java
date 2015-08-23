@@ -1,4 +1,4 @@
-package Model.Classes.AI.Steering;
+package Model.Classes.AI.Steering.SimpleBehaviors;
 
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.TerrenoI;
@@ -99,22 +99,24 @@ public class RayCastMuros implements RaycastCollisionDetector<Vector2>
 
                 if (terreno != null && terreno.getIsSolido())
                 {
-                    outputCollision.point.set(punto.x, punto.y);
+                    if (outputCollision != null)
+                    {
+                        outputCollision.point.set(punto.x, punto.y);
 
-                    int direccionChoqueX = punto.x % Settings.TILESIZE;
-                    int direccionChoqueY = punto.y % Settings.TILESIZE;
+                        int direccionChoqueX = punto.x % Settings.TILESIZE;
+                        int direccionChoqueY = punto.y % Settings.TILESIZE;
 
-                    outputCollision.normal.set(0, 0);
+                        outputCollision.normal.set(0, 0);
 
-                    //Para averiguar por donde le pega al tile, miramos el punto X, e Y si son el principio o final de tile:
-                    if (direccionChoqueX == 0)                          outputCollision.normal.x = -10;
-                    else if (direccionChoqueX == (Settings.TILESIZE - 1))    outputCollision.normal.x =  10;
-                    else if (direccionChoqueY == 0)                          outputCollision.normal.y = -10;
-                    else if (direccionChoqueY == (Settings.TILESIZE - 1))    outputCollision.normal.y =  10;
+                        //Para averiguar por donde le pega al tile, miramos el punto X, e Y si son el principio o final de tile:
+                        if (direccionChoqueX == 0) outputCollision.normal.x = -10;
+                        else if (direccionChoqueX == (Settings.TILESIZE - 1)) outputCollision.normal.x = 10;
+                        else if (direccionChoqueY == 0) outputCollision.normal.y = -10;
+                        else if (direccionChoqueY == (Settings.TILESIZE - 1)) outputCollision.normal.y = 10;
 
-                    if (outputCollision.normal.x == 0 && outputCollision.normal.y == 0)
-                        System.out.println("NORMAL MAL CALCULADA");
-
+                        if (outputCollision.normal.x == 0 && outputCollision.normal.y == 0)
+                            System.out.println("NORMAL MAL CALCULADA");
+                    }
                     return true;
                 }
             }
