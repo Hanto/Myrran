@@ -1,7 +1,7 @@
-package Model.Classes.AI.Steering;
+package Model.Classes.AI.SteeringFactory;
 
-import Model.Classes.AI.Steering.FixedBehaviors.FaceFixed;
-import Model.Classes.AI.Steering.FixedBehaviors.ReachOrientationFixed;
+import Model.Classes.AI.FixedBehaviors.FaceFixed;
+import Model.Classes.AI.FixedBehaviors.ReachOrientationFixed;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.steer.behaviors.*;

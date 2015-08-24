@@ -1,4 +1,4 @@
-package Model.Classes.AI.Steering.SimpleBehaviors;
+package Model.Classes.AI.SimpleBehaviors.SeparateMuros;
 
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
@@ -9,11 +9,11 @@ import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.ai.utils.RaycastCollisionDetector;
 import com.badlogic.gdx.math.Vector2;
 
-public class RayCollisionMuros implements RaycastCollisionDetector<Vector2>
+public class RayDetectorMuros implements RaycastCollisionDetector<Vector2>
 {
     private MapaI mapa;
 
-    public RayCollisionMuros(MapaI mapa)
+    public RayDetectorMuros(MapaI mapa)
     {   this.mapa = mapa; }
 
     @Override public boolean collides(Ray<Vector2> ray)

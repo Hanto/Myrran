@@ -1,33 +1,19 @@
-package Model.Classes.AI.Steering.FixedBehaviors;// Created by Hanto on 14/08/2015.
+package Model.Classes.AI.FixedBehaviors;// Created by Hanto on 14/08/2015.
 
 import com.badlogic.gdx.ai.steer.Limiter;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
-import com.badlogic.gdx.ai.steer.behaviors.Face;
+import com.badlogic.gdx.ai.steer.behaviors.ReachOrientation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector;
 
-public class FaceFixed<T extends Vector<T>> extends Face<T>
+public class ReachOrientationFixed<T extends Vector<T>> extends ReachOrientation<T>
 {
-    public FaceFixed(Steerable<T> owner)
+    public ReachOrientationFixed(Steerable<T> owner)
     {   super(owner); }
 
-    public FaceFixed (Steerable<T> owner, Steerable<T> target)
+    public ReachOrientationFixed(Steerable<T> owner, Steerable<T> target)
     {   super(owner, target); }
-
-    protected SteeringAcceleration<T> face (SteeringAcceleration<T> steering, T targetPosition) {
-        // Get the direction to target
-        T toTarget = steering.linear.set(targetPosition).sub(owner.getPosition());
-
-        // Check for a zero direction, and return no steering if so
-        if (toTarget.isZero(MathUtils.FLOAT_ROUNDING_ERROR)) return steering.setZero();
-
-        // Calculate the orientation to face the target
-        float orientation = owner.vectorToAngle(toTarget);
-
-        // Delegate to ReachOrientation
-        return reachOrientation(steering, orientation);
-    }
 
     protected SteeringAcceleration<T> reachOrientation (SteeringAcceleration<T> steering, float targetOrientation) {
         // Get the rotation direction to the target wrapped to the range [-PI, PI]

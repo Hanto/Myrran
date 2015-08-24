@@ -8,6 +8,8 @@ import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Iterator;
+
 public abstract class AbstractSteerableAgent extends AbstractModel implements SteerableAgent
 {
     protected Vector2 posicion = new Vector2();             // Espacial:
@@ -23,10 +25,11 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
     protected int ancho;                                    // Solido:
     protected int alto;
     protected float orientacion = 0;                        // Orientable:
+    protected SteeringBehavior<Vector2> steeringBehavior;   // SteerableAgent:
+    protected SteeringAcceleration<Vector2> steeringOutput;
+    protected Huellas huellas = new Huellas();              // Seguible:
     protected boolean encaramientoIndependiente = false;    // Steerable:
     protected boolean tagged = false;
-    protected SteeringBehavior<Vector2> steeringBehavior;   // AbstractSteerableAgent:
-    protected SteeringAcceleration<Vector2> steeringOutput;
 
     // ESPACIAL:
     //------------------------------------------------------------------------------------------------------------------
@@ -69,11 +72,25 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public float getOrientacion()                                 { return orientacion; }
-    @Override public void setOrientacion(float radianes)                    { this.orientacion = radianes%MathUtils.PI2; }
+    @Override public void setOrientacion(float radianes)                    { this.orientacion = radianes % MathUtils.PI2; }
 
+    // STEERABLEAGENT:
+    //------------------------------------------------------------------------------------------------------------------
 
-    public AbstractSteerableAgent()
-    {   steeringOutput = new SteeringAcceleration(new Vector2()); }
+    @Override public void setSteeringBehavior(SteeringBehavior<Vector2> steeringBehavior)
+    {   this.steeringBehavior = steeringBehavior; }
+
+    @Override public void setEncaramientoIndependiente (boolean b)
+    {   this.encaramientoIndependiente = b; }
+
+    // SEGUIBLE:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public Iterator<Huella> getListaHuellasIterator()
+    {   return this.huellas.iterator(); }
+
+    @Override public void setTiempoDecayHuellas (float tiempoDecayHuellas)
+    {   this.huellas.setTiempoDecayHuellas(tiempoDecayHuellas); }
 
     // STEERABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -103,15 +120,6 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
     @Override public void setTagged(boolean tagged)
     {   this.tagged = tagged; }
 
-    // TIPO DE STEERING:
-    //------------------------------------------------------------------------------------------------------------------
-
-    @Override public void setSteeringBehavior(SteeringBehavior<Vector2> steeringBehavior)
-    {   this.steeringBehavior = steeringBehavior; }
-
-    @Override public void setEncaramientoIndependiente (boolean b)
-    {   this.encaramientoIndependiente = b; }
-
     // OPERACIONES MATEMATICAS(Steerable):
     //------------------------------------------------------------------------------------------------------------------
 
@@ -130,6 +138,12 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
         outVector.y = (float)Math.sin(angle);
         return outVector;
     }
+
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public AbstractSteerableAgent()
+    {   steeringOutput = new SteeringAcceleration(new Vector2()); }
 
     // CALCULO STEERING:
     //------------------------------------------------------------------------------------------------------------------

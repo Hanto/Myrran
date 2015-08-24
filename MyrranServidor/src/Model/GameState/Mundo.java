@@ -10,7 +10,7 @@ import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Model.AbstractModel;
-import Model.Classes.AI.Steering.SteeringCompuestoFactory;
+import Model.Classes.AI.SteeringFactory.SteeringCompuestoFactory;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.EstructurasDatos.ListaMapaCuadrantes;

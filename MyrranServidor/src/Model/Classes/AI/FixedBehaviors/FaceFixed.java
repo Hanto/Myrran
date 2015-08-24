@@ -1,23 +1,29 @@
-package Model.Classes.AI.Steering.FixedBehaviors;
+package Model.Classes.AI.FixedBehaviors;// Created by Hanto on 14/08/2015.
 
 import com.badlogic.gdx.ai.steer.Limiter;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
-import com.badlogic.gdx.ai.steer.behaviors.LookWhereYouAreGoing;
+import com.badlogic.gdx.ai.steer.behaviors.Face;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector;
 
-public class LookWhereFixed<T extends Vector<T>> extends LookWhereYouAreGoing<T>
+public class FaceFixed<T extends Vector<T>> extends Face<T>
 {
-    public LookWhereFixed(Steerable<T> owner)
+    public FaceFixed(Steerable<T> owner)
     {   super(owner); }
 
-    @Override protected SteeringAcceleration<T> calculateRealSteering (SteeringAcceleration<T> steering) {
-        // Check for a zero direction, and return no steering if so
-        if (owner.getLinearVelocity().isZero(MathUtils.FLOAT_ROUNDING_ERROR)) return steering.setZero();
+    public FaceFixed (Steerable<T> owner, Steerable<T> target)
+    {   super(owner, target); }
 
-        // Calculate the orientation based on the velocity of the owner
-        float orientation = owner.vectorToAngle(owner.getLinearVelocity());
+    protected SteeringAcceleration<T> face (SteeringAcceleration<T> steering, T targetPosition) {
+        // Get the direction to target
+        T toTarget = steering.linear.set(targetPosition).sub(owner.getPosition());
+
+        // Check for a zero direction, and return no steering if so
+        if (toTarget.isZero(MathUtils.FLOAT_ROUNDING_ERROR)) return steering.setZero();
+
+        // Calculate the orientation to face the target
+        float orientation = owner.vectorToAngle(toTarget);
 
         // Delegate to ReachOrientation
         return reachOrientation(steering, orientation);
@@ -67,5 +73,4 @@ public class LookWhereFixed<T extends Vector<T>> extends LookWhereYouAreGoing<T>
         // Output the steering
         return steering;
     }
-
 }

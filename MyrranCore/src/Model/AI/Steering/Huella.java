@@ -1,30 +1,35 @@
 package Model.AI.Steering;
 
-import Model.EstructurasDatos.Punto;
+import Interfaces.EntidadesPropiedades.Espacial;
 import Model.Settings;
 
 public class Huella
 {
-    public Punto punto;
+    public int x;
+    public int y;
     public float duracion;
 
     public Huella(int x, int y)
     {
-        this.punto = new Punto(x, y);
+        ajustarPuntoCentroTile(x, y);
         this.duracion = 0;
-        ajustarPuntoCentroTile(punto);
     }
 
     public Huella(float x, float y)
     {
-        this.punto = new Punto(x, y);
+        ajustarPuntoCentroTile((int)x, (int)y);
         this.duracion = 0;
-        ajustarPuntoCentroTile(punto);
     }
 
-    private void ajustarPuntoCentroTile(Punto punto)
+    public Huella(Espacial espacial)
     {
-        punto.x = punto.x - punto.x % Settings.TILESIZE + Settings.TILESIZE / 2;
-        punto.y = punto.y - punto.y % Settings.TILESIZE + Settings.TILESIZE / 2;
+        ajustarPuntoCentroTile((int)espacial.getX(), (int)espacial.getY());
+        this.duracion = 0;
+    }
+
+    private void ajustarPuntoCentroTile(int x, int y)
+    {
+        this.x = x - x % Settings.TILESIZE + Settings.TILESIZE / 2;
+        this.y = y - y % Settings.TILESIZE + Settings.TILESIZE / 2;
     }
 }

@@ -4,10 +4,8 @@ import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.AI.Steering.Huella;
 import Model.Mobiles.Cuerpos.Cuerpo;
 
-import java.util.ArrayDeque;
 import java.util.Iterator;
 
 public class PC extends PCNotificador implements PCI
@@ -123,10 +121,5 @@ public class PC extends PCNotificador implements PCI
     @Override public void actualizar (float delta, MundoI mundo)
     {
 
-    }
-
-    @Override public ArrayDeque<Huella> getListaHuellas()
-    {
-        return null;
     }
 }

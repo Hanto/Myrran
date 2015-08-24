@@ -1,32 +1,33 @@
 package Model.AI.Steering;
 
-import DTO.DTOsPC;
-import Interfaces.EntidadesPropiedades.SteerableAgent;
+import Interfaces.EntidadesPropiedades.Espacial;
 import Model.Settings;
-import com.badlogic.gdx.utils.Disposable;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
-public class Huellas implements PropertyChangeListener, Disposable
+public class Huellas implements Iterable<Huella>
 {
-    public ArrayDeque<Huella> listaHuellas;
-    private SteerableAgent steerable;
+    private ArrayDeque<Huella> listaHuellas;
+    private float tiempoDecayHuellas = 20f;
 
-    public Huellas(SteerableAgent steerable)
-    {
-        this.steerable = steerable;
-        this.listaHuellas = new ArrayDeque<>();
-        this.steerable.añadirObservador(this);
-    }
+    public Huellas()
+    {   this.listaHuellas = new ArrayDeque<>(); }
 
-    @Override public void dispose()
-    {   steerable.eliminarObservador(this); }
-
-    //
     //------------------------------------------------------------------------------------------------------------------
+
+    @Override public Iterator<Huella> iterator()
+    {   return listaHuellas.iterator(); }
+
+    public void setTiempoDecayHuellas (float tiempoDecayHuellas)
+    {   this.tiempoDecayHuellas = tiempoDecayHuellas; }
+
+    public void añadirHuella(Espacial espacial)
+    {
+        Huella huella = listaHuellas.peekFirst();
+        if (mismoTile(espacial, huella)) huella.duracion = 0f;
+        else listaHuellas.addFirst(new Huella(espacial));
+    }
 
     public void actualizar (float delta)
     {
@@ -36,33 +37,17 @@ public class Huellas implements PropertyChangeListener, Disposable
         {
             huella = iterator.next();
             huella.duracion += delta;
-            if (huella.duracion > 20.0f) iterator.remove();
+            if (huella.duracion > tiempoDecayHuellas) iterator.remove();
         }
     }
 
-    private void añadirPosicion(int x, int y)
-    {
-        Huella huella = listaHuellas.peekFirst();
-        if (mismoTile(x, y, huella)) huella.duracion = 0;
-        else listaHuellas.addFirst(new Huella(x, y));
-    }
-
-    private boolean mismoTile (int x, int y, Huella huella)
+    private boolean mismoTile (Espacial espacial, Huella huella)
     {
         if (huella == null) return false;
-        if ( huella.punto.x / Settings.TILESIZE == x / Settings.TILESIZE &&
-             huella.punto.y / Settings.TILESIZE == y / Settings.TILESIZE ) return true;
+
+        if ( huella.x / Settings.TILESIZE == espacial.getX() / Settings.TILESIZE &&
+             huella.y / Settings.TILESIZE == espacial.getY() / Settings.TILESIZE ) return true;
+
         else return false;
     }
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {
-        if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
-        {   añadirPosicion(((DTOsPC.PosicionPC) evt.getNewValue()).posX, ((DTOsPC.PosicionPC) evt.getNewValue()).posY); }
-
-    }
-
-    // HUELLA:
-    //------------------------------------------------------------------------------------------------------------------
-
 }
