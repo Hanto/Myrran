@@ -16,8 +16,8 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
     protected int ultimoCuadranteX;
     protected int ultimoCuadranteY;
     protected Vector2 velocidad = new Vector2();            // Dinamico:
-    protected float velocidadMax = 40f;
-    protected float aceleracionMax = 50f;
+    protected float velocidadMax = 50f;
+    protected float aceleracionMax = 200f;
     protected float velocidadMod = 1.0f;
     protected float velocidadAngular;
     protected float velocidadAngularMax = 5f;

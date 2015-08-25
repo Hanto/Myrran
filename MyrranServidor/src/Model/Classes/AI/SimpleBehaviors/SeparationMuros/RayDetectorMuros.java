@@ -1,4 +1,4 @@
-package Model.Classes.AI.SimpleBehaviors.SeparateMuros;
+package Model.Classes.AI.SimpleBehaviors.SeparationMuros;
 
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
