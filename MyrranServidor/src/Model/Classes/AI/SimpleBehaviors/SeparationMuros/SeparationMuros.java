@@ -19,7 +19,8 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
     private Collision<T> colision;
 
     private T toMuro;
-    private float distanciaFrenado;
+    private float aceleracionMaxima;
+    private boolean colisionadoConMuro = false;
 
     public SeparationMuros(Steerable<T> owner, RaycastCollisionDetector<Vector2> rayDetectorMuros,
                            RayConfiguration<T> rayosConfig)
@@ -30,14 +31,14 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
         this.toMuro = owner.newVector();
         this.colision = new Collision<>(owner.newVector(), owner.newVector());
 
-        this.distanciaFrenado = owner.getBoundingRadius() +
-                                owner.getMaxLinearSpeed() * owner.getMaxLinearSpeed() / (2 * owner.getMaxLinearAcceleration())
-                                + 2;
+        this.aceleracionMaxima =  (4*4)*owner.getMaxLinearAcceleration(); //(float)Math.pow(owner.getMaxLinearSpeed(),2) / 2 + owner.getMaxLinearAcceleration();
     }
 
     @Override protected SteeringAcceleration<T> calculateRealSteering(SteeringAcceleration<T> steering)
     {
         float distancia;
+        float distanciaMenor = 1000;
+        T vector = owner.newVector();
 
         Ray<T>[] rayos = rayosConfig.updateRays();
 
@@ -49,12 +50,20 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
 
                 distancia = toMuro.len();
 
-                if (distancia <= distanciaFrenado)
-                    steering.linear.mulAdd(toMuro, owner.getMaxLinearAcceleration()/distancia);
-                    //Se calcula el modulo y se aplica la fuerza a la vez, es mas optimo que normalizar el vector
-                    //puesto que la logintud del vector ya la tenemos calculada
+                if (distancia < distanciaMenor ) distanciaMenor = distancia;
+                    vector.mulAdd(toMuro, 1/distancia);
             }
         }
+
+        distanciaMenor = distanciaMenor - owner.getBoundingRadius();
+
+        if (distanciaMenor < 2 && !colisionadoConMuro)
+        {   owner.getLinearVelocity().setZero(); colisionadoConMuro = true; }
+        else if (distanciaMenor >= 2)
+        {   colisionadoConMuro = false; }
+
+        if (distanciaMenor < 1000 - owner.getBoundingRadius())
+            steering.linear.mulAdd(vector, aceleracionMaxima/((distanciaMenor) * (distanciaMenor)));
 
         steering.angular = 0;
 

@@ -14,9 +14,7 @@ public class Ray6Direcciones<T extends Vector<T>> extends RayConfigurationBase<T
     public Ray6Direcciones(Steerable<T> owner)
     {
         super(owner, 6);
-        this.longitud = owner.getBoundingRadius() +
-                        owner.getMaxLinearSpeed() * owner.getMaxLinearSpeed()/ (2 * owner.getMaxLinearAcceleration())
-                        + 1;
+        this.longitud = owner.getBoundingRadius() + owner.getBoundingRadius();
     }
 
 

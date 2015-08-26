@@ -19,14 +19,14 @@ public class RayTargetSingle extends RayTargetConfiguration
         this.ancho = ancho;
         this.owner = owner;
         this.vector = new Vector2(0,0);
-        this.setNumRays(1);
+        this.setNumRays(3);
     }
 
     public Iterator<Ray<Vector2>> updateTarget (float x, float y)
     {
         rays[0].start.set(owner.getPosition());
         rays[0].end.set(x, y);
-/*
+
         vector.set(x, y).sub(owner.getPosition());
         float angulo = owner.vectorToAngle(vector);
 
@@ -36,7 +36,7 @@ public class RayTargetSingle extends RayTargetConfiguration
 
         owner.angleToVector(vector, angulo + grados90).scl(ancho);
         rays[2].start.set(owner.getPosition()).add(vector);
-        rays[2].end.set(x, y).add(vector);*/
+        rays[2].end.set(x, y).add(vector);
 
         return getRays();
     }

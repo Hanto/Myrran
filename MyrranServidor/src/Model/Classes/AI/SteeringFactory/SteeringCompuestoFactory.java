@@ -30,7 +30,7 @@ public enum SteeringCompuestoFactory
             //SeparationMuros:
             Ray6Direcciones<Vector2> rayo6 = new Ray6Direcciones<>(owner);
             SeparationMuros<Vector2> wallAvoidance = new SeparationMuros<>(owner, rayDetectorMuros, rayo6);
-            
+
             //TOTAL STEERING:
             BlendedSteering<Vector2> advancedSteering = new BlendedSteering<>(owner);
             advancedSteering.add(wallAvoidance,1f);
