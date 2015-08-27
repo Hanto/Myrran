@@ -21,9 +21,10 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
     private T toMuro;
     private float aceleracionMaxima;
     private boolean colisionadoConMuro = false;
+    private float distanciaColision;
 
     public SeparationMuros(Steerable<T> owner, RaycastCollisionDetector<Vector2> rayDetectorMuros,
-                           RayConfiguration<T> rayosConfig)
+                           RayConfiguration<T> rayosConfig, float timeStep)
     {
         super(owner);
         this.detectorMuros = rayDetectorMuros;
@@ -31,7 +32,8 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
         this.toMuro = owner.newVector();
         this.colision = new Collision<>(owner.newVector(), owner.newVector());
 
-        this.aceleracionMaxima =  (4*4)*owner.getMaxLinearAcceleration(); //(float)Math.pow(owner.getMaxLinearSpeed(),2) / 2 + owner.getMaxLinearAcceleration();
+        this.aceleracionMaxima =  (2.5f*2.5f)*owner.getMaxLinearAcceleration(); //(float)Math.pow(owner.getMaxLinearSpeed(),2) / 2 + owner.getMaxLinearAcceleration();
+        this.distanciaColision = owner.getMaxLinearSpeed() / (1f / timeStep);
     }
 
     @Override protected SteeringAcceleration<T> calculateRealSteering(SteeringAcceleration<T> steering)
@@ -57,9 +59,10 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
 
         distanciaMenor = distanciaMenor - owner.getBoundingRadius();
 
-        if (distanciaMenor < 2 && !colisionadoConMuro)
+        if (distanciaMenor < distanciaColision && !colisionadoConMuro)
         {   owner.getLinearVelocity().setZero(); colisionadoConMuro = true; }
-        else if (distanciaMenor >= 2)
+
+        else if (distanciaMenor >= distanciaColision)
         {   colisionadoConMuro = false; }
 
         if (distanciaMenor < 1000 - owner.getBoundingRadius())

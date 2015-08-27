@@ -3,7 +3,7 @@ package Model.EstructurasDatos;// Created by Hanto on 16/07/2015.
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.Misc.ListaPorCuadrantesI;
-import com.badlogic.gdx.math.Vector2;
+import Model.Settings;
 
 import java.util.*;
 
@@ -15,9 +15,13 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
     //adyacentes, para esto se implementa el IteratorCuadrantes, que itera las unidades de los cuadrantes adyacentes.
     //Se podria hacer con una Array[][] de ArrayList tambien
 
-    private Map<String, List<T>> mapa = new HashMap<>();
+    private static final Punto[] offsets = new Punto[]
+            { new Punto(-1,+1), new Punto( 0,+1), new Punto(+1,+1),
+              new Punto(-1, 0), new Punto( 0, 0), new Punto(+1, 0),
+              new Punto(-1,-1), new Punto( 0,-1), new Punto(+1,-1) };
+    private Map<Integer, List<T>> mapa = new HashMap<>();
 
-    private void put (String key, T valor)
+    private void put (Integer key, T valor)
     {
         //MAPA:
         if (mapa.containsKey(key))
@@ -41,11 +45,13 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
 
     @Override public void put (T espacial)
     {
-        String key = espacial.getCuadranteX()+ "," + espacial.getCuadranteY();
+        //String key = espacial.getCuadranteX()+ "," + espacial.getCuadranteY();
+        int key = generarKey(espacial.getCuadranteX(), espacial.getCuadranteY());
+
         put(key, espacial);
     }
 
-    private void remove (String key, T espacial)
+    private void remove (int key, T espacial)
     {
         //MAPA:
         if (mapa.containsKey(key))
@@ -61,8 +67,11 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
 
     @Override public void remove (T espacial)
     {
-        String key = espacial.getCuadranteX()+ "," + espacial.getCuadranteY();
-        String oldKey =  espacial.getUltimoCuadranteX()+ "," + espacial.getUltimoCuadranteY();
+        //String key = espacial.getCuadranteX()+ "," + espacial.getCuadranteY();
+        //String oldKey =  espacial.getUltimoCuadranteX()+ "," + espacial.getUltimoCuadranteY();
+        int key = generarKey(espacial.getCuadranteX(), espacial.getCuadranteY());
+        int oldKey = generarKey(espacial.getUltimoCuadranteX(), espacial.getUltimoCuadranteY());
+
 
         //MAPA:
         if (mapa.containsKey(oldKey))
@@ -86,17 +95,20 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
         if ( espacial.getCuadranteX() != espacial.getUltimoCuadranteX() ||
              espacial.getCuadranteY() != espacial.getUltimoCuadranteY() )
         {
-            String oldKey = espacial.getUltimoCuadranteX()+ "," + espacial.getUltimoCuadranteY();
+            //String oldKey = espacial.getUltimoCuadranteX()+ "," + espacial.getUltimoCuadranteY();
+            int oldKey = generarKey(espacial.getUltimoCuadranteX(), espacial.getUltimoCuadranteY());
             remove(oldKey, espacial);
 
-            String newKey = espacial.getCuadranteX()+ "," + espacial.getCuadranteY();
+            //String newKey = espacial.getCuadranteX()+ "," + espacial.getCuadranteY();
+            int newKey = generarKey(espacial.getCuadranteX(), espacial.getCuadranteY());
             put(newKey, espacial);
         }
     }
 
     @Override public List<T> get (int mapTileX, int mapTileY)
     {
-        String key = mapTileX+ ","+ mapTileY;
+        //String key = mapTileX+ ","+ mapTileY;
+        int key = generarKey(mapTileX, mapTileY);
 
         if (mapa.containsKey(key))
         {   return mapa.get(key); }
@@ -105,7 +117,8 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
 
     @Override public Iterator<T> getIteratorCuadrante(int mapTileX, int mapTileY)
     {
-        String key = mapTileX+ ","+ mapTileY;
+        //String key = mapTileX+ ","+ mapTileY;
+        int key = generarKey(mapTileX, mapTileY);
 
         if (mapa.containsKey(key))
         {   return mapa.get(key).iterator();}
@@ -127,6 +140,9 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
     @Override public void clear()
     {   mapa.clear(); }
 
+    private int generarKey(int mapTileX, int mapTileY)
+    {   return mapTileX * (Settings.MAPA_Max_TilesY / Settings.MAPTILE_NumTilesY) + mapTileY; }
+
     // ITERATOR
     //------------------------------------------------------------------------------------------------------------------
 
@@ -135,33 +151,25 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
         private int mapTileX;
         private int mapTileY;
         private int offsetActual = 0;
-        private final Vector2[] offsets = new Vector2[9];
         private Iterator<T> iterator;
 
         public IteratorCuadrantes(int mapTileX, int mapTileY)
         {
             this.mapTileX = mapTileX;
             this.mapTileY = mapTileY;
-            this.offsets[0] = new Vector2(-1,-1);
-            this.offsets[1] = new Vector2(-1, 0);
-            this.offsets[2] = new Vector2(-1,+1);
-            this.offsets[3] = new Vector2( 0,-1);
-            this.offsets[4] = new Vector2( 0, 0);
-            this.offsets[5] = new Vector2( 0,+1);
-            this.offsets[6] = new Vector2(+1,-1);
-            this.offsets[7] = new Vector2(+1, 0);
-            this.offsets[8] = new Vector2(+1,+1);
 
             firstLista();
         }
 
         private void firstLista()
         {
-            String key;
+            //String key;
+            int key;
 
             while (offsetActual <=8)
             {
-                key = (mapTileX+(int)offsets[offsetActual].x)+","+(mapTileY+(int)offsets[offsetActual].y);
+                //key = (mapTileX+(int)offsets[offsetActual].x)+","+(mapTileY+(int)offsets[offsetActual].y);
+                key = generarKey(mapTileX+offsets[offsetActual].x, mapTileY+offsets[offsetActual].y);
                 offsetActual++;
 
                 if (mapa.containsKey(key))
@@ -174,11 +182,13 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
 
         private T nextLista()
         {
-            String key;
+            //String key;
+            int key;
 
             while (offsetActual <=8)
             {
-                key = (mapTileX+(int)offsets[offsetActual].x)+","+(mapTileY+(int)offsets[offsetActual].y);
+                //key = (mapTileX+(int)offsets[offsetActual].x)+","+(mapTileY+(int)offsets[offsetActual].y);
+                key = generarKey(mapTileX+offsets[offsetActual].x, mapTileY+offsets[offsetActual].y);
                 offsetActual++;
 
                 if (mapa.containsKey(key))
@@ -195,11 +205,13 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
 
         private boolean hasNextLista()
         {
-            String key;
+            //String key;
+            int key;
 
             for (int i=offsetActual; i<=8; i++)
             {
-                key = (mapTileX+(int)offsets[i].x)+","+(mapTileY+(int)offsets[i].y);
+                //key = (mapTileX+(int)offsets[i].x)+","+(mapTileY+(int)offsets[i].y);
+                key = generarKey(mapTileX+offsets[i].x, mapTileY+offsets[i].y);
                 if (mapa.containsKey(key))
                 {
                     if (!mapa.get(key).isEmpty())

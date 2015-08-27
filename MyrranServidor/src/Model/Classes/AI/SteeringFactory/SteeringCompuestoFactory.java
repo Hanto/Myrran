@@ -3,11 +3,12 @@ package Model.Classes.AI.SteeringFactory;
 import Interfaces.EntidadesPropiedades.SteerableAgent;
 import Interfaces.GameState.MundoI;
 import Model.Classes.AI.FixedBehaviors.LookWhereFixed;
-import Model.Classes.AI.SimpleBehaviors.SeekHuellas.RayTargetSingle;
+import Model.Classes.AI.SimpleBehaviors.SeekHuellas.RayTargetDoble;
 import Model.Classes.AI.SimpleBehaviors.SeekHuellas.SeekHuellas;
 import Model.Classes.AI.SimpleBehaviors.SeparationMuros.Ray6Direcciones;
 import Model.Classes.AI.SimpleBehaviors.SeparationMuros.RayDetectorMuros;
 import Model.Classes.AI.SimpleBehaviors.SeparationMuros.SeparationMuros;
+import Model.Settings;
 import com.badlogic.gdx.ai.steer.behaviors.BlendedSteering;
 import com.badlogic.gdx.math.Vector2;
 
@@ -19,7 +20,7 @@ public enum SteeringCompuestoFactory
         {
             //SeekHuellas
             RayDetectorMuros rayDetectorMuros = new RayDetectorMuros(mundo.getMapa());
-            RayTargetSingle rayToTarget = new RayTargetSingle(owner, 10);
+            RayTargetDoble rayToTarget = new RayTargetDoble(owner, 10);
             SeekHuellas seekHuellas = new SeekHuellas(owner, target, rayDetectorMuros, rayToTarget);
 
             //LookWhereImGoing:
@@ -29,7 +30,7 @@ public enum SteeringCompuestoFactory
 
             //SeparationMuros:
             Ray6Direcciones<Vector2> rayo6 = new Ray6Direcciones<>(owner);
-            SeparationMuros<Vector2> wallAvoidance = new SeparationMuros<>(owner, rayDetectorMuros, rayo6);
+            SeparationMuros<Vector2> wallAvoidance = new SeparationMuros<>(owner, rayDetectorMuros, rayo6, Settings.FIXED_TimeStep);
 
             //TOTAL STEERING:
             BlendedSteering<Vector2> advancedSteering = new BlendedSteering<>(owner);

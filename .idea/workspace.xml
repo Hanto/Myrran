@@ -10,16 +10,16 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesPropiedades/SteerableLocation.java" />
-    <bookmark url="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java" line="47" />
+    <bookmark url="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java" line="48" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7d314d5-d115-4c47-b321-a6ac893ae3ac" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/AbstractSteerableAgent.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/AbstractSteerableAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/Ray6Direcciones.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/Ray6Direcciones.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaPorCuadrantes.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaPorCuadrantes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/SeparationMuros.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/SeparationMuros.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\Documents\Myrran\MyrranMP\MyrranServidor\src\Model\Classes\AI\SimpleBehaviors\SeekHuellas\RayTargetSingle.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetDoble.java" />
     </list>
     <ignored path="MyrranServidor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,10 +52,8 @@
             <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                  </folding>
+                  <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -65,9 +63,17 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
                   <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                  </folding>
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="RayTargetDoble.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetDoble.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -76,7 +82,7 @@
             <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+                  <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
@@ -95,8 +101,18 @@
           <file leaf-file-name="SeparationMuros.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/SeparationMuros.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.47219512">
-                  <caret line="53" column="55" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+                <state vertical-scroll-proportion="0.2682927">
+                  <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Settings.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/Settings.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
                   <folding />
                 </state>
               </provider>
@@ -106,64 +122,6 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Huellas.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/Huellas.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="21" column="64" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CentralRayWithWhiskersConfiguration.java" pinned="false" current-in-tab="false">
-            <entry file="jar://$PROJECT_DIR$/MyrranCore/lib/Java GDX-AI/gdx-ai-1.5.0-sources.jar!/com/badlogic/gdx/ai/steer/utils/rays/CentralRayWithWhiskersConfiguration.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="67" column="109" selection-start-line="57" selection-start-column="8" selection-end-line="67" selection-end-column="109" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="false" />
-                    <element signature="imports" expanded="false" />
-                    <element signature="e#3144#3145#0" expanded="false" />
-                    <element signature="e#3167#3168#0" expanded="false" />
-                    <element signature="e#3258#3259#0" expanded="false" />
-                    <element signature="e#3291#3292#0" expanded="false" />
-                    <element signature="e#3376#3377#0" expanded="false" />
-                    <element signature="e#3403#3404#0" expanded="false" />
-                    <element signature="e#3503#3504#0" expanded="false" />
-                    <element signature="e#3544#3545#0" expanded="false" />
-                    <element signature="e#3655#3656#0" expanded="false" />
-                    <element signature="e#3681#3682#0" expanded="false" />
-                    <element signature="e#3806#3807#0" expanded="false" />
-                    <element signature="e#3845#3846#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="RayConfigurationBase.java" pinned="false" current-in-tab="false">
-            <entry file="jar://$PROJECT_DIR$/MyrranCore/lib/Java GDX-AI/gdx-ai-1.5.0-sources.jar!/com/badlogic/gdx/ai/steer/utils/rays/RayConfigurationBase.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="41" column="76" selection-start-line="39" selection-start-column="8" selection-end-line="41" selection-end-column="76" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="false" />
-                    <element signature="imports" expanded="false" />
-                    <element signature="e#1928#1929#0" expanded="false" />
-                    <element signature="e#1947#1948#0" expanded="false" />
-                    <element signature="e#2039#2040#0" expanded="false" />
-                    <element signature="e#2064#2065#0" expanded="false" />
-                    <element signature="e#2143#2144#0" expanded="false" />
-                    <element signature="e#2161#2162#0" expanded="false" />
-                    <element signature="e#2246#2247#0" expanded="false" />
-                    <element signature="e#2269#2270#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="RaycastObstacleAvoidance.java" pinned="false" current-in-tab="false">
             <entry file="jar://$PROJECT_DIR$/MyrranCore/lib/Java GDX-AI/gdx-ai-1.5.0-sources.jar!/com/badlogic/gdx/ai/steer/behaviors/RaycastObstacleAvoidance.java">
               <provider selected="true" editor-type-id="text-editor">
@@ -221,11 +179,61 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="AbstractSteerableAgent.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="AbstractSteerableAgent.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/AbstractSteerableAgent.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.12039801">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TerrenoXML.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranCore/src/DAO/Terreno/TerrenoXML.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ListaPorCuadrantes.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaPorCuadrantes.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-1.1711442">
+                  <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CampoVision.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/CampoVision.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="140" column="9" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Updater.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/Updater.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MyrranServer.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranServidor/src/zMain/MyrranServer.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
@@ -283,18 +291,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/MobFactory.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/Mob.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/Model/AbstractClases/AbstractSteerableAgent.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/GameState/Mundo.java" />
         <option value="$PROJECT_DIR$/MyrranCliente/src/Controller/Cliente.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/Steering/LookWhereFixed.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/zMain/MyrranServer.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/Updater.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/Steering/RayCastWall.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/Steering/SteeringAdvancedFactory.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/Steering/RayCastMuros.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaPorCuadrantes.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesPropiedades/SteerableLocation.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/AbstractSteerableLocation.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/Steering/SimpleBehaviors/RayCastMuros.java" />
@@ -329,11 +333,15 @@
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/MobFactory.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/SeparationMuros/Ray6Direcciones.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/SeparationMuros/SeparationMuros.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/Ray6Direcciones.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/AbstractSteerableAgent.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetDoble.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/zMain/MyrranServer.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/Updater.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/SeparationMuros.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaPorCuadrantes.java" />
       </list>
     </option>
   </component>
@@ -398,7 +406,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Problems">
           <PATH>
@@ -708,98 +715,7 @@
         </subPane>
         <subPane subId="Tests" />
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranCliente" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranCliente" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranCliente" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranCliente" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PixieMobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranCliente" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Atlas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -1812,6 +1728,98 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCliente" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCliente" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCliente" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCliente" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PixieMobs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCliente" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Atlas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1923,6 +1931,9 @@
         <option name="DEBUG_PORT" value="" />
         <option name="TRANSPORT" value="0" />
         <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JProfiler">
+        <option name="WINDOW" value="false" />
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
@@ -2141,12 +2152,6 @@
       <created>1396881454118</created>
       <option name="number" value="Default" />
       <updated>1396881454118</updated>
-    </task>
-    <task id="LOCAL-00106" summary="v1.403 Tooltip implementa el MVC como dios manda (los Spells Personalizados son observados)">
-      <created>1405370325074</created>
-      <option name="number" value="00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1405370325074</updated>
     </task>
     <task id="LOCAL-00107" summary="v1.404 Tooltip y BarrasdeAccion MVC sello de calidad">
       <created>1405372166432</created>
@@ -2436,7 +2441,13 @@
       <option name="project" value="LOCAL" />
       <updated>1440544399695</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="v1.451 Mejora Separation Muro, ahora cuando el choque con un muro es inminente se para&#10;-El rayo de visiblidad tiene grosor igual al anchode la unidad&#10;-El Separation muro deja la velocidad a 0 del agente cuando el choque es inminente, en caso contrario repulsion igual a ley gravitacion universal, con una fuerza que igual la del max Aceleracion del agente a 4 pixeles">
+      <created>1440633265169</created>
+      <option name="number" value="00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1440633265170</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2465,7 +2476,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283721" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.20986547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="1257" y="265" width="627" height="522" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.20986547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="336" y="244" width="627" height="522" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17597765" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -2475,11 +2486,12 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283721" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17631297" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="306" height="1201" />
+      <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2867854" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1687966" sideWeight="0.49955237" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.50044763" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.17668161" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="1143" y="36" width="756" height="1092" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.17668161" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="1143" y="36" width="756" height="1092" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2539,7 +2551,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="v1.426 CampoVision refactorizacion completada" />
     <MESSAGE value="v1.427 CampoVision completado&#10;-Servidor ahora cuando recibe un evento en lugar de ejcutarlo inmediantamente lo pone en una cola de eventos que ejecuta a la vez en el hilo updater, justo antes de ejecutar la actualizacion de IA/Fisica, de esta manera no hay problema de sincronizacion de hilos" />
     <MESSAGE value="v1.428 seguimos con los problemas con Github" />
     <MESSAGE value="v1.429 seguimos con los problemas con Github" />
@@ -2564,7 +2575,8 @@
     <MESSAGE value="v1.448 Sistema de Huellas que usan los NPCs para seguir a los players&#10;-SteerableLocation con solo los datos del espacial&#10;-Clase huella con los datos de la posicion y duracion de cada huella&#10;-Clase Huellas que se encarga de salvar la lista de todas las huellas asi como hacerlas expirar con el tiempo&#10;-Por ahora se hace funcionar implementadolo en el interfaz del PC, hacerlo en el steerable, para que todos los steerables se puedan seguir&#10;-Entidad punto que es parecido al vector pero con enteros, y mas ligera, para jugar con posiciones de pantalla&#10;-Refactor del RaycastMuro para que sea mas rapido&#10;-SeekPC nuevo algoritmo que usa huellas, intenta seguir a los players, y si no tiene linea de vision, va a por la huella mas reciente con la que tenga linea de vision" />
     <MESSAGE value="v1.449 SeekHuellas sigue el rastro de los SteerableAgents&#10;-Descompuesto el steerableAgent en mas interfaces&#10;-la Huella para crear menos entidades, no contiene un punto, si no directamente las coordenadas&#10;-Decoupleado totalmente la clase Huellas, ahora ya no observa nada, es el agente quien invoca su metodo de salvar huella cuando se mueve.&#10;-Creado SeekHuellas que sigue al jugador, y si no tiene linea de vision con el, usa el RayTargetConfiguration asociado para trazar raycast con sus huellas&#10;-Creado RayConfiguration para los seekHuellas, y creado tambien una implementacion concreta con un solo rayo, y con 3 rayos (uno central y 2 a cada lado)&#10;-Interface seguible para acceder a las huellas" />
     <MESSAGE value="v1.450 Nuevo algoritmo de repulsion de muros&#10;-Para detectar muros, RayConfiguration de 6 rayos en angulos equidistantes, la longitud de los rayos es automatica, igual al radio de la unidad y el espacio minimo para frenar antes de chocar&#10;-SeparationMuros, aplica el steering Separation a los muros, para sufrir fuerzas repulsoras" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.450 Nuevo algoritmo de repulsion de muros&#10;-Para detectar muros, RayConfiguration de 6 rayos en angulos equidistantes, la longitud de los rayos es automatica, igual al radio de la unidad y el espacio minimo para frenar antes de chocar&#10;-SeparationMuros, aplica el steering Separation a los muros, para sufrir fuerzas repulsoras" />
+    <MESSAGE value="v1.451 Mejora Separation Muro, ahora cuando el choque con un muro es inminente se para&#10;-El rayo de visiblidad tiene grosor igual al anchode la unidad&#10;-El Separation muro deja la velocidad a 0 del agente cuando el choque es inminente, en caso contrario repulsion igual a ley gravitacion universal, con una fuerza que igual la del max Aceleracion del agente a 4 pixeles" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.451 Mejora Separation Muro, ahora cuando el choque con un muro es inminente se para&#10;-El rayo de visiblidad tiene grosor igual al anchode la unidad&#10;-El Separation muro deja la velocidad a 0 del agente cuando el choque es inminente, en caso contrario repulsion igual a ley gravitacion universal, con una fuerza que igual la del max Aceleracion del agente a 4 pixeles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2588,104 +2600,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/sources/gdx-sources.jar!/com/badlogic/gdx/utils/Pool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Actores/Particula.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/AbstractSteerableLocation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6705998">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.043264505">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.7.0_80/src.zip!/java/awt/Point.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47727272">
-          <caret line="154" column="9" selection-start-line="154" selection-start-column="9" selection-end-line="154" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCNotificador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesTipos/PCI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/Punto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21956088">
-          <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesPropiedades/AgenteAutonomo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07236842">
-          <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesPropiedades/Seguible.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.093045115">
-          <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesPropiedades/SteerableAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.052681994">
-          <caret line="6" column="84" selection-start-line="6" selection-start-column="84" selection-end-line="6" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/MyrranCore/lib/Java GDX-AI/gdx-1.5.3.jar!/com/badlogic/gdx/math/Vector.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42985973">
-          <caret line="42" column="10" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/MyrranCore/lib/Java GDX-AI/gdx-ai-1.5.0-sources.jar!/com/badlogic/gdx/ai/steer/utils/RayConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11816406">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.042226486">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43912175">
@@ -2802,22 +2716,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="109" selection-start-line="57" selection-start-column="8" selection-end-line="67" selection-end-column="109" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3144#3145#0" expanded="false" />
-            <element signature="e#3167#3168#0" expanded="false" />
-            <element signature="e#3258#3259#0" expanded="false" />
-            <element signature="e#3291#3292#0" expanded="false" />
-            <element signature="e#3376#3377#0" expanded="false" />
-            <element signature="e#3403#3404#0" expanded="false" />
-            <element signature="e#3503#3504#0" expanded="false" />
-            <element signature="e#3544#3545#0" expanded="false" />
-            <element signature="e#3655#3656#0" expanded="false" />
-            <element signature="e#3681#3682#0" expanded="false" />
-            <element signature="e#3806#3807#0" expanded="false" />
-            <element signature="e#3845#3846#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2851,7 +2750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17946257">
           <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2859,10 +2757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33301345">
           <caret line="73" column="17" selection-start-line="73" selection-start-column="17" selection-end-line="73" selection-end-column="17" />
-          <folding>
-            <element signature="e#2108#2109#0" expanded="false" />
-            <element signature="e#2135#2136#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2877,9 +2771,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="64" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2921,7 +2813,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2929,7 +2820,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2944,9 +2834,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2959,16 +2847,6 @@
             <element signature="imports" expanded="false" />
             <element signature="e#3321#3322#0" expanded="false" />
             <element signature="e#3351#3352#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2992,17 +2870,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/AbstractSteerableAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12039801">
+        <state vertical-scroll-proportion="0.0">
           <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
           <folding />
         </state>
@@ -3016,10 +2886,138 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DAO/Terreno/TerrenoXML.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_80/src.zip!/java/lang/StringBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21827412">
+          <caret line="369" column="7" selection-start-line="369" selection-start-column="7" selection-end-line="369" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/Mapa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.043781094">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/MapaGraph/IndexedMapaGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04467005">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/MapaGraph/AbstractMapaGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.043781094">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_80/src.zip!/java/util/Iterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46494994">
+          <caret line="59" column="12" selection-start-line="59" selection-start-column="12" selection-end-line="59" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/Controlador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06480118">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/lib/Java Kryonet/src/com/esotericsoftware/kryonet/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="160" column="16" selection-start-line="160" selection-start-column="16" selection-end-line="160" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/CampoVision.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="140" column="9" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/Updater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/zMain/MyrranServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetDoble.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/SeparationMuros.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47219512">
-          <caret line="53" column="55" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.2682927">
+          <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaPorCuadrantes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1711442">
+          <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
           <folding />
         </state>
       </provider>
