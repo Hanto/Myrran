@@ -62,7 +62,7 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
         if (distanciaMenor < distanciaColision && !colisionadoConMuro)
         {   owner.getLinearVelocity().setZero(); colisionadoConMuro = true; }
 
-        else if (distanciaMenor >= distanciaColision)
+        else if (colisionadoConMuro && distanciaMenor >= distanciaColision)
         {   colisionadoConMuro = false; }
 
         if (distanciaMenor < 1000 - owner.getBoundingRadius())

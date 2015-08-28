@@ -1,6 +1,5 @@
 package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 
-import DAO.Terreno.TerrenoDAO;
 import DTO.DTOsMapa;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
@@ -28,6 +27,13 @@ public class Mapa extends IndexedMapaGraph implements MapaI
 
     @Override public void init()
     {
+        for (int x = 0; x< Settings.MAPA_Max_TilesX; x++)
+        {
+            for (int y = 0; y< Settings.MAPA_Max_TilesY; y++)
+            {   matriz[x][y].setTerreno(0,(short)0); }
+            //{   setTerreno(x,y,0,(short)0); }
+        }
+
         for (int x=0; x < Settings.MAPA_Max_TilesX; x++)
         {
             for (int y=0; y < Settings.MAPA_Max_TilesY; y++)
@@ -41,8 +47,7 @@ public class Mapa extends IndexedMapaGraph implements MapaI
     @Override public TerrenoI getTerreno (int x, int y, int numCapa)
     {
         if (x<0 || y<0 || x>= Settings.MAPA_Max_TilesX || y>= Settings.MAPA_Max_TilesY) return null;
-        TerrenoDAO terrenoDAO = DB.DAO.terrenoDAOFactory.getTerrenoDAO();
-        return terrenoDAO.getTerreno(matriz[x][y].getTerrenoID(numCapa));
+        return matriz[x][y].getTerreno(numCapa);
     }
 
     @Override public short getTerrenoID (int x, int y, int numCapa)

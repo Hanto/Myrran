@@ -18,7 +18,6 @@ public class SeekHuellas extends SteeringBehavior<Vector2>
     protected Vector2 coordenadasTarget = new Vector2();
     protected RaycastCollisionDetector<Vector2> rayDetectorMuros;
     protected RayTargetConfigurationI rayTarget;
-    //protected Ray<Vector2> ray;
 
     public SeekHuellas(Steerable<Vector2> owner, SteerableAgent target,
                        RaycastCollisionDetector<Vector2> rayDetectorMuros,

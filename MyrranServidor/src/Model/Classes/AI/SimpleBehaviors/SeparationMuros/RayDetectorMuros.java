@@ -2,7 +2,6 @@ package Model.Classes.AI.SimpleBehaviors.SeparationMuros;
 
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
-import Model.EstructurasDatos.Punto;
 import Model.Settings;
 import com.badlogic.gdx.ai.utils.Collision;
 import com.badlogic.gdx.ai.utils.Ray;
@@ -21,7 +20,12 @@ public class RayDetectorMuros implements RaycastCollisionDetector<Vector2>
 
     @Override public boolean findCollision(Collision<Vector2> outputCollision, Ray<Vector2> inputRay)
     {
-        Punto lastTile = new Punto(0,0);
+        int tileX;
+        int tileY;
+
+        int lastTileX = 0;
+        int lastTileY = 0;
+
         int x1 = (int)inputRay.start.x;
         int y1 = (int)inputRay.start.y;
         int x2 = (int)inputRay.end.x;
@@ -42,8 +46,14 @@ public class RayDetectorMuros implements RaycastCollisionDetector<Vector2>
         {
             for (;;)
             {
-                if (!mismoTile(x1, y1, lastTile))
-                    if (checkColision(x1, y1, lastTile, outputCollision)) return true;
+                tileX = x1 / Settings.TILESIZE;
+                tileY = y1 / Settings.TILESIZE;
+
+                if (lastTileX != tileX || lastTileY != tileY)
+                {
+                    lastTileX = tileX; lastTileY = tileY;
+                    if (checkColision(x1, y1, lastTileX, lastTileY, outputCollision)) return true;
+                }
 
                 if (x1 == x2) break;
                 x1 += ix;
@@ -59,8 +69,14 @@ public class RayDetectorMuros implements RaycastCollisionDetector<Vector2>
         {
             for (;;)
             {
-                if (!mismoTile(x1, y1, lastTile))
-                    if (checkColision(x1, y1, lastTile, outputCollision)) return true;
+                tileX = x1 / Settings.TILESIZE;
+                tileY = y1 / Settings.TILESIZE;
+
+                if (lastTileX != tileX || lastTileY != tileY)
+                {
+                    lastTileX = tileX; lastTileY = tileY;
+                    if (checkColision(x1, y1, lastTileX, lastTileY, outputCollision)) return true;
+                }
 
                 if (y1 == y2) break;
                 y1 += iy;
@@ -75,37 +91,27 @@ public class RayDetectorMuros implements RaycastCollisionDetector<Vector2>
         return false;
     }
 
-    private boolean checkColision (int x, int y, Punto tile, Collision<Vector2> outputCollision)
+    private boolean checkColision (int x, int y, int tileX, int tileY, Collision<Vector2> outputCollision)
     {
-        TerrenoI terreno = mapa.getTerreno(tile.x, tile.y, 1);
+        TerrenoI terreno = mapa.getTerreno(tileX, tileY, 1);
         if (terreno != null && terreno.getIsSolido())
         {
-            if (outputCollision != null) calcularCollisionData(x, y, tile, outputCollision);
+            if (outputCollision != null) calcularCollisionData(x, y, tileX, tileY, outputCollision);
             return true;
         }
         return false;
     }
 
-    private void calcularCollisionData (int x, int y, Punto tile, Collision<Vector2> outputCollision)
+    private void calcularCollisionData (int x, int y, int tileX, int tileY, Collision<Vector2> outputCollision)
     {
         outputCollision.point.set(x, y);
 
-        int direccionChoqueX = x - tile.x * Settings.TILESIZE;
-        int direccionChoqueY = y - tile.y * Settings.TILESIZE;
+        int direccionChoqueX = x - tileX * Settings.TILESIZE;
+        int direccionChoqueY = y - tileY * Settings.TILESIZE;
 
         if (direccionChoqueX == 0)                              outputCollision.normal.x = -10;
         else if (direccionChoqueX == (Settings.TILESIZE - 1))   outputCollision.normal.x = 10;
         else if (direccionChoqueY == 0)                         outputCollision.normal.y = -10;
         else if (direccionChoqueY == (Settings.TILESIZE - 1))   outputCollision.normal.y = 10;
     }
-
-    private boolean mismoTile (int x, int y, Punto tile)
-    {
-        int nuevoTileX = x / Settings.TILESIZE;
-        int nuevoTileY = y / Settings.TILESIZE;
-
-        if ( tile.x == nuevoTileX && tile.y == nuevoTileY ) return true;
-        else { tile.set(nuevoTileX, nuevoTileY); return false; }
-    }
-
 }

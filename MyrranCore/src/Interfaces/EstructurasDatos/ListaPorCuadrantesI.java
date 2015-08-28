@@ -1,4 +1,4 @@
-package Interfaces.Misc;// Created by Hanto on 24/07/2015.
+package Interfaces.EstructurasDatos;// Created by Hanto on 24/07/2015.
 
 import Interfaces.EntidadesPropiedades.Espacial;
 
@@ -15,6 +15,6 @@ public interface ListaPorCuadrantesI<T extends Espacial>
     public Iterator<T> getIteratorCuadrantes(int mapTileX, int mapTileY);
     public int size();
     public boolean isEmpty();
-    public boolean containsKey(String key);
+    public boolean containsKey(int key);
     public void clear();
 }

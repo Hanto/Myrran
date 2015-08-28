@@ -191,12 +191,7 @@ public class DTOsCampoVision
     }
 
     public static class EliminarProyectil
-    {
-        public int iD;
-        public EliminarProyectil() {}
-        public EliminarProyectil(ProyectilI proyectil)
-        {   this.iD = proyectil.getID(); }
-    }
+    {   public EliminarProyectil() {} }
 
     //MISC DTOS:
     //------------------------------------------------------------------------------------------------------------------

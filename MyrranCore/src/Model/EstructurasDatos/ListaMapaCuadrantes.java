@@ -2,7 +2,7 @@ package Model.EstructurasDatos;// Created by Hanto on 06/08/2015.
 
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesPropiedades.IDentificable;
-import Interfaces.Misc.ListaPorCuadrantesI;
+import Interfaces.EstructurasDatos.ListaPorCuadrantesI;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ListaMapaCuadrantes<T extends Espacial & IDentificable> implements Iterable<T>
 {
-    private ListaPorCuadrantesI<T> listaPorCuadrantes = new ListaPorCuadrantes<T>();
+    private ListaPorCuadrantesI<T> listaPorCuadrantes = new ArrayPorCuadrantes<>();
     private ListaMapa<T> listaMapa = new ListaMapa<>();
 
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());

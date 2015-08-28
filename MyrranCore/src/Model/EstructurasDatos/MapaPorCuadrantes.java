@@ -2,12 +2,12 @@ package Model.EstructurasDatos;// Created by Hanto on 16/07/2015.
 
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesPropiedades.IDentificable;
-import Interfaces.Misc.ListaPorCuadrantesI;
+import Interfaces.EstructurasDatos.ListaPorCuadrantesI;
 import Model.Settings;
 
 import java.util.*;
 
-public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements ListaPorCuadrantesI<T>
+public class MapaPorCuadrantes<T extends Espacial & IDentificable> implements ListaPorCuadrantesI<T>
 {
     //Estructura de datos que almacena Espaciales en un Hashmap agrupandolos por sectores segun el maptile en el que
     //se encuentren. Todos los Espaciles del MapTileX 0, y MaptileY 0 estaran en un mismo ArrayList, indexado por el
@@ -134,7 +134,7 @@ public class ListaPorCuadrantes<T extends Espacial & IDentificable> implements L
     @Override public boolean isEmpty()
     {   return mapa.isEmpty(); }
 
-    @Override public boolean containsKey(String key)
+    @Override public boolean containsKey(int key)
     {   return mapa.containsKey(key); }
 
     @Override public void clear()

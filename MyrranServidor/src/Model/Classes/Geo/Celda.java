@@ -1,6 +1,7 @@
 package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 
 import DAO.Terreno.TerrenoDAO;
+import DB.DAO;
 import Model.Settings;
 import Interfaces.Geo.CeldaI;
 import Interfaces.Geo.TerrenoI;
@@ -13,6 +14,7 @@ public class Celda implements CeldaI, KryoSerializable
 {
     //private Integer[] terrenosID = new Integer[MiscData.MAPA_Max_Capas_Terreno];
     private short[] listaTerrenos = new short[Settings.MAPA_Max_Capas_Terreno];
+    private final static TerrenoDAO terrenoDAO = DAO.terrenoDAOFactory.getTerrenoDAO();
 
 
     //CONSTRUCTOR:
@@ -30,24 +32,20 @@ public class Celda implements CeldaI, KryoSerializable
     }
 
     @Override public short getTerrenoID(int numCapa)
-    {
-        return listaTerrenos[numCapa];
-    }
+    {   return listaTerrenos[numCapa]; }
 
     @Override public TerrenoI getTerreno(int numCapa)
     {
-        TerrenoDAO terrenoDAO = DB.DAO.terrenoDAOFactory.getTerrenoDAO();
+        //TerrenoDAO terrenoDAO = DB.DAO.terrenoDAOFactory.getTerrenoDAO();
         return terrenoDAO.getTerreno(listaTerrenos[numCapa]);
     }
 
     @Override public void setTerreno(int numCapa, TerrenoI terreno)
-    {
-        listaTerrenos[numCapa] = terreno.getID();
-    }
+    {   listaTerrenos[numCapa] = terreno.getID(); }
 
     @Override public boolean setTerreno(int numCapa, short terrenoID)
     {
-        TerrenoDAO terrenoDAO = DB.DAO.terrenoDAOFactory.getTerrenoDAO();
+        //TerrenoDAO terrenoDAO = DB.DAO.terrenoDAOFactory.getTerrenoDAO();
         if (terrenoDAO.getTerreno(terrenoID) == null && terrenoID != -1) { return false; }
         else { listaTerrenos[numCapa] = terrenoID; return true; }
     }

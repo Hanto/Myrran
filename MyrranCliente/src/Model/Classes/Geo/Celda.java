@@ -14,7 +14,7 @@ public class Celda implements CeldaI,KryoSerializable
 {
     //private Integer[] terrenosID = new Integer[MiscData.MAPA_Max_Capas_Terreno];
     private Short[] listaTerrenos = new Short[Settings.MAPA_Max_Capas_Terreno];
-
+    private static final TerrenoDAO terrenoDAO = DAO.terrenoDAOFactory.getTerrenoDAO();
 
     //CONSTRUCTOR:
     public Celda()
@@ -37,18 +37,16 @@ public class Celda implements CeldaI,KryoSerializable
 
     @Override public TerrenoI getTerreno(int numCapa)
     {
-        TerrenoDAO terrenoDAO = DAO.terrenoDAOFactory.getTerrenoDAO();
+        //TerrenoDAO terrenoDAO = DAO.terrenoDAOFactory.getTerrenoDAO();
         return terrenoDAO.getTerreno(listaTerrenos[numCapa]);
     }
 
     @Override public void setTerreno(int numCapa, TerrenoI terreno)
-    {
-        listaTerrenos[numCapa] = terreno.getID();
-    }
+    {   listaTerrenos[numCapa] = terreno.getID(); }
 
     @Override public boolean setTerreno(int numCapa, short terrenoID)
     {
-        TerrenoDAO terrenoDAO = DAO.terrenoDAOFactory.getTerrenoDAO();
+        //TerrenoDAO terrenoDAO = DAO.terrenoDAOFactory.getTerrenoDAO();
         if (terrenoDAO.getTerreno(terrenoID) == null && terrenoID != -1) { return false; }
         else { listaTerrenos[numCapa] = terrenoID; return true; }
     }

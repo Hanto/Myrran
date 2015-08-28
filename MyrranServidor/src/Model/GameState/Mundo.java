@@ -14,7 +14,6 @@ import Model.Classes.AI.SteeringFactory.SteeringCompuestoFactory;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.EstructurasDatos.ListaMapaCuadrantes;
-import Model.Settings;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.beans.PropertyChangeEvent;
@@ -40,12 +39,6 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     {
         this.world = world;
         this.mapa = mapa;
-
-        for (int x = 0; x< Settings.MAPA_Max_TilesX; x++)
-        {
-            for (int y = 0; y< Settings.MAPA_Max_TilesY; y++)
-            {   mapa.setTerreno(x,y,0,(short)0); }
-        }
     }
 
     // PLAYERS:

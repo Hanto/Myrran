@@ -23,6 +23,13 @@ public class BufferCampoVision
     private MapDTOs mapaDTOsProyectiles = new MapDTOs();
     private MapDTOs mapaDTOsMobs = new MapDTOs();
 
+    //DTOs para no tener que crearlos sin parar:
+    private DTOsCampoVision.PCDTOs pcDTOs = new DTOsCampoVision.PCDTOs();
+    private DTOsCampoVision.ProyectilDTOs proyectilDTOs = new DTOsCampoVision.ProyectilDTOs();
+    private DTOsCampoVision.MobDTOs mobDTOs = new DTOsCampoVision.MobDTOs();
+    private DTOsCampoVision.MiscDTOs miscDTOs = new DTOsCampoVision.MiscDTOs();
+
+
     //MANIPULACION DE LAS ESTRUCTURAS DE DATOS:
     //---------------------------------------------------------------------------------------------------------------
 
@@ -76,21 +83,21 @@ public class BufferCampoVision
 
     public void eliminarPC(PCI pc)
     {
-        DTOsCampoVision.EliminarPC eliminar = new DTOsCampoVision.EliminarPC();
+        DTOsCampoVision.EliminarPC eliminarPC = new DTOsCampoVision.EliminarPC();
         mapaDTOsPC.remove(pc.getID());
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.EliminarPC.class, eliminar);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.EliminarPC.class, eliminarPC);
     }
 
     public void setPositionPC (PCI pc)
     {
-        DTOsCampoVision.PosicionPC posicion = new DTOsCampoVision.PosicionPC(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.PosicionPC.class, posicion);
+        DTOsCampoVision.PosicionPC posicionPC = new DTOsCampoVision.PosicionPC(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.PosicionPC.class, posicionPC);
     }
 
     public void setNumAnimacionPC (PCI pc)
     {
-        DTOsCampoVision.NumAnimacionPC numAnumacion = new DTOsCampoVision.NumAnimacionPC(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NumAnimacionPC.class, numAnumacion);
+        DTOsCampoVision.NumAnimacionPC numAnimacionPC = new DTOsCampoVision.NumAnimacionPC(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NumAnimacionPC.class, numAnimacionPC);
     }
 
     // PC & PLAYER:
@@ -98,8 +105,8 @@ public class BufferCampoVision
 
     public void setDatosCompletosPC (PCI pc)
     {
-        DTOsCampoVision.DatosCompletosPC datosCompletos = new DTOsCampoVision.DatosCompletosPC(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.DatosCompletosPC.class, datosCompletos);
+        DTOsCampoVision.DatosCompletosPC datosCompletosPC = new DTOsCampoVision.DatosCompletosPC(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.DatosCompletosPC.class, datosCompletosPC);
 
         Iterator<SpellPersonalizadoI> iteratorSpell = pc.getIteratorSpellPersonalizado();
         while (iteratorSpell.hasNext())
@@ -139,14 +146,14 @@ public class BufferCampoVision
 
     public void addAñadirSpellPersonalizado(PCI pc, String spellID)
     {
-        DTOsCampoVision.AñadirSpellPersonalizadoPC añadirSpellPersonalizado = new DTOsCampoVision.AñadirSpellPersonalizadoPC(spellID);
-        mapaDTOsPC.add(pc.getID(), añadirSpellPersonalizado);
+        DTOsCampoVision.AñadirSpellPersonalizadoPC añadirSpellPersonalizadoPC = new DTOsCampoVision.AñadirSpellPersonalizadoPC(spellID);
+        mapaDTOsPC.add(pc.getID(), añadirSpellPersonalizadoPC);
     }
 
     public void addNumTalentosSkillPersonalizadoPC(PCI pc, String skillID, int statID, int valor)
     {
-        DTOsCampoVision.NumTalentosSkillPersonalizadoPC numTalentosSkill = new DTOsCampoVision.NumTalentosSkillPersonalizadoPC(skillID, statID, valor);
-        mapaDTOsPC.add(pc.getID(), numTalentosSkill);
+        DTOsCampoVision.NumTalentosSkillPersonalizadoPC numTalentosSkillPersonalizadoPC = new DTOsCampoVision.NumTalentosSkillPersonalizadoPC(skillID, statID, valor);
+        mapaDTOsPC.add(pc.getID(), numTalentosSkillPersonalizadoPC);
     }
 
     // MOBS:
@@ -176,7 +183,7 @@ public class BufferCampoVision
 
     public void eliminarProyectil (ProyectilI proyectil)
     {
-        DTOsCampoVision.EliminarProyectil eliminarProyectil = new DTOsCampoVision.EliminarProyectil(proyectil);
+        DTOsCampoVision.EliminarProyectil eliminarProyectil = new DTOsCampoVision.EliminarProyectil();
         mapaDTOsProyectiles.remove(proyectil.getID());
         mapaDTOsProyectiles.set(proyectil.getID(), DTOsCampoVision.EliminarProyectil.class, eliminarProyectil);
     }
@@ -209,7 +216,7 @@ public class BufferCampoVision
     {
         if (mapaDTOsPC.mapDTOs.size() > 0)
         {
-            DTOsCampoVision.PCDTOs pcDTOs = new DTOsCampoVision.PCDTOs();
+            //DTOsCampoVision.PCDTOs pcDTOs = new DTOsCampoVision.PCDTOs();
             for (Map.Entry<Integer, ArrayList<Object>> array : mapaDTOsPC.mapDTOs.entrySet())
             {
                 pcDTOs.connectionID = array.getKey();
@@ -225,7 +232,7 @@ public class BufferCampoVision
     {
         if (mapaDTOsProyectiles.mapDTOs.size() > 0)
         {
-            DTOsCampoVision.ProyectilDTOs proyectilDTOs = new DTOsCampoVision.ProyectilDTOs();
+            //DTOsCampoVision.ProyectilDTOs proyectilDTOs = new DTOsCampoVision.ProyectilDTOs();
             for (Map.Entry<Integer, ArrayList<Object>> array : mapaDTOsProyectiles.mapDTOs.entrySet())
             {
                 proyectilDTOs.iD = array.getKey();
@@ -241,7 +248,7 @@ public class BufferCampoVision
     {
         if (mapaDTOsMobs.mapDTOs.size() > 0)
         {
-            DTOsCampoVision.MobDTOs mobDTOs = new DTOsCampoVision.MobDTOs();
+            //DTOsCampoVision.MobDTOs mobDTOs = new DTOsCampoVision.MobDTOs();
             for (Map.Entry<Integer, ArrayList<Object>> array : mapaDTOsMobs.mapDTOs.entrySet())
             {
                 mobDTOs.iD = array.getKey();
@@ -257,7 +264,7 @@ public class BufferCampoVision
     {
         if (listaDTOsMisc.size() > 0)
         {
-            DTOsCampoVision.MiscDTOs miscDTOs = new DTOsCampoVision.MiscDTOs();
+            //DTOsCampoVision.MiscDTOs miscDTOs = new DTOsCampoVision.MiscDTOs();
             miscDTOs.listaDTOs = new Object[listaDTOsMisc.size()];
             miscDTOs.listaDTOs = listaDTOsMisc.toArray();
             servidor.enviarACliente(conID, miscDTOs);

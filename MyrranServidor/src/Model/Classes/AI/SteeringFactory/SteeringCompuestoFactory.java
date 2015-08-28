@@ -5,7 +5,7 @@ import Interfaces.GameState.MundoI;
 import Model.Classes.AI.FixedBehaviors.LookWhereFixed;
 import Model.Classes.AI.SimpleBehaviors.SeekHuellas.RayTargetDoble;
 import Model.Classes.AI.SimpleBehaviors.SeekHuellas.SeekHuellas;
-import Model.Classes.AI.SimpleBehaviors.SeparationMuros.Ray6Direcciones;
+import Model.Classes.AI.SimpleBehaviors.SeparationMuros.RayEnvolvente;
 import Model.Classes.AI.SimpleBehaviors.SeparationMuros.RayDetectorMuros;
 import Model.Classes.AI.SimpleBehaviors.SeparationMuros.SeparationMuros;
 import Model.Settings;
@@ -29,7 +29,7 @@ public enum SteeringCompuestoFactory
             lookWhereYouAreGoing.setAlignTolerance(0.1f);
 
             //SeparationMuros:
-            Ray6Direcciones<Vector2> rayo6 = new Ray6Direcciones<>(owner);
+            RayEnvolvente<Vector2> rayo6 = new RayEnvolvente<>(owner);
             SeparationMuros<Vector2> wallAvoidance = new SeparationMuros<>(owner, rayDetectorMuros, rayo6, Settings.FIXED_TimeStep);
 
             //TOTAL STEERING:

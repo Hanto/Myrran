@@ -28,6 +28,8 @@ public class Updater implements MainLoopI, Runnable
     private double currentTime;
     private double deltaTime;
 
+    private boolean mundoActualizado = false;
+
     protected final List<Runnable> runnables = new ArrayList<>();
     protected final List<Runnable> executedRunnables = new ArrayList<>();
 
@@ -60,7 +62,7 @@ public class Updater implements MainLoopI, Runnable
 
     public void run()
     {
-        while (true)
+        //while (true)
         {
             synchronized (mundo)
             {
@@ -86,15 +88,17 @@ public class Updater implements MainLoopI, Runnable
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep, mundo);
                     mundo.actualizarFisica(Settings.FIXED_TimeStep);
 
-                    //VISTA:
-                    //controlador.actualizarRadarCampoVisiones();
-                    //controlador.enviarDatosAClientes();
+                    mundoActualizado = true;
                 }
-                //VISTA:
-                mundoView.radar();
-                mundoView.enviarDTOs(servidor);
+                if (mundoActualizado)
+                {
+                    //VISTA:
+                    mundo.interpolarPosicion((float) timeStep / Settings.FIXED_TimeStep);
+                    mundoView.radar();
+                    mundoView.enviarDTOs(servidor);
 
-                mundo.interpolarPosicion((float) timeStep / Settings.FIXED_TimeStep);
+                    mundoActualizado = false;
+                }
             }
             try { Thread.sleep((long)(1)); }
             catch (InterruptedException e) { logger.error("ERROR: Updateando la red: ", e); return; }
