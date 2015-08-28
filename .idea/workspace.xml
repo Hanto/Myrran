@@ -16,35 +16,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7d314d5-d115-4c47-b321-a6ac893ae3ac" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/RayEnvolvente6.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/Huellas.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/Huellas.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/MapaGraph/IndexedMapaGraph.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/MapaGraph/IndexedMapaGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/MapaGraph/IndexedMapaGraphI.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/MapaGraph/IndexedMapaGraphI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/NodeGraph/IndexedNodeGraph.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/NodeGraph/IndexedNodeGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Geo/Mapa.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Geo/Mapa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesTipos/MobI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesTipos/MobI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/MobNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/MobNotificador.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/MobNotificador.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/MobNotificador.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesTipos/PCI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesTipos/PCI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PCNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PCNotificador.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCNotificador.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCNotificador.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesTipos/ProyectilI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesTipos/ProyectilI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/RayEnvolvente.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/RayEnvolvente.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetConfiguration.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetConfiguration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetDoble.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetDoble.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/RayTargetSingle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/SeekHuellas.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeekHuellas/SeekHuellas.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SteeringFactory/SteeringCompuestoFactory.java" />
+      <change type="DELETED" beforePath="D:\Documents\Myrran\MyrranMP\MyrranServidor\src\Model\Classes\AI\SimpleBehaviors\SeparationMuros\RayEnvolvente6.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\Documents\Myrran\MyrranMP\MyrranCore\src\Interfaces\EntidadesPropiedades\SteerableAgent.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesPropiedades/SteerableAgentI.java" />
-      <change type="MOVED" beforePath="D:\Documents\Myrran\MyrranMP\MyrranCore\src\Interfaces\EntidadesPropiedades\SteerableLocation.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/EntidadesPropiedades/SteerableLocationI.java" />
-      <change type="MOVED" beforePath="D:\Documents\Myrran\MyrranMP\MyrranCore\src\Model\AI\Steering\AbstractSteerableAgent.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/SteerableAgent.java" />
-      <change type="MOVED" beforePath="D:\Documents\Myrran\MyrranMP\MyrranCore\src\Model\AI\Steering\AbstractSteerableLocation.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/SteerableLocation.java" />
-      <change type="MOVED" beforePath="D:\Documents\Myrran\MyrranMP\MyrranServidor\src\Model\Classes\Geo\GeoGraph\MapaGraph\AbstractMapaGraph.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/MapaGraph/MapaGraph.java" />
-      <change type="MOVED" beforePath="D:\Documents\Myrran\MyrranMP\MyrranServidor\src\Model\Classes\Geo\GeoGraph\NodeGraph\AbstractNodeGraph.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/GeoGraph/NodeGraph/NodeGraph.java" />
     </list>
     <ignored path="MyrranServidor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -123,20 +96,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="PlayerView.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="PlayerView.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.43282148">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="SeparationMuros.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="SeparationMuros.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/SeparationMuros.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
+                <state vertical-scroll-proportion="0.36948177">
                   <caret line="44" column="41" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
                   <folding />
                 </state>
@@ -2131,12 +2104,6 @@
       <option name="number" value="Default" />
       <updated>1396881454118</updated>
     </task>
-    <task id="LOCAL-00109" summary="v1.406 Habilitado Tween Engine, ejemplo con la camara">
-      <created>1405440620190</created>
-      <option name="number" value="00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1405440620190</updated>
-    </task>
     <task id="LOCAL-00110" summary="v1.407 creacion Maquina de Estados">
       <created>1405495704879</created>
       <option name="number" value="00110" />
@@ -2425,7 +2392,13 @@
       <option name="project" value="LOCAL" />
       <updated>1440757908091</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="v1.454 Optimizaciones de rendimiento&#10;-Huellas, para quitar elementos se empieza por atras para que el coste de quitar elementos sea siempre 0;&#10;-Rayo envolvente implementado para Vector2, por rendimiento, el origen de los rayos 2-6 es un puntero al rayo 0;&#10;">
+      <created>1440769221123</created>
+      <option name="number" value="00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1440769221123</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2529,7 +2502,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="v1.429 seguimos con los problemas con Github" />
     <MESSAGE value="v1.43 Actualizado LibGDX, GDX-AI, Box2dLights" />
     <MESSAGE value="v1.431 Toques finales al refactor del campo de vision&#10;-eliminacion antiguo codigo en clienteInput del PCView&#10;-Maquina de estados ahora cuando mueves direcciones contrarias conserva la direccion actual de movimiento, y cuando se suelta una de las contrarias se movera en la que quede" />
     <MESSAGE value="v1.432 Proyectiles en el Cliente&#10;-Creado TipoSpell BOLT&#10;-Creado interface general IDentificable que devuelve el ID unico de cada unidad, sustituye el connectionID en el caso de los players&#10;-Divididos los recursos de los spells en 3, los base donde estan las texturas, los recursos de los tipoSpells, y los recursos de los spells, asi pueden referenciarse unos a otros sin petar&#10;-Ahora el TipoSpellsRecursos y el SpellRecursos capturan de los XML, las animaciones e iconos que usan los spells&#10;-Creado interface Consumible que define entidades con tiempo de vida limitado, como los proyectiles&#10;-Por ahora todos los skills y botones provisionales se crean en el controlador del cliente&#10;-Cuerpo se añaden los metodos getCentroXInterpolado y getCentroYInterpolado&#10;-Interface EspacialInterpolado para aquellos espaciales que interpolan posicion, como en el caso del player&#10;-Se crea estructura de datos ListaMapa, que incluye una Lista y un Mapa en su interior, ocupa mas memoria para ganar velocidad, segun lo que queramos usa el metodo mas optimo, usa la lista para iterar, o el mapa para buscar un elemento&#10;-Creado Proyectil Model y ProyectilView en el cliente&#10;-Creado interfaz ProyectilStats que contiene los stats exclusivos del proyectil&#10;-Creado factoria para crear proyectilViews&#10;-PantallaLibGDX ahora se llama Updater&#10;&#10;" />
@@ -2554,7 +2526,8 @@
     <MESSAGE value="v1.451 Mejora Separation Muro, ahora cuando el choque con un muro es inminente se para&#10;-El rayo de visiblidad tiene grosor igual al anchode la unidad&#10;-El Separation muro deja la velocidad a 0 del agente cuando el choque es inminente, en caso contrario repulsion igual a ley gravitacion universal, con una fuerza que igual la del max Aceleracion del agente a 4 pixeles" />
     <MESSAGE value="v1.452 Optimizaciones varias:&#10;-ListaPorCuadrantes usa integers como key en lugar de Strings, y para generarlos hay un nuevo metodo (GenerarKey)&#10;-ListaPorCuadrantes tiene el array de offsets adyacentes declarado como statico para no tener que crearlo con cada iterator&#10;-Creados 2 tipos de rayosTarget, el single ray, y el doble rayo paralelo&#10;-SeparationMuros ahora calcula la distancia minima a la que tiene que parar la unidad para que no se teleporte dentro del muro, segun su velocidad y el timeStep de la simulacion" />
     <MESSAGE value="v1.453 Optimizaciones Varias, ArrayCuadrantes, DTOs&#10;-El mapa por cuadrantes ha sido reimplementado como un array lo que mejora enormemente su rendimiento&#10;-Los dtos de envio de datos del bufferCampoVision, no se creean cada vez, si no que estan instanciados por la propia clase&#10;-Celda instancia una unica vez de forma statica el DAO que le devuelve los datos de un terreno, para no instanciar con cada consulta un nuevo DAO&#10;-El Mapa cuando tiene que acceder a datos de terreno, lo hace a traves del terreno, nunca pilla su ID y luego lo descodifica con el DAO&#10;-La iniciliazacion del mapa se hace sin usar los setters para no crear millones de notificaciones, y la hace el mapa, no el mundo (por ahora)&#10;-El detector de muros no usa el punto, para no tener que instanciarlo y destruirlo, todos los calculos se hacen con ints&#10;-El rayo envolvente de 6 direcciones no calcula cada rayo independientemente, solo calcula las 2 diagonales, para los demas, usa el vector ya calculado y lo multiplica por -1&#10;-En el updater solo se actualizan Radares y envianDTOs si el mundo ha sido actualizado" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.453 Optimizaciones Varias, ArrayCuadrantes, DTOs&#10;-El mapa por cuadrantes ha sido reimplementado como un array lo que mejora enormemente su rendimiento&#10;-Los dtos de envio de datos del bufferCampoVision, no se creean cada vez, si no que estan instanciados por la propia clase&#10;-Celda instancia una unica vez de forma statica el DAO que le devuelve los datos de un terreno, para no instanciar con cada consulta un nuevo DAO&#10;-El Mapa cuando tiene que acceder a datos de terreno, lo hace a traves del terreno, nunca pilla su ID y luego lo descodifica con el DAO&#10;-La iniciliazacion del mapa se hace sin usar los setters para no crear millones de notificaciones, y la hace el mapa, no el mundo (por ahora)&#10;-El detector de muros no usa el punto, para no tener que instanciarlo y destruirlo, todos los calculos se hacen con ints&#10;-El rayo envolvente de 6 direcciones no calcula cada rayo independientemente, solo calcula las 2 diagonales, para los demas, usa el vector ya calculado y lo multiplica por -1&#10;-En el updater solo se actualizan Radares y envianDTOs si el mundo ha sido actualizado" />
+    <MESSAGE value="v1.454 Optimizaciones de rendimiento&#10;-Huellas, para quitar elementos se empieza por atras para que el coste de quitar elementos sea siempre 0;&#10;-Rayo envolvente implementado para Vector2, por rendimiento, el origen de los rayos 2-6 es un puntero al rayo 0;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.454 Optimizaciones de rendimiento&#10;-Huellas, para quitar elementos se empieza por atras para que el coste de quitar elementos sea siempre 0;&#10;-Rayo envolvente implementado para Vector2, por rendimiento, el origen de los rayos 2-6 es un puntero al rayo 0;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2919,34 +2892,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/SeparationMuros.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="41" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/RayEnvolvente6.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06010929">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/AI/Steering/SteerableAgent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/RayEnvolvente.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -2977,8 +2926,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43282148">
+        <state vertical-scroll-proportion="0.0">
           <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/RayEnvolvente.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/AI/SimpleBehaviors/SeparationMuros/SeparationMuros.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36948177">
+          <caret line="44" column="41" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
           <folding />
         </state>
       </provider>
