@@ -1,7 +1,7 @@
 package Model.Classes.AI.SimpleBehaviors.SeekHuellas;
 
 
-import Interfaces.EntidadesPropiedades.SteerableAgent;
+import Interfaces.EntidadesPropiedades.SteerableAgentI;
 import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -14,7 +14,7 @@ public class RayTargetDoble extends RayTargetConfiguration
     private final float grados90 = MathUtils.PI * 0.5f;
     private Vector2 vector;
 
-    public RayTargetDoble(SteerableAgent owner, int ancho)
+    public RayTargetDoble(SteerableAgentI owner, int ancho)
     {
         this.ancho = ancho;
         this.owner = owner;

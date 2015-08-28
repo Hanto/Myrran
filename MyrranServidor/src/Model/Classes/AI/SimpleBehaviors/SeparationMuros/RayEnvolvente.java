@@ -1,80 +1,64 @@
 package Model.Classes.AI.SimpleBehaviors.SeparationMuros;
 
 import com.badlogic.gdx.ai.steer.Steerable;
-import com.badlogic.gdx.ai.steer.utils.rays.RayConfigurationBase;
+import com.badlogic.gdx.ai.steer.utils.RayConfiguration;
 import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector;
+import com.badlogic.gdx.math.Vector2;
 
-public class RayEnvolvente<T extends Vector<T>> extends RayConfigurationBase<T>
+public class RayEnvolvente implements RayConfiguration<Vector2>
 {
-    private float longitud;
-    private final float angulo = 60*MathUtils.degreesToRadians;
-    private T vector;
+    protected Steerable<Vector2> owner;
+    protected Ray<Vector2>[] rays;
 
-    public RayEnvolvente(Steerable<T> owner)
+    private float longitud;
+    private final float angulo = 60* MathUtils.degreesToRadians;
+    private Vector2 vector;
+
+    public RayEnvolvente(Steerable owner)
     {
-        super(owner, 6);
         this.longitud = owner.getBoundingRadius() + owner.getBoundingRadius();
-        this.vector = owner.newVector();
+        this.vector = new Vector2();
+        this.owner = owner;
+        this.rays = new Ray[6];
+
+        rays[0] = new Ray(new Vector2(), new Vector2());
+        for (int i = 1; i < 6; i++)
+            this.rays[i] = new Ray(rays[0].start, new Vector2());
     }
 
-
-    @Override public Ray<T>[] updateRays()
+    @Override public Ray<Vector2>[] updateRays()
     {
-        T ownerPosition = owner.getPosition();
-        T ownerVelocity = owner.getLinearVelocity();
-
-        float anguloVeloticy = owner.vectorToAngle(ownerVelocity);
+        float anguloVeloticy = owner.vectorToAngle(owner.getLinearVelocity());
 
         //Rayo Central Delantero:
-        rays[0].start.set(ownerPosition);
-        rays[3].start.set(ownerPosition);
-        vector.set(ownerVelocity).nor();
+        rays[0].start.set(owner.getPosition());
+        vector.set(owner.getLinearVelocity()).nor();
 
-        rays[0].end.set(vector).scl(longitud).add(ownerPosition);
-        rays[3].end.set(vector).scl(-longitud).add(ownerPosition);
+        rays[0].end.set(vector).scl(longitud).add(owner.getPosition());
+        rays[3].end.set(vector).scl(-longitud).add(owner.getPosition());
 
         //Rayo Izquierdo Delantero:
-        rays[1].start.set(ownerPosition);
-        rays[4].start.set(ownerPosition);
         owner.angleToVector(vector, anguloVeloticy - angulo);
 
-        rays[1].end.set(vector).scl(longitud).add(ownerPosition);
-        rays[4].end.set(vector).scl(-longitud).add(ownerPosition);
+        rays[1].end.set(vector).scl(longitud).add(owner.getPosition());
+        rays[4].end.set(vector).scl(-longitud).add(owner.getPosition());
 
         //Rayo Derecho Delantero:
-        rays[2].start.set(ownerPosition);
-        rays[5].start.set(ownerPosition);
         owner.angleToVector(vector, anguloVeloticy + angulo);
 
-        rays[2].end.set(vector).scl(longitud).add(ownerPosition);
-        rays[5].end.set(vector).scl(-longitud).add(ownerPosition);/*
-
-        //Rayo Central Delantero:
-        rays[0].start.set(ownerPosition);
-        rays[0].end.set(ownerVelocity).nor().scl(longitud).add(ownerPosition);
-
-        //Rayo Izquierdo Delantero:
-        rays[1].start.set(ownerPosition);
-        owner.angleToVector(rays[1].end, anguloVeloticy - angulo).scl(longitud).add(ownerPosition);
-
-        //Rayo Derecho Delantero:
-        rays[2].start.set(ownerPosition);
-        owner.angleToVector(rays[2].end, anguloVeloticy + angulo).scl(longitud).add(ownerPosition);
-
-        //Rayo Central Trasero:
-        rays[3].start.set(ownerPosition);
-        rays[3].end.set(ownerVelocity).nor().scl(-longitud).add(ownerPosition);
-
-        //Rayo Izquiero Trasero:
-        rays[4].start.set(ownerPosition);
-        owner.angleToVector(rays[4].end, anguloVeloticy - angulo).scl(-longitud).add(ownerPosition);
-
-        //Rayo Derecho Trasero:
-        rays[5].start.set(ownerPosition);
-        owner.angleToVector(rays[5].end, anguloVeloticy + angulo).scl(-longitud).add(ownerPosition);*/
+        rays[2].end.set(vector).scl(longitud).add(owner.getPosition());
+        rays[5].end.set(vector).scl(-longitud).add(owner.getPosition());
 
         return rays;
     }
+
+    public Steerable<Vector2> getOwner ()
+    {   return owner; }
+
+    public void setOwner (Steerable<Vector2> owner)
+    {   this.owner = owner; }
+
+    public Ray<Vector2>[] getRays ()
+    {   return rays; }
 }

@@ -1,12 +1,12 @@
 package Model.AI.Steering;
 
-import Interfaces.EntidadesPropiedades.SteerableLocation;
+import Interfaces.EntidadesPropiedades.SteerableLocationI;
 import Model.AbstractModel;
 import Model.Settings;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class AbstractSteerableLocation extends AbstractModel implements SteerableLocation
+public abstract class SteerableLocation extends AbstractModel implements SteerableLocationI
 {
     protected Vector2 posicion = new Vector2();             // Espacial:
     protected int ultimoCuadranteX;

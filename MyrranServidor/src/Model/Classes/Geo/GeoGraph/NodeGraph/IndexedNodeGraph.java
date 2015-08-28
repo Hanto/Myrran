@@ -5,7 +5,7 @@ import Model.Settings;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.utils.Array;
 
-public class IndexedNodeGraph extends AbstractNodeGraph<IndexedNodeGraph>
+public class IndexedNodeGraph extends NodeGraph<IndexedNodeGraph>
 {
     //public final int x;
     //public final int y;

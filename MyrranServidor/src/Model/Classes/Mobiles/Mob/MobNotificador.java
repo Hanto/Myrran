@@ -2,9 +2,9 @@ package Model.Classes.Mobiles.Mob;// Created by Hanto on 13/08/2015.
 
 import DTO.DTOsMob;
 import Interfaces.EntidadesTipos.MobI;
-import Model.AI.Steering.AbstractSteerableAgent;
+import Model.AI.Steering.SteerableAgent;
 
-public abstract class MobNotificador extends AbstractSteerableAgent implements MobI
+public abstract class MobNotificador extends SteerableAgent implements MobI
 {
     private DTOsMob.PosicionMob posicionDTO;
     private DTOsMob.OrientacionMob orientacionDTO;

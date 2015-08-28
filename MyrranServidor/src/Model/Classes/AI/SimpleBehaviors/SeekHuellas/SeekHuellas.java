@@ -1,6 +1,6 @@
 package Model.Classes.AI.SimpleBehaviors.SeekHuellas;
 
-import Interfaces.EntidadesPropiedades.SteerableAgent;
+import Interfaces.EntidadesPropiedades.SteerableAgentI;
 import Model.AI.Steering.Huella;
 import com.badlogic.gdx.ai.steer.Limiter;
 import com.badlogic.gdx.ai.steer.Steerable;
@@ -14,12 +14,12 @@ import java.util.Iterator;
 
 public class SeekHuellas extends SteeringBehavior<Vector2>
 {
-    protected SteerableAgent target;
+    protected SteerableAgentI target;
     protected Vector2 coordenadasTarget = new Vector2();
     protected RaycastCollisionDetector<Vector2> rayDetectorMuros;
     protected RayTargetConfigurationI rayTarget;
 
-    public SeekHuellas(Steerable<Vector2> owner, SteerableAgent target,
+    public SeekHuellas(Steerable<Vector2> owner, SteerableAgentI target,
                        RaycastCollisionDetector<Vector2> rayDetectorMuros,
                        RayTargetConfigurationI rayTargetConfiguration)
     {
@@ -76,7 +76,7 @@ public class SeekHuellas extends SteeringBehavior<Vector2>
     public Steerable<Vector2> getTarget ()
     {   return target; }
 
-    public SeekHuellas setTarget (SteerableAgent target)
+    public SeekHuellas setTarget (SteerableAgentI target)
     {   this.target = target; return this; }
 
     // STEERINGBEHAVIOR:

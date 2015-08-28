@@ -1,6 +1,6 @@
 package Model.Classes.AI.SimpleBehaviors.SeekHuellas;
 
-import Interfaces.EntidadesPropiedades.SteerableAgent;
+import Interfaces.EntidadesPropiedades.SteerableAgentI;
 import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.math.Vector2;
 
@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class RayTargetSingle extends RayTargetConfiguration
 {
-    public RayTargetSingle(SteerableAgent owner, int ancho)
+    public RayTargetSingle(SteerableAgentI owner, int ancho)
     {
         this.owner = owner;
         this.setNumRays(1);

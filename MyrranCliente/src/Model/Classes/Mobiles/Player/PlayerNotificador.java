@@ -2,12 +2,12 @@ package Model.Classes.Mobiles.Player;// Created by Hanto on 21/07/2014.
 
 import DTO.DTOsPlayer;
 import Interfaces.EntidadesTipos.PlayerI;
-import Model.AI.Steering.AbstractSteerableAgent;
+import Model.AI.Steering.SteerableAgent;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.ArrayList;
 
-public abstract class PlayerNotificador extends AbstractSteerableAgent implements PlayerI
+public abstract class PlayerNotificador extends SteerableAgent implements PlayerI
 {
     //Stats Excluyentes para enviar por RED al servidor::
     private DTOsPlayer.Animacion animacionDTO = new DTOsPlayer.Animacion();

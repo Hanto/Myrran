@@ -5,7 +5,7 @@ import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedNode;
 import com.badlogic.gdx.utils.Array;
 
-public abstract class AbstractNodeGraph<N extends AbstractNodeGraph<N>> implements IndexedNode<N>
+public abstract class NodeGraph<N extends NodeGraph<N>> implements IndexedNode<N>
 {
     // El tipo de nodo es un parametro ya que puede ser tanto un nodo Indexed A* como un nodo Hierarquico
     //------------------------------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ public abstract class AbstractNodeGraph<N extends AbstractNodeGraph<N>> implemen
     public CeldaI celda;
     protected Array<Connection<N>>connections;
 
-    public AbstractNodeGraph(int x, int y, CeldaI celda, Array<Connection<N>> connections)
+    public NodeGraph(int x, int y, CeldaI celda, Array<Connection<N>> connections)
     {
         this.x = x;
         this.y = y;

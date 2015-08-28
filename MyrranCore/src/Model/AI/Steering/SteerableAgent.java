@@ -1,6 +1,6 @@
 package Model.AI.Steering;// Created by Hanto on 12/08/2015.
 
-import Interfaces.EntidadesPropiedades.SteerableAgent;
+import Interfaces.EntidadesPropiedades.SteerableAgentI;
 import Model.AbstractModel;
 import Model.Settings;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.Iterator;
 
-public abstract class AbstractSteerableAgent extends AbstractModel implements SteerableAgent
+public abstract class SteerableAgent extends AbstractModel implements SteerableAgentI
 {
     protected Vector2 posicion = new Vector2();             // Espacial:
     protected int ultimoCuadranteX;
@@ -142,7 +142,7 @@ public abstract class AbstractSteerableAgent extends AbstractModel implements St
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public AbstractSteerableAgent()
+    public SteerableAgent()
     {   steeringOutput = new SteeringAcceleration(new Vector2()); }
 
     // CALCULO STEERING:

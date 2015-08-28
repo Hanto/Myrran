@@ -32,7 +32,7 @@ public class Huellas implements Iterable<Huella>
     public void actualizar (float delta)
     {
         Huella huella;
-        Iterator<Huella> iterator = listaHuellas.iterator();
+        Iterator<Huella> iterator = listaHuellas.descendingIterator();
         while (iterator.hasNext())
         {
             huella = iterator.next();

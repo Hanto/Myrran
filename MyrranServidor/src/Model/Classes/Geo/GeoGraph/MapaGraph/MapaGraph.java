@@ -1,24 +1,24 @@
 package Model.Classes.Geo.GeoGraph.MapaGraph;// Created by Hanto on 14/08/2015.
 
 import Model.AbstractModel;
-import Model.Classes.Geo.GeoGraph.NodeGraph.AbstractNodeGraph;
+import Model.Classes.Geo.GeoGraph.NodeGraph.NodeGraph;
 import Model.Settings;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedGraph;
 import com.badlogic.gdx.utils.Array;
 
-public abstract class AbstractMapaGraph<N extends AbstractNodeGraph<N>> extends AbstractModel implements
+public abstract class MapaGraph<N extends NodeGraph<N>> extends AbstractModel implements
         IndexedGraph<N>, IndexedMapaGraphI<N>
 {
     protected Array<N> listaNodos;
 
-    public AbstractMapaGraph()
+    public MapaGraph()
     {   this(new Array<N>()); }
 
-    public AbstractMapaGraph(int capacity)
+    public MapaGraph(int capacity)
     {   this(new Array<N>(capacity)); }
 
-    public AbstractMapaGraph(Array<N> nodes)
+    public MapaGraph(Array<N> nodes)
     {   this.listaNodos = nodes; }
 
 
