@@ -17,6 +17,9 @@ public class IndexedConnectionGraph implements Connection<IndexedNodeGraph>
         this.toNode = toNode;
     }
 
+    public int getTamañoMinimo()
+    {   return toNode.tamañoMinimo; }
+
     @Override public float getCost ()
     {   return 1f; }
 

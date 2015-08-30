@@ -3,11 +3,13 @@ package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 import DTO.DTOsMapa;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
+import Model.Classes.Geo.GeoGraph.ConnectionGraph.IndexedConnectionGraph;
 import Model.Classes.Geo.GeoGraph.MapaGraph.IndexedMapaGraph;
 import Model.Classes.Geo.GeoGraph.NodeGraph.IndexedNodeGraph;
 import Model.Settings;
+import com.badlogic.gdx.utils.Array;
 
-public class Mapa extends IndexedMapaGraph implements MapaI
+public class Mapa extends IndexedMapaGraph<IndexedNodeGraph> implements MapaI
 {
     private Celda[][] matriz = new Celda[Settings.MAPA_Max_TilesX][Settings.MAPA_Max_TilesY];
 
@@ -31,13 +33,15 @@ public class Mapa extends IndexedMapaGraph implements MapaI
         {
             for (int y = 0; y< Settings.MAPA_Max_TilesY; y++)
             {   matriz[x][y].setTerreno(0,(short)0); }
-            //{   setTerreno(x,y,0,(short)0); }
         }
 
         for (int x=0; x < Settings.MAPA_Max_TilesX; x++)
         {
             for (int y=0; y < Settings.MAPA_Max_TilesY; y++)
-            {   listaNodos.add(new IndexedNodeGraph(x, y, matriz[x][y], 4)); }
+            {
+                listaNodos.add(new IndexedNodeGraph(x, y, 5));
+                crearConexiones(x, y);
+            }
         }
     }
 
@@ -83,5 +87,25 @@ public class Mapa extends IndexedMapaGraph implements MapaI
             else return false;
         }
         else return true;
+    }
+
+    private void crearConexiones(int x, int y)
+    {
+        IndexedNodeGraph nodo = getNode(x, y);
+        Array<IndexedConnectionGraph> conexiones = new Array<>(4);
+
+        if (x > 0) nodo.getConnections().add
+                (new IndexedConnectionGraph(this, nodo, getNode(x-1, y)));
+
+        if (y > 0) nodo.getConnections().add
+                (new IndexedConnectionGraph(this, nodo, getNode(x, y - 1)));
+
+        if (x < Settings.MAPA_Max_TilesX -1) nodo.getConnections().add
+                (new IndexedConnectionGraph(this, nodo, getNode(x + 1, y)));
+
+        if (y < Settings.MAPA_Max_TilesY -1) nodo.getConnections().add
+                (new IndexedConnectionGraph(this, nodo, getNode(x, y + 1)));
+
+        
     }
 }
