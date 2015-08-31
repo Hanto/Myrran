@@ -143,7 +143,7 @@ public abstract class SteerableAgent extends AbstractModel implements SteerableA
     //------------------------------------------------------------------------------------------------------------------
 
     public SteerableAgent()
-    {   steeringOutput = new SteeringAcceleration(new Vector2()); }
+    {   steeringOutput = new SteeringAcceleration<>(new Vector2()); }
 
     // CALCULO STEERING:
     //------------------------------------------------------------------------------------------------------------------

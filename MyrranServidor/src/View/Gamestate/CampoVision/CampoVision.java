@@ -9,11 +9,10 @@ import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
-import Model.AbstractModel;
 import Interfaces.Network.ServidorI;
+import Model.AbstractModel;
 import Model.Settings;
 import View.Gamestate.MundoView;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
@@ -38,7 +37,6 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     private List<MobI> listaMobsCercanos = new ArrayList<>();
 
     @Override public int getConnectionID()              { return connectionID; }
-    @Override public Vector2 getPosition()              { return targetLock.getEspacial().getPosition(); }
     @Override public float getX()                       { return targetLock.getEspacial().getX(); }
     @Override public float getY()                       { return targetLock.getEspacial().getY(); }
     @Override public int getCuadranteX()                { return (int)(getX() / (float)(Settings.MAPTILE_NumTilesX * Settings.TILESIZE)); }
