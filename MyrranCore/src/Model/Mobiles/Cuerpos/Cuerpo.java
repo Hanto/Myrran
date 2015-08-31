@@ -55,12 +55,12 @@ public class Cuerpo implements Disposable
     {
         if (calculosInterpolados)
         {
-            body.setTransform(x * PIXEL_METROS + boxAncho / 2, y * PIXEL_METROS + boxAlto / 2, getAnguloInterpolado());
+            body.setTransform(x * PIXEL_METROS, y * PIXEL_METROS, getAnguloInterpolado());
             boxPosicionAnterior.set(body.getPosition().x, body.getPosition().y);
             boxPosicionInterpolada.set(body.getPosition().x, body.getPosition().y);
         }
         else
-        {   body.setTransform(x * PIXEL_METROS + boxAncho / 2, y * PIXEL_METROS + boxAlto / 2, body.getAngle()); }
+        {   body.setTransform(x * PIXEL_METROS, y * PIXEL_METROS, body.getAngle()); }
     }
 
     public int getAncho()
@@ -69,34 +69,34 @@ public class Cuerpo implements Disposable
     public int getAlto()
     {   return (int)(boxAlto * METROS_PIXEL); }
 
-    public int getBodyCentroX()
+    public int getBodyX()
     {   return (int)(body.getPosition().x * METROS_PIXEL); }
 
-    public int getBodyCentroY()
+    public int getBodyY()
     {   return (int)(body.getPosition().y * METROS_PIXEL); }
 
     public int getX()
-    {
-        if (calculosInterpolados) return (int)((boxPosicionInterpolada.x - boxAncho /2) * METROS_PIXEL);
-        else return (int)((body.getPosition().x - boxAncho /2) * METROS_PIXEL);
-    }
-
-    public int getY()
-    {
-        if (calculosInterpolados) return (int)((boxPosicionInterpolada.y - boxAlto /2) * METROS_PIXEL);
-        else return (int)((body.getPosition().y - boxAlto /2) * METROS_PIXEL);
-    }
-
-    public int getCentroX()
     {
         if (calculosInterpolados) return (int)(boxPosicionInterpolada.x * METROS_PIXEL);
         else return (int)(body.getPosition().x * METROS_PIXEL);
     }
 
-    public int getCentroY()
+    public int getY()
     {
         if (calculosInterpolados) return (int)(boxPosicionInterpolada.y * METROS_PIXEL);
         else return (int)(body.getPosition().y * METROS_PIXEL);
+    }
+
+    public int getEsquinaX()
+    {
+        if (calculosInterpolados) return (int)((boxPosicionInterpolada.x - boxAncho /2) * METROS_PIXEL);
+        else return (int)((body.getPosition().x - boxAncho /2) * METROS_PIXEL);
+    }
+
+    public int getEsquinaY()
+    {
+        if (calculosInterpolados) return (int)((boxPosicionInterpolada.y - boxAlto /2) * METROS_PIXEL);
+        else return (int)((body.getPosition().y - boxAlto /2) * METROS_PIXEL);
     }
 
     public void setDireccion(float grados)
@@ -113,7 +113,7 @@ public class Cuerpo implements Disposable
 
     public void setDireccion(float x, float y)
     {
-        direccion.set(x - getBodyCentroX(), y - getBodyCentroY());
+        direccion.set(x - getBodyX(), y - getBodyY());
         direccion.nor();
 
         body.setLinearVelocity(direccion.x * boxVelocidad, direccion.y * boxVelocidad);
@@ -131,7 +131,7 @@ public class Cuerpo implements Disposable
 
     public void setDireccionVelocidad(float x, float y, float velocidad)
     {
-        direccion.set(x - getBodyCentroX(), y - getBodyCentroY());
+        direccion.set(x - getBodyX(), y - getBodyY());
         direccion.nor();
         boxVelocidad = velocidad * PIXEL_METROS;
 

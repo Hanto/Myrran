@@ -1,7 +1,6 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 04/08/2015.
 
 import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.Corporeo;
 import Interfaces.EntidadesPropiedades.Espacial;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
@@ -28,15 +27,10 @@ public class Bolt extends TipoSpell
 
         float origenX, origenY;
 
-        if (caster instanceof Corporeo)
+        if (caster instanceof Espacial)
         {
-            origenX = ((Corporeo) caster).getCuerpo().getCentroX() - ANCHO/2;
-            origenY = ((Corporeo) caster).getCuerpo().getCentroY() - ALTO/2;
-        }
-        else if (caster instanceof Espacial)
-        {
-            origenX = ((Espacial) caster).getX() - ANCHO/2;
-            origenY = ((Espacial) caster).getY() - ALTO/2;
+            origenX = ((Espacial) caster).getX();
+            origenY = ((Espacial) caster).getY();
         }
         else return;
 

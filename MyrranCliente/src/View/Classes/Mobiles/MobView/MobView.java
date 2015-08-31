@@ -20,6 +20,9 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     protected int iD;
     protected Pixie actor;
 
+    private int rAncho;
+    private int rAlto;
+
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -34,11 +37,12 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
         this.mob = mob;
         this.iD = mob.getID();
         this.actor = new Pixie(RSC.pixieMobRecursosDAO.getPixieMobRecursosDaoDAO().getPixieMob("GrimReaper"));
+
+        crearActor();
+
         this.setPosition(mob.getX(), mob.getY());
 
         mob.añadirObservador(this);
-
-        crearActor();
     }
 
     @Override public void dispose()
@@ -52,12 +56,14 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
         this.addActor(actor);
         this.setWidth(actor.getWidth());
         this.setHeight(actor.getHeight());
+        this.rAncho = (int)actor.getWidth()/2;
+        this.rAlto = (int)actor.getHeight()/2;
     }
 
     public void setPosition(int x, int y)
     {
         this.clearActions();
-        this.addAction(Actions.moveTo(x, y, Settings.FIXED_TimeStep + 0.03f, Interpolation.linear));
+        this.addAction(Actions.moveTo(x-rAncho, y-rAlto, Settings.FIXED_TimeStep + 0.03f, Interpolation.linear));
     }
 
     public void setOrientacion(float angulo)

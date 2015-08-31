@@ -12,8 +12,8 @@ public abstract class RayTargetConfiguration implements RayTargetConfigurationI
     protected SteerableAgentI owner;
     protected Ray<Vector2>[] rays;
 
-    public SteerableAgentI getOwner()            { return owner; }
-    public void setOwner(SteerableAgentI owner)  { this.owner = owner; }
+    public SteerableAgentI getOwner()           { return owner; }
+    public void setOwner(SteerableAgentI owner) { this.owner = owner; }
     public Iterator<Ray<Vector2>> getRays()     { return Arrays.asList(rays).iterator(); }
 
     public void setNumRays(int numRays)

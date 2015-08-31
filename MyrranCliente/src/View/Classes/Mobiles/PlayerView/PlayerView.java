@@ -20,15 +20,17 @@ import static Model.Settings.PIXEL_METROS;
 
 public class PlayerView extends Group implements PropertyChangeListener, Disposable
 {
-    public Player player;
+    protected Player player;
+    protected PixiePC actor;
+    protected NameplateView nameplateView;
+    protected Texto nombre;
+    protected PointLight luz;
 
-    public PixiePC actor;
-    public NameplateView nameplateView;
-    public Texto nombre;
-    public PointLight luz;
+    private int rAncho;
+    private int rAlto;
 
-    public float getCenterX()               { return (player.getX()+this.getWidth()/2); }
-    public float getCenterY()               { return (player.getY()+this.getHeight()/2); }
+    public float getCenterX()               { return player.getX(); }
+    public float getCenterY()               { return player.getY(); }
 
     public PlayerView (Player player, PixiePC pixieActor, NameplateView nameplate, PointLight luz)
     {
@@ -36,20 +38,20 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
         this.actor = pixieActor;
         this.nameplateView = nameplate;
         this.luz = luz;
-        this.setPosition(player.getX(), player.getY());
 
         crearActor();
         crearNameplate();
         crearNombre();
         crearLuz();
 
+        this.setPosition(player.getX(), player.getY());
+
+        player.añadirObservador(this);
+
         actor.setPantalones("PantalonesGolem01");
         actor.setPeto("PetoGolem01");
         actor.setGuantes("GuantesGolem01");
         actor.setBotas("BotasGolem01");
-
-
-        player.añadirObservador(this);
     }
 
     @Override public void dispose()
@@ -69,6 +71,8 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
         this.addActor(actor);
         this.setWidth(actor.getWidth());
         this.setHeight(actor.getHeight());
+        this.rAncho = (int)actor.getWidth()/2;
+        this.rAlto = (int)actor.getHeight()/2;
     }
 
     private void crearNameplate()
@@ -108,8 +112,8 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
 
     public void setPosition (int x, int y)
     {
-        if (Math.abs(this.getX()-x) >= 1 || Math.abs(this.getY()-y) >= 1)
-        {   super.setPosition(x, y); }
+        //if (Math.abs(this.getX()-x) >= 1 || Math.abs(this.getY()-y) >= 1)
+        {   super.setPosition(x-rAncho, y-rAlto); }
     }
 
     @Override public void setPosition (float x, float y)

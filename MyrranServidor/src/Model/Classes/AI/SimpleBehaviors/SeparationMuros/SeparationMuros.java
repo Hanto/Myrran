@@ -32,7 +32,7 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
         this.toMuro = owner.newVector();
         this.colision = new Collision<>(owner.newVector(), owner.newVector());
 
-        this.aceleracionMaxima =  (2.5f*2.5f)*owner.getMaxLinearAcceleration(); //(float)Math.pow(owner.getMaxLinearSpeed(),2) / 2 + owner.getMaxLinearAcceleration();
+        this.aceleracionMaxima =  (4f*4f)*owner.getMaxLinearAcceleration(); //(float)Math.pow(owner.getMaxLinearSpeed(),2) / 2 + owner.getMaxLinearAcceleration();
         this.distanciaColision = owner.getMaxLinearSpeed() / (1f / timeStep);
     }
 

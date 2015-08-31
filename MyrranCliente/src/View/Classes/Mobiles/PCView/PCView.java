@@ -5,9 +5,9 @@ import DTO.DTOsPlayer;
 import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.EntidadesTipos.PCI;
 import Model.Settings;
+import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
-import View.Classes.Actores.NameplateView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -26,6 +26,9 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     protected NameplateView nameplateView;
     protected Texto nombre;
 
+    private int rAncho;
+    private int rAlto;
+
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -41,13 +44,14 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
         this.iD = pc.getID();
         this.actor = pixieActor;
         this.nameplateView = nameplate;
-        this.setPosition(pc.getX(), pc.getY());
-
-        pc.añadirObservador(this);
 
         crearActor();
         crearNameplate();
         crearNombre();
+
+        this.setPosition(pc.getX(), pc.getY());
+
+        pc.añadirObservador(this);
     }
 
     @Override public void dispose()
@@ -68,6 +72,8 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
         this.addActor(actor);
         this.setWidth(actor.getWidth());
         this.setHeight(actor.getHeight());
+        this.rAncho = (int)actor.getWidth()/2;
+        this.rAlto = (int)actor.getHeight()/2;
     }
 
     private void crearNameplate()
@@ -89,8 +95,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     {
         //TODO hay que hacerlo por setPosition y en cambio mover el pc interpoladamente, el destino sin decimales
         this.clearActions();
-        this.addAction(Actions.moveTo(x, y, Settings.FIXED_TimeStep+0.03f, Interpolation.linear));
-        //setPosition(x,y);
+        this.addAction(Actions.moveTo(x-rAncho, y-rAlto, Settings.FIXED_TimeStep+0.03f, Interpolation.linear));
     }
 
     public void modificarHPs(int HPs)

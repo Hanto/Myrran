@@ -20,6 +20,8 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
     protected Pixie actor;
     protected PointLight luz;
 
+    private int rAncho;
+    private int rAlto;
 
     public ProyectilView(ProyectilI proyectil, Pixie pixieActor, PointLight luz)
     {
@@ -31,7 +33,7 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
         crearActor();
         if (luz != null) crearLuz();
 
-        this.proyectil.añadirObservador(this);
+        proyectil.añadirObservador(this);
     }
 
     @Override public void dispose()
@@ -49,9 +51,11 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
         this.addActor(actor);
         this.setWidth(actor.getWidth());
         this.setHeight(actor.getHeight());
-        setDireccion();
+        this.setDireccion();
         this.setColor(0, 0, 0, 0);
         this.addAction(Actions.fadeIn(0.5f));
+        this.rAncho = (int)actor.getWidth()/2;
+        this.rAlto = (int)actor.getHeight()/2;
     }
 
     private void crearLuz()
@@ -79,8 +83,7 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
     public void setPosition (int x, int y)
     {
         if (Math.abs(this.getX()-x) >= 1 || Math.abs(this.getY()-y) >= 1)
-        {   super.setPosition(x, y); }
-
+        {   super.setPosition(x-rAncho, y-rAlto); }
     }
 
     @Override public void setPosition (float x, float y)

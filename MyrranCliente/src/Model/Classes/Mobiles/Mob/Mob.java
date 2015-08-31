@@ -56,7 +56,6 @@ public class Mob extends MobNotificador implements MobI
         notificarActualizacion("orientacionMob", null, orientacionMob);
     }
 
-
     @Override public void actualizar(float delta, MundoI mundo)
     { }
 
