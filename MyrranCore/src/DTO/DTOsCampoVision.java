@@ -1,7 +1,7 @@
 package DTO;// Created by Hanto on 06/06/2015.
 
 import Interfaces.EntidadesPropiedades.Animable;
-import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Interfaces.EntidadesPropiedades.PCStats;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobI;

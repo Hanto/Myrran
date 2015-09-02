@@ -37,7 +37,7 @@ public interface MundoI extends ModelI
 
     //IA:
     public void actualizarUnidades(float delta, MundoI mundo);
-    public void actualizarFisica(float delta);
+    public void actualizarFisica(float delta, MundoI mundo);
     public void interpolarPosicion(float alpha);
 
 

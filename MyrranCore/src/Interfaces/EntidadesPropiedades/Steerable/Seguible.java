@@ -1,4 +1,4 @@
-package Interfaces.EntidadesPropiedades;
+package Interfaces.EntidadesPropiedades.Steerable;
 
 import Model.AI.Steering.Huella;
 
@@ -8,4 +8,7 @@ public interface Seguible
 {
     public Iterator<Huella> getListaHuellasIterator();
     public void setTiempoDecayHuellas (float tiempoDecayHuellas);
+
+    //UPDATE:
+    public void actualizarHuellas(float delta);
 }

@@ -1,6 +1,6 @@
 package Interfaces.EstructurasDatos;// Created by Hanto on 24/07/2015.
 
-import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 
 import java.util.Iterator;
 import java.util.List;

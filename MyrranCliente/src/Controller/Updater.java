@@ -149,7 +149,7 @@ public class Updater implements Screen
 
             player.getInput().coordenadasScreenAMundo(camara);
             mundo.actualizarUnidades(FIXED_TimeStep, mundo);
-            mundo.actualizarFisica(FIXED_TimeStep);
+            mundo.actualizarFisica(FIXED_TimeStep, mundo);
             mundo.enviarDatosAServidor(cliente);
         }
         mundo.interpolarPosicion((float) timeStep / FIXED_TimeStep);

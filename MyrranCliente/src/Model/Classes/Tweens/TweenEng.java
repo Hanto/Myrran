@@ -1,6 +1,6 @@
 package Model.Classes.Tweens;// Created by Hanto on 15/07/2014.
 
-import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;

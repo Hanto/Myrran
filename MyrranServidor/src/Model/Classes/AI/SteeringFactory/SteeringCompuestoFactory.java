@@ -1,6 +1,6 @@
 package Model.Classes.AI.SteeringFactory;
 
-import Interfaces.EntidadesPropiedades.SteerableAgentI;
+import Interfaces.EntidadesPropiedades.Steerable.SteerableAgentI;
 import Interfaces.GameState.MundoI;
 import Model.Classes.AI.FixedBehaviors.LookWhereFixed;
 import Model.Classes.AI.SimpleBehaviors.SeekHuellas.RayTargetDoble;
@@ -16,7 +16,7 @@ public enum SteeringCompuestoFactory
 {
     WALL_PURSUE_LOOK
     {
-        @Override public BlendedSteering nuevo(SteerableAgentI owner, SteerableAgentI target, MundoI mundo)
+        @Override public BlendedSteering<Vector2> nuevo(SteerableAgentI owner, SteerableAgentI target, MundoI mundo)
         {
             //SeekHuellas
             RayDetectorMuros rayDetectorMuros = new RayDetectorMuros(mundo.getMapa());
@@ -46,5 +46,5 @@ public enum SteeringCompuestoFactory
         }
     };
 
-    public abstract BlendedSteering nuevo(SteerableAgentI owner, SteerableAgentI target, MundoI mundo);
+    public abstract BlendedSteering<Vector2> nuevo(SteerableAgentI owner, SteerableAgentI target, MundoI mundo);
 }

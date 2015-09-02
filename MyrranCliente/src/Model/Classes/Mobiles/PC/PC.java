@@ -68,6 +68,7 @@ public class PC extends PCNotificador implements PCI
     @Override public void setTotalCastingTime(float castingTime)                    {}
     @Override public void setSpellIDSeleccionado(String spellID)                    {}
     @Override public void setParametrosSpell(Object parametrosDTO)                  {}
+    @Override public void actualizarCastingTime(float delta)                        {}
 
     // CASTER PERSONALIZADO: TODO
     //------------------------------------------------------------------------------------------------------------------
@@ -118,8 +119,7 @@ public class PC extends PCNotificador implements PCI
         notificarSetModificarHPs(HPs);
     }
 
-    @Override public void actualizar (float delta, MundoI mundo)
-    {
-
-    }
+    @Override public void actualizarIA(float delta, MundoI mundo) {}
+    @Override public void actualizarTimers(float delta) {}
+    @Override public void actualizarFisica(float delta, MundoI mundo) {}
 }

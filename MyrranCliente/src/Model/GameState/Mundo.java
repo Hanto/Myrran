@@ -157,16 +157,15 @@ public class Mundo extends AbstractModel implements MundoI
     {   //Actualizar a todas las unidades a partir de los datos ya interpolados
 
         //PLAYER:
-        player.actualizar(delta, mundo);
-        //PLAYERS:
-        for (PCI pc: listaMapaPlayers)
-        {   pc.actualizar(delta, mundo); }
+        player.actualizarTimers(delta);
+        player.actualizarIA(delta, mundo);
+
         //PROYECTILES:
         Iterator<ProyectilI>iterator = listaMapaProyectiles.iterator(); ProyectilI pro;
         while (iterator.hasNext())
         {
             pro = iterator.next();
-            if (pro.consumirse(delta))
+            if (pro.actualizarDuracion(delta))
             {
                 iterator.remove();
                 pro.dispose();
@@ -178,7 +177,7 @@ public class Mundo extends AbstractModel implements MundoI
     }
 
     //Salvamos los ultimos valores para poder interpolarlos
-    public void actualizarFisica(float delta)
+    public void actualizarFisica(float delta, MundoI mundo)
     {
         //PLAYER:
         player.copiarUltimaPosicion();

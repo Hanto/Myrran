@@ -1,4 +1,4 @@
-package Interfaces.EntidadesPropiedades;// Created by Hanto on 12/08/2015.
+package Interfaces.EntidadesPropiedades.Espaciales;// Created by Hanto on 12/08/2015.
 
 public interface Orientable
 {

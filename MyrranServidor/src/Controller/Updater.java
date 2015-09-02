@@ -86,14 +86,14 @@ public class Updater implements MainLoopI, Runnable
 
                     //MODEL:
                     mundo.actualizarUnidades(Settings.FIXED_TimeStep, mundo);
-                    mundo.actualizarFisica(Settings.FIXED_TimeStep);
+                    mundo.actualizarFisica(Settings.FIXED_TimeStep, mundo);
+                    mundo.checkColisiones();
 
                     mundoActualizado = true;
                 }
                 if (mundoActualizado)
                 {
                     //VISTA:
-                    mundo.interpolarPosicion((float) timeStep / Settings.FIXED_TimeStep);
                     mundoView.radar();
                     mundoView.enviarDTOs(servidor);
 
@@ -119,8 +119,8 @@ public class Updater implements MainLoopI, Runnable
         }
         if (executedRunnables.size() == 0) return false;
 
-        for (int i=0; i< executedRunnables.size(); i++)
-        {   executedRunnables.get(i).run(); }
+        for (Runnable executedRunnable : executedRunnables)
+        {   executedRunnable.run(); }
 
         executedRunnables.clear();
         return true;

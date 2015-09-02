@@ -3,7 +3,7 @@ package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 import DTO.DTOsMob;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
-import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Interfaces.EntidadesTipos.CampoVisionI;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;

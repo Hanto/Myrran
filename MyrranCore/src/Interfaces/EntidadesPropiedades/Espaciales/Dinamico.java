@@ -1,8 +1,9 @@
-package Interfaces.EntidadesPropiedades;// Created by Hanto on 21/07/2014.
+package Interfaces.EntidadesPropiedades.Espaciales;// Created by Hanto on 21/07/2014.
 
+import Interfaces.GameState.MundoI;
 import com.badlogic.gdx.math.Vector2;
 
-public interface Dinamico extends Espacial, DinamicoSimple
+public interface Dinamico extends Espacial
 {
     //GET:
     public Vector2 getVelocidad();
@@ -23,7 +24,9 @@ public interface Dinamico extends Espacial, DinamicoSimple
     public void setVelocidadAngularMax(float velocidadAngularMax);
     public void setAceleracionAngularMax(float aceleracionAngularMax);
 
-
     public void setDireccion(float x, float y);
     public void setDireccion(float grados);
+
+    //UPDATE:
+    public void actualizarFisica(float delta, MundoI mundo);
 }

@@ -1,7 +1,7 @@
 package Model.Classes.AI.SimpleBehaviors.SeekHuellas;
 
 
-import Interfaces.EntidadesPropiedades.SteerableAgentI;
+import Interfaces.EntidadesPropiedades.Steerable.SteerableAgentI;
 import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;

@@ -1,6 +1,7 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 07/04/2014.
 
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
@@ -9,6 +10,8 @@ import Interfaces.Spell.SpellI;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class Proyectil extends ProyectilNotificador implements ProyectilI
 {
@@ -68,7 +71,7 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
         this.cuerpo = cuerpo;
         this.setAncho(cuerpo.getAncho());
         this.setAlto(cuerpo.getAlto());
-        this.cuerpo.setCalculosInterpolados(true);
+        this.cuerpo.setCalculosInterpolados(false);
     }
 
     @Override public void dispose()
@@ -99,9 +102,16 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
         {   iD = 0; }
     }
 
+    @Override public void setPosition(float x, float y)
+    {
+        super.setPosition(x, y);
+        cuerpo.setPosition(x, y);
+        notificarSetPosition();
+    }
+
     @Override public void setVelocidadMax(float velocidadMax)
     {
-        this.velocidadMax = velocidadMax;
+        super.setVelocidadMax(velocidadMax);
         cuerpo.setVelocidad(velocidadMax);
     }
 
@@ -111,25 +121,34 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
     @Override public void setDireccion(float grados)
     {   cuerpo.setDireccion(grados); }
 
-    @Override public void setPosition(float x, float y)
+    public void checkColisiones(List<Colisionable> listaColisionables)
     {
-        cuerpo.setPosition(x, y);
-        this.posicion.x = x;
-        this.posicion.y = y;
-        notificarSetPosition();
+        for (Colisionable mobCercano : listaColisionables)
+        {
+            if (mobCercano instanceof ProyectilI) continue;
+            if (owner instanceof PCI && mobCercano instanceof MobI)
+            {
+                if ( ((PCI) owner).getHitbox().overlaps(mobCercano.getHitbox()) )
+                {
+                    System.out.println("PUMBA");
+                }
+            }
+        }
     }
 
-    @Override public boolean consumirse (float delta)
+
+    // METODOS DE ACTUALIZACION
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public boolean actualizarDuracion(float delta)
     {
         duracionActual += delta;
-        if (duracionActual > duracionMaxima ) return true;
-        else return false;
+        return duracionActual > duracionMaxima;
     }
 
     private void getPosicionInterpoladaCuerpo()
     {
-        this.posicion.x = cuerpo.getX();
-        this.posicion.y = cuerpo.getY();
+        super.setPosition(cuerpo.getX(), cuerpo.getY());
         notificarSetPosition();
     }
 
@@ -142,8 +161,6 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
         getPosicionInterpoladaCuerpo();
     }
 
-    @Override public void actualizar (float delta, MundoI mundo)
-    { }
-
-
+    @Override public void actualizarFisica(float delta, MundoI mundo)
+    {   getPosicionInterpoladaCuerpo(); }
 }

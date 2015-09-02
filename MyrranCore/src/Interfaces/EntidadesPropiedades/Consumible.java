@@ -6,5 +6,5 @@ public interface Consumible
     public float getDuracionMaxima();
     public void setDuracionMaxima(float duracionMaxima);
     public void setDuracionActual(float duracionActual);
-    public boolean consumirse(float delta);
+    public boolean actualizarDuracion(float delta);
 }

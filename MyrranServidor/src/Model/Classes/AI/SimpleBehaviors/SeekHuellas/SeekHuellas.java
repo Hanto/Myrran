@@ -1,6 +1,6 @@
 package Model.Classes.AI.SimpleBehaviors.SeekHuellas;
 
-import Interfaces.EntidadesPropiedades.SteerableAgentI;
+import Interfaces.EntidadesPropiedades.Steerable.SteerableAgentI;
 import Model.AI.Steering.Huella;
 import com.badlogic.gdx.ai.steer.Limiter;
 import com.badlogic.gdx.ai.steer.Steerable;

@@ -1,6 +1,6 @@
 package Interfaces.EntidadesTipos;// Created by Hanto on 27/07/2015.
 
-import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Interfaces.Network.ServidorI;
 import com.badlogic.gdx.utils.Disposable;
 

@@ -16,4 +16,7 @@ public interface Caster extends ModelI, IDentificable
     public void setTotalCastingTime(float castingTime);
     public void setSpellIDSeleccionado(String spellID);
     public void setParametrosSpell (Object parametrosDTO);
+
+    //UPDATE:
+    public void actualizarCastingTime(float delta);
 }

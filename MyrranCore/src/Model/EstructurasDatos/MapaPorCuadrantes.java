@@ -1,6 +1,6 @@
 package Model.EstructurasDatos;// Created by Hanto on 16/07/2015.
 
-import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.EstructurasDatos.ListaPorCuadrantesI;
 import Model.Settings;

@@ -2,7 +2,7 @@ package Model.Classes.Geo;// Created by Hanto on 19/05/2014.
 
 import DTO.DTOsMapa;
 import DTO.DTOsPlayer;
-import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Model.AbstractModel;

@@ -185,7 +185,7 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable, M
     }
 
     //Vista:
-    private void actualizarCastingTime(float delta)
+    @Override public void actualizarCastingTime(float delta)
     {
         if (isCasteando())
         {
@@ -282,16 +282,13 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable, M
         return iDProyectiles;
     }
 
-    // METODOS DE ACTUALIZACION
-    //------------------------------------------------------------------------------------------------------------------
-
-    private void moverse ()
+    private void setRumbo()
     {
         if      (output.irAbajo && !output.irDerecha && !output.irIzquierda)    { cuerpo.setDireccionNorVelocidad(0, -1, velocidadMax * velocidadMod); }                //Sur
         else if (output.irArriba && !output.irDerecha && !output.irIzquierda)   { cuerpo.setDireccionNorVelocidad(0, +1, velocidadMax * velocidadMod); }               //Norte
         else if (output.irDerecha && !output.irArriba && !output.irAbajo)       { cuerpo.setDireccionNorVelocidad(+1, 0, velocidadMax * velocidadMod); }               //Este
         else if (output.irIzquierda && !output.irArriba && !output.irAbajo)     { cuerpo.setDireccionNorVelocidad(-1, 0, velocidadMax * velocidadMod); }               //Oeste
-        else if (output.irAbajo&& output.irIzquierda)                           { cuerpo.setDireccionNorVelocidad(-0.707f, -0.707f, velocidadMax * velocidadMod); }    //SurOeste
+        else if (output.irAbajo && output.irIzquierda)                          { cuerpo.setDireccionNorVelocidad(-0.707f, -0.707f, velocidadMax * velocidadMod); }    //SurOeste
         else if (output.irAbajo && output.irDerecha)                            { cuerpo.setDireccionNorVelocidad(+0.707f, -0.707f, velocidadMax * velocidadMod); }    //SurEste
         else if (output.irArriba && output.irIzquierda)                         { cuerpo.setDireccionNorVelocidad(-0.707f, +0.707f, velocidadMax * velocidadMod); }    //NorOeste
         else if (output.irArriba && output.irDerecha)                           { cuerpo.setDireccionNorVelocidad(+0.707f, +0.707f, velocidadMax * velocidadMod); }    //NorEste
@@ -299,12 +296,23 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable, M
         {   cuerpo.setVelocidad(0f); }
     }
 
-    public void actualizar (float delta, MundoI mundo)
+    // METODOS DE ACTUALIZACION
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void actualizarAuras(float delta)  {}
+    @Override public void actualizarTimers(float delta)
+    {   actualizarCastingTime(delta); }
+
+    @Override public void actualizarFisica(float delta, MundoI mundo)
+    {    }
+
+    @Override public void actualizarIA (float delta, MundoI mundo)
     {
         fsm.actualizar(delta);
-        actualizarCastingTime(delta);
-        moverse();
         setNumAnimacion(output.getNumAnimacion());
+
+        setRumbo();
+
         setSpellIDSeleccionado(output.getSpellID());
         if (output.getStartCastear()) startCastear(mundo);
         else if (output.getStopCastear()) stopCastear();

@@ -4,9 +4,11 @@ import DTO.DTOsMob;
 import DTO.DTOsMundo;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.EstructurasDatos.QuadTreeI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Model.AbstractModel;
@@ -14,17 +16,24 @@ import Model.Classes.AI.SteeringFactory.SteeringCompuestoFactory;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.EstructurasDatos.ListaMapaCuadrantes;
+import Model.EstructurasDatos.QuadTree;
+import Model.Settings;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Mundo extends AbstractModel implements PropertyChangeListener, MundoI
 {
     protected ListaMapaCuadrantes<ProyectilI> dataProyectiles = new ListaMapaCuadrantes<>();
     protected ListaMapaCuadrantes<PCI> dataPCs = new ListaMapaCuadrantes<>();
     protected ListaMapaCuadrantes<MobI> dataMobs = new ListaMapaCuadrantes<>();
+
+    protected QuadTreeI quadTree = new QuadTree(Settings.MAPA_Max_TilesX * Settings.TILESIZE,
+                                                Settings.MAPA_Max_TilesY * Settings.TILESIZE);
 
     private Mapa mapa;
     private World world;
@@ -140,19 +149,36 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     //IA MUNDO:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void actualizarUnidades(float delta, MundoI mundo)
-    {   // PCS:
+    private void actualizarQuadTree()
+    {
+        quadTree.clear();
+
+        //PCS:
         for (PCI pc : dataPCs)
-        {   pc.actualizar(delta, mundo); }
+        {   quadTree.add(pc); }
         // MOBS:
         for (MobI mob : dataMobs)
-        {   mob.actualizar(delta, mundo); }
+        {   quadTree.add(mob); }
+        // PROYECTILES:
+        for (ProyectilI proyectil: dataProyectiles)
+        {   quadTree.add(proyectil); }
+    }
+
+
+    @Override public void actualizarUnidades(float delta, MundoI mundo)
+    {
+        // PCS:
+        for (PCI pc : dataPCs)
+        {   pc.actualizarTimers(delta);
+            pc.actualizarIA(delta, mundo);
+        }
+
         // PROYECTILES:
         Iterator<ProyectilI>iterator = dataProyectiles.iterator(); ProyectilI pro;
         while (iterator.hasNext())
         {
             pro = iterator.next();
-            if (pro.consumirse(delta))
+            if (pro.actualizarDuracion(delta))
             {
                 iterator.remove();
                 pro.eliminarObservador(this);
@@ -162,21 +188,42 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     }
 
     //Salvamos los ultimos valores para poder interpolarlos
-    @Override public void actualizarFisica(float delta)
+    @Override public void actualizarFisica(float delta, MundoI mundo)
     {
-        //PROYECTILES:
-        for (ProyectilI proyectil : dataProyectiles)
-        {   proyectil.copiarUltimaPosicion(); }
+        // MOBS:
+        for (MobI mob : dataMobs)
+        {   mob.actualizarFisica(delta, mundo); }
 
         world.step(delta, 8, 6);
-    }
 
-    @Override public void interpolarPosicion(float alpha)
-    {
         //PROYECTILES:
         for (ProyectilI proyectil : dataProyectiles)
-        {   proyectil.interpolarPosicion(alpha); }
+        {   proyectil.actualizarFisica(delta, mundo); }
+
+        actualizarQuadTree();
     }
+
+    public void checkColisiones()
+    {
+        List<Colisionable> cercanos = new ArrayList<>();
+        for (ProyectilI proyectil : dataProyectiles)
+        {
+            quadTree.getCercanos(cercanos, proyectil);
+            for (Colisionable mobCercano : cercanos)
+            {
+                if (mobCercano instanceof ProyectilI) continue;
+                if (proyectil.getOwner() instanceof PCI && mobCercano instanceof MobI)
+                {
+                    if ( proyectil.getHitbox().overlaps(mobCercano.getHitbox()) )
+                    {
+                        System.out.println("PUMBA");
+                    }
+                }
+            }
+        }
+    }
+
+    @Override public void interpolarPosicion(float alpha) {}
 
     //CAMPOS OBSERVADOS:
     //------------------------------------------------------------------------------------------------------------------

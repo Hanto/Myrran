@@ -106,7 +106,6 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
     @Override public void eliminarAura(AuraI aura)                          { listaDeAuras.remove(aura); }
     @Override public Iterator<AuraI> getAuras()                             { return listaDeAuras.iterator(); }
 
-
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -133,9 +132,8 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
 
     @Override public void setPosition(float x, float y)
     {
+        super.setPosition(x, y);
         cuerpo.setPosition(x, y);
-        this.posicion.x = x;
-        this.posicion.y = y;
         huellas.añadirHuella(this);
         notificarSetPosition();
     }
@@ -195,9 +193,6 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
         return iDProyectiles;
     }
 
-    // METODOS ACTUALIZACION:
-    //------------------------------------------------------------------------------------------------------------------
-
     public void setCastear (boolean castear, int targetX, int targetY)
     {
         this.castear = castear;
@@ -221,7 +216,10 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
         }
     }
 
-    private void actualizarCastingTime(float delta)
+    // METODOS ACTUALIZACION:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void actualizarCastingTime(float delta)
     {
         if (isCasteando())
         {
@@ -234,7 +232,7 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
         }
     }
 
-    public void actualizarAuras (float delta)
+    @Override public void actualizarAuras (float delta)
     {
         AuraI aura;
         Iterator<AuraI> aurasIteator = getAuras();
@@ -247,13 +245,20 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
         }
     }
 
-    @Override public void actualizar(float delta, MundoI mundo)
+    @Override public void actualizarTimers(float delta)
     {
-        huellas.actualizar(delta);
+        actualizarHuellas(delta);
         actualizarCastingTime(delta);
         actualizarAuras(delta);
-        if (castear) castear(mundo);
     }
+
+    @Override public void actualizarFisica(float delta, MundoI mundo)   {}
+
+    @Override public void actualizarIA (float delta, MundoI mundo)
+    {   if (castear) castear(mundo); }
+
+    // EVENTOS:
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {

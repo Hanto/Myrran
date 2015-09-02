@@ -38,25 +38,19 @@ public class Mob extends MobNotificador implements MobI
 
     @Override public void setPosition(float x, float y)
     {
-        posicion.set(x, y);
+        super.setPosition(x, y);
         notificarSetPosition();
     }
 
-    @Override public void actualizar(float delta, MundoI mundo)
+    @Override public void setOrientacion(float radianes)
+    {
+        super.setOrientacion(radianes);
+        notificarSetOrientacion();
+    }
+
+    @Override public void actualizarFisica(float delta, MundoI mundo)
     {
         if ( steeringBehavior != null)
-        {
-            int oldX = (int)getX();
-            int oldY = (int)getY();
-            int oldOrientacion = (int)getOrientacion();
-
             super.calcularSteering(delta);
-
-            if (oldX != (int)getX() || oldY != (int)getY())
-            {   notificarSetPosition(); }
-
-            if (oldOrientacion != getOrientacion())
-            {   notificarSetOrientacion(); }
-        }
     }
 }

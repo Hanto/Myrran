@@ -1,6 +1,6 @@
 package Model.AI.Steering;
 
-import Interfaces.EntidadesPropiedades.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Model.Settings;
 
 import java.util.ArrayDeque;

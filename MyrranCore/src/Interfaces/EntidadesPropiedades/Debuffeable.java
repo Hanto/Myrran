@@ -10,4 +10,7 @@ public interface Debuffeable extends ModelI
     public void añadirAura(AuraI aura);
     public void eliminarAura(AuraI aura);
     public Iterator<AuraI> getAuras();
+
+    //UPDATE:
+    public void actualizarAuras(float delta);
 }

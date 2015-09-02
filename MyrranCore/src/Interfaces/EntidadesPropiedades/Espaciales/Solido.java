@@ -1,4 +1,4 @@
-package Interfaces.EntidadesPropiedades;// Created by Hanto on 14/08/2015.
+package Interfaces.EntidadesPropiedades.Espaciales;// Created by Hanto on 14/08/2015.
 
 public interface Solido
 {

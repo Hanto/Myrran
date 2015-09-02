@@ -110,7 +110,7 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
         notificarSetPosition();
     }
 
-    @Override public boolean consumirse (float delta)
+    @Override public boolean actualizarDuracion(float delta)
     {
         duracionActual += delta;
         if (duracionActual > duracionMaxima ) return true;
@@ -133,6 +133,6 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
         getPosicionInterpoladaCuerpo();
     }
 
-    @Override public void actualizar (float delta, MundoI mundo)
+    @Override public void actualizarFisica(float delta, MundoI mundo)
     { }
 }

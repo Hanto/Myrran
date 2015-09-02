@@ -1,11 +1,12 @@
 package Model.AI.Steering;// Created by Hanto on 12/08/2015.
 
-import Interfaces.EntidadesPropiedades.SteerableAgentI;
+import Interfaces.EntidadesPropiedades.Steerable.SteerableAgentI;
 import Model.AbstractModel;
 import Model.Settings;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.Iterator;
@@ -15,6 +16,7 @@ public abstract class SteerableAgent extends AbstractModel implements SteerableA
     protected Vector2 posicion = new Vector2();             // Espacial:
     protected int ultimoCuadranteX;
     protected int ultimoCuadranteY;
+    protected Rectangle hitbox = new Rectangle();           // Colisionable(Solido)
     protected Vector2 velocidad = new Vector2();            // Dinamico:
     protected float velocidadMax = 50f; //50
     protected float aceleracionMax = 200f; //200
@@ -22,8 +24,6 @@ public abstract class SteerableAgent extends AbstractModel implements SteerableA
     protected float velocidadAngular;
     protected float velocidadAngularMax = 5f;
     protected float aceleracionAngularMax = 5f;
-    protected int ancho;                                    // Solido:
-    protected int alto;
     protected float orientacion = 0;                        // Orientable:
     protected SteeringBehavior<Vector2> steeringBehavior;   // SteerableAgent:
     protected SteeringAcceleration<Vector2> steeringOutput;
@@ -41,7 +41,13 @@ public abstract class SteerableAgent extends AbstractModel implements SteerableA
     @Override public int getCuadranteY()                                    { return (int)(getY()/ (float)(Settings.MAPTILE_NumTilesY * Settings.TILESIZE)); }
     @Override public int getUltimoCuadranteX()                              { return ultimoCuadranteX; }
     @Override public int getUltimoCuadranteY()                              { return ultimoCuadranteY; }
-    @Override public void setUltimoMapTile (int x, int y)                   { ultimoCuadranteX = x; ultimoCuadranteY = y; }
+    @Override public void setUltimoMapTile (int x, int y)                   { this.ultimoCuadranteX = x; this.ultimoCuadranteY = y; }
+    @Override public void setPosition(float x, float y)                     { this.posicion.set(x, y); hitbox.setCenter(x, y); }
+
+    // COLISIONABLE:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public Rectangle getHitbox()                                  { return hitbox; }
 
     // DINAMICO:
     //------------------------------------------------------------------------------------------------------------------
@@ -63,10 +69,10 @@ public abstract class SteerableAgent extends AbstractModel implements SteerableA
     // SOLIDO:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public int getAncho()                                         { return ancho; }
-    @Override public int getAlto()                                          { return alto; }
-    @Override public void setAncho(int ancho)                               { this.ancho = ancho; }
-    @Override public void setAlto(int alto)                                 { this.alto = alto; }
+    @Override public int getAncho()                                         { return (int)this.hitbox.getWidth(); }
+    @Override public int getAlto()                                          { return (int)this.hitbox.getHeight(); }
+    @Override public void setAncho(int ancho)                               { this.hitbox.setWidth(ancho); }
+    @Override public void setAlto(int alto)                                 { this.hitbox.setHeight(alto); }
 
     // ORIENTABLE: (los angulos mejor que estem siempre normalizados)
     //------------------------------------------------------------------------------------------------------------------
@@ -92,6 +98,9 @@ public abstract class SteerableAgent extends AbstractModel implements SteerableA
     @Override public void setTiempoDecayHuellas (float tiempoDecayHuellas)
     {   this.huellas.setTiempoDecayHuellas(tiempoDecayHuellas); }
 
+    @Override public void actualizarHuellas (float delta)
+    {   huellas.actualizar(delta); }
+
     // STEERABLE:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -103,7 +112,7 @@ public abstract class SteerableAgent extends AbstractModel implements SteerableA
     @Override public float getMaxAngularAcceleration()  { return getAceleracionAngularMax(); }
     @Override public float getOrientation()             { return getOrientacion(); }
     @Override public boolean isTagged()                 { return tagged; }
-    @Override public float getBoundingRadius()          { return (ancho+alto)/4; }
+    @Override public float getBoundingRadius()          { return (hitbox.getWidth()+hitbox.getHeight())/4; }
 
     @Override public void setMaxLinearSpeed(float maxLinearSpeed)
     {   setVelocidadMax(maxLinearSpeed); }
@@ -156,9 +165,17 @@ public abstract class SteerableAgent extends AbstractModel implements SteerableA
 
     private void aplicarSteering(SteeringAcceleration<Vector2> steering, float delta)
     {
-        this.getPosition().mulAdd(getVelocidad(), delta);
+        //Posicion:
+        float x = posicion.x;
+        float y = posicion.y;
+        x += getVelocidad().x * delta;
+        y += getVelocidad().y * delta;
+        setPosition(x, y);
+
+        //Velocidad:
         this.getVelocidad().mulAdd(steering.linear, delta).limit(this.getMaxLinearSpeed());
 
+        //Orientacion:
         if (encaramientoIndependiente)
         {
             setOrientacion(getOrientacion() + getVelocidadAngular() * delta);

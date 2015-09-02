@@ -1,4 +1,4 @@
-package Interfaces.EntidadesPropiedades;// Created by Hanto on 21/07/2014.
+package Interfaces.EntidadesPropiedades.Espaciales;// Created by Hanto on 21/07/2014.
 
 import Interfaces.Model.ModelI;
 
