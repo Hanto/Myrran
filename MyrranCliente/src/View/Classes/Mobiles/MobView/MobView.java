@@ -6,9 +6,12 @@ import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.EntidadesTipos.MobI;
 import Model.Settings;
 import View.Classes.Actores.Pixie;
+import View.Classes.Actores.Texto;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
@@ -76,12 +79,23 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
         if (45 < grados && grados < 135) actor.setAnimacion(3, false);
     }
 
+    public void modificarHPs(int HPs)
+    {
+        Texto texto = new Texto(Integer.toString(HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
+                HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
+        texto.setPosition(this.getWidth() / 2 + (float) Math.random() * 30 - 15, this.getHeight() + 15);
+        texto.scrollingCombatText(this, 2f);
+    }
+
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getNewValue() instanceof DTOsMob.PosicionMob)
         {   setPosition(((DTOsMob.PosicionMob) evt.getNewValue()).posX, ((DTOsMob.PosicionMob) evt.getNewValue()).posY); }
 
         else if (evt.getNewValue() instanceof DTOsMob.OrientacionMob)
-        {   setOrientacion(((DTOsMob.OrientacionMob) evt.getNewValue()).orientacion);}
+        {   setOrientacion(((DTOsMob.OrientacionMob) evt.getNewValue()).orientacion); }
+
+        else if (evt.getNewValue() instanceof DTOsMob.ModificarHPsMob)
+        {   modificarHPs( (int) ((DTOsMob.ModificarHPsMob) evt.getNewValue()).HPs); }
     }
 }

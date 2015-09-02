@@ -4,6 +4,7 @@ import DTO.DTOsMob;
 import DTO.DTOsMundo;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
+import Interfaces.AI.SistemaAggroI;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
@@ -12,6 +13,7 @@ import Interfaces.EstructurasDatos.QuadTreeI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Model.AbstractModel;
+import Model.Classes.AI.SistemaAggro;
 import Model.Classes.AI.SteeringFactory.SteeringCompuestoFactory;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Mob.MobFactory;
@@ -34,20 +36,22 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
     protected QuadTreeI quadTree = new QuadTree(Settings.MAPA_Max_TilesX * Settings.TILESIZE,
                                                 Settings.MAPA_Max_TilesY * Settings.TILESIZE);
-
     private Mapa mapa;
     private World world;
+    private SistemaAggroI aggro;
     private int mobID;
 
     @Override public MapaI getMapa()                        { return mapa; }
     @Override public World getWorld()                       { return world; }
+    @Override public SistemaAggroI getAggro()               { return aggro; }
     public int getMobID()                                   { return mobID++ > Integer.MAX_VALUE ? 0 : mobID; }
 
 
-    public Mundo(World world, Mapa mapa)
+    public Mundo(World world, Mapa mapa, SistemaAggro aggro)
     {
         this.world = world;
         this.mapa = mapa;
+        this.aggro = aggro;
     }
 
     // PLAYERS:
@@ -156,24 +160,24 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         //PCS:
         for (PCI pc : dataPCs)
         {   quadTree.add(pc); }
-        // MOBS:
+        //MOBS:
         for (MobI mob : dataMobs)
         {   quadTree.add(mob); }
-        // PROYECTILES:
-        for (ProyectilI proyectil: dataProyectiles)
-        {   quadTree.add(proyectil); }
+        //PROYECTILES:
+        //for (ProyectilI proyectil: dataProyectiles)
+        //{   quadTree.add(proyectil); }
     }
 
 
     @Override public void actualizarUnidades(float delta, MundoI mundo)
     {
-        // PCS:
+        //PCS:
         for (PCI pc : dataPCs)
         {   pc.actualizarTimers(delta);
             pc.actualizarIA(delta, mundo);
         }
 
-        // PROYECTILES:
+        //PROYECTILES:
         Iterator<ProyectilI>iterator = dataProyectiles.iterator(); ProyectilI pro;
         while (iterator.hasNext())
         {
@@ -190,7 +194,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     //Salvamos los ultimos valores para poder interpolarlos
     @Override public void actualizarFisica(float delta, MundoI mundo)
     {
-        // MOBS:
+        //MOBS:
         for (MobI mob : dataMobs)
         {   mob.actualizarFisica(delta, mundo); }
 
@@ -205,21 +209,13 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
     public void checkColisiones()
     {
+        //PROYECTILES:
         List<Colisionable> cercanos = new ArrayList<>();
         for (ProyectilI proyectil : dataProyectiles)
         {
+            cercanos.clear();
             quadTree.getCercanos(cercanos, proyectil);
-            for (Colisionable mobCercano : cercanos)
-            {
-                if (mobCercano instanceof ProyectilI) continue;
-                if (proyectil.getOwner() instanceof PCI && mobCercano instanceof MobI)
-                {
-                    if ( proyectil.getHitbox().overlaps(mobCercano.getHitbox()) )
-                    {
-                        System.out.println("PUMBA");
-                    }
-                }
-            }
+            proyectil.checkColisiones(cercanos, aggro);
         }
     }
 

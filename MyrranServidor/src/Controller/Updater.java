@@ -1,6 +1,7 @@
 package Controller;// Created by Hanto on 09/04/2014.
 
 import Interfaces.Network.MainLoopI;
+import Model.Classes.AI.SistemaAggro;
 import Model.Classes.Geo.Mapa;
 import Model.GameState.Mundo;
 import Model.Settings;
@@ -19,6 +20,7 @@ public class Updater implements MainLoopI, Runnable
     private World world;
     private Mapa mapa;
     private Mundo mundo;
+    private SistemaAggro aggro;
     private MundoView mundoView;
     private Controlador controlador;
     private Servidor servidor;
@@ -43,7 +45,8 @@ public class Updater implements MainLoopI, Runnable
         //MODEL:
         world = new World(new Vector2(0,0), false);
         mapa = new Mapa();
-        mundo = new Mundo(world, mapa);
+        aggro = new SistemaAggro();
+        mundo = new Mundo(world, mapa, aggro);
 
         //VISTA:
         mundoView = new MundoView(mundo);

@@ -1,5 +1,6 @@
 package Interfaces.GameState;// Created by Hanto on 30/07/2015.
 
+import Interfaces.AI.SistemaAggroI;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
@@ -13,6 +14,7 @@ public interface MundoI extends ModelI
 {
     public MapaI getMapa();
     public World getWorld();
+    public SistemaAggroI getAggro();
 
     //PCs:
     public void añadirPC (PCI pc);

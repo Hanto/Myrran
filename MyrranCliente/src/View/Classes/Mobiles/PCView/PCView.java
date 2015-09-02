@@ -85,7 +85,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     private void crearNombre()
     {
         nombre = new Texto("Player"+iD, RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
-        nombre.setPosition(actor.getWidth()/2, actor.getHeight()+8);
+        nombre.setPosition(actor.getWidth() / 2, actor.getHeight() + 8);
         this.addActor(nombre);
     }
 
@@ -98,6 +98,9 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
         this.addAction(Actions.moveTo(x-rAncho, y-rAlto, Settings.FIXED_TimeStep+0.03f, Interpolation.linear));
     }
 
+    public void setAnimacion (int numAnimacion)
+    {   actor.setAnimacion(numAnimacion, false); }
+
     public void modificarHPs(int HPs)
     {
         Texto texto = new Texto(Integer.toString(HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
@@ -105,10 +108,6 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
         texto.setPosition(this.getWidth() / 2 + (float) Math.random() * 30 - 15, this.getHeight() + 15);
         texto.scrollingCombatText(this, 2f);
     }
-
-    public void setAnimacion (int numAnimacion)
-    {   actor.setAnimacion(numAnimacion, false); }
-
 
     // CAMPOS OBSERVADOS:
     //------------------------------------------------------------------------------------------------------------------
@@ -123,8 +122,5 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
         if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
         {   setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
-
-        if (evt.getNewValue() instanceof DTOsPlayer.EliminarPC)
-        {   dispose(); }
     }
 }

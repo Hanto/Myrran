@@ -1,6 +1,8 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 08/04/2014.
 
+import Interfaces.AI.SistemaAggroI;
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
@@ -9,6 +11,8 @@ import Interfaces.Spell.SpellI;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class Proyectil extends ProyectilNotificador implements ProyectilI
 {
@@ -68,7 +72,7 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
     @Override public void dispose()
     {
         cuerpo.dispose();
-        notificarSetDispose();
+        this.eliminarObservadores();
     }
 
     public void setID()
@@ -133,6 +137,6 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
         getPosicionInterpoladaCuerpo();
     }
 
-    @Override public void actualizarFisica(float delta, MundoI mundo)
-    { }
+    @Override public void actualizarFisica(float delta, MundoI mundo) {}
+    @Override public void checkColisiones(List<Colisionable> colisionables, SistemaAggroI aggro) {}
 }

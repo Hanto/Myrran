@@ -8,11 +8,13 @@ public abstract class MobNotificador extends SteerableAgent implements MobI
 {
     private DTOsMob.PosicionMob posicionDTO;
     private DTOsMob.OrientacionMob orientacionDTO;
+    private DTOsMob.ModificarHPsMob modificarHPsDTO;
 
     public MobNotificador()
     {
         posicionDTO = new DTOsMob.PosicionMob(this);
         orientacionDTO = new DTOsMob.OrientacionMob(this);
+        modificarHPsDTO = new DTOsMob.ModificarHPsMob(this);
     }
 
     // NOTIFICACION LOCAL:
@@ -35,5 +37,11 @@ public abstract class MobNotificador extends SteerableAgent implements MobI
             orientacionDTO.orientacion = getOrientacion();
             notificarActualizacion("orientacionMob", null, orientacionDTO);
         }
+    }
+
+    public void notificarAddModificarHPs(float HPs)
+    {
+        modificarHPsDTO.HPs = HPs;
+        notificarActualizacion("modificarHPsMob", null, modificarHPsDTO);
     }
 }

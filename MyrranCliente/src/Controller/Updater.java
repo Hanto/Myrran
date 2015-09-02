@@ -180,6 +180,7 @@ public class Updater implements Screen
     @Override public void dispose()
     {
         logger.trace("DISPOSE (Liberando memoria):");
+        mundo.dispose();
         vista.dispose();
     }
 }

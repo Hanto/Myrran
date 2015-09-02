@@ -40,8 +40,12 @@ public class ConjuntoBarraAcciones extends AbstractModel
     }
 
     public void eliminarBarraAccion(BarraAccionesI barraAccion)
-    {   listaDeBarraAcciones.remove(barraAccion.getID());
+    {
+        listaDeBarraAcciones.remove(barraAccion.getID());
         barraAccion.eliminar();
+
+        DTOsBarraAcciones.EliminarBarraAcciones eliminarBarraAcciones = new DTOsBarraAcciones.EliminarBarraAcciones(barraAccion);
+        notificarActualizacion("eliminarBarracion", null, eliminarBarraAcciones);
     }
 
     public void eliminarKeycode (int keycode)

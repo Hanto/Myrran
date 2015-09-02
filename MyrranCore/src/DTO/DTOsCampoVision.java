@@ -160,6 +160,14 @@ public class DTOsCampoVision
         {   this.orientacion = mob.getOrientacion(); }
     }
 
+    public static class ModificarHPsMob
+    {
+        public float HPs;
+        public ModificarHPsMob() {}
+        public ModificarHPsMob (float HPs)
+        {   this.HPs = HPs; }
+    }
+
     // PROYECTIL DTOS:
     //------------------------------------------------------------------------------------------------------------------
 

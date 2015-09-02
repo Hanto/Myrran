@@ -107,7 +107,6 @@ public class PC extends PCNotificador implements PCI
     @Override public void dispose()
     {
         cuerpo.dispose();
-        notificarSetDispose();
         this.eliminarObservadores();
     }
 

@@ -20,4 +20,14 @@ public class DTOsMob
         public OrientacionMob (MobI mob)
         {   this.mob = mob; this.orientacion = mob.getOrientacion(); }
     }
+
+    public static class ModificarHPsMob
+    {
+        public MobI mob;
+        public float HPs;
+        public ModificarHPsMob(MobI mob)
+        {   this.mob = mob; }
+        public ModificarHPsMob (MobI mob, float HPs)
+        {   this.mob = mob; this.HPs = HPs; }
+    }
 }

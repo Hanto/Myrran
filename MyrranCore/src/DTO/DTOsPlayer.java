@@ -117,14 +117,6 @@ public class DTOsPlayer
         }
     }
 
-    public static class EliminarPC
-    {
-        public int connectionID;
-        public EliminarPC() {}
-        public EliminarPC(int connectionID)
-        {   this.connectionID = connectionID; }
-    }
-
     public static class HPs
     {
         public float actualHPs;

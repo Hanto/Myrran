@@ -100,16 +100,10 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
             setPosition(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil.getX(),
                         ((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil.getY());
         }
-        else if (evt.getNewValue() instanceof DTOsProyectil.DisposeProyectil)
-        {   dispose(); }
     }
 
     @Override public void setID(int iD)
     {
-
-
-
-
 
     }
 }

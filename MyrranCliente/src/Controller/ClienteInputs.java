@@ -121,6 +121,9 @@ public class ClienteInputs
                 proyectil.setDuracionActual(((DTOsCampoVision.DatosCompletosProyectil) dto).duracionActual);
                 mundo.añadirProyectil(proyectil);
             }
+
+            else if (dto instanceof DTOsCampoVision.EliminarProyectil)
+            {   mundo.eliminarProyectil(proyectilDTOs.iD); }
         }
     }
 
@@ -144,6 +147,9 @@ public class ClienteInputs
 
             else if (dto instanceof DTOsCampoVision.OrientacionMob)
             {   mob.setOrientacion(((DTOsCampoVision.OrientacionMob) dto).orientacion);}
+
+            else if (dto instanceof DTOsCampoVision.ModificarHPsMob)
+            {   mob.modificarHPs(((DTOsCampoVision.ModificarHPsMob) dto).HPs);}
         }
     }
 

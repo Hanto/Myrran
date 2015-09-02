@@ -10,11 +10,13 @@ import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraAccionesView.ConjuntoBarraAccionesView;
 import View.Classes.UI.BarraTerrenosView.BarraTerrenosView;
 import View.Classes.UI.UIViewController;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
+import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -31,6 +33,7 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
 
     public void setTextoFPS(String s)                           { fps.setTexto(s); }
     public Stage getStage()                                     { return stage; }
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public UIView(UIViewController uiController, InputManager inputManager,
                   ConjuntoBarraAccionesView conjuntoBarraAccionesView, BarraTerrenosView barraTerrenosView, Stage stage)
@@ -51,6 +54,7 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
 
     @Override public void dispose()
     {
+        logger.trace("DISPOSE: Liberando Stage:UIView");
         stage.dispose();
         conjuntoBarraAccionesView.dispose();
         barraTerrenosView.dispose();

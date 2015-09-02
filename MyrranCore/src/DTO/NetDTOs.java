@@ -30,7 +30,6 @@ public class NetDTOs
         kryo.register(DTOsPlayer.StartCastear.class);
         kryo.register(DTOsPlayer.NumTalentosSkillPersonalizado.class);
         kryo.register(DTOsPlayer.CrearPC.class);
-        kryo.register(DTOsPlayer.EliminarPC.class);
         kryo.register(DTOsPlayer.Nombre.class);
         kryo.register(DTOsPlayer.HPs.class);
         kryo.register(DTOsPlayer.ModificarHPs.class);
@@ -66,6 +65,7 @@ public class NetDTOs
         kryo.register(DTOsCampoVision.MobDTOs.class);
         kryo.register(DTOsCampoVision.PosicionMob.class);
         kryo.register(DTOsCampoVision.OrientacionMob.class);
+        kryo.register(DTOsCampoVision.ModificarHPsMob.class);
 
         //PROYECTILES:
         kryo.register(DTOsCampoVision.ProyectilDTOs.class);

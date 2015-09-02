@@ -171,6 +171,11 @@ public class BufferCampoVision
         mapaDTOsMobs.add(mob.getID(), orientacionMob);
     }
 
+    public void addModificarHpsMob (MobI mob, float hps)
+    {
+        DTOsCampoVision.ModificarHPsMob modificarHPsMob = new DTOsCampoVision.ModificarHPsMob(hps);
+        mapaDTOsMobs.add(mob.getID(), modificarHPsMob);
+    }
 
     // PROYECTILES:
     //------------------------------------------------------------------------------------------------------------------

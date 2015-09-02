@@ -1,7 +1,10 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 07/04/2014.
 
+import Interfaces.AI.SistemaAggroI;
 import Interfaces.EntidadesPropiedades.Caster;
+import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
@@ -76,9 +79,9 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
 
     @Override public void dispose()
     {
-        this.eliminarObservadores();
         cuerpo.dispose();
         notificarSetDispose();
+        this.eliminarObservadores();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -121,20 +124,31 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
     @Override public void setDireccion(float grados)
     {   cuerpo.setDireccion(grados); }
 
-    public void checkColisiones(List<Colisionable> listaColisionables)
+    // COLISIONES:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void checkColisiones(List<Colisionable> listaColisionables, SistemaAggroI aggro)
     {
+        boolean haColisionado = false;
+
         for (Colisionable mobCercano : listaColisionables)
         {
-            if (mobCercano instanceof ProyectilI) continue;
-            if (owner instanceof PCI && mobCercano instanceof MobI)
+            if (aggro.sonEnemigos(owner, mobCercano) && getHitbox().overlaps(mobCercano.getHitbox()) )
             {
-                if ( ((PCI) owner).getHitbox().overlaps(mobCercano.getHitbox()) )
-                {
-                    System.out.println("PUMBA");
-                }
+                if (mobCercano instanceof Vulnerable) aplicarDaño((Vulnerable)mobCercano);
+                if (mobCercano instanceof Debuffeable) aplicarDebuffs((Debuffeable)mobCercano);
+                haColisionado = true;
             }
         }
+
+        if (haColisionado) duracionActual = duracionMaxima+1;
     }
+
+    private void aplicarDaño(Vulnerable vulnerable)
+    {   vulnerable.modificarHPs(-daño); }
+
+    private void aplicarDebuffs(Debuffeable debuffeable)
+    {   spell.aplicarDebuffs(owner, debuffeable); }
 
 
     // METODOS DE ACTUALIZACION

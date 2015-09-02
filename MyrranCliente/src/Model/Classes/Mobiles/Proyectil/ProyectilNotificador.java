@@ -25,7 +25,4 @@ public abstract class ProyectilNotificador extends SteerableAgent implements Pro
             notificarActualizacion("posicionProyectil", null, posicionDTO);
         }
     }
-
-    public void notificarSetDispose()
-    {   notificarActualizacion("EliminarProyectil", null, new DTOsProyectil.DisposeProyectil(this)); }
 }

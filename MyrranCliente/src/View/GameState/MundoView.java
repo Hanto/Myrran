@@ -105,6 +105,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         rayHandler.dispose();
         logger.trace("DISPOSE: Liberando ShapeRenderer");
         shape.dispose();
+        logger.trace("DISPOSE: Liberando mapaView");
         mapaView.dispose();
     }
 
@@ -131,6 +132,7 @@ public class MundoView extends Stage implements PropertyChangeListener
     {
         PCView pcView = listaPCViews.remove(iD);
         this.getRoot().removeActor(pcView);
+        pcView.dispose();
     }
 
     // PROYECTIL
@@ -147,6 +149,7 @@ public class MundoView extends Stage implements PropertyChangeListener
     {
         ProyectilView proyectilView = listaProyectilViews.remove(iD);
         this.getRoot().removeActor(proyectilView);
+        proyectilView.dispose();
     }
 
     // MOB
@@ -163,6 +166,7 @@ public class MundoView extends Stage implements PropertyChangeListener
     {
         MobView mobView = listaMobsViews.remove(iD);
         this.getRoot().removeActor(mobView);
+        mobView.dispose();
     }
 
     // RENDER:

@@ -248,6 +248,9 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     private void orientacionMob (MobI mob)
     {   buffer.setOrientacionMob(mob); }
 
+    private void modificarHpsMob (MobI mob, float hps)
+    {   buffer.addModificarHpsMob(mob, hps); }
+
     // PROYECTILES:
     //--------------------------------------------------------------------------------------------------------------
 
@@ -268,7 +271,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         {
             listaProyectilesCercanos.remove(proyectil);
             proyectil.eliminarObservador(this);
-            //TODO buffer.eliminarProyectil(proyectil)
+            buffer.eliminarProyectil(proyectil);
         }
     }
 
@@ -308,6 +311,11 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
 
         else if (evt.getNewValue() instanceof DTOsMob.OrientacionMob)
         {   orientacionMob(((DTOsMob.OrientacionMob) evt.getNewValue()).mob);}
+
+        else if (evt.getNewValue() instanceof DTOsMob.ModificarHPsMob)
+        {   modificarHpsMob(((DTOsMob.ModificarHPsMob) evt.getNewValue()).mob,
+                            ((DTOsMob.ModificarHPsMob) evt.getNewValue()).HPs);}
+
 
         //OBSERVAR A LOS PROYECTILES (PROYECTILES)
         else if (evt.getNewValue() instanceof DTOsProyectil.DisposeProyectil)

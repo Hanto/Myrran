@@ -3,6 +3,7 @@ package Model.GameState;// Created by Hanto on 08/04/2014.
 import Controller.Cliente;
 import DTO.DTOsMapView;
 import DTO.DTOsMundo;
+import Interfaces.AI.SistemaAggroI;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
@@ -15,11 +16,12 @@ import Model.EstructurasDatos.ListaMapa;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
-public class Mundo extends AbstractModel implements MundoI
+public class Mundo extends AbstractModel implements MundoI, Disposable
 {
     private ListaMapa<PCI> listaMapaPlayers = new ListaMapa<>();
     private ListaMapa<ProyectilI> listaMapaProyectiles = new ListaMapa<>();
@@ -32,6 +34,7 @@ public class Mundo extends AbstractModel implements MundoI
     public Player getPlayer()                               { return player; }
     @Override public MapaI getMapa()                        { return mapa; }
     @Override public World getWorld()                       { return world; }
+    @Override public SistemaAggroI getAggro()               { return null; }
 
     public boolean[][] mapTilesCargados = new boolean[3][3];
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -42,6 +45,18 @@ public class Mundo extends AbstractModel implements MundoI
         this.world = world;
         this.player = pc;
         this.mapa = map;
+    }
+
+    @Override public void dispose()
+    {
+        this.eliminarObservadores();
+
+        logger.trace("DISPOSE: Liberando PlayerModel");
+        player.dispose();
+        logger.trace("DISPOSE: Liberando World Box2D");
+        world.dispose();
+        logger.trace("DISPOSE: Liberando MapaModel");
+        mapa.dispose();
     }
 
     // PLAYERS:
@@ -58,10 +73,12 @@ public class Mundo extends AbstractModel implements MundoI
     @Override public void eliminarPC (int connectionID)
     {
         PCI pc = listaMapaPlayers.remove(connectionID);
-        pc.dispose();
-
-        DTOsMundo.EliminarPC eliminarPC = new DTOsMundo.EliminarPC(pc);
-        notificarActualizacion("eliminarPC", null, eliminarPC);
+        if (pc != null)
+        {
+            pc.dispose();
+            DTOsMundo.EliminarPC eliminarPC = new DTOsMundo.EliminarPC(pc);
+            notificarActualizacion("eliminarPC", null, eliminarPC);
+        }
     }
 
     @Override public PCI getPC (int connectionID)
@@ -87,10 +104,12 @@ public class Mundo extends AbstractModel implements MundoI
     @Override public void eliminarProyectil(int iD)
     {
         ProyectilI proyectil = listaMapaProyectiles.remove(iD);
-        proyectil.dispose();
-
-        DTOsMundo.EliminarProyectil eliminarProyectil = new DTOsMundo.EliminarProyectil(proyectil);
-        notificarActualizacion("eliminarProyectil", null, eliminarProyectil);
+        if (proyectil != null)
+        {
+            proyectil.dispose();
+            DTOsMundo.EliminarProyectil eliminarProyectil = new DTOsMundo.EliminarProyectil(proyectil);
+            notificarActualizacion("eliminarProyectil", null, eliminarProyectil);
+        }
     }
 
     @Override public ProyectilI getProyectil (int iD)
@@ -116,10 +135,12 @@ public class Mundo extends AbstractModel implements MundoI
     @Override public void eliminarMob (int iD)
     {
         MobI mob = listaMapaMobs.remove(iD);
-        mob.dispose();
-
-        DTOsMundo.EliminarMob eliminarMob = new DTOsMundo.EliminarMob(mob);
-        notificarActualizacion("eliminarMob", null, eliminarMob);
+        if (mob != null)
+        {
+            mob.dispose();
+            DTOsMundo.EliminarMob eliminarMob = new DTOsMundo.EliminarMob(mob);
+            notificarActualizacion("eliminarMob", null, eliminarMob);
+        }
     }
 
     @Override public MobI getMob (int iD)

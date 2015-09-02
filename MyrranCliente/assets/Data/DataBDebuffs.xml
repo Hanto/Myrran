@@ -10,4 +10,9 @@
     <SkillStat ID="0" nombre="Duracion" valorBase="10.0" isMejorable="true" costeTalento="1" bonoTalento="0.5" talentoMaximo="50" />
     <SkillStat ID="1" nombre="Curacion por segundo" valorBase="10.0" isMejorable="true" costeTalento="2" bonoTalento="1.25" talentoMaximo="50" />
   </Debuff>
+  <Debuff ID="DotPoisonBolt" nombre="DotPoisonBolt" isDebuff="true" stacksMaximos="5" tipoBDebuff="HOT">
+    <Descripcion>Cura cada tick por una cierta cantidad de HPs.</Descripcion>
+    <SkillStat ID="0" nombre="Duration" valorBase="10.0" isMejorable="true" costeTalento="1" bonoTalento="0.5" talentoMaximo="50" />
+    <SkillStat ID="1" nombre="Damage per second" valorBase="-10.0" isMejorable="true" costeTalento="2" bonoTalento="-1.25" talentoMaximo="50" />
+  </Debuff>
 </BDebuffs>

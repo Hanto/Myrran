@@ -5,8 +5,9 @@ import Interfaces.GameState.MundoI;
 
 public class Mob extends MobNotificador implements MobI
 {
-    //Identificable:
-    protected int iD;
+    protected int iD;                                                       //Identificable:
+    protected float actualHPs=1;                                            // Vulnerable:
+    protected float maxHPs=2000;
 
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -20,6 +21,13 @@ public class Mob extends MobNotificador implements MobI
     @Override public void setDireccion(float x, float y)                    { }
     @Override public void setDireccion(float grados)                        { }
 
+    // VULNERABLE:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public float getActualHPs()                                   { return actualHPs; }
+    @Override public float getMaxHPs()                                      { return maxHPs; }
+    @Override public void setActualHPs(float HPs)                           { modificarHPs(HPs - actualHPs); }
+    @Override public void setMaxHPs(float HPs)                              { maxHPs = HPs; }
 
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
@@ -46,6 +54,14 @@ public class Mob extends MobNotificador implements MobI
     {
         super.setOrientacion(radianes);
         notificarSetOrientacion();
+    }
+
+    @Override public void modificarHPs(float HPs)
+    {
+        actualHPs += HPs;
+        if (actualHPs > maxHPs) actualHPs = maxHPs;
+        else if (actualHPs < 0) actualHPs = 0;
+        notificarAddModificarHPs(HPs);
     }
 
     @Override public void actualizarFisica(float delta, MundoI mundo)

@@ -43,8 +43,4 @@ public abstract class PCNotificador extends SteerableAgent implements PCI
 
     public void notificarSetNombre(String nombre)
     {   notificarActualizacion("nombre", null, new DTOsPlayer.Nombre(nombre)); }
-
-    public void notificarSetDispose()
-    {   notificarActualizacion("Eliminar", null, new DTOsPlayer.EliminarPC(getID())); }
-
 }

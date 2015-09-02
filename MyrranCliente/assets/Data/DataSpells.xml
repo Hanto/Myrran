@@ -18,4 +18,11 @@
     <Animacion TipoAnimacion="0" numAnimacion="0"></Animacion>
     <Descripcion>Lanza una rafaga de fuego de destruccion</Descripcion>
   </Spell>
+  <Spell ID="PoisonBolt" nombre="Poisonbolt" tipoSpell="BOLT">
+    <Recursos icono="FrostBolt"></Recursos>
+    <Animacion TipoAnimacion="0" numAnimacion="1"></Animacion>
+    <Descripcion>Lanza una rafaga de fuego de destruccion</Descripcion>
+    <Debuff>Bomba</Debuff>
+    <Debuff>DotPoisonBolt</Debuff>
+  </Spell>
 </Spells>

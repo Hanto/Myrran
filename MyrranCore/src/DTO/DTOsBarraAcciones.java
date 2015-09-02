@@ -41,4 +41,11 @@ public class DTOsBarraAcciones
         public AñadirBarraAcciones(BarraAccionesI barraAcciones)
         {   this.barraAcciones = barraAcciones; }
     }
+
+    public static class EliminarBarraAcciones
+    {
+        public int barraAccionID;
+        public EliminarBarraAcciones(BarraAccionesI barraAcciones)
+        {   this.barraAccionID = barraAcciones.getID(); }
+    }
 }

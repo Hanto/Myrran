@@ -11,6 +11,7 @@ import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import View.Classes.UI.Ventana.VentanaResizeListener;
 import View.Classes.UI.Ventana.VentanaScrollListener;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -25,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -54,6 +56,8 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
 
     @Override public float getAnchoElemento()           { return Settings.TILESIZE*2; }
     @Override public float getAltoElemento()            { return Settings.TILESIZE*2; }
+
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public BarraTerrenosView (ControladorBarraTerrenosI controlador, final BarraTerrenos barraTerrenos, Stage stage)
     {
@@ -99,7 +103,10 @@ public class BarraTerrenosView extends Group implements PropertyChangeListener, 
     }
 
     @Override public void dispose()
-    {   barraTerrenos.eliminarObservador(this); }
+    {
+        logger.trace("DISPOSE: Liberando BarraTerrenosView");
+        barraTerrenos.eliminarObservador(this);
+    }
 
     private void crearBarraIconos()
     {

@@ -62,6 +62,7 @@ public class ServidorInputs
         pc.añadirSkillsPersonalizados("Terraformar");
         pc.añadirSkillsPersonalizados("Heal");
         pc.añadirSkillsPersonalizados("Bolt");
+        pc.añadirSkillsPersonalizados("PoisonBolt");
         pc.setNumTalentosSkillPersonalizado("Heal", 0, 10);
         pc.setNumTalentosSkillPersonalizado("Heal", 1, 17);
         pc.setNumTalentosSkillPersonalizado("Hot", 1, 10);

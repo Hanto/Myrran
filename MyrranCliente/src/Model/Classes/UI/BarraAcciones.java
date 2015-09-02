@@ -49,10 +49,6 @@ public class BarraAcciones extends AbstractModel implements BarraAccionesI
     }
 
 
-
-
-
-
     @Override public void eliminarKeycode(int keycode)
     {
         for (int y=0; y< barraAcciones.size; y++)

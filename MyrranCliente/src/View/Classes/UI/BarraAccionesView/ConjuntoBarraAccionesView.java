@@ -2,17 +2,19 @@ package View.Classes.UI.BarraAccionesView;// Created by Hanto on 08/05/2014.
 
 import DB.RSC;
 import DTO.DTOsBarraAcciones;
-import Model.Classes.UI.ConjuntoBarraAcciones;
-import Model.Settings;
-import Interfaces.UI.BarraAccionesI;
 import Interfaces.Controlador.ControladorBarraAccionI;
+import Interfaces.UI.BarraAccionesI;
+import Model.Classes.UI.ConjuntoBarraAcciones;
+import Model.EstructurasDatos.ListaMapa;
+import Model.Settings;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -23,12 +25,14 @@ public class ConjuntoBarraAccionesView implements PropertyChangeListener, Dispos
     private Stage stage;
     private ConjuntoBarraAcciones conjuntoBarraAcciones;
 
-    private Array<BarraAccionesView> listaBarraAccionesView = new Array<>();
+    private ListaMapa<BarraAccionesView> listaBarraAccionesView = new ListaMapa<>();
     private DragAndDrop dadAcciones = new DragAndDrop();
     private boolean rebindearSkills = false;
 
     public boolean getRebindearSkills()             { return rebindearSkills; }
     public DragAndDrop getDadAcciones()             { return dadAcciones; }
+
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public ConjuntoBarraAccionesView(ControladorBarraAccionI controller, ConjuntoBarraAcciones conjuntoBarraAcciones, Stage stage)
     {
@@ -43,7 +47,12 @@ public class ConjuntoBarraAccionesView implements PropertyChangeListener, Dispos
     }
 
     @Override public void dispose()
-    {   this.conjuntoBarraAcciones.eliminarObservador(this); }
+    {
+        logger.trace("DISPOSE: Liberando ConjuntoBarraAccionesView");
+        this.conjuntoBarraAcciones.eliminarObservador(this);
+        for (BarraAccionesView barraAccionesView : listaBarraAccionesView)
+        {   barraAccionesView.dispose(); }
+    }
 
     //
     //------------------------------------------------------------------------------------------------------------------
@@ -54,8 +63,12 @@ public class ConjuntoBarraAccionesView implements PropertyChangeListener, Dispos
         listaBarraAccionesView.add(barraAccionesView);
     }
 
-    public void eliminarBarraAccionesView(BarraAccionesView barraAccionesView)
-    {   listaBarraAccionesView.removeValue(barraAccionesView, true); }
+    private void eliminarBarraAccionesView(int barraAccionID)
+    {
+        BarraAccionesView barraAccionView = listaBarraAccionesView.remove(barraAccionID);
+        stage.getRoot().removeActor(barraAccionView);
+        barraAccionView.dispose();
+    }
 
     private void crearBotonesRebind()
     {
@@ -101,9 +114,11 @@ public class ConjuntoBarraAccionesView implements PropertyChangeListener, Dispos
     {
         //MODEL: OBSERVAMOS BARRA ACCIONES:
         if (evt.getNewValue() instanceof DTOsBarraAcciones.AñadirBarraAcciones)
-    {
-        BarraAccionesI barraAcciones = ((DTOsBarraAcciones.AñadirBarraAcciones) evt.getNewValue()).barraAcciones;
-        añadirBarraAccionesView(barraAcciones);
-    }
+        {
+            BarraAccionesI barraAcciones = ((DTOsBarraAcciones.AñadirBarraAcciones) evt.getNewValue()).barraAcciones;
+            añadirBarraAccionesView(barraAcciones);
+        }
+        else if (evt.getNewValue() instanceof DTOsBarraAcciones.EliminarBarraAcciones)
+        {   eliminarBarraAccionesView(((DTOsBarraAcciones.EliminarBarraAcciones) evt.getNewValue()).barraAccionID); }
     }
 }

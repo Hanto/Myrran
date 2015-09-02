@@ -2,6 +2,7 @@ package View.Classes.UI.BarraAccionesView;// Created by Hanto on 06/05/2014.
 
 import DB.RSC;
 import DTO.DTOsBarraAcciones;
+import Interfaces.EntidadesPropiedades.IDentificable;
 import Model.Settings;
 import Interfaces.UI.BarraAccionesI;
 import Interfaces.Controlador.ControladorBarraAccionI;
@@ -9,6 +10,7 @@ import View.Classes.UI.BarraAccionesView.CasillaView.CasillaView;
 import View.Classes.UI.Ventana.Ventana;
 import View.Classes.UI.Ventana.VentanaMoverListener;
 import View.Classes.UI.Ventana.VentanaResizeListener;
+import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,12 +18,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
+import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class BarraAccionesView extends Table implements PropertyChangeListener, Ventana
+public class BarraAccionesView extends Table implements PropertyChangeListener, IDentificable, Ventana, Disposable
 {
+    private int iD;
     private BarraAccionesI barraModel;
     private Stage stage;
     private DragAndDrop dad;
@@ -34,26 +39,38 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
 
     private Array<Array<CasillaView>> barraIconos = new Array<>();
 
+    public BarraAccionesI getModel()                        { return barraModel; }
     public float getEsquinaSupIzdaX()                       { return this.getX(); }
     public float getEsquinaSupIzdaY()                       { return this.getY() + this.getHeight(); }
+
+    // IDENTIFICABLE:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public int getID()                            { return iD; }
+    @Override public void setID(int iD)                     { this.iD = iD;}
+
+    // VENTANA:
+    //------------------------------------------------------------------------------------------------------------------
+
     @Override public float getAnchoElemento()               { return Settings.BARRASPELLS_Ancho_Casilla; }
     @Override public float getAltoElemento()                { return Settings.BARRASPELLS_Alto_Casilla; }
 
+    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+
     public BarraAccionesView(BarraAccionesI barraAcciones, ConjuntoBarraAccionesView conjuntoBarraAccionesView, Stage stage, ControladorBarraAccionI controller)
     {
+        this.iD = barraAcciones.getID();
         this.barraModel = barraAcciones;
         this.stage = stage;
         this.controlador = controller;
         this.conjuntoBarraAccionesView = conjuntoBarraAccionesView;
         this.dad = conjuntoBarraAccionesView.getDadAcciones();
 
-        barraAcciones.añadirObservador(this);
-
         this.setWidth(barraModel.getNumColumnas()*(Settings.BARRASPELLS_Ancho_Casilla));
-        this.setHeight(barraModel.getNumFilas()*(Settings.BARRASPELLS_Ancho_Casilla));
+        this.setHeight(barraModel.getNumFilas() * (Settings.BARRASPELLS_Ancho_Casilla));
 
         this.bottom().left();
-        this.setPosition(500,0);
+        this.setPosition(500, 0);
 
         moverBarra = new Image(RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_BARRASPELLS_RebindButtonON));
         moverBarra.addListener(new VentanaMoverListener(moverBarra, this));
@@ -67,8 +84,10 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
         this.addActor(eliminarBarra);
         eliminarBarra.addListener(new InputListener()
         {
-            @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-            {   eliminarBarraAcciones();
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                controlador.eliminarBarraAcciones(barraModel);
                 return true;
             }
         });
@@ -76,6 +95,14 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
         crearBarraIconos();
 
         this.stage.addActor(this);
+
+        barraModel.añadirObservador(this);
+    }
+
+    @Override public void dispose()
+    {
+        logger.trace("DISPOSE: Liberando BarraAccionesView");
+        barraModel.eliminarObservador(this);
     }
 
     private void crearBarraIconos()
@@ -198,14 +225,6 @@ public class BarraAccionesView extends Table implements PropertyChangeListener, 
             CasillaView icono = barraIconos.get(y).pop();
             icono.eliminarIcono(dad);
         }
-    }
-
-    public void eliminarBarraAcciones()
-    {
-        controlador.eliminarBarraAcciones(barraModel);
-        conjuntoBarraAccionesView.eliminarBarraAccionesView(this);
-        barraModel.eliminarObservador(this);
-        stage.getRoot().removeActor(this);
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt)

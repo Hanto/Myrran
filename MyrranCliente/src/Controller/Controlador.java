@@ -55,10 +55,12 @@ public class Controlador
         ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("Terraformar"));
         ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("Heal"));
         ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("Bolt"));
+        ui.getInputManager().añadirAccion(AccionFactory.accionSpell.SELECCIONARSPELL.nuevo("PoisonBolt"));
 
         ui.crearCasilla(0, 0, 0, "Terraformar", 8);
         ui.crearCasilla(0, 1, 0, "Heal", 9);
         ui.crearCasilla(0, 2, 0, "Bolt", 10);
+        ui.crearCasilla(0, 3, 0, "PoisonBolt", 11);
         ui.crearCasilla(0, 1, 1, "IrNorte", 51);
         ui.crearCasilla(0, 1, 2, "IrSur", 47);
         ui.crearCasilla(0, 2, 2, "IrEste", 32);
