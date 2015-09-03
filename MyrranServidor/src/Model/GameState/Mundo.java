@@ -176,6 +176,10 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
             pc.actualizarIA(delta, mundo);
         }
 
+        //MOBS:
+        for (MobI mob : dataMobs)
+        {   mob.actualizarTimers(delta); }
+
         //PROYECTILES:
         Iterator<ProyectilI>iterator = dataProyectiles.iterator(); ProyectilI pro;
         while (iterator.hasNext())

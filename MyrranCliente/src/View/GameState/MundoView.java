@@ -15,6 +15,7 @@ import Model.Settings;
 import View.Classes.Actores.Particula;
 import View.Classes.Geo.MapaView;
 import View.Classes.Mobiles.MobView.MobView;
+import View.Classes.Mobiles.MobView.MobViewFactory;
 import View.Classes.Mobiles.PCView.PCView;
 import View.Classes.Mobiles.PCView.PCViewFactory;
 import View.Classes.Mobiles.PlayerView.PlayerView;
@@ -89,7 +90,7 @@ public class MundoView extends Stage implements PropertyChangeListener
 
         mundo.añadirObservador(this);
 
-        particleCursor();
+        //particleCursor();
     }
 
     @Override public void dispose ()
@@ -157,7 +158,7 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     public void añadirMobView (MobI mob)
     {
-        MobView mobView = new MobView(mob);
+        MobView mobView = MobViewFactory.MOBVIEW.nuevo(mob);
         listaMobsViews.add(mobView);
         this.addActor(mobView);
     }
@@ -199,7 +200,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         rayHandler.updateAndRender();
 
         //dibujamos la geometrica fisica de DEBUG:
-        worldRender.render(getWorld(), boxCamara.combined);
+        //worldRender.render(getWorld(), boxCamara.combined);
 
         //dibujamos las lineas de debug:
         dibujarVision();

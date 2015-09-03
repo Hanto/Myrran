@@ -2,6 +2,7 @@ package View.Classes.Mobiles.PlayerView;// Created by Hanto on 10/04/2014.
 
 import DB.RSC;
 import DTO.DTOsPlayer;
+import DTOs.DTOsVulnerable;
 import Model.Classes.Mobiles.Player.Player;
 import Model.Settings;
 import View.Classes.Actores.NameplateView;
@@ -134,7 +135,7 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
         else if (evt.getNewValue() instanceof DTOsPlayer.Nombre)
         {   setNombre(((DTOsPlayer.Nombre) evt.getNewValue()).nombre); }
 
-        else if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
-        {   modificarHPs(((DTOsPlayer.ModificarHPs) evt.getNewValue()).HPs); }
+        else if (evt.getNewValue() instanceof DTOsVulnerable.ModificarHPs)
+        {   modificarHPs(((DTOsVulnerable.ModificarHPs) evt.getNewValue()).HPs); }
     }
 }

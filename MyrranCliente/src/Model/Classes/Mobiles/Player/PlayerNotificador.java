@@ -1,6 +1,8 @@
 package Model.Classes.Mobiles.Player;// Created by Hanto on 21/07/2014.
 
 import DTO.DTOsPlayer;
+import DTOs.DTOsCaster;
+import DTOs.DTOsVulnerable;
 import Interfaces.EntidadesTipos.PlayerI;
 import Model.AI.Steering.SteerableAgent;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -17,8 +19,8 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
     private DTOsPlayer.StopCastear stopCastearDTO = new DTOsPlayer.StopCastear();
     private DTOsPlayer.StartCastear startCastearDTO = new DTOsPlayer.StartCastear();
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
-    private DTOsPlayer.CastingTimePercent castingTimeDTO = new DTOsPlayer.CastingTimePercent();
-    private DTOsPlayer.ModificarHPs modificarHPsDTO = new DTOsPlayer.ModificarHPs();
+    private DTOsCaster.CastingTimePercent castingTimeDTO = new DTOsCaster.CastingTimePercent();
+    private DTOsVulnerable.ModificarHPs modificarHPsDTO = new DTOsVulnerable.ModificarHPs();
 
     private ObjectMap<Class, Object> cambiosExcluyentes = new ObjectMap<>();
     private ArrayList<Object> cambiosAcumulativos = new ArrayList<>();
@@ -130,7 +132,7 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
     {   notificarActualizacion("nombrePlayer", null, new DTOsPlayer.Nombre(getNombre())); }
 
     public void notificarSetMaxHPs()
-    {   notificarActualizacion("MaxHPsPlayer", null, new DTOsPlayer.MaxHPs(getMaxHPs())); }
+    {   notificarActualizacion("MaxHPsPlayer", null, new DTOsVulnerable.HPs(getActualHPs(), getMaxHPs())); }
 
     public void notificarSetModificarHPs (float HPs)
     {

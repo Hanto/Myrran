@@ -2,9 +2,11 @@ package View.Classes.Mobiles.MobView;// Created by Hanto on 13/08/2015.
 
 import DB.RSC;
 import DTO.DTOsMob;
+import DTOs.DTOsVulnerable;
 import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.EntidadesTipos.MobI;
 import Model.Settings;
+import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.Pixie;
 import View.Classes.Actores.Texto;
 import com.badlogic.gdx.graphics.Color;
@@ -22,6 +24,7 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     protected MobI mob;
     protected int iD;
     protected Pixie actor;
+    protected NameplateView nameplate;
 
     private int rAncho;
     private int rAlto;
@@ -35,13 +38,15 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public MobView(MobI mob)
+    public MobView(MobI mob, Pixie actor, NameplateView nameplate)
     {
         this.mob = mob;
         this.iD = mob.getID();
-        this.actor = new Pixie(RSC.pixieMobRecursosDAO.getPixieMobRecursosDaoDAO().getPixieMob("GrimReaper"));
+        this.actor = actor;
+        this.nameplate = nameplate;
 
         crearActor();
+        crearNameplate();
 
         this.setPosition(mob.getX(), mob.getY());
 
@@ -51,8 +56,14 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     @Override public void dispose()
     {
         mob.eliminarObservador(this);
+
+        nameplate.dispose();
         this.actor = null;
+        this.nameplate = null;
     }
+
+    // CREADORES VIEW:
+    //------------------------------------------------------------------------------------------------------------------
 
     private void crearActor()
     {
@@ -63,7 +74,15 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
         this.rAlto = (int)actor.getHeight()/2;
     }
 
-    //TODO FALTA QUE SI LA DISTANCIA ES MUY GRANDE SE TELEPORTE:
+    private void crearNameplate()
+    {
+        nameplate.setPosition(this.getWidth() / 2 - nameplate.getWidth() / 2, getHeight());
+        this.addActor(nameplate);
+    }
+
+    // VISTA:
+    //------------------------------------------------------------------------------------------------------------------
+
     public void setPosition(int x, int y)
     {
         if (Math.abs(this.getX() - x) > 10 || Math.abs(this.getY() - y) > 10)
@@ -101,7 +120,7 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
         else if (evt.getNewValue() instanceof DTOsMob.OrientacionMob)
         {   setOrientacion(((DTOsMob.OrientacionMob) evt.getNewValue()).orientacion); }
 
-        else if (evt.getNewValue() instanceof DTOsMob.ModificarHPsMob)
-        {   modificarHPs( (int) ((DTOsMob.ModificarHPsMob) evt.getNewValue()).HPs); }
+        else if (evt.getNewValue() instanceof DTOsVulnerable.ModificarHPs)
+        {   modificarHPs( (int) ((DTOsVulnerable.ModificarHPs) evt.getNewValue()).HPs); }
     }
 }

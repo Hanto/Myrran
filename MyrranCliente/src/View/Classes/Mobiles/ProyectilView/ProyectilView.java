@@ -61,7 +61,7 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
     private void crearLuz()
     {
         luz.setSoft(true);
-        luz.setColor(0.6f, 0.0f, 0.0f, 1.0f);
+        luz.setColor(0.6f, 0.0f, 0.0f, 0.5f);
         luz.setDistance(300 * Settings.PIXEL_METROS);
         luz.attachToBody(proyectil.getCuerpo().getBody());
     }

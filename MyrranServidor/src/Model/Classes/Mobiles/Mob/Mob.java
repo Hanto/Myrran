@@ -1,14 +1,21 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 10/08/2015.
 
+import Interfaces.BDebuff.AuraI;
+import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.GameState.MundoI;
 
-public class Mob extends MobNotificador implements MobI
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Mob extends MobNotificador implements MobI, Debuffeable
 {
     protected int iD;                                                       //Identificable:
-    protected float actualHPs=1;                                            // Vulnerable:
-    protected float maxHPs=2000;
+    protected float actualHPs=10000;                                        // Vulnerable:
+    protected float maxHPs=10000;
+    protected List<AuraI> listaDeAuras = new ArrayList<>();                 // Debuffeable:
 
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -35,6 +42,13 @@ public class Mob extends MobNotificador implements MobI
     @Override public float getMaxHPs()                                      { return maxHPs; }
     @Override public void setActualHPs(float HPs)                           { modificarHPs(HPs - actualHPs); }
     @Override public void setMaxHPs(float HPs)                              { maxHPs = HPs; }
+
+    // DEBUFFEABLE
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void añadirAura(AuraI aura)                            { listaDeAuras.add(aura); }
+    @Override public void eliminarAura(AuraI aura)                          { listaDeAuras.remove(aura); }
+    @Override public Iterator<AuraI> getAuras()                             { return listaDeAuras.iterator(); }
 
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
@@ -71,9 +85,30 @@ public class Mob extends MobNotificador implements MobI
         notificarAddModificarHPs(HPs);
     }
 
+    // METODOS ACTUALIZACION:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void actualizarAuras (float delta)
+    {
+        AuraI aura;
+        Iterator<AuraI> aurasIteator = getAuras();
+        while (aurasIteator.hasNext())
+        {
+            aura = aurasIteator.next();
+            aura.actualizarAura(delta);
+            if (aura.getDuracion() >= aura.getDuracionMax())
+                aurasIteator.remove();
+        }
+    }
+
+    @Override public void actualizarTimers(float delta)
+    {   actualizarAuras(delta); }
+
     @Override public void actualizarFisica(float delta, MundoI mundo)
     {
         if ( steeringBehavior != null)
             super.calcularSteering(delta);
     }
+
+    @Override public void actualizarIA(float delta, MundoI mundo) {}
 }

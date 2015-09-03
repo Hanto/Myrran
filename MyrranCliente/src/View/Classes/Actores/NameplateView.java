@@ -2,8 +2,8 @@ package View.Classes.Actores;
 
 import DB.RSC;
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;
-import DTO.DTOsPlayer;
-import DTO.DTOsPlayer.CastingTimePercent;
+import DTOs.DTOsCaster;
+import DTOs.DTOsVulnerable;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Vulnerable;
 import Interfaces.Model.ModelI;
@@ -47,14 +47,10 @@ public class NameplateView extends Actor implements PropertyChangeListener, Disp
             this.Caster = (Caster)vulnerable;
             this.isCaster = true;
         }
+
         crearActor();
+        model.añadirObservador(this);
     }
-
-    public void dispose()
-    {   model.eliminarObservador(this); }
-
-    //
-    //------------------------------------------------------------------------------------------------------------------
 
     public NameplateView(Caster Caster)
     {
@@ -67,13 +63,19 @@ public class NameplateView extends Actor implements PropertyChangeListener, Disp
             this.vulnerable = (Vulnerable) Caster;
             this.isVulnerable = true;
         }
+
         crearActor();
+        model.añadirObservador(this);
     }
+
+    public void dispose()
+    {   model.eliminarObservador(this); }
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
 
     public void crearActor()
     {
-        model.añadirObservador(this);
-
         MiscRecursosDAO miscRecursosDAO = RSC.miscRecusosDAO.getMiscRecursosDAO();
 
         int alto = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_NAMEPLATE_Nameplate).getRegionHeight();
@@ -155,14 +157,14 @@ public class NameplateView extends Actor implements PropertyChangeListener, Disp
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
-        { setHPsPercent();}
+        if (evt.getNewValue() instanceof DTOsVulnerable.ModificarHPs)
+        {   setHPsPercent(); }
 
-        else if (evt.getNewValue() instanceof DTOsPlayer.MaxHPs)
-        { setHPsPercent();}
+        else if (evt.getNewValue() instanceof DTOsVulnerable.HPs)
+        {   setHPsPercent();}
 
-        else if (evt.getNewValue() instanceof CastingTimePercent)
-        { setCastingTimePercent(((CastingTimePercent) evt.getNewValue()).castingTimePercent); }
+        else if (evt.getNewValue() instanceof DTOsCaster.CastingTimePercent)
+        {   setCastingTimePercent(((DTOsCaster.CastingTimePercent) evt.getNewValue()).castingTimePercent); }
     }
 
 }

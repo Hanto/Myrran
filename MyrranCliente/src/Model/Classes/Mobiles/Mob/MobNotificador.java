@@ -1,5 +1,6 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 13/08/2015.
 
+import DTOs.DTOsVulnerable;
 import DTO.DTOsMob;
 import Interfaces.EntidadesTipos.MobI;
 import Model.AI.Steering.SteerableAgent;
@@ -8,13 +9,13 @@ public abstract class MobNotificador extends SteerableAgent implements MobI
 {
     private DTOsMob.PosicionMob posicionDTO;
     private DTOsMob.OrientacionMob orientacionDTO;
-    private DTOsMob.ModificarHPsMob modificarHPsDTO;
+    private DTOsVulnerable.ModificarHPs modificarHPsDTO;
 
     public MobNotificador()
     {
         posicionDTO = new DTOsMob.PosicionMob(this);
         orientacionDTO = new DTOsMob.OrientacionMob(this);
-        modificarHPsDTO = new DTOsMob.ModificarHPsMob(this);
+        modificarHPsDTO = new DTOsVulnerable.ModificarHPs();
     }
 
     // NOTIFICACION LOCAL:

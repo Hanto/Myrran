@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 
 public interface MobI extends
         IDentificable, Espacial, Solido, Colisionable, Dinamico, Orientable, SteerableAgentI, Disposable,
-        Vulnerable, ModelI
+        Vulnerable, MobStats, ModelI
 {
 
 }

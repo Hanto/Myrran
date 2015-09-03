@@ -1,6 +1,7 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPlayer;
+import DTOs.DTOsVulnerable;
 import Interfaces.EntidadesTipos.PCI;
 import Model.AI.Steering.SteerableAgent;
 
@@ -9,7 +10,7 @@ public abstract class PCNotificador extends SteerableAgent implements PCI
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
     private DTOsPlayer.Animacion animacionDTO = new DTOsPlayer.Animacion();
     private DTOsPlayer.Posicion posicionDTO = new DTOsPlayer.Posicion();
-    private DTOsPlayer.ModificarHPs modificarHPsDTO = new DTOsPlayer.ModificarHPs();
+    private DTOsVulnerable.ModificarHPs modificarHPsDTO = new DTOsVulnerable.ModificarHPs();
 
     public PCNotificador()
     { }

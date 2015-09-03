@@ -1,6 +1,5 @@
 package DTO;// Created by Hanto on 24/07/2014.
 
-import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesTipos.PCI;
 
 public class DTOsPlayer
@@ -117,15 +116,6 @@ public class DTOsPlayer
         }
     }
 
-    public static class HPs
-    {
-        public float actualHPs;
-        public float maxHPs;
-        public HPs() {}
-        public HPs(int actualHPs, int maxHPs)
-        {   this.actualHPs = actualHPs; this.maxHPs = maxHPs; }
-    }
-
     public static class CambioTerreno
     {
         public int tileX;
@@ -146,22 +136,6 @@ public class DTOsPlayer
         {   this.nombre = nombre; }
     }
 
-    public static class ModificarHPs
-    {
-        public float HPs;
-        public ModificarHPs() {}
-        public ModificarHPs (float HPs)
-        {   this.HPs = HPs; }
-    }
-
-    public static class CastingTimePercent
-    {
-        public float castingTimePercent;
-        public CastingTimePercent() {}
-        public CastingTimePercent(Caster Caster)
-        {   this.castingTimePercent = Caster.getActualCastingTime() == 0 && Caster.getTotalCastingTime() == 0 ? 100 :
-                Caster.getActualCastingTime() / Caster.getTotalCastingTime(); }
-    }
 
     //  DTOS: no registrados (uso Local)
     //------------------------------------------------------------------------------------------------------------------

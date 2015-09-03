@@ -5,11 +5,9 @@ import Interfaces.AI.SistemaAggroI;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.EstructurasDatos.QuadTreeI;
+import Model.EstructurasDatos.QuadTreeCallBack;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ColisionProyectilesQTree implements ColisionProyectilesI
+public class ColisionProyectilesQTree implements ColisionProyectilesI, QuadTreeCallBack
 {
     private SistemaAggroI aggro;
     private QuadTreeI quadTree;
@@ -20,7 +18,16 @@ public class ColisionProyectilesQTree implements ColisionProyectilesI
         this.quadTree = quadTree;
     }
 
-    @Override public void collides(ProyectilI proyectil)
+    @Override public void collides (ProyectilI proyectil)
+    {   quadTree.getCercanos(this, proyectil); }
+
+    @Override public void returnCercano(Colisionable proyectil, Colisionable mobCercano)
+    {
+        if (aggro.sonEnemigos(((ProyectilI)proyectil).getOwner(), mobCercano) && proyectil.getHitbox().overlaps(mobCercano.getHitbox()))
+        {   proyectil.checkColisionesConMob(mobCercano); }
+    }
+
+    /*@Override public void collides(ProyectilI proyectil)
     {
         List<Colisionable> listaMobsCercanos = new ArrayList<>();
         quadTree.getCercanos(listaMobsCercanos, proyectil);
@@ -29,5 +36,5 @@ public class ColisionProyectilesQTree implements ColisionProyectilesI
             if (aggro.sonEnemigos(proyectil.getOwner(), mobCercano) && proyectil.getHitbox().overlaps(mobCercano.getHitbox()))
             {   proyectil.checkColisionesConMob(mobCercano); }
         }
-    }
+    }*/
 }

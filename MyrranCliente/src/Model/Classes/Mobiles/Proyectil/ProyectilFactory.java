@@ -15,7 +15,7 @@ public enum ProyectilFactory
 
         @Override public ProyectilFactory nuevo (World world, int ancho, int alto)
         {
-            Cuerpo cuerpo = BodyFactory.crearCuerpo.CIRCLE.nuevo(world, ancho, alto);
+            Cuerpo cuerpo = BodyFactory.crearCuerpoEtereo.RECTANGULAR.nuevo(world, ancho, alto);
             proyectil = new Proyectil(cuerpo);
 
             return this;

@@ -31,11 +31,9 @@ public class NetDTOs
         kryo.register(DTOsPlayer.NumTalentosSkillPersonalizado.class);
         kryo.register(DTOsPlayer.CrearPC.class);
         kryo.register(DTOsPlayer.Nombre.class);
-        kryo.register(DTOsPlayer.HPs.class);
-        kryo.register(DTOsPlayer.ModificarHPs.class);
         kryo.register(DTOsPlayer.SkillPersonalizado.class);
         kryo.register(DTOsPlayer.CambioTerreno.class);
-        kryo.register(DTOsPlayer.CastingTimePercent.class);
+
         //Parametros Spell:
         kryo.register(DTOsParametrosSpell.ParametrosEditarTerreno.class);
 

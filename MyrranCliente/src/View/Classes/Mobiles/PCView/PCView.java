@@ -2,6 +2,7 @@ package View.Classes.Mobiles.PCView;// Created by Hanto on 08/04/2014.
 
 import DB.RSC;
 import DTO.DTOsPlayer;
+import DTOs.DTOsVulnerable;
 import Interfaces.EntidadesPropiedades.IDentificable;
 import Interfaces.EntidadesTipos.PCI;
 import Model.Settings;
@@ -120,15 +121,12 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
-        {
-            setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
+        {   setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
 
-        if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
-        {
-            modificarHPs( (int) (((DTOsPlayer.ModificarHPs) evt.getNewValue()).HPs) ); }
+        if (evt.getNewValue() instanceof DTOsVulnerable.ModificarHPs)
+        {   modificarHPs( (int) (((DTOsVulnerable.ModificarHPs) evt.getNewValue()).HPs) ); }
 
         if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
-        {
-            setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
+        {   setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
     }
 }

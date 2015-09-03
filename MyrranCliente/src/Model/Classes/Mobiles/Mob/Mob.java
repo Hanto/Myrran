@@ -8,8 +8,8 @@ import Model.Mobiles.Cuerpos.Cuerpo;
 public class Mob extends MobNotificador implements MobI
 {
     protected int iD;                                                       // Identificable:
-    protected float actualHPs=1;                                            // Vulnerable:
-    protected float maxHPs=2000;
+    protected float actualHPs=10000;                                        // Vulnerable:
+    protected float maxHPs=10000;
     protected Cuerpo cuerpo;                                                // Corporeo:
 
     // IDENTIFICABLE:
@@ -74,6 +74,10 @@ public class Mob extends MobNotificador implements MobI
         notificarAddModificarHPs(HPs);
     }
 
-    @Override public void actualizarFisica(float delta, MundoI mundo) {}
+    // METODOS ACTUALIZACION:
+    //------------------------------------------------------------------------------------------------------------------
 
+    @Override public void actualizarTimers(float delta) {}
+    @Override public void actualizarFisica(float delta, MundoI mundo) {}
+    @Override public void actualizarIA(float delta, MundoI mundo) {}
 }

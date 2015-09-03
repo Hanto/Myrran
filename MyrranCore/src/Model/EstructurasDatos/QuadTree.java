@@ -146,4 +146,19 @@ public class QuadTree implements QuadTreeI
 
         return objetosCercanos;
     }
+
+    @Override public void getCercanos(QuadTreeCallBack callBack, Colisionable colisionable)
+    {
+        if (nodos[0] != null)
+        {
+            int indice = getIndice(colisionable.getHitbox());
+            if (indice != -1)
+                nodos[indice].getCercanos(callBack, colisionable);
+            else
+                for (QuadTree nodo : nodos)
+                    nodo.getCercanos(callBack, colisionable);
+        }
+        for (Colisionable objeto : objetos)
+            if (objeto != colisionable) callBack.returnCercano(colisionable, objeto);
+    }
 }

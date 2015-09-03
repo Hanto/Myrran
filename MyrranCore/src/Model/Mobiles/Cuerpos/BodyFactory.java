@@ -110,4 +110,27 @@ public class BodyFactory
 
         private crearCuerpo() {}
     }
+
+    public enum crearCuerpoEtereo
+    {
+        RECTANGULAR
+        {
+            @Override public Cuerpo nuevo(World world, int ancho, int alto)
+            {
+                BodyDef bd = new BodyDef();
+                bd.type = BodyDef.BodyType.KinematicBody;
+                bd.position.set(ancho * PIXEL_METROS / 2, alto * PIXEL_METROS / 2);
+
+                Body body = world.createBody(bd);
+
+                Cuerpo cuerpo = new Cuerpo(world, ancho, alto);
+                cuerpo.setBody(body);
+                return cuerpo;
+            }
+        };
+
+        public abstract Cuerpo nuevo(World world, int ancho, int alto);
+
+        private crearCuerpoEtereo() {}
+    }
 }
