@@ -1,6 +1,5 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 07/04/2014.
 
-import Interfaces.AI.SistemaAggroI;
 import Interfaces.EntidadesPropiedades.Caster;
 import Interfaces.EntidadesPropiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
@@ -13,8 +12,6 @@ import Interfaces.Spell.SpellI;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 public class Proyectil extends ProyectilNotificador implements ProyectilI
 {
@@ -124,25 +121,21 @@ public class Proyectil extends ProyectilNotificador implements ProyectilI
     @Override public void setDireccion(float grados)
     {   cuerpo.setDireccion(grados); }
 
-    // COLISIONES:
+    // COLISION CALLBACKS:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void checkColisiones(List<Colisionable> listaColisionables, SistemaAggroI aggro)
+    @Override public void checkColisionesConMob(Colisionable colisionable)
     {
-        boolean haColisionado = false;
-
-        for (Colisionable mobCercano : listaColisionables)
-        {
-            if (aggro.sonEnemigos(owner, mobCercano) && getHitbox().overlaps(mobCercano.getHitbox()) )
-            {
-                if (mobCercano instanceof Vulnerable) aplicarDaño((Vulnerable)mobCercano);
-                if (mobCercano instanceof Debuffeable) aplicarDebuffs((Debuffeable)mobCercano);
-                haColisionado = true;
-            }
-        }
-
-        if (haColisionado) duracionActual = duracionMaxima+1;
+        if (colisionable instanceof Vulnerable) aplicarDaño((Vulnerable)colisionable);
+        if (colisionable instanceof Debuffeable) aplicarDebuffs((Debuffeable)colisionable);
+        duracionActual = duracionMaxima+1;
     }
+
+    @Override public void checkColisionesConMuro()
+    {   duracionActual = duracionMaxima +1; }
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
 
     private void aplicarDaño(Vulnerable vulnerable)
     {   vulnerable.modificarHPs(-daño); }

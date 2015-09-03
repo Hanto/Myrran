@@ -63,10 +63,16 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
         this.rAlto = (int)actor.getHeight()/2;
     }
 
+    //TODO FALTA QUE SI LA DISTANCIA ES MUY GRANDE SE TELEPORTE:
     public void setPosition(int x, int y)
     {
-        this.clearActions();
-        this.addAction(Actions.moveTo(x-rAncho, y-rAlto, Settings.FIXED_TimeStep + 0.03f, Interpolation.linear));
+        if (Math.abs(this.getX() - x) > 10 || Math.abs(this.getY() - y) > 10)
+            super.setPosition(x-rAncho, y-rAlto);
+        else
+        {
+            this.clearActions();
+            this.addAction(Actions.moveTo(x - rAncho, y - rAlto, Settings.FIXED_TimeStep + 0.03f, Interpolation.linear));
+        }
     }
 
     public void setOrientacion(float angulo)

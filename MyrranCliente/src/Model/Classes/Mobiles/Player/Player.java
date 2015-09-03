@@ -3,6 +3,7 @@ package Model.Classes.Mobiles.Player;// Created by Hanto on 10/04/2014.
 import DB.DAO;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.GameState.MundoI;
@@ -57,6 +58,12 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable, M
 
     @Override public void setDireccion(float x, float y)                { cuerpo.setDireccion(x, y); }
     @Override public void setDireccion(float grados)                    { cuerpo.setDireccion(grados); }
+
+    // COLISION CALLBACKS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void checkColisionesConMob(Colisionable colisionable) {}
+    @Override  public void checkColisionesConMuro() {}
 
     // ANIMABLE:
     //------------------------------------------------------------------------------------------------------------------

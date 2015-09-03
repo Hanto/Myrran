@@ -4,8 +4,9 @@ import DTO.DTOsMob;
 import DTO.DTOsMundo;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
+import Interfaces.AI.ColisionMurosI;
+import Interfaces.AI.ColisionProyectilesI;
 import Interfaces.AI.SistemaAggroI;
-import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
@@ -13,20 +14,14 @@ import Interfaces.EstructurasDatos.QuadTreeI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Model.AbstractModel;
-import Model.Classes.AI.SistemaAggro;
 import Model.Classes.AI.SteeringFactory.SteeringCompuestoFactory;
-import Model.Classes.Geo.Mapa;
 import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.EstructurasDatos.ListaMapaCuadrantes;
-import Model.EstructurasDatos.QuadTree;
-import Model.Settings;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class Mundo extends AbstractModel implements PropertyChangeListener, MundoI
 {
@@ -34,11 +29,12 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     protected ListaMapaCuadrantes<PCI> dataPCs = new ListaMapaCuadrantes<>();
     protected ListaMapaCuadrantes<MobI> dataMobs = new ListaMapaCuadrantes<>();
 
-    protected QuadTreeI quadTree = new QuadTree(Settings.MAPA_Max_TilesX * Settings.TILESIZE,
-                                                Settings.MAPA_Max_TilesY * Settings.TILESIZE);
-    private Mapa mapa;
     private World world;
+    private MapaI mapa;
+    private QuadTreeI quadTree;
     private SistemaAggroI aggro;
+    private ColisionMurosI colisionMuros;
+    private ColisionProyectilesI colisionProyectiles;
     private int mobID;
 
     @Override public MapaI getMapa()                        { return mapa; }
@@ -47,11 +43,14 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     public int getMobID()                                   { return mobID++ > Integer.MAX_VALUE ? 0 : mobID; }
 
 
-    public Mundo(World world, Mapa mapa, SistemaAggro aggro)
+    public Mundo(World world, MapaI mapa, QuadTreeI quadTree, SistemaAggroI aggro, ColisionMurosI colisionMuros, ColisionProyectilesI colisionProyectiles)
     {
         this.world = world;
         this.mapa = mapa;
+        this.quadTree = quadTree;
         this.aggro = aggro;
+        this.colisionMuros = colisionMuros;
+        this.colisionProyectiles = colisionProyectiles;
     }
 
     // PLAYERS:
@@ -203,19 +202,17 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         //PROYECTILES:
         for (ProyectilI proyectil : dataProyectiles)
         {   proyectil.actualizarFisica(delta, mundo); }
-
-        actualizarQuadTree();
     }
 
-    public void checkColisiones()
+    @Override public void checkColisiones()
     {
+        actualizarQuadTree();
+
         //PROYECTILES:
-        List<Colisionable> cercanos = new ArrayList<>();
         for (ProyectilI proyectil : dataProyectiles)
         {
-            cercanos.clear();
-            quadTree.getCercanos(cercanos, proyectil);
-            proyectil.checkColisiones(cercanos, aggro);
+            colisionProyectiles.collides(proyectil);
+            colisionMuros.collides(proyectil);
         }
     }
 

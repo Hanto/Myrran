@@ -210,6 +210,11 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
         world.step(delta, 8, 6);
     }
 
+    @Override public void checkColisiones()
+    {
+
+    }
+
     public void enviarDatosAServidor(Cliente cliente)
     {
         if (player.notificadorContieneDatos())

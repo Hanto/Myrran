@@ -4,6 +4,7 @@ import DB.DAO;
 import DTO.DTOsSkillPersonalizado;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.EntidadesPropiedades.Debuffeable;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillPersonalizadoI;
@@ -52,6 +53,11 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCI, De
     @Override public void setDireccion(float x, float y)                    { }
     @Override public void setDireccion(float grados)                        { }
 
+    // COLISION CALLBACKS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void checkColisionesConMob(Colisionable colisionable) {}
+    @Override  public void checkColisionesConMuro() {}
 
     // ANIMABLE:
     //------------------------------------------------------------------------------------------------------------------

@@ -97,7 +97,7 @@ public class RayDetectorMuros implements RaycastCollisionDetector<Vector2>
         if (terreno != null && terreno.getIsSolido())
         {
             if (outputCollision != null) calcularCollisionData(x, y, tileX, tileY, outputCollision);
-            return true;
+                return true;
         }
         return false;
     }

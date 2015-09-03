@@ -91,11 +91,16 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
     //------------------------------------------------------------------------------------------------------------------
 
+    //TODO FALTA QUE SI LA DISTANCIA ES MUY GRANDE SE TELEPORTE:
     public void setPosition(int x, int y)
     {
-        //TODO hay que hacerlo por setPosition y en cambio mover el pc interpoladamente, el destino sin decimales
-        this.clearActions();
-        this.addAction(Actions.moveTo(x-rAncho, y-rAlto, Settings.FIXED_TimeStep+0.03f, Interpolation.linear));
+        if (Math.abs(this.getX() - x) > 10 || Math.abs(this.getY() - y) > 10)
+            super.setPosition(x-rAncho, y-rAlto);
+        else
+        {
+            this.clearActions();
+            this.addAction(Actions.moveTo(x-rAncho, y-rAlto, Settings.FIXED_TimeStep+0.03f, Interpolation.linear));
+        }
     }
 
     public void setAnimacion (int numAnimacion)
@@ -115,12 +120,15 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
-        {   setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
+        {
+            setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
 
         if (evt.getNewValue() instanceof DTOsPlayer.ModificarHPs)
-        {   modificarHPs( (int) (((DTOsPlayer.ModificarHPs) evt.getNewValue()).HPs) ); }
+        {
+            modificarHPs( (int) (((DTOsPlayer.ModificarHPs) evt.getNewValue()).HPs) ); }
 
         if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
-        {   setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
+        {
+            setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
     }
 }

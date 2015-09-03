@@ -5,4 +5,8 @@ import com.badlogic.gdx.math.Rectangle;
 public interface Colisionable extends Espacial, Solido
 {
     public Rectangle getHitbox();
+
+    //COLISION CALLBACKS:
+    public void checkColisionesConMob(Colisionable colisionable);
+    public void checkColisionesConMuro();
 }

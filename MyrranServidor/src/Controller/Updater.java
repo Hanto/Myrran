@@ -1,8 +1,16 @@
 package Controller;// Created by Hanto on 09/04/2014.
 
+import Interfaces.AI.ColisionMurosI;
+import Interfaces.AI.ColisionProyectilesI;
+import Interfaces.AI.SistemaAggroI;
+import Interfaces.EstructurasDatos.QuadTreeI;
+import Interfaces.Geo.MapaI;
 import Interfaces.Network.MainLoopI;
-import Model.Classes.AI.SistemaAggro;
+import Model.AI.Colisiones.ColisionProyectilesQTree;
+import Model.AI.Colisiones.CollisionMurosTiles;
+import Model.AI.SistemaAggro;
 import Model.Classes.Geo.Mapa;
+import Model.EstructurasDatos.QuadTree;
 import Model.GameState.Mundo;
 import Model.Settings;
 import View.Gamestate.MundoView;
@@ -18,9 +26,12 @@ import java.util.List;
 public class Updater implements MainLoopI, Runnable
 {
     private World world;
-    private Mapa mapa;
+    private MapaI mapa;
     private Mundo mundo;
-    private SistemaAggro aggro;
+    private QuadTreeI quadTree;
+    private SistemaAggroI aggro;
+    private ColisionMurosI colisionMuros;
+    private ColisionProyectilesI colisionProyectiles;
     private MundoView mundoView;
     private Controlador controlador;
     private Servidor servidor;
@@ -43,18 +54,29 @@ public class Updater implements MainLoopI, Runnable
     public Updater()
     {
         //MODEL:
+        //--------------------------------------------------------------------------------------------------------------
+
         world = new World(new Vector2(0,0), false);
         mapa = new Mapa();
+        quadTree = new QuadTree(Settings.MAPA_Max_TilesX * Settings.TILESIZE, Settings.MAPA_Max_TilesY * Settings.TILESIZE);
         aggro = new SistemaAggro();
-        mundo = new Mundo(world, mapa, aggro);
+        colisionMuros = new CollisionMurosTiles(mapa);
+        colisionProyectiles = new ColisionProyectilesQTree(quadTree, aggro);
+        mundo = new Mundo(world, mapa, quadTree, aggro, colisionMuros, colisionProyectiles);
 
         //VISTA:
+        //--------------------------------------------------------------------------------------------------------------
+
         mundoView = new MundoView(mundo);
 
         //CONTROLADOR:
+        //--------------------------------------------------------------------------------------------------------------
+
         controlador = new Controlador(mundo, mundoView);
 
         //MULTIPLAYER:
+        //--------------------------------------------------------------------------------------------------------------
+
         servidor = new Servidor(this, controlador);
 
         currentTime = TimeUtils.nanoTime() / 1000000000.0;

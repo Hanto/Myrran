@@ -1,4 +1,4 @@
-package Model.Classes.AI;// Created by Hanto on 02/09/2015.
+package Model.AI;// Created by Hanto on 02/09/2015.
 
 import Interfaces.AI.SistemaAggroI;
 import Interfaces.EntidadesTipos.MobI;

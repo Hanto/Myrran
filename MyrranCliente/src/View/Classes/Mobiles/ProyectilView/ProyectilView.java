@@ -53,7 +53,7 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
         this.setHeight(actor.getHeight());
         this.setDireccion();
         this.setColor(0, 0, 0, 0);
-        this.addAction(Actions.fadeIn(0.5f));
+        this.addAction(Actions.fadeIn(48/proyectil.getVelocidadMax()));
         this.rAncho = (int)actor.getWidth()/2;
         this.rAlto = (int)actor.getHeight()/2;
     }

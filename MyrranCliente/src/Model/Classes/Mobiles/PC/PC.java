@@ -1,5 +1,6 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 08/04/2014.
 
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillPersonalizadoI;
@@ -28,6 +29,12 @@ public class PC extends PCNotificador implements PCI
 
     @Override public void setDireccion(float x, float y)                            {}
     @Override public void setDireccion(float grados)                                {}
+
+    // COLISION CALLBACKS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void checkColisionesConMob(Colisionable colisionable) {}
+    @Override  public void checkColisionesConMuro() {}
 
     // ANIMABLE:
     //------------------------------------------------------------------------------------------------------------------

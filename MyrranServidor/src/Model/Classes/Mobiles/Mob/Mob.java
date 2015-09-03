@@ -1,5 +1,6 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 10/08/2015.
 
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.GameState.MundoI;
 
@@ -20,6 +21,12 @@ public class Mob extends MobNotificador implements MobI
 
     @Override public void setDireccion(float x, float y)                    { }
     @Override public void setDireccion(float grados)                        { }
+
+    // COLISION CALLBACKS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void checkColisionesConMob(Colisionable colisionable) {}
+    @Override  public void checkColisionesConMuro() {}
 
     // VULNERABLE:
     //------------------------------------------------------------------------------------------------------------------

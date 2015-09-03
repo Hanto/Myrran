@@ -10,11 +10,10 @@ import com.badlogic.gdx.ai.utils.Collision;
 import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.ai.utils.RaycastCollisionDetector;
 import com.badlogic.gdx.math.Vector;
-import com.badlogic.gdx.math.Vector2;
 
 public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
 {
-    private RaycastCollisionDetector detectorMuros;
+    private RaycastCollisionDetector<T> detectorMuros;
     private RayConfiguration<T> rayosConfig;
     private Collision<T> colision;
 
@@ -23,7 +22,7 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
     private boolean colisionadoConMuro = false;
     private float distanciaColision;
 
-    public SeparationMuros(Steerable<T> owner, RaycastCollisionDetector<Vector2> rayDetectorMuros,
+    public SeparationMuros(Steerable<T> owner, RaycastCollisionDetector<T> rayDetectorMuros,
                            RayConfiguration<T> rayosConfig, float timeStep)
     {
         super(owner);
@@ -44,7 +43,7 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
 
         Ray<T>[] rayos = rayosConfig.updateRays();
 
-        for (Ray rayo : rayos)
+        for (Ray<T> rayo : rayos)
         {
             if (detectorMuros.findCollision(colision, rayo))
             {
@@ -79,9 +78,9 @@ public class SeparationMuros<T extends Vector<T>>  extends SteeringBehavior<T>
     @Override public SeparationMuros<T> setOwner (Steerable<T> owner)
     {   this.owner = owner; return this; }
 
-    @Override public SeparationMuros setEnabled (boolean enabled)
+    @Override public SeparationMuros<T> setEnabled (boolean enabled)
     {   this.enabled = enabled; return this; }
 
-    @Override public SeparationMuros setLimiter (Limiter limiter)
+    @Override public SeparationMuros<T> setLimiter (Limiter limiter)
     {   this.limiter = limiter; return this; }
 }
