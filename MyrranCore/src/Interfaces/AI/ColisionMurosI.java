@@ -1,6 +1,6 @@
 package Interfaces.AI;// Created by Hanto on 03/09/2015.
 
-import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
 
 public interface ColisionMurosI
 {

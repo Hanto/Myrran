@@ -3,8 +3,8 @@ package View.Classes.Mobiles.MobView;// Created by Hanto on 13/08/2015.
 import DB.RSC;
 import DTO.DTOsMob;
 import DTOs.DTOsVulnerable;
-import Interfaces.EntidadesPropiedades.IDentificable;
-import Interfaces.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesPropiedades.IDentificable;
+import InterfacesEntidades.EntidadesTipos.MobI;
 import Model.Settings;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.Pixie;

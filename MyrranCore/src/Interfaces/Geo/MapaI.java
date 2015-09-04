@@ -1,8 +1,9 @@
 package Interfaces.Geo;// Created by Hanto on 17/04/2014.
 
 import Interfaces.Model.ModelI;
+import com.badlogic.gdx.utils.Disposable;
 
-public interface MapaI extends ModelI
+public interface MapaI extends ModelI, Disposable
 {
     //GET:
     public TerrenoI getTerreno (int tileX, int tileY, int numCapa);

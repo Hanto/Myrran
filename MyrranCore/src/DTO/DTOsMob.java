@@ -1,6 +1,6 @@
 package DTO;// Created by Hanto on 11/08/2015.
 
-import Interfaces.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.MobI;
 
 public class DTOsMob
 {
@@ -10,7 +10,7 @@ public class DTOsMob
         public int posX;
         public int posY;
         public PosicionMob(MobI mob)
-        {   this.mob = mob; this.posX = (int)mob.getX(); this.posY = (int)mob.getY(); }
+        {   this.mob = mob; }
     }
 
     public static class OrientacionMob
@@ -18,7 +18,7 @@ public class DTOsMob
         public MobI mob;
         public float orientacion;
         public OrientacionMob (MobI mob)
-        {   this.mob = mob; this.orientacion = mob.getOrientacion(); }
+        {   this.mob = mob; }
     }
 
     public static class ModificarHPsMob

@@ -3,8 +3,8 @@ package Model.Classes.Skill.BDebuff;// Created by Hanto on 04/06/2014.
 import Model.Settings;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.BDebuff.BDebuffI;
-import Interfaces.EntidadesPropiedades.Debuffeable;
-import Interfaces.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
 
 public class Aura implements AuraI
 {

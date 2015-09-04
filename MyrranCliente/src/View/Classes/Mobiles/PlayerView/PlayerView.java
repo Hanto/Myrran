@@ -3,7 +3,7 @@ package View.Classes.Mobiles.PlayerView;// Created by Hanto on 10/04/2014.
 import DB.RSC;
 import DTO.DTOsPlayer;
 import DTOs.DTOsVulnerable;
-import Model.Classes.Mobiles.Player.Player;
+import InterfacesEntidades.EntidadesTipos.PlayerI;
 import Model.Settings;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;
@@ -21,7 +21,7 @@ import static Model.Settings.PIXEL_METROS;
 
 public class PlayerView extends Group implements PropertyChangeListener, Disposable
 {
-    protected Player player;
+    protected PlayerI player;
     protected PixiePC actor;
     protected NameplateView nameplateView;
     protected Texto nombre;
@@ -33,7 +33,7 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
     public float getCenterX()               { return player.getX(); }
     public float getCenterY()               { return player.getY(); }
 
-    public PlayerView (Player player, PixiePC pixieActor, NameplateView nameplate, PointLight luz)
+    public PlayerView (PlayerI player, PixiePC pixieActor, NameplateView nameplate, PointLight luz)
     {
         this.player = player;
         this.actor = pixieActor;

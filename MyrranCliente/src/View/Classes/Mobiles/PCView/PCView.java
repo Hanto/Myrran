@@ -3,8 +3,8 @@ package View.Classes.Mobiles.PCView;// Created by Hanto on 08/04/2014.
 import DB.RSC;
 import DTO.DTOsPlayer;
 import DTOs.DTOsVulnerable;
-import Interfaces.EntidadesPropiedades.IDentificable;
-import Interfaces.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesPropiedades.IDentificable;
+import InterfacesEntidades.EntidadesTipos.PCI;
 import Model.Settings;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;

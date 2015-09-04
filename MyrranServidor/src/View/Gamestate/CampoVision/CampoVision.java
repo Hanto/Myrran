@@ -3,14 +3,15 @@ package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 import DTO.DTOsMob;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
-import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
-import Interfaces.EntidadesTipos.CampoVisionI;
-import Interfaces.EntidadesTipos.MobI;
-import Interfaces.EntidadesTipos.PCI;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import InterfacesEntidades.EntidadesPropiedades.IDentificable;
+import InterfacesEntidades.EntidadesTipos.CampoVisionI;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Network.ServidorI;
-import Model.AbstractModel;
+import Interfaces.Observable.AbstractModel;
 import Model.Settings;
 import View.Gamestate.MundoView;
 import com.badlogic.gdx.utils.Disposable;
@@ -260,7 +261,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         {
             listaProyectilesCercanos.add(proyectil);
             proyectil.añadirObservador(this);
-            if (proyectil.getOwner() instanceof PCI & proyectil.getOwner().getID() == connectionID) {}
+            if (proyectil.getOwner() instanceof PCI & ((IDentificable)proyectil.getOwner()).getID() == connectionID) {}
             else { buffer.setDatosCompletosProyectil(proyectil); }
         }
     }

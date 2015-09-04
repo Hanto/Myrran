@@ -2,7 +2,7 @@ package Model.Classes.Skill.BDebuff.TiposBDebuff;// Created by Hanto on 26/06/20
 
 import Model.Settings;
 import Interfaces.BDebuff.AuraI;
-import Interfaces.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Skill.BDebuff.TipoBDebuff;
 
 public class Bomba extends TipoBDebuff

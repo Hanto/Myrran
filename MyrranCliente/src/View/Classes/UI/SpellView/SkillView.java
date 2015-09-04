@@ -2,7 +2,7 @@ package View.Classes.UI.SpellView;// Created by Hanto on 27/06/2014.
 
 import DB.RSC;
 import DTO.DTOsSkillPersonalizado;
-import Interfaces.EntidadesPropiedades.CasterPersonalizable;
+import InterfacesEntidades.EntidadesPropiedades.CasterPersonalizable;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Model.Settings;
 import View.Classes.Actores.Texto;

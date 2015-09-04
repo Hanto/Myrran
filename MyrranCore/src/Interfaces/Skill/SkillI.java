@@ -1,7 +1,7 @@
 package Interfaces.Skill;// Created by Hanto on 24/06/2014.
 
 import Model.Skills.SkillStat;
-import Interfaces.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
 import Interfaces.Model.ModelI;
 
 import java.util.Iterator;

@@ -1,6 +1,6 @@
 package DTOs;// Created by Hanto on 03/09/2015.
 
-import Interfaces.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
 
 public class DTOsVulnerable
 {

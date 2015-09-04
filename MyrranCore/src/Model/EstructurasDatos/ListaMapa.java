@@ -1,6 +1,6 @@
 package Model.EstructurasDatos;// Created by Hanto on 06/08/2015.
 
-import Interfaces.EntidadesPropiedades.IDentificable;
+import InterfacesEntidades.EntidadesPropiedades.IDentificable;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 

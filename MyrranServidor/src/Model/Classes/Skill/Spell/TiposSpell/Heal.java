@@ -1,8 +1,8 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 17/06/2014.
 
-import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.Debuffeable;
-import Interfaces.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
 import Model.Classes.Skill.Spell.TipoSpell;

@@ -1,12 +1,12 @@
 package DTO;// Created by Hanto on 06/06/2015.
 
-import Interfaces.EntidadesPropiedades.Animable;
-import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
-import Interfaces.EntidadesPropiedades.PCStats;
-import Interfaces.EntidadesPropiedades.Vulnerable;
-import Interfaces.EntidadesTipos.MobI;
-import Interfaces.EntidadesTipos.PCI;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesPropiedades.Animable;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import InterfacesEntidades.EntidadesPropiedades.PCStats;
+import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 
 public class DTOsCampoVision
 {

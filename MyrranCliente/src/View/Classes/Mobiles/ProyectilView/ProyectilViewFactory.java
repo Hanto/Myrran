@@ -1,7 +1,7 @@
 package View.Classes.Mobiles.ProyectilView;// Created by Hanto on 05/08/2015.
 
 import DB.RSC;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import View.Classes.Actores.Pixie;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;

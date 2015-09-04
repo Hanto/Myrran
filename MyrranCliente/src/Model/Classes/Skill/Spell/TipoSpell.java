@@ -2,9 +2,9 @@ package Model.Classes.Skill.Spell;
 // @author Ivan Delgado Huerta
 
 import Model.Skills.SkillStat;
-import Interfaces.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
 import Interfaces.GameState.MundoI;
-import Model.AbstractModel;
+import Interfaces.Observable.AbstractModel;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.TipoSpellI;
 

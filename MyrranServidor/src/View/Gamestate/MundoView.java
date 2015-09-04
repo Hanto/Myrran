@@ -1,8 +1,8 @@
 package View.Gamestate;// Created by Hanto on 16/07/2015.
 
 import DTO.DTOsMundo;
-import Interfaces.EntidadesTipos.CampoVisionI;
-import Interfaces.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.CampoVisionI;
+import InterfacesEntidades.EntidadesTipos.PCI;
 import Interfaces.Network.ServidorI;
 import Model.GameState.Mundo;
 import View.Gamestate.CampoVision.CampoVision;

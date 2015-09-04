@@ -1,7 +1,7 @@
 package View.Classes.Mobiles.PlayerView;// Created by Hanto on 10/08/2015.
 
-import Interfaces.EntidadesPropiedades.Caster;
-import Model.Classes.Mobiles.Player.Player;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesTipos.PlayerI;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;
 import box2dLight.PointLight;
@@ -11,7 +11,7 @@ public enum PlayerViewFactory
 {
     ILUMINADO
     {
-        @Override public PlayerView nuevo (Player player, RayHandler rayHandler)
+        @Override public PlayerView nuevo (PlayerI player, RayHandler rayHandler)
         {
             PixiePC pixie = new PixiePC("Golem");
             NameplateView nameplateView = new NameplateView((Caster)player);
@@ -21,5 +21,5 @@ public enum PlayerViewFactory
         }
     };
 
-    public abstract PlayerView nuevo(Player player, RayHandler rayHandler);
+    public abstract PlayerView nuevo(PlayerI player, RayHandler rayHandler);
 }

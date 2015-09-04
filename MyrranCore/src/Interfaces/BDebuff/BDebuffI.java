@@ -2,8 +2,8 @@ package Interfaces.BDebuff;// Created by Hanto on 09/06/2014.
 
 
 import Model.Skills.SkillStat;
-import Interfaces.EntidadesPropiedades.Debuffeable;
-import Interfaces.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
 import Interfaces.Skill.SkillI;
 
 import java.util.Iterator;

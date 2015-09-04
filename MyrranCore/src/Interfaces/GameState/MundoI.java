@@ -1,9 +1,9 @@
 package Interfaces.GameState;// Created by Hanto on 30/07/2015.
 
 import Interfaces.AI.SistemaAggroI;
-import Interfaces.EntidadesTipos.MobI;
-import Interfaces.EntidadesTipos.PCI;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Model.ModelI;
 import com.badlogic.gdx.physics.box2d.World;

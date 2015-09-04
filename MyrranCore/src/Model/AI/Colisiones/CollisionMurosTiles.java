@@ -1,7 +1,7 @@
 package Model.AI.Colisiones;// Created by Hanto on 02/09/2015.
 
 import Interfaces.AI.ColisionMurosI;
-import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Model.Settings;

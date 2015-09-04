@@ -1,6 +1,6 @@
 package Interfaces.EstructurasDatos;// Created by Hanto on 01/09/2015.
 
-import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
 import Model.EstructurasDatos.QuadTreeCallBack;
 
 import java.util.List;

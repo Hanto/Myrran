@@ -7,15 +7,15 @@ import DTO.DTOsProyectil;
 import Interfaces.AI.ColisionMurosI;
 import Interfaces.AI.ColisionProyectilesI;
 import Interfaces.AI.SistemaAggroI;
-import Interfaces.EntidadesTipos.MobI;
-import Interfaces.EntidadesTipos.PCI;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.EstructurasDatos.QuadTreeI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
-import Model.AbstractModel;
-import Model.Classes.AI.SteeringFactory.SteeringCompuestoFactory;
-import Model.Classes.Mobiles.Mob.MobFactory;
+import Interfaces.Observable.AbstractModel;
+import Model.AI.Behaviors.SteeringFactory.SteeringCompuestoFactory;
+import Model.Classes.Mobiles.Modulares.Mob.MobFactory;
 import Model.EstructurasDatos.ListaMapaCuadrantes;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -66,7 +66,8 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
 
         //TODO COGIDO PROVISIONAL PARA PROBAR:
-        MobI mob = MobFactory.NUEVO.nuevo(this);
+        MobI mob = MobFactory.NUEVOMOB.nuevo(this);
+                //MobFactory.NUEVO.nuevo(this);
         añadirMob(mob);
         mob.setSteeringBehavior(SteeringCompuestoFactory.WALL_PURSUE_LOOK.nuevo(mob, pc, this));
     }
@@ -123,6 +124,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
     // MOBS:
     //------------------------------------------------------------------------------------------------------------------
+
 
     @Override public void añadirMob (MobI mob)
     {

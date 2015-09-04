@@ -1,7 +1,7 @@
 package Model.Classes.Skill.BDebuff.TiposBDebuff;// Created by Hanto on 10/06/2014.
 
 import Interfaces.BDebuff.AuraI;
-import Interfaces.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
 import Model.Classes.Skill.BDebuff.TipoBDebuff;
 
 public class Hot extends TipoBDebuff

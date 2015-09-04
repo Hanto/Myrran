@@ -2,8 +2,8 @@ package Model.AI.Colisiones;// Created by Hanto on 03/09/2015.
 
 import Interfaces.AI.ColisionProyectilesI;
 import Interfaces.AI.SistemaAggroI;
-import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.EstructurasDatos.QuadTreeI;
 import Model.EstructurasDatos.QuadTreeCallBack;
 

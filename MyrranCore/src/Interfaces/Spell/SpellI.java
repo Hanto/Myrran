@@ -2,8 +2,8 @@ package Interfaces.Spell;// Created by Hanto on 09/06/2014.
 
 import Model.Skills.SkillStat;
 import Interfaces.BDebuff.BDebuffI;
-import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
 import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillI;
 

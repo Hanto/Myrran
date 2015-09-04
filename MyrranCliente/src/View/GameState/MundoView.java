@@ -2,11 +2,11 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 
 import DB.RSC;
 import DTO.DTOsMundo;
-import Interfaces.EntidadesTipos.MobI;
-import Interfaces.EntidadesTipos.PCI;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.PlayerI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Model.Classes.Geo.Mapa;
-import Model.Classes.Mobiles.Player.Player;
 import Model.Classes.Tweens.CamaraTween;
 import Model.Classes.Tweens.TweenEng;
 import Model.EstructurasDatos.ListaMapa;
@@ -73,7 +73,7 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MundoView(Player player, Mundo mundo, MapaView mapaView,
+    public MundoView(PlayerI player, Mundo mundo, MapaView mapaView,
                      OrthographicCamera camara, OrthographicCamera boxCamara, RayHandler rayHandler)
     {
         RayHandler.useDiffuseLight(true);
@@ -113,7 +113,7 @@ public class MundoView extends Stage implements PropertyChangeListener
     // PLAYER
     //------------------------------------------------------------------------------------------------------------------
 
-    public void añadirPlayerView(Player player)
+    public void añadirPlayerView(PlayerI player)
     {
         playerView = PlayerViewFactory.ILUMINADO.nuevo(player, rayHandler);
         this.addActor(playerView);

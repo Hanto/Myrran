@@ -4,8 +4,8 @@ import DB.RSC;
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;
 import DTOs.DTOsCaster;
 import DTOs.DTOsVulnerable;
-import Interfaces.EntidadesPropiedades.Caster;
-import Interfaces.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
 import Interfaces.Model.ModelI;
 import Model.Settings;
 import com.badlogic.gdx.graphics.Color;
@@ -38,7 +38,7 @@ public class NameplateView extends Actor implements PropertyChangeListener, Disp
 
     public NameplateView(Vulnerable vulnerable)
     {
-        this.model = vulnerable;
+        this.model = (ModelI)vulnerable;
         this.vulnerable = vulnerable;
         this.isVulnerable = true;
 
@@ -54,7 +54,7 @@ public class NameplateView extends Actor implements PropertyChangeListener, Disp
 
     public NameplateView(Caster Caster)
     {
-        this.model = Caster;
+        this.model = (ModelI)Caster;
         this.Caster = Caster;
         this.isCaster = true;
 

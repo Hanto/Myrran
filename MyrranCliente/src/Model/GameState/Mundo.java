@@ -4,14 +4,13 @@ import Controller.Cliente;
 import DTO.DTOsMapView;
 import DTO.DTOsMundo;
 import Interfaces.AI.SistemaAggroI;
-import Interfaces.EntidadesTipos.MobI;
-import Interfaces.EntidadesTipos.PCI;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.PlayerI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
-import Model.AbstractModel;
-import Model.Classes.Geo.Mapa;
-import Model.Classes.Mobiles.Player.Player;
+import Interfaces.Observable.AbstractModel;
 import Model.EstructurasDatos.ListaMapa;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
@@ -28,10 +27,10 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
     private ListaMapa<MobI> listaMapaMobs = new ListaMapa<>();
 
     private World world;
-    private Player player;
-    private Mapa mapa;
+    private PlayerI player;
+    private MapaI mapa;
 
-    public Player getPlayer()                               { return player; }
+    public PlayerI getPlayer()                              { return player; }
     @Override public MapaI getMapa()                        { return mapa; }
     @Override public World getWorld()                       { return world; }
     @Override public SistemaAggroI getAggro()               { return null; }
@@ -40,7 +39,7 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
     protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
 
-    public Mundo(World world, Player pc, Mapa map)
+    public Mundo(World world, PlayerI pc, MapaI map)
     {
         this.world = world;
         this.player = pc;
@@ -225,9 +224,9 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
     public void interpolarPosicion(float alpha)
     {
         //PLAYER:
-        player.interpolarPosicion(alpha);
+        player.actualizarFisicaPorInterpolacion(alpha);
         //PROYECTILES:
         for (ProyectilI proyectil: listaMapaProyectiles)
-        {   proyectil.interpolarPosicion(alpha); }
+        {   proyectil.actualizarFisicaPorInterpolacion(alpha); }
     }
 }

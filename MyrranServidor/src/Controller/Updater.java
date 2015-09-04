@@ -8,7 +8,7 @@ import Interfaces.Geo.MapaI;
 import Interfaces.Network.MainLoopI;
 import Model.AI.Colisiones.ColisionProyectilesQTree;
 import Model.AI.Colisiones.CollisionMurosTiles;
-import Model.AI.SistemaAggro;
+import Model.AI.SistemaAggro.SistemaAggro;
 import Model.Classes.Geo.Mapa;
 import Model.EstructurasDatos.QuadTree;
 import Model.GameState.Mundo;

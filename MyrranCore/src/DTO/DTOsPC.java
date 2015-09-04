@@ -1,6 +1,6 @@
 package DTO;// Created by Hanto on 28/07/2015.
 
-import Interfaces.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.PCI;
 
 public class DTOsPC
 {

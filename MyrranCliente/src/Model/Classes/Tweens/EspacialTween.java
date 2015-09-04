@@ -1,6 +1,6 @@
 package Model.Classes.Tweens;// Created by Hanto on 25/07/2014.
 
-import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
 import aurelienribon.tweenengine.TweenAccessor;
 
 public class EspacialTween implements TweenAccessor<Espacial>

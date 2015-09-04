@@ -1,6 +1,6 @@
 package Interfaces.UI;// Created by Hanto on 05/05/2014.
 
-import Interfaces.EntidadesPropiedades.MaquinablePlayer;
+import InterfacesEntidades.EntidadesPropiedades.MaquinablePlayer;
 import Interfaces.Model.ModelI;
 
 public interface AccionI

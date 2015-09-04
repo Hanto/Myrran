@@ -3,9 +3,9 @@ package Model.Classes.UI;// Created by Hanto on 14/05/2014.
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
 import DTO.DTOsBarraTerrenos;
-import Interfaces.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
 import Interfaces.Geo.TerrenoI;
-import Model.AbstractModel;
+import Interfaces.Observable.AbstractModel;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;

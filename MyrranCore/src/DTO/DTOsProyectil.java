@@ -1,6 +1,6 @@
 package DTO;// Created by Hanto on 03/08/2015.
 
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 
 public class DTOsProyectil
 {
@@ -16,6 +16,7 @@ public class DTOsProyectil
     public static class DisposeProyectil
     {
         public ProyectilI proyectil;
-        public DisposeProyectil (ProyectilI proyectil) { this.proyectil = proyectil; }
+        public DisposeProyectil (ProyectilI proyectil)
+        {   this.proyectil = proyectil; }
     }
 }

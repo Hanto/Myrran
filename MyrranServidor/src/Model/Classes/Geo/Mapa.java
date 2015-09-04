@@ -21,6 +21,8 @@ public class Mapa extends MapaFlat implements MapaI
         init();
     }
 
+    @Override public void dispose() {}
+
     // PATH FINDING INIT:
     //------------------------------------------------------------------------------------------------------------------
 

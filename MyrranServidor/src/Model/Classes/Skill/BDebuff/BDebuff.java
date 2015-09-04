@@ -7,10 +7,10 @@ import Model.Skills.SkillStat;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.BDebuff.TipoBDebuffI;
-import Interfaces.EntidadesPropiedades.CasterPersonalizable;
-import Interfaces.EntidadesPropiedades.Debuffeable;
-import Interfaces.EntidadesPropiedades.Caster;
-import Model.AbstractModel;
+import InterfacesEntidades.EntidadesPropiedades.CasterPersonalizable;
+import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
+import Interfaces.Observable.AbstractModel;
 
 import java.util.Arrays;
 import java.util.Iterator;

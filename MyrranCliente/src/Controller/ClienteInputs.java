@@ -2,16 +2,16 @@ package Controller;// Created by Hanto on 22/07/2014.
 
 import DB.DAO;
 import DTO.DTOsCampoVision;
-import Interfaces.EntidadesTipos.MobI;
-import Interfaces.EntidadesTipos.PCI;
-import Interfaces.EntidadesTipos.ProyectilI;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.PlayerI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
-import Model.Classes.Mobiles.Mob.MobFactory;
-import Model.Classes.Mobiles.PC.PCFactory;
-import Model.Classes.Mobiles.Player.Player;
-import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
+import Model.Classes.Mobiles.MModulares.Mob.MobFactory;
+import Model.Classes.Mobiles.MModulares.PC.PCFactory;
+import Model.Classes.Mobiles.MModulares.Proyectil.ProyectilFactory;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,8 @@ public class ClienteInputs
         if (pcDTOs.connectionID == mundo.getPlayer().getID()) pc = mundo.getPlayer();
         else if (mundo.getPC(pcDTOs.connectionID) == null)
         {
-            pc = PCFactory.NORMAL.nuevo(pcDTOs.connectionID, mundo.getWorld());
+            pc = PCFactory.PCMODULAR.nuevo(pcDTOs.connectionID, mundo.getWorld());
+            //PCFactory.NORMAL.nuevo(pcDTOs.connectionID, mundo.getWorld());
             mundo.añadirPC(pc);
         }
         else pc = mundo.getPC(pcDTOs.connectionID);
@@ -85,7 +86,7 @@ public class ClienteInputs
                 int valor = ((DTOsCampoVision.NumTalentosSkillPersonalizadoPC) dto).valor;
 
                 logger.debug("Modificado Spell: {} stat: {} talentos "+valor, skillID, statID);
-                if (pc instanceof Player) ((Player) pc).setNumTalentosSkillPersonalizadoFromServer(skillID, statID, valor);
+                if (pc instanceof PlayerI) ((PlayerI) pc).setNumTalentosSkillPersonalizadoFromServer(skillID, statID, valor);
                 else pc.setNumTalentosSkillPersonalizado(skillID, statID, valor);
             }
 
@@ -110,7 +111,8 @@ public class ClienteInputs
 
             if (dto instanceof DTOsCampoVision.DatosCompletosProyectil)
             {
-                ProyectilI proyectil = ProyectilFactory.ESFERA.nuevo(mundo.getWorld(), ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
+                ProyectilI proyectil = ProyectilFactory.NUEVOPROYECTIL.nuevo(mundo.getWorld(), ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
+                        //ProyectilFactory.ESFERA.nuevo(mundo.getWorld(), ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
                         .setID(proyectilDTOs.iD)
                         .setSpell(((DTOsCampoVision.DatosCompletosProyectil) dto).spellID)
                         .setPosition(((DTOsCampoVision.DatosCompletosProyectil) dto).origenX, ((DTOsCampoVision.DatosCompletosProyectil) dto).origenY)
@@ -134,7 +136,8 @@ public class ClienteInputs
         MobI mob = mundo.getMob(mobDTOs.iD);
         if (mob == null)
         {
-            mob = MobFactory.NUEVO.nuevo(mobDTOs.iD, mundo.getWorld());
+            mob = MobFactory.MOBMODULAR.nuevo(mobDTOs.iD, mundo.getWorld());
+            //MobFactory.NUEVO.nuevo(mobDTOs.iD, mundo.getWorld());
             mundo.añadirMob(mob);
         }
 

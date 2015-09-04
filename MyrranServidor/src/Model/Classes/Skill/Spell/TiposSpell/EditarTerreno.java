@@ -2,7 +2,7 @@ package Model.Classes.Skill.Spell.TiposSpell;
 // @author Ivan Delgado Huerta
 
 import Model.Settings;
-import Interfaces.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Caster;
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
 import Model.Classes.Skill.Spell.TipoSpell;

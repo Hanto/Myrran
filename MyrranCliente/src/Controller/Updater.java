@@ -1,9 +1,10 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
+import InterfacesEntidades.EntidadesTipos.PlayerI;
+import Interfaces.Geo.MapaI;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Input.InputManager;
-import Model.Classes.Mobiles.Player.Player;
-import Model.Classes.Mobiles.Player.PlayerFactory;
+import Model.Classes.Mobiles.MModulares.Player.PlayerFactory;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
 import Model.GameState.Mundo;
@@ -36,8 +37,8 @@ public class Updater implements Screen
     private MyrranClient myrranCliente;
     //MODEL:
     private World world;
-    private Player player;
-    private Mapa mapa;
+    private PlayerI player;
+    private MapaI mapa;
     private Mundo mundo;
     private InputManager inputManager;
     private ConjuntoBarraAcciones conjuntoBarraAcciones;
@@ -83,7 +84,7 @@ public class Updater implements Screen
         //--------------------------------------------------------------------------------------------------------------
 
         world = new World(new Vector2(0, 0), false);
-        player = PlayerFactory.GOLEM.nuevo(world);
+        player = PlayerFactory.PLAYERMODULAR.nuevo(world); //PlayerFactory.GOLEM.nuevo(world);
         mapa = new Mapa(player);
         mundo = new Mundo(world, player, mapa);
         inputManager = new InputManager(player);
