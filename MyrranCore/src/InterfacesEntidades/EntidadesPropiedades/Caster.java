@@ -11,6 +11,7 @@ public interface Caster
 
     //SET:
     public void setCastear(boolean castear, int screenX, int screenY);
+    public void setCastear(String spellID, Object parametrosSpell, int screenX, int screenY);
     public void setActualCastingTime(float castingTime);
     public void setTotalCastingTime(float castingTime);
     public void setSpellIDSeleccionado(String spellID);

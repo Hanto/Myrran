@@ -4,12 +4,13 @@ import InterfacesEntidades.EntidadesTipos.PCI;
 
 public class DTOsPC
 {
-    public static class PosicionPC
+    public static class PosicionPC<PC extends PCI>
     {
-        public PCI pc;
+        public PC pc;
         public int posX;
         public int posY;
-        public PosicionPC (PCI pc) {this.pc = pc;}
+        public PosicionPC (PC pc)
+        {   this.pc = pc;}
     }
 
     public static class NumAnimacionPC

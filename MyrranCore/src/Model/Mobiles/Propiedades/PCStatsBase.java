@@ -16,7 +16,7 @@ public class PCStatsBase implements PCStats
 
     public int getIDProyectiles()
     {
-        if (iDProyectiles++ >= (Math.pow(2, 20)))
+        if (iDProyectiles++ >= (10000))
             iDProyectiles = 0;
         return iDProyectiles;
     }

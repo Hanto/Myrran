@@ -30,7 +30,6 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
     private Animable animable;
     private Cuerpo cuerpo;
 
-    private boolean castearInterrumpible = false;
     private MaquinaEstados fsm;
     private PlayerIO input = new PlayerIO();
     private PlayerIO output = new PlayerIO();
@@ -119,6 +118,8 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
     @Override public Object getParametrosSpell()                    {   return caster.getParametrosSpell(); }
     @Override public void setActualCastingTime(float castingTime)   {   caster.setActualCastingTime(castingTime); }
     @Override public void setTotalCastingTime(float castingTime)    {   caster.setTotalCastingTime(castingTime); }
+    @Override public void setParametrosSpell(Object parametros)     {   caster.setParametrosSpell(parametros); }
+    @Override public void setSpellIDSeleccionado(String spellID)    {   caster.setSpellIDSeleccionado(spellID);}
 
     // CORPOREO:
     //------------------------------------------------------------------------------------------------------------------
@@ -167,18 +168,6 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
         notificarSetNumAnimacion();
     }
 
-    @Override public void setParametrosSpell(Object parametros)
-    {
-        caster.setParametrosSpell(parametros);
-        notificarSetParametrosSpell();
-    }
-
-    @Override public void setSpellIDSeleccionado(String spellID)
-    {
-        caster.setSpellIDSeleccionado(spellID);
-        notificarSetSpellIDSeleccionado();
-    }
-
     @Override public void copiarUltimaPosicion()
     {   cuerpo.copiarUltimaPosicion(); }
 
@@ -199,11 +188,30 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
         skillPersonalizado.setNumTalentos(statID, valor);
     }
 
+    @Override public void setCastear(boolean castear, int screenX, int screenY)
+    {
+        output.setScreenX(screenX);
+        output.setScreenY(screenY);
+        if (castear) { output.setStartCastear(true); output.setStopCastear(false); }
+        else { output.setStopCastear(true); output.setStartCastear(false); }
+    }
+
+    @Override public void setCastear(String spellID, Object parametrosSpell, int screenX, int screenY)
+    {
+        caster.setSpellIDSeleccionado(spellID);
+        caster.setParametrosSpell(parametrosSpell);
+        setCastear(true, screenX, screenY);
+    }
+
+
     // ACTUALIZACION:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public void actualizarFisica(float delta, MundoI mundo)
-    {    }
+    {
+        super.setPosition(cuerpo.getX(), cuerpo.getY());
+        notificarSetPosition();
+    }
 
     @Override public void actualizarFisicaPorInterpolacion(float alpha)
     {
@@ -224,28 +232,10 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
 
         setSpellIDSeleccionado(output.getSpellID());
         if (output.getStartCastear()) startCastear(mundo);
-        else if (output.getStopCastear()) stopCastear();
-    }
-
-    @Override public void setCastear(boolean castear, int screenX, int screenY)
-    {
-        output.setScreenX(screenX);
-        output.setScreenY(screenY);
-        if (castear) { output.setStartCastear(true); output.setStopCastear(false); }
-        else { output.setStopCastear(true); output.setStartCastear(false); }
     }
 
     // METODOS PROPIOS:
     //------------------------------------------------------------------------------------------------------------------
-
-    private void stopCastear()
-    {
-        if (castearInterrumpible)
-        {
-            castearInterrumpible = false;
-            notificarSetStopCastear(output.mundoX, output.mundoY);
-        }
-    }
 
     private void startCastear(MundoI mundo)
     {
@@ -255,8 +245,7 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
             if (spell != null)
             {
                 spell.castear(this, output.mundoX, output.mundoY, mundo);
-
-                castearInterrumpible = true;
+                System.out.println("Player: Casteo");
                 notificarSetStartCastear(output.mundoX, output.mundoY);
             }
         }

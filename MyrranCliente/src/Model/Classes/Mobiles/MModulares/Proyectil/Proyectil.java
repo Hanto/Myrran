@@ -77,22 +77,22 @@ public class Proyectil extends ProyectilNotificador
         if (proyectilStats.getOwner() == null)
         {   logger.error("ERROR: no se puede generar el ID del proyectil con el Owner NULL"); }
 
+        double hashcode;
         if (proyectilStats.getOwner() instanceof PCI)
         {   //el int en java como tiene signo, tiene 31 bits para datos:
-            //Destino un bit para determinar si es de player o de mob:
-            double hashcode = Math.pow(2, 31 - 1);
-            //Destino 10 bits para dejar sitio para 1,025 players 2^10
-            hashcode = hashcode + ((PCI) proyectilStats.getOwner()).getID() * Math.pow(2, 31 - 1 - 10);
-            //Cada player podra disparar 2^20 = 1,048,576 pepos antes de tener que reiniciar el contador
-            hashcode = hashcode + ((PCI) proyectilStats.getOwner()).getIDProyectiles();
+            hashcode = ((PCI) proyectilStats.getOwner()).getID() *(10000) +
+                    ((PCI) proyectilStats.getOwner()).getIDProyectiles();
             identificable.setID((int)hashcode);
         }
         if (proyectilStats.getOwner() instanceof MobI)
-        {   identificable.setID((int)0); }
+        {
+            hashcode = 10000 * 10000 +
+                    ((MobI) proyectilStats.getOwner()).getID() *(10000);
+            //+proyectilStats.getOwner().getIDProyectiles();
+            identificable.setID((int)hashcode);
+        }
+        System.out.println(identificable.getID());
     }
-
-    @Override public void copiarUltimaPosicion()
-    {   cuerpo.copiarUltimaPosicion(); }
 
     @Override public void setPosition(float x, float y)
     {
@@ -113,6 +113,9 @@ public class Proyectil extends ProyectilNotificador
         cuerpo.setVelocidad(velocidadMax);
     }
 
+    @Override public void copiarUltimaPosicion()
+    {   cuerpo.copiarUltimaPosicion(); }
+
     // ACTUALIZACION:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -123,7 +126,11 @@ public class Proyectil extends ProyectilNotificador
         notificarSetPosition();
     }
 
-    @Override public void actualizarFisica(float delta, MundoI mundo) {}
+    @Override public void actualizarFisica(float delta, MundoI mundo)
+    {
+        super.setPosition(cuerpo.getX(), cuerpo.getY());
+        notificarSetPosition();
+    }
 
     // COLISIONABLE:
     //------------------------------------------------------------------------------------------------------------------

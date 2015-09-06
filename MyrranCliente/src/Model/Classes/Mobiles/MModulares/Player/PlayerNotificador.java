@@ -14,10 +14,7 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
     //Stats Excluyentes para enviar por RED al servidor::
     private DTOsPlayer.Animacion animacionDTO = new DTOsPlayer.Animacion();
     private DTOsPlayer.Posicion posicionDTO = new DTOsPlayer.Posicion();
-    private DTOsPlayer.ParametrosSpell parametrosSpellDTO = new DTOsPlayer.ParametrosSpell();
-    private DTOsPlayer.SpellSeleccionado spellSeleccionadoDTO = new DTOsPlayer.SpellSeleccionado();
-    private DTOsPlayer.StopCastear stopCastearDTO = new DTOsPlayer.StopCastear();
-    private DTOsPlayer.StartCastear startCastearDTO = new DTOsPlayer.StartCastear();
+    private DTOsCaster.Castear castearDTO = new DTOsCaster.Castear();
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
     private DTOsCaster.CastingTimePercent castingTimeDTO = new DTOsCaster.CastingTimePercent();
     private DTOsVulnerable.ModificarHPs modificarHPsDTO = new DTOsVulnerable.ModificarHPs();
@@ -81,43 +78,13 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
         }
     }
 
-    public void notificarSetParametrosSpell()
-    {
-        if (parametrosSpellDTO.parametros != getParametrosSpell())
-        {
-            parametrosSpellDTO.parametros = getParametrosSpell();
-            cambiosExcluyentes.put(DTOsPlayer.ParametrosSpell.class, parametrosSpellDTO);
-        }
-    }
-
-    public void notificarSetSpellIDSeleccionado()
-    {
-        if (spellSeleccionadoDTO.spellIDSeleccionado != getSpellIDSeleccionado() || spellSeleccionadoDTO.parametrosSpell != getParametrosSpell())
-        {
-            spellSeleccionadoDTO.spellIDSeleccionado = getSpellIDSeleccionado();
-            spellSeleccionadoDTO.parametrosSpell = getParametrosSpell();
-            cambiosExcluyentes.put(DTOsPlayer.SpellSeleccionado.class, spellSeleccionadoDTO);
-        }
-    }
-
-    public void notificarSetStopCastear(int screenX, int screenY)
-    {
-        //if (stopCastearDTO.screenX != screenX || stopCastearDTO.screenY != screenY)
-        {
-            stopCastearDTO.screenX = screenX;
-            stopCastearDTO.screenY = screenY;
-            cambiosExcluyentes.put(DTOsPlayer.StopCastear.class, stopCastearDTO);
-        }
-    }
-
     public void notificarSetStartCastear(int screenX, int screenY)
     {
-        //if (startCastearDTO.screenX != screenX || startCastearDTO.screenY != screenY)
-        {
-            startCastearDTO.screenX = screenX;
-            startCastearDTO.screenY = screenY;
-            cambiosExcluyentes.put(DTOsPlayer.StartCastear.class, startCastearDTO);
-        }
+        castearDTO.screenX = screenX;
+        castearDTO.screenY = screenY;
+        castearDTO.spellID = this.getSpellIDSeleccionado();
+        castearDTO.parametrosSpell = this.getParametrosSpell();
+        cambiosExcluyentes.put(DTOsPlayer.StartCastear.class, castearDTO);
     }
 
     //Cambios Acumulativos:

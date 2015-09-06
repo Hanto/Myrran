@@ -72,6 +72,7 @@ public class PCOld extends PCOldNotificador implements PCI
     @Override public String getSpellIDSeleccionado()                                { return null; }
     @Override public Object getParametrosSpell()                                    { return null; }
     @Override public void setCastear(boolean castear, int screenX, int screenY)     {}
+    @Override public void setCastear(String spellID, Object parametrosSpell, int screenX, int screenY) {}
     @Override public void setActualCastingTime(float castingTime)                   {}
     @Override public void setTotalCastingTime(float castingTime)                    {}
     @Override public void setSpellIDSeleccionado(String spellID)                    {}

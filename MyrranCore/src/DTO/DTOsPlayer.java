@@ -78,15 +78,6 @@ public class DTOsPlayer
         {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
     }
 
-    public static class StopCastear
-    {
-        public int screenX;
-        public int screenY;
-        public StopCastear () {}
-        public StopCastear(int screenX, int screenY)
-        {   this.screenX = screenX; this.screenY = screenY; }
-    }
-
     public static class StartCastear
     {
         public int screenX;

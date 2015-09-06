@@ -210,6 +210,11 @@ public class PCOld extends PCOldNotificador implements PropertyChangeListener, P
         else this.castear = false;
     }
 
+    @Override public void setCastear(String spellID, Object parametrosSpell, int screenX, int screenY)
+    {
+
+    }
+
     private void castear(MundoI mundo)
     {
         if (!isCasteando())

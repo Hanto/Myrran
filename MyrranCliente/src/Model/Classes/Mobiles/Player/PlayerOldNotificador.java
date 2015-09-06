@@ -16,7 +16,7 @@ public abstract class PlayerOldNotificador extends SteerableAgentOld implements 
     private DTOsPlayer.Posicion posicionDTO = new DTOsPlayer.Posicion();
     private DTOsPlayer.ParametrosSpell parametrosSpellDTO = new DTOsPlayer.ParametrosSpell();
     private DTOsPlayer.SpellSeleccionado spellSeleccionadoDTO = new DTOsPlayer.SpellSeleccionado();
-    private DTOsPlayer.StopCastear stopCastearDTO = new DTOsPlayer.StopCastear();
+    //private DTOsPlayer.StopCastear stopCastearDTO = new DTOsPlayer.StopCastear();
     private DTOsPlayer.StartCastear startCastearDTO = new DTOsPlayer.StartCastear();
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
     private DTOsCaster.CastingTimePercent castingTimeDTO = new DTOsCaster.CastingTimePercent();
@@ -100,7 +100,7 @@ public abstract class PlayerOldNotificador extends SteerableAgentOld implements 
         }
     }
 
-    public void notificarSetStopCastear(int screenX, int screenY)
+    /*public void notificarSetStopCastear(int screenX, int screenY)
     {
         //if (stopCastearDTO.screenX != screenX || stopCastearDTO.screenY != screenY)
         {
@@ -108,7 +108,7 @@ public abstract class PlayerOldNotificador extends SteerableAgentOld implements 
             stopCastearDTO.screenY = screenY;
             cambiosExcluyentes.put(DTOsPlayer.StopCastear.class, stopCastearDTO);
         }
-    }
+    }*/
 
     public void notificarSetStartCastear(int screenX, int screenY)
     {

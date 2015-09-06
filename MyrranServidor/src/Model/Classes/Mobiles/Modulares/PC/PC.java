@@ -2,27 +2,21 @@ package Model.Classes.Mobiles.Modulares.PC;// Created by Hanto on 03/09/2015.
 
 import DTO.DTOsSkillPersonalizado;
 import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.*;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.*;
-import InterfacesEntidades.EntidadesPropiedades.Steerable.Seguible;
-import InterfacesEntidades.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
+import InterfacesEntidades.EntidadesPropiedades.*;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
+import InterfacesEntidades.EntidadesTipos.PCSI;
 import Model.AI.Huellas.Huellas;
 import Model.Mobiles.Cuerpos.Cuerpo;
-import com.badlogic.gdx.ai.steer.Steerable;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Disposable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Iterator;
 
-public class PC extends PCNotificador implements CasterPersonalizable, Caster, Vulnerable, Debuffeable, PCStats,
-        IDentificable, Animable, Espacial, Colisionable, Dinamico, Solido, Orientable, Steerable<Vector2>, Seguible,
-        Disposable, PropertyChangeListener, PCI
+public class PC extends PCNotificador implements PropertyChangeListener, PCSI
 {
     protected IDentificable identificable;
     protected Caster caster;
@@ -32,9 +26,8 @@ public class PC extends PCNotificador implements CasterPersonalizable, Caster, V
     protected PCStats pcStats;
     protected Animable animable;
 
-    protected int targetX = 0;
-    protected int targetY = 0;
-    protected boolean castear = false;
+    protected SpellsACastear spellsACastear = new SpellsACastear();
+    protected SpellACastear spellACastear;
 
     public PC(int connectionID, int ancho, int alto,
               IDentificable identificable, Caster caster, CasterPersonalizable casterPersonalizado,
@@ -129,19 +122,19 @@ public class PC extends PCNotificador implements CasterPersonalizable, Caster, V
     @Override public Object getParametrosSpell()                    {   return caster.getParametrosSpell(); }
     @Override public void setActualCastingTime(float castingTime)   {   caster.setActualCastingTime(castingTime); }
     @Override public void setTotalCastingTime(float castingTime)    {   caster.setTotalCastingTime(castingTime); }
+    @Override public void actualizarCastingTime(float delta)        {   caster.actualizarCastingTime(delta); }
     @Override public void setSpellIDSeleccionado(String spellID)    {   caster.setSpellIDSeleccionado(spellID); }
     @Override public void setParametrosSpell(Object parametrosDTO)  {   caster.setParametrosSpell(parametrosDTO); }
-    @Override public void actualizarCastingTime(float delta)        {   caster.actualizarCastingTime(delta); }
 
     // CODIGO PERSONALIZADO:
     //------------------------------------------------------------------------------------------------------------------
 
+    @Override public void setCastear(String spellID, Object parametrosSpell, int screenX, int screenY)
+    {   spellsACastear.add(spellID, parametrosSpell, screenX, screenY); }
+
     @Override public void setCastear(boolean castear, int screenX, int screenY)
     {
-        this.castear = castear;
-        this.targetX = screenX;
-        this.targetY = screenY;
-        this.castear = castear;
+
     }
 
     @Override public void setPosition(float x, float y)
@@ -180,21 +173,26 @@ public class PC extends PCNotificador implements CasterPersonalizable, Caster, V
     }
 
     @Override public void actualizarIA(float delta, MundoI mundo)
-    {   if (castear) castear(mundo); }
+    {   if (spellsACastear.tieneSpells()) castear(mundo); }
 
     // METODOS PROPIOS:
     //------------------------------------------------------------------------------------------------------------------
+
+    private void getSpellDeListaSpellsACastear()
+    {
+        spellACastear = spellsACastear.get();
+        caster.setSpellIDSeleccionado(spellACastear.spellID);
+        caster.setParametrosSpell(spellACastear.parametrosSpell);
+    }
 
     private void castear(MundoI mundo)
     {
         if (!isCasteando())
         {
+            getSpellDeListaSpellsACastear();
             SpellI spell = DB.DAO.spellDAOFactory.getSpellDAO().getSpell(caster.getSpellIDSeleccionado());
             if (spell != null)
-            {
-                spell.castear(this, targetX, targetY, mundo);
-                castear = false;
-            }
+            {   spell.castear(this, spellACastear.screenX, spellACastear.screenY, mundo); }
         }
     }
 

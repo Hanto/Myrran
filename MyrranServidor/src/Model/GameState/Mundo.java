@@ -7,13 +7,14 @@ import DTO.DTOsProyectil;
 import Interfaces.AI.ColisionMurosI;
 import Interfaces.AI.ColisionProyectilesI;
 import Interfaces.AI.SistemaAggroI;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.EstructurasDatos.QuadTreeI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Observable.AbstractModel;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.PCSI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Model.AI.Behaviors.SteeringFactory.SteeringCompuestoFactory;
 import Model.Classes.Mobiles.Modulares.Mob.MobFactory;
 import Model.EstructurasDatos.ListaMapaCuadrantes;
@@ -23,10 +24,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Iterator;
 
-public class Mundo extends AbstractModel implements PropertyChangeListener, MundoI
+public class Mundo extends AbstractModel implements PropertyChangeListener, MundoI<PCSI, ProyectilI, MobI>
 {
     protected ListaMapaCuadrantes<ProyectilI> dataProyectiles = new ListaMapaCuadrantes<>();
-    protected ListaMapaCuadrantes<PCI> dataPCs = new ListaMapaCuadrantes<>();
+    protected ListaMapaCuadrantes<PCSI> dataPCs = new ListaMapaCuadrantes<>();
     protected ListaMapaCuadrantes<MobI> dataMobs = new ListaMapaCuadrantes<>();
 
     private World world;
@@ -56,7 +57,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     // PLAYERS:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void añadirPC (PCI pc)
+    @Override public void añadirPC (PCSI pc)
     {
         dataPCs.add(pc);
         pc.añadirObservador(this);
@@ -65,7 +66,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         notificarActualizacion("añadirPC", null, nuevoPlayer);
 
 
-        //TODO COGIDO PROVISIONAL PARA PROBAR:
+        //TODO CODIGO PROVISIONAL PARA PROBAR:
         MobI mob = MobFactory.NUEVOMOB.nuevo(this);
                 //MobFactory.NUEVO.nuevo(this);
         añadirMob(mob);
@@ -74,7 +75,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
     @Override public void eliminarPC (int connectionID)
     {
-        PCI pc = dataPCs.remove(connectionID);
+        PCSI pc = dataPCs.remove(connectionID);
         pc.eliminarObservador(this);
         pc.dispose();
 
@@ -82,16 +83,16 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         notificarActualizacion("eliminarPC", null, eliminarPlayer);
     }
 
-    @Override public PCI getPC(int connectionID)
+    @Override public PCSI getPC(int connectionID)
     {   return dataPCs.get(connectionID); }
 
-    @Override public Iterator<PCI> getIteratorPCs()
+    @Override public Iterator<PCSI> getIteratorPCs()
     {   return dataPCs.iterator(); }
 
-    @Override public Iterator<PCI> getIteratorPCs(int mapTileX, int mapTileY)
+    @Override public Iterator<PCSI> getIteratorPCs(int mapTileX, int mapTileY)
     {   return dataPCs.getIteratorCuadrantes(mapTileX, mapTileY); }
 
-    private void updatePC(PCI pc)
+    private void updatePC(PCSI pc)
     {   dataPCs.update(pc); }
 
     // PROYECTILES:
@@ -230,7 +231,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
-        {   updatePC(((DTOsPC.PosicionPC) evt.getNewValue()).pc); }
+        {   updatePC(((DTOsPC.PosicionPC<PCSI>) evt.getNewValue()).pc); }
 
         else if (evt.getNewValue() instanceof DTOsProyectil.PosicionProyectil)
         {   updateProyectil(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil); }

@@ -111,12 +111,13 @@ public class PC extends PCNotificador implements Debuffeable
     @Override public float getTotalCastingTime()                    {   return caster.getTotalCastingTime(); }
     @Override public String getSpellIDSeleccionado()                {   return caster.getSpellIDSeleccionado(); }
     @Override public Object getParametrosSpell()                    {   return caster.getParametrosSpell(); }
-    @Override public void setCastear(boolean castear, int screenX, int screenY) {}
     @Override public void setActualCastingTime(float castingTime)   {   caster.setActualCastingTime(castingTime); }
     @Override public void setTotalCastingTime(float castingTime)    {   caster.setTotalCastingTime(castingTime); }
     @Override public void setSpellIDSeleccionado(String spellID)    {   caster.setSpellIDSeleccionado(spellID); }
     @Override public void setParametrosSpell(Object parametrosDTO)  {   caster.setParametrosSpell(parametrosDTO); }
     @Override public void actualizarCastingTime(float delta)        {   caster.actualizarCastingTime(delta); }
+    @Override public void setCastear(String spellID, Object parametrosSpell, int screenX, int screenY) {}
+    @Override public void setCastear(boolean castear, int screenX, int screenY) {}
 
     // CODIGO PERSONALIZADO:
     //------------------------------------------------------------------------------------------------------------------

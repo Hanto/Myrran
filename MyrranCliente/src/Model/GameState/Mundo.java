@@ -4,13 +4,13 @@ import Controller.Cliente;
 import DTO.DTOsMapView;
 import DTO.DTOsMundo;
 import Interfaces.AI.SistemaAggroI;
+import Interfaces.GameState.MundoI;
+import Interfaces.Geo.MapaI;
+import Interfaces.Observable.AbstractModel;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import InterfacesEntidades.EntidadesTipos.PlayerI;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;
-import Interfaces.GameState.MundoI;
-import Interfaces.Geo.MapaI;
-import Interfaces.Observable.AbstractModel;
 import Model.EstructurasDatos.ListaMapa;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
-public class Mundo extends AbstractModel implements MundoI, Disposable
+public class Mundo extends AbstractModel implements MundoI<PCI, ProyectilI, MobI>, Disposable
 {
     private ListaMapa<PCI> listaMapaPlayers = new ListaMapa<>();
     private ListaMapa<ProyectilI> listaMapaProyectiles = new ListaMapa<>();

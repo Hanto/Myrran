@@ -49,4 +49,5 @@ public class CasterBase implements Caster
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public void setCastear(boolean castear, int screenX, int screenY) {}
+    @Override public void setCastear(String spellID, Object parametrosSpell, int screenX, int screenY) {}
 }

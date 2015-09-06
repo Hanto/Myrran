@@ -1,11 +1,11 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 04/08/2015.
 
+import Interfaces.GameState.MundoI;
+import Interfaces.Spell.SpellI;
 import InterfacesEntidades.EntidadesPropiedades.Caster;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;
-import Interfaces.GameState.MundoI;
-import Interfaces.Spell.SpellI;
-import Model.Classes.Mobiles.Monoliticos.Proyectil.ProyectilOldFactory;
+import Model.Classes.Mobiles.MModulares.Proyectil.ProyectilFactory;
 import Model.Classes.Skill.Spell.TipoSpell;
 
 public class Bolt extends TipoSpell
@@ -34,7 +34,8 @@ public class Bolt extends TipoSpell
         }
         else return;
 
-        ProyectilI proyectil = ProyectilOldFactory.ESFERA.nuevo(mundo.getWorld(), ANCHO, ALTO)
+        ProyectilI proyectil = ProyectilFactory.NUEVOPROYECTIL.nuevo(mundo.getWorld(), ANCHO, ALTO)
+        //ProyectilOldFactory.ESFERA.nuevo(mundo.getWorld(), ANCHO, ALTO)
                 .setSpell(spell)
                 .setOwner(caster)
                 .setID()

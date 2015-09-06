@@ -1,5 +1,6 @@
 package DTO;
 
+import DTOs.DTOsCaster;
 import Model.Settings;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
@@ -26,13 +27,14 @@ public class NetDTOs
         kryo.register(DTOsPlayer.Posicion.class);
         kryo.register(DTOsPlayer.ParametrosSpell.class);
         kryo.register(DTOsPlayer.SpellSeleccionado.class);
-        kryo.register(DTOsPlayer.StopCastear.class);
         kryo.register(DTOsPlayer.StartCastear.class);
         kryo.register(DTOsPlayer.NumTalentosSkillPersonalizado.class);
         kryo.register(DTOsPlayer.CrearPC.class);
         kryo.register(DTOsPlayer.Nombre.class);
         kryo.register(DTOsPlayer.SkillPersonalizado.class);
         kryo.register(DTOsPlayer.CambioTerreno.class);
+
+        kryo.register(DTOsCaster.Castear.class);
 
         //Parametros Spell:
         kryo.register(DTOsParametrosSpell.ParametrosEditarTerreno.class);

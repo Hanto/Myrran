@@ -258,7 +258,7 @@ public class PlayerOld extends PlayerOldNotificador implements PlayerI, Debuffea
             castearInterrumpible = false;
 
             //TODO PRUEBA
-            notificarSetStopCastear(output.mundoX, output.mundoY);
+            //notificarSetStopCastear(output.mundoX, output.mundoY);
             //notificador.setStopCastear(output.getScreenX(), output.getScreenY());
         }
     }
@@ -345,4 +345,6 @@ public class PlayerOld extends PlayerOldNotificador implements PlayerI, Debuffea
         if (castear) { output.setStartCastear(true); output.setStopCastear(false); }
         else { output.setStopCastear(true); output.setStartCastear(false); }
     }
+
+    @Override public void setCastear(String spellID, Object parametrosSpell, int screenX, int screenY) {}
 }
