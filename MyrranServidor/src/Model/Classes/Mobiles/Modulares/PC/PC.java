@@ -133,9 +133,7 @@ public class PC extends PCNotificador implements PropertyChangeListener, PCSI
     {   spellsACastear.add(spellID, parametrosSpell, screenX, screenY); }
 
     @Override public void setCastear(boolean castear, int screenX, int screenY)
-    {
-
-    }
+    {  }
 
     @Override public void setPosition(float x, float y)
     {

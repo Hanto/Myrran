@@ -3,6 +3,7 @@ package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 import DTO.DTOsMob;
 import DTO.DTOsPC;
 import DTO.DTOsProyectil;
+import DTOs.DTOsEspacial;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
 import InterfacesEntidades.EntidadesPropiedades.IDentificable;
 import InterfacesEntidades.EntidadesTipos.CampoVisionI;
@@ -362,7 +363,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
 
         @Override public void propertyChange(PropertyChangeEvent evt)
         {
-            if (evt.getNewValue() instanceof DTOsPC.PosicionPC) { posicion(); }
+            if (evt.getNewValue() instanceof DTOsEspacial.PosicionEspacial) { posicion(); }
             if (evt.getNewValue() instanceof DTOsPC.EliminarPC) { eliminar(); }
         }
     }

@@ -1,18 +1,19 @@
 package Model.Classes.Mobiles.Modulares.PC;// Created by Hanto on 24/07/2014.
 
 import DTO.DTOsPC;
+import DTOs.DTOsEspacial;
 import InterfacesEntidades.EntidadesTipos.PCSI;
 import Model.Mobiles.Steerables.SteerableAgent;
 
 public abstract class PCNotificador extends SteerableAgent implements PCSI
 {
-    private DTOsPC.PosicionPC posicionDTO;
+    private DTOsEspacial.PosicionEspacial posicionDTO;
     private DTOsPC.NumAnimacionPC animacionDTO;
     private DTOsPC.ModificarHPsPC modificarHPsDTO;
 
     public PCNotificador()
     {
-        posicionDTO = new DTOsPC.PosicionPC<PCSI>(this);
+        posicionDTO = new DTOsEspacial.PosicionEspacial(this);
         animacionDTO = new DTOsPC.NumAnimacionPC(this);
         modificarHPsDTO = new DTOsPC.ModificarHPsPC(this);
     }

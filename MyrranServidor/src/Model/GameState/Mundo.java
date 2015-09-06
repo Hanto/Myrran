@@ -2,8 +2,8 @@ package Model.GameState;// Created by Hanto on 07/04/2014.
 
 import DTO.DTOsMob;
 import DTO.DTOsMundo;
-import DTO.DTOsPC;
 import DTO.DTOsProyectil;
+import DTOs.DTOsEspacial;
 import Interfaces.AI.ColisionMurosI;
 import Interfaces.AI.ColisionProyectilesI;
 import Interfaces.AI.SistemaAggroI;
@@ -11,6 +11,7 @@ import Interfaces.EstructurasDatos.QuadTreeI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
 import Interfaces.Observable.AbstractModel;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import InterfacesEntidades.EntidadesTipos.PCSI;
@@ -230,8 +231,11 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
-        {   updatePC(((DTOsPC.PosicionPC<PCSI>) evt.getNewValue()).pc); }
+        if (evt.getNewValue() instanceof DTOsEspacial.PosicionEspacial)
+        {
+            Espacial espacial = ((DTOsEspacial.PosicionEspacial) evt.getNewValue()).espacial;
+            if (espacial instanceof PCSI) updatePC((PCSI)espacial);
+        }
 
         else if (evt.getNewValue() instanceof DTOsProyectil.PosicionProyectil)
         {   updateProyectil(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil); }
