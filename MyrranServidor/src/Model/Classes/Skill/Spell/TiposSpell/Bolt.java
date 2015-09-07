@@ -6,7 +6,7 @@ import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
 import Model.Classes.Skill.Spell.TipoSpell;
-import Model.Classes.Mobiles.Modulares.Proyectil.ProyectilFactory;
+import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
 
 public class Bolt extends TipoSpell
 {

@@ -1,7 +1,8 @@
 package View.Classes.Mobiles.PCView;// Created by Hanto on 08/04/2014.
 
 import DB.RSC;
-import DTO.DTOsPlayer;
+import DTOs.DTOsAnimable;
+import DTOs.DTOsEspacial;
 import DTOs.DTOsVulnerable;
 import InterfacesEntidades.EntidadesPropiedades.IDentificable;
 import InterfacesEntidades.EntidadesTipos.PCI;
@@ -22,7 +23,6 @@ import java.beans.PropertyChangeListener;
 public class PCView extends Group implements PropertyChangeListener, IDentificable, Disposable
 {
     protected PCI pc;
-    protected int iD;
     protected PixiePC actor;
     protected NameplateView nameplateView;
     protected Texto nombre;
@@ -30,11 +30,9 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     private int rAncho;
     private int rAlto;
 
-    // IDENTIFICABLE:
-    //------------------------------------------------------------------------------------------------------------------
-
-    @Override public int getID()                                            { return iD; }
-    @Override public void setID(int iD)                                     { this.iD = iD; }
+    //IDENTIFICABLE:
+    @Override public int getID()                        {   return pc.getID(); }
+    @Override public void setID(int iD)                 {   this.pc.setID(iD); }
 
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
@@ -42,7 +40,6 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     public PCView (PCI pc, PixiePC pixieActor, NameplateView nameplate)
     {
         this.pc = pc;
-        this.iD = pc.getID();
         this.actor = pixieActor;
         this.nameplateView = nameplate;
 
@@ -85,7 +82,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
     private void crearNombre()
     {
-        nombre = new Texto("Player"+iD, RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
+        nombre = new Texto("Player"+getID(), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
         nombre.setPosition(actor.getWidth() / 2, actor.getHeight() + 8);
         this.addActor(nombre);
     }
@@ -120,13 +117,13 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
-        {   setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
+        if (evt.getNewValue() instanceof DTOsEspacial.Posicion)
+        {   setPosition(((DTOsEspacial.Posicion) evt.getNewValue()).posX, ((DTOsEspacial.Posicion) evt.getNewValue()).posY); }
 
         if (evt.getNewValue() instanceof DTOsVulnerable.ModificarHPs)
         {   modificarHPs( (int) (((DTOsVulnerable.ModificarHPs) evt.getNewValue()).HPs) ); }
 
-        if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
-        {   setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
+        if (evt.getNewValue() instanceof DTOsAnimable.NumAnimacion)
+        {   setAnimacion(((DTOsAnimable.NumAnimacion) evt.getNewValue()).numAnimacion); }
     }
 }

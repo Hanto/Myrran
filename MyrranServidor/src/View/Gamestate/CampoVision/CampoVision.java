@@ -1,18 +1,19 @@
 package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 
-import DTO.DTOsMob;
-import DTO.DTOsPC;
-import DTO.DTOsProyectil;
-import DTOs.DTOsEspacial;
+import DTOs.*;
+import Interfaces.GameState.MundoI;
+import Interfaces.Network.ServidorI;
+import Interfaces.Observable.AbstractModel;
+import InterfacesEntidades.EntidadesPropiedades.Animable;
+import InterfacesEntidades.EntidadesPropiedades.CasterPersonalizable;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Orientable;
 import InterfacesEntidades.EntidadesPropiedades.IDentificable;
+import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
 import InterfacesEntidades.EntidadesTipos.CampoVisionI;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;
-import Interfaces.GameState.MundoI;
-import Interfaces.Network.ServidorI;
-import Interfaces.Observable.AbstractModel;
 import Model.Settings;
 import View.Gamestate.MundoView;
 import com.badlogic.gdx.utils.Disposable;
@@ -282,46 +283,56 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        //OBSERVAR A LOS PLAYERS (PC)
-        if (evt.getNewValue() instanceof DTOsPC.EliminarPC)
-        {   eliminarPC(((DTOsPC.EliminarPC) evt.getNewValue()).pc); }
-
-        else if (evt.getNewValue() instanceof DTOsPC.PosicionPC)
-        {   posicionPC(((DTOsPC.PosicionPC) evt.getNewValue()).pc); }
-
-        else if (evt.getNewValue() instanceof DTOsPC.NumAnimacionPC)
-        {   numAnimacionPC(((DTOsPC.NumAnimacionPC) evt.getNewValue()).pc); }
-
-        else if (evt.getNewValue() instanceof DTOsPC.ModificarHPsPC)
-        {   modificarHPsPC(((DTOsPC.ModificarHPsPC) evt.getNewValue()).pc,
-                           ((DTOsPC.ModificarHPsPC) evt.getNewValue()).HPs); }
-
-        else if (evt.getNewValue() instanceof DTOsPC.AñadirSpellPersonalizadoPC)
-        {   añadirSpellPersonalizadoPC(((DTOsPC.AñadirSpellPersonalizadoPC) evt.getNewValue()).pc,
-                                       ((DTOsPC.AñadirSpellPersonalizadoPC) evt.getNewValue()).spellID);}
-
-        else if (evt.getNewValue() instanceof DTOsPC.NumTalentosSkillPersonalizadoPC)
-        {   numTalentosSkillPersonalizadoPC(((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).pc,
-                                            ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).skillID,
-                                            ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).statID,
-                                            ((DTOsPC.NumTalentosSkillPersonalizadoPC) evt.getNewValue()).valor);
+        //ESPACIAL:
+        if (evt.getNewValue() instanceof DTOsEspacial.Posicion)
+        {
+            Espacial espacial = ((DTOsEspacial.Posicion) evt.getNewValue()).espacial;
+            if      (espacial instanceof PCI) this.posicionPC((PCI) espacial);
+            else if (espacial instanceof MobI) this.posicionMob((MobI) espacial);
+        }
+        //ANIMABLE:
+        else if (evt.getNewValue() instanceof DTOsAnimable.NumAnimacion)
+        {
+            Animable animable = ((DTOsAnimable.NumAnimacion) evt.getNewValue()).animable;
+            if (animable instanceof PCI) this.numAnimacionPC((PCI) animable);
+        }
+        //ORIENTABLE:
+        else if (evt.getNewValue() instanceof DTOsOrientable.Orientacion)
+        {
+            Orientable orientable = ((DTOsOrientable.Orientacion) evt.getNewValue()).orientable;
+            if (orientable instanceof MobI) this.orientacionMob((MobI) orientable);
+        }
+        //VULNERABLE:
+        else if (evt.getNewValue() instanceof DTOsVulnerable.ModificarHPs)
+        {
+            Vulnerable vulnerable = ((DTOsVulnerable.ModificarHPs) evt.getNewValue()).vulnerable;
+            float hps = ((DTOsVulnerable.ModificarHPs) evt.getNewValue()).HPs;
+            if      (vulnerable instanceof PCI) this.modificarHPsPC((PCI) vulnerable, hps);
+            else if (vulnerable instanceof MobI) this.modificarHpsMob((MobI) vulnerable, hps);
+        }
+        //DISPOSABLE:
+        else if (evt.getNewValue() instanceof DTOsDisposable.Dispose)
+        {
+            Disposable disposable = ((DTOsDisposable.Dispose) evt.getNewValue()).disposable;
+            if      (disposable instanceof PCI) this.eliminarPC((PCI)disposable);
+            else if (disposable instanceof MobI) this.eliminarMob((MobI)disposable);
+            else if (disposable instanceof ProyectilI) this.eliminarProyectil((ProyectilI)disposable);
+        }
+        //CASTER PERSONALIZADO:
+        else if (evt.getNewValue() instanceof DTOsCasterPersonalizable.AñadirSpellPersonalizado)
+        {
+            CasterPersonalizable caster = ((DTOsCasterPersonalizable.AñadirSpellPersonalizado) evt.getNewValue()).caster;
+            if (caster instanceof PCI) this.añadirSpellPersonalizadoPC((PCI)caster, ((DTOsCasterPersonalizable.AñadirSpellPersonalizado) evt.getNewValue()).spellID);
         }
 
-        //OBSERVAR A LOS MOBS:
-        else if (evt.getNewValue() instanceof DTOsMob.PosicionMob)
-        {   posicionMob(((DTOsMob.PosicionMob) evt.getNewValue()).mob); }
-
-        else if (evt.getNewValue() instanceof DTOsMob.OrientacionMob)
-        {   orientacionMob(((DTOsMob.OrientacionMob) evt.getNewValue()).mob);}
-
-        else if (evt.getNewValue() instanceof DTOsMob.ModificarHPsMob)
-        {   modificarHpsMob(((DTOsMob.ModificarHPsMob) evt.getNewValue()).mob,
-                            ((DTOsMob.ModificarHPsMob) evt.getNewValue()).HPs);}
-
-
-        //OBSERVAR A LOS PROYECTILES (PROYECTILES)
-        else if (evt.getNewValue() instanceof DTOsProyectil.DisposeProyectil)
-        {   eliminarProyectil(((DTOsProyectil.DisposeProyectil) evt.getNewValue()).proyectil); }
+        else if (evt.getNewValue() instanceof DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado)
+        {
+            CasterPersonalizable caster = ((DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado) evt.getNewValue()).caster;
+            String skillID = ((DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado) evt.getNewValue()).skillID;
+            int statID = ((DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado) evt.getNewValue()).statID;
+            int valor = ((DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado) evt.getNewValue()).valor;
+            if (caster instanceof PCI) this.numTalentosSkillPersonalizadoPC((PCI)caster, skillID, statID, valor);
+        }
     }
 
     //TARGET LOCK
@@ -363,8 +374,8 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
 
         @Override public void propertyChange(PropertyChangeEvent evt)
         {
-            if (evt.getNewValue() instanceof DTOsEspacial.PosicionEspacial) { posicion(); }
-            if (evt.getNewValue() instanceof DTOsPC.EliminarPC) { eliminar(); }
+            if (evt.getNewValue() instanceof DTOsEspacial.Posicion) { posicion(); }
+            if (evt.getNewValue() instanceof DTOsDisposable.Dispose) { eliminar(); }
         }
     }
 }

@@ -1,11 +1,11 @@
 package Model.Classes.Geo;// Created by Hanto on 19/05/2014.
 
 import DTO.DTOsMapa;
-import DTO.DTOsPlayer;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import DTOs.DTOsEspacial;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Interfaces.Observable.AbstractModel;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
 import Model.Settings;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -178,7 +178,7 @@ public class Mapa extends AbstractModel implements MapaI, PropertyChangeListener
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
+        if (evt.getNewValue() instanceof DTOsEspacial.Posicion)
         {   comprobarCambioDeMapTile(); }
     }
 }

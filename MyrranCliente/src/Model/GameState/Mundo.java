@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
-public class Mundo extends AbstractModel implements MundoI<PCI, ProyectilI, MobI>, Disposable
+public class Mundo extends AbstractModel implements MundoI, Disposable
 {
     private ListaMapa<PCI> listaMapaPlayers = new ListaMapa<>();
     private ListaMapa<ProyectilI> listaMapaProyectiles = new ListaMapa<>();

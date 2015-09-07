@@ -1,8 +1,11 @@
 package View.Classes.Mobiles.PlayerView;// Created by Hanto on 10/04/2014.
 
 import DB.RSC;
-import DTO.DTOsPlayer;
+import DTOs.DTOsAnimable;
+import DTOs.DTOsEspacial;
+import DTOs.DTOsPCStats;
 import DTOs.DTOsVulnerable;
+import InterfacesEntidades.EntidadesPropiedades.IDentificable;
 import InterfacesEntidades.EntidadesTipos.PlayerI;
 import Model.Settings;
 import View.Classes.Actores.NameplateView;
@@ -19,7 +22,7 @@ import java.beans.PropertyChangeListener;
 
 import static Model.Settings.PIXEL_METROS;
 
-public class PlayerView extends Group implements PropertyChangeListener, Disposable
+public class PlayerView extends Group implements PropertyChangeListener, IDentificable, Disposable
 {
     protected PlayerI player;
     protected PixiePC actor;
@@ -30,8 +33,15 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
     private int rAncho;
     private int rAlto;
 
-    public float getCenterX()               { return player.getX(); }
-    public float getCenterY()               { return player.getY(); }
+    public float getCenterX()                           {   return player.getX(); }
+    public float getCenterY()                           {   return player.getY(); }
+
+    //IDENTIFICABLE:
+    @Override public int getID()                        {   return player.getID(); }
+    @Override public void setID(int iD)                 {   this.player.setID(iD); }
+
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
 
     public PlayerView (PlayerI player, PixiePC pixieActor, NameplateView nameplate, PointLight luz)
     {
@@ -126,16 +136,16 @@ public class PlayerView extends Group implements PropertyChangeListener, Disposa
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsPlayer.Posicion)
-        {   setPosition(((DTOsPlayer.Posicion) evt.getNewValue()).posX, ((DTOsPlayer.Posicion) evt.getNewValue()).posY); }
+        if (evt.getNewValue() instanceof DTOsEspacial.Posicion)
+        {   setPosition(((DTOsEspacial.Posicion) evt.getNewValue()).posX, ((DTOsEspacial.Posicion) evt.getNewValue()).posY); }
 
-        else if (evt.getNewValue() instanceof DTOsPlayer.Animacion)
-        {   setAnimacion(((DTOsPlayer.Animacion) evt.getNewValue()).numAnimacion); }
-
-        else if (evt.getNewValue() instanceof DTOsPlayer.Nombre)
-        {   setNombre(((DTOsPlayer.Nombre) evt.getNewValue()).nombre); }
+        else if (evt.getNewValue() instanceof DTOsAnimable.NumAnimacion)
+        {   setAnimacion(((DTOsAnimable.NumAnimacion) evt.getNewValue()).numAnimacion); }
 
         else if (evt.getNewValue() instanceof DTOsVulnerable.ModificarHPs)
         {   modificarHPs(((DTOsVulnerable.ModificarHPs) evt.getNewValue()).HPs); }
+
+        else if (evt.getNewValue() instanceof DTOsPCStats.Nombre)
+        {   setNombre(((DTOsPCStats.Nombre) evt.getNewValue()).nombre); }
     }
 }

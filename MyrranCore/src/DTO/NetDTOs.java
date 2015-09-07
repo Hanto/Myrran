@@ -1,6 +1,5 @@
 package DTO;
 
-import DTOs.DTOsCaster;
 import Model.Settings;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
@@ -16,30 +15,14 @@ public class NetDTOs
         Kryo kryo = endPoint.getKryo();
 
         kryo.register(Object[].class);
-        //Player Cliente:
+        // Player Cliente:
         kryo.register(DTOsPlayer.PlayerDTOs.class);
-        //Player Servidor:
-        kryo.register(DTOsPlayer.PCDTOs.class);
-
-        //Player:
         kryo.register(DTOsPlayer.LogIn.class);
-        kryo.register(DTOsPlayer.Animacion.class);
-        kryo.register(DTOsPlayer.Posicion.class);
-        kryo.register(DTOsPlayer.ParametrosSpell.class);
-        kryo.register(DTOsPlayer.SpellSeleccionado.class);
-        kryo.register(DTOsPlayer.StartCastear.class);
-        kryo.register(DTOsPlayer.NumTalentosSkillPersonalizado.class);
-        kryo.register(DTOsPlayer.CrearPC.class);
-        kryo.register(DTOsPlayer.Nombre.class);
-        kryo.register(DTOsPlayer.SkillPersonalizado.class);
-        kryo.register(DTOsPlayer.CambioTerreno.class);
 
-        kryo.register(DTOsCaster.Castear.class);
-
-        //Parametros Spell:
+        // Parametros Spell:
         kryo.register(DTOsParametrosSpell.ParametrosEditarTerreno.class);
 
-        //MapView:
+        // MapView:
         kryo.register(boolean[].class);
         kryo.register(boolean[][].class);
         kryo.register(short[].class);
@@ -48,32 +31,33 @@ public class NetDTOs
         kryo.register(DTOsMapView.Mapa.Celda[][].class);
         kryo.register(DTOsMapView.Mapa.class);
 
-        //PC
+        // CAMPOVISION:
+        //--------------------------------------------------------------------------------------------------------------
+
         kryo.register(DTOsCampoVision.PCDTOs.class);
-        kryo.register(DTOsCampoVision.MiscDTOs.class);
-        kryo.register(DTOsCampoVision.DatosCompletosPC.class);
-        kryo.register(DTOsCampoVision.EliminarPC.class);
-        kryo.register(DTOsCampoVision.PosicionPC.class);
-        kryo.register(DTOsCampoVision.NumAnimacionPC.class);
-        kryo.register(DTOsCampoVision.NombrePC.class);
-        kryo.register(DTOsCampoVision.HPsPC.class);
-        kryo.register(DTOsCampoVision.ModificarHPsPC.class);
-        kryo.register(DTOsCampoVision.AñadirSpellPersonalizadoPC.class);
-        kryo.register(DTOsCampoVision.NumTalentosSkillPersonalizadoPC.class);
-
-        //MOBS:
         kryo.register(DTOsCampoVision.MobDTOs.class);
-        kryo.register(DTOsCampoVision.PosicionMob.class);
-        kryo.register(DTOsCampoVision.OrientacionMob.class);
-        kryo.register(DTOsCampoVision.ModificarHPsMob.class);
-
-        //PROYECTILES:
         kryo.register(DTOsCampoVision.ProyectilDTOs.class);
-        kryo.register(DTOsCampoVision.DatosCompletosProyectil.class);
-        kryo.register(DTOsCampoVision.EliminarProyectil.class);
-
-        //MISC:
         kryo.register(DTOsCampoVision.MiscDTOs.class);
+
+        // general:
+        kryo.register(DTOsCampoVision.Eliminar.class);
+        kryo.register(DTOsCampoVision.Posicion.class);
+        kryo.register(DTOsCampoVision.NumAnimacion.class);
+        kryo.register(DTOsCampoVision.Orientacion.class);
+        kryo.register(DTOsCampoVision.setHPs.class);
+        kryo.register(DTOsCampoVision.ModificarHPs.class);
+        kryo.register(DTOsCampoVision.AñadirSpellPersonalizado.class);
+        kryo.register(DTOsCampoVision.SetNumTalentosSkillPersonalizado.class);
+        kryo.register(DTOsCampoVision.Castear.class);
+
+        // pc:
+        kryo.register(DTOsCampoVision.DatosCompletosPC.class);
+        kryo.register(DTOsCampoVision.NombrePC.class);
+
+        // proyectil:
+        kryo.register(DTOsCampoVision.DatosCompletosProyectil.class);
+
+        // misc:
         kryo.register(DTOsCampoVision.CambioTerrenoMisc.class);
         kryo.register(DTOsCampoVision.MapTilesAdyacentes.class);
     }

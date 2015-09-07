@@ -1,7 +1,8 @@
 package View.Classes.Mobiles.MobView;// Created by Hanto on 13/08/2015.
 
 import DB.RSC;
-import DTO.DTOsMob;
+import DTOs.DTOsEspacial;
+import DTOs.DTOsOrientable;
 import DTOs.DTOsVulnerable;
 import InterfacesEntidades.EntidadesPropiedades.IDentificable;
 import InterfacesEntidades.EntidadesTipos.MobI;
@@ -114,11 +115,11 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsMob.PosicionMob)
-        {   setPosition(((DTOsMob.PosicionMob) evt.getNewValue()).posX, ((DTOsMob.PosicionMob) evt.getNewValue()).posY); }
+        if (evt.getNewValue() instanceof DTOsEspacial.Posicion)
+        {   setPosition(((DTOsEspacial.Posicion) evt.getNewValue()).posX, ((DTOsEspacial.Posicion) evt.getNewValue()).posY); }
 
-        else if (evt.getNewValue() instanceof DTOsMob.OrientacionMob)
-        {   setOrientacion(((DTOsMob.OrientacionMob) evt.getNewValue()).orientacion); }
+        else if (evt.getNewValue() instanceof DTOsOrientable.Orientacion)
+        {   setOrientacion(((DTOsOrientable.Orientacion) evt.getNewValue()).orientacion); }
 
         else if (evt.getNewValue() instanceof DTOsVulnerable.ModificarHPs)
         {   modificarHPs( (int) ((DTOsVulnerable.ModificarHPs) evt.getNewValue()).HPs); }

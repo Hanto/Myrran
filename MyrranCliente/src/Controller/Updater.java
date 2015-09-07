@@ -4,7 +4,7 @@ import InterfacesEntidades.EntidadesTipos.PlayerI;
 import Interfaces.Geo.MapaI;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Input.InputManager;
-import Model.Classes.Mobiles.MModulares.Player.PlayerFactory;
+import Model.Classes.Mobiles.Player.PlayerFactory;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
 import Model.GameState.Mundo;

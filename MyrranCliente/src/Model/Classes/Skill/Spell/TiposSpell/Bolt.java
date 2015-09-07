@@ -5,7 +5,7 @@ import Interfaces.Spell.SpellI;
 import InterfacesEntidades.EntidadesPropiedades.Caster;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;
-import Model.Classes.Mobiles.MModulares.Proyectil.ProyectilFactory;
+import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
 import Model.Classes.Skill.Spell.TipoSpell;
 
 public class Bolt extends TipoSpell

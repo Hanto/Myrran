@@ -83,21 +83,21 @@ public class BufferCampoVision
 
     public void eliminarPC(PCI pc)
     {
-        DTOsCampoVision.EliminarPC eliminarPC = new DTOsCampoVision.EliminarPC();
+        DTOsCampoVision.Eliminar eliminar = new DTOsCampoVision.Eliminar();
         mapaDTOsPC.remove(pc.getID());
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.EliminarPC.class, eliminarPC);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.Eliminar.class, eliminar);
     }
 
     public void setPositionPC (PCI pc)
     {
-        DTOsCampoVision.PosicionPC posicionPC = new DTOsCampoVision.PosicionPC(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.PosicionPC.class, posicionPC);
+        DTOsCampoVision.Posicion posicion = new DTOsCampoVision.Posicion(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.Posicion.class, posicion);
     }
 
     public void setNumAnimacionPC (PCI pc)
     {
-        DTOsCampoVision.NumAnimacionPC numAnimacionPC = new DTOsCampoVision.NumAnimacionPC(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NumAnimacionPC.class, numAnimacionPC);
+        DTOsCampoVision.NumAnimacion numAnimacion = new DTOsCampoVision.NumAnimacion(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NumAnimacion.class, numAnimacion);
     }
 
     // PC & PLAYER:
@@ -134,26 +134,26 @@ public class BufferCampoVision
 
     public void setHPsPC (PCI pc)
     {
-        DTOsCampoVision.HPsPC hpsPC = new DTOsCampoVision.HPsPC(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.HPsPC.class, hpsPC);
+        DTOsCampoVision.setHPs hpsSet = new DTOsCampoVision.setHPs(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.setHPs.class, hpsSet);
     }
 
     public void addModificarHPsPC (PCI pc, float hps)
     {
-        DTOsCampoVision.ModificarHPsPC modificarHPsPC = new DTOsCampoVision.ModificarHPsPC(hps);
-        mapaDTOsPC.add(pc.getID(), modificarHPsPC);
+        DTOsCampoVision.ModificarHPs modificarHPs = new DTOsCampoVision.ModificarHPs(hps);
+        mapaDTOsPC.add(pc.getID(), modificarHPs);
     }
 
     public void addAñadirSpellPersonalizado(PCI pc, String spellID)
     {
-        DTOsCampoVision.AñadirSpellPersonalizadoPC añadirSpellPersonalizadoPC = new DTOsCampoVision.AñadirSpellPersonalizadoPC(spellID);
-        mapaDTOsPC.add(pc.getID(), añadirSpellPersonalizadoPC);
+        DTOsCampoVision.AñadirSpellPersonalizado añadirSpellPersonalizado = new DTOsCampoVision.AñadirSpellPersonalizado(spellID);
+        mapaDTOsPC.add(pc.getID(), añadirSpellPersonalizado);
     }
 
     public void addNumTalentosSkillPersonalizadoPC(PCI pc, String skillID, int statID, int valor)
     {
-        DTOsCampoVision.NumTalentosSkillPersonalizadoPC numTalentosSkillPersonalizadoPC = new DTOsCampoVision.NumTalentosSkillPersonalizadoPC(skillID, statID, valor);
-        mapaDTOsPC.add(pc.getID(), numTalentosSkillPersonalizadoPC);
+        DTOsCampoVision.SetNumTalentosSkillPersonalizado setNumTalentosSkillPersonalizado = new DTOsCampoVision.SetNumTalentosSkillPersonalizado(skillID, statID, valor);
+        mapaDTOsPC.add(pc.getID(), setNumTalentosSkillPersonalizado);
     }
 
     // MOBS:
@@ -161,19 +161,19 @@ public class BufferCampoVision
 
     public void setPosicionMob(MobI mob)
     {
-        DTOsCampoVision.PosicionMob posicionMob = new DTOsCampoVision.PosicionMob(mob);
+        DTOsCampoVision.Posicion posicionMob = new DTOsCampoVision.Posicion(mob);
         mapaDTOsMobs.add(mob.getID(), posicionMob);
     }
 
     public void setOrientacionMob(MobI mob)
     {
-        DTOsCampoVision.OrientacionMob orientacionMob = new DTOsCampoVision.OrientacionMob(mob);
-        mapaDTOsMobs.add(mob.getID(), orientacionMob);
+        DTOsCampoVision.Orientacion orientacion = new DTOsCampoVision.Orientacion(mob);
+        mapaDTOsMobs.add(mob.getID(), orientacion);
     }
 
     public void addModificarHpsMob (MobI mob, float hps)
     {
-        DTOsCampoVision.ModificarHPsMob modificarHPsMob = new DTOsCampoVision.ModificarHPsMob(hps);
+        DTOsCampoVision.ModificarHPs modificarHPsMob = new DTOsCampoVision.ModificarHPs(hps);
         mapaDTOsMobs.add(mob.getID(), modificarHPsMob);
     }
 
@@ -188,9 +188,9 @@ public class BufferCampoVision
 
     public void eliminarProyectil (ProyectilI proyectil)
     {
-        DTOsCampoVision.EliminarProyectil eliminarProyectil = new DTOsCampoVision.EliminarProyectil();
+        DTOsCampoVision.Eliminar eliminarProyectil = new DTOsCampoVision.Eliminar();
         mapaDTOsProyectiles.remove(proyectil.getID());
-        mapaDTOsProyectiles.set(proyectil.getID(), DTOsCampoVision.EliminarProyectil.class, eliminarProyectil);
+        mapaDTOsProyectiles.set(proyectil.getID(), DTOsCampoVision.Eliminar.class, eliminarProyectil);
     }
 
     // MISC:

@@ -1,8 +1,6 @@
 package Model.GameState;// Created by Hanto on 07/04/2014.
 
-import DTO.DTOsMob;
 import DTO.DTOsMundo;
-import DTO.DTOsProyectil;
 import DTOs.DTOsEspacial;
 import Interfaces.AI.ColisionMurosI;
 import Interfaces.AI.ColisionProyectilesI;
@@ -14,10 +12,9 @@ import Interfaces.Observable.AbstractModel;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.PCSI;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Model.AI.Behaviors.SteeringFactory.SteeringCompuestoFactory;
-import Model.Classes.Mobiles.Modulares.Mob.MobFactory;
+import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.EstructurasDatos.ListaMapaCuadrantes;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -25,10 +22,11 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Iterator;
 
-public class Mundo extends AbstractModel implements PropertyChangeListener, MundoI<PCSI, ProyectilI, MobI>
+public class Mundo extends AbstractModel implements PropertyChangeListener, MundoI
 {
+
     protected ListaMapaCuadrantes<ProyectilI> dataProyectiles = new ListaMapaCuadrantes<>();
-    protected ListaMapaCuadrantes<PCSI> dataPCs = new ListaMapaCuadrantes<>();
+    protected ListaMapaCuadrantes<PCI> dataPCs = new ListaMapaCuadrantes<>();
     protected ListaMapaCuadrantes<MobI> dataMobs = new ListaMapaCuadrantes<>();
 
     private World world;
@@ -58,7 +56,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
     // PLAYERS:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void añadirPC (PCSI pc)
+    @Override public void añadirPC (PCI pc)
     {
         dataPCs.add(pc);
         pc.añadirObservador(this);
@@ -76,7 +74,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
     @Override public void eliminarPC (int connectionID)
     {
-        PCSI pc = dataPCs.remove(connectionID);
+        PCI pc = dataPCs.remove(connectionID);
         pc.eliminarObservador(this);
         pc.dispose();
 
@@ -84,16 +82,16 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         notificarActualizacion("eliminarPC", null, eliminarPlayer);
     }
 
-    @Override public PCSI getPC(int connectionID)
+    @Override public PCI getPC(int connectionID)
     {   return dataPCs.get(connectionID); }
 
-    @Override public Iterator<PCSI> getIteratorPCs()
+    @Override public Iterator<PCI> getIteratorPCs()
     {   return dataPCs.iterator(); }
 
-    @Override public Iterator<PCSI> getIteratorPCs(int mapTileX, int mapTileY)
+    @Override public Iterator<PCI> getIteratorPCs(int mapTileX, int mapTileY)
     {   return dataPCs.getIteratorCuadrantes(mapTileX, mapTileY); }
 
-    private void updatePC(PCSI pc)
+    private void updatePC(PCI pc)
     {   dataPCs.update(pc); }
 
     // PROYECTILES:
@@ -231,16 +229,12 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsEspacial.PosicionEspacial)
+        if (evt.getNewValue() instanceof DTOsEspacial.Posicion)
         {
-            Espacial espacial = ((DTOsEspacial.PosicionEspacial) evt.getNewValue()).espacial;
-            if (espacial instanceof PCSI) updatePC((PCSI)espacial);
+            Espacial espacial = ((DTOsEspacial.Posicion) evt.getNewValue()).espacial;
+            if (espacial instanceof PCI) updatePC((PCI)espacial);
+            else if (espacial instanceof MobI) updateMob((MobI)espacial);
+            else if (espacial instanceof ProyectilI) updateProyectil((ProyectilI)espacial);
         }
-
-        else if (evt.getNewValue() instanceof DTOsProyectil.PosicionProyectil)
-        {   updateProyectil(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil); }
-
-        else if (evt.getNewValue() instanceof DTOsMob.PosicionMob)
-        {   updateMob(((DTOsMob.PosicionMob) evt.getNewValue()).mob); }
     }
 }

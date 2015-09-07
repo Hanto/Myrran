@@ -2,9 +2,9 @@ package DTO;// Created by Hanto on 06/06/2015.
 
 import InterfacesEntidades.EntidadesPropiedades.Animable;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Orientable;
 import InterfacesEntidades.EntidadesPropiedades.PCStats;
 import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
-import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;
 
@@ -50,6 +50,89 @@ public class DTOsCampoVision
     //PLAYER DTOS:
     //------------------------------------------------------------------------------------------------------------------
 
+    public static class Eliminar
+    {   public Eliminar() {} }
+
+    public static class Posicion
+    {
+        public int posX;
+        public int posY;
+        public Posicion() {}
+        public Posicion(int x, int y)
+        {   this.posX = x; this.posY = y; }
+        public Posicion(Espacial pc)
+        { posX = (int)pc.getX(); posY = (int)pc.getY(); }
+    }
+
+    public static class NumAnimacion
+    {
+        public short numAnimacion;
+        public NumAnimacion() {}
+        public NumAnimacion(short numAnimacion)
+        {   this.numAnimacion = numAnimacion; }
+        public NumAnimacion(Animable pc)
+        {   this.numAnimacion = (short)pc.getNumAnimacion(); }
+    }
+
+    public static class Orientacion
+    {
+        public float orientacion;
+        public Orientacion() {}
+        public Orientacion(Orientable mob)
+        {   this.orientacion = mob.getOrientacion(); }
+    }
+
+    public static class setHPs
+    {
+        public float actualHPs;
+        public float maxHPs;
+        public setHPs() {}
+        public setHPs(int actualHPs, int maxHPs)
+        {   this.actualHPs = actualHPs; this.maxHPs = maxHPs; }
+        public setHPs(Vulnerable pc)
+        {   this.actualHPs = pc.getActualHPs(); this.maxHPs = pc.getMaxHPs(); }
+    }
+
+    public static class ModificarHPs
+    {
+        public float HPs;
+        public ModificarHPs() {}
+        public ModificarHPs(float HPs)
+        {   this.HPs = HPs; }
+    }
+
+    public static class Castear
+    {
+        public String spellID;
+        public Object parametrosSpell;
+        public int screenX;
+        public int screenY;
+        public Castear() {}
+        public Castear(String spellID, Object parametrosSpell, int screenX, int screenY)
+        {   this.spellID = spellID; this.parametrosSpell = parametrosSpell; this.screenX = screenX; this.screenY = screenY; }
+    }
+
+    public static class AñadirSpellPersonalizado
+    {
+        public String spellID;
+        public AñadirSpellPersonalizado() {}
+        public AñadirSpellPersonalizado(String spellID)
+        {   this.spellID = spellID; }
+    }
+
+    public static class SetNumTalentosSkillPersonalizado
+    {
+        public String skillID;
+        public int statID;
+        public int valor;
+        public SetNumTalentosSkillPersonalizado() {}
+        public SetNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
+        {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
+    }
+
+    // PC DTOS:
+    //------------------------------------------------------------------------------------------------------------------
+
     public static class DatosCompletosPC
     {
         public String nombre;
@@ -67,30 +150,6 @@ public class DTOsCampoVision
         }
     }
 
-    public static class EliminarPC
-    {   public EliminarPC() {} }
-
-    public static class PosicionPC
-    {
-        public int posX;
-        public int posY;
-        public PosicionPC() {}
-        public PosicionPC (int x, int y)
-        {   this.posX = x; this.posY = y; }
-        public PosicionPC(Espacial pc)
-        { posX = (int)pc.getX(); posY = (int)pc.getY(); }
-    }
-
-    public static class NumAnimacionPC
-    {
-        public short numAnimacion;
-        public NumAnimacionPC() {}
-        public NumAnimacionPC(short numAnimacion)
-        {   this.numAnimacion = numAnimacion; }
-        public NumAnimacionPC(Animable pc)
-        {   this.numAnimacion = (short)pc.getNumAnimacion(); }
-    }
-
     public static class NombrePC
     {
         public String nombre;
@@ -101,72 +160,6 @@ public class DTOsCampoVision
         {   this.nombre = pc.getNombre(); }
     }
 
-    public static class HPsPC
-    {
-        public float actualHPs;
-        public float maxHPs;
-        public HPsPC() {}
-        public HPsPC(int actualHPs, int maxHPs)
-        {   this.actualHPs = actualHPs; this.maxHPs = maxHPs; }
-        public HPsPC (Vulnerable pc)
-        {   this.actualHPs = pc.getActualHPs(); this.maxHPs = pc.getMaxHPs(); }
-    }
-
-    public static class ModificarHPsPC
-    {
-        public float HPs;
-        public ModificarHPsPC() {}
-        public ModificarHPsPC (float HPs)
-        {   this.HPs = HPs; }
-    }
-
-    public static class AñadirSpellPersonalizadoPC
-    {
-        public String spellID;
-        public AñadirSpellPersonalizadoPC() {}
-        public AñadirSpellPersonalizadoPC(String spellID)
-        {   this.spellID = spellID; }
-    }
-
-    public static class NumTalentosSkillPersonalizadoPC
-    {
-        public String skillID;
-        public int statID;
-        public int valor;
-        public NumTalentosSkillPersonalizadoPC() {}
-        public NumTalentosSkillPersonalizadoPC(String skillID, int statID, int valor)
-        {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
-    }
-
-    // MOB DTOS:
-    //------------------------------------------------------------------------------------------------------------------
-
-    public static class PosicionMob
-    {
-        public int posX;
-        public int posY;
-        public PosicionMob() {}
-        public PosicionMob(int x, int y)
-        {   this.posX = x; this.posY = y; }
-        public PosicionMob(Espacial mob)
-        {   this.posX = (int) mob.getX(); this.posY = (int) mob.getY(); }
-    }
-
-    public static class OrientacionMob
-    {
-        public float orientacion;
-        public OrientacionMob() {}
-        public OrientacionMob(MobI mob)
-        {   this.orientacion = mob.getOrientacion(); }
-    }
-
-    public static class ModificarHPsMob
-    {
-        public float HPs;
-        public ModificarHPsMob() {}
-        public ModificarHPsMob (float HPs)
-        {   this.HPs = HPs; }
-    }
 
     // PROYECTIL DTOS:
     //------------------------------------------------------------------------------------------------------------------
@@ -197,9 +190,6 @@ public class DTOsCampoVision
             this.duracionMax = proyectil.getDuracionMaxima();
         }
     }
-
-    public static class EliminarProyectil
-    {   public EliminarProyectil() {} }
 
     //MISC DTOS:
     //------------------------------------------------------------------------------------------------------------------

@@ -9,9 +9,9 @@ import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Interfaces.Spell.SpellI;
 import Interfaces.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
-import Model.Classes.Mobiles.MModulares.Mob.MobFactory;
-import Model.Classes.Mobiles.MModulares.PC.PCFactory;
-import Model.Classes.Mobiles.MModulares.Proyectil.ProyectilFactory;
+import Model.Classes.Mobiles.Mob.MobFactory;
+import Model.Classes.Mobiles.PC.PCFactory;
+import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
 import Model.GameState.Mundo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,31 +46,28 @@ public class ClienteInputs
         {
             dto = pcDTOs.listaDTOs[i];
 
-            if (dto instanceof DTOsCampoVision.EliminarPC)
+            if (dto instanceof DTOsCampoVision.Eliminar)
             {   mundo.eliminarPC(pcDTOs.connectionID); }
 
-            else if (dto instanceof DTOsCampoVision.PosicionPC)
-            {   pc.setPosition(((DTOsCampoVision.PosicionPC) dto).posX, ((DTOsCampoVision.PosicionPC) dto).posY); }
+            else if (dto instanceof DTOsCampoVision.Posicion)
+            {   pc.setPosition(((DTOsCampoVision.Posicion) dto).posX, ((DTOsCampoVision.Posicion) dto).posY); }
 
-            else if (dto instanceof DTOsCampoVision.NumAnimacionPC)
-            {   pc.setNumAnimacion(((DTOsCampoVision.NumAnimacionPC) dto).numAnimacion); }
+            else if (dto instanceof DTOsCampoVision.NumAnimacion)
+            {   pc.setNumAnimacion(((DTOsCampoVision.NumAnimacion) dto).numAnimacion); }
 
-            else if (dto instanceof DTOsCampoVision.NombrePC)
-            {   pc.setNombre(((DTOsCampoVision.NombrePC) dto).nombre);}
+            else if (dto instanceof DTOsCampoVision.ModificarHPs)
+            {   pc.modificarHPs(((DTOsCampoVision.ModificarHPs) dto).HPs);}
 
-            else if (dto instanceof DTOsCampoVision.ModificarHPsPC)
-            {   pc.modificarHPs(((DTOsCampoVision.ModificarHPsPC) dto).HPs);}
-
-            else if (dto instanceof DTOsCampoVision.HPsPC)
+            else if (dto instanceof DTOsCampoVision.setHPs)
             {
-                pc.setMaxHPs(((DTOsCampoVision.HPsPC) dto).maxHPs);
-                pc.setActualHPs(((DTOsCampoVision.HPsPC) dto).actualHPs);
+                pc.setMaxHPs(((DTOsCampoVision.setHPs) dto).maxHPs);
+                pc.setActualHPs(((DTOsCampoVision.setHPs) dto).actualHPs);
             }
 
-            else if (dto instanceof DTOsCampoVision.AñadirSpellPersonalizadoPC)
+            else if (dto instanceof DTOsCampoVision.AñadirSpellPersonalizado)
             {
-                SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(((DTOsCampoVision.AñadirSpellPersonalizadoPC) dto).spellID);
-                if (spell == null) { logger.error("ERROR: no existe Spell con este ID: {}", ((DTOsCampoVision.AñadirSpellPersonalizadoPC) dto).spellID); return; }
+                SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(((DTOsCampoVision.AñadirSpellPersonalizado) dto).spellID);
+                if (spell == null) { logger.error("ERROR: no existe Spell con este ID: {}", ((DTOsCampoVision.AñadirSpellPersonalizado) dto).spellID); return; }
                 else
                 {
                     pc.añadirSkillsPersonalizados(spell.getID());
@@ -79,11 +76,11 @@ public class ClienteInputs
                 }
             }
 
-            else if (dto instanceof DTOsCampoVision.NumTalentosSkillPersonalizadoPC)
+            else if (dto instanceof DTOsCampoVision.SetNumTalentosSkillPersonalizado)
             {
-                String skillID = ((DTOsCampoVision.NumTalentosSkillPersonalizadoPC) dto).skillID;
-                int statID = ((DTOsCampoVision.NumTalentosSkillPersonalizadoPC) dto).statID;
-                int valor = ((DTOsCampoVision.NumTalentosSkillPersonalizadoPC) dto).valor;
+                String skillID = ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).skillID;
+                int statID = ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).statID;
+                int valor = ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).valor;
 
                 logger.debug("Modificado Spell: {} stat: {} talentos "+valor, skillID, statID);
                 if (pc instanceof PlayerI) ((PlayerI) pc).setNumTalentosSkillPersonalizadoFromServer(skillID, statID, valor);
@@ -98,6 +95,9 @@ public class ClienteInputs
                 pc.setActualHPs(((DTOsCampoVision.DatosCompletosPC) dto).actualHPs);
                 pc.setNivel(((DTOsCampoVision.DatosCompletosPC) dto).nivel);
             }
+
+            else if (dto instanceof DTOsCampoVision.NombrePC)
+            {   pc.setNombre(((DTOsCampoVision.NombrePC) dto).nombre);}
         }
     }
 
@@ -112,7 +112,6 @@ public class ClienteInputs
             if (dto instanceof DTOsCampoVision.DatosCompletosProyectil)
             {
                 ProyectilI proyectil = ProyectilFactory.NUEVOPROYECTIL.nuevo(mundo.getWorld(), ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
-                        //ProyectilFactory.ESFERA.nuevo(mundo.getWorld(), ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
                         .setID(proyectilDTOs.iD)
                         .setSpell(((DTOsCampoVision.DatosCompletosProyectil) dto).spellID)
                         .setPosition(((DTOsCampoVision.DatosCompletosProyectil) dto).origenX, ((DTOsCampoVision.DatosCompletosProyectil) dto).origenY)
@@ -124,7 +123,7 @@ public class ClienteInputs
                 mundo.añadirProyectil(proyectil);
             }
 
-            else if (dto instanceof DTOsCampoVision.EliminarProyectil)
+            else if (dto instanceof DTOsCampoVision.Eliminar)
             {   mundo.eliminarProyectil(proyectilDTOs.iD); }
         }
     }
@@ -145,14 +144,14 @@ public class ClienteInputs
         {
             dto = mobDTOs.listaDTOs[i];
 
-            if (dto instanceof DTOsCampoVision.PosicionMob)
-            {   mob.setPosition(((DTOsCampoVision.PosicionMob) dto).posX, ((DTOsCampoVision.PosicionMob) dto).posY); }
+            if (dto instanceof DTOsCampoVision.Posicion)
+            {   mob.setPosition(((DTOsCampoVision.Posicion) dto).posX, ((DTOsCampoVision.Posicion) dto).posY); }
 
-            else if (dto instanceof DTOsCampoVision.OrientacionMob)
-            {   mob.setOrientacion(((DTOsCampoVision.OrientacionMob) dto).orientacion);}
+            else if (dto instanceof DTOsCampoVision.Orientacion)
+            {   mob.setOrientacion(((DTOsCampoVision.Orientacion) dto).orientacion);}
 
-            else if (dto instanceof DTOsCampoVision.ModificarHPsMob)
-            {   mob.modificarHPs(((DTOsCampoVision.ModificarHPsMob) dto).HPs);}
+            else if (dto instanceof DTOsCampoVision.ModificarHPs)
+            {   mob.modificarHPs(((DTOsCampoVision.ModificarHPs) dto).HPs);}
         }
     }
 

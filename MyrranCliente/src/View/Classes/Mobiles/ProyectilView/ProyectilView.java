@@ -1,6 +1,6 @@
 package View.Classes.Mobiles.ProyectilView;// Created by Hanto on 06/08/2015.
 
-import DTO.DTOsProyectil;
+import DTOs.DTOsEspacial;
 import InterfacesEntidades.EntidadesPropiedades.IDentificable;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Model.Settings;
@@ -16,17 +16,22 @@ import java.beans.PropertyChangeListener;
 public class ProyectilView extends Group implements PropertyChangeListener, IDentificable, Disposable
 {
     protected ProyectilI proyectil;
-    protected int iD;
     protected Pixie actor;
     protected PointLight luz;
 
     private int rAncho;
     private int rAlto;
 
+    //IDENTIFICABLE:
+    @Override public int getID()                        {   return proyectil.getID(); }
+    @Override public void setID(int iD)                 {   this.proyectil.setID(iD); }
+
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
+
     public ProyectilView(ProyectilI proyectil, Pixie pixieActor, PointLight luz)
     {
         this.proyectil = proyectil;
-        this.iD = proyectil.getID();
         this.actor = pixieActor;
         this.luz = luz;
 
@@ -69,11 +74,6 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
     //
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public int getID()
-    {   return iD;}
-
-
-
     public void setDireccion()
     {
         float grados = proyectil.getCuerpo().getDireccion().angle();
@@ -95,15 +95,10 @@ public class ProyectilView extends Group implements PropertyChangeListener, IDen
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsProyectil.PosicionProyectil)
+        if (evt.getNewValue() instanceof DTOsEspacial.Posicion)
         {
-            setPosition(((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil.getX(),
-                        ((DTOsProyectil.PosicionProyectil) evt.getNewValue()).proyectil.getY());
+            setPosition(((DTOsEspacial.Posicion) evt.getNewValue()).posX,
+                        ((DTOsEspacial.Posicion) evt.getNewValue()).posY);
         }
-    }
-
-    @Override public void setID(int iD)
-    {
-
     }
 }

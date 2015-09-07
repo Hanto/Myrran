@@ -13,9 +13,8 @@ public enum ProyectilViewFactory
         @Override public ProyectilView nuevo(ProyectilI proyectil, RayHandler rayHandler)
         {
             Pixie pixieProyectil = new Pixie(RSC.skillRecursosDAO.getSkillRecursosDAO().getSpellRecursos(proyectil.getSpell()).getAnimacion(0));
-            PointLight luz = new PointLight(rayHandler, 300);
-            ProyectilView proyectilView = new ProyectilView(proyectil, pixieProyectil, luz);
-            return proyectilView;
+            PointLight luz = new PointLight(rayHandler, 100);
+            return new ProyectilView(proyectil, pixieProyectil, luz);
         }
     };
     public abstract ProyectilView nuevo(ProyectilI proyectil, RayHandler rayHandler);
