@@ -4,9 +4,9 @@ import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
 import DTOs.DTOsBarraTerrenos;
 import DTOs.DTOsNet;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
-import Interfaces.Geo.TerrenoI;
-import Interfaces.Observable.AbstractModel;
+import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.Misc.Geo.TerrenoI;
+import Interfaces.Misc.Observable.AbstractModel;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;

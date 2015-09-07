@@ -1,6 +1,6 @@
 package Model.Mobiles.Steerables;// Created by Hanto on 03/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Steerable.SteerableAgentAutonomoI;
+import Interfaces.EntidadesPropiedades.Steerable.SteerableAgentAutonomoI;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.math.Vector2;

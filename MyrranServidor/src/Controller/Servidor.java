@@ -2,8 +2,8 @@ package Controller;// Created by Hanto on 07/04/2014.
 
 import DTOs.KryoDTOs;
 import DTOs.DTOsNet;
-import Interfaces.Network.MainLoopI;
-import Interfaces.Network.ServidorI;
+import Interfaces.Misc.Network.MainLoopI;
+import Interfaces.Misc.Network.ServidorI;
 import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;

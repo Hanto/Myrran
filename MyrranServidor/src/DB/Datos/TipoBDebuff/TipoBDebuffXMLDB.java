@@ -3,8 +3,8 @@ package DB.Datos.TipoBDebuff;// Created by Hanto on 10/06/2014.
 import Model.Skills.SkillsPersonalizados.SkillStat;
 import DAO.TipoBDebuff.TipoBDebuffXMLDBI;
 import Model.Settings;
-import Interfaces.BDebuff.TipoBDebuffI;
-import Model.Classes.Skill.BDebuff.TipoBDebuff;
+import Interfaces.Misc.BDebuff.TipoBDebuffI;
+import Model.Skills.BDebuff.TipoBDebuff;
 import Model.Classes.Skill.BDebuff.TipoBDebuffFactory;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;

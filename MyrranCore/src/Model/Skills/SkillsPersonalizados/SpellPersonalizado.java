@@ -1,9 +1,9 @@
 package Model.Skills.SkillsPersonalizados;// Created by Hanto on 29/06/2014.
 
-import Interfaces.BDebuff.BDebuffI;
-import Interfaces.Skill.SkillPersonalizadoI;
-import Interfaces.Spell.SpellI;
-import Interfaces.Spell.SpellPersonalizadoI;
+import Interfaces.Misc.BDebuff.BDebuffI;
+import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SpellI;
+import Interfaces.Misc.Spell.SpellPersonalizadoI;
 
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;

@@ -1,9 +1,9 @@
 package Model.AI.SistemaAggro;// Created by Hanto on 02/09/2015.
 
-import Interfaces.AI.SistemaAggroI;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.AI.SistemaAggroI;
+import Interfaces.EntidadesTipos.MobI;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 
 public class SistemaAggro implements SistemaAggroI
 {

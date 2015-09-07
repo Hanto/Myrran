@@ -1,6 +1,6 @@
 package Model.AI.Huellas;
 
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Model.Settings;
 
 import java.util.ArrayDeque;

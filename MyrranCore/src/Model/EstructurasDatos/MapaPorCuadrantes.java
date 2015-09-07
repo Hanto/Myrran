@@ -1,8 +1,8 @@
 package Model.EstructurasDatos;// Created by Hanto on 16/07/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
-import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
-import Interfaces.EstructurasDatos.ListaPorCuadrantesI;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.Misc.EstructurasDatos.ListaPorCuadrantesI;
 import Model.Settings;
 
 import java.util.*;

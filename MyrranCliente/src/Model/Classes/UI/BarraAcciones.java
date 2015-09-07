@@ -1,11 +1,11 @@
 package Model.Classes.UI;// Created by Hanto on 06/05/2014.
 
 import DTOs.DTOsBarraAcciones;
-import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
-import Interfaces.Observable.AbstractModel;
-import Interfaces.UI.AccionI;
-import Interfaces.UI.CasillaI;
-import Interfaces.UI.BarraAccionesI;
+import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.UI.AccionI;
+import Interfaces.Misc.UI.CasillaI;
+import Interfaces.Misc.UI.BarraAccionesI;
 import Model.Classes.Input.InputManager;
 import com.badlogic.gdx.utils.Array;
 

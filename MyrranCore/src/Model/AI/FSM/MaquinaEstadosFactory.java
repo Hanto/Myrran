@@ -1,7 +1,7 @@
 package Model.AI.FSM;// Created by Hanto on 16/07/2014.
 
 import Model.AI.FSM.PlayerEstados.*;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Maquinable;
+import Interfaces.EntidadesPropiedades.Misc.Maquinable;
 
 public enum MaquinaEstadosFactory
 {

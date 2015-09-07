@@ -3,9 +3,9 @@ package Model.Classes.Skill.Spell.TiposSpell;
 
 import DTOs.DTOsNet;
 import Model.Settings;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
-import Interfaces.GameState.MundoI;
-import Interfaces.Spell.SpellI;
+import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Spell.SpellI;
 import Model.Skills.Spell.TipoSpell;
 
 public class EditarTerreno extends TipoSpell

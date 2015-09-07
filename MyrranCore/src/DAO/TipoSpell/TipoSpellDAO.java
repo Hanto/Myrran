@@ -1,6 +1,6 @@
 package DAO.TipoSpell;// Created by Hanto on 17/04/2014.
 
-import Interfaces.Spell.TipoSpellI;
+import Interfaces.Misc.Spell.TipoSpellI;
 
 public interface TipoSpellDAO
 {

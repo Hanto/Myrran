@@ -1,7 +1,7 @@
 package DB.Datos.TipoSpell;// Created by Hanto on 17/04/2014.
 
 import DAO.TipoSpell.TipoSpellXMLDBI;
-import Interfaces.Spell.TipoSpellI;
+import Interfaces.Misc.Spell.TipoSpellI;
 import Model.Classes.Skill.Spell.TipoSpellFactory;
 import Model.Settings;
 import Model.Skills.SkillsPersonalizados.SkillStat;

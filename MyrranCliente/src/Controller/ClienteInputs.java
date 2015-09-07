@@ -2,12 +2,12 @@ package Controller;// Created by Hanto on 22/07/2014.
 
 import DB.DAO;
 import DTOs.DTOsNet;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.PlayerI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
-import Interfaces.Spell.SpellI;
-import Interfaces.UI.AccionI;
+import Interfaces.EntidadesTipos.MobI;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.PlayerI;
+import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.Spell.SpellI;
+import Interfaces.Misc.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.Classes.Mobiles.Mob.MobFactory;
 import Model.Classes.Mobiles.PC.PCFactory;

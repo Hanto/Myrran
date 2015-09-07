@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
 import DTOs.DTOsNet;
-import Interfaces.UI.AccionI;
+import Interfaces.Misc.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.GameState.Mundo;
 import Model.GameState.UI;

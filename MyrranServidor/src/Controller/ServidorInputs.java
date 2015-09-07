@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 22/07/2014.
 
 import DTOs.DTOsNet;
-import InterfacesEntidades.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.PCI;
 import Model.Classes.Mobiles.PC.PCFactory;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

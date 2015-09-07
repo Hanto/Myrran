@@ -1,8 +1,8 @@
 package Model.Classes.Skill.BDebuff.TiposBDebuff;// Created by Hanto on 10/06/2014.
 
-import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Vulnerable;
-import Model.Classes.Skill.BDebuff.TipoBDebuff;
+import Interfaces.Misc.BDebuff.AuraI;
+import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Model.Skills.BDebuff.TipoBDebuff;
 
 public class Hot extends TipoBDebuff
 {
@@ -10,7 +10,7 @@ public class Hot extends TipoBDebuff
 
     @Override public void inicializarSkillStats()
     {
-        setID(this.getClass().getSimpleName().toUpperCase());
+        super.inicializarSkillStats();
         setNumSkillStats(2);
     }
 

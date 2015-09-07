@@ -1,8 +1,8 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 04/09/2015.
 
 import DB.DAO;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
-import Interfaces.Spell.SpellI;
+import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.Misc.Spell.SpellI;
 import Model.Mobiles.Cuerpos.BodyFactory;
 import Model.Mobiles.Propiedades.ConsumibleBase;
 import Model.Mobiles.Propiedades.IdentificableBase;

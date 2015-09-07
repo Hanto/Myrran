@@ -1,10 +1,10 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 04/08/2015.
 
-import Interfaces.GameState.MundoI;
-import Interfaces.Spell.SpellI;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Spell.SpellI;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
 import Model.Skills.Spell.TipoSpell;
 

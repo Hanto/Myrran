@@ -1,11 +1,11 @@
 package Model.Mobiles.Steerables;// Created by Hanto on 12/08/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
-import InterfacesEntidades.EntidadesPropiedades.Steerable.Autonomo;
-import InterfacesEntidades.EntidadesPropiedades.Steerable.SteerableAgentI;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.EntidadesPropiedades.Steerable.Autonomo;
+import Interfaces.EntidadesPropiedades.Steerable.SteerableAgentI;
 import Model.AI.Huellas.Huella;
 import Model.AI.Huellas.Huellas;
-import Interfaces.Observable.AbstractModel;
+import Interfaces.Misc.Observable.AbstractModel;
 import Model.Settings;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;

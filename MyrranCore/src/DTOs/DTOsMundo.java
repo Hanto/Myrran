@@ -1,8 +1,8 @@
 package DTOs;// Created by Hanto on 24/07/2014.
 
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.EntidadesTipos.MobI;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 
 public class DTOsMundo
 {

@@ -1,6 +1,6 @@
 package DTOs;// Created by Hanto on 07/05/2014.
 
-import Interfaces.UI.BarraAccionesI;
+import Interfaces.Misc.UI.BarraAccionesI;
 
 public class DTOsBarraAcciones
 {

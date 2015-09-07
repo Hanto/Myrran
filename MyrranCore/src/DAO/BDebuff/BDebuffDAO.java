@@ -1,6 +1,6 @@
 package DAO.BDebuff;// Created by Hanto on 16/06/2014.
 
-import Interfaces.BDebuff.BDebuffI;
+import Interfaces.Misc.BDebuff.BDebuffI;
 
 public interface BDebuffDAO
 {

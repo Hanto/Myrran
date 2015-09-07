@@ -1,6 +1,6 @@
 package DAO.Spell;// Created by Hanto on 17/04/2014.
 
-import Interfaces.Spell.SpellI;
+import Interfaces.Misc.Spell.SpellI;
 
 public interface SpellDAO
 {

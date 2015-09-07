@@ -1,6 +1,6 @@
 package DAO.TipoSpell;// Created by Hanto on 07/07/2014.
 
-import Interfaces.Spell.TipoSpellI;
+import Interfaces.Misc.Spell.TipoSpellI;
 
 import java.util.Map;
 

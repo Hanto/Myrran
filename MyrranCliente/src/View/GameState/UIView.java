@@ -2,8 +2,8 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 
 import DB.RSC;
 import DTOs.DTOsInputManager;
-import Interfaces.Observable.AbstractModel;
-import Interfaces.UI.BarraAccionesI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.UI.BarraAccionesI;
 import Model.Classes.Input.InputManager;
 import Model.Settings;
 import View.Classes.Actores.Texto;

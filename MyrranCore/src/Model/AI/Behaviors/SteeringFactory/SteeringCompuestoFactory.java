@@ -1,8 +1,8 @@
 package Model.AI.Behaviors.SteeringFactory;
 
-import InterfacesEntidades.EntidadesPropiedades.Steerable.SteerableAgentAutonomoI;
-import InterfacesEntidades.EntidadesPropiedades.Steerable.SteerableAgentI;
-import Interfaces.GameState.MundoI;
+import Interfaces.EntidadesPropiedades.Steerable.SteerableAgentAutonomoI;
+import Interfaces.EntidadesPropiedades.Steerable.SteerableAgentI;
+import Interfaces.Misc.GameState.MundoI;
 import Model.AI.Behaviors.FixedBehaviors.LookWhereFixed;
 import Model.AI.Behaviors.SimpleBehaviors.SeekHuellas.RayTargetDoble;
 import Model.AI.Behaviors.SimpleBehaviors.SeekHuellas.SeekHuellas;

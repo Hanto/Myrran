@@ -1,6 +1,6 @@
 package DAO.TipoBDebuff;// Created by Hanto on 07/07/2014.
 
-import Interfaces.BDebuff.TipoBDebuffI;
+import Interfaces.Misc.BDebuff.TipoBDebuffI;
 
 import java.util.Map;
 

@@ -1,15 +1,15 @@
 package Model.Skills.Spell;
 // @author Ivan Delgado Huerta
 
-import Interfaces.BDebuff.BDebuffI;
-import Interfaces.GameState.MundoI;
-import Interfaces.Observable.AbstractModel;
-import Interfaces.Skill.SkillI;
-import Interfaces.Spell.SpellI;
-import Interfaces.Spell.TipoSpellI;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
-import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
+import Interfaces.Misc.BDebuff.BDebuffI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.Skill.SkillI;
+import Interfaces.Misc.Spell.SpellI;
+import Interfaces.Misc.Spell.TipoSpellI;
+import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
 import Model.Skills.SkillsPersonalizados.SkillStat;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

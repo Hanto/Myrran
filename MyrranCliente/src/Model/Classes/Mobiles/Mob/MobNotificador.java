@@ -3,7 +3,7 @@ package Model.Classes.Mobiles.Mob;// Created by Hanto on 13/08/2015.
 import DTOs.DTOsEspacial;
 import DTOs.DTOsOrientable;
 import DTOs.DTOsVulnerable;
-import InterfacesEntidades.EntidadesTipos.MobI;
+import Interfaces.EntidadesTipos.MobI;
 import Model.Mobiles.Steerables.SteerableAgentAutonomo;
 
 public abstract class MobNotificador extends SteerableAgentAutonomo implements MobI

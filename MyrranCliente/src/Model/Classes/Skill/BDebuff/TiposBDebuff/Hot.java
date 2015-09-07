@@ -1,6 +1,7 @@
 package Model.Classes.Skill.BDebuff.TiposBDebuff;// Created by Hanto on 10/06/2014.
 
-import Model.Classes.Skill.BDebuff.TipoBDebuff;
+import Interfaces.Misc.BDebuff.AuraI;
+import Model.Skills.BDebuff.TipoBDebuff;
 
 public class Hot extends TipoBDebuff
 {
@@ -9,4 +10,6 @@ public class Hot extends TipoBDebuff
         setID(this.getClass().getSimpleName().toUpperCase());
         setNumSkillStats(2);
     }
+
+    @Override public void actualizarTick(AuraI aura) { }
 }

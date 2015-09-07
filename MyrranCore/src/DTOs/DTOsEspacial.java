@@ -1,6 +1,6 @@
 package DTOs;
 
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 
 public class DTOsEspacial
 {

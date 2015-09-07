@@ -2,9 +2,9 @@ package View.Classes.UI.SpellView;// Created by Hanto on 19/06/2014.
 
 import DB.RSC;
 import DTOs.DTOsSkillPersonalizado;
-import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
-import Interfaces.Skill.SkillPersonalizadoI;
-import Interfaces.Spell.SpellPersonalizadoI;
+import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SpellPersonalizadoI;
 import Model.Settings;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.Ventana.VentanaMoverListener;

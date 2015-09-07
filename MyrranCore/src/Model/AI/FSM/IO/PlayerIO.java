@@ -1,6 +1,6 @@
 package Model.AI.FSM.IO;// Created by Hanto on 11/04/2014.
 
-import Interfaces.Input.PlayerIOI;
+import Interfaces.Misc.Input.PlayerIOI;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 

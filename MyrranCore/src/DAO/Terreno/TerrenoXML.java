@@ -1,6 +1,6 @@
 package DAO.Terreno;// Created by Hanto on 15/04/2014.
 
-import Interfaces.Geo.TerrenoI;
+import Interfaces.Misc.Geo.TerrenoI;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 

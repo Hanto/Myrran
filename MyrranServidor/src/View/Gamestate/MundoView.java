@@ -1,10 +1,10 @@
 package View.Gamestate;// Created by Hanto on 16/07/2015.
 
 import DTOs.DTOsMundo;
-import Interfaces.GameState.MundoI;
-import Interfaces.Network.ServidorI;
-import InterfacesEntidades.EntidadesTipos.CampoVisionI;
-import InterfacesEntidades.EntidadesTipos.PCI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Network.ServidorI;
+import Interfaces.EntidadesTipos.CampoVisionI;
+import Interfaces.EntidadesTipos.PCI;
 import View.Gamestate.CampoVision.CampoVision;
 import com.badlogic.gdx.utils.Disposable;
 

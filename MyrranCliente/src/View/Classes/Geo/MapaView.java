@@ -1,7 +1,7 @@
 package View.Classes.Geo;// Created by Hanto on 16/04/2014.
 
 import DTOs.DTOsMapa;
-import Interfaces.Geo.MapaI;
+import Interfaces.Misc.Geo.MapaI;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;

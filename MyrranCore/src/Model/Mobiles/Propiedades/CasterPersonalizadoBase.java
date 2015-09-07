@@ -1,10 +1,10 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 03/09/2015.
 
 import DAO.Spell.SpellDAOFactoryI;
-import Interfaces.Skill.SkillPersonalizadoI;
-import Interfaces.Spell.SpellI;
-import Interfaces.Spell.SpellPersonalizadoI;
-import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SpellI;
+import Interfaces.Misc.Spell.SpellPersonalizadoI;
+import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
 import Model.Skills.SkillsPersonalizados.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

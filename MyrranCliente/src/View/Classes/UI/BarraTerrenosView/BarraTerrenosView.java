@@ -2,7 +2,7 @@ package View.Classes.UI.BarraTerrenosView;// Created by Hanto on 14/05/2014.
 
 import DB.RSC;
 import DTOs.DTOsBarraTerrenos;
-import Interfaces.Controlador.ControladorBarraTerrenosI;
+import Interfaces.Misc.Controlador.ControladorBarraTerrenosI;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Settings;
 import View.Classes.Actores.Texto;

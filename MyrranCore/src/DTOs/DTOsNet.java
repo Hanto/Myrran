@@ -1,12 +1,12 @@
 package DTOs;// Created by Hanto on 06/06/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Misc.Animable;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Orientable;
-import InterfacesEntidades.EntidadesPropiedades.TipoMobile.PCStats;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Vulnerable;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.EntidadesPropiedades.Misc.Animable;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Orientable;
+import Interfaces.EntidadesPropiedades.TipoMobile.PCStats;
+import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Settings;
 
 public class DTOsNet

@@ -1,8 +1,8 @@
 package View.Classes.Mobiles.ProyectilView;// Created by Hanto on 06/08/2015.
 
 import DTOs.DTOsEspacial;
-import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Settings;
 import View.Classes.Actores.Pixie;
 import box2dLight.PointLight;

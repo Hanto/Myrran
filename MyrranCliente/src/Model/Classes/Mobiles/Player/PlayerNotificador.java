@@ -1,7 +1,7 @@
 package Model.Classes.Mobiles.Player;// Created by Hanto on 21/07/2014.
 
 import DTOs.*;
-import InterfacesEntidades.EntidadesTipos.PlayerI;
+import Interfaces.EntidadesTipos.PlayerI;
 import Model.Mobiles.Steerables.SteerableAgent;
 import com.badlogic.gdx.utils.ObjectMap;
 

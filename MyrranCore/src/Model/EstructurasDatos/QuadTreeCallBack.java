@@ -1,6 +1,6 @@
 package Model.EstructurasDatos;// Created by Hanto on 03/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 
 public interface QuadTreeCallBack
 {

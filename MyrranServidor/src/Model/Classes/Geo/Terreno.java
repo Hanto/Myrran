@@ -1,6 +1,6 @@
 package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 
-import Interfaces.Geo.TerrenoI;
+import Interfaces.Misc.Geo.TerrenoI;
 
 //Clase que define los tipos de terreno
 public class Terreno implements TerrenoI

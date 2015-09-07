@@ -1,8 +1,8 @@
 package View.Gamestate.CampoVision;// Created by Hanto on 20/05/2014.
 
 import DTOs.DTOsMapa;
-import Interfaces.GameState.MundoI;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.utils.Disposable;

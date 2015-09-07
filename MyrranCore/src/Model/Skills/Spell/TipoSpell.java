@@ -2,8 +2,8 @@ package Model.Skills.Spell;
 // @author Ivan Delgado Huerta
 
 import Model.Skills.SkillsPersonalizados.SkillStat;
-import Interfaces.Observable.AbstractModel;
-import Interfaces.Spell.TipoSpellI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.Spell.TipoSpellI;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -34,9 +34,7 @@ public abstract class TipoSpell extends AbstractModel implements TipoSpellI
     
     //CONSTRUCTOR:
     public TipoSpell ()
-    {
-        inicializarSkillStats();
-    }
+    {   inicializarSkillStats(); }
 
     @Override public void inicializarSkillStats()
     {   setID(this.getClass().getSimpleName().toUpperCase()); }

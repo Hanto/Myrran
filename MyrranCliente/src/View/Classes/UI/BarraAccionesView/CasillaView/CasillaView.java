@@ -2,10 +2,10 @@ package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/
 
 import DB.RSC;
 import DTOs.DTOsBarraAcciones;
-import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
-import Interfaces.UI.AccionI;
-import Interfaces.UI.CasillaI;
-import Interfaces.Controlador.ControladorBarraAccionI;
+import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.Misc.UI.AccionI;
+import Interfaces.Misc.UI.CasillaI;
+import Interfaces.Misc.Controlador.ControladorBarraAccionI;
 import Model.Classes.Acciones.TiposAccion.SeleccionarSpell;
 import Model.Settings;
 import View.Classes.Actores.Texto;

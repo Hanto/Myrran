@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
-import InterfacesEntidades.EntidadesTipos.PlayerI;
-import Interfaces.Geo.MapaI;
+import Interfaces.EntidadesTipos.PlayerI;
+import Interfaces.Misc.Geo.MapaI;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Input.InputManager;
 import Model.Classes.Mobiles.Player.PlayerFactory;

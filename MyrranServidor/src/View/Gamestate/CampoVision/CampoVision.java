@@ -1,19 +1,19 @@
 package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 
 import DTOs.*;
-import Interfaces.GameState.MundoI;
-import Interfaces.Network.ServidorI;
-import Interfaces.Observable.AbstractModel;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Animable;
-import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Orientable;
-import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Vulnerable;
-import InterfacesEntidades.EntidadesTipos.CampoVisionI;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Network.ServidorI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.EntidadesPropiedades.Misc.Animable;
+import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.EntidadesPropiedades.Espaciales.Orientable;
+import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Interfaces.EntidadesTipos.CampoVisionI;
+import Interfaces.EntidadesTipos.MobI;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Settings;
 import View.Gamestate.MundoView;
 import com.badlogic.gdx.utils.Disposable;
@@ -49,7 +49,9 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     @Override public void setUltimoMapTile(int x, int y){  }
     @Override public void setPosition(float x, float y) {  }
 
-    //Constructor:
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
+
     public CampoVision(Espacial targetCampoVision, int connectionID, MundoView mundoView)
     {
         this.mundoView = mundoView;
@@ -83,7 +85,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         radar();
     }
 
-    //CODIGO DE RADAR:
+    // CODIGO DE RADAR:
     //-------------------------------------------------------------------------------------------------------------
 
     private boolean isVisiblePor(Espacial espacial)

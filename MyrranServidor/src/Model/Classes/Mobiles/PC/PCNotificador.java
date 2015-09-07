@@ -1,7 +1,7 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 24/07/2014.
 
 import DTOs.*;
-import InterfacesEntidades.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.PCI;
 import Model.Mobiles.Steerables.SteerableAgent;
 
 public abstract class PCNotificador extends SteerableAgent implements PCI

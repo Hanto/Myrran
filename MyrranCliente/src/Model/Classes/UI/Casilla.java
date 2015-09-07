@@ -2,9 +2,9 @@ package Model.Classes.UI;// Created by Hanto on 11/07/2014.
 
 import DTOs.DTOsBarraAcciones;
 import Model.Settings;
-import Interfaces.Observable.AbstractModel;
-import Interfaces.UI.AccionI;
-import Interfaces.UI.CasillaI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.UI.AccionI;
+import Interfaces.Misc.UI.CasillaI;
 import Model.Classes.Input.InputManager;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

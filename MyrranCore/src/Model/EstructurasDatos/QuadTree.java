@@ -1,7 +1,7 @@
 package Model.EstructurasDatos;// Created by Hanto on 01/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import Interfaces.EstructurasDatos.QuadTreeI;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.Misc.EstructurasDatos.QuadTreeI;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.ArrayList;

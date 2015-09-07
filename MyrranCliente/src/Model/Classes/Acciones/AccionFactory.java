@@ -1,6 +1,6 @@
 package Model.Classes.Acciones;// Created by Hanto on 13/06/2014.
 
-import Interfaces.Spell.SpellI;
+import Interfaces.Misc.Spell.SpellI;
 import Model.Classes.Acciones.TiposAccion.*;
 
 public class AccionFactory

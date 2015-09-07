@@ -2,10 +2,10 @@ package Model.Classes.Geo;// Created by Hanto on 19/05/2014.
 
 import DTOs.DTOsMapa;
 import DTOs.DTOsEspacial;
-import Interfaces.Geo.MapaI;
-import Interfaces.Geo.TerrenoI;
-import Interfaces.Observable.AbstractModel;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.Misc.Geo.MapaI;
+import Interfaces.Misc.Geo.TerrenoI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Model.Settings;
 import com.badlogic.gdx.utils.Disposable;
 

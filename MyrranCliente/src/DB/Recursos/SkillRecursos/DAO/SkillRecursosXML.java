@@ -2,7 +2,7 @@ package DB.Recursos.SkillRecursos.DAO;// Created by Hanto on 30/04/2014.
 
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
 import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
-import Interfaces.Spell.SpellI;
+import Interfaces.Misc.Spell.SpellI;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 

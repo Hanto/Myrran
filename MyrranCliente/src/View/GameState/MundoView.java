@@ -2,10 +2,10 @@ package View.GameState;// Created by Hanto on 14/05/2014.
 
 import DB.RSC;
 import DTOs.DTOsMundo;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.PlayerI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.EntidadesTipos.MobI;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.PlayerI;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Classes.Geo.Mapa;
 import Model.Classes.Tweens.CamaraTween;
 import Model.Classes.Tweens.TweenEng;

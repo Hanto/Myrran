@@ -1,9 +1,9 @@
 package Model.Classes.UI;// Created by Hanto on 08/05/2014.
 
 import DTOs.DTOsBarraAcciones;
-import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
-import Interfaces.Observable.AbstractModel;
-import Interfaces.UI.BarraAccionesI;
+import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.UI.BarraAccionesI;
 import Model.Classes.Input.InputManager;
 
 import java.util.HashMap;

@@ -1,7 +1,7 @@
 package Model.AI.FSM.PlayerEstados;// Created by Hanto on 15/07/2014.
 
-import InterfacesEntidades.EntidadesPropiedades.Misc.MaquinablePlayer;
-import Interfaces.Input.PlayerIOI;
+import Interfaces.EntidadesPropiedades.Misc.MaquinablePlayer;
+import Interfaces.Misc.Input.PlayerIOI;
 import Model.AI.FSM.Estado;
 import Model.AI.FSM.MaquinaEstados;
 

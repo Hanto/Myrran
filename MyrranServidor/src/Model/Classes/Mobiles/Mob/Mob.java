@@ -1,18 +1,18 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 04/09/2015.
 
-import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
-import InterfacesEntidades.EntidadesPropiedades.TipoMobile.MobStats;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Vulnerable;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import Interfaces.GameState.MundoI;
+import Interfaces.Misc.BDebuff.AuraI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
+import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Interfaces.EntidadesPropiedades.TipoMobile.MobStats;
+import Interfaces.EntidadesTipos.MobI;
 import Model.AI.Huellas.Huellas;
 
 import java.util.Iterator;
 
-public class Mob extends MobNotificador implements MobI, Debuffeable
+public class Mob extends MobNotificador implements MobI
 {
     private IDentificable identificable;
     private Vulnerable vulnerable;

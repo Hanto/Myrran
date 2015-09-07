@@ -1,7 +1,7 @@
 package Model.AI.Behaviors.SimpleBehaviors.SeparationMuros;
 
-import Interfaces.Geo.MapaI;
-import Interfaces.Geo.TerrenoI;
+import Interfaces.Misc.Geo.MapaI;
+import Interfaces.Misc.Geo.TerrenoI;
 import Model.Settings;
 import com.badlogic.gdx.ai.utils.Collision;
 import com.badlogic.gdx.ai.utils.Ray;

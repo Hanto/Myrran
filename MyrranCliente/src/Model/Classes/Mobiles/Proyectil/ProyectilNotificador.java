@@ -1,7 +1,7 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 13/08/2015.
 
 import DTOs.DTOsEspacial;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Mobiles.Steerables.SteerableAgent;
 
 public abstract class ProyectilNotificador extends SteerableAgent implements ProyectilI

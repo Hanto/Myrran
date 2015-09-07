@@ -1,16 +1,16 @@
 package Model.Classes.Mobiles.Player;// Created by Hanto on 04/09/2015.
 
 import DB.DAO;
-import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import InterfacesEntidades.EntidadesPropiedades.Misc.*;
-import InterfacesEntidades.EntidadesPropiedades.TipoMobile.PCStats;
-import InterfacesEntidades.EntidadesTipos.PlayerI;
-import Interfaces.GameState.MundoI;
-import Interfaces.Input.PlayerIOI;
-import Interfaces.Skill.SkillPersonalizadoI;
-import Interfaces.Spell.SpellI;
-import Interfaces.Spell.SpellPersonalizadoI;
+import Interfaces.Misc.BDebuff.AuraI;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.EntidadesPropiedades.Misc.*;
+import Interfaces.EntidadesPropiedades.TipoMobile.PCStats;
+import Interfaces.EntidadesTipos.PlayerI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Input.PlayerIOI;
+import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SpellI;
+import Interfaces.Misc.Spell.SpellPersonalizadoI;
 import Model.AI.FSM.IO.PlayerIO;
 import Model.AI.FSM.MaquinaEstados;
 import Model.AI.FSM.MaquinaEstadosFactory;

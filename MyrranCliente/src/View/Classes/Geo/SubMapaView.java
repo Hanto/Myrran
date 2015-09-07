@@ -3,7 +3,7 @@ package View.Classes.Geo;// Created by Hanto on 15/04/2014.
 import DB.RSC;
 import DTOs.DTOTerrenoView;
 import Model.Settings;
-import Interfaces.Geo.MapaI;
+import Interfaces.Misc.Geo.MapaI;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;

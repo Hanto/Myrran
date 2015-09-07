@@ -1,14 +1,14 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 04/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Consumible;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
-import InterfacesEntidades.EntidadesPropiedades.TipoMobile.ProyectilStats;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import Interfaces.GameState.MundoI;
-import Interfaces.Spell.SpellI;
+import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesPropiedades.Misc.Consumible;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesPropiedades.TipoMobile.ProyectilStats;
+import Interfaces.EntidadesTipos.MobI;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Spell.SpellI;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,8 +1,8 @@
 package Model.GameState;// Created by Hanto on 06/05/2014.
 
-import Interfaces.UI.AccionI;
-import Interfaces.UI.BarraAccionesI;
-import Interfaces.UI.CasillaI;
+import Interfaces.Misc.UI.AccionI;
+import Interfaces.Misc.UI.BarraAccionesI;
+import Interfaces.Misc.UI.CasillaI;
 import Model.Classes.Input.InputManager;
 import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;

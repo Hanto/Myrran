@@ -1,12 +1,12 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 04/09/2015.
 
-import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
-import InterfacesEntidades.EntidadesPropiedades.TipoMobile.MobStats;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Vulnerable;
-import Interfaces.GameState.MundoI;
+import Interfaces.Misc.BDebuff.AuraI;
+import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesPropiedades.TipoMobile.MobStats;
+import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Interfaces.Misc.GameState.MundoI;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

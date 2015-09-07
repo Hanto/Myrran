@@ -2,6 +2,7 @@ package Model.Classes.Skill.BDebuff;
 
 import Model.Classes.Skill.BDebuff.TiposBDebuff.Bomba;
 import Model.Classes.Skill.BDebuff.TiposBDebuff.Hot;
+import Model.Skills.BDebuff.TipoBDebuff;
 
 public enum TipoBDebuffFactory
 {

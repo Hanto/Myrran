@@ -1,9 +1,9 @@
 package View.Classes.UI;// Created by Hanto on 10/08/2015.
 
-import Interfaces.Controlador.ControladorUI;
-import Interfaces.Observable.AbstractModel;
-import Interfaces.UI.BarraAccionesI;
-import Interfaces.UI.CasillaI;
+import Interfaces.Misc.Controlador.ControladorUI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.UI.BarraAccionesI;
+import Interfaces.Misc.UI.CasillaI;
 import Model.GameState.UI;
 
 public class UIViewController extends AbstractModel implements ControladorUI

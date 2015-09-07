@@ -1,8 +1,8 @@
 package Model.Classes.Skill.Spell;// Created by Hanto on 07/09/2015.
 
-import Interfaces.Spell.TipoSpellI;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
-import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
+import Interfaces.Misc.Spell.TipoSpellI;
+import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
 import Model.Skills.Spell.Spell;
 
 public class SpellCliente extends Spell

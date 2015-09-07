@@ -1,6 +1,6 @@
 package Model.Classes.Acciones;// Created by Hanto on 05/05/2014.
 
-import Interfaces.UI.AccionI;
+import Interfaces.Misc.UI.AccionI;
 
 public abstract class Accion implements AccionI
 {

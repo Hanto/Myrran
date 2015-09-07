@@ -1,12 +1,12 @@
-package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 03/08/2015.
+package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 07/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
-import Interfaces.GameState.MundoI;
-import Interfaces.Spell.SpellI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Spell.SpellI;
+import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
+import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesTipos.ProyectilI;
+import Model.Classes.Mobiles.Proyectiles.ProyectilFactory;
 import Model.Skills.Spell.TipoSpell;
-import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
 
 public class Bolt extends TipoSpell
 {

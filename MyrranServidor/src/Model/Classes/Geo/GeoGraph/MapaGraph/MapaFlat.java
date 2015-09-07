@@ -1,6 +1,6 @@
 package Model.Classes.Geo.GeoGraph.MapaGraph;// Created by Hanto on 14/08/2015.
 
-import Interfaces.Observable.AbstractModel;
+import Interfaces.Misc.Observable.AbstractModel;
 import Model.Classes.Geo.GeoGraph.ConnectionGraph.ConexionFlat;
 import Model.Classes.Geo.GeoGraph.NodeGraph.NodoFlatI;
 import Model.Settings;

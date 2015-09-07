@@ -3,8 +3,8 @@ package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
 import Model.Settings;
-import Interfaces.Geo.CeldaI;
-import Interfaces.Geo.TerrenoI;
+import Interfaces.Misc.Geo.CeldaI;
+import Interfaces.Misc.Geo.TerrenoI;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.KryoSerializable;
 import com.esotericsoftware.kryo.io.Input;

@@ -1,12 +1,12 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 04/09/2015.
 
-import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import Interfaces.GameState.MundoI;
-import Interfaces.Skill.SkillPersonalizadoI;
-import Interfaces.Spell.SpellPersonalizadoI;
-import InterfacesEntidades.EntidadesPropiedades.Misc.*;
-import InterfacesEntidades.EntidadesPropiedades.TipoMobile.PCStats;
+import Interfaces.Misc.BDebuff.AuraI;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SpellPersonalizadoI;
+import Interfaces.EntidadesPropiedades.Misc.*;
+import Interfaces.EntidadesPropiedades.TipoMobile.PCStats;
 import Model.Mobiles.Cuerpos.Cuerpo;
 
 import java.util.Iterator;

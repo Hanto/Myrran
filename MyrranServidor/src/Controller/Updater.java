@@ -1,11 +1,11 @@
 package Controller;// Created by Hanto on 09/04/2014.
 
-import Interfaces.AI.ColisionMurosI;
-import Interfaces.AI.ColisionProyectilesI;
-import Interfaces.AI.SistemaAggroI;
-import Interfaces.EstructurasDatos.QuadTreeI;
-import Interfaces.Geo.MapaI;
-import Interfaces.Network.MainLoopI;
+import Interfaces.Misc.AI.ColisionMurosI;
+import Interfaces.Misc.AI.ColisionProyectilesI;
+import Interfaces.Misc.AI.SistemaAggroI;
+import Interfaces.Misc.EstructurasDatos.QuadTreeI;
+import Interfaces.Misc.Geo.MapaI;
+import Interfaces.Misc.Network.MainLoopI;
 import Model.AI.Colisiones.ColisionProyectilesQTree;
 import Model.AI.Colisiones.CollisionMurosTiles;
 import Model.AI.SistemaAggro.SistemaAggro;

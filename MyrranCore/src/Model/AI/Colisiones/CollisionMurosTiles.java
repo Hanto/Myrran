@@ -1,9 +1,9 @@
 package Model.AI.Colisiones;// Created by Hanto on 02/09/2015.
 
-import Interfaces.AI.ColisionMurosI;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import Interfaces.Geo.MapaI;
-import Interfaces.Geo.TerrenoI;
+import Interfaces.Misc.AI.ColisionMurosI;
+import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.Misc.Geo.MapaI;
+import Interfaces.Misc.Geo.TerrenoI;
 import Model.Settings;
 import com.badlogic.gdx.math.Rectangle;
 

@@ -1,6 +1,6 @@
 package DAO.Terreno;// Created by Hanto on 07/07/2014.
 
-import Interfaces.Geo.TerrenoI;
+import Interfaces.Misc.Geo.TerrenoI;
 
 import java.util.Map;
 

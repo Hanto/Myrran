@@ -4,9 +4,9 @@ import Model.Skills.SkillsPersonalizados.SkillStat;
 import DAO.BDebuff.BDebuffXMLDBI;
 import DB.DAO;
 import Model.Settings;
-import Interfaces.BDebuff.BDebuffI;
-import Interfaces.BDebuff.TipoBDebuffI;
-import Model.Classes.Skill.BDebuff.BDebuff;
+import Interfaces.Misc.BDebuff.BDebuffI;
+import Interfaces.Misc.BDebuff.TipoBDebuffI;
+import Model.Classes.Skill.BDebuff.BDebuffCliente;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -61,7 +61,7 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
                 String descripcion  = nodo.getChildText("Descripcion");
 
                 TipoBDebuffI tipoBDebuffI =  DAO.tipoBDebuffDAOFactory.getTipoBDebuffDAO().getTipoBDebuff(tipoBDebuff);
-                BDebuffI debuff = new BDebuff(tipoBDebuffI);
+                BDebuffI debuff = new BDebuffCliente(tipoBDebuffI);
                 debuff.setID(iD);
                 debuff.setNombre(nombre);
                 debuff.setDescripcion(descripcion);

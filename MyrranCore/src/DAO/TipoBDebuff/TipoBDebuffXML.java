@@ -1,6 +1,6 @@
 package DAO.TipoBDebuff;// Created by Hanto on 10/06/2014.
 
-import Interfaces.BDebuff.TipoBDebuffI;
+import Interfaces.Misc.BDebuff.TipoBDebuffI;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 

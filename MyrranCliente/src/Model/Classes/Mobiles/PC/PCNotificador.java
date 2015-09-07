@@ -4,7 +4,7 @@ import DTOs.DTOsAnimable;
 import DTOs.DTOsEspacial;
 import DTOs.DTOsPCStats;
 import DTOs.DTOsVulnerable;
-import InterfacesEntidades.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.PCI;
 import Model.Mobiles.Steerables.SteerableAgent;
 
 public abstract class PCNotificador extends SteerableAgent implements PCI

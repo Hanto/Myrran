@@ -1,7 +1,7 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 07/05/2014.
 
-import InterfacesEntidades.EntidadesPropiedades.Misc.MaquinablePlayer;
-import Interfaces.Model.ModelI;
+import Interfaces.EntidadesPropiedades.Misc.MaquinablePlayer;
+import Interfaces.Misc.Model.ModelI;
 import Model.Classes.Acciones.Accion;
 
 public class IrEste extends Accion

@@ -1,13 +1,13 @@
 package View.Gamestate.CampoVision;// Created by Hanto on 24/07/2015.
 
 import DTOs.DTOsNet;
-import Interfaces.Geo.MapaI;
-import Interfaces.Network.ServidorI;
-import Interfaces.Skill.SkillPersonalizadoI;
-import Interfaces.Spell.SpellPersonalizadoI;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.Geo.MapaI;
+import Interfaces.Misc.Network.ServidorI;
+import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SpellPersonalizadoI;
+import Interfaces.EntidadesTipos.MobI;
+import Interfaces.EntidadesTipos.PCI;
+import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Settings;
 import Model.Skills.SkillsPersonalizados.SkillMod;
 

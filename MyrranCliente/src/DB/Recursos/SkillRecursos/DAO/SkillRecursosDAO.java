@@ -1,7 +1,7 @@
 package DB.Recursos.SkillRecursos.DAO;// Created by Hanto on 30/04/2014.
 
 import DB.Recursos.SkillRecursos.DTO.SpellRecursos;
-import Interfaces.Spell.SpellI;
+import Interfaces.Misc.Spell.SpellI;
 
 public interface SkillRecursosDAO
 {

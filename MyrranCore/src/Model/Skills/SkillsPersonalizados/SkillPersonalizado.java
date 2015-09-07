@@ -1,10 +1,10 @@
 package Model.Skills.SkillsPersonalizados;// Created by Hanto on 25/06/2014.
 
 import DTOs.DTOsSkillPersonalizado;
-import Interfaces.BDebuff.BDebuffI;
-import Interfaces.Observable.AbstractModel;
-import Interfaces.Skill.SkillI;
-import Interfaces.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.BDebuff.BDebuffI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.Skill.SkillI;
+import Interfaces.Misc.Skill.SkillPersonalizadoI;
 
 import java.util.Arrays;
 import java.util.Iterator;
