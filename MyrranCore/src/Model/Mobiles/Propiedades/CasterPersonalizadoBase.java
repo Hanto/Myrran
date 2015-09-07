@@ -4,8 +4,8 @@ import DAO.Spell.SpellDAOFactoryI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import InterfacesEntidades.EntidadesPropiedades.CasterPersonalizable;
-import Model.Skills.SpellPersonalizado;
+import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Model.Skills.SkillsPersonalizados.SpellPersonalizado;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 

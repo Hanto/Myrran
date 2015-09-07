@@ -1,19 +1,18 @@
 package Model.Classes.Skill.Spell.TiposSpell;
 // @author Ivan Delgado Huerta
 
+import DTOs.DTOsNet;
 import Model.Settings;
-import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
-import Model.Classes.Skill.Spell.TipoSpell;
-
-import static DTO.DTOsParametrosSpell.ParametrosEditarTerreno;
+import Model.Skills.Spell.TipoSpell;
 
 public class EditarTerreno extends TipoSpell
 {
     @Override public void inicializarSkillStats() 
     {
-        setID(this.getClass().getSimpleName().toUpperCase());
+        super.inicializarSkillStats();
         setNumSkillStats(1);
     }
 
@@ -25,10 +24,10 @@ public class EditarTerreno extends TipoSpell
         int numCapa = 0;
         short iDTerreno = 0;
 
-        if (Caster.getParametrosSpell() instanceof ParametrosEditarTerreno)
+        if (Caster.getParametrosSpell() instanceof DTOsNet.ParametrosEditarTerreno)
         {
-            numCapa = ((ParametrosEditarTerreno) Caster.getParametrosSpell()).capaTerrenoSeleccionada;
-            iDTerreno = ((ParametrosEditarTerreno) Caster.getParametrosSpell()).terrenoIDSeleccionado;
+            numCapa = ((DTOsNet.ParametrosEditarTerreno) Caster.getParametrosSpell()).capaTerrenoSeleccionada;
+            iDTerreno = ((DTOsNet.ParametrosEditarTerreno) Caster.getParametrosSpell()).terrenoIDSeleccionado;
         }
 
         mundo.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);

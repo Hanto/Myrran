@@ -1,7 +1,6 @@
 package Controller;// Created by Hanto on 22/07/2014.
 
-import DTO.DTOsCampoVision;
-import DTO.DTOsPlayer;
+import DTOs.DTOsNet;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import Model.Classes.Mobiles.PC.PCFactory;
 import ch.qos.logback.classic.Logger;
@@ -15,7 +14,7 @@ public class ServidorInputs
     public ServidorInputs(Controlador controlador)
     {   this.controlador = controlador; }
 
-    public void procesarInput(int connectionID, DTOsPlayer.PlayerDTOs netPlayer)
+    public void procesarInput(int connectionID, DTOsNet.PlayerDTOs netPlayer)
     {
         PCI player = controlador.getMundo().getPC(connectionID);
         if (player == null) { logger.error("ERROR: no existe Player con este ID: {}", connectionID); return; }
@@ -25,27 +24,27 @@ public class ServidorInputs
         {
             dto = netPlayer.listaDTOs[i];
 
-            if (dto instanceof DTOsCampoVision.Posicion)
+            if (dto instanceof DTOsNet.Posicion)
             {   player.setPosition(
-                    ((DTOsCampoVision.Posicion) dto).posX,
-                    ((DTOsCampoVision.Posicion) dto).posY); }
+                    ((DTOsNet.Posicion) dto).posX,
+                    ((DTOsNet.Posicion) dto).posY); }
 
-            else if (dto instanceof DTOsCampoVision.NumAnimacion)
-            {   player.setNumAnimacion(((DTOsCampoVision.NumAnimacion) dto).numAnimacion); }
+            else if (dto instanceof DTOsNet.NumAnimacion)
+            {   player.setNumAnimacion(((DTOsNet.NumAnimacion) dto).numAnimacion); }
 
-            else if (dto instanceof DTOsCampoVision.Castear)
+            else if (dto instanceof DTOsNet.Castear)
             {   player.setCastear(
-                    ((DTOsCampoVision.Castear) dto).spellID,
-                    ((DTOsCampoVision.Castear) dto).parametrosSpell,
-                    ((DTOsCampoVision.Castear) dto).screenX,
-                    ((DTOsCampoVision.Castear) dto).screenY); }
+                    ((DTOsNet.Castear) dto).spellID,
+                    ((DTOsNet.Castear) dto).parametrosSpell,
+                    ((DTOsNet.Castear) dto).screenX,
+                    ((DTOsNet.Castear) dto).screenY); }
 
-            else if (dto instanceof DTOsCampoVision.SetNumTalentosSkillPersonalizado)
+            else if (dto instanceof DTOsNet.SetNumTalentosSkillPersonalizado)
             {
                 player.setNumTalentosSkillPersonalizado(
-                        ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).skillID,
-                        ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).statID,
-                        ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).valor); }
+                        ((DTOsNet.SetNumTalentosSkillPersonalizado) dto).skillID,
+                        ((DTOsNet.SetNumTalentosSkillPersonalizado) dto).statID,
+                        ((DTOsNet.SetNumTalentosSkillPersonalizado) dto).valor); }
         }
     }
 

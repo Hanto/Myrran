@@ -1,8 +1,8 @@
 package View.Classes.UI.BarraAccionesView;// Created by Hanto on 06/05/2014.
 
 import DB.RSC;
-import DTO.DTOsBarraAcciones;
-import InterfacesEntidades.EntidadesPropiedades.IDentificable;
+import DTOs.DTOsBarraAcciones;
+import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
 import Model.Settings;
 import Interfaces.UI.BarraAccionesI;
 import Interfaces.Controlador.ControladorBarraAccionI;

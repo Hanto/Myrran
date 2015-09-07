@@ -1,6 +1,6 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 03/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.IDentificable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
 
 public class IdentificableBase implements IDentificable
 {

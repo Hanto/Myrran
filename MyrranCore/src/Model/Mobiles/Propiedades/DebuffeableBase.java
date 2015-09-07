@@ -1,7 +1,7 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 03/09/2015.
 
 import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
 
 import java.util.ArrayList;
 import java.util.Iterator;

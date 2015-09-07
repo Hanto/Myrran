@@ -1,6 +1,8 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 03/09/2015.
 
-public class AnimableBase implements InterfacesEntidades.EntidadesPropiedades.Animable
+import InterfacesEntidades.EntidadesPropiedades.Misc.Animable;
+
+public class AnimableBase implements Animable
 {
     protected int numAnimacion = 5;
 

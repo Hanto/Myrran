@@ -1,7 +1,7 @@
 package View.GameState;// Created by Hanto on 14/05/2014.
 
 import DB.RSC;
-import DTO.DTOsMundo;
+import DTOs.DTOsMundo;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import InterfacesEntidades.EntidadesTipos.PlayerI;

@@ -1,6 +1,6 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 04/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.MobStats;
+import InterfacesEntidades.EntidadesPropiedades.TipoMobile.MobStats;
 import Interfaces.GameState.MundoI;
 
 public class MobStatsBase implements MobStats

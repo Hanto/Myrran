@@ -1,6 +1,6 @@
 package Model.Classes.Geo;// Created by Hanto on 14/04/2014.
 
-import DTO.DTOsMapa;
+import DTOs.DTOsMapa;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;
 import Model.Classes.Geo.GeoGraph.MapaGraph.MapaFlat;

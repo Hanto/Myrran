@@ -1,8 +1,7 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
-import DTO.DTOsCampoVision;
-import DTO.DTOsPlayer;
-import DTO.NetDTOs;
+import DTOs.KryoDTOs;
+import DTOs.DTOsNet;
 import Interfaces.Network.MainLoopI;
 import Interfaces.Network.ServidorI;
 import ch.qos.logback.classic.Logger;
@@ -26,7 +25,7 @@ public class Servidor extends Server implements ServidorI
         this.mainLoop = mainLoop;
         this.servidorInputs = new ServidorInputs(controlador);
 
-        NetDTOs.register(this);
+        KryoDTOs.register(this);
         this.start();
 
         //Para activar el log completo de mensajes:
@@ -61,7 +60,7 @@ public class Servidor extends Server implements ServidorI
                     {   Servidor.this.mainLoop.postRunnable(runnable); }
                 });
 
-        try { this.bind(NetDTOs.puertoTCP, NetDTOs.puertoUDP); }
+        try { this.bind(KryoDTOs.puertoTCP, KryoDTOs.puertoUDP); }
         catch (Exception e) { System.out.println("ERROR: Inicio Servidor: "+e); }
     }
 
@@ -76,10 +75,10 @@ public class Servidor extends Server implements ServidorI
 
     private void procesarReceived(Connection con, Object obj)
     {
-        if (obj instanceof DTOsPlayer.PlayerDTOs)
-        {   servidorInputs.procesarInput(con.getID(), (DTOsPlayer.PlayerDTOs)obj); }
+        if (obj instanceof DTOsNet.PlayerDTOs)
+        {   servidorInputs.procesarInput(con.getID(), (DTOsNet.PlayerDTOs)obj); }
 
-        if (obj instanceof DTOsPlayer.LogIn)
+        if (obj instanceof DTOsNet.LogIn)
         {   servidorInputs.procesarLogIn(con.getID());}
     }
 
@@ -89,27 +88,27 @@ public class Servidor extends Server implements ServidorI
     @Override public void enviarACliente(int connectionID, Object obj)
     {
         String nombreDTOs ="";
-        if (obj instanceof DTOsCampoVision.PCDTOs)
+        if (obj instanceof DTOsNet.PCDTOs)
         {
-            DTOsCampoVision.PCDTOs dtos = (DTOsCampoVision.PCDTOs)obj;
+            DTOsNet.PCDTOs dtos = (DTOsNet.PCDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }
-        else if (obj instanceof DTOsCampoVision.MiscDTOs)
+        else if (obj instanceof DTOsNet.MiscDTOs)
         {
-            DTOsCampoVision.MiscDTOs dtos = (DTOsCampoVision.MiscDTOs)obj;
+            DTOsNet.MiscDTOs dtos = (DTOsNet.MiscDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }
-        else if (obj instanceof DTOsCampoVision.MobDTOs)
+        else if (obj instanceof DTOsNet.MobDTOs)
         {
-            DTOsCampoVision.MobDTOs dtos = (DTOsCampoVision.MobDTOs)obj;
+            DTOsNet.MobDTOs dtos = (DTOsNet.MobDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }
-        else if (obj instanceof DTOsCampoVision.ProyectilDTOs)
+        else if (obj instanceof DTOsNet.ProyectilDTOs)
     {
-        DTOsCampoVision.ProyectilDTOs dtos = (DTOsCampoVision.ProyectilDTOs)obj;
+        DTOsNet.ProyectilDTOs dtos = (DTOsNet.ProyectilDTOs)obj;
         for (int i=0; i< dtos.listaDTOs.length; i++)
         {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
     }

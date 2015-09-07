@@ -1,9 +1,8 @@
 package View.Gamestate.CampoVision;// Created by Hanto on 20/05/2014.
 
-import DTO.DTOsMapView;
-import DTO.DTOsMapa;
-import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import DTOs.DTOsMapa;
 import Interfaces.GameState.MundoI;
+import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.utils.Disposable;
@@ -222,16 +221,7 @@ public class MapaView implements PropertyChangeListener, Disposable
         int esquinaInfIzdaX = mapTileInicialX * Settings.MAPTILE_NumTilesX - reborde;
         int esquinaInfIzdaY = mapTileInicialY * Settings.MAPTILE_NumTilesY - reborde;
 
-        DTOsMapView.Mapa actualizarMapa = new DTOsMapView.Mapa(esquinaInfIzdaX, esquinaInfIzdaY, ancho, alto);
-        for (int x=0; x< ancho; x++)
-        {
-            for (int y = 0; y< alto; y++)
-            {
-                for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
-                {   actualizarMapa.mapa[x][y].celda[i] = mundo.getMapa().getTerrenoID(x +esquinaInfIzdaX, y +esquinaInfIzdaY, i); }
-            }
-        }
-        buffer.addMapa(actualizarMapa);
+        buffer.addMapa(mundo.getMapa(), esquinaInfIzdaX, esquinaInfIzdaY, ancho, alto);
     }
 
     public void cambioTerreno (int tileX, int tileY, int numCapa, short iDTerreno)

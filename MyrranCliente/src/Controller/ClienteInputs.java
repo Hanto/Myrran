@@ -1,7 +1,7 @@
 package Controller;// Created by Hanto on 22/07/2014.
 
 import DB.DAO;
-import DTO.DTOsCampoVision;
+import DTOs.DTOsNet;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import InterfacesEntidades.EntidadesTipos.PlayerI;
@@ -28,7 +28,7 @@ public class ClienteInputs
         this.mundo = controlador.getMundo();
     }
 
-    public void procesarActualizacionesPC(DTOsCampoVision.PCDTOs pcDTOs)
+    public void procesarActualizacionesPC(DTOsNet.PCDTOs pcDTOs)
     {
         PCI pc;
         Object dto;
@@ -46,28 +46,28 @@ public class ClienteInputs
         {
             dto = pcDTOs.listaDTOs[i];
 
-            if (dto instanceof DTOsCampoVision.Eliminar)
+            if (dto instanceof DTOsNet.Eliminar)
             {   mundo.eliminarPC(pcDTOs.connectionID); }
 
-            else if (dto instanceof DTOsCampoVision.Posicion)
-            {   pc.setPosition(((DTOsCampoVision.Posicion) dto).posX, ((DTOsCampoVision.Posicion) dto).posY); }
+            else if (dto instanceof DTOsNet.Posicion)
+            {   pc.setPosition(((DTOsNet.Posicion) dto).posX, ((DTOsNet.Posicion) dto).posY); }
 
-            else if (dto instanceof DTOsCampoVision.NumAnimacion)
-            {   pc.setNumAnimacion(((DTOsCampoVision.NumAnimacion) dto).numAnimacion); }
+            else if (dto instanceof DTOsNet.NumAnimacion)
+            {   pc.setNumAnimacion(((DTOsNet.NumAnimacion) dto).numAnimacion); }
 
-            else if (dto instanceof DTOsCampoVision.ModificarHPs)
-            {   pc.modificarHPs(((DTOsCampoVision.ModificarHPs) dto).HPs);}
+            else if (dto instanceof DTOsNet.ModificarHPs)
+            {   pc.modificarHPs(((DTOsNet.ModificarHPs) dto).HPs);}
 
-            else if (dto instanceof DTOsCampoVision.setHPs)
+            else if (dto instanceof DTOsNet.setHPs)
             {
-                pc.setMaxHPs(((DTOsCampoVision.setHPs) dto).maxHPs);
-                pc.setActualHPs(((DTOsCampoVision.setHPs) dto).actualHPs);
+                pc.setMaxHPs(((DTOsNet.setHPs) dto).maxHPs);
+                pc.setActualHPs(((DTOsNet.setHPs) dto).actualHPs);
             }
 
-            else if (dto instanceof DTOsCampoVision.AñadirSpellPersonalizado)
+            else if (dto instanceof DTOsNet.AñadirSpellPersonalizado)
             {
-                SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(((DTOsCampoVision.AñadirSpellPersonalizado) dto).spellID);
-                if (spell == null) { logger.error("ERROR: no existe Spell con este ID: {}", ((DTOsCampoVision.AñadirSpellPersonalizado) dto).spellID); return; }
+                SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(((DTOsNet.AñadirSpellPersonalizado) dto).spellID);
+                if (spell == null) { logger.error("ERROR: no existe Spell con este ID: {}", ((DTOsNet.AñadirSpellPersonalizado) dto).spellID); return; }
                 else
                 {
                     pc.añadirSkillsPersonalizados(spell.getID());
@@ -76,32 +76,32 @@ public class ClienteInputs
                 }
             }
 
-            else if (dto instanceof DTOsCampoVision.SetNumTalentosSkillPersonalizado)
+            else if (dto instanceof DTOsNet.SetNumTalentosSkillPersonalizado)
             {
-                String skillID = ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).skillID;
-                int statID = ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).statID;
-                int valor = ((DTOsCampoVision.SetNumTalentosSkillPersonalizado) dto).valor;
+                String skillID = ((DTOsNet.SetNumTalentosSkillPersonalizado) dto).skillID;
+                int statID = ((DTOsNet.SetNumTalentosSkillPersonalizado) dto).statID;
+                int valor = ((DTOsNet.SetNumTalentosSkillPersonalizado) dto).valor;
 
                 logger.debug("Modificado Spell: {} stat: {} talentos "+valor, skillID, statID);
                 if (pc instanceof PlayerI) ((PlayerI) pc).setNumTalentosSkillPersonalizadoFromServer(skillID, statID, valor);
                 else pc.setNumTalentosSkillPersonalizado(skillID, statID, valor);
             }
 
-            else if (dto instanceof DTOsCampoVision.DatosCompletosPC)
+            else if (dto instanceof DTOsNet.DatosCompletosPC)
             {
-                pc.setNumAnimacion(((DTOsCampoVision.DatosCompletosPC) dto).numAnimacion);
-                pc.setNombre(((DTOsCampoVision.DatosCompletosPC) dto).nombre);
-                pc.setMaxHPs(((DTOsCampoVision.DatosCompletosPC) dto).maxHPs);
-                pc.setActualHPs(((DTOsCampoVision.DatosCompletosPC) dto).actualHPs);
-                pc.setNivel(((DTOsCampoVision.DatosCompletosPC) dto).nivel);
+                pc.setNumAnimacion(((DTOsNet.DatosCompletosPC) dto).numAnimacion);
+                pc.setNombre(((DTOsNet.DatosCompletosPC) dto).nombre);
+                pc.setMaxHPs(((DTOsNet.DatosCompletosPC) dto).maxHPs);
+                pc.setActualHPs(((DTOsNet.DatosCompletosPC) dto).actualHPs);
+                pc.setNivel(((DTOsNet.DatosCompletosPC) dto).nivel);
             }
 
-            else if (dto instanceof DTOsCampoVision.NombrePC)
-            {   pc.setNombre(((DTOsCampoVision.NombrePC) dto).nombre);}
+            else if (dto instanceof DTOsNet.NombrePC)
+            {   pc.setNombre(((DTOsNet.NombrePC) dto).nombre);}
         }
     }
 
-    public void procesarActualizacionesProyectiles(DTOsCampoVision.ProyectilDTOs proyectilDTOs)
+    public void procesarActualizacionesProyectiles(DTOsNet.ProyectilDTOs proyectilDTOs)
     {
         Object dto;
 
@@ -109,26 +109,26 @@ public class ClienteInputs
         {
             dto = proyectilDTOs.listaDTOs[i];
 
-            if (dto instanceof DTOsCampoVision.DatosCompletosProyectil)
+            if (dto instanceof DTOsNet.DatosCompletosProyectil)
             {
-                ProyectilI proyectil = ProyectilFactory.NUEVOPROYECTIL.nuevo(mundo.getWorld(), ((DTOsCampoVision.DatosCompletosProyectil) dto).ancho, ((DTOsCampoVision.DatosCompletosProyectil) dto).alto)
+                ProyectilI proyectil = ProyectilFactory.NUEVOPROYECTIL.nuevo(mundo.getWorld(), ((DTOsNet.DatosCompletosProyectil) dto).ancho, ((DTOsNet.DatosCompletosProyectil) dto).alto)
                         .setID(proyectilDTOs.iD)
-                        .setSpell(((DTOsCampoVision.DatosCompletosProyectil) dto).spellID)
-                        .setPosition(((DTOsCampoVision.DatosCompletosProyectil) dto).origenX, ((DTOsCampoVision.DatosCompletosProyectil) dto).origenY)
-                        .setDireccionEnGrados(((DTOsCampoVision.DatosCompletosProyectil) dto).direccionEnGrados)
-                        .setVelocidad(((DTOsCampoVision.DatosCompletosProyectil) dto).velocidad)
-                        .setDuracion(((DTOsCampoVision.DatosCompletosProyectil) dto).duracionMax)
+                        .setSpell(((DTOsNet.DatosCompletosProyectil) dto).spellID)
+                        .setPosition(((DTOsNet.DatosCompletosProyectil) dto).origenX, ((DTOsNet.DatosCompletosProyectil) dto).origenY)
+                        .setDireccionEnGrados(((DTOsNet.DatosCompletosProyectil) dto).direccionEnGrados)
+                        .setVelocidad(((DTOsNet.DatosCompletosProyectil) dto).velocidad)
+                        .setDuracion(((DTOsNet.DatosCompletosProyectil) dto).duracionMax)
                         .build();
-                proyectil.setDuracionActual(((DTOsCampoVision.DatosCompletosProyectil) dto).duracionActual);
+                proyectil.setDuracionActual(((DTOsNet.DatosCompletosProyectil) dto).duracionActual);
                 mundo.añadirProyectil(proyectil);
             }
 
-            else if (dto instanceof DTOsCampoVision.Eliminar)
+            else if (dto instanceof DTOsNet.Eliminar)
             {   mundo.eliminarProyectil(proyectilDTOs.iD); }
         }
     }
 
-    public void procesarActualizacionesMobs(DTOsCampoVision.MobDTOs mobDTOs)
+    public void procesarActualizacionesMobs(DTOsNet.MobDTOs mobDTOs)
     {
         Object dto;
 
@@ -144,18 +144,18 @@ public class ClienteInputs
         {
             dto = mobDTOs.listaDTOs[i];
 
-            if (dto instanceof DTOsCampoVision.Posicion)
-            {   mob.setPosition(((DTOsCampoVision.Posicion) dto).posX, ((DTOsCampoVision.Posicion) dto).posY); }
+            if (dto instanceof DTOsNet.Posicion)
+            {   mob.setPosition(((DTOsNet.Posicion) dto).posX, ((DTOsNet.Posicion) dto).posY); }
 
-            else if (dto instanceof DTOsCampoVision.Orientacion)
-            {   mob.setOrientacion(((DTOsCampoVision.Orientacion) dto).orientacion);}
+            else if (dto instanceof DTOsNet.Orientacion)
+            {   mob.setOrientacion(((DTOsNet.Orientacion) dto).orientacion);}
 
-            else if (dto instanceof DTOsCampoVision.ModificarHPs)
-            {   mob.modificarHPs(((DTOsCampoVision.ModificarHPs) dto).HPs);}
+            else if (dto instanceof DTOsNet.ModificarHPs)
+            {   mob.modificarHPs(((DTOsNet.ModificarHPs) dto).HPs);}
         }
     }
 
-    public void procesarActualizacionesMisc(DTOsCampoVision.MiscDTOs miscDTOs)
+    public void procesarActualizacionesMisc(DTOsNet.MiscDTOs miscDTOs)
     {
         Object dto;
 
@@ -163,16 +163,16 @@ public class ClienteInputs
         {
             dto = miscDTOs.listaDTOs[i];
 
-            if (dto instanceof DTOsCampoVision.CambioTerrenoMisc)
+            if (dto instanceof DTOsNet.CambioTerrenoMisc)
             {
-                int tileX = ((DTOsCampoVision.CambioTerrenoMisc) dto).tileX;
-                int tileY = ((DTOsCampoVision.CambioTerrenoMisc) dto).tileY;
-                int numCapa = ((DTOsCampoVision.CambioTerrenoMisc) dto).numCapa;
-                short iDTerreno = ((DTOsCampoVision.CambioTerrenoMisc) dto).iDTerreno;
+                int tileX = ((DTOsNet.CambioTerrenoMisc) dto).tileX;
+                int tileY = ((DTOsNet.CambioTerrenoMisc) dto).tileY;
+                int numCapa = ((DTOsNet.CambioTerrenoMisc) dto).numCapa;
+                short iDTerreno = ((DTOsNet.CambioTerrenoMisc) dto).iDTerreno;
                 mundo.getMapa().setTerreno(tileX, tileY, numCapa, iDTerreno);
             }
-            else if (dto instanceof DTOsCampoVision.MapTilesAdyacentes)
-            {   controlador.actualizarMapTilesAdyacentes(((DTOsCampoVision.MapTilesAdyacentes) dto));}
+            else if (dto instanceof DTOsNet.MapTilesAdyacentes)
+            {   controlador.actualizarMapTilesAdyacentes(((DTOsNet.MapTilesAdyacentes) dto));}
 
 
         }

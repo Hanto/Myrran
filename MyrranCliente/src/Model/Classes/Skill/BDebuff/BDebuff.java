@@ -1,14 +1,14 @@
 package Model.Classes.Skill.BDebuff;// Created by Hanto on 04/06/2014.
 
 
-import Model.Skills.SkillStat;
+import Model.Skills.SkillsPersonalizados.SkillStat;
 import DB.DAO;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.BDebuff.TipoBDebuffI;
-import InterfacesEntidades.EntidadesPropiedades.CasterPersonalizable;
-import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
-import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
 import Interfaces.Observable.AbstractModel;
 
 import java.util.Arrays;

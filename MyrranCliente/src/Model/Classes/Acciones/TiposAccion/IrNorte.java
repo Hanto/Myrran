@@ -1,6 +1,6 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 05/05/2014.
 
-import InterfacesEntidades.EntidadesPropiedades.MaquinablePlayer;
+import InterfacesEntidades.EntidadesPropiedades.Misc.MaquinablePlayer;
 import Interfaces.Model.ModelI;
 import Model.Classes.Acciones.Accion;
 

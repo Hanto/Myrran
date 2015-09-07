@@ -1,6 +1,6 @@
 package DB.Datos.BDebuff;// Created by Hanto on 16/06/2014.
 
-import Model.Skills.SkillStat;
+import Model.Skills.SkillsPersonalizados.SkillStat;
 import DAO.BDebuff.BDebuffXMLDBI;
 import DB.DAO;
 import Model.Settings;

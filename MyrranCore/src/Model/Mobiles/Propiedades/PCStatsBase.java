@@ -1,6 +1,6 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 03/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.PCStats;
+import InterfacesEntidades.EntidadesPropiedades.TipoMobile.PCStats;
 import Interfaces.GameState.MundoI;
 
 public class PCStatsBase implements PCStats

@@ -1,17 +1,17 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 17/06/2014.
 
-import InterfacesEntidades.EntidadesPropiedades.Caster;
-import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
-import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Vulnerable;
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
-import Model.Classes.Skill.Spell.TipoSpell;
+import Model.Skills.Spell.TipoSpell;
 
 public class Heal extends TipoSpell
 {
     @Override public void inicializarSkillStats()
     {
-        setID(this.getClass().getSimpleName().toUpperCase());
+        super.inicializarSkillStats();
         setNumSkillStats(2);
     }
 

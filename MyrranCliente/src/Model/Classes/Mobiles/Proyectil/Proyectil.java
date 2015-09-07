@@ -1,10 +1,10 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 04/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Caster;
-import InterfacesEntidades.EntidadesPropiedades.Consumible;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Consumible;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import InterfacesEntidades.EntidadesPropiedades.IDentificable;
-import InterfacesEntidades.EntidadesPropiedades.ProyectilStats;
+import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
+import InterfacesEntidades.EntidadesPropiedades.TipoMobile.ProyectilStats;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import Interfaces.GameState.MundoI;

@@ -1,13 +1,14 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 03/09/2015.
 
-import DTO.DTOsSkillPersonalizado;
+import DTOs.DTOsSkillPersonalizado;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import InterfacesEntidades.EntidadesPropiedades.*;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.*;
+import InterfacesEntidades.EntidadesPropiedades.TipoMobile.PCStats;
 import Model.AI.Huellas.Huellas;
 import Model.Classes.Mobiles.PC.SpellsACastear.SpellACastear;
 import Model.Classes.Mobiles.PC.SpellsACastear.SpellsACastear;

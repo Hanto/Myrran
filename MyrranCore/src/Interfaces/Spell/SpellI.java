@@ -1,9 +1,9 @@
 package Interfaces.Spell;// Created by Hanto on 09/06/2014.
 
-import Model.Skills.SkillStat;
+import Model.Skills.SkillsPersonalizados.SkillStat;
 import Interfaces.BDebuff.BDebuffI;
-import InterfacesEntidades.EntidadesPropiedades.Caster;
-import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
 import Interfaces.GameState.MundoI;
 import Interfaces.Skill.SkillI;
 
@@ -32,7 +32,6 @@ public interface SpellI extends SkillI
 
     //METODOS:
     public void añadirDebuff (BDebuffI debuff);
-    public void añadirDebuff (String debuffID);
     public void castear (Caster Caster, int targetX, int targetY, MundoI mundo);
     public void aplicarDebuffs (Caster Caster, Debuffeable target);
 }

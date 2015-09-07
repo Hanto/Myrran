@@ -1,6 +1,6 @@
 package Interfaces.UI;// Created by Hanto on 13/05/2014.
 
-import InterfacesEntidades.EntidadesPropiedades.CasterPersonalizable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
 import Interfaces.Model.ModelI;
 
 public interface BarraAccionesI extends ModelI

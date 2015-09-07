@@ -2,15 +2,15 @@ package Model.Classes.UI;// Created by Hanto on 14/05/2014.
 
 import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
-import DTO.DTOsBarraTerrenos;
-import InterfacesEntidades.EntidadesPropiedades.Caster;
+import DTOs.DTOsBarraTerrenos;
+import DTOs.DTOsNet;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
 import Interfaces.Geo.TerrenoI;
 import Interfaces.Observable.AbstractModel;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
 
-import static DTO.DTOsParametrosSpell.ParametrosEditarTerreno;
 
 public class BarraTerrenos extends AbstractModel
 {
@@ -63,7 +63,7 @@ public class BarraTerrenos extends AbstractModel
         //if (caster.getParametrosSpell() instanceof ParametrosEditarTerreno)
         {
             //ParametrosEditarTerreno editarTerreno = (ParametrosEditarTerreno)caster.getParametrosSpell();
-            ParametrosEditarTerreno editarTerreno = new ParametrosEditarTerreno(parametroNumCapa, terrenoID);
+            DTOsNet.ParametrosEditarTerreno editarTerreno = new DTOsNet.ParametrosEditarTerreno(parametroNumCapa, terrenoID);
             parametroTerrenoID = terrenoID;
             //editarTerreno.terrenoIDSeleccionado = terrenoID;
             Caster.setParametrosSpell(editarTerreno);
@@ -75,7 +75,7 @@ public class BarraTerrenos extends AbstractModel
         //if (caster.getParametrosSpell() instanceof ParametrosEditarTerreno)
         {
             //ParametrosEditarTerreno editarTerreno = (ParametrosEditarTerreno)caster.getParametrosSpell();
-            ParametrosEditarTerreno editarTerreno = new ParametrosEditarTerreno(numCapa, parametroTerrenoID);
+            DTOsNet.ParametrosEditarTerreno editarTerreno = new DTOsNet.ParametrosEditarTerreno(numCapa, parametroTerrenoID);
             parametroNumCapa = numCapa;
             //editarTerreno.capaTerrenoSeleccionada = numCapa;
             Caster.setParametrosSpell(editarTerreno);

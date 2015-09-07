@@ -1,11 +1,11 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 04/09/2015.
 
 import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
-import InterfacesEntidades.EntidadesPropiedades.IDentificable;
-import InterfacesEntidades.EntidadesPropiedades.MobStats;
-import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
+import InterfacesEntidades.EntidadesPropiedades.TipoMobile.MobStats;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Vulnerable;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import Interfaces.GameState.MundoI;
 import Model.AI.Huellas.Huellas;

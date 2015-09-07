@@ -1,14 +1,15 @@
 package View.Gamestate.CampoVision;// Created by Hanto on 24/07/2015.
 
-import DTO.DTOsCampoVision;
-import DTO.DTOsMapView;
-import InterfacesEntidades.EntidadesTipos.MobI;
-import InterfacesEntidades.EntidadesTipos.PCI;
-import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import DTOs.DTOsNet;
+import Interfaces.Geo.MapaI;
 import Interfaces.Network.ServidorI;
 import Interfaces.Skill.SkillPersonalizadoI;
 import Interfaces.Spell.SpellPersonalizadoI;
-import Model.Skills.SkillMod;
+import InterfacesEntidades.EntidadesTipos.MobI;
+import InterfacesEntidades.EntidadesTipos.PCI;
+import InterfacesEntidades.EntidadesTipos.ProyectilI;
+import Model.Settings;
+import Model.Skills.SkillsPersonalizados.SkillMod;
 
 import java.util.*;
 
@@ -17,17 +18,17 @@ public class BufferCampoVision
     //Buffer que almacena todos los cambios de las unidades observadas por el cambio de vision durante los updates
     //al final del update se envian todos los datos al player del campo de vision.
 
-    private List<DTOsMapView.Mapa> listaDTOsMapa = new ArrayList<>();
+    private List<DTOsNet.Mapa> listaDTOsMapa = new ArrayList<>();
     private List<Object> listaDTOsMisc = new ArrayList<>();
     private MapDTOs mapaDTOsPC = new MapDTOs();
     private MapDTOs mapaDTOsProyectiles = new MapDTOs();
     private MapDTOs mapaDTOsMobs = new MapDTOs();
 
     //DTOs para no tener que crearlos sin parar:
-    private DTOsCampoVision.PCDTOs pcDTOs = new DTOsCampoVision.PCDTOs();
-    private DTOsCampoVision.ProyectilDTOs proyectilDTOs = new DTOsCampoVision.ProyectilDTOs();
-    private DTOsCampoVision.MobDTOs mobDTOs = new DTOsCampoVision.MobDTOs();
-    private DTOsCampoVision.MiscDTOs miscDTOs = new DTOsCampoVision.MiscDTOs();
+    private DTOsNet.PCDTOs pcDTOs = new DTOsNet.PCDTOs();
+    private DTOsNet.ProyectilDTOs proyectilDTOs = new DTOsNet.ProyectilDTOs();
+    private DTOsNet.MobDTOs mobDTOs = new DTOsNet.MobDTOs();
+    private DTOsNet.MiscDTOs miscDTOs = new DTOsNet.MiscDTOs();
 
 
     //MANIPULACION DE LAS ESTRUCTURAS DE DATOS:
@@ -83,21 +84,21 @@ public class BufferCampoVision
 
     public void eliminarPC(PCI pc)
     {
-        DTOsCampoVision.Eliminar eliminar = new DTOsCampoVision.Eliminar();
+        DTOsNet.Eliminar eliminar = new DTOsNet.Eliminar();
         mapaDTOsPC.remove(pc.getID());
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.Eliminar.class, eliminar);
+        mapaDTOsPC.set(pc.getID(), DTOsNet.Eliminar.class, eliminar);
     }
 
     public void setPositionPC (PCI pc)
     {
-        DTOsCampoVision.Posicion posicion = new DTOsCampoVision.Posicion(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.Posicion.class, posicion);
+        DTOsNet.Posicion posicion = new DTOsNet.Posicion(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsNet.Posicion.class, posicion);
     }
 
     public void setNumAnimacionPC (PCI pc)
     {
-        DTOsCampoVision.NumAnimacion numAnimacion = new DTOsCampoVision.NumAnimacion(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NumAnimacion.class, numAnimacion);
+        DTOsNet.NumAnimacion numAnimacion = new DTOsNet.NumAnimacion(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsNet.NumAnimacion.class, numAnimacion);
     }
 
     // PC & PLAYER:
@@ -105,8 +106,8 @@ public class BufferCampoVision
 
     public void setDatosCompletosPC (PCI pc)
     {
-        DTOsCampoVision.DatosCompletosPC datosCompletosPC = new DTOsCampoVision.DatosCompletosPC(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.DatosCompletosPC.class, datosCompletosPC);
+        DTOsNet.DatosCompletosPC datosCompletosPC = new DTOsNet.DatosCompletosPC(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsNet.DatosCompletosPC.class, datosCompletosPC);
 
         Iterator<SpellPersonalizadoI> iteratorSpell = pc.getIteratorSpellPersonalizado();
         while (iteratorSpell.hasNext())
@@ -128,31 +129,31 @@ public class BufferCampoVision
 
     public void setNombrePC (PCI pc)
     {
-        DTOsCampoVision.NombrePC nombre = new DTOsCampoVision.NombrePC(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.NombrePC.class, nombre);
+        DTOsNet.NombrePC nombre = new DTOsNet.NombrePC(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsNet.NombrePC.class, nombre);
     }
 
     public void setHPsPC (PCI pc)
     {
-        DTOsCampoVision.setHPs hpsSet = new DTOsCampoVision.setHPs(pc);
-        mapaDTOsPC.set(pc.getID(), DTOsCampoVision.setHPs.class, hpsSet);
+        DTOsNet.setHPs hpsSet = new DTOsNet.setHPs(pc);
+        mapaDTOsPC.set(pc.getID(), DTOsNet.setHPs.class, hpsSet);
     }
 
     public void addModificarHPsPC (PCI pc, float hps)
     {
-        DTOsCampoVision.ModificarHPs modificarHPs = new DTOsCampoVision.ModificarHPs(hps);
+        DTOsNet.ModificarHPs modificarHPs = new DTOsNet.ModificarHPs(hps);
         mapaDTOsPC.add(pc.getID(), modificarHPs);
     }
 
     public void addAñadirSpellPersonalizado(PCI pc, String spellID)
     {
-        DTOsCampoVision.AñadirSpellPersonalizado añadirSpellPersonalizado = new DTOsCampoVision.AñadirSpellPersonalizado(spellID);
+        DTOsNet.AñadirSpellPersonalizado añadirSpellPersonalizado = new DTOsNet.AñadirSpellPersonalizado(spellID);
         mapaDTOsPC.add(pc.getID(), añadirSpellPersonalizado);
     }
 
     public void addNumTalentosSkillPersonalizadoPC(PCI pc, String skillID, int statID, int valor)
     {
-        DTOsCampoVision.SetNumTalentosSkillPersonalizado setNumTalentosSkillPersonalizado = new DTOsCampoVision.SetNumTalentosSkillPersonalizado(skillID, statID, valor);
+        DTOsNet.SetNumTalentosSkillPersonalizado setNumTalentosSkillPersonalizado = new DTOsNet.SetNumTalentosSkillPersonalizado(skillID, statID, valor);
         mapaDTOsPC.add(pc.getID(), setNumTalentosSkillPersonalizado);
     }
 
@@ -161,19 +162,19 @@ public class BufferCampoVision
 
     public void setPosicionMob(MobI mob)
     {
-        DTOsCampoVision.Posicion posicionMob = new DTOsCampoVision.Posicion(mob);
+        DTOsNet.Posicion posicionMob = new DTOsNet.Posicion(mob);
         mapaDTOsMobs.add(mob.getID(), posicionMob);
     }
 
     public void setOrientacionMob(MobI mob)
     {
-        DTOsCampoVision.Orientacion orientacion = new DTOsCampoVision.Orientacion(mob);
+        DTOsNet.Orientacion orientacion = new DTOsNet.Orientacion(mob);
         mapaDTOsMobs.add(mob.getID(), orientacion);
     }
 
     public void addModificarHpsMob (MobI mob, float hps)
     {
-        DTOsCampoVision.ModificarHPs modificarHPsMob = new DTOsCampoVision.ModificarHPs(hps);
+        DTOsNet.ModificarHPs modificarHPsMob = new DTOsNet.ModificarHPs(hps);
         mapaDTOsMobs.add(mob.getID(), modificarHPsMob);
     }
 
@@ -182,15 +183,15 @@ public class BufferCampoVision
 
     public void setDatosCompletosProyectil (ProyectilI proyectil)
     {
-        DTOsCampoVision.DatosCompletosProyectil datosCompletos = new DTOsCampoVision.DatosCompletosProyectil(proyectil);
-        mapaDTOsProyectiles.set(proyectil.getID(), DTOsCampoVision.DatosCompletosProyectil.class, datosCompletos);
+        DTOsNet.DatosCompletosProyectil datosCompletos = new DTOsNet.DatosCompletosProyectil(proyectil);
+        mapaDTOsProyectiles.set(proyectil.getID(), DTOsNet.DatosCompletosProyectil.class, datosCompletos);
     }
 
     public void eliminarProyectil (ProyectilI proyectil)
     {
-        DTOsCampoVision.Eliminar eliminarProyectil = new DTOsCampoVision.Eliminar();
+        DTOsNet.Eliminar eliminarProyectil = new DTOsNet.Eliminar();
         mapaDTOsProyectiles.remove(proyectil.getID());
-        mapaDTOsProyectiles.set(proyectil.getID(), DTOsCampoVision.Eliminar.class, eliminarProyectil);
+        mapaDTOsProyectiles.set(proyectil.getID(), DTOsNet.Eliminar.class, eliminarProyectil);
     }
 
     // MISC:
@@ -198,21 +199,32 @@ public class BufferCampoVision
 
     public void addCambioTerreno (int tileX, int tileY, int numCapa, short iDTerreno)
     {
-        DTOsCampoVision.CambioTerrenoMisc cambioTerreno = new DTOsCampoVision.CambioTerrenoMisc(tileX, tileY, numCapa, iDTerreno);
+        DTOsNet.CambioTerrenoMisc cambioTerreno = new DTOsNet.CambioTerrenoMisc(tileX, tileY, numCapa, iDTerreno);
         listaDTOsMisc.add(cambioTerreno);
     }
 
     public void addMapaAdyacencias(boolean[][] mapaAdyacencias)
     {
-        DTOsCampoVision.MapTilesAdyacentes mapTilesAdyacentes = new DTOsCampoVision.MapTilesAdyacentes(mapaAdyacencias);
+        DTOsNet.MapTilesAdyacentes mapTilesAdyacentes = new DTOsNet.MapTilesAdyacentes(mapaAdyacencias);
         listaDTOsMisc.add(mapTilesAdyacentes);
     }
 
     // MAPAS:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void addMapa (DTOsMapView.Mapa mapa)
-    {   listaDTOsMapa.add(mapa); }
+    public void addMapa(MapaI mapa, int esquinaInfIzdaX, int esquinaInfIzdaY, int ancho, int alto)
+    {
+        DTOsNet.Mapa mapaDTO = new DTOsNet.Mapa(esquinaInfIzdaX, esquinaInfIzdaY, ancho, alto);
+        for (int x=0; x< ancho; x++)
+        {
+            for (int y = 0; y< alto; y++)
+            {
+                for (int i=0; i< Settings.MAPA_Max_Capas_Terreno; i++)
+                {   mapaDTO.mapa[x][y].celda[i] = mapa.getTerrenoID(x + esquinaInfIzdaX, y + esquinaInfIzdaY, i); }
+            }
+        }
+        listaDTOsMapa.add(mapaDTO);
+    }
 
     //ENVIAR DATOS A CLIENTE:
     //------------------------------------------------------------------------------------------------------------------
@@ -281,7 +293,7 @@ public class BufferCampoVision
     {
         if (listaDTOsMapa.size() > 0)
         {
-            for (DTOsMapView.Mapa mapa : listaDTOsMapa)
+            for (DTOsNet.Mapa mapa : listaDTOsMapa)
             {   servidor.enviarACliente(conID, mapa); }
             listaDTOsMapa.clear();
         }

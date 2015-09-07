@@ -1,6 +1,6 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 04/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Consumible;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Consumible;
 
 public class ConsumibleBase implements Consumible
 {

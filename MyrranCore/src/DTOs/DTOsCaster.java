@@ -1,6 +1,6 @@
 package DTOs;// Created by Hanto on 03/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
 
 public class DTOsCaster
 {

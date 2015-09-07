@@ -1,7 +1,7 @@
 package Model.EstructurasDatos;// Created by Hanto on 06/08/2015.
 
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
-import InterfacesEntidades.EntidadesPropiedades.IDentificable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
 import Interfaces.EstructurasDatos.ListaPorCuadrantesI;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;

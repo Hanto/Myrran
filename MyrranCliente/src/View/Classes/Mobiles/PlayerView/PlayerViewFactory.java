@@ -1,6 +1,6 @@
 package View.Classes.Mobiles.PlayerView;// Created by Hanto on 10/08/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
 import InterfacesEntidades.EntidadesTipos.PlayerI;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;

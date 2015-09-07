@@ -1,11 +1,11 @@
 package DB.Datos.TipoSpell;// Created by Hanto on 17/04/2014.
 
-import Model.Skills.SkillStat;
 import DAO.TipoSpell.TipoSpellXMLDBI;
-import Model.Settings;
 import Interfaces.Spell.TipoSpellI;
-import Model.Classes.Skill.Spell.TipoSpell;
 import Model.Classes.Skill.Spell.TipoSpellFactory;
+import Model.Settings;
+import Model.Skills.SkillsPersonalizados.SkillStat;
+import Model.Skills.Spell.TipoSpell;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;

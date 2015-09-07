@@ -1,6 +1,6 @@
 package Model.Classes.Geo;// Created by Hanto on 19/05/2014.
 
-import DTO.DTOsMapa;
+import DTOs.DTOsMapa;
 import DTOs.DTOsEspacial;
 import Interfaces.Geo.MapaI;
 import Interfaces.Geo.TerrenoI;

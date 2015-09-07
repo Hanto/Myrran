@@ -1,7 +1,7 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 04/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Caster;
-import InterfacesEntidades.EntidadesPropiedades.ProyectilStats;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
+import InterfacesEntidades.EntidadesPropiedades.TipoMobile.ProyectilStats;
 import Interfaces.Spell.SpellI;
 
 public class ProyectilStatsBase implements ProyectilStats

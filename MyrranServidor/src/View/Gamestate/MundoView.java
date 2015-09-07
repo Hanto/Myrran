@@ -1,10 +1,10 @@
 package View.Gamestate;// Created by Hanto on 16/07/2015.
 
-import DTO.DTOsMundo;
+import DTOs.DTOsMundo;
+import Interfaces.GameState.MundoI;
+import Interfaces.Network.ServidorI;
 import InterfacesEntidades.EntidadesTipos.CampoVisionI;
 import InterfacesEntidades.EntidadesTipos.PCI;
-import Interfaces.Network.ServidorI;
-import Model.GameState.Mundo;
 import View.Gamestate.CampoVision.CampoVision;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -16,16 +16,16 @@ import java.util.List;
 
 public class MundoView implements PropertyChangeListener, Disposable
 {
-    public Mundo mundo;
+    public MundoI mundo;
 
     protected List<CampoVisionI> listaCampoVisiones = new ArrayList<>();
 
 
     //Constructor:
-    public MundoView(Mundo mundo)
+    public MundoView(MundoI mundo)
     {
-        mundo.añadirObservador(this);
         this.mundo = mundo;
+        this.mundo.añadirObservador(this);
     }
 
     @Override public void dispose()

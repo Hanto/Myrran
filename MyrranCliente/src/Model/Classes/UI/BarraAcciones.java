@@ -1,7 +1,7 @@
 package Model.Classes.UI;// Created by Hanto on 06/05/2014.
 
-import DTO.DTOsBarraAcciones;
-import InterfacesEntidades.EntidadesPropiedades.CasterPersonalizable;
+import DTOs.DTOsBarraAcciones;
+import InterfacesEntidades.EntidadesPropiedades.Misc.CasterPersonalizable;
 import Interfaces.Observable.AbstractModel;
 import Interfaces.UI.AccionI;
 import Interfaces.UI.CasillaI;

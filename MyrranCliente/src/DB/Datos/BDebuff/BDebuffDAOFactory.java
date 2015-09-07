@@ -1,9 +1,10 @@
 package DB.Datos.BDebuff;
 
 import DAO.BDebuff.BDebuffDAO;
+import DAO.BDebuff.BDebuffDAOFactoryI;
 import DAO.BDebuff.BDebuffXML;
 
-public enum BDebuffDAOFactory
+public enum BDebuffDAOFactory implements BDebuffDAOFactoryI
 {
     XML("XML")
     {

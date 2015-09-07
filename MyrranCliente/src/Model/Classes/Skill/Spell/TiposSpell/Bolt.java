@@ -2,17 +2,17 @@ package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 04/08/2015.
 
 import Interfaces.GameState.MundoI;
 import Interfaces.Spell.SpellI;
-import InterfacesEntidades.EntidadesPropiedades.Caster;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Espacial;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;
 import Model.Classes.Mobiles.Proyectil.ProyectilFactory;
-import Model.Classes.Skill.Spell.TipoSpell;
+import Model.Skills.Spell.TipoSpell;
 
 public class Bolt extends TipoSpell
 {
     @Override public void inicializarSkillStats()
     {
-        setID(this.getClass().getSimpleName().toUpperCase());
+        super.inicializarSkillStats();
         setNumSkillStats(4);
     }
 
@@ -35,7 +35,6 @@ public class Bolt extends TipoSpell
         else return;
 
         ProyectilI proyectil = ProyectilFactory.NUEVOPROYECTIL.nuevo(mundo.getWorld(), ANCHO, ALTO)
-        //ProyectilOldFactory.ESFERA.nuevo(mundo.getWorld(), ANCHO, ALTO)
                 .setSpell(spell)
                 .setOwner(caster)
                 .setID()

@@ -1,8 +1,8 @@
 package Model.GameState;// Created by Hanto on 08/04/2014.
 
 import Controller.Cliente;
-import DTO.DTOsMapView;
-import DTO.DTOsMundo;
+import DTOs.DTOsMundo;
+import DTOs.DTOsNet;
 import Interfaces.AI.SistemaAggroI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Geo.MapaI;
@@ -155,7 +155,7 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
     // MAPA:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void actualizarMapa (DTOsMapView.Mapa mapaServidor)
+    public void actualizarMapa (DTOsNet.Mapa mapaServidor)
     {
         for (int y=0; y< mapaServidor.mapa[0].length; y++)
         {

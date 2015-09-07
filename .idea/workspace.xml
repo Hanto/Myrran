@@ -10,92 +10,159 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7d314d5-d115-4c47-b321-a6ac893ae3ac" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsAnimable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCasterPersonalizable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsDisposable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsOrientable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsPCStats.java" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Abstractos\CasterPersonalizadoAbstract.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\Mob\MobOld.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\Mob\MobOldFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\Mob\MobOldNotificador.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\PC\PCOld.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\PC\PCOldFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\PC\PCOldNotificador.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\Proyectil\ProyectilOld.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\Proyectil\ProyectilOldFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Monoliticos\Proyectil\ProyectilOldNotificador.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Player\PlayerOld.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Player\PlayerOldFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\Player\PlayerOldNotificador.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsMob.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsPC.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsProyectil.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\CasterC.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\CasterS.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesTipos\PCSI.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\Mob\MobOld.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\Mob\MobOldFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\Mob\MobOldNotificador.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\PC\PCOld.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\PC\PCOldFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\PC\PCOldNotificador.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\Proyectil\ProyectilOld.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\Proyectil\ProyectilOldFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Monoliticos\Proyectil\ProyectilOldNotificador.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DAO/BDebuff/BDebuffDAOFactoryI.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/KryoDTOs.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/Maquinable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/SpellCliente.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DAO/Spell/SpellDAOFactoryI.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MyrranCore/src/DAO/TipoSpell/TipoSpellDAOFactoryI.java" />
+      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Skill\Spell\Spell.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Skill\Spell\TipoSpell.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsMapView.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsParametrosSpell.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsPlayer.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\NetDTOs.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\Maquinable.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/UI/AccionI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/UI/AccionI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/AnimableBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/AnimableBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ArrayPorCuadrantes.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ArrayPorCuadrantes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/BDebuff/Aura.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/BDebuff/Aura.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/Aura.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/Aura.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/BDebuff/AuraI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/BDebuff/AuraI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/BDebuff/BDebuff.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/BDebuff/BDebuff.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/BDebuff.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/BDebuff.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/BDebuff/BDebuffDAOFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/BDebuff/BDebuffDAOFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/BDebuff/BDebuffDAOFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/BDebuff/BDebuffDAOFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/BDebuff/BDebuffI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/BDebuff/BDebuffI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/BDebuff/BDebuffXMLDB.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/BDebuff/BDebuffXMLDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/BDebuff/BDebuffXMLDB.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/BDebuff/BDebuffXMLDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/BarraAcciones.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/BarraAcciones.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/UI/BarraAccionesI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/UI/BarraAccionesI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/BarraAccionesView/BarraAccionesView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/BarraAccionesView/BarraAccionesView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/BarraTerrenos.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/BarraTerrenos.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/BarraTerrenosView/BarraTerrenosView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/BarraTerrenosView/BarraTerrenosView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/TiposBDebuff/Bomba.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/TiposBDebuff/Bomba.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/BufferCampoVision.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/BufferCampoVision.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/CampoVision.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/CampoVision.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/Casilla.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/Casilla.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/BarraAccionesView/CasillaView/CasillaView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/BarraAccionesView/CasillaView/CasillaView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/SpellView/CasilleroTalentos.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/SpellView/CasilleroTalentos.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/CasterBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/CasterBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/CasterPersonalizadoBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/CasterPersonalizadoBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Controller/Cliente.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Controller/Cliente.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Controller/ClienteInputs.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Controller/ClienteInputs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsCampoVision.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsCampoVision.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/ConjuntoBarraAcciones.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/ConjuntoBarraAcciones.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/BarraAccionesView/ConjuntoBarraAccionesView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/BarraAccionesView/ConjuntoBarraAccionesView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/ConsumibleBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/ConsumibleBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Controller/Controlador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Controller/Controlador.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsAnimable.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsAnimable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCaster.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCaster.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsEspacial.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsEspacial.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsPlayer.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCasterPersonalizable.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCasterPersonalizable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsVulnerable.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsVulnerable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/DebuffeableBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/DebuffeableBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/EditarTerreno.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/EditarTerreno.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/EditarTerreno.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/EditarTerreno.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/TiposBDebuff/Hot.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/TiposBDebuff/Hot.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/IdentificableBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/IdentificableBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Input/InputManager.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Input/InputManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/IrEste.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/IrEste.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/IrNorte.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/IrNorte.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/IrOeste.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/IrOeste.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/IrSur.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/IrSur.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaMapa.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaMapa.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaMapaCuadrantes.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/ListaMapaCuadrantes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Geo/Mapa.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Geo/Mapa.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/Mapa.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Geo/Mapa.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/MapaPorCuadrantes.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/EstructurasDatos/MapaPorCuadrantes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Geo/MapaView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Geo/MapaView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/MapaView.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/MapaView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/AI/FSM/MaquinaEstados.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/AI/FSM/MaquinaEstados.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/AI/FSM/MaquinaEstadosFactory.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/AI/FSM/MaquinaEstadosFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/Mob.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/Mob.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/Mob.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/Mob.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/MobI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/MobI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/MobStatsBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/MobStatsBase.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/MobView/MobView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/MobView/MobView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/GameState/Mundo.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/GameState/Mundo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/GameState/Mundo.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/GameState/Mundo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/GameState/MundoI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/GameState/MundoI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/GameState/MundoView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/GameState/MundoView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/MundoView.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/MundoView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Actores/NameplateView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Actores/NameplateView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PC.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PC.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PC.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PC.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PCI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PCI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/PCStatsBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/PCStatsBase.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PCView/PCView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PCView/PCView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PCView/PCViewFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PCView/PCViewFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/Player.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/AI/FSM/PlayerEstados/PlayerEstado.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/AI/FSM/PlayerEstados/PlayerEstado.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PlayerI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PlayerI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerViewFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerViewFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/Proyectil.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/Proyectil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/Proyectil.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/Proyectil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/ProyectilI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/ProyectilI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/ProyectilStatsBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/ProyectilStatsBase.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/ProyectilView/ProyectilView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/ProyectilView/ProyectilView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/ProyectilView/ProyectilViewFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/ProyectilView/ProyectilViewFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/SeleccionarSpell.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Acciones/TiposAccion/SeleccionarSpell.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Controller/Servidor.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Controller/Servidor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/Spell/SpellDAOFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/Spell/SpellDAOFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/Spell/SpellDAOFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/Spell/SpellDAOFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Controller/Updater.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Controller/Updater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/Skill/SkillI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/Skill/SkillI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/Skill/SkillPersonalizadoI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/Skill/SkillPersonalizadoI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/SpellView/SkillView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/SpellView/SkillView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/Spell/SpellI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/Spell/SpellI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/SpellView/SpellView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/UI/SpellView/SpellView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/Spell/SpellXMLDB.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/Spell/SpellXMLDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/Spell/SpellXMLDB.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/Spell/SpellXMLDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Geo/SubMapaView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Geo/SubMapaView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Geo/TerrenoView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Geo/TerrenoView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/BDebuff/TipoBDebuff.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/BDebuff/TipoBDebuff.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/TipoBDebuff.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/BDebuff/TipoBDebuff.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/BDebuff/TipoBDebuffI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/BDebuff/TipoBDebuffI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoBdDebuff/TipoBDebuffXMLDB.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoBdDebuff/TipoBDebuffXMLDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/TipoBDebuff/TipoBDebuffXMLDB.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/TipoBDebuff/TipoBDebuffXMLDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoSpell/TipoSpellDAOFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoSpell/TipoSpellDAOFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/TipoSpell/TipoSpellDAOFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/TipoSpell/TipoSpellDAOFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TipoSpellFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TipoSpellFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TipoSpellFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TipoSpellFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Interfaces/Spell/TipoSpellI.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Interfaces/Spell/TipoSpellI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoSpell/TipoSpellXMLDB.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoSpell/TipoSpellXMLDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/TipoSpell/TipoSpellXMLDB.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/TipoSpell/TipoSpellXMLDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCliente/src/View/GameState/UIView.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/View/GameState/UIView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/VulnerableBase.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/VulnerableBase.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Mob\Mob.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/Mob.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Mob\MobFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/MobFactory.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Mob\MobNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/MobNotificador.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\PC\PC.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PC.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\PC\PCFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PCFactory.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\PC\PCNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PCNotificador.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Player\Player.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/Player.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Player\PlayerFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerFactory.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Player\PlayerNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Proyectil\Proyectil.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/Proyectil.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Proyectil\ProyectilFactory.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCliente\src\Model\Classes\Mobiles\MModulares\Proyectil\ProyectilNotificador.java" afterPath="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\Abstractos\CasterPersonalizadoAbstract.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/CasterPersonalizadoBase.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\Mob\Mob.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/Mob.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\Mob\MobFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/MobFactory.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\Mob\MobNotificador.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/MobNotificador.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\PC\PC.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PC.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\PC\PCFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCFactory.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\PC\PCNotificador.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCNotificador.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\PC\SpellACastear.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/SpellsACastear/SpellACastear.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\PC\SpellsACastear.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/SpellsACastear/SpellsACastear.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\Proyectil\Proyectil.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/Proyectil.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\Proyectil\ProyectilFactory.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java" />
-      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Mobiles\Modulares\Proyectil\ProyectilNotificador.java" afterPath="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOTerrenoView.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOTerrenoView.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsBarraAcciones.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsBarraAcciones.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsBarraTerrenos.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsBarraTerrenos.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsCampoVision.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsNet.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsInputManager.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsInputManager.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsMapa.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsMapa.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsMundo.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsMundo.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\DTO\DTOsSkillPersonalizado.java" afterPath="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsSkillPersonalizado.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\Animable.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/Animable.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\Caster.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/Caster.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\CasterPersonalizable.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/CasterPersonalizable.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\Consumible.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/Consumible.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\Debuffeable.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/Debuffeable.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\IDentificable.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/IDentificable.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\MaquinablePlayer.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/MaquinablePlayer.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\MobStats.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/TipoMobile/MobStats.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\PCStats.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/TipoMobile/PCStats.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\ProyectilStats.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/TipoMobile/ProyectilStats.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\InterfacesEntidades\EntidadesPropiedades\Vulnerable.java" afterPath="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesPropiedades/Misc/Vulnerable.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\Model\Skills\SkillMod.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Skills/SkillsPersonalizados/SkillMod.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\Model\Skills\SkillPersonalizado.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Skills/SkillsPersonalizados/SkillPersonalizado.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\Model\Skills\SkillStat.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Skills/SkillsPersonalizados/SkillStat.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranCore\src\Model\Skills\SpellPersonalizado.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Skills/SkillsPersonalizados/SpellPersonalizado.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Skill\Spell\Spell.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Skills/Spell/Spell.java" />
+      <change type="MOVED" beforePath="D:\Google Drive\Myrran\Myrran\MyrranServidor\src\Model\Classes\Skill\Spell\TipoSpell.java" afterPath="$PROJECT_DIR$/MyrranCore/src/Model/Skills/Spell/TipoSpell.java" />
     </list>
     <ignored path="MyrranServidor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -121,11 +188,11 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="DTOsCampoVision.java" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsCampoVision.java">
+            <file leaf-file-name="DTOsNet.java" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsNet.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.60947275">
-                    <caret line="122" column="27" selection-start-line="122" selection-start-column="27" selection-end-line="122" selection-end-column="27" />
+                  <state vertical-scroll-proportion="0.5084897">
+                    <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
                     <folding />
                   </state>
                 </provider>
@@ -141,14 +208,44 @@
     <favorites_list name="MyrranServidor" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5067437">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="CampoVision.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="CampoVision.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/CampoVision.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-1.7863247">
-                  <caret line="76" column="58" selection-start-line="76" selection-start-column="58" selection-end-line="76" selection-end-column="58" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Spell.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/Skills/Spell/Spell.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SpellCliente.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/SpellCliente.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Bolt.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.041785374">
+                  <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
                   <folding />
                 </state>
               </provider>
@@ -158,21 +255,21 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="ServidorInputs.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java">
+          <file leaf-file-name="Heal.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="47" column="74" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
+                  <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="PlayerNotificador.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java">
+          <file leaf-file-name="Bolt.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.13865148">
-                  <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="33" />
+                <state vertical-scroll-proportion="0.3133903">
+                  <caret line="36" column="99" selection-start-line="36" selection-start-column="99" selection-end-line="36" selection-end-column="99" />
                   <folding />
                 </state>
               </provider>
@@ -220,57 +317,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/Spell/SpellDAOFactory.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/Spell/SpellDAOFactory.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/MModulares/Abstractos/CasterPersonalizadoBase.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/Model/Mobiles/Propiedades/CasterPersonalizadoBase.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/MModulares/Player/PlayerFactory.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Modulares/PC/PCFactory.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCFactory.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/Interfaces/GameState/MundoI.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/GameState/Mundo.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PCFactory.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/MobI.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PCI.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/ProyectilI.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PC.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/Mob.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PC.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PlayerI.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/Player.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCNotificador.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/CampoVision.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/MobNotificador.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/MobNotificador.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/GameState/Mundo.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsMob.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/MobView/MobView.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsProyectil.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/ProyectilView/ProyectilView.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/Model/Skills/SkillPersonalizado.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Controller/ClienteInputs.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/BufferCampoVision.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/ProyectilView/ProyectilViewFactory.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PCView/PCView.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Geo/Mapa.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java" />
         <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/Proyectil.java" />
         <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/Proyectil.java" />
         <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PCNotificador.java" />
         <option value="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerView.java" />
-        <option value="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsPlayer.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsPCStats.java" />
-        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java" />
-        <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsAnimable.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCaster.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCasterPersonalizable.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsEspacial.java" />
         <option value="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsCampoVision.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PlayerI.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsPlayer.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Controller/Servidor.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/DTO/DTOsMapView.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Controller/Cliente.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Controller/Controlador.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/GameState/Mundo.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/MapaView.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/BufferCampoVision.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/MundoView.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/View/Classes/Geo/SubMapaView.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/DTO/KryoDTOs.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsNet.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/BarraTerrenos.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/DTOs/KryoDTOs.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/DAO/BDebuff/BDebuffDAOFactoryI.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/BDebuff/BDebuffDAOFactory.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/BDebuff/BDebuffDAOFactory.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/DAO/TipoSpell/TipoSpellDAOFactyI.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoSpell/TipoSpellDAOFactory.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/TipoSpell/TipoSpellDAOFactory.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/DB/Datos/Spell/SpellXMLDB.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/Interfaces/Spell/SpellI.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/Spell.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/Spell.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TipoSpellFactory.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoSpell/TipoSpellXMLDB.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/Model/Skills/Spell/Spell.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/DB/Datos/Spell/SpellXMLDB.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/SpellCliente.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/EditarTerreno.java" />
+        <option value="$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/Interfaces/Spell/TipoSpellI.java" />
+        <option value="$PROJECT_DIR$/MyrranCore/src/Model/Skills/Spell/TipoSpell.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/EditarTerreno.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java" />
+        <option value="$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java" />
       </list>
     </option>
   </component>
@@ -793,6 +890,66 @@
               <option name="myItemId" value="Classes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Skill" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranServidor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Skill" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TiposSpell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranServidor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Skill" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -929,50 +1086,6 @@
               <option name="myItemId" value="MyrranServidor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranServidor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Datos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranServidor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Datos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Spell" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -996,6 +1109,60 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="MyrranCore" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Skills" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Skills" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1033,18 +1200,8 @@
               <option name="myItemId" value="EntidadesPropiedades" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranCore" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DTOs" />
+              <option name="myItemId" value="TipoMobile" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1058,7 +1215,127 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DTO" />
+              <option name="myItemId" value="InterfacesEntidades" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EntidadesPropiedades" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Steerable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="InterfacesEntidades" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EntidadesPropiedades" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Misc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="InterfacesEntidades" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EntidadesPropiedades" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Espaciales" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DAO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipoSpell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DAO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DAO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DAO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BDebuff" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1222,6 +1499,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Geo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCliente" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
@@ -1245,6 +1544,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCliente" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Skill" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranMP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyrranCliente" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Skill" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TiposSpell" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1415,38 +1770,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Geo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranCliente" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranMP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyrranCliente" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Datos" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1896,12 +2219,6 @@
       <option name="number" value="Default" />
       <updated>1396881454118</updated>
     </task>
-    <task id="LOCAL-00118" summary="v1.413 SuperRefactorizacion en camino al 70%, creacion ControlaPlayers">
-      <created>1406199616342</created>
-      <option name="number" value="00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1406199616342</updated>
-    </task>
     <task id="LOCAL-00119" summary="v1.414 SuperRefactorizacion en camino al 90%, reordenacion DTOs">
       <created>1406235880566</created>
       <option name="number" value="00119" />
@@ -2190,7 +2507,13 @@
       <option name="project" value="LOCAL" />
       <updated>1441523953879</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="v1.466 Cambiados todos los eventos para capturar Interfaces y no clases&#10;-Todos los DTOs de envio y recepcion se van centralizando en la misma clase (CampoDeVisionDTOs)&#10;-CasterPersonalizadoBase recibe como parametro la factoria de DAOs asi puede estar en el core y compartir el codigo">
+      <created>1441625645850</created>
+      <option name="number" value="00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1441625645851</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2236,7 +2559,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.50044763" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.17668161" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="-1910" y="8" width="941" height="1190" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.17668161" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="-1908" y="8" width="941" height="1190" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2265,7 +2588,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1687966" sideWeight="0.49955237" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.17668161" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="-1911" y="8" width="639" height="1128" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.17668161" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="-1910" y="8" width="941" height="1190" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32651162" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283721" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.20986547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="-1094" y="218" width="585" height="529" />
@@ -2277,7 +2600,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32749078" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17199148" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="1" y="0" width="306" height="1201" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28597787" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.329148" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-1047" y="154" width="658" height="419" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.329148" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-1518" y="109" width="658" height="419" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.50044763" order="3" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -2295,7 +2618,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="v1.437 Continua la refactorizacion Inyectora&#10;-Se elimina la clase AbstractModelStage, se hace que el stage sea un campo mas para que no haya circular dependency&#10;-La barradeTerrenosView y la ConjuntoBarraACcionesView toman como parametros los model, y capturan los eventos de añadir de estos&#10;-Todas las peticiones de accion son enrutadas a traves de un UIViewController, que tiene acceso a los model del uiView, si hiciera falta modificar algo del view, lo haria mediante eventos para que no existiera una dependiencia ciclica y mantener el decoupling de las clases&#10;-El UiView manda la peticion de zoom a la vista a traves de un evento&#10;-Todo el UI, y su View, asi como sus subclases son inyectadas" />
     <MESSAGE value="v1.438 Cliente refactorizado para hacerlo mas S.O.L.I.D&#10;-mapaView coge como parametro la camara en lugar del mundoView asi no hay dependencia ciclica, ademas deja de usar como parametros iniciales la posX y posY, usa los de la camara&#10;-El mundoView y solo el, se encarga de añadir y eliminar las unidades de sus listas, via eventos de su model el Mundo&#10;-El mundoView recibe todos sus parametros inyectados, sus componentes a su vez, han perdido sus dependencias ciclicas y son inyectados por factorias&#10;-Todas las unidades que tienen nameplate, hacen dispose de este cuando se eliminan&#10;-Todas las unidadesView tienen factoria ahora, y ninguna modifica ni tiene acceso a las listas del mundoView, solo ven y modifican el model al que observan&#10;-Casi todas las clases del cliente estan ahora creadas en el updater (Main Loop)&#10;" />
     <MESSAGE value="v1.439 Creacion en el servidor entidad Mob, con la propiedas AI Steerable&#10;" />
     <MESSAGE value="v1.440 Implementacion Steering Behaviors&#10;-Nueva entidad Mob, el campo de vision la captura y la envia, su posicion y su rotacion&#10;-el movimiento del player tenia un lag de 30ms, ya que el primer input se ignoraba por que la direccion no se aplicaba al no hacerse a la vez que la velocidad, ahora la clase cuerpo aplica velocidad y direccion a la vez para crear un vector velocidad siempre que se proporciona uno solo de estos parametros&#10;-Completa rescritura del interface dinamico, para incluir todos los campos necesarios para mover las entidades&#10;-Interfaz campo de vision ahora en lugar de tener 2 floats tendra un vector de floats, esto hara mas facil el acceso de librerias como ligbdx y box2d&#10;-interfaz identificable tiene ahora el SetID, se elimina el setConnectionID de playerStats&#10;-Nueva entidad mob, Steeterable, puede seguir otras unidades segun patrones de movimiento&#10;-Nuevo interfaz Orientable&#10;-Ahora todas las clases que se mueven heredan de SteerableAbstract, que a su vez implementa un esqueleto de todos los metodos base de Espacial, Dinamico y Orientable. Asi nos ahorramos de implementar una y otra vez el mismo esqueleto de codigo.&#10;-Las clases que antes tenian notificadores ahora estos son un hijo de Steerable del que la entidad hereda. PCNotificador, es ahora PCAbstract, PC hereda de PCAbstract y esta hereda de SteerableAbstract&#10;-Todas las entidades del servidor se crean ahora con factorias&#10;-Queda pendiente la refactorizacion del cliente&#10;" />
@@ -2320,7 +2642,8 @@
     <MESSAGE value="v1.461 Sistema de Colisiones de proyectiles implementado, totalmente solid&#10;-El interface Solid define 2 callbacks para cuando se encuentra colision con mob y con muro&#10;-Nuevos interfaces para definir otros metodos para encontrar colisiones con muros y entre proyectiles y mobs&#10;-Implementacion concreta ColisionProyectilesQTree que usa unQtree para acotar la busqueda por hitboxes&#10;-Implementacion concreta ColisionMurosTiles que usa el grid y asume que los muros son siempre cuadrados para encontrar la colision&#10;-Los MobView y PCView cuando su SetPosition difiere mucho de su ultima posicion, en lugar de interpolarla, se teleporta&#10;-Todo el sistema de colision esta decoupleado entre si, el mundo chequea por colisiones usando los sistems de colisiones, pasando como parametro cada entidad, estos sistemas en cuanto detectan una colision si el sistema de aggro lo da por bueno, ejecutan el callback de la entidad&#10;-El fadeIn de los pepos depende de la velocidad de los mismos, si no cuando eran muy rapidos siempre se veian transparentes" />
     <MESSAGE value="v1.462 Optimizaciones y refactors varios (Callback Quadtree)&#10;-El cuerpo de los proyectiles no tiene Fixtura para que no haga sombras&#10;-Por ahora el cliente no registra el tamaño de los envios (para comprobar su repercusion en el framerate)&#10;-La consulta de datos al QuadTree por parte del ColisionProyectilesQTree se hace por CallBack para no tener que crear una lista cada vez&#10;-Se transiciona de los DTOs por clase a los DTOs por interface&#10;-Mob ahora implementa Debufeable, Vulnerable y tiene Nameplate&#10;-Creada factoria para el MobView" />
     <MESSAGE value="v1.464 Arreglado bug de desincronizacion de proyectiles&#10;-Era debido al delay variable con el que llega la informacion al servidor, que hacia que si se casteaba muy rapido se apilasen las peticiones de casteo y al ya estar casteando se ignorasen, tambien fallaba por el stopCastear, que podia cancelar en el servidor un pepo ya lanzado en el cliente&#10;-Para arreglarlo el servidor lleva la lista de spells a lanzar, con la nueva clase SpellsACastear, y la va limpiando en orden. Se ha tenido que cambiar el DTO de envio desde el cliente tambien, y hacer que mande los datos de spellID, coordenadas y parametro con cada casteo" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.464 Arreglado bug de desincronizacion de proyectiles&#10;-Era debido al delay variable con el que llega la informacion al servidor, que hacia que si se casteaba muy rapido se apilasen las peticiones de casteo y al ya estar casteando se ignorasen, tambien fallaba por el stopCastear, que podia cancelar en el servidor un pepo ya lanzado en el cliente&#10;-Para arreglarlo el servidor lleva la lista de spells a lanzar, con la nueva clase SpellsACastear, y la va limpiando en orden. Se ha tenido que cambiar el DTO de envio desde el cliente tambien, y hacer que mande los datos de spellID, coordenadas y parametro con cada casteo" />
+    <MESSAGE value="v1.466 Cambiados todos los eventos para capturar Interfaces y no clases&#10;-Todos los DTOs de envio y recepcion se van centralizando en la misma clase (CampoDeVisionDTOs)&#10;-CasterPersonalizadoBase recibe como parametro la factoria de DAOs asi puede estar en el core y compartir el codigo" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.466 Cambiados todos los eventos para capturar Interfaces y no clases&#10;-Todos los DTOs de envio y recepcion se van centralizando en la misma clase (CampoDeVisionDTOs)&#10;-CasterPersonalizadoBase recibe como parametro la factoria de DAOs asi puede estar en el core y compartir el codigo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2344,329 +2667,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/GameState/Mundo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="237" column="9" selection-start-line="237" selection-start-column="9" selection-end-line="237" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerViewFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/MobView/MobView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0940171">
-          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/MobView/MobViewFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PCView/PCViewFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/GameState/MundoView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11490978">
-          <caret line="61" column="34" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Mob/MobNotificador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/Skills/SkillPersonalizado.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5111326">
-          <caret line="55" column="79" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/BufferCampoVision.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.34757835">
-          <caret line="175" column="93" selection-start-line="175" selection-start-column="93" selection-end-line="175" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Controller/ClienteInputs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8774929">
-          <caret line="113" column="203" selection-start-line="113" selection-start-column="203" selection-end-line="113" selection-end-column="203" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsBarraAcciones.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsInputManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.020892687">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsMapa.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.020892687">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsMapView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsMundo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsParametrosSpell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.020892687">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsSkillPersonalizado.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOTerrenoView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.020892687">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/ProyectilView/ProyectilViewFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11490978">
-          <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/MobFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.042594384">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Mob/MobNotificador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14624882">
-          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilNotificador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.104463436">
-          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding>
-            <element signature="e#381#382#0" expanded="true" />
-            <element signature="e#442#443#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/PC/PCNotificador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/Proyectil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50048405">
-          <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/Proyectil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4805318">
-          <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20232333">
-          <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Proyectil/ProyectilFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20232333">
-          <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Geo/Mapa.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89553654">
-          <caret line="180" column="62" selection-start-line="180" selection-start-column="62" selection-end-line="180" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/ProyectilView/ProyectilView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0702754">
-          <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PlayerView/PlayerView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9164292">
-          <caret line="148" column="42" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Mobiles/PCView/PCView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9059829">
-          <caret line="126" column="52" selection-start-line="126" selection-start-column="52" selection-end-line="126" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/CampoVisionI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/MobI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PCI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PlayerI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/ProyectilI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.041785374">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/PC/PCNotificador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/CampoVision.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7863247">
-          <caret line="76" column="58" selection-start-line="76" selection-start-column="58" selection-end-line="76" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsAnimable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCaster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsCasterPersonalizable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2715,42 +2715,364 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsCampoVision.java">
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/InterfacesEntidades/EntidadesTipos/PlayerI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60947275">
-          <caret line="122" column="27" selection-start-line="122" selection-start-column="27" selection-end-line="122" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/DTOsPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.094017096">
-          <caret line="9" column="36" selection-start-line="8" selection-start-column="4" selection-end-line="9" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTO/NetDTOs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5014245">
-          <caret line="50" column="53" selection-start-line="50" selection-start-column="53" selection-end-line="50" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="74" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
+        <state vertical-scroll-proportion="0.074540175">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Mobiles/Player/PlayerNotificador.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.13865148">
-          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/ServidorInputs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12778315">
+          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/Servidor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39411205">
+          <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Controller/Controlador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="106" selection-start-line="74" selection-start-column="92" selection-end-line="74" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/GameState/Mundo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="157" column="40" selection-start-line="157" selection-start-column="40" selection-end-line="157" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/MapaView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6134853">
+          <caret line="223" column="87" selection-start-line="223" selection-start-column="87" selection-end-line="223" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/zMain/MyrranServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18102613">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/View/Classes/Geo/SubMapaView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6389158">
+          <caret line="96" column="8" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/MundoView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15972894">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Controller/Cliente.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54017425">
+          <caret line="61" column="33" selection-start-line="61" selection-start-column="33" selection-end-line="61" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/Updater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33301064">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/BufferCampoVision.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="226" column="5" selection-start-line="226" selection-start-column="5" selection-end-line="226" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/UI/BarraTerrenos.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsMapa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.020892687">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOTerrenoView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.020892687">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsSkillPersonalizado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsMundo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/DTOsNet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5084897">
+          <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DTOs/KryoDTOs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1671415">
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Controller/Controlador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DAO/Spell/SpellDAOFactoryI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/DB/Datos/BDebuff/BDebuffDAOFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.042594384">
+          <caret line="6" column="59" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/DB/Datos/BDebuff/BDebuffDAOFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="6" column="59" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DAO/BDebuff/BDebuffDAOFactoryI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/DAO/TipoSpell/TipoSpellDAOFactoryI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoSpell/TipoSpellDAOFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="6" column="63" selection-start-line="6" selection-start-column="63" selection-end-line="6" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/DB/Datos/TipoSpell/TipoSpellDAOFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="6" column="63" selection-start-line="6" selection-start-column="63" selection-end-line="6" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/DB/Datos/Spell/SpellXMLDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34377968">
+          <caret line="84" column="45" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Interfaces/Spell/SpellI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27160493">
+          <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/DB/Datos/TipoSpell/TipoSpellXMLDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23426911">
+          <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TipoSpellFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TipoSpellFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06267806">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/DB/Datos/Spell/SpellXMLDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="65" column="48" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/EditarTerreno.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Interfaces/Spell/TipoSpellI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/Skills/Spell/TipoSpell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35140368">
+          <caret line="41" column="62" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Heal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08687068">
+          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/EditarTerreno.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09583737">
+          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/SpellCliente.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCore/src/Model/Skills/Spell/Spell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/View/Gamestate/CampoVision/CampoVision.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranServidor/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041785374">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyrranCliente/src/Model/Classes/Skill/Spell/TiposSpell/Bolt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3133903">
+          <caret line="36" column="99" selection-start-line="36" selection-start-column="99" selection-end-line="36" selection-end-column="99" />
           <folding />
         </state>
       </provider>

@@ -1,8 +1,8 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 05/05/2014.
 
 import DB.DAO;
-import DTO.DTOsInputManager;
-import InterfacesEntidades.EntidadesPropiedades.MaquinablePlayer;
+import DTOs.DTOsInputManager;
+import InterfacesEntidades.EntidadesPropiedades.Misc.MaquinablePlayer;
 import Interfaces.Model.ModelI;
 import Interfaces.Spell.SpellI;
 import Model.Classes.Acciones.Accion;

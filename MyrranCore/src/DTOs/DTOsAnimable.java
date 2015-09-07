@@ -1,6 +1,6 @@
 package DTOs;// Created by Hanto on 06/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Animable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Animable;
 
 public class DTOsAnimable
 {

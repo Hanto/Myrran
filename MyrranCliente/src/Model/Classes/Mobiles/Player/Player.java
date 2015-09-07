@@ -2,8 +2,9 @@ package Model.Classes.Mobiles.Player;// Created by Hanto on 04/09/2015.
 
 import DB.DAO;
 import Interfaces.BDebuff.AuraI;
-import InterfacesEntidades.EntidadesPropiedades.*;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.*;
+import InterfacesEntidades.EntidadesPropiedades.TipoMobile.PCStats;
 import InterfacesEntidades.EntidadesTipos.PlayerI;
 import Interfaces.GameState.MundoI;
 import Interfaces.Input.PlayerIOI;

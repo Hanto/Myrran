@@ -1,6 +1,6 @@
 package View.Classes.Geo;// Created by Hanto on 15/04/2014.
 
-import DTO.DTOTerrenoView;
+import DTOs.DTOTerrenoView;
 import Model.Settings;
 import DB.RSC;
 import DB.Recursos.TerrenoRecursos.DTO.TerrenoRecursos;

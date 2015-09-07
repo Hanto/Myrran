@@ -1,6 +1,6 @@
 package Model.Classes.Skill.BDebuff;// Created by Hanto on 04/06/2014.
 
-import Model.Skills.SkillStat;
+import Model.Skills.SkillsPersonalizados.SkillStat;
 import Interfaces.BDebuff.AuraI;
 import Interfaces.Observable.AbstractModel;
 import Interfaces.BDebuff.TipoBDebuffI;

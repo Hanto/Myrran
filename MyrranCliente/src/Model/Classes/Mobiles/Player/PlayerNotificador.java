@@ -1,7 +1,5 @@
 package Model.Classes.Mobiles.Player;// Created by Hanto on 21/07/2014.
 
-import DTO.DTOsCampoVision;
-import DTO.DTOsPlayer;
 import DTOs.*;
 import InterfacesEntidades.EntidadesTipos.PlayerI;
 import Model.Mobiles.Steerables.SteerableAgent;
@@ -15,9 +13,9 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
     private DTOsEspacial.Posicion posicionDTO;
     private DTOsAnimable.NumAnimacion animacionDTO;
 
-    private DTOsCampoVision.Posicion posicionNET;
-    private DTOsCampoVision.NumAnimacion animacionNET;
-    private DTOsCampoVision.Castear castearNET;
+    private DTOsNet.Posicion posicionNET;
+    private DTOsNet.NumAnimacion animacionNET;
+    private DTOsNet.Castear castearNET;
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
     private DTOsCaster.CastingTimePercent castingTimeDTO;
     private DTOsVulnerable.ModificarHPs modificarHPsDTO;
@@ -25,25 +23,27 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
     private ObjectMap<Class, Object> cambiosExcluyentes = new ObjectMap<>();
     private ArrayList<Object> cambiosAcumulativos = new ArrayList<>();
 
-    private DTOsPlayer.PlayerDTOs dtos = new DTOsPlayer.PlayerDTOs();
+    private DTOsNet.PlayerDTOs dtos;
 
     public PlayerNotificador()
     {
+        dtos = new DTOsNet.PlayerDTOs();
+
         posicionDTO = new DTOsEspacial.Posicion(this);
         animacionDTO = new DTOsAnimable.NumAnimacion(this);
         castingTimeDTO = new DTOsCaster.CastingTimePercent();
         modificarHPsDTO = new DTOsVulnerable.ModificarHPs();
 
-        posicionNET = new DTOsCampoVision.Posicion();
-        animacionNET = new DTOsCampoVision.NumAnimacion();
-        castearNET = new DTOsCampoVision.Castear();
+        posicionNET = new DTOsNet.Posicion();
+        animacionNET = new DTOsNet.NumAnimacion();
+        castearNET = new DTOsNet.Castear();
     }
 
 
-    public boolean notificadorContieneDatos()
+    @Override public boolean notificadorContieneDatos()
     {   return (cambiosExcluyentes.size >0 || cambiosAcumulativos.size() >0); }
 
-    public DTOsPlayer.PlayerDTOs getDTOs()
+    @Override public DTOsNet.PlayerDTOs getDTOs()
     {
         dtos.listaDTOs = juntarObjectMapYArrayList(cambiosExcluyentes, cambiosAcumulativos);
         cambiosExcluyentes.clear();
@@ -74,7 +74,7 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
         {
             posicionNET.posX = (int) getX();
             posicionNET.posY = (int) getY();
-            cambiosExcluyentes.put(DTOsCampoVision.Posicion.class, posicionNET);
+            cambiosExcluyentes.put(DTOsNet.Posicion.class, posicionNET);
 
             posicionDTO.set(getX(), getY());
             notificarActualizacion("posicionPlayer", null, posicionDTO);
@@ -86,7 +86,7 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
         if (animacionNET.numAnimacion != (short)getNumAnimacion())
         {
             animacionNET.numAnimacion = (short)getNumAnimacion();
-            cambiosExcluyentes.put(DTOsCampoVision.NumAnimacion.class, animacionNET);
+            cambiosExcluyentes.put(DTOsNet.NumAnimacion.class, animacionNET);
 
             animacionDTO.set(getNumAnimacion());
             notificarActualizacion("numAnimacionPlayer", null, animacionDTO);
@@ -99,14 +99,14 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
         castearNET.screenY = screenY;
         castearNET.spellID = this.getSpellIDSeleccionado();
         castearNET.parametrosSpell = this.getParametrosSpell();
-        cambiosExcluyentes.put(DTOsCampoVision.Castear.class, castearNET);
+        cambiosExcluyentes.put(DTOsNet.Castear.class, castearNET);
     }
 
     //Cambios Acumulativos:
     //(Se envia cualquier valor, aunque sea repetido)
     public void notificarSetNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
     {   cambiosAcumulativos.add(
-            new DTOsCampoVision.SetNumTalentosSkillPersonalizado(skillID, statID, valor)); }
+            new DTOsNet.SetNumTalentosSkillPersonalizado(skillID, statID, valor)); }
 
     //  NOTIFICACION LOCAL:
     //------------------------------------------------------------------------------------------------------------------

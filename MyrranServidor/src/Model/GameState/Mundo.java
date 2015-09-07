@@ -1,6 +1,6 @@
 package Model.GameState;// Created by Hanto on 07/04/2014.
 
-import DTO.DTOsMundo;
+import DTOs.DTOsMundo;
 import DTOs.DTOsEspacial;
 import Interfaces.AI.ColisionMurosI;
 import Interfaces.AI.ColisionProyectilesI;

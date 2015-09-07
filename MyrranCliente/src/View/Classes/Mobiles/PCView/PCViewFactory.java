@@ -1,6 +1,6 @@
 package View.Classes.Mobiles.PCView;// Created by Hanto on 10/08/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.NameplateView;

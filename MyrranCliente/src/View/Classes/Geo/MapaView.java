@@ -1,6 +1,6 @@
 package View.Classes.Geo;// Created by Hanto on 16/04/2014.
 
-import DTO.DTOsMapa;
+import DTOs.DTOsMapa;
 import Interfaces.Geo.MapaI;
 import Model.Settings;
 import ch.qos.logback.classic.Logger;

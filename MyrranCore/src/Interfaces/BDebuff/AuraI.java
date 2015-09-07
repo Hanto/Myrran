@@ -1,7 +1,7 @@
 package Interfaces.BDebuff;// Created by Hanto on 09/06/2014.
 
-import InterfacesEntidades.EntidadesPropiedades.Debuffeable;
-import InterfacesEntidades.EntidadesPropiedades.Caster;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Debuffeable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Caster;
 
 public interface AuraI
 {    //SET:

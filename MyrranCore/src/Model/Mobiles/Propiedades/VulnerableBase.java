@@ -1,6 +1,6 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 03/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.Vulnerable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.Vulnerable;
 
 public class VulnerableBase implements Vulnerable
 {

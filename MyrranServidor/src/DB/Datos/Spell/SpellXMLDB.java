@@ -1,13 +1,13 @@
 package DB.Datos.Spell;// Created by Hanto on 17/04/2014.
 
-import Model.Skills.SkillStat;
+import Model.Skills.SkillsPersonalizados.SkillStat;
 import DAO.Spell.SpellXMLDBI;
 import DB.DAO;
 import Model.Settings;
 import Interfaces.BDebuff.BDebuffI;
 import Interfaces.Spell.SpellI;
 import Interfaces.Spell.TipoSpellI;
-import Model.Classes.Skill.Spell.Spell;
+import Model.Skills.Spell.Spell;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -81,7 +81,8 @@ public class SpellXMLDB implements SpellXMLDBI
                 for (int j = 0; j < listaDebuffs.size(); j++)
                 {
                     String debuffID = ((Element)listaDebuffs.get(j)).getText();
-                    spell.añadirDebuff(debuffID);
+                    BDebuffI debuff = DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(debuffID);
+                    spell.añadirDebuff(debuff);
 
                     logger.trace("Aplica debuff:  {}", debuffID);
                 }

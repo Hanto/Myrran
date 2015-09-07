@@ -1,7 +1,8 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 04/09/2015.
 
-import InterfacesEntidades.EntidadesPropiedades.*;
 import InterfacesEntidades.EntidadesPropiedades.Espaciales.Colisionable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.*;
+import InterfacesEntidades.EntidadesPropiedades.TipoMobile.ProyectilStats;
 import InterfacesEntidades.EntidadesTipos.MobI;
 import InterfacesEntidades.EntidadesTipos.PCI;
 import InterfacesEntidades.EntidadesTipos.ProyectilI;

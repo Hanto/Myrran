@@ -1,7 +1,6 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
-import DTO.DTOsCampoVision;
-import DTO.DTOsMapView;
+import DTOs.DTOsNet;
 import Interfaces.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
 import Model.GameState.Mundo;
@@ -73,6 +72,6 @@ public class Controlador
     public void añadirAccion(AccionI accion)                                                { ui.getInputManager().añadirAccion(accion); }
 
     //Entidades:
-    public void actualizarMapa(DTOsMapView.Mapa mapaServidor)                               { mundo.actualizarMapa(mapaServidor); }
-    public void actualizarMapTilesAdyacentes(DTOsCampoVision.MapTilesAdyacentes mapTiles)   { mundo.mapTilesCargados = mapTiles.mapaAdyacencias; }
+    public void actualizarMapa(DTOsNet.Mapa mapaServidor)                           { mundo.actualizarMapa(mapaServidor); }
+    public void actualizarMapTilesAdyacentes(DTOsNet.MapTilesAdyacentes mapTiles)   { mundo.mapTilesCargados = mapTiles.mapaAdyacencias; }
 }

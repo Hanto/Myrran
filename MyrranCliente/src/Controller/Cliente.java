@@ -1,9 +1,7 @@
 package Controller;// Created by Hanto on 08/04/2014.
 
-import DTO.DTOsCampoVision;
-import DTO.DTOsMapView;
-import DTO.DTOsPlayer;
-import DTO.NetDTOs;
+import DTOs.KryoDTOs;
+import DTOs.DTOsNet;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Client;
@@ -25,7 +23,7 @@ public class Cliente extends Client
         this.controlador = controlador;
         this.clienteInputs = new ClienteInputs(controlador);
 
-        NetDTOs.register(this);
+        KryoDTOs.register(this);
         this.start();
 
         //Para activar el log completo de mensajes:
@@ -49,7 +47,7 @@ public class Cliente extends Client
 
         while (true)
         {
-            try { this.connect(NetDTOs.timeout, host, NetDTOs.puertoTCP, NetDTOs.puertoUDP); break; }
+            try { this.connect(KryoDTOs.timeout, host, KryoDTOs.puertoTCP, KryoDTOs.puertoUDP); break; }
             catch (Exception IOException) { logger.warn("ERROR: Imposible conectar con el Servidor: "); }
         }
 
@@ -60,20 +58,20 @@ public class Cliente extends Client
 
     private void procesarReceived(Connection con, Object obj)
     {
-        if (obj instanceof DTOsMapView.Mapa)
-        {   controlador.actualizarMapa(((DTOsMapView.Mapa) obj));}
+        if (obj instanceof DTOsNet.Mapa)
+        {   controlador.actualizarMapa(((DTOsNet.Mapa) obj));}
 
-        else if (obj instanceof DTOsCampoVision.PCDTOs)
-        {   clienteInputs.procesarActualizacionesPC((DTOsCampoVision.PCDTOs) obj);}
+        else if (obj instanceof DTOsNet.PCDTOs)
+        {   clienteInputs.procesarActualizacionesPC((DTOsNet.PCDTOs) obj);}
 
-        else if (obj instanceof DTOsCampoVision.MobDTOs)
-        {   clienteInputs.procesarActualizacionesMobs( (DTOsCampoVision.MobDTOs)obj );}
+        else if (obj instanceof DTOsNet.MobDTOs)
+        {   clienteInputs.procesarActualizacionesMobs( (DTOsNet.MobDTOs)obj );}
 
-        else if (obj instanceof DTOsCampoVision.MiscDTOs)
-        {   clienteInputs.procesarActualizacionesMisc((DTOsCampoVision.MiscDTOs) obj);}
+        else if (obj instanceof DTOsNet.MiscDTOs)
+        {   clienteInputs.procesarActualizacionesMisc((DTOsNet.MiscDTOs) obj);}
 
-        else if (obj instanceof DTOsCampoVision.ProyectilDTOs)
-        {   clienteInputs.procesarActualizacionesProyectiles((DTOsCampoVision.ProyectilDTOs) obj);}
+        else if (obj instanceof DTOsNet.ProyectilDTOs)
+        {   clienteInputs.procesarActualizacionesProyectiles((DTOsNet.ProyectilDTOs) obj);}
     }
 
     // LOG IN
@@ -82,7 +80,7 @@ public class Cliente extends Client
     private void procesarConnected(Connection con)
     {
         controlador.getMundo().getPlayer().setID(this.getID());
-        enviarAServidor(new DTOsPlayer.LogIn());
+        enviarAServidor(new DTOsNet.LogIn());
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -90,9 +88,9 @@ public class Cliente extends Client
     public void enviarAServidor(Object obj)
     {
         String nombreDTOs ="";
-        if (obj instanceof DTOsPlayer.PlayerDTOs)
+        if (obj instanceof DTOsNet.PlayerDTOs)
         {
-            DTOsPlayer.PlayerDTOs dtos = (DTOsPlayer.PlayerDTOs)obj;
+            DTOsNet.PlayerDTOs dtos = (DTOsNet.PlayerDTOs)obj;
             for (int i=0; i< dtos.listaDTOs.length; i++)
             {   nombreDTOs = nombreDTOs +" - "+dtos.listaDTOs[i].getClass().getSimpleName(); }
         }

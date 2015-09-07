@@ -5,7 +5,7 @@ import DTOs.DTOsAnimable;
 import DTOs.DTOsEspacial;
 import DTOs.DTOsPCStats;
 import DTOs.DTOsVulnerable;
-import InterfacesEntidades.EntidadesPropiedades.IDentificable;
+import InterfacesEntidades.EntidadesPropiedades.Misc.IDentificable;
 import InterfacesEntidades.EntidadesTipos.PlayerI;
 import Model.Settings;
 import View.Classes.Actores.NameplateView;

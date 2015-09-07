@@ -1,6 +1,6 @@
 package Model.Classes.UI;// Created by Hanto on 11/07/2014.
 
-import DTO.DTOsBarraAcciones;
+import DTOs.DTOsBarraAcciones;
 import Model.Settings;
 import Interfaces.Observable.AbstractModel;
 import Interfaces.UI.AccionI;
