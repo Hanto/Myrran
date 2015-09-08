@@ -164,6 +164,23 @@ public class DTOsNet
         }
     }
 
+    public static class EliminarAura
+    {
+        public byte auraID;
+        public EliminarAura() {}
+        public EliminarAura(AuraI aura)
+        {   this.auraID = (byte)aura.getID(); }
+    }
+
+    public static class ModificarAuraStacks
+    {
+        public byte auraID;
+        public byte numStacks;
+        public ModificarAuraStacks() {}
+        public ModificarAuraStacks(AuraI aura)
+        {   this.auraID = (byte)aura.getID(); this.numStacks = (byte)aura.getStacks(); }
+    }
+
     // PC DTOS:
     //------------------------------------------------------------------------------------------------------------------
 

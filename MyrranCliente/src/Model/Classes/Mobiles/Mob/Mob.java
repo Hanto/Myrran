@@ -107,7 +107,7 @@ public class Mob extends MobNotificador
     // ACTUALIZACION:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void actualizarTimers(float delta) {}
+    @Override public void actualizarTimers(float delta) {   actualizarAuras(delta); }
     @Override public void actualizarFisica(float delta, MundoI mundo) {}
     @Override public void actualizarIA(float delta, MundoI mundo) {}
 

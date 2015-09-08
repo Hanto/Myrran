@@ -5,6 +5,7 @@ import Interfaces.Misc.Spell.AuraI;
 public interface DeBuffeableNotificadorI
 {
     public void notificarAñadirAura(AuraI aura);
+    public void notificarIncrementarStack(AuraI aura);
     public void notificarEliminarAura(AuraI aura);
 
 }

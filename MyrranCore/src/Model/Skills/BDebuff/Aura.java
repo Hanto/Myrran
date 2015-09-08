@@ -1,5 +1,6 @@
 package Model.Skills.BDebuff;// Created by Hanto on 04/06/2014.
 
+import DTOs.DTOsAura;
 import Interfaces.Misc.Observable.AbstractModel;
 import Model.Settings;
 import Interfaces.Misc.Spell.AuraI;
@@ -25,13 +26,13 @@ public class Aura extends AbstractModel implements AuraI
     @Override public float getDuracion()                    { return duracion; }
     @Override public float getDuracionMax()                 { return duracionMax; }
     @Override public Caster getCaster()                     { return Caster; }
-    @Override public DebuffeableI getTarget()                { return target; }
+    @Override public DebuffeableI getTarget()               { return target; }
     @Override public BDebuffI getDebuff()                   { return debuff; }
 
     @Override public void setDuracion(float f)              { duracion = f; }
     @Override public void setDuracionMax(float f)           { duracionMax = f; }
     @Override public void setCaster(Caster Caster)          { this.Caster = Caster; }
-    @Override public void setTarget(DebuffeableI target)     { this.target = target; }
+    @Override public void setTarget(DebuffeableI target)    { this.target = target; }
     @Override public void setDebuff(BDebuffI debuff)        { this.debuff = debuff; }
 
     // IDENTIFICABLE:
@@ -52,21 +53,31 @@ public class Aura extends AbstractModel implements AuraI
     }
 
     @Override public void dispose()
-    {
-        this.eliminarObservadores();
-    }
+    {   this.eliminarObservadores(); }
 
     // NOTIFICAR VISTA:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public void setStacks(int numStacks)
-    {   stacks = numStacks; }
+    {
+        stacks = numStacks;
+        notificarActualizacion("setStacks", null, new DTOsAura.SetStacks(numStacks));
+    }
 
     @Override public void setTicksAplicados(int ticksAplicados)
-    {   this.ticksAplicados = ticksAplicados; }
+    {
+        this.ticksAplicados = ticksAplicados;
+        notificarActualizacion("setTicksAplicados", null, new DTOsAura.SetTicksAplicados(ticksAplicados));
+    }
 
     // METODO DE ACTUALIZACION:
     //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void resetDuracion()
+    {
+        setTicksAplicados(0);
+        setDuracion(getDuracion() % Settings.BDEBUFF_DuracionTick);
+    }
 
     @Override public void actualizarAura (float delta)
     {

@@ -7,6 +7,7 @@ import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.Spell.AuraI;
 import Interfaces.Misc.Spell.BDebuffI;
 import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.UI.AccionI;
@@ -173,6 +174,15 @@ public class ClienteInputs
 
                 mob.añadirAura(auraID, debuff, caster, mob);
             }
+
+            else if (dto instanceof DTOsNet.ModificarAuraStacks)
+            {   AuraI aura = mob.getAura(((DTOsNet.ModificarAuraStacks) dto).auraID);
+                aura.setStacks(((DTOsNet.ModificarAuraStacks) dto).numStacks);
+                aura.resetDuracion();
+            }
+
+            else if (dto instanceof DTOsNet.EliminarAura)
+            {   mob.eliminarAura(((DTOsNet.EliminarAura) dto).auraID); }
         }
     }
 

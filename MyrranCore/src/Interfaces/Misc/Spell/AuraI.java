@@ -27,5 +27,7 @@ public interface AuraI extends IDentificable, Disposable, ModelI
     public void setDebuff(BDebuffI debuff);
 
     //METODOS:
+    public void resetDuracion();
     public void actualizarAura (float delta);
+
 }

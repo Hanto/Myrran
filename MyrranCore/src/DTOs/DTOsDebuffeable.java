@@ -22,4 +22,13 @@ public class DTOsDebuffeable
         {   this.debuffeable = debuffeable; }
         public EliminarAura() {}
     }
+
+    public static class ModificarStacks
+    {
+        public DebuffeableI debuffeable;
+        public AuraI aura;
+        public ModificarStacks(DebuffeableI debuffeable)
+        {   this.debuffeable = debuffeable; }
+        public ModificarStacks() {}
+    }
 }

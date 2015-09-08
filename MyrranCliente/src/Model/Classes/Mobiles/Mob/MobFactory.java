@@ -13,9 +13,12 @@ public enum MobFactory
     {
         @Override public Mob nuevo(int iD, World world)
         {
+            Debuffeable debuffeable = new Debuffeable();
+            debuffeable.isServidor = false;
+
             return new Mob(iD, BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 32, 32),
                     new IdentificableBase(), new VulnerableBase(),
-                    new Debuffeable(), new MobStatsBase());
+                    debuffeable, new MobStatsBase());
         }
     };
     public abstract Mob nuevo (int iD, World world);

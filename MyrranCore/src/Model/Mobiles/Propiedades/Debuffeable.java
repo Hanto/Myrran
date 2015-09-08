@@ -16,6 +16,7 @@ public class Debuffeable implements DebuffeableI
     protected List<AuraI> listaDeAuras = new ArrayList<>();
     protected DeBuffeableNotificadorI notificador;
     protected int auraID = 0;
+    public boolean isServidor = true;
 
     public void setNotificador(DeBuffeableNotificadorI notificador)
     {   this.notificador = notificador; }
@@ -34,7 +35,10 @@ public class Debuffeable implements DebuffeableI
     {
         AuraI aura = auraExisteYEsDelCaster(debuff, caster);
         if (aura != null)
-        {   incrementarStackYRestearDuracion(aura, debuff); }
+        {
+            incrementarStackYRestearDuracion(aura, debuff);
+            notificador.notificarIncrementarStack(aura);
+        }
         else
         {
             aura = new Aura(auraID++, debuff, caster, target);
@@ -45,10 +49,13 @@ public class Debuffeable implements DebuffeableI
 
     public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, DebuffeableI target)
     {
-        AuraI aura = auraExisteYEsDelCaster(debuff, caster);
+        AuraI aura;/* = auraExisteYEsDelCaster(debuff, caster);
         if (aura != null)
-        {   incrementarStackYRestearDuracion(aura, debuff); }
-        else
+        {
+            incrementarStackYRestearDuracion(aura, debuff);
+            notificador.notificarIncrementarStack(aura);
+        }
+        else*/
         {
             aura = new Aura(iDAura, debuff, caster, target);
             listaDeAuras.add(aura);
@@ -79,10 +86,12 @@ public class Debuffeable implements DebuffeableI
         {
             aura = iterator.next();
             aura.actualizarAura(delta);
-            if (aura.getDuracion() >= aura.getDuracionMax())
+            if (isServidor)
             {
-                notificador.notificarEliminarAura(aura);
-                iterator.remove();
+                if (aura.getDuracion() >= aura.getDuracionMax()) {
+                    notificador.notificarEliminarAura(aura);
+                    iterator.remove();
+                }
             }
         }
     }

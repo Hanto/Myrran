@@ -179,10 +179,22 @@ public class BufferCampoVision
         mapaDTOsMobs.add(mob.getID(), modificarHPsMob);
     }
 
-    public void addAura(MobI mob, AuraI aura)
+    public void addAñadirAura(MobI mob, AuraI aura)
     {
         DTOsNet.AñadirAura añadirAura = new DTOsNet.AñadirAura(aura);
         mapaDTOsMobs.add(mob.getID(), añadirAura);
+    }
+
+    public void addEliminarAura(MobI mob, AuraI aura)
+    {
+        DTOsNet.EliminarAura eliminarAura = new DTOsNet.EliminarAura(aura);
+        mapaDTOsMobs.add(mob.getID(), eliminarAura);
+    }
+
+    public void addAuraStacks(MobI mob, AuraI aura)
+    {
+        DTOsNet.ModificarAuraStacks modificarAuraStacks = new DTOsNet.ModificarAuraStacks(aura);
+        mapaDTOsMobs.add(mob.getID(), modificarAuraStacks);
     }
 
     // PROYECTILES:

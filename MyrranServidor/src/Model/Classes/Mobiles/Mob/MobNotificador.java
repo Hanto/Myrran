@@ -18,6 +18,7 @@ public abstract class MobNotificador extends SteerableAgentAutonomo implements M
 
     private DTOsDebuffeable.AñadirAura añadirAuraDTO;
     private DTOsDebuffeable.EliminarAura eliminarAuraDTO;
+    private DTOsDebuffeable.ModificarStacks modificarStacksDTO;
 
     public MobNotificador()
     {
@@ -25,8 +26,9 @@ public abstract class MobNotificador extends SteerableAgentAutonomo implements M
         orientacionDTO = new DTOsOrientable.Orientacion(this);
         modificarHPsDTO = new DTOsVulnerable.ModificarHPs(this);
 
-        this.añadirAuraDTO = new DTOsDebuffeable.AñadirAura(this);
-        this.eliminarAuraDTO = new DTOsDebuffeable.EliminarAura(this);
+        añadirAuraDTO = new DTOsDebuffeable.AñadirAura(this);
+        eliminarAuraDTO = new DTOsDebuffeable.EliminarAura(this);
+        modificarStacksDTO = new DTOsDebuffeable.ModificarStacks(this);
     }
 
     // NOTIFICACION LOCAL:
@@ -67,5 +69,11 @@ public abstract class MobNotificador extends SteerableAgentAutonomo implements M
     {
         eliminarAuraDTO.aura = aura;
         notificarActualizacion("eliminarAura", null, eliminarAuraDTO);
+    }
+
+    public void notificarIncrementarStack(AuraI aura)
+    {
+        modificarStacksDTO.aura = aura;
+        notificarActualizacion("setModificarStacks", null, modificarStacksDTO);
     }
 }

@@ -180,6 +180,12 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
         player.actualizarTimers(delta);
         player.actualizarIA(delta, mundo);
 
+        //MOBS:
+        for (MobI mob : listaMapaMobs)
+        {
+            mob.actualizarTimers(delta);
+        }
+
         //PROYECTILES:
         Iterator<ProyectilI>iterator = listaMapaProyectiles.iterator(); ProyectilI pro;
         while (iterator.hasNext())

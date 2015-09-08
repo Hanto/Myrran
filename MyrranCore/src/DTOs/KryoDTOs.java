@@ -38,6 +38,8 @@ public class KryoDTOs
         kryo.register(DTOsNet.Castear.class);
         kryo.register(DTOsNet.ParametrosEditarTerreno.class);
         kryo.register(DTOsNet.AñadirAura.class);
+        kryo.register(DTOsNet.EliminarAura.class);
+        kryo.register(DTOsNet.ModificarAuraStacks.class);
 
         // pc:
         kryo.register(DTOsNet.DatosCompletosPC.class);

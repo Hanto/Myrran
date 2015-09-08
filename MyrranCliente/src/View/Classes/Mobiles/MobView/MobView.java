@@ -10,6 +10,7 @@ import Model.Settings;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.Pixie;
 import View.Classes.Actores.Texto;
+import View.Classes.Propiedades.DebuffeableView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -26,6 +27,7 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     protected int iD;
     protected Pixie actor;
     protected NameplateView nameplate;
+    protected DebuffeableView debuffView;
 
     private int rAncho;
     private int rAlto;
@@ -48,6 +50,7 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
 
         crearActor();
         crearNameplate();
+        crearDebuffView();
 
         this.setPosition(mob.getX(), mob.getY());
 
@@ -57,6 +60,7 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     @Override public void dispose()
     {
         mob.eliminarObservador(this);
+        mob.eliminarObservador(debuffView);
 
         nameplate.dispose();
         this.actor = null;
@@ -79,6 +83,14 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     {
         nameplate.setPosition(this.getWidth() / 2 - nameplate.getWidth() / 2, getHeight());
         this.addActor(nameplate);
+    }
+
+    private void crearDebuffView()
+    {
+        debuffView = new DebuffeableView();
+        this.addActor(debuffView);
+        debuffView.setPosition(this.getWidth()+10, this.getHeight());
+        mob.añadirObservador(debuffView);
     }
 
     // VISTA:
