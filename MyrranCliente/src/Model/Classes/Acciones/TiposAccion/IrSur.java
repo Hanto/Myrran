@@ -1,7 +1,7 @@
 package Model.Classes.Acciones.TiposAccion;// Created by Hanto on 13/05/2014.
 
-import Interfaces.EntidadesPropiedades.Misc.MaquinablePlayer;
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.EntidadesPropiedades.Propiedades.MaquinablePlayer;
+import Interfaces.Misc.Observable.ModelI;
 import Model.Classes.Acciones.Accion;
 
 public class IrSur extends Accion

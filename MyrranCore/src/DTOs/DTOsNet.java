@@ -1,12 +1,14 @@
 package DTOs;// Created by Hanto on 06/06/2015.
 
-import Interfaces.EntidadesPropiedades.Misc.Animable;
 import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Interfaces.EntidadesPropiedades.Espaciales.Orientable;
+import Interfaces.EntidadesPropiedades.Propiedades.Animable;
+import Interfaces.EntidadesPropiedades.Propiedades.Vulnerable;
 import Interfaces.EntidadesPropiedades.TipoMobile.PCStats;
-import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.Spell.AuraI;
 import Model.Settings;
 
 public class DTOsNet
@@ -144,6 +146,22 @@ public class DTOsNet
         public SetNumTalentosSkillPersonalizado() {}
         public SetNumTalentosSkillPersonalizado(String skillID, int statID, int valor)
         {   this.skillID = skillID; this.statID = statID; this.valor = valor; }
+    }
+
+    public static class AñadirAura
+    {
+        public int auraID;
+        public String debuffID;
+        public byte tipoCaster;
+        public int casteriD;
+        public AñadirAura() {}
+        public AñadirAura(AuraI aura)
+        {
+            if (aura.getCaster() instanceof PCI) { tipoCaster = 0; casteriD = ((PCI) aura.getCaster()).getID(); }
+            else if (aura.getCaster() instanceof MobI) { tipoCaster = 1; casteriD = ((MobI) aura.getCaster()).getID(); }
+            this.debuffID = aura.getDebuff().getID();
+            this.auraID = aura.getID();
+        }
     }
 
     // PC DTOS:

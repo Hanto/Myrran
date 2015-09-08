@@ -1,7 +1,7 @@
 package Model.EstructurasDatos;
 
 import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
-import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
 import Interfaces.Misc.EstructurasDatos.ListaPorCuadrantesI;
 import Model.Settings;
 

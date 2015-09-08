@@ -2,8 +2,8 @@ package View.Classes.UI.SpellView;// Created by Hanto on 27/06/2014.
 
 import DB.RSC;
 import DTOs.DTOsSkillPersonalizado;
-import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
-import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
+import Interfaces.Misc.Spell.SkillPersonalizadoI;
 import Model.Settings;
 import View.Classes.Actores.Texto;
 import com.badlogic.gdx.graphics.Color;

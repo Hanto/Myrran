@@ -1,6 +1,6 @@
 package Interfaces.Misc.Geo;// Created by Hanto on 17/04/2014.
 
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.Misc.Observable.ModelI;
 import com.badlogic.gdx.utils.Disposable;
 
 public interface MapaI extends ModelI, Disposable

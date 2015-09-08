@@ -1,4 +1,4 @@
-package Interfaces.EntidadesPropiedades.Misc;// Created by Hanto on 06/08/2015.
+package Interfaces.EntidadesPropiedades.Propiedades;// Created by Hanto on 06/08/2015.
 
 public interface IDentificable
 {

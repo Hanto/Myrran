@@ -3,7 +3,7 @@ package DB.Datos.TipoBDebuff;// Created by Hanto on 10/06/2014.
 import Model.Skills.SkillsPersonalizados.SkillStat;
 import DAO.TipoBDebuff.TipoBDebuffXMLDBI;
 import Model.Settings;
-import Interfaces.Misc.BDebuff.TipoBDebuffI;
+import Interfaces.Misc.Spell.TipoBDebuffI;
 import Model.Skills.BDebuff.TipoBDebuff;
 import Model.Classes.Skill.BDebuff.TipoBDebuffFactory;
 import ch.qos.logback.classic.Logger;

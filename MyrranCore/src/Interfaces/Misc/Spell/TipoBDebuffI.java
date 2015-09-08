@@ -1,4 +1,4 @@
-package Interfaces.Misc.BDebuff;// Created by Hanto on 09/06/2014.
+package Interfaces.Misc.Spell;// Created by Hanto on 09/06/2014.
 
 import Model.Skills.SkillsPersonalizados.SkillStat;
 

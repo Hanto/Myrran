@@ -1,7 +1,7 @@
 package Interfaces.Misc.Spell;// Created by Hanto on 09/06/2014.
 
 import Model.Skills.SkillsPersonalizados.SkillStat;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.Misc.GameState.MundoI;
 
 import java.util.Iterator;

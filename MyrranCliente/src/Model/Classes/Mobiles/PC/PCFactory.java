@@ -14,7 +14,7 @@ public enum PCFactory
         {
             return new PC(iD, BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 48, 48),
                     new IdentificableBase(), new CasterBase(), new CasterPersonalizadoBase(DAO.spellDAOFactory),
-                    new VulnerableBase(), new DebuffeableBase(), new PCStatsBase(), new AnimableBase());
+                    new VulnerableBase(), new Debuffeable(), new PCStatsBase(), new AnimableBase());
         }
     };
 

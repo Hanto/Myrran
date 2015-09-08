@@ -1,7 +1,5 @@
 package Interfaces.Misc.Observable;// Created by Hanto on 09/04/2014.
 
-import Interfaces.Misc.Model.ModelI;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 

@@ -3,7 +3,7 @@ package Model.Classes.Skill.Spell.TiposSpell;
 
 import DTOs.DTOsNet;
 import Model.Settings;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.Misc.GameState.MundoI;
 import Interfaces.Misc.Spell.SpellI;
 import Model.Skills.Spell.TipoSpell;

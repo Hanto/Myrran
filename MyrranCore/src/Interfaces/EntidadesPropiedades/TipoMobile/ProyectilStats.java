@@ -1,7 +1,7 @@
 package Interfaces.EntidadesPropiedades.TipoMobile;// Created by Hanto on 06/08/2015.
 
 import Interfaces.Misc.Spell.SpellI;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 
 public interface ProyectilStats
 {

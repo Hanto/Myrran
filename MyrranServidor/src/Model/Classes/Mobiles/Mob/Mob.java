@@ -1,33 +1,33 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 04/09/2015.
 
-import Interfaces.Misc.BDebuff.AuraI;
-import Interfaces.Misc.GameState.MundoI;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
-import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
-import Interfaces.EntidadesPropiedades.Misc.IDentificable;
-import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
+import Interfaces.EntidadesPropiedades.Propiedades.Vulnerable;
 import Interfaces.EntidadesPropiedades.TipoMobile.MobStats;
 import Interfaces.EntidadesTipos.MobI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Spell.AuraI;
+import Interfaces.Misc.Spell.BDebuffI;
 import Model.AI.Huellas.Huellas;
-
-import java.util.Iterator;
+import Model.Mobiles.Propiedades.DeBuffeableNotificadorI;
 
 public class Mob extends MobNotificador implements MobI
 {
     private IDentificable identificable;
     private Vulnerable vulnerable;
-    private Debuffeable debuffeable;
+    private DebuffeableI debuffeable;
     private MobStats mobStats;
 
     public Mob(int iD, int ancho, int alto,
                IDentificable identificable, Vulnerable vulnerable,
-               Debuffeable debuffeable, MobStats mobStats)
+               DebuffeableI debuffeable, MobStats mobStats)
     {
         this.identificable = identificable;
         this.vulnerable = vulnerable;
         this.debuffeable = debuffeable;
         this.mobStats = mobStats;
-
 
         this.identificable.setID(iD);
         this.setAncho(ancho);
@@ -38,6 +38,8 @@ public class Mob extends MobNotificador implements MobI
 
         this.vulnerable.setMaxHPs(10000);
         this.vulnerable.setActualHPs(10000);
+
+        this.debuffeable.setNotificador(this);
     }
 
     @Override public void dispose()
@@ -64,10 +66,18 @@ public class Mob extends MobNotificador implements MobI
 
     // DEBUFFEABLE:
     //------------------------------------------------------------------------------------------------------------------
-    @Override public void añadirAura(AuraI aura)                    {   debuffeable.añadirAura(aura); }
-    @Override public void eliminarAura(AuraI aura)                  {   debuffeable.eliminarAura(aura); }
-    @Override public Iterator<AuraI> getAuras()                     {   return debuffeable.getAuras(); }
-    @Override public void actualizarAuras(float delta)              {   debuffeable.actualizarAuras(delta); }
+    @Override public AuraI getAura(int auraID)
+    {   return debuffeable.getAura(auraID); }
+    @Override public void añadirAura(BDebuffI debuff, Caster caster, DebuffeableI target)
+    {   debuffeable.añadirAura(debuff, caster, target);}
+    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, DebuffeableI target)
+    {   debuffeable.añadirAura(iDAura, debuff, caster, target); }
+    @Override public void eliminarAura(int iDAura)
+    {   debuffeable.eliminarAura(iDAura); }
+    @Override public void actualizarAuras(float delta)
+    {   debuffeable.actualizarAuras(delta); }
+    @Override public void setNotificador(DeBuffeableNotificadorI notificador)
+    {   debuffeable.setNotificador(notificador); }
 
     // CODIGO PERSONALIZADO:
     //------------------------------------------------------------------------------------------------------------------
@@ -106,14 +116,9 @@ public class Mob extends MobNotificador implements MobI
     @Override public void actualizarFisica(float delta, MundoI mundo)
     {
         if (getSteeringBehavior() != null)
-        {
-            calcularSteering(delta);
-
-            setPosition(nuevaPosX, nuevaPosY);
-            if (getOrientation() != nuevaOrientacion)
-                setOrientacion(nuevaOrientacion);
-        }
+        {   calcularSteering(delta); }
     }
+
 
     // COLISIONABLE:
     //------------------------------------------------------------------------------------------------------------------

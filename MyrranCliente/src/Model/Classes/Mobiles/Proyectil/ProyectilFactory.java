@@ -1,12 +1,11 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 04/09/2015.
 
 import DB.DAO;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.Misc.Spell.SpellI;
 import Model.Mobiles.Cuerpos.BodyFactory;
 import Model.Mobiles.Propiedades.ConsumibleBase;
-import Model.Mobiles.Propiedades.IdentificableBase;
-import Model.Mobiles.Propiedades.ProyectilStatsBase;
+import Model.Mobiles.Propiedades.ProyectilStatsIDBase;
 import com.badlogic.gdx.physics.box2d.World;
 
 public enum ProyectilFactory
@@ -17,9 +16,10 @@ public enum ProyectilFactory
 
         @Override public ProyectilFactory nuevo(World world, int ancho, int alto)
         {
+            ProyectilStatsIDBase proyectilStatsIDBase = new ProyectilStatsIDBase();
             proyectil = new Proyectil(
                     BodyFactory.crearCuerpoEtereo.RECTANGULAR.nuevo(world, ancho, alto),
-                    new IdentificableBase(), new ProyectilStatsBase(), new ConsumibleBase());
+                    proyectilStatsIDBase, proyectilStatsIDBase, new ConsumibleBase());
             return this;
         }
 

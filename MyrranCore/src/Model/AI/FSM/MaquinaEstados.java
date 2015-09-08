@@ -1,6 +1,6 @@
 package Model.AI.FSM;// Created by Hanto on 15/07/2014.
 
-import Interfaces.EntidadesPropiedades.Misc.Maquinable;
+import Interfaces.EntidadesPropiedades.Propiedades.Maquinable;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.utils.ObjectMap;
 import org.slf4j.LoggerFactory;

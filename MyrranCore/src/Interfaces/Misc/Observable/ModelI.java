@@ -1,4 +1,4 @@
-package Interfaces.Misc.Model;// Created by Hanto on 22/05/2014.
+package Interfaces.Misc.Observable;// Created by Hanto on 22/05/2014.
 
 import java.beans.PropertyChangeListener;
 

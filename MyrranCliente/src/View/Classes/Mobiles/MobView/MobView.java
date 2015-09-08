@@ -4,7 +4,7 @@ import DB.RSC;
 import DTOs.DTOsEspacial;
 import DTOs.DTOsOrientable;
 import DTOs.DTOsVulnerable;
-import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
 import Interfaces.EntidadesTipos.MobI;
 import Model.Settings;
 import View.Classes.Actores.NameplateView;

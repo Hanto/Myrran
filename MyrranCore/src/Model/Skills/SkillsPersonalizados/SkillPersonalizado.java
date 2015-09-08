@@ -1,10 +1,10 @@
 package Model.Skills.SkillsPersonalizados;// Created by Hanto on 25/06/2014.
 
 import DTOs.DTOsSkillPersonalizado;
-import Interfaces.Misc.BDebuff.BDebuffI;
+import Interfaces.Misc.Spell.BDebuffI;
 import Interfaces.Misc.Observable.AbstractModel;
-import Interfaces.Misc.Skill.SkillI;
-import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SkillI;
+import Interfaces.Misc.Spell.SkillPersonalizadoI;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -39,7 +39,7 @@ public class SkillPersonalizado extends AbstractModel implements SkillPersonaliz
     public SkillPersonalizado(SkillI skill)
     {
         this.skill = skill;
-        id = skill.getID();
+        this.id = skill.getID();
 
         skillMods = new SkillMod[skill.getNumSkillStats()];
         for (int i = 0; i < skillMods.length; i++)

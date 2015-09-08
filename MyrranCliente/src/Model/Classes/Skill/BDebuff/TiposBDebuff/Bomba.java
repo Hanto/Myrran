@@ -1,6 +1,6 @@
 package Model.Classes.Skill.BDebuff.TiposBDebuff;// Created by Hanto on 26/06/2014.
 
-import Interfaces.Misc.BDebuff.AuraI;
+import Interfaces.Misc.Spell.AuraI;
 import Model.Skills.BDebuff.TipoBDebuff;
 
 public class Bomba extends TipoBDebuff

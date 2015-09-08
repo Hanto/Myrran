@@ -1,6 +1,6 @@
-package Interfaces.EntidadesPropiedades.Misc;// Created by Hanto on 23/06/2014.
+package Interfaces.EntidadesPropiedades.Propiedades;// Created by Hanto on 23/06/2014.
 
-import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SkillPersonalizadoI;
 import Interfaces.Misc.Spell.SpellPersonalizadoI;
 
 import java.util.Iterator;

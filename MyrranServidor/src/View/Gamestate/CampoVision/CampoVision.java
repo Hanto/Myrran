@@ -1,19 +1,17 @@
 package View.Gamestate.CampoVision;  //Created by Hanto on 14/04/2015.
 
 import DTOs.*;
-import Interfaces.Misc.GameState.MundoI;
-import Interfaces.Misc.Network.ServidorI;
-import Interfaces.Misc.Observable.AbstractModel;
-import Interfaces.EntidadesPropiedades.Misc.Animable;
-import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Espaciales.Espacial;
 import Interfaces.EntidadesPropiedades.Espaciales.Orientable;
-import Interfaces.EntidadesPropiedades.Misc.IDentificable;
-import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Interfaces.EntidadesPropiedades.Propiedades.*;
 import Interfaces.EntidadesTipos.CampoVisionI;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Network.ServidorI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.Spell.AuraI;
 import Model.Settings;
 import View.Gamestate.MundoView;
 import com.badlogic.gdx.utils.Disposable;
@@ -256,6 +254,9 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     private void modificarHpsMob (MobI mob, float hps)
     {   buffer.addModificarHpsMob(mob, hps); }
 
+    private void añadirAura(MobI mob, AuraI aura)
+    {   buffer.addAura(mob, aura); }
+
     // PROYECTILES:
     //--------------------------------------------------------------------------------------------------------------
 
@@ -312,19 +313,25 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
             if      (vulnerable instanceof PCI) this.modificarHPsPC((PCI) vulnerable, hps);
             else if (vulnerable instanceof MobI) this.modificarHpsMob((MobI) vulnerable, hps);
         }
+        else if (evt.getNewValue() instanceof DTOsDebuffeable.AñadirAura)
+        {
+            DebuffeableI debuffeable = ((DTOsDebuffeable.AñadirAura) evt.getNewValue()).debuffeable;
+            AuraI aura = ((DTOsDebuffeable.AñadirAura) evt.getNewValue()).aura;
+            if (debuffeable instanceof MobI) this.añadirAura((MobI)debuffeable, aura);
+        }
         //DISPOSABLE:
         else if (evt.getNewValue() instanceof DTOsDisposable.Dispose)
         {
             Disposable disposable = ((DTOsDisposable.Dispose) evt.getNewValue()).disposable;
-            if      (disposable instanceof PCI) this.eliminarPC((PCI)disposable);
-            else if (disposable instanceof MobI) this.eliminarMob((MobI)disposable);
+            if      (disposable instanceof PCI) this.eliminarPC((PCI) disposable);
+            else if (disposable instanceof MobI) this.eliminarMob((MobI) disposable);
             else if (disposable instanceof ProyectilI) this.eliminarProyectil((ProyectilI)disposable);
         }
         //CASTER PERSONALIZADO:
         else if (evt.getNewValue() instanceof DTOsCasterPersonalizable.AñadirSpellPersonalizado)
         {
             CasterPersonalizable caster = ((DTOsCasterPersonalizable.AñadirSpellPersonalizado) evt.getNewValue()).caster;
-            if (caster instanceof PCI) this.añadirSpellPersonalizadoPC((PCI)caster, ((DTOsCasterPersonalizable.AñadirSpellPersonalizado) evt.getNewValue()).spellID);
+            if (caster instanceof PCI) this.añadirSpellPersonalizadoPC((PCI) caster, ((DTOsCasterPersonalizable.AñadirSpellPersonalizado) evt.getNewValue()).spellID);
         }
 
         else if (evt.getNewValue() instanceof DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado)
@@ -333,7 +340,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
             String skillID = ((DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado) evt.getNewValue()).skillID;
             int statID = ((DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado) evt.getNewValue()).statID;
             int valor = ((DTOsCasterPersonalizable.SetNumTalentosSkillPersonalizado) evt.getNewValue()).valor;
-            if (caster instanceof PCI) this.numTalentosSkillPersonalizadoPC((PCI)caster, skillID, statID, valor);
+            if (caster instanceof PCI) this.numTalentosSkillPersonalizadoPC((PCI) caster, skillID, statID, valor);
         }
     }
 

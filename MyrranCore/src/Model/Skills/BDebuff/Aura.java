@@ -1,55 +1,82 @@
 package Model.Skills.BDebuff;// Created by Hanto on 04/06/2014.
 
+import Interfaces.Misc.Observable.AbstractModel;
 import Model.Settings;
-import Interfaces.Misc.BDebuff.AuraI;
-import Interfaces.Misc.BDebuff.BDebuffI;
-import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.Misc.Spell.AuraI;
+import Interfaces.Misc.Spell.BDebuffI;
+import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 
-public class Aura implements AuraI
+public class Aura extends AbstractModel implements AuraI
 {
-    private byte stacks = 1;
-    private byte ticksAplicados = 0;
+    private int iD;
+    private int stacks = 1;
+    private int ticksAplicados = 0;
     private float duracion = 0;
     private float duracionMax;
     private Caster Caster;
-    private Debuffeable target;
+    private DebuffeableI target;
     private BDebuffI debuff;
 
-    //SET:
-    @Override public byte getStacks()                       { return stacks; }
-    @Override public byte getTicksAplicados()               { return ticksAplicados; }
+    // AURAI:
+    //------------------------------------------------------------------------------------------------------------------
+    @Override public int getStacks()                        { return stacks; }
+    @Override public int getTicksAplicados()                { return ticksAplicados; }
     @Override public float getDuracion()                    { return duracion; }
     @Override public float getDuracionMax()                 { return duracionMax; }
     @Override public Caster getCaster()                     { return Caster; }
-    @Override public Debuffeable getTarget()                { return target; }
+    @Override public DebuffeableI getTarget()                { return target; }
     @Override public BDebuffI getDebuff()                   { return debuff; }
 
-    //GET:
-    @Override public void setStacks(byte b)                 { stacks = b; }
-    @Override public void setTicksAplicados(byte b)         { ticksAplicados = b; }
     @Override public void setDuracion(float f)              { duracion = f; }
     @Override public void setDuracionMax(float f)           { duracionMax = f; }
     @Override public void setCaster(Caster Caster)          { this.Caster = Caster; }
-    @Override public void setTarget(Debuffeable target)     { this.target = target; }
+    @Override public void setTarget(DebuffeableI target)     { this.target = target; }
     @Override public void setDebuff(BDebuffI debuff)        { this.debuff = debuff; }
 
-    public Aura (BDebuffI debuff, Caster Caster, Debuffeable target)
+    // IDENTIFICABLE:
+    //------------------------------------------------------------------------------------------------------------------
+    @Override public int getID()                            { return iD; }
+    @Override public void setID(int iD)                     { this.iD = iD; }
+
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public Aura (int iD, BDebuffI debuff, Caster caster, DebuffeableI target)
     {
+        this.iD = iD;
         this.debuff = debuff;
-        this.Caster = Caster;
+        this.Caster = caster;
         this.target = target;
+        this.duracionMax = debuff.getValorTotal(caster, BDebuff.STAT_Duracion);
     }
+
+    @Override public void dispose()
+    {
+        this.eliminarObservadores();
+    }
+
+    // NOTIFICAR VISTA:
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Override public void setStacks(int numStacks)
+    {   stacks = numStacks; }
+
+    @Override public void setTicksAplicados(int ticksAplicados)
+    {   this.ticksAplicados = ticksAplicados; }
+
+    // METODO DE ACTUALIZACION:
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override public void actualizarAura (float delta)
     {
-        duracion += delta;
+        setDuracion(duracion + delta);
 
         int tickActual =  (int) (duracion / Settings.BDEBUFF_DuracionTick);
 
         for (int i=ticksAplicados; i<tickActual; i++)
         {
-            ticksAplicados++;
+            setTicksAplicados(ticksAplicados+1);
             debuff.actualizarTick(this);
         }
     }

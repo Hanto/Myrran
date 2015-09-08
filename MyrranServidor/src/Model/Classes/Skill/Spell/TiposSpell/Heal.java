@@ -1,8 +1,8 @@
 package Model.Classes.Skill.Spell.TiposSpell;// Created by Hanto on 17/06/2014.
 
-import Interfaces.EntidadesPropiedades.Misc.Caster;
-import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
-import Interfaces.EntidadesPropiedades.Misc.Vulnerable;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Vulnerable;
 import Interfaces.Misc.GameState.MundoI;
 import Interfaces.Misc.Spell.SpellI;
 import Model.Skills.Spell.TipoSpell;
@@ -24,7 +24,7 @@ public class Heal extends TipoSpell
         if (Caster instanceof Vulnerable)
         {   ((Vulnerable) Caster).modificarHPs(curacion); }
 
-        if (Caster instanceof Debuffeable)
-        {   spell.aplicarDebuffs(Caster, (Debuffeable) Caster);}
+        if (Caster instanceof DebuffeableI)
+        {   spell.aplicarDebuffs(Caster, (DebuffeableI) Caster);}
     }
 }

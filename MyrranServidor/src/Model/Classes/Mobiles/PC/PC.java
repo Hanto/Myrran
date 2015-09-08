@@ -1,17 +1,15 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 03/09/2015.
 
 import DTOs.DTOsSkillPersonalizado;
-import Interfaces.Misc.BDebuff.AuraI;
+import Interfaces.Misc.Spell.*;
 import Interfaces.Misc.GameState.MundoI;
-import Interfaces.Misc.Skill.SkillPersonalizadoI;
-import Interfaces.Misc.Spell.SpellI;
-import Interfaces.Misc.Spell.SpellPersonalizadoI;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
-import Interfaces.EntidadesPropiedades.Misc.*;
+import Interfaces.EntidadesPropiedades.Propiedades.*;
 import Interfaces.EntidadesPropiedades.TipoMobile.PCStats;
 import Model.AI.Huellas.Huellas;
 import Model.Classes.Mobiles.PC.SpellsACastear.SpellACastear;
 import Model.Classes.Mobiles.PC.SpellsACastear.SpellsACastear;
+import Model.Mobiles.Propiedades.DeBuffeableNotificadorI;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -23,7 +21,7 @@ public class PC extends PCNotificador implements PropertyChangeListener
     protected Caster caster;
     protected CasterPersonalizable casterPersonalizado;
     protected Vulnerable vulnerable;
-    protected Debuffeable debuffeable;
+    protected DebuffeableI debuffeable;
     protected PCStats pcStats;
     protected Animable animable;
 
@@ -32,7 +30,7 @@ public class PC extends PCNotificador implements PropertyChangeListener
 
     public PC(int connectionID, int ancho, int alto,
               IDentificable identificable, Caster caster, CasterPersonalizable casterPersonalizado,
-              Vulnerable vulnerable, Debuffeable debuffeable, PCStats pcStats,
+              Vulnerable vulnerable, DebuffeableI debuffeable, PCStats pcStats,
               Animable animable)
     {
         this.identificable = identificable;
@@ -87,10 +85,18 @@ public class PC extends PCNotificador implements PropertyChangeListener
 
     // DEBUFFEABLE:
     //------------------------------------------------------------------------------------------------------------------
-    @Override public void añadirAura(AuraI aura)                    {   debuffeable.añadirAura(aura); }
-    @Override public void eliminarAura(AuraI aura)                  {   debuffeable.eliminarAura(aura); }
-    @Override public Iterator<AuraI> getAuras()                     {   return debuffeable.getAuras(); }
-    @Override public void actualizarAuras(float delta)              {   debuffeable.actualizarAuras(delta); }
+    @Override public AuraI getAura(int auraID)
+    {   return debuffeable.getAura(auraID); }
+    @Override public void añadirAura(BDebuffI debuff, Caster caster, DebuffeableI target)
+    {   debuffeable.añadirAura(debuff, caster, target);}
+    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, DebuffeableI target)
+    {   debuffeable.añadirAura(iDAura, debuff, caster, target); }
+    @Override public void eliminarAura(int iDAura)
+    {   debuffeable.eliminarAura(iDAura); }
+    @Override public void actualizarAuras(float delta)
+    {   debuffeable.actualizarAuras(delta); }
+    @Override public void setNotificador(DeBuffeableNotificadorI notificador)
+    {   debuffeable.setNotificador(notificador); }
 
     // PCSTATS:
     //------------------------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ import Model.Skills.SkillsPersonalizados.SkillStat;
 import DAO.Spell.SpellXMLDBI;
 import DB.DAO;
 import Model.Settings;
-import Interfaces.Misc.BDebuff.BDebuffI;
+import Interfaces.Misc.Spell.BDebuffI;
 import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.Spell.TipoSpellI;
 import Model.Skills.Spell.Spell;

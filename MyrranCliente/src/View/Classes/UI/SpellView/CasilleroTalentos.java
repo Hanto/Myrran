@@ -2,7 +2,7 @@ package View.Classes.UI.SpellView;// Created by Hanto on 27/06/2014.
 
 import DB.RSC;
 import Model.Settings;
-import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

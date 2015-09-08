@@ -2,10 +2,12 @@ package Controller;// Created by Hanto on 22/07/2014.
 
 import DB.DAO;
 import DTOs.DTOsNet;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.Spell.BDebuffI;
 import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.UI.AccionI;
 import Model.Classes.Acciones.AccionFactory;
@@ -152,6 +154,25 @@ public class ClienteInputs
 
             else if (dto instanceof DTOsNet.ModificarHPs)
             {   mob.modificarHPs(((DTOsNet.ModificarHPs) dto).HPs);}
+
+            else if (dto instanceof DTOsNet.AñadirAura)
+            {
+                Caster caster;
+                if (((DTOsNet.AñadirAura) dto).tipoCaster == 0)
+                {
+                    if (((DTOsNet.AñadirAura) dto).casteriD == mundo.getPlayer().getID())
+                        caster = mundo.getPlayer();
+                    else
+                        caster = mundo.getPC(((DTOsNet.AñadirAura) dto).casteriD);
+                }
+                else
+                {   caster = null;}
+
+                int auraID = ((DTOsNet.AñadirAura) dto).auraID;
+                BDebuffI debuff = DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(((DTOsNet.AñadirAura) dto).debuffID);
+
+                mob.añadirAura(auraID, debuff, caster, mob);
+            }
         }
     }
 

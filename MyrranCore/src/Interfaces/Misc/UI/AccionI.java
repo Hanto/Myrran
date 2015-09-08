@@ -1,7 +1,7 @@
 package Interfaces.Misc.UI;// Created by Hanto on 05/05/2014.
 
-import Interfaces.EntidadesPropiedades.Misc.MaquinablePlayer;
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.EntidadesPropiedades.Propiedades.MaquinablePlayer;
+import Interfaces.Misc.Observable.ModelI;
 
 public interface AccionI
 {

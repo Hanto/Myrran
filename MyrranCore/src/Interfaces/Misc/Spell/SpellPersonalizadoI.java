@@ -1,7 +1,5 @@
 package Interfaces.Misc.Spell;// Created by Hanto on 30/06/2014.
 
-import Interfaces.Misc.Skill.SkillPersonalizadoI;
-
 import java.beans.PropertyChangeListener;
 import java.util.Iterator;
 

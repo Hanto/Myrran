@@ -1,7 +1,7 @@
 package Interfaces.Misc.UI;// Created by Hanto on 13/05/2014.
 
-import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
+import Interfaces.Misc.Observable.ModelI;
 
 public interface BarraAccionesI extends ModelI
 {

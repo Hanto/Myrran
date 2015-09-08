@@ -1,4 +1,4 @@
-package Interfaces.EntidadesPropiedades.Misc;// Created by Hanto on 17/04/2014.
+package Interfaces.EntidadesPropiedades.Propiedades;// Created by Hanto on 17/04/2014.
 
 public interface Caster
 {

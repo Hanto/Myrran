@@ -1,32 +1,30 @@
 package Model.Classes.Mobiles.Player;// Created by Hanto on 04/09/2015.
 
 import DB.DAO;
-import Interfaces.Misc.BDebuff.AuraI;
+import Interfaces.Misc.Spell.*;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
-import Interfaces.EntidadesPropiedades.Misc.*;
+import Interfaces.EntidadesPropiedades.Propiedades.*;
 import Interfaces.EntidadesPropiedades.TipoMobile.PCStats;
 import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.Misc.GameState.MundoI;
 import Interfaces.Misc.Input.PlayerIOI;
-import Interfaces.Misc.Skill.SkillPersonalizadoI;
-import Interfaces.Misc.Spell.SpellI;
-import Interfaces.Misc.Spell.SpellPersonalizadoI;
 import Model.AI.FSM.IO.PlayerIO;
 import Model.AI.FSM.MaquinaEstados;
 import Model.AI.FSM.MaquinaEstadosFactory;
 import Model.Mobiles.Cuerpos.Cuerpo;
+import Model.Mobiles.Propiedades.DeBuffeableNotificadorI;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
-public class Player extends PlayerNotificador implements PlayerI, Debuffeable
+public class Player extends PlayerNotificador implements PlayerI, DebuffeableI
 {
     private IDentificable identificable;
     private Caster caster;
     private CasterPersonalizable casterPersonalizado;
     private Vulnerable vulnerable;
-    private Debuffeable debuffeable;
+    private DebuffeableI debuffeable;
     private PCStats pcStats;
     private Animable animable;
     private Cuerpo cuerpo;
@@ -39,7 +37,7 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
 
     public Player(Cuerpo cuerpo,
                   IDentificable identificable, Caster caster, CasterPersonalizable casterPersonalizado,
-                  Vulnerable vulnerable, Debuffeable debuffeable, PCStats pcStats,
+                  Vulnerable vulnerable, DebuffeableI debuffeable, PCStats pcStats,
                   Animable animable)
     {
         this.identificable = identificable;
@@ -85,10 +83,18 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
 
     // DEBUFFEABLE:
     //------------------------------------------------------------------------------------------------------------------
-    @Override public void añadirAura(AuraI aura)                    {   debuffeable.añadirAura(aura); }
-    @Override public void eliminarAura(AuraI aura)                  {   debuffeable.eliminarAura(aura); }
-    @Override public Iterator<AuraI> getAuras()                     {   return debuffeable.getAuras(); }
-    @Override public void actualizarAuras(float delta)              {   debuffeable.actualizarAuras(delta); }
+    @Override public AuraI getAura(int auraID)
+    {   return debuffeable.getAura(auraID); }
+    @Override public void añadirAura(BDebuffI debuff, Caster caster, DebuffeableI target)
+    {   debuffeable.añadirAura(debuff, caster, target);}
+    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, DebuffeableI target)
+    {   debuffeable.añadirAura(iDAura, debuff, caster, target); }
+    @Override public void eliminarAura(int iDAura)
+    {   debuffeable.eliminarAura(iDAura); }
+    @Override public void actualizarAuras(float delta)
+    {   debuffeable.actualizarAuras(delta); }
+    @Override public void setNotificador(DeBuffeableNotificadorI notificador)
+    {   debuffeable.setNotificador(notificador); }
 
     // PCSTATS:
     //------------------------------------------------------------------------------------------------------------------

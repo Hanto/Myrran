@@ -1,13 +1,14 @@
 package View.Gamestate.CampoVision;// Created by Hanto on 24/07/2015.
 
 import DTOs.DTOsNet;
-import Interfaces.Misc.Geo.MapaI;
-import Interfaces.Misc.Network.ServidorI;
-import Interfaces.Misc.Skill.SkillPersonalizadoI;
-import Interfaces.Misc.Spell.SpellPersonalizadoI;
 import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
+import Interfaces.Misc.Geo.MapaI;
+import Interfaces.Misc.Network.ServidorI;
+import Interfaces.Misc.Spell.AuraI;
+import Interfaces.Misc.Spell.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.SpellPersonalizadoI;
 import Model.Settings;
 import Model.Skills.SkillsPersonalizados.SkillMod;
 
@@ -176,6 +177,12 @@ public class BufferCampoVision
     {
         DTOsNet.ModificarHPs modificarHPsMob = new DTOsNet.ModificarHPs(hps);
         mapaDTOsMobs.add(mob.getID(), modificarHPsMob);
+    }
+
+    public void addAura(MobI mob, AuraI aura)
+    {
+        DTOsNet.AñadirAura añadirAura = new DTOsNet.AñadirAura(aura);
+        mapaDTOsMobs.add(mob.getID(), añadirAura);
     }
 
     // PROYECTILES:

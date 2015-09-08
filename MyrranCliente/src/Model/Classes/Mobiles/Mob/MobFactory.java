@@ -1,7 +1,7 @@
 package Model.Classes.Mobiles.Mob;// Created by Hanto on 04/09/2015.
 
 import Model.Mobiles.Cuerpos.BodyFactory;
-import Model.Mobiles.Propiedades.DebuffeableBase;
+import Model.Mobiles.Propiedades.Debuffeable;
 import Model.Mobiles.Propiedades.IdentificableBase;
 import Model.Mobiles.Propiedades.MobStatsBase;
 import Model.Mobiles.Propiedades.VulnerableBase;
@@ -15,7 +15,7 @@ public enum MobFactory
         {
             return new Mob(iD, BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 32, 32),
                     new IdentificableBase(), new VulnerableBase(),
-                    new DebuffeableBase(), new MobStatsBase());
+                    new Debuffeable(), new MobStatsBase());
         }
     };
     public abstract Mob nuevo (int iD, World world);

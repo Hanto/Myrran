@@ -1,7 +1,7 @@
 package Model.Classes.Input;// Created by Hanto on 05/05/2014.
 
 import DTOs.DTOsInputManager;
-import Interfaces.EntidadesPropiedades.Misc.MaquinablePlayer;
+import Interfaces.EntidadesPropiedades.Propiedades.MaquinablePlayer;
 import Interfaces.EntidadesTipos.PlayerI;
 import Interfaces.Misc.Observable.AbstractModel;
 import Interfaces.Misc.UI.AccionI;

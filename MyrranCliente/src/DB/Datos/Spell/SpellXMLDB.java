@@ -2,7 +2,7 @@ package DB.Datos.Spell;// Created by Hanto on 17/04/2014.
 
 import DAO.Spell.SpellXMLDBI;
 import DB.DAO;
-import Interfaces.Misc.BDebuff.BDebuffI;
+import Interfaces.Misc.Spell.BDebuffI;
 import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.Spell.TipoSpellI;
 import Model.Classes.Skill.Spell.SpellCliente;

@@ -1,6 +1,6 @@
 package DAO.BDebuff;// Created by Hanto on 16/06/2014.
 
-import Interfaces.Misc.BDebuff.BDebuffI;
+import Interfaces.Misc.Spell.BDebuffI;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 

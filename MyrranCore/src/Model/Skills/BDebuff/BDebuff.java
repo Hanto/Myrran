@@ -1,14 +1,13 @@
 package Model.Skills.BDebuff;// Created by Hanto on 04/06/2014.
 
 
-import Interfaces.Misc.BDebuff.AuraI;
-import Interfaces.Misc.BDebuff.BDebuffI;
-import Interfaces.Misc.BDebuff.TipoBDebuffI;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
+import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
 import Interfaces.Misc.Observable.AbstractModel;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
-import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
-import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
-import Model.Settings;
+import Interfaces.Misc.Spell.AuraI;
+import Interfaces.Misc.Spell.BDebuffI;
+import Interfaces.Misc.Spell.TipoBDebuffI;
 import Model.Skills.SkillsPersonalizados.SkillStat;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,7 @@ import java.util.Iterator;
 
 public class BDebuff extends AbstractModel implements BDebuffI
 {
-    protected final int STAT_Duracion = 0;
+    protected static final int STAT_Duracion = 0;
 
     protected String id;
     protected String nombre;
@@ -72,44 +71,15 @@ public class BDebuff extends AbstractModel implements BDebuffI
         }
     }
 
-    private AuraI auraExisteYEsDelCaster(Caster Caster, Debuffeable target)
+    @Override public float getValorTotal(Caster caster, int statID)
     {
-        AuraI aura;
-        Iterator<AuraI> iterator = target.getAuras();
-
-        while (iterator.hasNext())
-        {
-            aura = iterator.next();
-            if (aura.getDebuff().getID().equals(id) && aura.getCaster() == Caster)
-            {   return aura; }
-        }
-        return null;
-    }
-
-    @Override public float getValorTotal(Caster Caster, int statID)
-    {
-        if (Caster instanceof CasterPersonalizable)
-        {   return ((CasterPersonalizable) Caster).getSkillPersonalizado(id).getValorTotal(statID); }
+        if (caster instanceof CasterPersonalizable)
+        {   return ((CasterPersonalizable) caster).getSkillPersonalizado(id).getValorTotal(statID); }
         else return getSkillStat(statID).getValorBase();
     }
 
-    @Override public void aplicarDebuff(Caster Caster, Debuffeable target)
-    {
-        AuraI aura = auraExisteYEsDelCaster(Caster, target);
-
-        if (aura != null)
-        {
-            aura.setTicksAplicados((byte)0);
-            if (aura.getStacks() < stacksMaximos) aura.setStacks((byte) (aura.getStacks()+1));
-            aura.setDuracion(aura.getDuracion() % Settings.BDEBUFF_DuracionTick);
-        }
-        else
-        {
-            aura = new Aura(this, Caster, target);
-            aura.setDuracionMax(getValorTotal(Caster, STAT_Duracion));
-            target.añadirAura(aura);
-        }
-    }
+    @Override public void aplicarDebuff(Caster caster, DebuffeableI target)
+    {   target.añadirAura(this, caster, target); }
 
     @Override public void actualizarTick (AuraI aura)
     {   tipoBDebuff.actualizarTick(aura); }

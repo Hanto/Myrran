@@ -37,6 +37,7 @@ public class KryoDTOs
         kryo.register(DTOsNet.SetNumTalentosSkillPersonalizado.class);
         kryo.register(DTOsNet.Castear.class);
         kryo.register(DTOsNet.ParametrosEditarTerreno.class);
+        kryo.register(DTOsNet.AñadirAura.class);
 
         // pc:
         kryo.register(DTOsNet.DatosCompletosPC.class);

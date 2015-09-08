@@ -2,7 +2,7 @@ package Model.Skills.BDebuff;// Created by Hanto on 04/06/2014.
 
 import Model.Skills.SkillsPersonalizados.SkillStat;
 import Interfaces.Misc.Observable.AbstractModel;
-import Interfaces.Misc.BDebuff.TipoBDebuffI;
+import Interfaces.Misc.Spell.TipoBDebuffI;
 
 import java.util.Arrays;
 import java.util.Iterator;

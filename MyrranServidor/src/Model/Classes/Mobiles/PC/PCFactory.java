@@ -10,7 +10,7 @@ public enum PCFactory
         @Override public PC nuevo(int connectionID)
         {
             return new PC(connectionID, 48, 48, new IdentificableBase(), new CasterBase(),
-                    new CasterPersonalizadoBase(DAO.spellDAOFactory), new VulnerableBase(), new DebuffeableBase(),
+                    new CasterPersonalizadoBase(DAO.spellDAOFactory), new VulnerableBase(), new Debuffeable(),
                     new PCStatsBase(), new AnimableBase());
         }
     };

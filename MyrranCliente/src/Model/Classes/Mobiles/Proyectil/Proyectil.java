@@ -1,12 +1,10 @@
 package Model.Classes.Mobiles.Proyectil;// Created by Hanto on 04/09/2015.
 
-import Interfaces.EntidadesPropiedades.Misc.Caster;
-import Interfaces.EntidadesPropiedades.Misc.Consumible;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
-import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.Consumible;
+import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
 import Interfaces.EntidadesPropiedades.TipoMobile.ProyectilStats;
-import Interfaces.EntidadesTipos.MobI;
-import Interfaces.EntidadesTipos.PCI;
 import Interfaces.Misc.GameState.MundoI;
 import Interfaces.Misc.Spell.SpellI;
 import Model.Mobiles.Cuerpos.Cuerpo;
@@ -46,6 +44,7 @@ public class Proyectil extends ProyectilNotificador
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
     @Override public int getID()                                    {   return identificable.getID(); }
+    @Override public void setID(int iD)                             {   identificable.setID(iD); }
 
     // PROYECTILSTATS:
     //------------------------------------------------------------------------------------------------------------------
@@ -71,29 +70,6 @@ public class Proyectil extends ProyectilNotificador
 
     // CODIGO PERSONALIZADO:
     //------------------------------------------------------------------------------------------------------------------
-
-    @Override public void setID(int iD)
-    {
-        if (iD >= 0) identificable.setID(iD);
-        else
-        {
-            if (proyectilStats.getOwner() == null)
-            {   logger.error("ERROR: no se puede generar el ID del proyectil con el Owner NULL"); }
-
-            double hashcode;
-            if (proyectilStats.getOwner() instanceof PCI) {   //el int en java como tiene signo, tiene 31 bits para datos:
-                hashcode = ((PCI) proyectilStats.getOwner()).getID() * (10000) +
-                        ((PCI) proyectilStats.getOwner()).getIDProyectiles();
-                identificable.setID((int) hashcode);
-            }
-            if (proyectilStats.getOwner() instanceof MobI) {
-                hashcode = 10000 * 10000 +
-                        ((MobI) proyectilStats.getOwner()).getID() * (10000);
-                //+proyectilStats.getOwner().getIDProyectiles();
-                identificable.setID((int) hashcode);
-            }
-        }
-    }
 
     @Override public void setPosition(float x, float y)
     {

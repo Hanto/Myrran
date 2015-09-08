@@ -1,7 +1,7 @@
 package View.Classes.Mobiles.ProyectilView;// Created by Hanto on 06/08/2015.
 
 import DTOs.DTOsEspacial;
-import Interfaces.EntidadesPropiedades.Misc.IDentificable;
+import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Model.Settings;
 import View.Classes.Actores.Pixie;

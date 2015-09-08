@@ -2,7 +2,7 @@ package View.Classes.UI.BarraAccionesView.CasillaView;// Created by Hanto on 13/
 
 import DB.RSC;
 import DTOs.DTOsBarraAcciones;
-import Interfaces.EntidadesPropiedades.Misc.CasterPersonalizable;
+import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
 import Interfaces.Misc.UI.AccionI;
 import Interfaces.Misc.UI.CasillaI;
 import Interfaces.Misc.Controlador.ControladorBarraAccionI;

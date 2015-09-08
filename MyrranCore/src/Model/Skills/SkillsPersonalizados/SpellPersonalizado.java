@@ -1,7 +1,7 @@
 package Model.Skills.SkillsPersonalizados;// Created by Hanto on 29/06/2014.
 
-import Interfaces.Misc.BDebuff.BDebuffI;
-import Interfaces.Misc.Skill.SkillPersonalizadoI;
+import Interfaces.Misc.Spell.BDebuffI;
+import Interfaces.Misc.Spell.SkillPersonalizadoI;
 import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.Spell.SpellPersonalizadoI;
 

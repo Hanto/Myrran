@@ -1,6 +1,6 @@
 package Interfaces.Misc.UI;// Created by Hanto on 11/07/2014.
 
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.Misc.Observable.ModelI;
 
 public interface CasillaI extends ModelI
 {

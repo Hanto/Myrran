@@ -1,10 +1,9 @@
-package Interfaces.Misc.BDebuff;// Created by Hanto on 09/06/2014.
+package Interfaces.Misc.Spell;// Created by Hanto on 09/06/2014.
 
 
 import Model.Skills.SkillsPersonalizados.SkillStat;
-import Interfaces.EntidadesPropiedades.Misc.Debuffeable;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
-import Interfaces.Misc.Skill.SkillI;
+import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 
 import java.util.Iterator;
 
@@ -31,7 +30,7 @@ public interface BDebuffI extends SkillI
     public int getNumSkillStats();
 
     //METODOS:
-    public void aplicarDebuff(Caster Caster, Debuffeable target);
+    public void aplicarDebuff(Caster Caster, DebuffeableI target);
     public void actualizarTick (AuraI aura);
 
 }

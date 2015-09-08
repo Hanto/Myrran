@@ -1,7 +1,7 @@
-package Interfaces.Misc.Skill;// Created by Hanto on 29/06/2014.
+package Interfaces.Misc.Spell;// Created by Hanto on 29/06/2014.
 
 import Model.Skills.SkillsPersonalizados.SkillMod;
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.Misc.Observable.ModelI;
 
 import java.util.Iterator;
 

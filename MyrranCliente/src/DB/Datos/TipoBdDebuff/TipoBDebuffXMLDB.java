@@ -1,7 +1,7 @@
 package DB.Datos.TipoBdDebuff;// Created by Hanto on 10/06/2014.
 
 import DAO.TipoBDebuff.TipoBDebuffXMLDBI;
-import Interfaces.Misc.BDebuff.TipoBDebuffI;
+import Interfaces.Misc.Spell.TipoBDebuffI;
 import Model.Classes.Skill.BDebuff.TipoBDebuffFactory;
 import Model.Settings;
 import Model.Skills.BDebuff.TipoBDebuff;

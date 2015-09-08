@@ -5,7 +5,7 @@ import Interfaces.EntidadesTipos.MobI;
 import Interfaces.EntidadesTipos.PCI;
 import Interfaces.EntidadesTipos.ProyectilI;
 import Interfaces.Misc.Geo.MapaI;
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.Misc.Observable.ModelI;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.Iterator;

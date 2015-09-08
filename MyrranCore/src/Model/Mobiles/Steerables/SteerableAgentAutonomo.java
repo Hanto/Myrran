@@ -38,6 +38,7 @@ public abstract class SteerableAgentAutonomo extends SteerableAgent implements S
         //Posicion:
         nuevaPosX = posicion.x + getVelocidad().x * delta;
         nuevaPosY = posicion.y + getVelocidad().y * delta;
+        setPosition(nuevaPosX, nuevaPosY);
 
         //Velocidad:
         this.getVelocidad().mulAdd(steering.linear, delta).limit(this.getMaxLinearSpeed());
@@ -50,13 +51,14 @@ public abstract class SteerableAgentAutonomo extends SteerableAgent implements S
         }
         else
         {
-            if ( this.getVelocidad().isZero(0.1f))
-                nuevaOrientacion = this.getOrientation();
-            else
-                nuevaOrientacion = this.vectorToAngle(this.getVelocidad());
+            if ( this.getVelocidad().isZero(0.1f))  nuevaOrientacion = this.getOrientation();
+            else                                    nuevaOrientacion = this.vectorToAngle(this.getVelocidad());
 
             if (nuevaOrientacion != getOrientacion())
-            {   setVelocidadAngular((nuevaOrientacion - getOrientacion()) * delta); }
+            {
+                setVelocidadAngular((nuevaOrientacion - getOrientacion()) * delta);
+                setOrientacion(nuevaOrientacion);
+            }
         }
     }
 }

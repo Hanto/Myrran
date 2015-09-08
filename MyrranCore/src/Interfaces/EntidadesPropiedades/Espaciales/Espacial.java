@@ -1,6 +1,6 @@
 package Interfaces.EntidadesPropiedades.Espaciales;// Created by Hanto on 21/07/2014.
 
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.Misc.Observable.ModelI;
 
 public interface Espacial extends ModelI
 {

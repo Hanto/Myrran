@@ -1,4 +1,4 @@
-package Interfaces.EntidadesPropiedades.Misc;// Created by Ladrim on 18/04/2014.
+package Interfaces.EntidadesPropiedades.Propiedades;// Created by Ladrim on 18/04/2014.
 
 public interface Vulnerable
 {

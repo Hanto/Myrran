@@ -1,8 +1,8 @@
-package Interfaces.Misc.Skill;// Created by Hanto on 24/06/2014.
+package Interfaces.Misc.Spell;// Created by Hanto on 24/06/2014.
 
 import Model.Skills.SkillsPersonalizados.SkillStat;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
-import Interfaces.Misc.Model.ModelI;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
+import Interfaces.Misc.Observable.ModelI;
 
 import java.util.Iterator;
 

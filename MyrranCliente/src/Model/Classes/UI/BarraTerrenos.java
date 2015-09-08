@@ -4,7 +4,7 @@ import DAO.Terreno.TerrenoDAO;
 import DB.DAO;
 import DTOs.DTOsBarraTerrenos;
 import DTOs.DTOsNet;
-import Interfaces.EntidadesPropiedades.Misc.Caster;
+import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.Misc.Geo.TerrenoI;
 import Interfaces.Misc.Observable.AbstractModel;
 import com.badlogic.gdx.utils.Array;
