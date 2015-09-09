@@ -2,12 +2,15 @@ package Model.Classes.Mobiles.Player;// Created by Hanto on 21/07/2014.
 
 import DTOs.*;
 import Interfaces.EntidadesTipos.PlayerI;
+import Interfaces.Misc.Spell.AuraI;
+import Model.Mobiles.Propiedades.DeBuffeableNotificadorI;
 import Model.Mobiles.Steerables.SteerableAgent;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.ArrayList;
 
-public abstract class PlayerNotificador extends SteerableAgent implements PlayerI
+public abstract class PlayerNotificador extends SteerableAgent implements PlayerI,
+        DeBuffeableNotificadorI
 {
     //Stats Excluyentes para enviar por RED al servidor::
     private DTOsEspacial.Posicion posicionDTO;
@@ -19,6 +22,10 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
     //Notificaciones locales muy usadas para las cuales creamos variable reusables
     private DTOsCaster.CastingTimePercent castingTimeDTO;
     private DTOsVulnerable.ModificarHPs modificarHPsDTO;
+
+    private DTOsDebuffeable.AñadirAura añadirAuraDTO;
+    private DTOsDebuffeable.EliminarAura eliminarAuraDTO;
+    private DTOsDebuffeable.ModificarStacks modificarStacksDTO;
 
     private ObjectMap<Class, Object> cambiosExcluyentes = new ObjectMap<>();
     private ArrayList<Object> cambiosAcumulativos = new ArrayList<>();
@@ -33,6 +40,10 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
         animacionDTO = new DTOsAnimable.NumAnimacion(this);
         castingTimeDTO = new DTOsCaster.CastingTimePercent();
         modificarHPsDTO = new DTOsVulnerable.ModificarHPs();
+
+        añadirAuraDTO = new DTOsDebuffeable.AñadirAura(this);
+        eliminarAuraDTO = new DTOsDebuffeable.EliminarAura(this);
+        modificarStacksDTO = new DTOsDebuffeable.ModificarStacks(this);
 
         posicionNET = new DTOsNet.Posicion();
         animacionNET = new DTOsNet.NumAnimacion();
@@ -126,5 +137,23 @@ public abstract class PlayerNotificador extends SteerableAgent implements Player
     {
         castingTimeDTO.castingTimePercent = getActualCastingTime() == 0 && getTotalCastingTime() == 0 ? 100 : getActualCastingTime() / getTotalCastingTime();
         notificarActualizacion("CastingTimePlayer", null, castingTimeDTO);
+    }
+
+    public void notificarAñadirAura(AuraI aura)
+    {
+        añadirAuraDTO.aura= aura;
+        notificarActualizacion("añadirAura", null, añadirAuraDTO);
+    }
+
+    public void notificarEliminarAura(AuraI aura)
+    {
+        eliminarAuraDTO.aura = aura;
+        notificarActualizacion("eliminarAura", null, eliminarAuraDTO);
+    }
+
+    public void notificarIncrementarStack(AuraI aura)
+    {
+        modificarStacksDTO.aura = aura;
+        notificarActualizacion("setModificarStacks", null, modificarStacksDTO);
     }
 }

@@ -158,6 +158,24 @@ public class BufferCampoVision
         mapaDTOsPC.add(pc.getID(), setNumTalentosSkillPersonalizado);
     }
 
+    public void addAñadirAura(PCI pc, AuraI aura)
+    {
+        DTOsNet.AñadirAura añadirAura = new DTOsNet.AñadirAura(aura);
+        mapaDTOsPC.add(pc.getID(), añadirAura);
+    }
+
+    public void addEliminarAura(PCI pc, AuraI aura)
+    {
+        DTOsNet.EliminarAura eliminarAura = new DTOsNet.EliminarAura(aura);
+        mapaDTOsPC.add(pc.getID(), eliminarAura);
+    }
+
+    public void addAuraStacks(PCI pc, AuraI aura)
+    {
+        DTOsNet.ModificarAuraStacks modificarAuraStacks = new DTOsNet.ModificarAuraStacks(aura);
+        mapaDTOsPC.add(pc.getID(), modificarAuraStacks);
+    }
+
     // MOBS:
     //------------------------------------------------------------------------------------------------------------------
 

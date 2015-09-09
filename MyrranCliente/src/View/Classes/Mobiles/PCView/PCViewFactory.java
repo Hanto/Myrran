@@ -4,6 +4,7 @@ import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.EntidadesTipos.PCI;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.NameplateView;
+import View.Classes.Propiedades.DebuffeableView;
 
 public enum PCViewFactory
 {
@@ -12,8 +13,7 @@ public enum PCViewFactory
         @Override public PCView nuevo (PCI pc)
         {
             PixiePC pixie = new PixiePC("Golem");
-            NameplateView nameplate = new NameplateView((Caster)pc);
-            return new PCView(pc, pixie, nameplate);
+            return new PCView(pc, pixie, new NameplateView((Caster)pc), new DebuffeableView(pc));
         }
     };
 

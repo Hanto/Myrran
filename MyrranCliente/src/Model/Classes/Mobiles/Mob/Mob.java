@@ -37,6 +37,7 @@ public class Mob extends MobNotificador
         this.mobStats = mobStats;
         this.cuerpo = cuerpo;
 
+        this.debuffeable.setNotificador(this);
 
         this.identificable.setID(iD);
         this.setAncho(cuerpo.getAncho());
@@ -44,8 +45,6 @@ public class Mob extends MobNotificador
         this.setSeguible(false);
         this.vulnerable.setMaxHPs(10000);
         this.vulnerable.setActualHPs(10000);
-
-        this.debuffeable.setNotificador(this);
     }
 
     @Override public void dispose()

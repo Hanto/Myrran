@@ -41,6 +41,7 @@ public class PC extends PCNotificador implements PropertyChangeListener
         this.pcStats = pcStats;
         this.animable = animable;
 
+        this.debuffeable.setNotificador(this);
 
         this.identificable.setID(connectionID);
         this.setAncho(ancho);
@@ -48,8 +49,6 @@ public class PC extends PCNotificador implements PropertyChangeListener
         this.setHuellas(new Huellas());
         this.setSeguible(true);
         this.setTiempoDecayHuellas(20f);
-
-        this.debuffeable.setNotificador(this);
     }
 
     @Override public void dispose()

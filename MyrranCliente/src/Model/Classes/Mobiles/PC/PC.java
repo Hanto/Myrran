@@ -39,6 +39,8 @@ public class PC extends PCNotificador implements Debuffeable
         this.animable = animable;
         this.cuerpo = cuerpo;
 
+        this.debuffeable.setNotificador(this);
+
         this.identificable.setID(connectionID);
         this.setAncho(cuerpo.getAncho());
         this.setAlto(cuerpo.getAlto());

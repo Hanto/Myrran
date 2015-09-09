@@ -10,6 +10,7 @@ import Model.Settings;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
+import View.Classes.Propiedades.DebuffeableView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -25,6 +26,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     protected PCI pc;
     protected PixiePC actor;
     protected NameplateView nameplateView;
+    protected DebuffeableView debuffView;
     protected Texto nombre;
 
     private int rAncho;
@@ -37,14 +39,16 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public PCView (PCI pc, PixiePC pixieActor, NameplateView nameplate)
+    public PCView (PCI pc, PixiePC pixieActor, NameplateView nameplate, DebuffeableView debuffView)
     {
         this.pc = pc;
         this.actor = pixieActor;
         this.nameplateView = nameplate;
+        this.debuffView = debuffView;
 
         crearActor();
         crearNameplate();
+        crearDebuffView();
         crearNombre();
 
         this.setPosition(pc.getX(), pc.getY());
@@ -78,6 +82,12 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
     {
         nameplateView.setPosition(this.getWidth() / 2 - nameplateView.getWidth() / 2, getHeight());
         this.addActor(nameplateView);
+    }
+
+    private void crearDebuffView()
+    {
+        debuffView.setPosition(this.getWidth() + 10, this.getHeight());
+        this.addActor(debuffView);
     }
 
     private void crearNombre()

@@ -61,6 +61,34 @@ public class ClienteInputs
             else if (dto instanceof DTOsNet.ModificarHPs)
             {   pc.modificarHPs(((DTOsNet.ModificarHPs) dto).HPs);}
 
+            else if (dto instanceof DTOsNet.AñadirAura)
+            {
+                Caster caster;
+                if (((DTOsNet.AñadirAura) dto).tipoCaster == 0)
+                {
+                    if (((DTOsNet.AñadirAura) dto).casteriD == mundo.getPlayer().getID())
+                        caster = mundo.getPlayer();
+                    else
+                        caster = mundo.getPC(((DTOsNet.AñadirAura) dto).casteriD);
+                }
+                else
+                {   caster = null;}
+
+                int auraID = ((DTOsNet.AñadirAura) dto).auraID;
+                BDebuffI debuff = DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(((DTOsNet.AñadirAura) dto).debuffID);
+
+                pc.añadirAura(auraID, debuff, caster, pc);
+            }
+
+            else if (dto instanceof DTOsNet.ModificarAuraStacks)
+            {   AuraI aura = pc.getAura(((DTOsNet.ModificarAuraStacks) dto).auraID);
+                aura.setStacks(((DTOsNet.ModificarAuraStacks) dto).numStacks);
+                aura.resetDuracion();
+            }
+
+            else if (dto instanceof DTOsNet.EliminarAura)
+            {   pc.eliminarAura(((DTOsNet.EliminarAura) dto).auraID); }
+
             else if (dto instanceof DTOsNet.setHPs)
             {
                 pc.setMaxHPs(((DTOsNet.setHPs) dto).maxHPs);

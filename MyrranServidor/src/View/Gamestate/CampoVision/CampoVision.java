@@ -222,6 +222,15 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     private void numTalentosSkillPersonalizadoPC (PCI pc, String skillID, int statID, int valor)
     {   buffer.addNumTalentosSkillPersonalizadoPC(pc, skillID, statID, valor); }
 
+    private void añadirAura(PCI pc, AuraI aura)
+    {   buffer.addAñadirAura(pc, aura); }
+
+    private void eliminarAura(PCI pc, AuraI aura)
+    {   buffer.addEliminarAura(pc, aura); }
+
+    private void modificarAura(PCI pc, AuraI aura)
+    {   buffer.addAuraStacks(pc, aura); }
+
     // MOBS:
     //--------------------------------------------------------------------------------------------------------------
 
@@ -257,11 +266,11 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
     private void añadirAura(MobI mob, AuraI aura)
     {   buffer.addAñadirAura(mob, aura); }
 
-    private void modificarAura(MobI mob,  AuraI aura)
-    {   buffer.addAuraStacks(mob, aura);}
-
     private void eliminarAura(MobI mob, AuraI aura)
     {   buffer.addEliminarAura(mob, aura);}
+
+    private void modificarAura(MobI mob,  AuraI aura)
+    {   buffer.addAuraStacks(mob, aura);}
 
     // PROYECTILES:
     //--------------------------------------------------------------------------------------------------------------
@@ -325,18 +334,21 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
             Debuffeable debuffeable = ((DTOsDebuffeable.AñadirAura) evt.getNewValue()).debuffeable;
             AuraI aura = ((DTOsDebuffeable.AñadirAura) evt.getNewValue()).aura;
             if (debuffeable instanceof MobI) this.añadirAura((MobI)debuffeable, aura);
+            else if (debuffeable instanceof PCI) this.añadirAura((PCI)debuffeable, aura);
         }
         else if (evt.getNewValue() instanceof DTOsDebuffeable.EliminarAura)
         {
             Debuffeable debuffeable = ((DTOsDebuffeable.EliminarAura) evt.getNewValue()).debuffeable;
             AuraI aura = ((DTOsDebuffeable.EliminarAura) evt.getNewValue()).aura;
             if (debuffeable instanceof MobI) this.eliminarAura((MobI)debuffeable, aura);
+            else if (debuffeable instanceof PCI) this.eliminarAura((PCI)debuffeable, aura);
         }
         else if (evt.getNewValue() instanceof DTOsDebuffeable.ModificarStacks)
         {
             Debuffeable debuffeable = ((DTOsDebuffeable.ModificarStacks) evt.getNewValue()).debuffeable;
             AuraI aura = ((DTOsDebuffeable.ModificarStacks) evt.getNewValue()).aura;
             if (debuffeable instanceof MobI) this.modificarAura((MobI) debuffeable, aura);
+            else if (debuffeable instanceof PCI) this.modificarAura((PCI) debuffeable, aura);
         }
         //DISPOSABLE:
         else if (evt.getNewValue() instanceof DTOsDisposable.Dispose)

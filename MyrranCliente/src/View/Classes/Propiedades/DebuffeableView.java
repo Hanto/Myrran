@@ -32,6 +32,7 @@ public class DebuffeableView extends Table implements PropertyChangeListener, Di
             model.añadirObservador(this);
         }
         else logger.error("ERROR: debuffeable no es Observable:");
+        this.setTransform(false);
     }
 
     @Override public void dispose()
@@ -41,7 +42,7 @@ public class DebuffeableView extends Table implements PropertyChangeListener, Di
     {
         AuraView auraView = new AuraView(aura);
         listaAuraViews.add(auraView);
-        this.add(auraView).left().padBottom(-6);
+        this.add(auraView).left();
         this.row();
     }
 
@@ -66,7 +67,7 @@ public class DebuffeableView extends Table implements PropertyChangeListener, Di
         this.clear();
         for (AuraView auraView : listaAuraViews)
         {
-            this.add(auraView).left().padBottom(-6);
+            this.add(auraView).left();
             this.row();
         }
     }

@@ -4,6 +4,7 @@ import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.EntidadesTipos.PlayerI;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;
+import View.Classes.Propiedades.DebuffeableView;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
@@ -14,10 +15,9 @@ public enum PlayerViewFactory
         @Override public PlayerView nuevo (PlayerI player, RayHandler rayHandler)
         {
             PixiePC pixie = new PixiePC("Golem");
-            NameplateView nameplateView = new NameplateView((Caster)player);
             PointLight luz = new PointLight(rayHandler, 300);
 
-            return new PlayerView(player, pixie, nameplateView, luz);
+            return new PlayerView(player, pixie, new NameplateView((Caster)player), new DebuffeableView(player),luz);
         }
     };
 

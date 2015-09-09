@@ -37,7 +37,7 @@ public class AuraView extends Group implements PropertyChangeListener, IDentific
 
         crearNombre();
 
-        this.setSize(nombre.getWidth(), nombre.getHeight());
+        this.setSize(nombre.getWidth(), nombre.getHeight()-6);
         this.setTransform(false);
 
         this.aura.añadirObservador(this);
@@ -49,6 +49,17 @@ public class AuraView extends Group implements PropertyChangeListener, IDentific
 
     private void crearNombre()
     {
+        stacks = new Texto(
+                Integer.toString(aura.getStacks()),
+                RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_10),
+                Color.WHITE,
+                Color.BLACK,
+                Align.center,
+                Align.bottom,
+                1);
+
+        this.addActor(stacks);
+
         nombre = new Texto(
                 aura.getDebuff().getNombre(),
                 RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_10),
@@ -57,17 +68,9 @@ public class AuraView extends Group implements PropertyChangeListener, IDentific
                 Align.left,
                 Align.bottom,
                 1);
-        this.addActor(nombre);
 
-        stacks = new Texto(
-                Integer.toString(aura.getStacks()),
-                RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_10),
-                Color.WHITE,
-                Color.BLACK,
-                Align.right,
-                Align.bottom,
-                1);
-        this.addActor(stacks);
+        nombre.setX(6);
+        this.addActor(nombre);
 
         duracion = new Texto(
                 Integer.toString(aura.getTicksRestantes()),
@@ -78,25 +81,24 @@ public class AuraView extends Group implements PropertyChangeListener, IDentific
                 Align.bottom,
                 1);
 
+        duracion.setX(6 + nombre.getWidth());
         this.addActor(duracion);
-        duracion.setX(nombre.getWidth() + 3);
     }
 
     private Color setColorDebuff()
     {
-        Color color;
-
         if (aura.getDebuff().isDebuff())
         {
-            if (aura.getCaster() instanceof PlayerI) color = (Color.ORANGE);
-            else color = (Color.TAN);
+            if (aura.getTarget() instanceof PlayerI) return Color.RED;
+            if (aura.getCaster() instanceof PlayerI) return Color.ORANGE;
+            else return Color.TAN;
         }
         else
         {
-            if (aura.getCaster() instanceof PlayerI) color = (Color.GREEN);
-            else color = (Color.LIME);
+            if (aura.getTarget() instanceof PlayerI) return Color.GREEN;
+            if (aura.getCaster() instanceof PlayerI) return Color.LIME;
+            else return Color.FOREST;
         }
-        return color;
     }
 
     private void setStacks(int numStacks)

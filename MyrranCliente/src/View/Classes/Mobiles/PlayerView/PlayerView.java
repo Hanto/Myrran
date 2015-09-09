@@ -11,6 +11,7 @@ import Model.Settings;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
+import View.Classes.Propiedades.DebuffeableView;
 import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -27,6 +28,7 @@ public class PlayerView extends Group implements PropertyChangeListener, IDentif
     protected PlayerI player;
     protected PixiePC actor;
     protected NameplateView nameplateView;
+    protected DebuffeableView debuffView;
     protected Texto nombre;
     protected PointLight luz;
 
@@ -43,15 +45,17 @@ public class PlayerView extends Group implements PropertyChangeListener, IDentif
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public PlayerView (PlayerI player, PixiePC pixieActor, NameplateView nameplate, PointLight luz)
+    public PlayerView (PlayerI player, PixiePC pixieActor, NameplateView nameplate, DebuffeableView debuffView, PointLight luz)
     {
         this.player = player;
         this.actor = pixieActor;
         this.nameplateView = nameplate;
+        this.debuffView = debuffView;
         this.luz = luz;
 
         crearActor();
         crearNameplate();
+        crearDebuffView();
         crearNombre();
         crearLuz();
 
@@ -90,6 +94,12 @@ public class PlayerView extends Group implements PropertyChangeListener, IDentif
     {
         nameplateView.setPosition(this.getWidth() / 2 - nameplateView.getWidth() / 2, getHeight());
         this.addActor(nameplateView);
+    }
+
+    private void crearDebuffView()
+    {
+        debuffView.setPosition(this.getWidth() + 10, this.getHeight());
+        this.addActor(debuffView);
     }
 
     private void crearNombre()

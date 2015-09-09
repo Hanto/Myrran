@@ -50,6 +50,8 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
         this.cuerpo = cuerpo;
         this.fsm = MaquinaEstadosFactory.PLAYER.nuevo(this);
 
+        this.debuffeable.setNotificador(this);
+
         this.setAncho(cuerpo.getAncho());
         this.setAlto(cuerpo.getAlto());
         this.setSeguible(false);
@@ -230,7 +232,9 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
     }
 
     @Override public void actualizarTimers(float delta)
-    {   actualizarCastingTime(delta); }
+    {   actualizarCastingTime(delta);
+        actualizarAuras(delta);
+    }
 
     @Override public void actualizarIA (float delta, MundoI mundo)
     {
