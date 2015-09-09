@@ -9,7 +9,7 @@ import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.Spell.TipoSpellI;
 import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
-import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
 import Model.Skills.SkillsPersonalizados.SkillStat;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,7 +95,7 @@ public class Spell extends AbstractModel implements SpellI
         if (!listaDeDebuffsQueAplica.contains(debuff)) { listaDeDebuffsQueAplica.add(debuff); }
     }
 
-    @Override public void aplicarDebuffs (Caster Caster, DebuffeableI target)
+    @Override public void aplicarDebuffs (Caster Caster, Debuffeable target)
     {
         for (BDebuffI debuff: listaDeDebuffsQueAplica)
         {   debuff.aplicarDebuff(Caster, target);}

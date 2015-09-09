@@ -41,12 +41,13 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public MobView(MobI mob, Pixie actor, NameplateView nameplate)
+    public MobView(MobI mob, Pixie actor, NameplateView nameplate, DebuffeableView debuffView)
     {
         this.mob = mob;
         this.iD = mob.getID();
         this.actor = actor;
         this.nameplate = nameplate;
+        this.debuffView = debuffView;
 
         crearActor();
         crearNameplate();
@@ -60,8 +61,8 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     @Override public void dispose()
     {
         mob.eliminarObservador(this);
-        mob.eliminarObservador(debuffView);
 
+        debuffView.dispose();
         nameplate.dispose();
         this.actor = null;
         this.nameplate = null;
@@ -87,10 +88,8 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
 
     private void crearDebuffView()
     {
-        debuffView = new DebuffeableView();
+        debuffView.setPosition(this.getWidth() + 10, this.getHeight());
         this.addActor(debuffView);
-        debuffView.setPosition(this.getWidth()+10, this.getHeight());
-        mob.añadirObservador(debuffView);
     }
 
     // VISTA:

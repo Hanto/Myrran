@@ -2,7 +2,7 @@ package Interfaces.Misc.Spell;// Created by Hanto on 09/06/2014.
 
 
 import Model.Skills.SkillsPersonalizados.SkillStat;
-import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 
 import java.util.Iterator;
@@ -30,7 +30,7 @@ public interface BDebuffI extends SkillI
     public int getNumSkillStats();
 
     //METODOS:
-    public void aplicarDebuff(Caster Caster, DebuffeableI target);
+    public void aplicarDebuff(Caster Caster, Debuffeable target);
     public void actualizarTick (AuraI aura);
 
 }

@@ -18,13 +18,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
-public class Player extends PlayerNotificador implements PlayerI, DebuffeableI
+public class Player extends PlayerNotificador implements PlayerI, Debuffeable
 {
     private IDentificable identificable;
     private Caster caster;
     private CasterPersonalizable casterPersonalizado;
     private Vulnerable vulnerable;
-    private DebuffeableI debuffeable;
+    private Debuffeable debuffeable;
     private PCStats pcStats;
     private Animable animable;
     private Cuerpo cuerpo;
@@ -37,7 +37,7 @@ public class Player extends PlayerNotificador implements PlayerI, DebuffeableI
 
     public Player(Cuerpo cuerpo,
                   IDentificable identificable, Caster caster, CasterPersonalizable casterPersonalizado,
-                  Vulnerable vulnerable, DebuffeableI debuffeable, PCStats pcStats,
+                  Vulnerable vulnerable, Debuffeable debuffeable, PCStats pcStats,
                   Animable animable)
     {
         this.identificable = identificable;
@@ -85,9 +85,11 @@ public class Player extends PlayerNotificador implements PlayerI, DebuffeableI
     //------------------------------------------------------------------------------------------------------------------
     @Override public AuraI getAura(int auraID)
     {   return debuffeable.getAura(auraID); }
-    @Override public void añadirAura(BDebuffI debuff, Caster caster, DebuffeableI target)
+    @Override public Iterator<AuraI> getAuras()
+    {   return debuffeable.getAuras(); }
+    @Override public void añadirAura(BDebuffI debuff, Caster caster, Debuffeable target)
     {   debuffeable.añadirAura(debuff, caster, target);}
-    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, DebuffeableI target)
+    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, Debuffeable target)
     {   debuffeable.añadirAura(iDAura, debuff, caster, target); }
     @Override public void eliminarAura(int iDAura)
     {   debuffeable.eliminarAura(iDAura); }

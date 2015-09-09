@@ -17,12 +17,15 @@ import DB.Recursos.SkillBaseRecursos.SkillBaseRecursosXMLDB;
 import DB.Recursos.SkillRecursos.SkillRecursosXMLDB;
 import DB.Recursos.TerrenoRecursos.TerrenoRecursosXMLDB;
 import DB.Recursos.TipoSkillRecursos.TipoSkillRecursosXMLDB;
+import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
+import Model.Classes.Pools.PoolDebuffeableCliente;
 import Model.Settings;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.utils.Pools;
 
 public class MyrranClient extends Game
 {
@@ -73,6 +76,8 @@ public class MyrranClient extends Game
         TipoSkillRecursosXMLDB.get();
         SkillRecursosXMLDB.get();
         ParticulaRecursosXMLDB.get();
+
+        Pools.set(Debuffeable.class, new PoolDebuffeableCliente(10, 100));
     }
 
     public void nagevarA (tipoPantalla pantalla)

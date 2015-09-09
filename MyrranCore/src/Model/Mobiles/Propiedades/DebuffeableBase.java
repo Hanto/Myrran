@@ -1,22 +1,38 @@
 package Model.Mobiles.Propiedades;// Created by Hanto on 03/09/2015.
 
 import Interfaces.EntidadesPropiedades.Propiedades.Caster;
-import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
 import Interfaces.Misc.Spell.AuraI;
 import Interfaces.Misc.Spell.BDebuffI;
 import Model.Settings;
 import Model.Skills.BDebuff.Aura;
+import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Pool.Poolable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Debuffeable implements DebuffeableI
+public class DebuffeableBase implements Debuffeable, Poolable
 {
     protected List<AuraI> listaDeAuras = new ArrayList<>();
     protected DeBuffeableNotificadorI notificador;
     protected int auraID = 0;
-    public boolean isServidor = true;
+    protected Pool<Debuffeable> pool;
+
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public DebuffeableBase() {}
+
+    public DebuffeableBase(Pool<Debuffeable> pool)
+    {   this.pool = pool; }
+
+    @Override public void dispose()
+    {   if (pool != null) pool.free(this); }
+
+    //
+    //------------------------------------------------------------------------------------------------------------------
 
     public void setNotificador(DeBuffeableNotificadorI notificador)
     {   this.notificador = notificador; }
@@ -31,12 +47,15 @@ public class Debuffeable implements DebuffeableI
         return null;
     }
 
-    public void añadirAura(BDebuffI debuff, Caster caster, DebuffeableI target)
+    public Iterator<AuraI>getAuras()
+    {   return listaDeAuras.iterator(); }
+
+    public void añadirAura(BDebuffI debuff, Caster caster, Debuffeable target)
     {
         AuraI aura = auraExisteYEsDelCaster(debuff, caster);
         if (aura != null)
         {
-            incrementarStackYRestearDuracion(aura, debuff);
+            resetearDuracionYOIncrementarStack(aura, debuff);
             notificador.notificarIncrementarStack(aura);
         }
         else
@@ -47,20 +66,11 @@ public class Debuffeable implements DebuffeableI
         }
     }
 
-    public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, DebuffeableI target)
-    {
-        AuraI aura;/* = auraExisteYEsDelCaster(debuff, caster);
-        if (aura != null)
-        {
-            incrementarStackYRestearDuracion(aura, debuff);
-            notificador.notificarIncrementarStack(aura);
-        }
-        else*/
-        {
-            aura = new Aura(iDAura, debuff, caster, target);
-            listaDeAuras.add(aura);
-            notificador.notificarAñadirAura(aura);
-        }
+    public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, Debuffeable target)
+    {   //para el cliente:
+        AuraI aura = new Aura(iDAura, debuff, caster, target);
+        listaDeAuras.add(aura);
+        notificador.notificarAñadirAura(aura);
     }
 
     public void eliminarAura(int iDAura)
@@ -86,21 +96,19 @@ public class Debuffeable implements DebuffeableI
         {
             aura = iterator.next();
             aura.actualizarAura(delta);
-            if (isServidor)
+
+            if (aura.getDuracion() >= aura.getDuracionMax())
             {
-                if (aura.getDuracion() >= aura.getDuracionMax()) {
-                    notificador.notificarEliminarAura(aura);
-                    iterator.remove();
-                }
+                notificador.notificarEliminarAura(aura);
+                iterator.remove();
             }
         }
     }
 
-
     // METODOS PROPIOS:
     //------------------------------------------------------------------------------------------------------------------
 
-    private void incrementarStackYRestearDuracion(AuraI aura, BDebuffI debuff)
+    private void resetearDuracionYOIncrementarStack(AuraI aura, BDebuffI debuff)
     {
         //incrementamos Stacks:
         if (aura.getStacks() < debuff.getStacksMaximos()) aura.setStacks(aura.getStacks()+1);
@@ -117,5 +125,12 @@ public class Debuffeable implements DebuffeableI
                 return aura;
         }
         return null;
+    }
+
+    @Override public void reset()
+    {
+        listaDeAuras.clear();
+        notificador = null;
+        auraID = 0;
     }
 }

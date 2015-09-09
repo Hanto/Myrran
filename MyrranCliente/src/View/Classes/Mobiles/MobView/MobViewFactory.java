@@ -4,6 +4,7 @@ import DB.RSC;
 import Interfaces.EntidadesTipos.MobI;
 import View.Classes.Actores.NameplateView;
 import View.Classes.Actores.Pixie;
+import View.Classes.Propiedades.DebuffeableView;
 
 public enum MobViewFactory
 {
@@ -12,8 +13,7 @@ public enum MobViewFactory
         @Override public MobView nuevo(MobI mob)
         {
             Pixie actor = new Pixie(RSC.pixieMobRecursosDAO.getPixieMobRecursosDaoDAO().getPixieMob("GrimReaper"));
-            NameplateView nameplate =  new NameplateView(mob);
-            return new MobView(mob, actor, nameplate);
+            return new MobView(mob, actor, new NameplateView(mob), new DebuffeableView(mob));
         }
     };
 

@@ -21,7 +21,7 @@ public class PC extends PCNotificador implements PropertyChangeListener
     protected Caster caster;
     protected CasterPersonalizable casterPersonalizado;
     protected Vulnerable vulnerable;
-    protected DebuffeableI debuffeable;
+    protected Debuffeable debuffeable;
     protected PCStats pcStats;
     protected Animable animable;
 
@@ -30,7 +30,7 @@ public class PC extends PCNotificador implements PropertyChangeListener
 
     public PC(int connectionID, int ancho, int alto,
               IDentificable identificable, Caster caster, CasterPersonalizable casterPersonalizado,
-              Vulnerable vulnerable, DebuffeableI debuffeable, PCStats pcStats,
+              Vulnerable vulnerable, Debuffeable debuffeable, PCStats pcStats,
               Animable animable)
     {
         this.identificable = identificable;
@@ -48,6 +48,8 @@ public class PC extends PCNotificador implements PropertyChangeListener
         this.setHuellas(new Huellas());
         this.setSeguible(true);
         this.setTiempoDecayHuellas(20f);
+
+        this.debuffeable.setNotificador(this);
     }
 
     @Override public void dispose()
@@ -87,9 +89,11 @@ public class PC extends PCNotificador implements PropertyChangeListener
     //------------------------------------------------------------------------------------------------------------------
     @Override public AuraI getAura(int auraID)
     {   return debuffeable.getAura(auraID); }
-    @Override public void añadirAura(BDebuffI debuff, Caster caster, DebuffeableI target)
+    @Override public Iterator<AuraI> getAuras()
+    {   return debuffeable.getAuras(); }
+    @Override public void añadirAura(BDebuffI debuff, Caster caster, Debuffeable target)
     {   debuffeable.añadirAura(debuff, caster, target);}
-    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, DebuffeableI target)
+    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, Debuffeable target)
     {   debuffeable.añadirAura(iDAura, debuff, caster, target); }
     @Override public void eliminarAura(int iDAura)
     {   debuffeable.eliminarAura(iDAura); }

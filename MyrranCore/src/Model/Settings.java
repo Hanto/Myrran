@@ -95,6 +95,7 @@ public class Settings
 
         //Fuentes
         FUENTE_Nombres              = settings.getString("FUENTE_Nombres", "14");
+        FUENTE_10                   = settings.getString("FUENTE_10", "10");
 
         //Barra Spells:
         BARRASPELLS_Ancho_Casilla   = settings.getInt("BARRASPELLS_Ancho_Casilla", 32+2);
@@ -203,6 +204,7 @@ public class Settings
 
     //Fuentes
     public static String FUENTE_Nombres;
+    public static String FUENTE_10;
 
     //Barra Spells:
     public static int BARRASPELLS_Ancho_Casilla;

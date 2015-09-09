@@ -14,7 +14,7 @@ public enum PlayerFactory
         {
             return new Player(BodyFactory.crearCuerpo.CIRCLE.nuevo(world, 48, 48),
                     new IdentificableBase(), new CasterBase(), new CasterPersonalizadoBase(DAO.spellDAOFactory),
-                    new VulnerableBase(), new Debuffeable(), new PCStatsBase(),
+                    new VulnerableBase(), new DebuffeableBase(), new PCStatsBase(),
                     new AnimableBase());
         }
     };

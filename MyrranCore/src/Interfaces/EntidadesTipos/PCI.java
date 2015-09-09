@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 public interface PCI extends
         IDentificable, SteerableAgentI, Disposable,
         PCStats,
-        Vulnerable, Caster, CasterPersonalizable, Animable, DebuffeableI
+        Vulnerable, Caster, CasterPersonalizable, Animable, Debuffeable
 
 {
 }

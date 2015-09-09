@@ -114,7 +114,7 @@ public class Proyectil extends ProyectilNotificador
     @Override public void checkColisionesConMob(Colisionable colisionable)
     {
         if (colisionable instanceof Vulnerable) aplicarDaño((Vulnerable)colisionable);
-        if (colisionable instanceof DebuffeableI) aplicarDebuffs((DebuffeableI)colisionable);
+        if (colisionable instanceof Debuffeable) aplicarDebuffs((Debuffeable)colisionable);
         consumible.setDuracionActual(consumible.getDuracionMaxima() + 1);
     }
 
@@ -124,6 +124,6 @@ public class Proyectil extends ProyectilNotificador
     private void aplicarDaño(Vulnerable vulnerable)
     {   vulnerable.modificarHPs(-proyectilStats.getDaño()); }
 
-    private void aplicarDebuffs(DebuffeableI debuffeable)
+    private void aplicarDebuffs(Debuffeable debuffeable)
     {   proyectilStats.getSpell().aplicarDebuffs(proyectilStats.getOwner(), debuffeable); }
 }

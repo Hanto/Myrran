@@ -2,7 +2,7 @@ package Model.Classes.Mobiles.Mob;// Created by Hanto on 04/09/2015.
 
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
 import Interfaces.EntidadesPropiedades.Propiedades.Caster;
-import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
 import Interfaces.EntidadesPropiedades.Propiedades.Vulnerable;
 import Interfaces.EntidadesPropiedades.TipoMobile.MobStats;
@@ -14,11 +14,13 @@ import Model.Mobiles.Propiedades.DeBuffeableNotificadorI;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Iterator;
+
 public class Mob extends MobNotificador
 {
     private IDentificable identificable;
     private Vulnerable vulnerable;
-    private DebuffeableI debuffeable;
+    private Debuffeable debuffeable;
     private MobStats mobStats;
 
     private Cuerpo cuerpo;
@@ -27,7 +29,7 @@ public class Mob extends MobNotificador
 
     public Mob(int iD, Cuerpo cuerpo,
                IDentificable identificable, Vulnerable vulnerable,
-               DebuffeableI debuffeable, MobStats mobStats)
+               Debuffeable debuffeable, MobStats mobStats)
     {
         this.identificable = identificable;
         this.vulnerable = vulnerable;
@@ -47,7 +49,10 @@ public class Mob extends MobNotificador
     }
 
     @Override public void dispose()
-    {   cuerpo.dispose(); }
+    {
+        cuerpo.dispose();
+        debuffeable.dispose();
+    }
 
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -70,9 +75,11 @@ public class Mob extends MobNotificador
     //------------------------------------------------------------------------------------------------------------------
     @Override public AuraI getAura(int auraID)
     {   return debuffeable.getAura(auraID); }
-    @Override public void añadirAura(BDebuffI debuff, Caster caster, DebuffeableI target)
+    @Override public Iterator<AuraI> getAuras()
+    {   return debuffeable.getAuras(); }
+    @Override public void añadirAura(BDebuffI debuff, Caster caster, Debuffeable target)
     {   debuffeable.añadirAura(debuff, caster, target);}
-    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, DebuffeableI target)
+    @Override public void añadirAura(int iDAura, BDebuffI debuff, Caster caster, Debuffeable target)
     {   debuffeable.añadirAura(iDAura, debuff, caster, target); }
     @Override public void eliminarAura(int iDAura)
     {   debuffeable.eliminarAura(iDAura); }

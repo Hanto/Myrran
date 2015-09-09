@@ -3,7 +3,7 @@ package Model.Skills.BDebuff;// Created by Hanto on 04/06/2014.
 
 import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
-import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
 import Interfaces.Misc.Observable.AbstractModel;
 import Interfaces.Misc.Spell.AuraI;
 import Interfaces.Misc.Spell.BDebuffI;
@@ -78,7 +78,7 @@ public class BDebuff extends AbstractModel implements BDebuffI
         else return getSkillStat(statID).getValorBase();
     }
 
-    @Override public void aplicarDebuff(Caster caster, DebuffeableI target)
+    @Override public void aplicarDebuff(Caster caster, Debuffeable target)
     {   target.añadirAura(this, caster, target); }
 
     @Override public void actualizarTick (AuraI aura)

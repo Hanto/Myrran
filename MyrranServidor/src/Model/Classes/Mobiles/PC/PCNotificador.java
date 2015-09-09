@@ -2,19 +2,30 @@ package Model.Classes.Mobiles.PC;// Created by Hanto on 24/07/2014.
 
 import DTOs.*;
 import Interfaces.EntidadesTipos.PCI;
+import Interfaces.Misc.Spell.AuraI;
+import Model.Mobiles.Propiedades.DeBuffeableNotificadorI;
 import Model.Mobiles.Steerables.SteerableAgent;
 
-public abstract class PCNotificador extends SteerableAgent implements PCI
+public abstract class PCNotificador extends SteerableAgent implements PCI,
+        DeBuffeableNotificadorI
 {
     private DTOsEspacial.Posicion posicionDTO;
     private DTOsAnimable.NumAnimacion animacionDTO;
     private DTOsVulnerable.ModificarHPs modificarHPsDTO;
+
+    private DTOsDebuffeable.AñadirAura añadirAuraDTO;
+    private DTOsDebuffeable.EliminarAura eliminarAuraDTO;
+    private DTOsDebuffeable.ModificarStacks modificarStacksDTO;
 
     public PCNotificador()
     {
         posicionDTO = new DTOsEspacial.Posicion(this);
         animacionDTO = new DTOsAnimable.NumAnimacion(this);
         modificarHPsDTO = new DTOsVulnerable.ModificarHPs(this);
+
+        añadirAuraDTO = new DTOsDebuffeable.AñadirAura(this);
+        eliminarAuraDTO = new DTOsDebuffeable.EliminarAura(this);
+        modificarStacksDTO = new DTOsDebuffeable.ModificarStacks(this);
     }
 
     //  NOTIFICACION LOCAL:
@@ -37,6 +48,23 @@ public abstract class PCNotificador extends SteerableAgent implements PCI
             animacionDTO.numAnimacion = (short)getNumAnimacion();
             notificarActualizacion("numAnimacionPC", null, animacionDTO);
         }
+    }
+
+    public void notificarAñadirAura(AuraI aura)
+    {
+        añadirAuraDTO.aura= aura;
+        notificarActualizacion("añadirAura", null, añadirAuraDTO);
+    }
+
+    public void notificarEliminarAura(AuraI aura)
+    {
+        eliminarAuraDTO.aura = aura;
+        notificarActualizacion("eliminarAura", null, eliminarAuraDTO);
+    }
+
+    public void notificarIncrementarStack(AuraI aura) {
+        modificarStacksDTO.aura = aura;
+        notificarActualizacion("setModificarStacks", null, modificarStacksDTO);
     }
 
     public void notificarAddModificarHPs(float HPs)

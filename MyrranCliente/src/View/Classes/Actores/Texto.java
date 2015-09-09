@@ -93,8 +93,8 @@ public class Texto extends Actor
         textoNormal.setWidth(ltexto.getWidth() +relieveSombra);
         textoSombra.setWidth(ltexto.getWidth() +relieveSombra);
         this.setWidth(ltexto.getWidth() +relieveSombra);
-        this.setHeight(ltexto.getHeight() +relieveSombra);
-        setCentrado (this.centradoHorizontal, this.centradoVertical);
+        this.setHeight(ltexto.getHeight() + relieveSombra);
+        setCentrado(this.centradoHorizontal, this.centradoVertical);
     }
 
     public void setFuente ( BitmapFont fuente )
@@ -172,7 +172,7 @@ public class Texto extends Actor
         textoSombra.setPosition(getX() + offSetX + relieveSombra, getY() + offSetY - relieveSombra);
 
         //Dibujado Elementos:
-        textoSombra.draw(batch, this.getColor().a);
-        textoNormal.draw(batch, this.getColor().a);
+        textoSombra.draw(batch, this.getColor().a * alpha);
+        textoNormal.draw(batch, this.getColor().a * alpha);
     }
 }

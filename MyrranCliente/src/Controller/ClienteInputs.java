@@ -139,7 +139,6 @@ public class ClienteInputs
         if (mob == null)
         {
             mob = MobFactory.MOBMODULAR.nuevo(mobDTOs.iD, mundo.getWorld());
-            //MobFactory.NUEVO.nuevo(mobDTOs.iD, mundo.getWorld());
             mundo.añadirMob(mob);
         }
 

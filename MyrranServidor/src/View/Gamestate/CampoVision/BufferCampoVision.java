@@ -161,6 +161,19 @@ public class BufferCampoVision
     // MOBS:
     //------------------------------------------------------------------------------------------------------------------
 
+    public void setDatosCompletosMob (MobI mob)
+    {
+        setPosicionMob(mob);
+
+        AuraI aura;
+        Iterator<AuraI>iterator = mob.getAuras();
+        while (iterator.hasNext())
+        {
+            aura = iterator.next();
+            addAñadirAura(mob, aura);
+        }
+    }
+
     public void setPosicionMob(MobI mob)
     {
         DTOsNet.Posicion posicionMob = new DTOsNet.Posicion(mob);

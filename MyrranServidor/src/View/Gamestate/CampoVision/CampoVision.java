@@ -231,7 +231,7 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         {
             listaMobsCercanos.add(mob);
             mob.añadirObservador(this);
-            //TODO buffer.setDatosCompletosMob(mob)
+            buffer.setDatosCompletosMob(mob);
         }
     }
 
@@ -322,19 +322,19 @@ public class CampoVision extends AbstractModel implements PropertyChangeListener
         //DEBUFFEABLE:
         else if (evt.getNewValue() instanceof DTOsDebuffeable.AñadirAura)
         {
-            DebuffeableI debuffeable = ((DTOsDebuffeable.AñadirAura) evt.getNewValue()).debuffeable;
+            Debuffeable debuffeable = ((DTOsDebuffeable.AñadirAura) evt.getNewValue()).debuffeable;
             AuraI aura = ((DTOsDebuffeable.AñadirAura) evt.getNewValue()).aura;
             if (debuffeable instanceof MobI) this.añadirAura((MobI)debuffeable, aura);
         }
         else if (evt.getNewValue() instanceof DTOsDebuffeable.EliminarAura)
         {
-            DebuffeableI debuffeable = ((DTOsDebuffeable.EliminarAura) evt.getNewValue()).debuffeable;
+            Debuffeable debuffeable = ((DTOsDebuffeable.EliminarAura) evt.getNewValue()).debuffeable;
             AuraI aura = ((DTOsDebuffeable.EliminarAura) evt.getNewValue()).aura;
             if (debuffeable instanceof MobI) this.eliminarAura((MobI)debuffeable, aura);
         }
         else if (evt.getNewValue() instanceof DTOsDebuffeable.ModificarStacks)
         {
-            DebuffeableI debuffeable = ((DTOsDebuffeable.ModificarStacks) evt.getNewValue()).debuffeable;
+            Debuffeable debuffeable = ((DTOsDebuffeable.ModificarStacks) evt.getNewValue()).debuffeable;
             AuraI aura = ((DTOsDebuffeable.ModificarStacks) evt.getNewValue()).aura;
             if (debuffeable instanceof MobI) this.modificarAura((MobI) debuffeable, aura);
         }

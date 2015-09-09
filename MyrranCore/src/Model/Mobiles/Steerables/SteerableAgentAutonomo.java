@@ -48,6 +48,7 @@ public abstract class SteerableAgentAutonomo extends SteerableAgent implements S
         {
             nuevaOrientacion = getOrientacion() + getVelocidadAngular() * delta;
             setVelocidadAngular(getVelocidadAngular() + steering.angular * delta);
+            setOrientacion(nuevaOrientacion);
         }
         else
         {

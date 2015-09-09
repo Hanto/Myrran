@@ -5,7 +5,7 @@ import Interfaces.Misc.Observable.AbstractModel;
 import Model.Settings;
 import Interfaces.Misc.Spell.AuraI;
 import Interfaces.Misc.Spell.BDebuffI;
-import Interfaces.EntidadesPropiedades.Propiedades.DebuffeableI;
+import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
 import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 
 public class Aura extends AbstractModel implements AuraI
@@ -16,23 +16,25 @@ public class Aura extends AbstractModel implements AuraI
     private float duracion = 0;
     private float duracionMax;
     private Caster Caster;
-    private DebuffeableI target;
+    private Debuffeable target;
     private BDebuffI debuff;
 
     // AURAI:
     //------------------------------------------------------------------------------------------------------------------
     @Override public int getStacks()                        { return stacks; }
     @Override public int getTicksAplicados()                { return ticksAplicados; }
+    @Override public int getTicksRestantes()                { return getMaxTicks()- ticksAplicados; }
+    @Override public int getMaxTicks()                      { return (int) (duracionMax / Settings.BDEBUFF_DuracionTick); }
     @Override public float getDuracion()                    { return duracion; }
     @Override public float getDuracionMax()                 { return duracionMax; }
     @Override public Caster getCaster()                     { return Caster; }
-    @Override public DebuffeableI getTarget()               { return target; }
+    @Override public Debuffeable getTarget()               { return target; }
     @Override public BDebuffI getDebuff()                   { return debuff; }
 
     @Override public void setDuracion(float f)              { duracion = f; }
     @Override public void setDuracionMax(float f)           { duracionMax = f; }
     @Override public void setCaster(Caster Caster)          { this.Caster = Caster; }
-    @Override public void setTarget(DebuffeableI target)    { this.target = target; }
+    @Override public void setTarget(Debuffeable target)    { this.target = target; }
     @Override public void setDebuff(BDebuffI debuff)        { this.debuff = debuff; }
 
     // IDENTIFICABLE:
@@ -43,7 +45,7 @@ public class Aura extends AbstractModel implements AuraI
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public Aura (int iD, BDebuffI debuff, Caster caster, DebuffeableI target)
+    public Aura (int iD, BDebuffI debuff, Caster caster, Debuffeable target)
     {
         this.iD = iD;
         this.debuff = debuff;
