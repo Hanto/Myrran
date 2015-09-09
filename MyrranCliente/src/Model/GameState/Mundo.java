@@ -213,6 +213,9 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
 
         //calculamos los nuevos valores:
         world.step(delta, 8, 6);
+
+        for (PCI pc : listaMapaPlayers)
+        {   pc.actualizarFisica(delta, mundo); }
     }
 
     @Override public void checkColisiones()

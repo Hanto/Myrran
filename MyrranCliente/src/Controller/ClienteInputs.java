@@ -53,7 +53,7 @@ public class ClienteInputs
             {   mundo.eliminarPC(pcDTOs.connectionID); }
 
             else if (dto instanceof DTOsNet.Posicion)
-            {   pc.setPosition(((DTOsNet.Posicion) dto).posX, ((DTOsNet.Posicion) dto).posY); }
+            {   pc.setDireccion(((DTOsNet.Posicion) dto).posX, ((DTOsNet.Posicion) dto).posY); }
 
             else if (dto instanceof DTOsNet.NumAnimacion)
             {   pc.setNumAnimacion(((DTOsNet.NumAnimacion) dto).numAnimacion); }

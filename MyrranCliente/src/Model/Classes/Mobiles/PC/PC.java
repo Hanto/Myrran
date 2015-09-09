@@ -1,15 +1,16 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 04/09/2015.
 
-import Interfaces.Misc.Spell.AuraI;
 import Interfaces.EntidadesPropiedades.Espaciales.Colisionable;
+import Interfaces.EntidadesPropiedades.Propiedades.*;
+import Interfaces.EntidadesPropiedades.TipoMobile.PCStats;
 import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Spell.AuraI;
 import Interfaces.Misc.Spell.BDebuffI;
 import Interfaces.Misc.Spell.SkillPersonalizadoI;
 import Interfaces.Misc.Spell.SpellPersonalizadoI;
-import Interfaces.EntidadesPropiedades.Propiedades.*;
-import Interfaces.EntidadesPropiedades.TipoMobile.PCStats;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import Model.Mobiles.Propiedades.DeBuffeableNotificadorI;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.Iterator;
 
@@ -22,6 +23,9 @@ public class PC extends PCNotificador implements Debuffeable
     private Debuffeable debuffeable;
     private PCStats pcStats;
     private Animable animable;
+
+    private Vector2 destino = new Vector2();
+    private Vector2 toTarget = new Vector2();
 
     private Cuerpo cuerpo;
 
@@ -60,9 +64,7 @@ public class PC extends PCNotificador implements Debuffeable
 
     // DINAMICO:
     //------------------------------------------------------------------------------------------------------------------
-    @Override public void setDireccion(float x, float y)            {}
     @Override public void setDireccion(float grados)                {}
-    @Override public void actualizarFisica(float delta,MundoI mundo){}
 
     // ANIMABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -144,6 +146,9 @@ public class PC extends PCNotificador implements Debuffeable
         notificarSetPosition();
     }
 
+    @Override public void setDireccion(float x, float y)
+    {   destino.set(x, y); }
+
     @Override public void setNumAnimacion(int numAnimacion)
     {
         animable.setNumAnimacion(numAnimacion);
@@ -158,6 +163,24 @@ public class PC extends PCNotificador implements Debuffeable
 
     @Override public void actualizarTimers(float delta)
     {   actualizarAuras(delta); }
+
+    @Override public void actualizarFisica(float delta, MundoI mundo)
+    {
+        toTarget.set(destino).sub(posicion);
+        float distancia = toTarget.len();
+
+        float targetSpeed = 80f;
+
+        if (distancia > 10 || distancia <= 2.0)
+        {   setPosition(destino.x, destino.y); return; }
+
+        //normalizamos a la vez que multiplicamos por la velocidad:
+        getVelocidad().set(toTarget).scl(targetSpeed / distancia);
+
+        float nuevaPosX = posicion.x + getVelocidad().x * delta;
+        float nuevaPosY = posicion.y + getVelocidad().y * delta;
+        setPosition(nuevaPosX, nuevaPosY);
+    }
 
     @Override public void actualizarIA(float delta, MundoI mundo)
     {

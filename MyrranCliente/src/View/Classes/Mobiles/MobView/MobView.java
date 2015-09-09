@@ -98,11 +98,11 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
     public void setPosition(int x, int y)
     {
         if (Math.abs(this.getX() - x) > 10 || Math.abs(this.getY() - y) > 10)
-            super.setPosition(x-rAncho, y-rAlto);
+            super.setPosition(x -rAncho, y -rAlto);
         else
         {
             this.clearActions();
-            this.addAction(Actions.moveTo(x - rAncho, y - rAlto, Settings.FIXED_TimeStep + 0.03f, Interpolation.linear));
+            this.addAction(Actions.moveTo(x - rAncho, y - rAlto, Settings.FIXED_TimeStep, Interpolation.linear));
         }
     }
 

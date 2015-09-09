@@ -112,7 +112,7 @@ public class PlayerView extends Group implements PropertyChangeListener, IDentif
     private void crearLuz()
     {
         luz.setSoft(true);
-        luz.setColor(0.3f, 0.3f, 0.3f, 1.0f);
+        luz.setColor(0.6f, 0.6f, 0.6f, 1.0f);
         luz.setDistance(350 * PIXEL_METROS);
         luz.attachToBody(player.getCuerpo().getBody(), 0, 0);
     }
