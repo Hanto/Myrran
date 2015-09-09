@@ -82,7 +82,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         RayHandler.useDiffuseLight(true);
         RayHandler.setGammaCorrection(false);
         this.rayHandler = rayHandler;
-        this.rayHandler.setAmbientLight(0.6f, 0.6f, 0.6f, 1.0f);
+        this.rayHandler.setAmbientLight(0.4f, 0.4f, 0.4f, 1.0f);
         this.camara = camara;
         this.boxCamara = boxCamara;
         this.mundo = mundo;
@@ -198,7 +198,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         //batch.end();
 
         //ordenadomos los actores:
-        //getActors().sort(ordenarPorProfundidad);
+        getActors().sort(ordenarPorProfundidad);
 
         //dibujamos los sprites:
         super.draw();
