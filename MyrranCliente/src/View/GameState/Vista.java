@@ -1,9 +1,9 @@
 package View.GameState;// Created by Hanto on 08/04/2014.
 
 import DB.RSC;
+import Model.Classes.Tweens.TweenEng;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
-import Model.Classes.Tweens.TweenEng;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Disposable;
@@ -21,6 +21,7 @@ public class Vista implements PropertyChangeListener, Disposable
 
     public UIView getUiView()       { return uiView; }
     public MundoView getMundoView() { return mundoView; }
+
 
     public Vista (MundoView mundoView, UIView uiView)
     {
@@ -42,7 +43,7 @@ public class Vista implements PropertyChangeListener, Disposable
 
     public void render (float delta)
     {
-        Gdx.gl.glClearColor(0/2.55f, 0/2.55f, 0/2.55f, 1f);
+        Gdx.gl.glClearColor(0 / 2.55f, 0 / 2.55f, 0 / 2.55f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         TweenEng.getTweenManager().update(delta);

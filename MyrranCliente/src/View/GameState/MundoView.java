@@ -35,11 +35,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Comparator;
 
 import static Model.Settings.PIXEL_METROS;
 
@@ -54,6 +56,7 @@ public class MundoView extends Stage implements PropertyChangeListener
     protected ListaMapa<PCView> listaPCViews = new ListaMapa<>();
     protected ListaMapa<ProyectilView> listaProyectilViews = new ListaMapa<>();
     protected ListaMapa<MobView> listaMobsViews = new ListaMapa<>();
+    private OrdenarPorProfundidad ordenarPorProfundidad;
 
     //LibGDX Tools:
     protected SpriteBatch batch = new SpriteBatch();
@@ -84,6 +87,8 @@ public class MundoView extends Stage implements PropertyChangeListener
         this.boxCamara = boxCamara;
         this.mundo = mundo;
         this.mapaView = mapaView;
+
+        this.ordenarPorProfundidad = new OrdenarPorProfundidad();
 
         añadirPlayerView(player);
         getViewport().setCamera(camara);
@@ -188,9 +193,12 @@ public class MundoView extends Stage implements PropertyChangeListener
         mapaView.render();
 
         //dibujamos los sprites a manopla:
-        batch.setProjectionMatrix(camara.combined);
-        batch.begin();
-        batch.end();
+        //batch.setProjectionMatrix(camara.combined);
+        //batch.begin();
+        //batch.end();
+
+        //ordenadomos los actores:
+        //getActors().sort(ordenarPorProfundidad);
 
         //dibujamos los sprites:
         super.draw();
@@ -250,6 +258,24 @@ public class MundoView extends Stage implements PropertyChangeListener
 
         else if (evt.getNewValue() instanceof DTOsMundo.EliminarMob)
         {   eliminarMobView(((DTOsMundo.EliminarMob) evt.getNewValue()).mob.getID());}
+    }
+
+    // ALGORITMO ORDENACION ACTORES:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public class OrdenarPorProfundidad implements Comparator<Actor>
+    {
+        @Override public int compare(Actor o1, Actor o2)
+        {
+            float o1Y, o2Y;
+            o1Y = o1.getY();
+            o2Y = o2.getY();
+            /*if (o1 instanceof Muro && ((Muro)o1).perspectiva < 0 )
+            { o1Y = Muro.distanciaPerspectiva-((Muro)o1).muroTecho.getY(); }
+            if (o2 instanceof Muro && ((Muro)o2).perspectiva < 0 )
+            { o2Y = Muro.distanciaPerspectiva-((Muro)o2).muroTecho.getY(); }*/
+            return (o1Y < o2Y ? 1 : (o1Y == o2Y ? 1 : -1));
+        }
     }
 
     // CODIGO DEBUG:
