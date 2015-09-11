@@ -25,7 +25,7 @@ public class PC extends PCNotificador implements Debuffeable
     private Animable animable;
 
     private Vector2 destino = new Vector2();
-    private Vector2 toTarget = new Vector2();
+    private Vector2 vectorDireccion = new Vector2();
 
     private Cuerpo cuerpo;
 
@@ -101,6 +101,7 @@ public class PC extends PCNotificador implements Debuffeable
     @Override public int getNivel()                                 {   return pcStats.getNivel(); }
     @Override public void setNombre(String nombre)                  {   pcStats.setNombre(nombre); }
     @Override public void setNivel(int nivel)                       {   pcStats.setNivel(nivel); }
+    @Override public void actualizarIA(float delta, MundoI mundo)   { }
 
     // CORPOREO:
     //------------------------------------------------------------------------------------------------------------------
@@ -161,32 +162,29 @@ public class PC extends PCNotificador implements Debuffeable
         notificarSetModificarHPs(HPs);
     }
 
+    // ACTUALIZACION:
+    //------------------------------------------------------------------------------------------------------------------
+
     @Override public void actualizarTimers(float delta)
     {   actualizarAuras(delta); }
 
     @Override public void actualizarFisica(float delta, MundoI mundo)
     {
-        toTarget.set(destino).sub(posicion);
-        float distancia = toTarget.len();
+        vectorDireccion.set(destino).sub(posicion);
+        float distancia = vectorDireccion.len();
 
-        float targetSpeed = 80f;
+        float velocidad = getVelocidadMax()*velocidadMod;
 
-        if (distancia > 10 || distancia <= 2.0)
+        if (distancia > 100 || distancia <= 2.0)
         {   setPosition(destino.x, destino.y); return; }
 
+        //si nos desincronizamos y nos separamos mucho del objetivo, subimos la velocidad por encima del limite:
+        velocidad = (distancia * 0.01f) * velocidad + velocidad;
+
         //normalizamos a la vez que multiplicamos por la velocidad:
-        getVelocidad().set(toTarget).scl(targetSpeed / distancia);
-
-        float nuevaPosX = posicion.x + getVelocidad().x * delta;
-        float nuevaPosY = posicion.y + getVelocidad().y * delta;
-        setPosition(nuevaPosX, nuevaPosY);
+        getVelocidad().set(vectorDireccion).scl(velocidad / distancia);
+        setPosition(posicion.x + getVelocidad().x * delta, posicion.y + getVelocidad().y * delta);
     }
-
-    @Override public void actualizarIA(float delta, MundoI mundo)
-    {
-
-    }
-
 
     // COLISIONABLE:
     //------------------------------------------------------------------------------------------------------------------

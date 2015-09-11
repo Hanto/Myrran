@@ -1,13 +1,11 @@
 <component name="libraryTable">
   <library name="Java Box2DLights">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/MyrranCliente/lib/Java Box2DLights" />
+      <root url="jar://$PROJECT_DIR$/MyrranCliente/lib/Java Box2DLights/box2dlights-1.5-SNAPSHOT.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/MyrranCliente/lib/Java Box2DLights" />
+      <root url="jar://$PROJECT_DIR$/MyrranCliente/lib/Java Box2DLights/box2dlights-1.5-SNAPSHOT-sources.jar!/" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/MyrranCliente/lib/Java Box2DLights" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/MyrranCliente/lib/Java Box2DLights" recursive="false" type="SOURCES" />
   </library>
 </component>

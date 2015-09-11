@@ -48,6 +48,9 @@ public class KryoDTOs
         // proyectil:
         kryo.register(DTOsNet.DatosCompletosProyectil.class);
 
+        // mob:
+        kryo.register(DTOsNet.DatosCompletosMob.class);
+
         // misc:
         kryo.register(DTOsNet.CambioTerrenoMisc.class);
 

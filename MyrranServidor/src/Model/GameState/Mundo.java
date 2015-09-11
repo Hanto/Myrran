@@ -67,7 +67,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
 
         //TODO CODIGO PROVISIONAL PARA PROBAR:
         MobI mob = MobFactory.NUEVOMOB.nuevo(this);
-                //MobFactory.NUEVO.nuevo(this);
+
         añadirMob(mob);
         mob.setSteeringBehavior(SteeringCompuestoFactory.WALL_PURSUE_LOOK.nuevo(mob, pc, this));
     }
@@ -222,7 +222,7 @@ public class Mundo extends AbstractModel implements PropertyChangeListener, Mund
         }
     }
 
-    @Override public void interpolarPosicion(float alpha) {}
+    @Override public void actualizarFisicaPorInterpolacion(float alpha) {}
 
     //CAMPOS OBSERVADOS:
     //------------------------------------------------------------------------------------------------------------------

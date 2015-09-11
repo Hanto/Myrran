@@ -9,6 +9,7 @@ import Model.Classes.UI.BarraTerrenos;
 import Model.Classes.UI.ConjuntoBarraAcciones;
 import Model.GameState.Mundo;
 import Model.GameState.UI;
+import View.Classes.Actores.Camara;
 import View.Classes.Geo.MapaView;
 import View.Classes.UI.BarraAccionesView.ConjuntoBarraAccionesView;
 import View.Classes.UI.BarraTerrenosView.BarraTerrenosView;
@@ -20,7 +21,6 @@ import box2dLight.RayHandler;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import zMain.MyrranClient;
 
 import static Model.Settings.FIXED_TimeStep;
-import static Model.Settings.PIXEL_METROS;
 
 
 public class Updater implements Screen
@@ -53,8 +52,7 @@ public class Updater implements Screen
     private UIView uiView;
 
     private RayHandler rayhandler;
-    private OrthographicCamera camara;
-    private OrthographicCamera boxCamara;
+    private Camara camara;
     private MundoView mundoView;
     private MapaView mapaView;
 
@@ -105,10 +103,9 @@ public class Updater implements Screen
         //--------------------------------------------------------------------------------------------------------------
 
         rayhandler = new RayHandler(world);
-        camara = new OrthographicCamera (Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        boxCamara = new OrthographicCamera(Gdx.graphics.getWidth() * PIXEL_METROS, Gdx.graphics.getHeight() * PIXEL_METROS);
-        mapaView = new MapaView(mapa, camara);
-        mundoView = new MundoView(player, mundo, mapaView, camara, boxCamara, rayhandler);
+        camara = new Camara(player, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        mapaView = new MapaView(mapa, camara.getCamaraMundo());
+        mundoView = new MundoView(player, mundo, mapaView, camara, rayhandler);
 
         // VISTA:
         //--------------------------------------------------------------------------------------------------------------
@@ -148,12 +145,12 @@ public class Updater implements Screen
 
             timeStep -= FIXED_TimeStep;
 
-            player.getInput().coordenadasScreenAMundo(camara);
+            player.getInput().coordenadasScreenAMundo(camara.getCamaraMundo());
             mundo.actualizarUnidades(FIXED_TimeStep, mundo);
             mundo.actualizarFisica(FIXED_TimeStep, mundo);
             mundo.enviarDatosAServidor(cliente);
         }
-        mundo.interpolarPosicion((float) timeStep / FIXED_TimeStep);
+        mundo.actualizarFisicaPorInterpolacion((float) timeStep / FIXED_TimeStep);
         vista.render(delta);
     }
 

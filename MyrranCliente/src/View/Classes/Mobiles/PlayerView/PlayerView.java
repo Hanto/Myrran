@@ -8,7 +8,7 @@ import DTOs.DTOsVulnerable;
 import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
 import Interfaces.EntidadesTipos.PlayerI;
 import Model.Settings;
-import View.Classes.Actores.NameplateView;
+import View.Classes.Propiedades.NameplateView;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
 import View.Classes.Propiedades.DebuffeableView;

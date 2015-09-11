@@ -191,6 +191,9 @@ public class DTOsNet
         public float maxHPs;
         public float actualHPs;
         public int numAnimacion;
+        public float velocidadMax;
+        public float posX;
+        public float posY;
         public DatosCompletosPC() {}
         public DatosCompletosPC(PCI pc)
         {
@@ -198,6 +201,9 @@ public class DTOsNet
             nivel = pc.getNivel();
             maxHPs = pc.getMaxHPs(); actualHPs = pc.getActualHPs();
             numAnimacion = pc.getNumAnimacion();
+            velocidadMax = pc.getVelocidadMax();
+            posX = pc.getX();
+            posY = pc.getY();
         }
     }
 
@@ -211,6 +217,22 @@ public class DTOsNet
         {   this.nombre = pc.getNombre(); }
     }
 
+    // MOB DTOS:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public static class DatosCompletosMob
+    {
+        public float velocidadMax;
+        public float posX;
+        public float posY;
+        public DatosCompletosMob() {}
+        public DatosCompletosMob(MobI mob)
+        {
+            this.velocidadMax = mob.getVelocidadMax();
+            posX = mob.getX();
+            posY = mob.getY();
+        }
+    }
 
     // PROYECTIL DTOS:
     //------------------------------------------------------------------------------------------------------------------

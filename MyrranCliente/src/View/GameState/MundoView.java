@@ -12,6 +12,7 @@ import Model.Classes.Tweens.TweenEng;
 import Model.EstructurasDatos.ListaMapa;
 import Model.GameState.Mundo;
 import Model.Settings;
+import View.Classes.Actores.Camara;
 import View.Classes.Actores.Particula;
 import View.Classes.Geo.MapaView;
 import View.Classes.Mobiles.MobView.MobView;
@@ -64,34 +65,32 @@ public class MundoView extends Stage implements PropertyChangeListener
     protected ShapeRenderer shape = new ShapeRenderer();
     protected int nivelDeZoom = 0;
 
-    protected OrthographicCamera camara;
-    protected OrthographicCamera boxCamara;
+    protected Camara camara;
     protected Box2DDebugRenderer worldRender = new Box2DDebugRenderer();
 
     public PlayerView getPlayerView()                   { return playerView; }
     public MapaView getMapaView()                       { return mapaView; }
-    public OrthographicCamera getCamara()               { return camara; }
+    public OrthographicCamera getCamara()               { return camara.getCamaraMundo(); }
     public RayHandler getRayHandler()                   { return rayHandler; }
     public World getWorld()                             { return mundo.getWorld(); }
 
     private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
-    public MundoView(PlayerI player, Mundo mundo, MapaView mapaView,
-                     OrthographicCamera camara, OrthographicCamera boxCamara, RayHandler rayHandler)
+    public MundoView(PlayerI player, Mundo mundo, MapaView mapaView, Camara camara, RayHandler rayHandler)
     {
         RayHandler.useDiffuseLight(true);
         RayHandler.setGammaCorrection(false);
         this.rayHandler = rayHandler;
         this.rayHandler.setAmbientLight(0.4f, 0.4f, 0.4f, 1.0f);
         this.camara = camara;
-        this.boxCamara = boxCamara;
         this.mundo = mundo;
         this.mapaView = mapaView;
+        this.camara = camara;
 
         this.ordenarPorProfundidad = new OrdenarPorProfundidad();
 
         añadirPlayerView(player);
-        getViewport().setCamera(camara);
+        getViewport().setCamera(this.camara.getCamaraMundo());
 
         mundo.añadirObservador(this);
 
@@ -113,6 +112,8 @@ public class MundoView extends Stage implements PropertyChangeListener
         shape.dispose();
         logger.trace("DISPOSE: Liberando mapaView");
         mapaView.dispose();
+        logger.trace("DISPOSE: Liberando camara");
+        camara.dispose();
     }
 
     // PLAYER
@@ -181,13 +182,7 @@ public class MundoView extends Stage implements PropertyChangeListener
     @Override public void draw ()
     {
         //actualizamos las camaras:
-        camara.position.x = getPlayerView().getCenterX();
-        camara.position.y = getPlayerView().getCenterY();
         camara.update();
-
-        boxCamara.position.x = camara.position.x * PIXEL_METROS;
-        boxCamara.position.y = camara.position.y * PIXEL_METROS;
-        boxCamara.update();
 
         //dibujamos el fondo:
         mapaView.render();
@@ -204,7 +199,7 @@ public class MundoView extends Stage implements PropertyChangeListener
         super.draw();
 
         //aplicamos las luces:
-        rayHandler.setCombinedMatrix(boxCamara);
+        rayHandler.setCombinedMatrix(camara.getCamaraBox2D());
         rayHandler.updateAndRender();
 
         //dibujamos la geometrica fisica de DEBUG:
@@ -216,8 +211,8 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     public void resize (int anchura, int altura)
     {
-        camara.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camara.resize(anchura, altura);
+        getViewport().update(anchura, altura);
     }
 
     public void aplicarZoom(int incrementoZoom)
@@ -229,8 +224,8 @@ public class MundoView extends Stage implements PropertyChangeListener
         if (nivelDeZoom ==0) zoom = 1f;
         if (nivelDeZoom > 0) zoom = 1f+ nivelDeZoom *0.2f;
 
-        Tween.to(camara, CamaraTween.ZOOM, 0.4f).target(zoom).ease(TweenEquations.easeOutBounce).start(TweenEng.getTweenManager());
-        Tween.to(boxCamara, CamaraTween.ZOOM, 0.4f).target(zoom).ease(TweenEquations.easeOutBounce).start(TweenEng.getTweenManager());
+        Tween.to(camara.getCamaraMundo(), CamaraTween.ZOOM, 0.4f).target(zoom).ease(TweenEquations.easeOutBounce).start(TweenEng.getTweenManager());
+        Tween.to(camara.getCamaraBox2D(), CamaraTween.ZOOM, 0.4f).target(zoom).ease(TweenEquations.easeOutBounce).start(TweenEng.getTweenManager());
     }
 
     //CAMPOS OBSERVADOS:
@@ -283,7 +278,7 @@ public class MundoView extends Stage implements PropertyChangeListener
 
     public void dibujarVision()
     {
-        shape.setProjectionMatrix(camara.combined);
+        shape.setProjectionMatrix(camara.getCamaraMundo().combined);
         shape.begin(ShapeRenderer.ShapeType.Line);
 
         Gdx.gl.glEnable(GL20.GL_BLEND);

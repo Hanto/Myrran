@@ -207,6 +207,7 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
     {
         //PLAYER:
         player.copiarUltimaPosicion();
+
         //PROYECTILES:
         for (ProyectilI proyectil: listaMapaProyectiles)
         {   proyectil.copiarUltimaPosicion(); }
@@ -214,8 +215,13 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
         //calculamos los nuevos valores:
         world.step(delta, 8, 6);
 
+        //PCs:
         for (PCI pc : listaMapaPlayers)
         {   pc.actualizarFisica(delta, mundo); }
+
+        //MOBs:
+        for (MobI mob: listaMapaMobs)
+        {   mob.actualizarFisica(delta, mundo); }
     }
 
     @Override public void checkColisiones()
@@ -230,10 +236,11 @@ public class Mundo extends AbstractModel implements MundoI, Disposable
     }
 
     //Interpolamos las posiciones y angulos con el resto del TimeStep:
-    public void interpolarPosicion(float alpha)
+    public void actualizarFisicaPorInterpolacion(float alpha)
     {
         //PLAYER:
         player.actualizarFisicaPorInterpolacion(alpha);
+
         //PROYECTILES:
         for (ProyectilI proyectil: listaMapaProyectiles)
         {   proyectil.actualizarFisicaPorInterpolacion(alpha); }

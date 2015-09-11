@@ -3,26 +3,40 @@
     <output-path>$PROJECT_DIR$/out/artifacts/MyrranCliente_jar</output-path>
     <root id="archive" name="MyrranCliente.jar">
       <element id="module-output" name="MyrranCliente" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-setup.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-natives.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-backend-gwt.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-backend-jglfw.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-backend-lwjgl.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-backend-robovm.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-backend-android.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-backend-headless.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-backend-jglfw-natives.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/gdx-backend-lwjgl-natives.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/extensions/gdx-tools/gdx-tools.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java Kryonet/kryonet-2.21-all.jar" path-in-jar="/" />
-      <element id="dir-copy" path="$PROJECT_DIR$/MyrranCliente/assets" />
       <element id="module-output" name="MyrranCore" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java JDom/jdom-2.0.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/extensions/gdx-box2d/gdx-box2d.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/extensions/gdx-box2d/gdx-box2d-gwt.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java LibGDX/extensions/gdx-box2d/gdx-box2d-natives.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librerias/Java Box2DLights/box2dlights-1.3-SNAPSHOT.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java Kryonet/kryonet-2.21-all.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java JDom/jdom-2.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java JDom/jdom-2.0.5-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java GDX-AI/gdx-ai-1.5.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java GDX-AI/gdx-1.5.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/extensions/gdx-tools/gdx-tools.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/extensions/gdx-box2d/gdx-box2d.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/extensions/gdx-box2d/gdx-box2d-gwt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/extensions/gdx-box2d/gdx-box2d-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java Tween-Engine/tween-engine-api.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java Tween-Engine/tween-engine-api-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-setup.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-backend-gwt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-backend-jglfw.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-backend-lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-backend-robovm.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-backend-android.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-backend-headless.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-backend-jglfw-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java LibGDX/gdx-backend-lwjgl-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java SLF4J/slf4j-api-1.7.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java SLF4J/logback-core-1.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java SLF4J/logback-access-1.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java SLF4J/logback-classic-1.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java SLF4J/slf4j-api-1.7.7-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java SLF4J/logback-core-1.1.2-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java SLF4J/logback-access-1.1.2-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCore/lib/Java SLF4J/logback-classic-1.1.2-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCliente/lib/Java Box2DLights/box2dlights-1.5-SNAPSHOT.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MyrranCliente/lib/Java Box2DLights/box2dlights-1.5-SNAPSHOT-sources.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/MyrranCliente/assets" />
     </root>
   </artifact>
 </component>

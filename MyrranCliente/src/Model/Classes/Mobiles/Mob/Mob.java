@@ -12,6 +12,7 @@ import Interfaces.Misc.Spell.BDebuffI;
 import Model.Mobiles.Cuerpos.Cuerpo;
 import Model.Mobiles.Propiedades.DeBuffeableNotificadorI;
 import ch.qos.logback.classic.Logger;
+import com.badlogic.gdx.math.Vector2;
 import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
@@ -22,6 +23,9 @@ public class Mob extends MobNotificador
     private Vulnerable vulnerable;
     private Debuffeable debuffeable;
     private MobStats mobStats;
+
+    private Vector2 destino = new Vector2();
+    private Vector2 vectorDireccion = new Vector2();
 
     private Cuerpo cuerpo;
 
@@ -60,7 +64,6 @@ public class Mob extends MobNotificador
 
     // DINAMICO:
     //------------------------------------------------------------------------------------------------------------------
-    @Override public void setDireccion(float x, float y)            { }
     @Override public void setDireccion(float grados)                { }
 
     // VULNERABLE:
@@ -97,6 +100,9 @@ public class Mob extends MobNotificador
         notificarSetPosition();
     }
 
+    @Override public void setDireccion(float x, float y)
+    {   destino.set(x, y); }
+
     @Override public void setOrientacion(float radianes)
     {
         super.setOrientacion(radianes);
@@ -113,8 +119,27 @@ public class Mob extends MobNotificador
     // ACTUALIZACION:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void actualizarTimers(float delta) {   actualizarAuras(delta); }
-    @Override public void actualizarFisica(float delta, MundoI mundo) {}
+    @Override public void actualizarTimers(float delta)
+    {   actualizarAuras(delta); }
+
+    @Override public void actualizarFisica(float delta, MundoI mundo)
+    {
+        vectorDireccion.set(destino).sub(posicion);
+        float distancia = vectorDireccion.len();
+
+        float velocidad = getVelocidadMax()*velocidadMod;
+
+        if (distancia > 100 || distancia <= 2.0)
+        {   setPosition(destino.x, destino.y); return; }
+
+        //si nos desincronizamos y nos separamos mucho del objetivo, subimos la velocidad por encima del limite:
+        velocidad = (distancia * 0.01f) * velocidad + velocidad;
+
+        //normalizamos a la vez que multiplicamos por la velocidad:
+        getVelocidad().set(vectorDireccion).scl(velocidad / distancia);
+        setPosition(posicion.x + getVelocidad().x * delta, posicion.y + getVelocidad().y * delta);
+    }
+
     @Override public void actualizarIA(float delta, MundoI mundo) {}
 
     // COLISION:

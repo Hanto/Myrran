@@ -1,4 +1,4 @@
-package View.Classes.Actores;
+package View.Classes.Propiedades;
 
 import DB.RSC;
 import DB.Recursos.MiscRecursos.DAO.MiscRecursosDAO;

@@ -40,7 +40,6 @@ public class ClienteInputs
         else if (mundo.getPC(pcDTOs.connectionID) == null)
         {
             pc = PCFactory.PCMODULAR.nuevo(pcDTOs.connectionID, mundo.getWorld());
-            //PCFactory.NORMAL.nuevo(pcDTOs.connectionID, mundo.getWorld());
             mundo.añadirPC(pc);
         }
         else pc = mundo.getPC(pcDTOs.connectionID);
@@ -125,6 +124,8 @@ public class ClienteInputs
                 pc.setMaxHPs(((DTOsNet.DatosCompletosPC) dto).maxHPs);
                 pc.setActualHPs(((DTOsNet.DatosCompletosPC) dto).actualHPs);
                 pc.setNivel(((DTOsNet.DatosCompletosPC) dto).nivel);
+                pc.setVelocidadMax(((DTOsNet.DatosCompletosPC) dto).velocidadMax);
+                pc.setPosition(((DTOsNet.DatosCompletosPC) dto).posX, ((DTOsNet.DatosCompletosPC) dto).posY);
             }
 
             else if (dto instanceof DTOsNet.NombrePC)
@@ -175,7 +176,7 @@ public class ClienteInputs
             dto = mobDTOs.listaDTOs[i];
 
             if (dto instanceof DTOsNet.Posicion)
-            {   mob.setPosition(((DTOsNet.Posicion) dto).posX, ((DTOsNet.Posicion) dto).posY); }
+            {   mob.setDireccion(((DTOsNet.Posicion) dto).posX, ((DTOsNet.Posicion) dto).posY); }
 
             else if (dto instanceof DTOsNet.Orientacion)
             {   mob.setOrientacion(((DTOsNet.Orientacion) dto).orientacion);}
@@ -210,6 +211,12 @@ public class ClienteInputs
 
             else if (dto instanceof DTOsNet.EliminarAura)
             {   mob.eliminarAura(((DTOsNet.EliminarAura) dto).auraID); }
+
+            else if (dto instanceof DTOsNet.DatosCompletosMob)
+            {
+                mob.setVelocidadMax(((DTOsNet.DatosCompletosMob) dto).velocidadMax);
+                mob.setPosition(((DTOsNet.DatosCompletosMob) dto).posX, ((DTOsNet.DatosCompletosMob) dto).posY);
+            }
         }
     }
 

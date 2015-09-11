@@ -129,6 +129,7 @@ public class Texto extends Actor
 
     public void scrollingCombatText (Group group, float duracion)
     {
+        duracion += Math.random()*3;
         this.setColor(this.getColor().r, this.getColor().g, this.getColor().b, 0);
         this.addAction(Actions.sequence(Actions.fadeIn(duracion / 4), Actions.delay(duracion / 4 * 2), Actions.fadeOut(duracion / 4)));
         this.addAction(Actions.sequence(Actions.moveBy(0f, 40f, duracion, Interpolation.sine), Actions.removeActor()));

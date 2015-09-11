@@ -9,12 +9,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="MyrranCore" />
-    <orderEntry type="library" name="Java JDom" level="project" />
-    <orderEntry type="library" name="Java Kryonet" level="project" />
-    <orderEntry type="library" name="Java SLF4J" level="project" />
-    <orderEntry type="library" name="gdx-box2d" level="project" />
-    <orderEntry type="library" name="Java LibGDX" level="project" />
-    <orderEntry type="library" name="com.badlogicgames.gdx:gdx-ai:1.5.0" level="project" />
+    <orderEntry type="module" module-name="MyrranCore" exported="" />
+    <orderEntry type="library" exported="" name="Java JDom" level="project" />
+    <orderEntry type="library" exported="" name="Java Kryonet" level="project" />
+    <orderEntry type="library" exported="" name="Java SLF4J" level="project" />
+    <orderEntry type="library" exported="" name="gdx-box2d" level="project" />
+    <orderEntry type="library" exported="" name="Java LibGDX" level="project" />
+    <orderEntry type="library" exported="" name="com.badlogicgames.gdx:gdx-ai:1.5.0" level="project" />
   </component>
 </module>

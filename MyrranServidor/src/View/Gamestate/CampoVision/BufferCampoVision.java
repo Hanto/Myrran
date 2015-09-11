@@ -181,7 +181,8 @@ public class BufferCampoVision
 
     public void setDatosCompletosMob (MobI mob)
     {
-        setPosicionMob(mob);
+        DTOsNet.DatosCompletosMob datosCompletosMob = new DTOsNet.DatosCompletosMob(mob);
+        mapaDTOsMobs.add(mob.getID(), datosCompletosMob);
 
         AuraI aura;
         Iterator<AuraI>iterator = mob.getAuras();

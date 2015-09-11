@@ -7,7 +7,7 @@ import DTOs.DTOsVulnerable;
 import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
 import Interfaces.EntidadesTipos.PCI;
 import Model.Settings;
-import View.Classes.Actores.NameplateView;
+import View.Classes.Propiedades.NameplateView;
 import View.Classes.Actores.PixiePC;
 import View.Classes.Actores.Texto;
 import View.Classes.Propiedades.DebuffeableView;
@@ -49,7 +49,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
         crearDebuffView();
         crearNombre();
 
-        this.setPosition(pc.getX(), pc.getY());
+        this.setPosition(pc.getX() -rAncho, pc.getY() -rAlto);
 
         pc.añadirObservador(this);
     }

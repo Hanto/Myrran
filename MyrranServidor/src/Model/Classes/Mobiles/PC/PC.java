@@ -49,6 +49,7 @@ public class PC extends PCNotificador implements PropertyChangeListener
         this.setHuellas(new Huellas());
         this.setSeguible(true);
         this.setTiempoDecayHuellas(20f);
+        this.setVelocidadMax(80);
     }
 
     @Override public void dispose()

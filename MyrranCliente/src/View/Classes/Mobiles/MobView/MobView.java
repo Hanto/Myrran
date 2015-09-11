@@ -7,14 +7,12 @@ import DTOs.DTOsVulnerable;
 import Interfaces.EntidadesPropiedades.Propiedades.IDentificable;
 import Interfaces.EntidadesTipos.MobI;
 import Model.Settings;
-import View.Classes.Actores.NameplateView;
+import View.Classes.Propiedades.NameplateView;
 import View.Classes.Actores.Pixie;
 import View.Classes.Actores.Texto;
 import View.Classes.Propiedades.DebuffeableView;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -53,7 +51,7 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
         crearNameplate();
         crearDebuffView();
 
-        this.setPosition(mob.getX(), mob.getY());
+        this.setPosition(mob.getX() -rAncho, mob.getY() -rAlto);
 
         mob.añadirObservador(this);
     }
@@ -97,13 +95,15 @@ public class MobView extends Group implements PropertyChangeListener, IDentifica
 
     public void setPosition(int x, int y)
     {
+        super.setPosition(x -rAncho, y -rAlto);
+        /*
         if (Math.abs(this.getX() - x) > 10 || Math.abs(this.getY() - y) > 10)
             super.setPosition(x -rAncho, y -rAlto);
         else
         {
             this.clearActions();
             this.addAction(Actions.moveTo(x - rAncho, y - rAlto, Settings.FIXED_TimeStep, Interpolation.linear));
-        }
+        }*/
     }
 
     public void setOrientacion(float angulo)

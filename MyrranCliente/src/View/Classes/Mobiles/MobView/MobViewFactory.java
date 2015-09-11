@@ -2,7 +2,7 @@ package View.Classes.Mobiles.MobView;// Created by Hanto on 03/09/2015.
 
 import DB.RSC;
 import Interfaces.EntidadesTipos.MobI;
-import View.Classes.Actores.NameplateView;
+import View.Classes.Propiedades.NameplateView;
 import View.Classes.Actores.Pixie;
 import View.Classes.Propiedades.DebuffeableView;
 

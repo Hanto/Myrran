@@ -24,8 +24,8 @@ public class ListaMapa<T extends IDentificable> implements Iterable<T>
 
     public T remove (Integer iD)
     {
-        if (!mapa.containsKey(iD))
-        {   logger.warn("ERROR: No se puede eliminar ID que no existe, ID:{}", iD); return null;}
+        //if (!mapa.containsKey(iD))
+        //{   logger.warn("ERROR: No se puede eliminar ID que no existe, ID:{}", iD); return null;}
 
         T valor = mapa.remove(iD);
         lista.remove(valor);
@@ -34,8 +34,8 @@ public class ListaMapa<T extends IDentificable> implements Iterable<T>
 
     public T remove (T iDentificable)
     {
-        if (!mapa.containsKey(iDentificable.getID()))
-        {   logger.warn("ERROR: No se puede eliminar ID que no se ha añadido: Entidad:{} ID:{}", iDentificable, iDentificable.getID()); return null;}
+        //if (!mapa.containsKey(iDentificable.getID()))
+        //{   logger.warn("ERROR: No se puede eliminar ID que no se ha añadido: Entidad:{} ID:{}", iDentificable, iDentificable.getID()); return null;}
 
         lista.remove(iDentificable);
         return mapa.remove(iDentificable.getID());
