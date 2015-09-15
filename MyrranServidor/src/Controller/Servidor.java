@@ -1,13 +1,13 @@
 package Controller;// Created by Hanto on 07/04/2014.
 
-import DTOs.KryoDTOs;
 import DTOs.DTOsNet;
+import DTOs.KryoDTOs;
 import Interfaces.Misc.Network.MainLoopI;
 import Interfaces.Misc.Network.ServidorI;
-import ch.qos.logback.classic.Logger;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Servidor extends Server implements ServidorI
@@ -16,7 +16,7 @@ public class Servidor extends Server implements ServidorI
     public MainLoopI mainLoop;
     protected ServidorInputs servidorInputs;
 
-    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public Servidor (MainLoopI mainLoop, Controlador controlador)
     {

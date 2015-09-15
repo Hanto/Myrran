@@ -14,6 +14,7 @@ public interface SkillI extends ModelI
 
     public float getValorTotal(Caster Caster, int statID);
     public String getID();
+    public String getTipoID();
     public String getNombre ();
     public String getDescripcion ();
     public SkillStat getSkillStat(int numSkillStat);

@@ -1,17 +1,17 @@
 package Model.Skills.Spell;
 // @author Ivan Delgado Huerta
 
-import Interfaces.Misc.Spell.BDebuffI;
-import Interfaces.Misc.GameState.MundoI;
-import Interfaces.Misc.Observable.AbstractModel;
-import Interfaces.Misc.Spell.SkillI;
-import Interfaces.Misc.Spell.SpellI;
-import Interfaces.Misc.Spell.TipoSpellI;
 import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
+import Interfaces.Misc.GameState.MundoI;
+import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.Spell.BDebuffI;
+import Interfaces.Misc.Spell.SkillI;
+import Interfaces.Misc.Spell.SpellI;
+import Interfaces.Misc.Spell.TipoSpellI;
 import Model.Skills.SkillsPersonalizados.SkillStat;
-import ch.qos.logback.classic.Logger;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class Spell extends AbstractModel implements SpellI
     protected String id;
     protected String nombre;
     protected String descripcion;
-    protected TipoSpellI tipoSpell;                              //Command Pattern: Codigo que se ejecuta al castear el skill
+    protected TipoSpellI tipoSpell;                             //Command Pattern: Codigo que se ejecuta al castear el skill
 
     private SkillStat[] skillStats;                             //Stats concretos del skill
     private List<BDebuffI> listaDeDebuffsQueAplica = new ArrayList<>();
@@ -39,6 +39,7 @@ public class Spell extends AbstractModel implements SpellI
 
     //GET:
     @Override public String getID()                             { return id; }
+    @Override public String getTipoID()                         { return tipoSpell.getID(); }
     @Override public String getNombre ()                        { return nombre; }
     @Override public String getDescripcion ()                   { return descripcion; }
     @Override public TipoSpellI getTipoSpell()                  { return tipoSpell; }
@@ -48,9 +49,9 @@ public class Spell extends AbstractModel implements SpellI
     @Override public int getNumSkillStats()                     { return skillStats.length; }
     @Override public int getNumDebuffsQueAplica()               { return listaDeDebuffsQueAplica.size(); }
 
-    private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //CONSTRUCTOR:
+    // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
     public Spell (TipoSpellI tipospell)

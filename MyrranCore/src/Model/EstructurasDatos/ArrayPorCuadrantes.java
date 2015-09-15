@@ -15,7 +15,7 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
             { new Punto(-1,+1), new Punto( 0,+1), new Punto(+1,+1),
               new Punto(-1, 0), new Punto( 0, 0), new Punto(+1, 0),
               new Punto(-1,-1), new Punto( 0,-1), new Punto(+1,-1) };
-    private List<T>[] array;
+    private List<List<T>> array;
     private int numCuadrantesX;
     private int numCuadrantesY;
 
@@ -25,7 +25,9 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
         numCuadrantesX = Settings.MAPA_Max_TilesX / Settings.MAPTILE_NumTilesX;
         numCuadrantesY = Settings.MAPA_Max_TilesY / Settings.MAPTILE_NumTilesY;
 
-        array = new List[numCuadrantesX * numCuadrantesY];
+        array = new ArrayList<>(numCuadrantesX * numCuadrantesY);
+        for (int i=0; i< numCuadrantesX * numCuadrantesY; i++)
+        {   array.add(null); }
     }
 
 
@@ -33,7 +35,7 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
     {
         if (containsKey(key))
         {
-            List<T> lista = array[key];
+            List<T> lista = array.get(key);
             if (!lista.contains(valor))
             {
                 lista.add(valor);
@@ -44,7 +46,7 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
         {
             List<T> lista = new ArrayList<>();
             lista.add(valor);
-            array[key] = lista;
+            array.set(key, lista);
             valor.setUltimoMapTile(valor.getCuadranteX(), valor.getCuadranteY());
         }
     }
@@ -59,9 +61,9 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
     {
         if (containsKey(key))
         {
-            List<T> lista = array[key];
+            List<T> lista = array.get(key);
             lista.remove(espacial);
-            if (lista.isEmpty()) array[key] = null;
+            if (lista.isEmpty()) array.set(key, null);
         }
     }
 
@@ -72,15 +74,15 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
 
         if (containsKey(oldKey))
         {
-            List<T>lista = array[oldKey];
+            List<T>lista = array.get(oldKey);
             lista.remove(espacial);
-            if (lista.isEmpty()) array[oldKey] = null;
+            if (lista.isEmpty()) array.set(oldKey, null);
         }
         else if (containsKey(key))
         {
-            List<T>lista = array[key];
+            List<T>lista = array.get(key);
             lista.remove(espacial);
-            if (lista.isEmpty()) array[key] = null;
+            if (lista.isEmpty()) array.set(key, null);
         }
     }
 
@@ -100,18 +102,18 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
     }
 
     private List<T> get(int key)
-    {   return array[key]; }
+    {   return array.get(key); }
 
     @Override public List<T> get(int mapTileX, int mapTileY)
     {
         int key = generarKey(mapTileX, mapTileY);
-        return array[key];
+        return array.get(key);
     }
 
     @Override public Iterator<T> getIteratorCuadrante(int mapTileX, int mapTileY)
     {
         int key = generarKey(mapTileX, mapTileY);
-        if (containsKey(key)) return array[key].iterator();
+        if (containsKey(key)) return array.get(key).iterator();
         return null;
     }
 
@@ -119,7 +121,7 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
     {   return new IteratorCuadrantes(mapTileX, mapTileY); }
 
     @Override public int size()
-    {   return array.length; }
+    {   return array.size(); }
 
     @Override public boolean isEmpty()
     {
@@ -130,14 +132,14 @@ public class ArrayPorCuadrantes<T extends Espacial & IDentificable> implements L
 
     @Override public boolean containsKey(int key)
     {
-        if (key <0 || key >= numCuadrantesX*numCuadrantesY || array[key] == null) return false;
+        if (key <0 || key >= numCuadrantesX*numCuadrantesY || array.get(key) == null) return false;
         else return true;
     }
 
     @Override public void clear()
     {
-        for (int i=0; i<array.length; i++)
-        {   array[i] = null; }
+        for (int i=0; i<array.size(); i++)
+        {   array.set(i, null); }
     }
 
     private int generarKey(int mapTileX, int mapTileY)

@@ -6,8 +6,6 @@ import Interfaces.EntidadesPropiedades.TipoMobile.ProyectilStats;
 import Interfaces.Misc.GameState.MundoI;
 import Interfaces.Misc.Spell.SpellI;
 import Model.Mobiles.Cuerpos.Cuerpo;
-import ch.qos.logback.classic.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Proyectil extends ProyectilNotificador
 {
@@ -15,8 +13,6 @@ public class Proyectil extends ProyectilNotificador
     protected ProyectilStats proyectilStats;
     protected Consumible consumible;
     protected Cuerpo cuerpo;
-
-    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
     public Proyectil(Cuerpo cuerpo,
                      IDentificable identificable, ProyectilStats proyectilStats,

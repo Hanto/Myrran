@@ -9,7 +9,7 @@ import Interfaces.Misc.Spell.AuraI;
 import Interfaces.Misc.Spell.BDebuffI;
 import Interfaces.Misc.Spell.TipoBDebuffI;
 import Model.Skills.SkillsPersonalizados.SkillStat;
-import ch.qos.logback.classic.Logger;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
@@ -26,7 +26,7 @@ public class BDebuff extends AbstractModel implements BDebuffI
     protected byte stacksMaximos = 0;
     protected TipoBDebuffI tipoBDebuff;                             //Command Pattern: Codigo que se ejecuta al castear el skill
 
-    private SkillStat[] skillStats;                               //Stats concretos del skill
+    private SkillStat[] skillStats;                                 //Stats concretos del skill
 
     //SET
     @Override public void setID(String id)                          { this.id = id; }
@@ -38,6 +38,7 @@ public class BDebuff extends AbstractModel implements BDebuffI
 
     //GET:
     @Override public String getID()                                 { return id; }
+    @Override public String getTipoID()                             { return tipoBDebuff.getID(); }
     @Override public String getNombre ()                            { return nombre; }
     @Override public String getDescripcion ()                       { return descripcion; }
     @Override public boolean isDebuff ()                            { return isDebuff; }
@@ -47,9 +48,9 @@ public class BDebuff extends AbstractModel implements BDebuffI
     @Override public Iterator<SkillStat> getSkillStats()            { return Arrays.asList(skillStats).iterator(); }
     @Override public int getNumSkillStats()                         { return skillStats.length; }
 
-    protected Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //CONSTRUCTOR:
+    // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
     public BDebuff (TipoBDebuffI tipoBDebuff)
