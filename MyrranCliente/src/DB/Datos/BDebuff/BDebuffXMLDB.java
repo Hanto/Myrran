@@ -1,6 +1,6 @@
 package DB.Datos.BDebuff;// Created by Hanto on 16/06/2014.
 
-import Model.Skills.SkillsPersonalizados.SkillStat;
+import Model.Skills.SkillStat;
 import DAO.BDebuff.BDebuffXMLDBI;
 import DB.DAO;
 import Model.Settings;
@@ -94,8 +94,8 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    debuff.getSkillStat(id).setStat(id, nombreStat, valorBase);
-                    if (isMejorable) debuff.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
+                    debuff.getSkillStat(id).setSkillStats(id, nombreStat, valorBase);
+                    if (isMejorable) debuff.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else debuff.getSkillStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
@@ -155,7 +155,7 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
                 element.setAttribute("isMejorable", Boolean.toString(skillStat.getisMejorable()));
                 element.setAttribute("costeTalento", Integer.toString(skillStat.getCosteTalento()));
                 element.setAttribute("bonoTalento", Float.toString(skillStat.getBonoTalento()));
-                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentoMaximo()));
+                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentosMaximos()));
                 debuff.addContent(element);
             }
             doc.getRootElement().addContent(debuff);

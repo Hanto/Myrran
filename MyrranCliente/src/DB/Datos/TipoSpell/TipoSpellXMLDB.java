@@ -4,7 +4,7 @@ import DAO.TipoSpell.TipoSpellXMLDBI;
 import Interfaces.Misc.Spell.TipoSpellI;
 import Model.Classes.Skill.Spell.TipoSpellFactory;
 import Model.Settings;
-import Model.Skills.SkillsPersonalizados.SkillStat;
+import Model.Skills.SkillStat;
 import Model.Skills.Spell.TipoSpell;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
@@ -92,7 +92,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
                     tipoSpell.setSkillStat(new SkillStat(id, nombreStat, valorBase), id);
-                    if (isMejorable) tipoSpell.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
+                    if (isMejorable) tipoSpell.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else tipoSpell.getSkillStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
@@ -149,7 +149,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                 element.setAttribute("isMejorable", Boolean.toString(skillStat.getisMejorable()));
                 element.setAttribute("costeTalento", Integer.toString(skillStat.getCosteTalento()));
                 element.setAttribute("bonoTalento", Float.toString(skillStat.getBonoTalento()));
-                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentoMaximo()));
+                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentosMaximos()));
                 tspell.addContent(element);
             }
             doc.getRootElement().addContent(tspell);

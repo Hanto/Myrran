@@ -7,7 +7,7 @@ import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.Spell.TipoSpellI;
 import Model.Classes.Skill.Spell.SpellCliente;
 import Model.Settings;
-import Model.Skills.SkillsPersonalizados.SkillStat;
+import Model.Skills.SkillStat;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -104,8 +104,8 @@ public class SpellXMLDB implements SpellXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    spell.getSkillStat(id).setStat(id, nombreStat, valorBase);
-                    if (isMejorable) spell.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
+                    spell.getSkillStat(id).setSkillStats(id, nombreStat, valorBase);
+                    if (isMejorable) spell.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else spell.getSkillStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
@@ -178,7 +178,7 @@ public class SpellXMLDB implements SpellXMLDBI
                 element.setAttribute("isMejorable", Boolean.toString(skillStat.getisMejorable()));
                 element.setAttribute("costeTalento", Integer.toString(skillStat.getCosteTalento()));
                 element.setAttribute("bonoTalento", Float.toString(skillStat.getBonoTalento()));
-                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentoMaximo()));
+                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentosMaximos()));
                 spell.addContent(element);
             }
             doc.getRootElement().addContent(spell);

@@ -32,7 +32,7 @@ public class SkillPersonalizado extends AbstractModel implements SkillPersonaliz
     @Override public float getValorBase(int statID)         { return skill.getSkillStat(statID).getValorBase(); }
     @Override public float getBonoTalento (int statID)      { return skill.getSkillStat(statID).getBonoTalento(); }
     @Override public int getCosteTalento(int statID)        { return skill.getSkillStat(statID).getCosteTalento(); }
-    @Override public int getTalentoMaximo(int statID)       { return skill.getSkillStat(statID).getTalentoMaximo(); }
+    @Override public int getTalentoMaximo(int statID)       { return skill.getSkillStat(statID).getTalentosMaximos(); }
     @Override public boolean getIsMejorable(int statID)     { return skill.getSkillStat(statID).getisMejorable(); }
     @Override public Iterator<SkillMod>getIterator()        { return Arrays.asList(skillMods).iterator(); }
 

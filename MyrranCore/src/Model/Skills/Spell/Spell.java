@@ -1,52 +1,34 @@
 package Model.Skills.Spell;
 // @author Ivan Delgado Huerta
 
+import DTOs.DTOsSkill;
 import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
 import Interfaces.Misc.GameState.MundoI;
-import Interfaces.Misc.Observable.AbstractModel;
 import Interfaces.Misc.Spell.BDebuffI;
-import Interfaces.Misc.Spell.SkillI;
 import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.Spell.TipoSpellI;
-import Model.Skills.SkillsPersonalizados.SkillStat;
+import Model.Skills.Skill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Spell extends AbstractModel implements SpellI
+public class Spell extends Skill implements SpellI
 {
-    public final int STAT_Cast = 0;
+    public static final int STAT_Cast = 0;
 
-    protected String id;
-    protected String nombre;
-    protected String descripcion;
-    protected TipoSpellI tipoSpell;                             //Command Pattern: Codigo que se ejecuta al castear el skill
-
-    private SkillStat[] skillStats;                             //Stats concretos del skill
+    protected TipoSpellI tipoSpell;
     private List<BDebuffI> listaDeDebuffsQueAplica = new ArrayList<>();
 
-    //SET
-    @Override public void setID(String id)                      { this.id = id; }
-    @Override public void setNombre (String nombre)             { this.nombre = nombre; }
-    @Override public void setDescripcion (String descripcion)   { this.descripcion = descripcion; }
     @Override public void setTipoSpell(TipoSpellI tipoSpell)    { this.tipoSpell = tipoSpell; }
-
-    //GET:
-    @Override public String getID()                             { return id; }
     @Override public String getTipoID()                         { return tipoSpell.getID(); }
-    @Override public String getNombre ()                        { return nombre; }
-    @Override public String getDescripcion ()                   { return descripcion; }
     @Override public TipoSpellI getTipoSpell()                  { return tipoSpell; }
-    @Override public SkillStat getSkillStat(int statID)         { return skillStats[statID]; }
-    @Override public Iterator<SkillStat> getSkillStats()        { return Arrays.asList(skillStats).iterator(); }
     @Override public Iterator<BDebuffI> getDebuffsQueAplica()   { return listaDeDebuffsQueAplica.iterator(); }
-    @Override public int getNumSkillStats()                     { return skillStats.length; }
     @Override public int getNumDebuffsQueAplica()               { return listaDeDebuffsQueAplica.size(); }
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -55,40 +37,13 @@ public class Spell extends AbstractModel implements SpellI
     //------------------------------------------------------------------------------------------------------------------
 
     public Spell (TipoSpellI tipospell)
-    {   //Se vincula el objeto que ejecutara los metodos de este tipo de Spell
-        if (tipospell == null) { logger.error("ERROR: spellID no encontrado."); return; }
-        tipoSpell = tipospell;
-
-        nombre = tipospell.getNombre();
-        descripcion = tipospell.getDescripcion();
-
-        //y se copian sus Stats base:
-        skillStats = new SkillStat[tipospell.getNumSkillStats()];
-        for (int i=0; i<skillStats.length;i++)
-        {
-            SkillStat statSkill = new SkillStat(tipospell.getSkillStat(i));
-            skillStats[i] = statSkill;       
-        }
+    {
+        super(tipospell);
+        this.tipoSpell = tipospell;
     }
 
     //
     //------------------------------------------------------------------------------------------------------------------
-
-    @Override public SkillI getSkill(String skillID)
-    {
-        if (id.equals(skillID)) return this;
-        else
-        {
-            Iterator<BDebuffI> debuffIIterator = getDebuffsQueAplica();
-            BDebuffI debuff;
-            while (debuffIIterator.hasNext())
-            {
-                debuff = debuffIIterator.next();
-                if (debuff.getID().equals(skillID)) { return debuff; }
-            }
-        }
-        return null;
-    }
 
     @Override public void añadirDebuff (BDebuffI debuff)
     {
@@ -102,7 +57,7 @@ public class Spell extends AbstractModel implements SpellI
         {   debuff.aplicarDebuff(Caster, target);}
     }
 
-    @Override public float getValorTotal(Caster Caster, int statID)
+    public float getValorTotal(Caster Caster, int statID)
     {
         if (Caster instanceof CasterPersonalizable)
         {   return ((CasterPersonalizable) Caster).getSkillPersonalizado(id).getValorTotal(statID); }
@@ -116,6 +71,15 @@ public class Spell extends AbstractModel implements SpellI
         {   //Marcamos al personaje como Casteando, y actualizamos su tiempo de casteo con el que marque el Spell (Stat Slot 0)
             Caster.setTotalCastingTime(getValorTotal(Caster, STAT_Cast));
             tipoSpell.ejecutarCasteo(this, Caster, targetX, targetY, mundo);
+        }
+    }
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {
+        if (evt.getNewValue() instanceof DTOsSkill.setSkillStat)
+        {
+            ((DTOsSkill.setSkillStat) evt.getNewValue()).skillID = id;
+            notificarActualizacion("setSkillStat", null, evt.getNewValue());
         }
     }
 }

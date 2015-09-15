@@ -5,7 +5,7 @@ import Interfaces.Misc.Spell.TipoBDebuffI;
 import Model.Classes.Skill.BDebuff.TipoBDebuffFactory;
 import Model.Settings;
 import Model.Skills.BDebuff.TipoBDebuff;
-import Model.Skills.SkillsPersonalizados.SkillStat;
+import Model.Skills.SkillStat;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -98,7 +98,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
                     tipoDebuff.setSkillStat(new SkillStat(id, nombreStat, valorBase), id);
-                    if (isMejorable) tipoDebuff.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
+                    if (isMejorable) tipoDebuff.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else tipoDebuff.getSkillStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
@@ -157,7 +157,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                 element.setAttribute("isMejorable", Boolean.toString(skillStat.getisMejorable()));
                 element.setAttribute("costeTalento", Integer.toString(skillStat.getCosteTalento()));
                 element.setAttribute("bonoTalento", Float.toString(skillStat.getBonoTalento()));
-                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentoMaximo()));
+                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentosMaximos()));
                 debuff.addContent(element);
             }
             doc.getRootElement().addContent(debuff);

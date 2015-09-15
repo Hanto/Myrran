@@ -1,6 +1,6 @@
 package DB.Datos.TipoSpell;// Created by Hanto on 17/04/2014.
 
-import Model.Skills.SkillsPersonalizados.SkillStat;
+import Model.Skills.SkillStat;
 import DAO.TipoSpell.TipoSpellXMLDBI;
 import Model.Settings;
 import Interfaces.Misc.Spell.TipoSpellI;
@@ -92,7 +92,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
                     tipoSpell.setSkillStat(new SkillStat(id, nombreStat, valorBase), id);
-                    if (isMejorable) tipoSpell.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
+                    if (isMejorable) tipoSpell.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else tipoSpell.getSkillStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
@@ -149,7 +149,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                 element.setAttribute("isMejorable", Boolean.toString(skillStat.getisMejorable()));
                 element.setAttribute("costeTalento", Integer.toString(skillStat.getCosteTalento()));
                 element.setAttribute("bonoTalento", Float.toString(skillStat.getBonoTalento()));
-                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentoMaximo()));
+                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentosMaximos()));
                 tspell.addContent(element);
             }
             doc.getRootElement().addContent(tspell);

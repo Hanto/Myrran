@@ -1,6 +1,6 @@
 package DB.Datos.TipoBDebuff;// Created by Hanto on 10/06/2014.
 
-import Model.Skills.SkillsPersonalizados.SkillStat;
+import Model.Skills.SkillStat;
 import DAO.TipoBDebuff.TipoBDebuffXMLDBI;
 import Model.Settings;
 import Interfaces.Misc.Spell.TipoBDebuffI;
@@ -97,7 +97,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
                     tipoDebuff.setSkillStat(new SkillStat(id, nombreStat, valorBase), id);
-                    if (isMejorable) tipoDebuff.getSkillStat(id).setTalentos(talentoMaximo, costeTalento, bonoTalento);
+                    if (isMejorable) tipoDebuff.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else tipoDebuff.getSkillStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
@@ -156,7 +156,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                 element.setAttribute("isMejorable", Boolean.toString(skillStat.getisMejorable()));
                 element.setAttribute("costeTalento", Integer.toString(skillStat.getCosteTalento()));
                 element.setAttribute("bonoTalento", Float.toString(skillStat.getBonoTalento()));
-                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentoMaximo()));
+                element.setAttribute("talentoMaximo", Integer.toString(skillStat.getTalentosMaximos()));
                 debuff.addContent(element);
             }
             doc.getRootElement().addContent(debuff);
