@@ -28,13 +28,13 @@ public class Aura extends AbstractModel implements AuraI
     @Override public float getDuracion()                    { return duracion; }
     @Override public float getDuracionMax()                 { return duracionMax; }
     @Override public Caster getCaster()                     { return Caster; }
-    @Override public Debuffeable getTarget()               { return target; }
+    @Override public Debuffeable getTarget()                { return target; }
     @Override public BDebuffI getDebuff()                   { return debuff; }
 
     @Override public void setDuracion(float f)              { duracion = f; }
     @Override public void setDuracionMax(float f)           { duracionMax = f; }
     @Override public void setCaster(Caster Caster)          { this.Caster = Caster; }
-    @Override public void setTarget(Debuffeable target)    { this.target = target; }
+    @Override public void setTarget(Debuffeable target)     { this.target = target; }
     @Override public void setDebuff(BDebuffI debuff)        { this.debuff = debuff; }
 
     // IDENTIFICABLE:

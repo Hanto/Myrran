@@ -42,6 +42,12 @@ public class Spell extends Skill implements SpellI
         this.tipoSpell = tipospell;
     }
 
+    public Spell (SpellI spell)
+    {
+        super(spell);
+        this.tipoSpell = spell.getTipoSpell();
+    }
+
     //
     //------------------------------------------------------------------------------------------------------------------
 
@@ -69,7 +75,8 @@ public class Spell extends Skill implements SpellI
         if (Caster.isCasteando()) { }
         else
         {   //Marcamos al personaje como Casteando, y actualizamos su tiempo de casteo con el que marque el Spell (Stat Slot 0)
-            Caster.setTotalCastingTime(getValorTotal(Caster, STAT_Cast));
+            //Caster.setTotalCastingTime(getValorTotal(Caster, STAT_Cast));
+            Caster.setTotalCastingTime(getSkillStat(STAT_Cast).getValorTotal());
             tipoSpell.ejecutarCasteo(this, Caster, targetX, targetY, mundo);
         }
     }

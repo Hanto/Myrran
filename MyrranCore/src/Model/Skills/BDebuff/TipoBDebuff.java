@@ -22,13 +22,10 @@ public abstract class TipoBDebuff extends Skill implements TipoBDebuffI
     //------------------------------------------------------------------------------------------------------------------
 
     public TipoBDebuff()
-    {   inicializarSkillStats(); }
-
-    // TIPODEBUFFI:
-    //------------------------------------------------------------------------------------------------------------------
-
-    @Override public void inicializarSkillStats()
-    {   setID(this.getClass().getSimpleName().toUpperCase()); }
+    {
+        setID(this.getClass().getSimpleName().toUpperCase());
+        inicializarSkillStats();
+    }
 
     @Override public void propertyChange(PropertyChangeEvent evt) {}
 }

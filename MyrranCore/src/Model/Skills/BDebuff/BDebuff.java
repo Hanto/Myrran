@@ -44,6 +44,15 @@ public class BDebuff extends Skill implements BDebuffI
         this.stacksMaximos = tipoBDebuff.getStacksMaximos();
     }
 
+    public BDebuff (BDebuffI debuff)
+    {
+        super(debuff);
+        this.tipoBDebuff = debuff.getTipoBDebuff();
+
+        this.isDebuff = debuff.isDebuff();
+        this.stacksMaximos = debuff.getStacksMaximos();
+    }
+
     //
     //------------------------------------------------------------------------------------------------------------------
 

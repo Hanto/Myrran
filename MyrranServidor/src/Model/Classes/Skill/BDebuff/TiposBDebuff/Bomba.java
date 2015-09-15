@@ -10,10 +10,7 @@ public class Bomba extends TipoBDebuff
     public final int STAT_Daño = 1;
 
     @Override public void inicializarSkillStats()
-    {
-        super.inicializarSkillStats();
-        setNumSkillStats(2);
-    }
+    {   setNumSkillStats(2); }
 
     @Override public void actualizarTick(AuraI aura)
     {

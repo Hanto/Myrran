@@ -197,6 +197,11 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
         SkillPersonalizadoI skillPersonalizado = casterPersonalizado.getSkillPersonalizado(skillID);
         if (skillPersonalizado == null) { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
         skillPersonalizado.setNumTalentos(statID, valor);
+
+        //TODO Provisional salvando datos en el propio Spell:
+        SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(skillID);
+        if (spell != null) spell.getSkillStat(statID).setNumTalentos(valor);
+        else DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(skillID).getSkillStat(statID).setNumTalentos(valor);
     }
 
     @Override public void setCastear(boolean castear, int screenX, int screenY)

@@ -14,13 +14,10 @@ public abstract class TipoSpell extends Skill implements TipoSpellI
     //------------------------------------------------------------------------------------------------------------------
 
     public TipoSpell ()
-    {   inicializarSkillStats(); }
-
-    // TIPOSPELLI:
-    //------------------------------------------------------------------------------------------------------------------
-
-    @Override public void inicializarSkillStats()
-    {   setID(this.getClass().getSimpleName().toUpperCase()); }
+    {
+        setID(this.getClass().getSimpleName().toUpperCase());
+        inicializarSkillStats();
+    }
 
     @Override public void propertyChange(PropertyChangeEvent evt) {}
 }

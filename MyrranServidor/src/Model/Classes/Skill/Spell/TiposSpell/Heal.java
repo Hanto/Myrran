@@ -12,10 +12,7 @@ public class Heal extends TipoSpell
     public int STAT_Curacion = 1;
 
     @Override public void inicializarSkillStats()
-    {
-        super.inicializarSkillStats();
-        setNumSkillStats(2);
-    }
+    {   setNumSkillStats(2); }
 
     @Override public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY, MundoI mundo)
     {

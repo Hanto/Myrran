@@ -18,11 +18,11 @@ public abstract class Skill extends AbstractModel implements SkillI, Disposable,
     protected String descripcion;
     private List<SkillStat> listaSkillStats;
 
-    //SET
+    //TODO lista spells a ejecutar:
+
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setNombre (String nombre)             { this.nombre = nombre; }
     @Override public void setDescripcion (String descripcion)   { this.descripcion = descripcion; }
-
 
     @Override public String getID()                             { return id; }
     @Override public String getNombre ()                        { return nombre; }
@@ -38,6 +38,7 @@ public abstract class Skill extends AbstractModel implements SkillI, Disposable,
     //constructor copia:
     public Skill(SkillI skill)
     {
+        this.setID(skill.getID());
         this.setNombre(skill.getNombre());
         this.setDescripcion(skill.getDescripcion());
         this.setNumSkillStats(skill.getNumSkillStats());

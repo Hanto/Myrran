@@ -62,5 +62,6 @@ public class CasterPersonalizadoBase implements CasterPersonalizable
             { logger.error("ERROR: setNumTalentosSkillPersonalizado, spellID no existe: {}", skillID); return; }
         else if (valor >= 0 && valor <= skillPersonalizado.getTalentoMaximo(statID))
             skillPersonalizado.setNumTalentos(statID, valor);
+
     }
 }

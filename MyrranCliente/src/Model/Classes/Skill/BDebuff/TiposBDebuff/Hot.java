@@ -6,10 +6,7 @@ import Model.Skills.BDebuff.TipoBDebuff;
 public class Hot extends TipoBDebuff
 {
     @Override public void inicializarSkillStats()
-    {
-        setID(this.getClass().getSimpleName().toUpperCase());
-        setNumSkillStats(2);
-    }
+    {   setNumSkillStats(2); }
 
     @Override public void actualizarTick(AuraI aura) { }
 }

@@ -9,10 +9,7 @@ public class Hot extends TipoBDebuff
     public final int STAT_Heal = 1;
 
     @Override public void inicializarSkillStats()
-    {
-        super.inicializarSkillStats();
-        setNumSkillStats(2);
-    }
+    {   setNumSkillStats(2); }
 
     @Override public void actualizarTick(AuraI aura)
     {

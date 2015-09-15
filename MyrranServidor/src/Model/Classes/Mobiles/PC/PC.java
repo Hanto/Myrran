@@ -1,5 +1,6 @@
 package Model.Classes.Mobiles.PC;// Created by Hanto on 03/09/2015.
 
+import DB.DAO;
 import DTOs.DTOsSkillPersonalizado;
 import Interfaces.Misc.Spell.*;
 import Interfaces.Misc.GameState.MundoI;
@@ -121,8 +122,6 @@ public class PC extends PCNotificador implements PropertyChangeListener
     {   return casterPersonalizado.getIteratorSpellPersonalizado(); }
     @Override public Iterator<SkillPersonalizadoI> getIteratorSkillPersonalizado()
     {   return casterPersonalizado.getIteratorSkillPersonalizado(); }
-    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int talento)
-    {   casterPersonalizado.setNumTalentosSkillPersonalizado(skillID, statID, talento); }
 
     // CASTER:
     //------------------------------------------------------------------------------------------------------------------
@@ -171,6 +170,16 @@ public class PC extends PCNotificador implements PropertyChangeListener
         notificarAddSpellPersonalizado(spellID);
     }
 
+    @Override public void setNumTalentosSkillPersonalizado(String skillID, int statID, int talento)
+    {
+        casterPersonalizado.setNumTalentosSkillPersonalizado(skillID, statID, talento);
+
+        //TODO Provisional salvando datos en el propio Spell:
+        SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(skillID);
+        if (spell != null) spell.getSkillStat(statID).setNumTalentos(talento);
+        else DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(skillID).getSkillStat(statID).setNumTalentos(talento);
+    }
+
     // ACTUALIZACION:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -199,7 +208,7 @@ public class PC extends PCNotificador implements PropertyChangeListener
         if (!isCasteando())
         {
             getSpellDeListaSpellsACastear();
-            SpellI spell = DB.DAO.spellDAOFactory.getSpellDAO().getSpell(caster.getSpellIDSeleccionado());
+            SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(caster.getSpellIDSeleccionado());
             if (spell != null)
             {   spell.castear(this, spellACastear.screenX, spellACastear.screenY, mundo); }
         }

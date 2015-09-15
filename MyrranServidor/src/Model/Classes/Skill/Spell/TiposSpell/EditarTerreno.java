@@ -11,10 +11,7 @@ import Model.Skills.Spell.TipoSpell;
 public class EditarTerreno extends TipoSpell
 {
     @Override public void inicializarSkillStats() 
-    {
-        super.inicializarSkillStats();
-        setNumSkillStats(1);
-    }
+    {   setNumSkillStats(1); }
 
     @Override public void ejecutarCasteo(SpellI skill, Caster Caster, int targetX, int targetY, MundoI mundo)
     {
