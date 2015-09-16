@@ -110,7 +110,7 @@ public class SkillStat extends AbstractModel implements SkillStatI
         }
     }
 
-    public float getValorTotal()
+    public float getTotal()
     {   return valorBase + numTalentos * bonoTalento + bonosPorObjetos; }
 
     private void notificarActualizacion()

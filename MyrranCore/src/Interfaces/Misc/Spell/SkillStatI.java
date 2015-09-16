@@ -27,7 +27,7 @@ public interface SkillStatI extends ModelI
     public void setTalentosStats(int maxNumeroTalentos, int coste, float bono);
     public void setNumTalentos(int valor);
 
-    public float getValorTotal();
+    public float getTotal();
 
 
 

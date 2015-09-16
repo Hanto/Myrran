@@ -1,19 +1,22 @@
 package Model.Skills;
 
+import DTOs.DTOsSkill;
+import Interfaces.Misc.Observable.AbstractModel;
 import Interfaces.Misc.Spell.SkillI;
 import Interfaces.Misc.Spell.SkillSlotI;
 import Interfaces.Misc.Spell.SkillSlotsI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SkillSlots<T extends SkillI> implements SkillSlotsI<T>
+public class SkillSlots<T extends SkillI> extends AbstractModel implements SkillSlotsI<T>, PropertyChangeListener
 {
-    private List<SkillSlotI<T>> listaSpellSlots;
+    private List<SkillSlotI<T>> listaSkillSlots;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //
@@ -21,8 +24,6 @@ public class SkillSlots<T extends SkillI> implements SkillSlotsI<T>
 
     @Override public void setSlots(SkillSlotsI<T> skillSlots)
     {
-        if (listaSpellSlots != null) { logger.error("ERROR: skillSlots ya inicializado"); return; }
-
         if (skillSlots != null)
         {
             setNumSlots(skillSlots.getNumSlots());
@@ -33,38 +34,42 @@ public class SkillSlots<T extends SkillI> implements SkillSlotsI<T>
 
     @Override public void setNumSlots(int numSpellSlots)
     {
-        if (listaSpellSlots != null) { logger.error("ERROR: skillSlots ya inicializado"); return; }
+        if (listaSkillSlots == null) listaSkillSlots = new ArrayList<>(numSpellSlots);
 
-        listaSpellSlots = new ArrayList<>(numSpellSlots);
-        for (int iD = 0; iD < numSpellSlots; iD++)
-        {   listaSpellSlots.add(new SkillSlot<T>(iD)); }
+        while (numSpellSlots - listaSkillSlots.size() > 0)
+        {
+            SkillSlotI<T> skillSlot = new SkillSlot<>(listaSkillSlots.size());
+            listaSkillSlots.add(skillSlot);
+            skillSlot.añadirObservador(this);
+        }
+
+        while (numSpellSlots - listaSkillSlots.size() < 0)
+        {   listaSkillSlots.remove(listaSkillSlots.size()-1).eliminarObservador(this); }
     }
 
     @Override public int getNumSlots()
     {
-        if (listaSpellSlots == null)
+        if (listaSkillSlots == null)
         {   logger.error("ERROR: falta definir el numero de SkillSlots en IniciacilizarSkill del skill"); return 0; }
-        return listaSpellSlots.size();
+        return listaSkillSlots.size();
     }
 
     @Override public SkillSlotI<T> getSlot(int numSpellSlot)
-    {   return listaSpellSlots.get(numSpellSlot); }
+    {   return listaSkillSlots.get(numSpellSlot); }
 
-    @Override public Iterator<SkillSlotI<T>> getSlots()
-    {   return listaSpellSlots.iterator(); }
+    @Override public Iterator<SkillSlotI<T>> getIterator()
+    {   return listaSkillSlots.iterator(); }
 
-    // MODEL:
+
+    // NOTIFICACIONES:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void añadirObservador(PropertyChangeListener observador)
+    @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        for (SkillSlotI<T> skillSlot : listaSpellSlots)
-        {   skillSlot.añadirObservador(observador); }
-    }
+        if (evt.getNewValue() instanceof DTOsSkill.SetSpellSlot)
+        {   notificarActualizacion("SetSpellSlot", null, evt.getNewValue()); }
 
-    @Override public void eliminarObservador(PropertyChangeListener observador)
-    {
-        for (SkillSlotI<T> skillSlot : listaSpellSlots)
-        {   skillSlot.eliminarObservador(observador); }
+        else if (evt.getNewValue() instanceof DTOsSkill.SetDebuffSlot)
+        {   notificarActualizacion("SetDebuffSlot", null, evt.getNewValue()); }
     }
 }

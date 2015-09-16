@@ -14,7 +14,7 @@ public class Bolt extends TipoSpell
     {
         stats().setNumStats(4);
         spellSlots().setNumSlots(1);
-        debuffSlots().setNumSlots(3);
+        debuffSlots().setNumSlots(10);
     }
 
     @Override public void ejecutarCasteo(SpellI spell, Caster caster, int targetX, int targetY, MundoI mundo)

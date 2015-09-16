@@ -146,7 +146,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
             element.setText(entry.getValue().getDescripcion());
             debuff.addContent(element);
 
-            Iterator<SkillStatI> stat = entry.getValue().stats().getStats();
+            Iterator<SkillStatI> stat = entry.getValue().stats().getIterator();
             while (stat.hasNext())
             {
                 skillStat = stat.next();

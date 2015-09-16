@@ -83,8 +83,8 @@ public class Spell extends Skill implements SpellI
         if (Caster.isCasteando()) { }
         else
         {   //Marcamos al personaje como Casteando, y actualizamos su tiempo de casteo con el que marque el Spell (Stat Slot 0)
-            //Caster.setTotalCastingTime(getValorTotal(Caster, STAT_Cast));
-            Caster.setTotalCastingTime(stats().getStat(STAT_Cast).getValorTotal());
+            //Caster.setTotalCastingTime(getTotal(Caster, STAT_Cast));
+            Caster.setTotalCastingTime(stats().getStat(STAT_Cast).getTotal());
             tipoSpell.ejecutarCasteo(this, Caster, targetX, targetY, mundo);
         }
     }
