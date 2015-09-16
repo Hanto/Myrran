@@ -22,7 +22,7 @@ public abstract class AbstractModel implements ModelI
     @Override public void eliminarObservadores()
     {
         PropertyChangeListener observadores[] = observado.getPropertyChangeListeners();
-        for (int i = 0; i < observadores.length; i++)
-        {   observado.removePropertyChangeListener(observadores[i]); }
+        for (PropertyChangeListener observador : observadores)
+        {   observado.removePropertyChangeListener(observador); }
     }
 }

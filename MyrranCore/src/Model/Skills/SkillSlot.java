@@ -2,25 +2,23 @@ package Model.Skills;
 
 import DTOs.DTOsSkill;
 import Interfaces.Misc.Observable.AbstractModel;
-import Interfaces.Misc.Spell.KeyI;
-import Interfaces.Misc.Spell.SpellI;
-import Interfaces.Misc.Spell.SpellSlotI;
+import Interfaces.Misc.Spell.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SpellSlot extends AbstractModel implements SpellSlotI
+public class SkillSlot<T extends SkillI> extends AbstractModel implements SkillSlotI<T>
 {
     private int iD;
     private List<Integer> lock = new ArrayList<>();
-    private SpellI spell;
+    private T skill;
 
 
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public SpellSlot(int iD)
+    public SkillSlot(int iD)
     {   this.iD = iD; }
 
     // IDENTIFICABLE:
@@ -51,25 +49,25 @@ public class SpellSlot extends AbstractModel implements SpellSlotI
     // SPELLSLOT:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public SpellI getSpell()
-    {   return spell; }
+    @Override public T getSkill()
+    {   return skill; }
 
-    @Override public String getSpellID()
+    @Override public String getSkillID()
     {
-        if (spell == null) return null;
-        else return spell.getID();
+        if (skill == null) return null;
+        else return skill.getID();
     }
 
-    @Override public void setSpell(SpellI spell)
+    @Override public void setSkill(T spell)
     {
         if (abreLaCerradura(spell))
         {
-            this.spell = spell;
+            this.skill = spell;
             notificarActualizacion();
         }
     }
 
-    @Override public void setKeys(SpellSlotI spellSlot)
+    @Override public void setKeys(SkillSlotI<T> spellSlot)
     {
         for (Integer cerradura : spellSlot.getKeys())
             lock.add(cerradura);
@@ -79,7 +77,15 @@ public class SpellSlot extends AbstractModel implements SpellSlotI
 
     private void notificarActualizacion()
     {
-        DTOsSkill.setSpellSlot setSpellSlot = new DTOsSkill.setSpellSlot(this);
-        notificarActualizacion("setSpellSlot", null, setSpellSlot);
+        if (skill instanceof SpellI)
+        {
+            DTOsSkill.SetSpellSlot setSpellSlot = new DTOsSkill.SetSpellSlot(this);
+            notificarActualizacion("setSpellSlot", null, setSpellSlot);
+        }
+        if (skill instanceof BDebuffI)
+        {
+            DTOsSkill.SetDebuffSlot setDebuffSlot = new DTOsSkill.SetDebuffSlot(this);
+            notificarActualizacion("setDebuffSlot", null, setDebuffSlot);
+        }
     }
 }

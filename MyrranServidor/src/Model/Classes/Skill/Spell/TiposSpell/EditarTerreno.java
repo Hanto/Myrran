@@ -12,8 +12,9 @@ public class EditarTerreno extends TipoSpell
 {
     @Override public void inicializarSkill()
     {
-        setNumSkillStats(1);
-        setNumSpellSlots(0);
+        stats().setNumStats(1);
+        spellSlots().setNumSlots(0);
+        debuffSlots().setNumSlots(0);
     }
 
     @Override public void ejecutarCasteo(SpellI skill, Caster Caster, int targetX, int targetY, MundoI mundo)

@@ -5,6 +5,8 @@ import Interfaces.Misc.GameState.MundoI;
 
 public interface TipoSpellI extends SkillI
 {
+    public SkillSlotsI<BDebuffI> debuffSlots();
+
     //METODOS:
     public void inicializarSkill();
     public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY, MundoI mundo);

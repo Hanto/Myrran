@@ -200,8 +200,8 @@ public class Player extends PlayerNotificador implements PlayerI, Debuffeable
 
         //TODO Provisional salvando datos en el propio Spell:
         SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(skillID);
-        if (spell != null) spell.getSkillStat(statID).setNumTalentos(valor);
-        else DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(skillID).getSkillStat(statID).setNumTalentos(valor);
+        if (spell != null) spell.stats().getStat(statID).setNumTalentos(valor);
+        else DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(skillID).stats().getStat(statID).setNumTalentos(valor);
     }
 
     @Override public void setCastear(boolean castear, int screenX, int screenY)

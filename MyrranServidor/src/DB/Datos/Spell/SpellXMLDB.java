@@ -91,7 +91,7 @@ public class SpellXMLDB implements SpellXMLDBI
 
                 for (int j = 0; j < listaStats.size(); j++)
                 {
-                    if (listaStats.size() < spell.getTipoSpell().getNumSkillStats()) logger.error("Faltan SkillStats por definir");
+                    if (listaStats.size() < spell.getTipoSpell().stats().getNumStats()) logger.error("Faltan SkillStats por definir");
 
                     Element stat = listaStats.get(j);
 
@@ -103,9 +103,9 @@ public class SpellXMLDB implements SpellXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    spell.getSkillStat(id).setBaseStats(id, nombreStat, valorBase);
-                    if (isMejorable) spell.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
-                    else spell.getSkillStat(id).setIsMejorable(isMejorable);
+                    spell.stats().getStat(id).setBaseStats(id, nombreStat, valorBase);
+                    if (isMejorable) spell.stats().getStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
+                    else spell.stats().getStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
                     logger.trace("  nombreStat:   {}", nombreStat);
@@ -166,7 +166,7 @@ public class SpellXMLDB implements SpellXMLDBI
                 spell.addContent(element);
             }
 
-            Iterator<SkillStatI> stat = entry.getValue().getSkillStats();
+            Iterator<SkillStatI> stat = entry.getValue().stats().getStats();
             while (stat.hasNext())
             {
                 skillStat = stat.next();

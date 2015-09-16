@@ -13,8 +13,9 @@ public class Heal extends TipoSpell
 
     @Override public void inicializarSkill()
     {
-        setNumSkillStats(2);
-        setNumSpellSlots(0);
+        stats().setNumStats(2);
+        spellSlots().setNumSlots(0);
+        debuffSlots().setNumSlots(2);
     }
 
     @Override public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY, MundoI mundo)

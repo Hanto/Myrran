@@ -2,11 +2,11 @@ package DTOs;
 
 import Interfaces.Misc.Spell.SkillI;
 import Model.Skills.SkillStat;
-import Model.Skills.SpellSlot;
+import Model.Skills.SkillSlot;
 
 public class DTOsSkill
 {
-    public static class setSkillStat
+    public static class SetSkillStat
     {
         public String skillID;
 
@@ -21,8 +21,8 @@ public class DTOsSkill
         public int numTalentos;
         public float bonosPorObjetos;
 
-        public setSkillStat() {}
-        public setSkillStat(SkillStat stat)
+        public SetSkillStat() {}
+        public SetSkillStat(SkillStat stat)
         {
             this.statID = stat.getID();
             this.nombre = stat.getNombre();
@@ -36,7 +36,7 @@ public class DTOsSkill
         }
     }
 
-    public static class setSpellSlot
+    public static class SetSpellSlot
     {
         public String skillID;
 
@@ -44,11 +44,31 @@ public class DTOsSkill
         public String spellID;
         public int[] keys;
 
-        public setSpellSlot() {}
-        public setSpellSlot(SpellSlot spellSlot)
+        public SetSpellSlot() {}
+        public SetSpellSlot(SkillSlot<?> spellSlot)
         {
             this.slotID = spellSlot.getID();
-            this.spellID = spellSlot.getSpellID();
+            this.spellID = spellSlot.getSkillID();
+            this.keys = new int[spellSlot.getKeys().size()];
+
+            for (int i=0; i< spellSlot.getKeys().size(); i++)
+            {   keys[i] = spellSlot.getKeys().get(i); }
+        }
+    }
+
+    public static class SetDebuffSlot
+    {
+        public String skillID;
+
+        public int slotID;
+        public String spellID;
+        public int[] keys;
+
+        public SetDebuffSlot() {}
+        public SetDebuffSlot(SkillSlot<?> spellSlot)
+        {
+            this.slotID = spellSlot.getID();
+            this.spellID = spellSlot.getSkillID();
             this.keys = new int[spellSlot.getKeys().size()];
 
             for (int i=0; i< spellSlot.getKeys().size(); i++)

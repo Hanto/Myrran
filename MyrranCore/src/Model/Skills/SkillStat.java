@@ -115,7 +115,7 @@ public class SkillStat extends AbstractModel implements SkillStatI
 
     private void notificarActualizacion()
     {
-        DTOsSkill.setSkillStat setSkillStat = new DTOsSkill.setSkillStat(this);
+        DTOsSkill.SetSkillStat setSkillStat = new DTOsSkill.SetSkillStat(this);
         notificarActualizacion("setSkillStat", null, setSkillStat);
     }
 }

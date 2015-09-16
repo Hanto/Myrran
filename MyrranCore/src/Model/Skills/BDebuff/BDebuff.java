@@ -18,17 +18,17 @@ public class BDebuff extends Skill implements BDebuffI
 {
     protected static final int STAT_Duracion = 0;
 
+    protected TipoBDebuffI tipoBDebuff;
     protected boolean isDebuff = false;
     protected byte stacksMaximos = 0;
-    protected TipoBDebuffI tipoBDebuff;
 
-    @Override public void setIsDebuff (boolean b)                   { isDebuff = b; }
-    @Override public void setStacksMaximos (byte i)                 { stacksMaximos = i; }
     @Override public void setTipoBDebuff(TipoBDebuffI tipoBDebuff)  { this.tipoBDebuff = tipoBDebuff; }
     @Override public String getTipoID()                             { return tipoBDebuff.getID(); }
+    @Override public TipoBDebuffI getTipoBDebuff()                  { return tipoBDebuff; }
     @Override public boolean isDebuff ()                            { return isDebuff; }
     @Override public byte getStacksMaximos ()                       { return stacksMaximos; }
-    @Override public TipoBDebuffI getTipoBDebuff()                  { return tipoBDebuff; }
+    @Override public void setIsDebuff (boolean b)                   { isDebuff = b; }
+    @Override public void setStacksMaximos (byte i)                 { stacksMaximos = i; }
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -60,7 +60,7 @@ public class BDebuff extends Skill implements BDebuffI
     {
         if (caster instanceof CasterPersonalizable)
         {   return ((CasterPersonalizable) caster).getSkillPersonalizado(id).getValorTotal(statID); }
-        else return getSkillStat(statID).getValorBase();
+        else return stats().getStat(statID).getValorBase();
     }
 
     @Override public void aplicarDebuff(Caster caster, Debuffeable target)
@@ -72,15 +72,15 @@ public class BDebuff extends Skill implements BDebuffI
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsSkill.setSkillStat)
+        if (evt.getNewValue() instanceof DTOsSkill.SetSkillStat)
         {
-            ((DTOsSkill.setSkillStat) evt.getNewValue()).skillID = id;
-            notificarActualizacion("setSkillStat", null, evt.getNewValue());
+            ((DTOsSkill.SetSkillStat) evt.getNewValue()).skillID = id;
+            notificarActualizacion("SetSkillStat", null, evt.getNewValue());
         }
-        else if (evt.getNewValue() instanceof DTOsSkill.setSpellSlot)
+        else if (evt.getNewValue() instanceof DTOsSkill.SetSpellSlot)
         {
-            ((DTOsSkill.setSpellSlot) evt.getNewValue()).spellID = id;
-            notificarActualizacion("setSpellSlot", null, evt.getNewValue());
+            ((DTOsSkill.SetSpellSlot) evt.getNewValue()).spellID = id;
+            notificarActualizacion("SetSpellSlot", null, evt.getNewValue());
         }
     }
 }

@@ -6,10 +6,9 @@ import Interfaces.EntidadesPropiedades.Propiedades.Caster;
 import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
 import Interfaces.EntidadesPropiedades.Propiedades.Debuffeable;
 import Interfaces.Misc.GameState.MundoI;
-import Interfaces.Misc.Spell.BDebuffI;
-import Interfaces.Misc.Spell.SpellI;
-import Interfaces.Misc.Spell.TipoSpellI;
+import Interfaces.Misc.Spell.*;
 import Model.Skills.Skill;
+import Model.Skills.SkillSlots;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,13 +22,17 @@ public class Spell extends Skill implements SpellI
     public static final int STAT_Cast = 0;
 
     protected TipoSpellI tipoSpell;
-    private List<BDebuffI> listaDeDebuffsQueAplica = new ArrayList<>();
+    protected SkillSlotsI<BDebuffI> debuffSlots = new SkillSlots<>();
+
+    protected List<BDebuffI> listaDeDebuffsQueAplica = new ArrayList<>();
 
     @Override public void setTipoSpell(TipoSpellI tipoSpell)    { this.tipoSpell = tipoSpell; }
     @Override public String getTipoID()                         { return tipoSpell.getID(); }
     @Override public TipoSpellI getTipoSpell()                  { return tipoSpell; }
+    @Override public SkillSlotsI<BDebuffI> debuffSlots()        { return debuffSlots; }
     @Override public Iterator<BDebuffI> getDebuffsQueAplica()   { return listaDeDebuffsQueAplica.iterator(); }
     @Override public int getNumDebuffsQueAplica()               { return listaDeDebuffsQueAplica.size(); }
+
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -40,13 +43,18 @@ public class Spell extends Skill implements SpellI
     {
         super(tipospell);
         this.tipoSpell = tipospell;
+        this.debuffSlots().setSlots(tipospell.debuffSlots());
     }
 
     public Spell (SpellI spell)
     {
         super(spell);
         this.tipoSpell = spell.getTipoSpell();
+        this.debuffSlots().setSlots(spell.debuffSlots());
     }
+
+    @Override public void dispose()
+    {   super.dispose(); }
 
     //
     //------------------------------------------------------------------------------------------------------------------
@@ -67,7 +75,7 @@ public class Spell extends Skill implements SpellI
     {
         if (Caster instanceof CasterPersonalizable)
         {   return ((CasterPersonalizable) Caster).getSkillPersonalizado(id).getValorTotal(statID); }
-        else return getSkillStat(statID).getValorBase();
+        else return stats().getStat(statID).getValorBase();
     }
 
     @Override public void castear (Caster Caster, int targetX, int targetY, MundoI mundo)
@@ -76,22 +84,27 @@ public class Spell extends Skill implements SpellI
         else
         {   //Marcamos al personaje como Casteando, y actualizamos su tiempo de casteo con el que marque el Spell (Stat Slot 0)
             //Caster.setTotalCastingTime(getValorTotal(Caster, STAT_Cast));
-            Caster.setTotalCastingTime(getSkillStat(STAT_Cast).getValorTotal());
+            Caster.setTotalCastingTime(stats().getStat(STAT_Cast).getValorTotal());
             tipoSpell.ejecutarCasteo(this, Caster, targetX, targetY, mundo);
         }
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsSkill.setSkillStat)
+        if (evt.getNewValue() instanceof DTOsSkill.SetSkillStat)
         {
-            ((DTOsSkill.setSkillStat) evt.getNewValue()).skillID = id;
-            notificarActualizacion("setSkillStat", null, evt.getNewValue());
+            ((DTOsSkill.SetSkillStat) evt.getNewValue()).skillID = id;
+            notificarActualizacion("SetSkillStat", null, evt.getNewValue());
         }
-        else if (evt.getNewValue() instanceof DTOsSkill.setSpellSlot)
+        else if (evt.getNewValue() instanceof DTOsSkill.SetSpellSlot)
         {
-            ((DTOsSkill.setSpellSlot) evt.getNewValue()).spellID = id;
-            notificarActualizacion("setSpellSlot", null, evt.getNewValue());
+            ((DTOsSkill.SetSpellSlot) evt.getNewValue()).spellID = id;
+            notificarActualizacion("SetSpellSlot", null, evt.getNewValue());
+        }
+        else if (evt.getNewValue() instanceof DTOsSkill.SetDebuffSlot)
+        {
+            ((DTOsSkill.SetDebuffSlot) evt.getNewValue()).spellID = id;
+            notificarActualizacion("SetDebuffSlot", null, evt.getNewValue());
         }
     }
 }
