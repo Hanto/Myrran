@@ -6,6 +6,6 @@ import Interfaces.Misc.GameState.MundoI;
 public interface TipoSpellI extends SkillI
 {
     //METODOS:
-    public void inicializarSkillStats();
+    public void inicializarSkill();
     public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY, MundoI mundo);
 }

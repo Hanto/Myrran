@@ -1,10 +1,10 @@
 package DB.Datos.TipoSpell;// Created by Hanto on 17/04/2014.
 
 import DAO.TipoSpell.TipoSpellXMLDBI;
+import Interfaces.Misc.Spell.SkillStatI;
 import Interfaces.Misc.Spell.TipoSpellI;
 import Model.Classes.Skill.Spell.TipoSpellFactory;
 import Model.Settings;
-import Model.Skills.SkillStat;
 import Model.Skills.Spell.TipoSpell;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
@@ -91,7 +91,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    tipoSpell.setSkillStat(new SkillStat(id, nombreStat, valorBase), id);
+                    tipoSpell.getSkillStat(id).setBaseStats(id, nombreStat, valorBase);
                     if (isMejorable) tipoSpell.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else tipoSpell.getSkillStat(id).setIsMejorable(isMejorable);
 
@@ -123,7 +123,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
         Document doc = new Document();
         Element tspell;
         Element element;
-        SkillStat skillStat;
+        SkillStatI skillStat;
 
         //Crear root:
         doc.setRootElement(new Element("TipoSpells"));
@@ -138,7 +138,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
             element.setText(entry.getValue().getDescripcion());
             tspell.addContent(element);
 
-            Iterator<SkillStat> stat = entry.getValue().getSkillStats();
+            Iterator<SkillStatI> stat = entry.getValue().getSkillStats();
             while (stat.hasNext())
             {
                 skillStat = stat.next();

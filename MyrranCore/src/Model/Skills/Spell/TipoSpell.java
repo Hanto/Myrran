@@ -16,7 +16,7 @@ public abstract class TipoSpell extends Skill implements TipoSpellI
     public TipoSpell ()
     {
         setID(this.getClass().getSimpleName().toUpperCase());
-        inicializarSkillStats();
+        inicializarSkill();
     }
 
     @Override public void propertyChange(PropertyChangeEvent evt) {}

@@ -1,12 +1,12 @@
 package DB.Datos.Spell;// Created by Hanto on 17/04/2014.
 
-import Model.Skills.SkillStat;
 import DAO.Spell.SpellXMLDBI;
 import DB.DAO;
-import Model.Settings;
 import Interfaces.Misc.Spell.BDebuffI;
+import Interfaces.Misc.Spell.SkillStatI;
 import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.Spell.TipoSpellI;
+import Model.Settings;
 import Model.Skills.Spell.Spell;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
@@ -103,7 +103,7 @@ public class SpellXMLDB implements SpellXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    spell.getSkillStat(id).setSkillStats(id, nombreStat, valorBase);
+                    spell.getSkillStat(id).setBaseStats(id, nombreStat, valorBase);
                     if (isMejorable) spell.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else spell.getSkillStat(id).setIsMejorable(isMejorable);
 
@@ -135,7 +135,7 @@ public class SpellXMLDB implements SpellXMLDBI
         Document doc = new Document();
         Element spell;
         Element element;
-        SkillStat skillStat;
+        SkillStatI skillStat;
 
         actualizarListaRecursos();
 
@@ -166,7 +166,7 @@ public class SpellXMLDB implements SpellXMLDBI
                 spell.addContent(element);
             }
 
-            Iterator<SkillStat> stat = entry.getValue().getSkillStats();
+            Iterator<SkillStatI> stat = entry.getValue().getSkillStats();
             while (stat.hasNext())
             {
                 skillStat = stat.next();

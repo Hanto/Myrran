@@ -10,8 +10,11 @@ import Model.Skills.Spell.TipoSpell;
 
 public class Bolt extends TipoSpell
 {
-    @Override public void inicializarSkillStats()
-    {   setNumSkillStats(4); }
+    @Override public void inicializarSkill()
+    {
+        setNumSkillStats(4);
+        setNumSpellSlots(1);
+    }
 
     @Override public void ejecutarCasteo(SpellI spell, Caster caster, int targetX, int targetY, MundoI mundo)
     {

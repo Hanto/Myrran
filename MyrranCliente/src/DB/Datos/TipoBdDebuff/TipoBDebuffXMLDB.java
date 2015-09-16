@@ -1,11 +1,11 @@
 package DB.Datos.TipoBdDebuff;// Created by Hanto on 10/06/2014.
 
 import DAO.TipoBDebuff.TipoBDebuffXMLDBI;
+import Interfaces.Misc.Spell.SkillStatI;
 import Interfaces.Misc.Spell.TipoBDebuffI;
 import Model.Classes.Skill.BDebuff.TipoBDebuffFactory;
 import Model.Settings;
 import Model.Skills.BDebuff.TipoBDebuff;
-import Model.Skills.SkillStat;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -97,7 +97,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    tipoDebuff.setSkillStat(new SkillStat(id, nombreStat, valorBase), id);
+                    tipoDebuff.getSkillStat(id).setBaseStats(id, nombreStat, valorBase);
                     if (isMejorable) tipoDebuff.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else tipoDebuff.getSkillStat(id).setIsMejorable(isMejorable);
 
@@ -129,7 +129,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
         Document doc = new Document();
         Element debuff;
         Element element;
-        SkillStat skillStat;
+        SkillStatI skillStat;
 
         //Crear root:
         doc.setRootElement(new Element("TipoBDebuffs"));
@@ -146,7 +146,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
             element.setText(entry.getValue().getDescripcion());
             debuff.addContent(element);
 
-            Iterator<SkillStat> stat = entry.getValue().getSkillStats();
+            Iterator<SkillStatI> stat = entry.getValue().getSkillStats();
             while (stat.hasNext())
             {
                 skillStat = stat.next();

@@ -1,11 +1,11 @@
 package DB.Datos.BDebuff;// Created by Hanto on 16/06/2014.
 
-import Model.Skills.SkillStat;
 import DAO.BDebuff.BDebuffXMLDBI;
 import DB.DAO;
-import Model.Settings;
 import Interfaces.Misc.Spell.BDebuffI;
+import Interfaces.Misc.Spell.SkillStatI;
 import Interfaces.Misc.Spell.TipoBDebuffI;
+import Model.Settings;
 import Model.Skills.BDebuff.BDebuff;
 import ch.qos.logback.classic.Logger;
 import org.jdom2.Document;
@@ -94,7 +94,7 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    debuff.getSkillStat(id).setSkillStats(id, nombreStat, valorBase);
+                    debuff.getSkillStat(id).setBaseStats(id, nombreStat, valorBase);
                     if (isMejorable) debuff.getSkillStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
                     else debuff.getSkillStat(id).setIsMejorable(isMejorable);
 
@@ -126,7 +126,7 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
         Document doc = new Document();
         Element debuff;
         Element element;
-        SkillStat skillStat;
+        SkillStatI skillStat;
 
         //Crear root:
         doc.setRootElement(new Element("BDebuffs"));
@@ -144,7 +144,7 @@ public class BDebuffXMLDB implements BDebuffXMLDBI
             element.setText(entry.getValue().getDescripcion());
             debuff.addContent(element);
 
-            Iterator<SkillStat> stat = entry.getValue().getSkillStats();
+            Iterator<SkillStatI> stat = entry.getValue().getSkillStats();
             while (stat.hasNext())
             {
                 skillStat = stat.next();

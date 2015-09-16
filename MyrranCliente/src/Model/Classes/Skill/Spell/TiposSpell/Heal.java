@@ -7,8 +7,11 @@ import Model.Skills.Spell.TipoSpell;
 
 public class Heal extends TipoSpell
 {
-    @Override public void inicializarSkillStats()
-    {   setNumSkillStats(2); }
+    @Override public void inicializarSkill()
+    {
+        setNumSkillStats(2);
+        setNumSpellSlots(0);
+    }
 
     @Override public void ejecutarCasteo(SpellI spell, Caster Caster, int targetX, int targetY, MundoI mundo) {}
 }

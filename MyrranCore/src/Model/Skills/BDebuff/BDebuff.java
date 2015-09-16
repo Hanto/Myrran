@@ -77,5 +77,10 @@ public class BDebuff extends Skill implements BDebuffI
             ((DTOsSkill.setSkillStat) evt.getNewValue()).skillID = id;
             notificarActualizacion("setSkillStat", null, evt.getNewValue());
         }
+        else if (evt.getNewValue() instanceof DTOsSkill.setSpellSlot)
+        {
+            ((DTOsSkill.setSpellSlot) evt.getNewValue()).spellID = id;
+            notificarActualizacion("setSpellSlot", null, evt.getNewValue());
+        }
     }
 }

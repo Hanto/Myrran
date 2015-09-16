@@ -6,7 +6,10 @@ import Model.Skills.BDebuff.TipoBDebuff;
 public class Bomba extends TipoBDebuff
 {
     @Override public void inicializarSkillStats()
-    {   setNumSkillStats(2); }
+    {
+        setNumSkillStats(2);
+        setNumSpellSlots(0);
+    }
 
     @Override public void actualizarTick(AuraI aura) { }
 

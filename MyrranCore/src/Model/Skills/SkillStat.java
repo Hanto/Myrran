@@ -2,9 +2,10 @@ package Model.Skills;
 
 import DTOs.DTOsSkill;
 import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.Spell.SkillStatI;
 
 //* @author Ivan Delgado Huerta
-public class SkillStat extends AbstractModel
+public class SkillStat extends AbstractModel implements SkillStatI
 {
     private int id;
     private String nombre;                          //Nombre del SkillStat: por ej: "Daño, velocidad, Casting Time"
@@ -41,6 +42,8 @@ public class SkillStat extends AbstractModel
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
+    public SkillStat() {}
+
     public SkillStat(int id, String nombre, float valor)
     {
         this.id = id;
@@ -50,23 +53,36 @@ public class SkillStat extends AbstractModel
     }
     
     //CONSTRUCTOR: (constructor Copia)
-    public SkillStat(SkillStat skillStat)
+    public SkillStat(SkillStatI skillStat)
     {
-        this.id = skillStat.id;
-        this.nombre = skillStat.nombre;
-        this.valorBase = skillStat.valorBase;
-        this.talentosMaximos = skillStat.talentosMaximos;
-        this.costeTalento = skillStat.costeTalento;
-        this.bonoTalento = skillStat.bonoTalento;
-        this.isMejorable = skillStat.isMejorable;
-        this.numTalentos = skillStat.numTalentos;
-        this.bonosPorObjetos = skillStat.bonosPorObjetos;
+        this.id = skillStat.getID();
+        this.nombre = skillStat.getNombre();
+        this.valorBase = skillStat.getValorBase();
+        this.talentosMaximos = skillStat.getTalentosMaximos();
+        this.costeTalento = skillStat.getCosteTalento();
+        this.bonoTalento = skillStat.getBonoTalento();
+        this.isMejorable = skillStat.getisMejorable();
+        this.numTalentos = skillStat.getNumTalentos();
+        this.bonosPorObjetos = skillStat.getBonosPorObjetos();
     }
 
     //------------------------------------------------------------------------------------------------------------------
 
+    public void setFullStats(SkillStatI skillStat)
+    {
+        this.id = skillStat.getID();
+        this.nombre = skillStat.getNombre();
+        this.valorBase = skillStat.getValorBase();
+        this.talentosMaximos = skillStat.getTalentosMaximos();
+        this.costeTalento = skillStat.getCosteTalento();
+        this.bonoTalento = skillStat.getBonoTalento();
+        this.isMejorable = skillStat.getisMejorable();
+        this.numTalentos = skillStat.getNumTalentos();
+        this.bonosPorObjetos = skillStat.getBonosPorObjetos();
+        notificarActualizacion();
+    }
 
-    public void setSkillStats(int id, String nombre, float valor)
+    public void setBaseStats(int id, String nombre, float valor)
     {
         this.id = id;
         this.nombre = nombre;

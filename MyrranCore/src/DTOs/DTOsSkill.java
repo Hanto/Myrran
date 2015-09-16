@@ -1,6 +1,8 @@
 package DTOs;
 
+import Interfaces.Misc.Spell.SkillI;
 import Model.Skills.SkillStat;
+import Model.Skills.SpellSlot;
 
 public class DTOsSkill
 {
@@ -31,6 +33,43 @@ public class DTOsSkill
             this.bonoTalento = stat.getBonoTalento();
             this.numTalentos = stat.getNumTalentos();
             this.bonosPorObjetos = stat.getBonosPorObjetos();
+        }
+    }
+
+    public static class setSpellSlot
+    {
+        public String skillID;
+
+        public int slotID;
+        public String spellID;
+        public int[] keys;
+
+        public setSpellSlot() {}
+        public setSpellSlot(SpellSlot spellSlot)
+        {
+            this.slotID = spellSlot.getID();
+            this.spellID = spellSlot.getSpellID();
+            this.keys = new int[spellSlot.getKeys().size()];
+
+            for (int i=0; i< spellSlot.getKeys().size(); i++)
+            {   keys[i] = spellSlot.getKeys().get(i); }
+        }
+    }
+
+    public static class SetKey
+    {
+        public String skillID;
+
+        public int[] keys;
+
+        public SetKey() {}
+        public SetKey(SkillI skill)
+        {
+            this.skillID = skill.getID();
+            this.keys = new int[skill.getKeys().size()];
+
+            for (int i=0; i< skill.getKeys().size(); i++)
+            {   keys[i] = skill.getKeys().get(i); }
         }
     }
 }
