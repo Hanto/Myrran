@@ -12,8 +12,8 @@ public class Bolt extends TipoSpell
 {
     @Override public void inicializarSkill()
     {
-        stats().setNumStats(4);
-        spellSlots().setNumSlots(1);
+        getStats().setNumStats(4);
+        getSpellSlots().setNumSlots(1);
         debuffSlots().setNumSlots(10);
     }
 

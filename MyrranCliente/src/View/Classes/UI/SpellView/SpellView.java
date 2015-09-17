@@ -77,9 +77,6 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
         //tabla.debug();
     }
 
-    private void añadirSkillView(SkillView skillView)
-    {   listaSkills.add(skillView); }
-
     @Override public void dispose()
     {
         spell.eliminarObservador(this);
@@ -93,6 +90,9 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
         }
         if (this.getStage() != null) this.getStage().getRoot().removeActor(this);
     }
+
+    private void añadirSkillView(SkillView skillView)
+    {   listaSkills.add(skillView); }
 
     public void construirView()
     {

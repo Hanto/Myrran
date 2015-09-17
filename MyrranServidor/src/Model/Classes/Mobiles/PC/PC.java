@@ -176,8 +176,8 @@ public class PC extends PCNotificador implements PropertyChangeListener
 
         //TODO Provisional salvando datos en el propio Spell:
         SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell(skillID);
-        if (spell != null) spell.stats().getStat(statID).setNumTalentos(talento);
-        else DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(skillID).stats().getStat(statID).setNumTalentos(talento);
+        if (spell != null) spell.getStats().getStat(statID).setNumTalentos(talento);
+        else DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff(skillID).getStats().getStat(statID).setNumTalentos(talento);
     }
 
     // ACTUALIZACION:

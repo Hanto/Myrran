@@ -60,7 +60,7 @@ public class BDebuff extends Skill implements BDebuffI
     {
         if (caster instanceof CasterPersonalizable)
         {   return ((CasterPersonalizable) caster).getSkillPersonalizado(id).getValorTotal(statID); }
-        else return stats().getStat(statID).getValorBase();
+        else return getStats().getStat(statID).getValorBase();
     }
 
     @Override public void aplicarDebuff(Caster caster, Debuffeable target)

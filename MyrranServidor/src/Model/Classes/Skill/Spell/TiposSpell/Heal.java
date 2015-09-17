@@ -13,8 +13,8 @@ public class Heal extends TipoSpell
 
     @Override public void inicializarSkill()
     {
-        stats().setNumStats(2);
-        spellSlots().setNumSlots(0);
+        getStats().setNumStats(2);
+        getSpellSlots().setNumSlots(0);
         debuffSlots().setNumSlots(2);
     }
 

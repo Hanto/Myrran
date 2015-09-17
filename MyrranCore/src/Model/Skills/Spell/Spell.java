@@ -29,7 +29,7 @@ public class Spell extends Skill implements SpellI
     @Override public void setTipoSpell(TipoSpellI tipoSpell)    { this.tipoSpell = tipoSpell; }
     @Override public String getTipoID()                         { return tipoSpell.getID(); }
     @Override public TipoSpellI getTipoSpell()                  { return tipoSpell; }
-    @Override public SkillSlotsI<BDebuffI> debuffSlots()        { return debuffSlots; }
+    @Override public SkillSlotsI<BDebuffI> getDebuffSlots()     { return debuffSlots; }
     @Override public Iterator<BDebuffI> getDebuffsQueAplica()   { return listaDeDebuffsQueAplica.iterator(); }
     @Override public int getNumDebuffsQueAplica()               { return listaDeDebuffsQueAplica.size(); }
 
@@ -43,14 +43,14 @@ public class Spell extends Skill implements SpellI
     {
         super(tipospell);
         this.tipoSpell = tipospell;
-        this.debuffSlots().setSlots(tipospell.debuffSlots());
+        this.getDebuffSlots().setSlots(tipospell.debuffSlots());
     }
 
     public Spell (SpellI spell)
     {
         super(spell);
         this.tipoSpell = spell.getTipoSpell();
-        this.debuffSlots().setSlots(spell.debuffSlots());
+        this.getDebuffSlots().setSlots(spell.getDebuffSlots());
     }
 
     @Override public void dispose()
@@ -75,7 +75,7 @@ public class Spell extends Skill implements SpellI
     {
         if (Caster instanceof CasterPersonalizable)
         {   return ((CasterPersonalizable) Caster).getSkillPersonalizado(id).getValorTotal(statID); }
-        else return stats().getStat(statID).getValorBase();
+        else return getStats().getStat(statID).getValorBase();
     }
 
     @Override public void castear (Caster Caster, int targetX, int targetY, MundoI mundo)
@@ -84,7 +84,7 @@ public class Spell extends Skill implements SpellI
         else
         {   //Marcamos al personaje como Casteando, y actualizamos su tiempo de casteo con el que marque el Spell (Stat Slot 0)
             //Caster.setTotalCastingTime(getTotal(Caster, STAT_Cast));
-            Caster.setTotalCastingTime(stats().getStat(STAT_Cast).getTotal());
+            Caster.setTotalCastingTime(getStats().getStat(STAT_Cast).getTotal());
             tipoSpell.ejecutarCasteo(this, Caster, targetX, targetY, mundo);
         }
     }

@@ -7,8 +7,8 @@ public class Hot extends TipoBDebuff
 {
     @Override public void inicializarSkillStats()
     {
-        stats().setNumStats(2);
-        spellSlots().setNumSlots(0);
+        getStats().setNumStats(2);
+        getSpellSlots().setNumSlots(0);
     }
 
     @Override public void actualizarTick(AuraI aura) { }

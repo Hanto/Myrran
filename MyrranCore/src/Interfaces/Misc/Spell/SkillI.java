@@ -16,7 +16,7 @@ public interface SkillI extends KeyI<Integer>, ModelI, Disposable
     // SKILLSTATS:
     //------------------------------------------------------------------------------------------------------------------
 
-    public SkillStatsI stats();
+    public SkillStatsI getStats();
 
     //public void setNumSkillStats(int numSkillStats);
     //public int getNumSkillStats();
@@ -27,7 +27,7 @@ public interface SkillI extends KeyI<Integer>, ModelI, Disposable
     // SPELLSLOTS:
     //------------------------------------------------------------------------------------------------------------------
 
-    public SkillSlotsI<SpellI> spellSlots();
+    public SkillSlotsI<SpellI> getSpellSlots();
 
 
     // KEYS:

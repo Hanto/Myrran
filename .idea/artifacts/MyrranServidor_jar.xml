@@ -1,24 +1,22 @@
 <component name="ArtifactManager">
-  <artifact name="MyrranCliente:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/MyrranCliente_jar</output-path>
+  <artifact name="MyrranServidor:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MyrranServidor_jar</output-path>
     <root id="root">
-      <element id="archive" name="MyrranCliente.jar">
+      <element id="archive" name="MyrranServidor.jar">
         <element id="directory" name="META-INF">
-          <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/Cliente/META-INF/MANIFEST.MF" />
+          <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/Servidor/META-INF/MANIFEST.MF" />
         </element>
-        <element id="module-output" name="MyrranCliente" />
+        <element id="module-output" name="MyrranServidor" />
         <element id="module-output" name="MyrranCore" />
       </element>
       <element id="library" level="project" name="Java LibGDX" />
       <element id="library" level="project" name="Java Tween-Engine" />
-      <element id="library" level="project" name="gdx-tools" />
       <element id="library" level="project" name="Java JDom" />
       <element id="library" level="project" name="Java Kryonet" />
       <element id="library" level="project" name="com.badlogicgames.gdx:gdx-ai:1.5.0" />
-      <element id="library" level="project" name="Java Box2DLights" />
       <element id="library" level="project" name="gdx-box2d" />
       <element id="library" level="project" name="Java SLF4J" />
-      <element id="dir-copy" path="$PROJECT_DIR$/MyrranCliente/assets" />
+      <element id="dir-copy" path="$PROJECT_DIR$/MyrranServidor/assets" />
     </root>
   </artifact>
 </component>

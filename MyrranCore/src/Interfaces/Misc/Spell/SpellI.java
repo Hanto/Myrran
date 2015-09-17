@@ -13,7 +13,7 @@ public interface SpellI extends SkillI
 
     //GET:
     public TipoSpellI getTipoSpell();
-    public SkillSlotsI<BDebuffI> debuffSlots();
+    public SkillSlotsI<BDebuffI> getDebuffSlots();
     public Iterator<BDebuffI> getDebuffsQueAplica();
     public int getNumDebuffsQueAplica();
 

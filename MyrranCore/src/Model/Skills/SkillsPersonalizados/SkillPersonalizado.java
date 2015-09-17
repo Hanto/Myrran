@@ -26,14 +26,14 @@ public class SkillPersonalizado extends AbstractModel implements SkillPersonaliz
     @Override public boolean isDebuff()                     { return (skill instanceof BDebuffI ? true : false); }
     @Override public String getID()                         { return id; }
     @Override public String getNombre()                     { return skill.getNombre(); }
-    @Override public int getNumSkillStats()                 { return skill.stats().getNumStats(); }
-    @Override public String getNombre(int statID)           { return skill.stats().getStat(statID).getNombre(); }
+    @Override public int getNumSkillStats()                 { return skill.getStats().getNumStats(); }
+    @Override public String getNombre(int statID)           { return skill.getStats().getStat(statID).getNombre(); }
 
-    @Override public float getValorBase(int statID)         { return skill.stats().getStat(statID).getValorBase(); }
-    @Override public float getBonoTalento (int statID)      { return skill.stats().getStat(statID).getBonoTalento(); }
-    @Override public int getCosteTalento(int statID)        { return skill.stats().getStat(statID).getCosteTalento(); }
-    @Override public int getTalentoMaximo(int statID)       { return skill.stats().getStat(statID).getTalentosMaximos(); }
-    @Override public boolean getIsMejorable(int statID)     { return skill.stats().getStat(statID).getisMejorable(); }
+    @Override public float getValorBase(int statID)         { return skill.getStats().getStat(statID).getValorBase(); }
+    @Override public float getBonoTalento (int statID)      { return skill.getStats().getStat(statID).getBonoTalento(); }
+    @Override public int getCosteTalento(int statID)        { return skill.getStats().getStat(statID).getCosteTalento(); }
+    @Override public int getTalentoMaximo(int statID)       { return skill.getStats().getStat(statID).getTalentosMaximos(); }
+    @Override public boolean getIsMejorable(int statID)     { return skill.getStats().getStat(statID).getisMejorable(); }
     @Override public Iterator<SkillMod>getIterator()        { return Arrays.asList(skillMods).iterator(); }
 
     public SkillPersonalizado(SkillI skill)
@@ -41,7 +41,7 @@ public class SkillPersonalizado extends AbstractModel implements SkillPersonaliz
         this.skill = skill;
         this.id = skill.getID();
 
-        skillMods = new SkillMod[skill.stats().getNumStats()];
+        skillMods = new SkillMod[skill.getStats().getNumStats()];
         for (int i = 0; i < skillMods.length; i++)
         {   skillMods[i] = new SkillMod(i); }
     }

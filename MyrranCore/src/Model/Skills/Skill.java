@@ -32,8 +32,8 @@ public abstract class Skill extends AbstractModel implements SkillI, PropertyCha
     @Override public String getID()                             { return id; }
     @Override public String getNombre ()                        { return nombre; }
     @Override public String getDescripcion ()                   { return descripcion; }
-    @Override public SkillStatsI stats()                        { return stats; }
-    @Override public SkillSlotsI<SpellI> spellSlots()           { return spellSlots; }
+    @Override public SkillStatsI getStats()                     { return stats; }
+    @Override public SkillSlotsI<SpellI> getSpellSlots()        { return spellSlots; }
     @Override public List<Integer> getKeys()                    { return keys; }
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -48,17 +48,17 @@ public abstract class Skill extends AbstractModel implements SkillI, PropertyCha
         this.setID(skill.getID());
         this.setNombre(skill.getNombre());
         this.setDescripcion(skill.getDescripcion());
-        this.stats().setStats(skill.stats());
-        this.spellSlots().setSlots(skill.spellSlots());
+        this.getStats().setStats(skill.getStats());
+        this.getSpellSlots().setSlots(skill.getSpellSlots());
 
-        stats().añadirObservador(this);
-        spellSlots().añadirObservador(this);
+        getStats().añadirObservador(this);
+        getSpellSlots().añadirObservador(this);
     }
 
     @Override public void dispose()
     {
-        stats().eliminarObservador(this);
-        spellSlots().eliminarObservador(this);
+        getStats().eliminarObservador(this);
+        getSpellSlots().eliminarObservador(this);
     }
 
     // KEYS:

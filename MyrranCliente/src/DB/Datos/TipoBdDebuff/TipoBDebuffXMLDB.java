@@ -85,7 +85,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
 
                 for (int j = 0; j < listaStats.size(); j++)
                 {
-                    if (listaStats.size() < tipoDebuff.stats().getNumStats()) logger.error("Faltan SkillStats por definir");
+                    if (listaStats.size() < tipoDebuff.getStats().getNumStats()) logger.error("Faltan SkillStats por definir");
 
                     Element stat        = listaStats.get(j);
 
@@ -97,9 +97,9 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    tipoDebuff.stats().getStat(id).setBaseStats(id, nombreStat, valorBase);
-                    if (isMejorable) tipoDebuff.stats().getStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
-                    else tipoDebuff.stats().getStat(id).setIsMejorable(isMejorable);
+                    tipoDebuff.getStats().getStat(id).setBaseStats(id, nombreStat, valorBase);
+                    if (isMejorable) tipoDebuff.getStats().getStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
+                    else tipoDebuff.getStats().getStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
                     logger.trace("  nombreStat:   {}", nombreStat);
@@ -146,7 +146,7 @@ public class TipoBDebuffXMLDB implements TipoBDebuffXMLDBI
             element.setText(entry.getValue().getDescripcion());
             debuff.addContent(element);
 
-            Iterator<SkillStatI> stat = entry.getValue().stats().getIterator();
+            Iterator<SkillStatI> stat = entry.getValue().getStats().getIterator();
             while (stat.hasNext())
             {
                 skillStat = stat.next();

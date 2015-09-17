@@ -48,7 +48,6 @@ public class CasilleroTalentos extends Actor
 
                         int valor = CasilleroTalentos.this.caster.getSkillPersonalizado(skillID).getNumTalentos(statID);
                         CasilleroTalentos.this.caster.setNumTalentosSkillPersonalizado(skillID, statID, valor+1);
-
                     }
                 }
                 if (button == Input.Buttons.RIGHT)

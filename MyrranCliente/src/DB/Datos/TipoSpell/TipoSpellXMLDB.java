@@ -79,7 +79,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
 
                 for (int j = 0; j < listaStats.size(); j++)
                 {
-                    if (listaStats.size() < tipoSpell.stats().getNumStats()) logger.error("Faltan SkillStats por definir");
+                    if (listaStats.size() < tipoSpell.getStats().getNumStats()) logger.error("Faltan SkillStats por definir");
 
                     Element stat        = listaStats.get(j);
 
@@ -91,9 +91,9 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
                     int costeTalento    = Integer.parseInt(stat.getAttributeValue("costeTalento"));
                     float bonoTalento   = Float.parseFloat(stat.getAttributeValue("bonoTalento"));
 
-                    tipoSpell.stats().getStat(id).setBaseStats(id, nombreStat, valorBase);
-                    if (isMejorable) tipoSpell.stats().getStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
-                    else tipoSpell.stats().getStat(id).setIsMejorable(isMejorable);
+                    tipoSpell.getStats().getStat(id).setBaseStats(id, nombreStat, valorBase);
+                    if (isMejorable) tipoSpell.getStats().getStat(id).setTalentosStats(talentoMaximo, costeTalento, bonoTalento);
+                    else tipoSpell.getStats().getStat(id).setIsMejorable(isMejorable);
 
                     logger.trace("  id:           {}", id);
                     logger.trace("  nombreStat:   {}", nombreStat);
@@ -138,7 +138,7 @@ public class TipoSpellXMLDB implements TipoSpellXMLDBI
             element.setText(entry.getValue().getDescripcion());
             tspell.addContent(element);
 
-            Iterator<SkillStatI> stat = entry.getValue().stats().getIterator();
+            Iterator<SkillStatI> stat = entry.getValue().getStats().getIterator();
             while (stat.hasNext())
             {
                 skillStat = stat.next();
