@@ -96,7 +96,7 @@ public class SpellView extends Group implements PropertyChangeListener, Disposab
 
     public void construirView()
     {
-        BitmapFont normal = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres);
+        BitmapFont normal = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_14);
         SkillView skillView;
         SkillPersonalizadoI skill;
 

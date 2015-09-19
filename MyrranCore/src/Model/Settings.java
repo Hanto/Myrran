@@ -3,6 +3,8 @@ package Model;// Created by Hanto on 07/04/2014.
 import DAO.Settings.DAO.SettingsDAO;
 import DAO.Settings.SettingsDAOFactory;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 
 public class Settings
@@ -26,11 +28,11 @@ public class Settings
         //Network:
         NETWORK_PuertoTCP           = settings.getInt("NETWORK_PuertoTCP", 54555);
         NETWORK_PuertoUDP           = settings.getInt("NETWORK_PuertoUDP", 54777);
-        NETWORK_Client_Timeout      = settings.getInt("NETWORK_Client_Timeout", 5000*10000);
-        NETWORK_DistanciaVisionMobs = settings.getFloat("NETWORK_DistanciaVisionMobs",1.2f );
+        NETWORK_Client_Timeout      = settings.getInt("NETWORK_Client_Timeout", 5000 * 10000);
+        NETWORK_DistanciaVisionMobs = settings.getFloat("NETWORK_DistanciaVisionMobs", 1.2f);
 
         //Spells, Debuffs:
-        BDEBUFF_DuracionTick        = settings.getFloat("BDEBUFF_DuracionTick",1.0f);
+        BDEBUFF_DuracionTick        = settings.getFloat("BDEBUFF_DuracionTick", 1.0f);
 
         //Recursos:
         RECURSOS_XML                            = settings.getString("RECURSOS_XML",                            "Data/");
@@ -53,24 +55,24 @@ public class Settings
         XML_TexturasIconosAcciones  = settings.getString("XML_TexturasIconosAcciones", "Texturas.xml");
         XML_TexturasIconoSpells     = settings.getString("XML_TexturasIconoSpells",    "Texturas.xml");
         XML_TexturasTerrenos        = settings.getString("XML_TexturasTerrenos",       "Texturas.xml");
-        XML_TexturasFuentes         = settings.getString("XML_TexturasFuentes",        "Texturas.xml");
+        XML_TexturasFuentes         = settings.getString("XML_TexturasFuentes", "Texturas.xml");
 
         XML_Particulas              = settings.getString("XML_Particulas",             "Particulas.xml");
-        XML_PixieSlot               = settings.getString("XML_PixieSlot",              "PixieSlot.xml");
+        XML_PixieSlot               = settings.getString("XML_PixieSlot", "PixieSlot.xml");
         XML_PixieMob                = settings.getString("XML_PixieMob",               "PixieMob.xml");
-        XML_AnimacionesCasteo       = settings.getString("XML_AnimacionesCasteo",      "AnimacionesCasteo.xml");
+        XML_AnimacionesCasteo       = settings.getString("XML_AnimacionesCasteo", "AnimacionesCasteo.xml");
         XML_AnimacionesProyectil    = settings.getString("XML_AnimacionesProyectil",   "AnimacionesProyectil.xml");
 
         //Atlas Recursos:
-        ATLAS_GenerarAtlas          = settings.getBoolean("ATLAS_GenerarAtlas",         false);
+        ATLAS_GenerarAtlas          = settings.getBoolean("ATLAS_GenerarAtlas", false);
         ATLAS_PixiePcCuerpos_LOC    = settings.getString("ATLAS_PixiePcCuerpos_LOC",   "PixiePcCuerpos/");
         ATLAS_PixiePcSlots_LOC      = settings.getString("ATLAS_PixiePcSlots_LOC",     "PixiePcSlots/");
-        ATLAS_PixieMObs_LOC         = settings.getString("ATLAS_PixieMobs_LOC",        "PixieMobs/");
+        ATLAS_PixieMObs_LOC         = settings.getString("ATLAS_PixieMobs_LOC", "PixieMobs/");
         ATLAS_TexturasTerrenos_LOC  = settings.getString("ATLAS_TexturasTerrenos_LOC", "TexturasTerrenos/");
-        ATLAS_TexturasIconos_LOC    = settings.getString("ATLAS_TexturasIconos_LOC",   "TexturasIconos/");
-        ATLAS_TexturasMisc_LOC      = settings.getString("ATLAS_TexturasMisc_LOC",     "TexturasMisc/");
-        ATLAS_AnimacionesSpells_LOC = settings.getString("ATLAS_AnimacionesSpells_LOC","AnimacionesSpells/");
-        ATLAS_Fuentes_LOC           = settings.getString("ATLAS_Fuentes_LOC",          "Fonts/");
+        ATLAS_TexturasIconos_LOC    = settings.getString("ATLAS_TexturasIconos_LOC", "TexturasIconos/");
+        ATLAS_TexturasMisc_LOC      = settings.getString("ATLAS_TexturasMisc_LOC", "TexturasMisc/");
+        ATLAS_AnimacionesSpells_LOC = settings.getString("ATLAS_AnimacionesSpells_LOC", "AnimacionesSpells/");
+        ATLAS_Fuentes_LOC           = settings.getString("ATLAS_Fuentes_LOC", "Fonts/");
 
         //Pixie:
         PIXIE_Player_numFilas       = settings.getInt("PIXIE_Player_numFilas", 3);
@@ -88,18 +90,20 @@ public class Settings
 
         MAPA_Max_Capas_Terreno      = settings.getInt("MAPA_Max_Capas_Terreno", 4);
         MAPA_Max_TilesX             = settings.getInt("MAPA_Max_TilesX", 2000);
-        MAPA_Max_TilesY             = settings.getInt("MAPA_Max_TilesY" ,2000);
+        MAPA_Max_TilesY             = settings.getInt("MAPA_Max_TilesY", 2000);
 
         MAPAVIEW_TamañoX            = settings.getInt("MAPAVIEW_TamañoX", 2);  //18;
         MAPAVIEW_TamañoY            = settings.getInt("MAPAVIEW_TamañoY", 2);  //20;
 
         //Fuentes
-        FUENTE_Nombres              = settings.getString("FUENTE_Nombres", "14");
+        FUENTE_14                   = settings.getString("FUENTE_14", "14");
         FUENTE_10                   = settings.getString("FUENTE_10", "10");
+        FUENTE_11                   = settings.getString("FUENTE_11", "11");
+        FUENTE_20                   = settings.getString("FUENTE_20", "20");
 
         //Barra Spells:
         BARRASPELLS_Ancho_Casilla   = settings.getInt("BARRASPELLS_Ancho_Casilla", 32+2);
-        BARRASPELLS_Alto_Casilla    = settings.getInt("BARRASPELLS_Alto_Casilla" , 32+2);
+        BARRASPELLS_Alto_Casilla    = settings.getInt("BARRASPELLS_Alto_Casilla", 32 + 2);
 
         //Barra Terrenos:
         BARRATERRENOS_EditarTerrenoID = settings.getString("BARRATERRENOS_EditarTerrenoID", "EDITARTERRENO");
@@ -111,13 +115,18 @@ public class Settings
         RECURSO_NAMEPLATE_Nameplate             = settings.getString("RECURSO_NAMEPLATE_Nameplate",             "Nameplate");
         RECURSO_NAMEPLATE_Nameplate_Fondo       = settings.getString("RECURSO_NAMEPLATE_Nameplate_Fondo",       "NameplateFondo");
         RECURSO_PIXIEPC_Sombra                  = settings.getString("RECURSO_PIXIEPC_Sombra",                  "Sombra");
-        RECURSO_Grid                            = settings.getString("RECURSO_Grid",                            "Grid");
-        RECURSO_SPELLTOOLTIP_TalentoFondo       = settings.getString("RECURSO_SPELLTOOLTIP_TalentoFondo",       "CasillaTalentoFondo");
-        RECURSO_SPELLTOOLTIP_Talento            = settings.getString("RECURSO_SPELLTOOLTIP_Talento",            "CasillaTalento");
+        RECURSO_Grid                            = settings.getString("RECURSO_Grid", "Grid");
+        RECURSO_SPELLTOOLTIP_TalentoFondo       = settings.getString("RECURSO_SPELLTOOLTIP_TalentoFondo", "CasillaTalentoFondo");
+        RECURSO_SPELLTOOLTIP_Talento            = settings.getString("RECURSO_SPELLTOOLTIP_Talento", "CasillaTalento");
 
         //Icono Accion
         ICONO_Accion_Ancho                      = settings.getInt("ICONO_Accion_Ancho", 32);
         ICONO_Accion_Alto                       = settings.getInt("ICONO_Accion_Alto", 32);
+
+        df = new DecimalFormat("0.00");
+        DecimalFormatSymbols simbolos = df.getDecimalFormatSymbols();
+        simbolos.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(simbolos);
     }
 
     //LibGDX:
@@ -203,8 +212,10 @@ public class Settings
     public static int MAPAVIEW_TamañoY;
 
     //Fuentes
-    public static String FUENTE_Nombres;
+    public static String FUENTE_14;
     public static String FUENTE_10;
+    public static String FUENTE_11;
+    public static String FUENTE_20;
 
     //Barra Spells:
     public static int BARRASPELLS_Ancho_Casilla;
@@ -227,6 +238,8 @@ public class Settings
     //Icono Accion
     public static int ICONO_Accion_Ancho;
     public static int ICONO_Accion_Alto;
+
+    public static DecimalFormat df;
 
     //KEYCODES:
     public static final HashMap<Integer, String> keycodeNames = new HashMap<>();

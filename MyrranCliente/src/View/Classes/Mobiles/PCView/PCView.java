@@ -90,7 +90,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
     private void crearNombre()
     {
-        nombre = new Texto("Player"+getID(), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
+        nombre = new Texto("Player"+getID(), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_14), Color.WHITE, Color.BLACK, Align.center, Align.bottom, 1);
         nombre.setPosition(actor.getWidth() / 2, actor.getHeight() + 8);
         this.addActor(nombre);
     }
@@ -115,7 +115,7 @@ public class PCView extends Group implements PropertyChangeListener, IDentificab
 
     public void modificarHPs(int HPs)
     {
-        Texto texto = new Texto(Integer.toString(HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
+        Texto texto = new Texto(Integer.toString(HPs), RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_14),
                 HPs < 0 ? Color.RED : Color.GREEN, Color.BLACK, Align.center, Align.bottom, 1);
         texto.setPosition(this.getWidth() / 2 + (float) Math.random() * 30 - 15, this.getHeight() + 15);
         texto.scrollingCombatText(this, 2f);

@@ -1,4 +1,4 @@
-package View.Classes.UI.SpellView;
+package View.Classes.UI.SpellView2;
 
 
 import Interfaces.Misc.Spell.SpellI;

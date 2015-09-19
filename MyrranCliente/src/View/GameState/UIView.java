@@ -1,5 +1,6 @@
 package View.GameState;// Created by Hanto on 14/05/2014.
 
+import DB.DAO;
 import DB.RSC;
 import DTOs.DTOsInputManager;
 import Interfaces.Misc.Observable.AbstractModel;
@@ -9,6 +10,7 @@ import Model.Settings;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraAccionesView.ConjuntoBarraAccionesView;
 import View.Classes.UI.BarraTerrenosView.BarraTerrenosView;
+import View.Classes.UI.SpellView2.SkillStatsView;
 import View.Classes.UI.UIViewController;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
@@ -44,12 +46,14 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
         this.barraTerrenosView = barraTerrenosView;
         this.stage = stage;
 
-        fps = new Texto("fps", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres),
+        fps = new Texto("fps", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_14),
                         Color.WHITE, Color.BLACK, Align.left, Align.bottom, 2);
         stage.addActor(fps);
 
         inputManager.añadirObservador(this);
         uiController.añadirObservador(this);
+
+        PRUEBA();
     }
 
     @Override public void dispose()
@@ -72,7 +76,7 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
     {   stage.draw(); }
 
     public void setDebugUnderMouse(boolean bool)
-    {   stage.setDebugUnderMouse(bool);}
+    {   stage.setDebugUnderMouse(bool); }
 
     public void resize (int anchura, int altura)
     {   stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); }
@@ -106,5 +110,12 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
 
         else if (evt.getNewValue() instanceof DTOsInputManager.OcultarBarraTerrenos)
         {   ocultarBarraTerrenos(); }
+    }
+
+    public void PRUEBA()
+    {
+        SkillStatsView statsView = new SkillStatsView(DAO.spellDAOFactory.getSpellDAO().getSpell("PoisonBolt"), null);
+        this.getStage().addActor(statsView);
+        statsView.setPosition(300, 300);
     }
 }

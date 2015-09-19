@@ -4,6 +4,7 @@ import DB.RSC;
 import Model.Settings;
 import Interfaces.EntidadesPropiedades.Propiedades.CasterPersonalizable;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -20,11 +21,14 @@ public class CasilleroTalentos extends Actor
     private int numTalentos = 0;
 
     private CasterPersonalizable caster;
-
+    private String skillID;
+    private int statID;
 
     public CasilleroTalentos(CasterPersonalizable caster, final String skillID, final int statID, int numTalentos)
     {
         this.caster = caster;
+        this.skillID = skillID;
+        this.statID = statID;
 
         fondo = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_SPELLTOOLTIP_TalentoFondo);
         frente = RSC.miscRecusosDAO.getMiscRecursosDAO().cargarTextura(Settings.RECURSO_SPELLTOOLTIP_Talento);
@@ -76,6 +80,8 @@ public class CasilleroTalentos extends Actor
     @Override public void draw (Batch batch, float alpha)
     {
         batch.setColor(getColor());
+        if (!caster.getSkillPersonalizado(skillID).getIsMejorable(statID))
+            batch.setColor(Color.GRAY);
         batch.draw(fondo, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 
         batch.setColor(255 / 255f, 180 / 255f, 0 / 255f, 0.75f);

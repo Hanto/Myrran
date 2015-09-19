@@ -53,7 +53,7 @@ public class CasillaView extends Actor implements PropertyChangeListener
         this.caster = caster;
         this.controlador = controlador;
 
-        keybind = new Texto("", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres), Color.ORANGE, Color.BLACK, Align.left, Align.top, 2);
+        keybind = new Texto("", RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_14), Color.ORANGE, Color.BLACK, Align.left, Align.top, 2);
         keybind.setTouchable(Touchable.disabled);
 
         this.addCaptureListener(new CasillaTooltipListener(this));

@@ -75,10 +75,10 @@ public class SkillView implements PropertyChangeListener, Disposable
 
     private void crearView()
     {
-        BitmapFont cabecera = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente("20");
-        BitmapFont normal = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_Nombres);
-        BitmapFont mini = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente("11");
-        BitmapFont smini = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente("10");
+        BitmapFont cabecera = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_20);
+        BitmapFont normal = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_14);
+        BitmapFont mini = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_11);
+        BitmapFont smini = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_10);
         BitmapFont fuenteNombre;
         Texto texto;
 
@@ -125,7 +125,7 @@ public class SkillView implements PropertyChangeListener, Disposable
             setCosteTalento(statID, texto);
 
             //BONO TALENTO:
-            texto = new Texto(skill.getIsMejorable(statID) ? Float.toString(skill.getBonoTalento(statID)) : "-",
+            texto = new Texto(skill.getIsMejorable(statID) ? df.format(skill.getBonoTalento(statID)) : "-",
                     mini, Color.YELLOW, Color.BLACK, Align.left, Align.bottom, 1);
             setBonoTalentos(statID, texto);
 
