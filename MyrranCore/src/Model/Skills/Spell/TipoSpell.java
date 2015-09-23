@@ -11,7 +11,7 @@ import java.beans.PropertyChangeEvent;
 
 public abstract class TipoSpell extends Skill implements TipoSpellI
 {
-    protected SkillSlotsI<BDebuffI> debuffSlots = new SkillSlots<>();
+    protected SkillSlotsI<BDebuffI> debuffSlots = new SkillSlots<>(this);
 
     @Override public SkillSlotsI<BDebuffI> debuffSlots()                { return debuffSlots; }
     @Override public String getTipoID()                                 { return null; }

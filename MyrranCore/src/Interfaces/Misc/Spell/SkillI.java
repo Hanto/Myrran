@@ -3,7 +3,7 @@ package Interfaces.Misc.Spell;// Created by Hanto on 24/06/2014.
 import Interfaces.Misc.Observable.ModelI;
 import com.badlogic.gdx.utils.Disposable;
 
-public interface SkillI extends KeyI<Integer>, ModelI, Disposable
+public interface SkillI extends KeyI<Integer>, SkillAsociadoAlSlotI, ModelI, Disposable
 {
     public void setID(String id);
     public void setNombre (String nombre);
@@ -18,18 +18,8 @@ public interface SkillI extends KeyI<Integer>, ModelI, Disposable
 
     public SkillStatsI getStats();
 
-    //public void setNumSkillStats(int numSkillStats);
-    //public int getNumSkillStats();
-    //public SkillStatI getSkillStat(int numSkillStat);
-    //public Iterator<SkillStatI> getSkillStats();
-
-
     // SPELLSLOTS:
     //------------------------------------------------------------------------------------------------------------------
 
     public SkillSlotsI<SpellI> getSpellSlots();
-
-
-    // KEYS:
-    //------------------------------------------------------------------------------------------------------------------
 }

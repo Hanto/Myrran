@@ -6,8 +6,6 @@ import Interfaces.Misc.Spell.SkillI;
 import Interfaces.Misc.Spell.SkillSlotsI;
 import Interfaces.Misc.Spell.SkillStatsI;
 import Interfaces.Misc.Spell.SpellI;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -18,13 +16,11 @@ public abstract class Skill extends AbstractModel implements SkillI, PropertyCha
     protected String id;
     protected String nombre;
     protected String descripcion;
+    protected SkillI skillPadre;
 
     protected SkillStatsI stats = new SkillStats();
-    protected SkillSlotsI<SpellI> spellSlots = new SkillSlots<>();
+    protected SkillSlotsI<SpellI> spellSlots = new SkillSlots<>(this);
     protected List<Integer> keys = new ArrayList<>();
-
-    // SKILL BASE:
-    //------------------------------------------------------------------------------------------------------------------
 
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setNombre (String nombre)             { this.nombre = nombre; }
@@ -35,8 +31,6 @@ public abstract class Skill extends AbstractModel implements SkillI, PropertyCha
     @Override public SkillStatsI getStats()                     { return stats; }
     @Override public SkillSlotsI<SpellI> getSpellSlots()        { return spellSlots; }
     @Override public List<Integer> getKeys()                    { return keys; }
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
@@ -61,6 +55,21 @@ public abstract class Skill extends AbstractModel implements SkillI, PropertyCha
         getSpellSlots().eliminarObservador(this);
     }
 
+    // SKILLASOCIADOALOSLOT: (para evitar la dependencia circular)
+    //------------------------------------------------------------------------------------------------------------------
+
+    public SkillI getSkill()
+    {   return this; }
+
+    public SkillI getSkillPadre()
+    {   return skillPadre; }
+
+    public void setSkillPadre(SkillI skill)
+    {
+        skillPadre = skill;
+        notificarSetSpellPadre();
+    }
+
     // KEYS:
     //------------------------------------------------------------------------------------------------------------------
 
@@ -76,9 +85,18 @@ public abstract class Skill extends AbstractModel implements SkillI, PropertyCha
         notificarSetKey();
     }
 
+    // NOTIFICAR:
+    //------------------------------------------------------------------------------------------------------------------
+
     private void notificarSetKey()
     {
         DTOsSkill.SetKey setKey = new DTOsSkill.SetKey(this);
         notificarActualizacion("setKey", null, setKey);
+    }
+
+    private void notificarSetSpellPadre()
+    {
+        DTOsSkill.SetSpellPadre setSpellPadre = new DTOsSkill.SetSpellPadre(this);
+        notificarActualizacion("setSpellPadre", null, setSpellPadre);
     }
 }

@@ -22,7 +22,7 @@ public class Spell extends Skill implements SpellI
     public static final int STAT_Cast = 0;
 
     protected TipoSpellI tipoSpell;
-    protected SkillSlotsI<BDebuffI> debuffSlots = new SkillSlots<>();
+    protected SkillSlotsI<BDebuffI> debuffSlots = new SkillSlots<>(this);
 
     protected List<BDebuffI> listaDeDebuffsQueAplica = new ArrayList<>();
 
@@ -44,6 +44,8 @@ public class Spell extends Skill implements SpellI
         super(tipospell);
         this.tipoSpell = tipospell;
         this.getDebuffSlots().setSlots(tipospell.debuffSlots());
+
+        this.getDebuffSlots().añadirObservador(this);
     }
 
     public Spell (SpellI spell)
@@ -51,10 +53,15 @@ public class Spell extends Skill implements SpellI
         super(spell);
         this.tipoSpell = spell.getTipoSpell();
         this.getDebuffSlots().setSlots(spell.getDebuffSlots());
+
+        this.getDebuffSlots().añadirObservador(this);
     }
 
     @Override public void dispose()
-    {   super.dispose(); }
+    {
+        super.dispose();
+        this.getDebuffSlots().eliminarObservador(this);
+    }
 
     //
     //------------------------------------------------------------------------------------------------------------------
@@ -96,15 +103,10 @@ public class Spell extends Skill implements SpellI
             ((DTOsSkill.SetSkillStat) evt.getNewValue()).skillID = id;
             notificarActualizacion("SetSkillStat", null, evt.getNewValue());
         }
-        else if (evt.getNewValue() instanceof DTOsSkill.SetSpellSlot)
+        else if (evt.getNewValue() instanceof DTOsSkill.SetSkillSlot)
         {
-            ((DTOsSkill.SetSpellSlot) evt.getNewValue()).spellID = id;
+            ((DTOsSkill.SetSkillSlot) evt.getNewValue()).spellID = id;
             notificarActualizacion("SetSpellSlot", null, evt.getNewValue());
-        }
-        else if (evt.getNewValue() instanceof DTOsSkill.SetDebuffSlot)
-        {
-            ((DTOsSkill.SetDebuffSlot) evt.getNewValue()).spellID = id;
-            notificarActualizacion("SetDebuffSlot", null, evt.getNewValue());
         }
     }
 }

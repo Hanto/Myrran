@@ -269,7 +269,7 @@ public class MundoView extends Stage implements PropertyChangeListener
             { o1Y = Muro.distanciaPerspectiva-((Muro)o1).muroTecho.getY(); }
             if (o2 instanceof Muro && ((Muro)o2).perspectiva < 0 )
             { o2Y = Muro.distanciaPerspectiva-((Muro)o2).muroTecho.getY(); }*/
-            return (o1Y < o2Y ? 1 : (o1Y == o2Y ? 1 : -1));
+            return (o1Y < o2Y ? 1 : (o1Y == o2Y ? 0 : -1));
         }
     }
 

@@ -3,6 +3,8 @@ package Model.Skills;
 import DTOs.DTOsSkill;
 import Interfaces.Misc.Observable.AbstractModel;
 import Interfaces.Misc.Spell.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,14 +14,19 @@ public class SkillSlot<T extends SkillI> extends AbstractModel implements SkillS
 {
     private int iD;
     private List<Integer> lock = new ArrayList<>();
+    private SkillAsociadoAlSlotI skillAsociadoAlSlot;
     private T skill;
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // CONSTRUCTOR:
     //------------------------------------------------------------------------------------------------------------------
 
-    public SkillSlot(int iD)
-    {   this.iD = iD; }
+    public SkillSlot(int iD, SkillAsociadoAlSlotI skillAsociadoAlSlot)
+    {
+        this.iD = iD;
+        this.skillAsociadoAlSlot = skillAsociadoAlSlot;
+    }
 
     // IDENTIFICABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -34,7 +41,10 @@ public class SkillSlot<T extends SkillI> extends AbstractModel implements SkillS
     {   return lock;}
 
     @Override public boolean abreLaCerradura(KeyI<Integer> key)
-    {   return !Collections.disjoint(key.getKeys(), lock); }
+    {
+        if (key == null) return true;
+        else return !Collections.disjoint(key.getKeys(), lock);
+    }
 
     @Override public void addKey(Integer key)
     {   lock.add(key);
@@ -46,7 +56,7 @@ public class SkillSlot<T extends SkillI> extends AbstractModel implements SkillS
         notificarActualizacion();
     }
 
-    // SPELLSLOT:
+    // SKILLSLOT:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public T getSkill()
@@ -58,13 +68,21 @@ public class SkillSlot<T extends SkillI> extends AbstractModel implements SkillS
         else return skill.getID();
     }
 
-    @Override public void setSkill(T spell)
+    @Override public void setSkill(T skill)
     {
-        if (abreLaCerradura(spell))
+        if (abreLaCerradura(skill))
         {
-            this.skill = spell;
+            if (this.skill != null)
+                this.skill.setSkillPadre(null);
+
+            this.skill = skill;
+
+            if (skill != null)
+                this.skill.setSkillPadre(skillAsociadoAlSlot.getSkill());
+
             notificarActualizacion();
         }
+        else logger.warn("[{}] no coincide en el Slot {}", skill.getID(), iD);
     }
 
     @Override public void setKeys(SkillSlotI<T> spellSlot)
@@ -75,17 +93,13 @@ public class SkillSlot<T extends SkillI> extends AbstractModel implements SkillS
         notificarActualizacion();
     }
 
+    // NOTIFICAR:
+    //------------------------------------------------------------------------------------------------------------------
+
+    //TODO no se diferencia entre Spell y Debuff
     private void notificarActualizacion()
     {
-        if (skill instanceof SpellI)
-        {
-            DTOsSkill.SetSpellSlot setSpellSlot = new DTOsSkill.SetSpellSlot(this);
-            notificarActualizacion("setSpellSlot", null, setSpellSlot);
-        }
-        if (skill instanceof BDebuffI)
-        {
-            DTOsSkill.SetDebuffSlot setDebuffSlot = new DTOsSkill.SetDebuffSlot(this);
-            notificarActualizacion("setDebuffSlot", null, setDebuffSlot);
-        }
+        DTOsSkill.SetSkillSlot setSkillSlot = new DTOsSkill.SetSkillSlot(this);
+        notificarActualizacion("setSkillSlot", null, setSkillSlot);
     }
 }

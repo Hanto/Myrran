@@ -9,6 +9,8 @@ public class Hot extends TipoBDebuff
     {
         getStats().setNumStats(2);
         getSpellSlots().setNumSlots(0);
+
+        addKey(1);
     }
 
     @Override public void actualizarTick(AuraI aura) { }

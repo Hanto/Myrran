@@ -57,6 +57,7 @@ public class TalentosView extends Actor
                  return true;
              }
         });
+        setNumTalentos(stat.getNumTalentos());
     }
 
     // MODIFICACION VISTA Y CONTROLADOR:

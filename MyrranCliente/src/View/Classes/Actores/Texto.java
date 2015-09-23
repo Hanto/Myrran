@@ -49,7 +49,7 @@ public class Texto extends Actor
         switch (centradoHorizontal)
         {//Segun el tipo de centradoHorizontal ajustamos el eje de coordenadas X:
             case Align.right:   { offSetX = - (int)textoNormal.getWidth(); break; }
-            case Align.center:  { offSetX = - (int)textoNormal.getWidth()/2; ;break;}
+            case Align.center:  { offSetX = - (int)textoNormal.getWidth()/2; break;}
             case Align.left:    { break; }
             default:            { break; }
         }

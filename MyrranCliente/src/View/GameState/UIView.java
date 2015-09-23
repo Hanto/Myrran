@@ -4,13 +4,15 @@ import DB.DAO;
 import DB.RSC;
 import DTOs.DTOsInputManager;
 import Interfaces.Misc.Observable.AbstractModel;
+import Interfaces.Misc.Spell.BDebuffI;
+import Interfaces.Misc.Spell.SpellI;
 import Interfaces.Misc.UI.BarraAccionesI;
 import Model.Classes.Input.InputManager;
 import Model.Settings;
 import View.Classes.Actores.Texto;
 import View.Classes.UI.BarraAccionesView.ConjuntoBarraAccionesView;
 import View.Classes.UI.BarraTerrenosView.BarraTerrenosView;
-import View.Classes.UI.SpellView2.SkillStatsView;
+import View.Classes.UI.SpellView2.SpellView2;
 import View.Classes.UI.UIViewController;
 import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
@@ -76,7 +78,10 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
     {   stage.draw(); }
 
     public void setDebugUnderMouse(boolean bool)
-    {   stage.setDebugUnderMouse(bool); }
+    {
+        stage.setDebugUnderMouse(bool);
+        //stage.setDebugAll(bool);
+    }
 
     public void resize (int anchura, int altura)
     {   stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); }
@@ -114,8 +119,19 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
 
     public void PRUEBA()
     {
-        SkillStatsView statsView = new SkillStatsView(DAO.spellDAOFactory.getSpellDAO().getSpell("PoisonBolt"), null);
-        this.getStage().addActor(statsView);
-        statsView.setPosition(300, 300);
+        SpellI spell = DAO.spellDAOFactory.getSpellDAO().getSpell("PoisonBolt");
+        BDebuffI debuff = DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff("DotPoisonBolt");
+        BDebuffI debuff2 = DAO.debuffDAOFactory.getBDebuffDAO().getBDebuff("Bomba");
+
+        debuff.addKey(1);
+        debuff.addKey(2);
+        debuff.addKey(3);
+        debuff2.addKey(1);
+        debuff2.addKey(2);
+        spell.getDebuffSlots().getSlot(0).setSkill(debuff);
+        spell.getDebuffSlots().getSlot(1).setSkill(debuff2);
+        SpellView2 spellView = new SpellView2(spell, null);
+        this.getStage().addActor(spellView);
+        spellView.setPosition(300, 300);
     }
 }

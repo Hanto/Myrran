@@ -5,6 +5,7 @@ import Interfaces.Misc.Observable.AbstractModel;
 import Interfaces.Misc.Spell.SkillI;
 import Interfaces.Misc.Spell.SkillSlotI;
 import Interfaces.Misc.Spell.SkillSlotsI;
+import Interfaces.Misc.Spell.SkillAsociadoAlSlotI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +18,11 @@ import java.util.List;
 public class SkillSlots<T extends SkillI> extends AbstractModel implements SkillSlotsI<T>, PropertyChangeListener
 {
     private List<SkillSlotI<T>> listaSkillSlots;
+    private SkillAsociadoAlSlotI skillAsociadoAlSlot;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    public SkillSlots(SkillAsociadoAlSlotI skillAsociadoAlSlot)
+    {   this.skillAsociadoAlSlot = skillAsociadoAlSlot; }
 
     //
     //------------------------------------------------------------------------------------------------------------------
@@ -38,7 +43,7 @@ public class SkillSlots<T extends SkillI> extends AbstractModel implements Skill
 
         while (numSpellSlots - listaSkillSlots.size() > 0)
         {
-            SkillSlotI<T> skillSlot = new SkillSlot<>(listaSkillSlots.size());
+            SkillSlotI<T> skillSlot = new SkillSlot<>(listaSkillSlots.size(), skillAsociadoAlSlot);
             listaSkillSlots.add(skillSlot);
             skillSlot.añadirObservador(this);
         }
@@ -66,10 +71,7 @@ public class SkillSlots<T extends SkillI> extends AbstractModel implements Skill
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getNewValue() instanceof DTOsSkill.SetSpellSlot)
+        if (evt.getNewValue() instanceof DTOsSkill.SetSkillSlot)
         {   notificarActualizacion("SetSpellSlot", null, evt.getNewValue()); }
-
-        else if (evt.getNewValue() instanceof DTOsSkill.SetDebuffSlot)
-        {   notificarActualizacion("SetDebuffSlot", null, evt.getNewValue()); }
     }
 }

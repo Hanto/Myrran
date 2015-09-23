@@ -36,7 +36,7 @@ public class DTOsSkill
         }
     }
 
-    public static class SetSpellSlot
+    public static class SetSkillSlot
     {
         public String skillID;
 
@@ -44,28 +44,8 @@ public class DTOsSkill
         public String spellID;
         public int[] keys;
 
-        public SetSpellSlot() {}
-        public SetSpellSlot(SkillSlot<?> spellSlot)
-        {
-            this.slotID = spellSlot.getID();
-            this.spellID = spellSlot.getSkillID();
-            this.keys = new int[spellSlot.getKeys().size()];
-
-            for (int i=0; i< spellSlot.getKeys().size(); i++)
-            {   keys[i] = spellSlot.getKeys().get(i); }
-        }
-    }
-
-    public static class SetDebuffSlot
-    {
-        public String skillID;
-
-        public int slotID;
-        public String spellID;
-        public int[] keys;
-
-        public SetDebuffSlot() {}
-        public SetDebuffSlot(SkillSlot<?> spellSlot)
+        public SetSkillSlot() {}
+        public SetSkillSlot(SkillSlot<?> spellSlot)
         {
             this.slotID = spellSlot.getID();
             this.spellID = spellSlot.getSkillID();
@@ -90,6 +70,22 @@ public class DTOsSkill
 
             for (int i=0; i< skill.getKeys().size(); i++)
             {   keys[i] = skill.getKeys().get(i); }
+        }
+    }
+
+    public static class SetSpellPadre
+    {
+        public String skillID;
+
+        public String skillPadreID;
+
+        public SetSpellPadre() {}
+        public SetSpellPadre(SkillI skill)
+        {
+            this.skillID = skill.getID();
+            if (skill.getSkillPadre() != null)
+                this.skillPadreID = skill.getSkillPadre().getID();
+            else this.skillPadreID = null;
         }
     }
 }

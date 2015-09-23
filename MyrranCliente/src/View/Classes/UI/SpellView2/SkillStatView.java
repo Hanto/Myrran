@@ -79,14 +79,14 @@ public class SkillStatView
         maxTalentos   = new Texto ( stat.getisMejorable() ? Integer.toString(stat.getTalentosMaximos()) : "-",
                         fuente11, Color.YELLOW, Color.BLACK, Align.left, Align.bottom, 1);
 
-        cNombre = new Container<>(nombre);
-        cCasillero = new Container<>(casillero);
-        cValorBase = new Container<>(valorBase);
-        cTotal = new Container<>(total);
-        cTalentos = new Container<>(talentos);
-        cCosteTalento = new Container<>(costeTalento);
-        cBonoTalento = new Container<>(bonoTalento);
-        cMaxTalentos = new Container<>(maxTalentos);
+        cNombre = new Container<>(nombre).left();
+        cCasillero = new Container<>(casillero).left();
+        cValorBase = new Container<>(valorBase).right();
+        cTotal = new Container<>(total).right();
+        cTalentos = new Container<>(talentos).right();
+        cCosteTalento = new Container<>(costeTalento).right();
+        cBonoTalento = new Container<>(bonoTalento).right();
+        cMaxTalentos = new Container<>(maxTalentos).right();
 
     }
 
