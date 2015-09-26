@@ -51,10 +51,8 @@ public class SkillStatView
 
     private void crearView()
     {
-        BitmapFont fuente20 = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_20);
         BitmapFont fuente14 = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_14);
         BitmapFont fuente11 = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_11);
-        BitmapFont fuente10 = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_10);
 
         nombre        = new Texto( stat.getNombre(),
                         fuente11, Color.WHITE, Color.BLACK, Align.left, Align.bottom, 1);
@@ -90,18 +88,25 @@ public class SkillStatView
 
     }
 
+    public void setSkill (SkillI skill)
+    {
+        this.skill = skill;
+        this.stat = skill.getStats().getStat(stat.getID());
+        casillero.setSkill(skill);
+    }
+
     // MODIFICACION VISTA:
     //------------------------------------------------------------------------------------------------------------------
 
     private void setCasillero(int numTalentos)  { casillero.setNumTalentos(numTalentos); }
-    private void setValorBase(float nuevoValor) { valorBase.setTexto(df.format(nuevoValor)); }
-    private void setTotal(float nuevoValor)     { total.setTexto(df.format(nuevoValor)); }
-    private void setNumTalentos(int talentos)   { this.talentos.setTexto(stat.getisMejorable() ? Integer.toString(talentos) : "-"); }
-    private void setCosteTalento(int coste)     { costeTalento.setTexto(stat.getisMejorable() ? Integer.toString(coste) : "-"); }
-    private void setBonoTalento(float bono)     { bonoTalento.setTexto(stat.getisMejorable() ? df.format(bono) : "-"); }
-    private void setMaxTalentos(int max)        { maxTalentos.setTexto(stat.getisMejorable() ? Integer.toString(max) : "-"); }
+    private void setValorBase(float nuevoValor) { valorBase.setTexto(df.format(nuevoValor)); cValorBase.invalidate();}
+    private void setTotal(float nuevoValor)     { total.setTexto(df.format(nuevoValor)); cTotal.invalidate();}
+    private void setNumTalentos(int talentos)   { this.talentos.setTexto(stat.getisMejorable() ? Integer.toString(talentos) : "-"); cTalentos.invalidate();}
+    private void setCosteTalento(int coste)     { costeTalento.setTexto(stat.getisMejorable() ? Integer.toString(coste) : "-"); cCosteTalento.invalidate();}
+    private void setBonoTalento(float bono)     { bonoTalento.setTexto(stat.getisMejorable() ? df.format(bono) : "-"); cBonoTalento.invalidate();}
+    private void setMaxTalentos(int max)        { maxTalentos.setTexto(stat.getisMejorable() ? Integer.toString(max) : "-"); cMaxTalentos.invalidate();}
 
-    public void setSkillStatView()
+    public void actualizarTodo()
     {
         setCasillero(stat.getNumTalentos());
         setValorBase(stat.getValorBase());

@@ -1,7 +1,6 @@
 package View.Classes.UI.SpellView2;// Created by Hanto on 21/09/2015.
 
 import DB.RSC;
-import DTOs.DTOsSkill;
 import Interfaces.Misc.Controlador.ControladorSpellsI;
 import Interfaces.Misc.Spell.BDebuffI;
 import Interfaces.Misc.Spell.SkillSlotI;
@@ -15,29 +14,25 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Disposable;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-public class DebuffSlotView implements PropertyChangeListener, Disposable
+public class DebuffSlotView implements Disposable
 {
     private SkillSlotI<BDebuffI> skillSlot;
     private SpellI spell;
     private ControladorSpellsI controlador;
 
-    private Group icono = new Group();
+    private Group iconoSlot = new Group();
+    private Group iconoDebuff = new Group();
     private Image imagenIcono;
     private Texto nombreSkill;
     private Texto keys;
     private Texto lock;
+    public Texto miniNombre;
     public SkillStatsView stats;
-
-    public Container<Texto> cNombre;
 
     private DragAndDrop dad;
     private DebuffSlotSource source;
@@ -45,7 +40,9 @@ public class DebuffSlotView implements PropertyChangeListener, Disposable
 
     public SpellI getSpell()                        { return spell; }
     public SkillSlotI<BDebuffI> getSkillSlot()      { return skillSlot; }
-    public Group getIcono()                         { return icono; }
+    public Group getIconoSlot()                     { return iconoSlot; }
+    public Group getIconoDebuff()                   { return iconoDebuff; }
+    public boolean isOcupado()                      { return skillSlot.getSkill() != null;}
 
     public DebuffSlotView(SpellI spell, int numSlot, ControladorSpellsI controlador, DragAndDrop dad)
     {
@@ -58,14 +55,12 @@ public class DebuffSlotView implements PropertyChangeListener, Disposable
 
         crearView();
 
-        skillSlot.añadirObservador(this);
         dad.addSource(source);
         dad.addTarget(target);
     }
 
     public void dispose()
     {
-        skillSlot.eliminarObservador(this);
         dad.removeSource(source);
         dad.removeTarget(target);
     }
@@ -78,14 +73,10 @@ public class DebuffSlotView implements PropertyChangeListener, Disposable
         if (skillSlot.getSkill() == null)   imagenIcono = new Image(RSC.skillBaseRecursosDAO.getSkillBaseRecursosDAO().getIcono("IconoVacio"));
         else                                imagenIcono = new Image(RSC.skillRecursosDAO.getSkillRecursosDAO().getSpellRecursos(spell).getIcono());
 
-        icono.setSize(32, 32);
-        dad.addSource(new DebuffSlotSource(this, dad));
-        dad.addTarget(new DebuffSlotTarget(this, dad, null));
-
-
-        icono.addActor(imagenIcono);
+        iconoSlot.setSize(32, 32);
+        iconoSlot.addListener(new DebuffSlotTooltipListener(this, null));
+        iconoSlot.addActor(imagenIcono);
         imagenIcono.setTouchable(Touchable.disabled);
-        icono.addListener(new DebuffSlotTooltipListener(this, null));
 
         BitmapFont fuente14 = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_14);
         BitmapFont fuente10 = RSC.fuenteRecursosDAO.getFuentesRecursosDAO().getFuente(Settings.FUENTE_10);
@@ -96,19 +87,20 @@ public class DebuffSlotView implements PropertyChangeListener, Disposable
         nombreSkill = new Texto(skillSlot.getSkill() != null? skillSlot.getSkill().getNombre(): " ",
                       fuente14, Color.ORANGE, Color.BLACK, Align.left, Align.bottom, 1);
 
+        miniNombre  = new Texto(skillSlot.getSkill() != null? skillSlot.getSkill().getNombre(): " ",
+                      fuente10, Color.ORANGE, Color.BLACK, Align.left, Align.bottom, 1);
+
         keys        = new Texto(skillSlot.getSkill() != null? skillSlot.getSkill().getKeys().toString() : " ",
                       fuente10, Color.WHITE, Color.BLACK, Align.left, Align.bottom, 1);
 
-        cNombre = new Container<>(nombreSkill);
+        stats       = new SkillStatsView(skillSlot.getSkill(), controlador);
 
-        icono.addActor(lock);
-        icono.addActor(nombreSkill);
-        icono.addActor(keys);
+        iconoSlot.addActor(lock);
         lock.setPosition(0, 16);
-        nombreSkill.setPosition(34, 0);
-        keys.setPosition(32, 16);
 
-        setStats();
+        iconoDebuff.addActor(nombreSkill);
+        iconoDebuff.addActor(keys);
+        keys.setPosition(0, 16);
     }
 
     private void setLock()
@@ -117,40 +109,31 @@ public class DebuffSlotView implements PropertyChangeListener, Disposable
     private void setNombreSkill()
     {   nombreSkill.setTexto(skillSlot.getSkill() != null ? skillSlot.getSkill().getNombre() : ""); }
 
+    private void setMiniNombre()
+    {   miniNombre.setTexto(skillSlot.getSkill() != null ? skillSlot.getSkill().getNombre(): "");}
+
     private void setKeys()
     {   keys.setTexto(skillSlot.getSkill() != null ? skillSlot.getSkill().getKeys().toString() : ""); }
 
     private void setStats()
-    {
-        if (stats != null) stats.dispose();
-        if (skillSlot.getSkill() != null)   stats = new SkillStatsView(skillSlot.getSkill(), controlador);
-        else                                stats = null;
-    }
+    {   stats.setSkill(skillSlot.getSkill()); }
 
     private void setIcono()
     {
-        icono.removeActor(imagenIcono);
+        iconoSlot.removeActor(imagenIcono);
         if (skillSlot.getSkill() == null)   imagenIcono = new Image(RSC.skillBaseRecursosDAO.getSkillBaseRecursosDAO().getIcono("IconoVacio"));
         else                                imagenIcono = new Image(RSC.skillRecursosDAO.getSkillRecursosDAO().getSpellRecursos(spell).getIcono());
-        icono.addActor(imagenIcono);
+        iconoSlot.addActor(imagenIcono);
         imagenIcono.toBack();
     }
 
-    public void setDebuffSlowView()
+    public void actualizarTodo()
     {
         setIcono();
         setLock();
         setKeys();
         setStats();
         setNombreSkill();
-    }
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {
-        if (evt.getNewValue() instanceof DTOsSkill.SetSkillSlot)
-        {
-            setDebuffSlowView();
-        }
-
+        setMiniNombre();
     }
 }

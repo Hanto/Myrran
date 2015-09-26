@@ -13,7 +13,7 @@ public class DebuffSlotTarget extends DragAndDrop.Target
 
     public DebuffSlotTarget(DebuffSlotView debuffSlot, DragAndDrop dad, ControladorSpellsI controlador)
     {
-        super(debuffSlot.getIcono());
+        super(debuffSlot.getIconoSlot());
         this.debuffSlot = debuffSlot;
         this.dad = dad;
         this.controlador = controlador;

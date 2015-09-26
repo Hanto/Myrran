@@ -3,6 +3,7 @@ package View.Classes.UI.SpellView2.SkillSlotView;// Created by Hanto on 21/09/20
 import Interfaces.Misc.Controlador.ControladorSpellsI;
 import View.Classes.UI.SpellView2.DebuffSlotView;
 import View.Classes.UI.SpellView2.SpellView2;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -26,7 +27,7 @@ public class DebuffSlotTooltipListener extends InputListener
                 tooltip = new SpellView2(debuffSlotView.getSkillSlot().getSkill(), controlador);
                 event.getStage().addActor(tooltip);
                 Vector2 clickPos = event.getListenerActor().localToStageCoordinates(new Vector2());
-                tooltip.setPosition(clickPos.x+66, clickPos.y+32);
+                tooltip.setPosition(clickPos.x+32, clickPos.y+50-34);
             }
         }
     }
@@ -42,5 +43,15 @@ public class DebuffSlotTooltipListener extends InputListener
                 tooltip = null;
             }
         }
+    }
+
+    @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+    {
+        if (button == Input.Buttons.RIGHT)
+        {
+            //TODO hacerlo a traves del controlador:8
+            debuffSlotView.getSkillSlot().setSkill(null);
+        }
+        return true;
     }
 }

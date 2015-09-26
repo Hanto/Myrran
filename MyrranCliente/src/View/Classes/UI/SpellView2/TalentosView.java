@@ -60,6 +60,12 @@ public class TalentosView extends Actor
         setNumTalentos(stat.getNumTalentos());
     }
 
+    public void setSkill(SkillI skill)
+    {
+        this.skill = skill;
+        this.stat = skill.getStats().getStat(stat.getID());
+    }
+
     // MODIFICACION VISTA Y CONTROLADOR:
     //------------------------------------------------------------------------------------------------------------------
 

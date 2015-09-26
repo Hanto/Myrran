@@ -14,7 +14,7 @@ public class DebuffSlotSource extends DragAndDrop.Source
 
     public DebuffSlotSource(DebuffSlotView debuffSlotView, DragAndDrop dad)
     {
-        super(debuffSlotView.getIcono());
+        super(debuffSlotView.getIconoSlot());
         this.debuffSlot = debuffSlotView;
         this.dad = dad;
     }
