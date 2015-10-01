@@ -28,22 +28,32 @@ public class SpellView2 extends Group implements Disposable, PropertyChangeListe
 {
     private SkillI skill;
     private ControladorSpellsI controlador;
+    private DragAndDrop dad;
 
     private Texto nombre;
     private Table tabla;
+    private Table tablaDebuffs;
     private Image icono;
     private Image fondo;
     private SkillStatsView skillStatsView;
     private DebuffsSlotView debuffsSlotView;
 
+    // CONSTRUCTOR:
+    //------------------------------------------------------------------------------------------------------------------
 
-    public SpellView2(SkillI skill, ControladorSpellsI controlador)
+    public SpellView2(SkillI skill, ControladorSpellsI controlador, DragAndDrop dad)
     {
         this.skill = skill;
         this.controlador = controlador;
+        this.dad = dad;
+
         this.tabla = new Table().top().left();
         this.tabla.defaults().padLeft(4).padRight(2);
         this.tabla.setTransform(false);
+
+        this.tablaDebuffs = new Table().top().left();
+        this.tablaDebuffs.setTransform(false);
+
         this.addActor(tabla);
 
         crearNombre();
@@ -58,6 +68,8 @@ public class SpellView2 extends Group implements Disposable, PropertyChangeListe
 
     @Override public void dispose()
     {
+        skill.eliminarObservador(this);
+
         skillStatsView.dispose();
 
         if (debuffsSlotView != null)
@@ -67,6 +79,9 @@ public class SpellView2 extends Group implements Disposable, PropertyChangeListe
             controlador.eliminarDelStage(this);
     }
 
+    // CREACION:
+    //------------------------------------------------------------------------------------------------------------------
+
     private void crearIcono()
     {
         if (skill instanceof SpellI)
@@ -75,11 +90,9 @@ public class SpellView2 extends Group implements Disposable, PropertyChangeListe
         icono.addListener(new VentanaMoverListener(icono, this));
         icono.addListener(new InputListener()
         {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
             {
-                if (button == Input.Buttons.RIGHT)
-                    dispose();
+                if (button == Input.Buttons.RIGHT) dispose();
                 return true;
             }
         });
@@ -107,8 +120,21 @@ public class SpellView2 extends Group implements Disposable, PropertyChangeListe
 
     private void crearDebuffSlots()
     {
-        if (skill instanceof SpellI) debuffsSlotView = new DebuffsSlotView((SpellI)skill, controlador, new DragAndDrop());
+        if (skill instanceof SpellI)
+        {
+            debuffsSlotView = new DebuffsSlotView((SpellI)skill, controlador, dad);
+            for (int i=0; i< debuffsSlotView.getNumDebuffSlots(); i++)
+            {
+                tablaDebuffs.add(debuffsSlotView.getDebuffSlot(i).getIconoSlot()).bottom().left();
+                tablaDebuffs.add(debuffsSlotView.getDebuffSlot(i).getIconoDebuff()).bottom().left();
+                tablaDebuffs.row();
+            }
+            this.addActor(tablaDebuffs);
+        }
     }
+
+    // MODIFICACION VISTA:
+    //------------------------------------------------------------------------------------------------------------------
 
     private void crearTabla()
     {
@@ -116,29 +142,19 @@ public class SpellView2 extends Group implements Disposable, PropertyChangeListe
         tabla.add(nombre).padBottom(-2).left().row();
         crearCabecera();
         añadirStats(skillStatsView);
+
         if (debuffsSlotView != null)
         {
-            for (DebuffSlotView debuffSlot : debuffsSlotView.listaDebuffs)
+            for (int i=0; i< debuffsSlotView.getNumDebuffSlots(); i++)
             {
-                if (debuffSlot.isOcupado())
+                if (debuffsSlotView.getDebuffSlot(i).isOcupado())
                 {
-                    tabla.add(debuffSlot.miniNombre).bottom().left().padTop(-1).padBottom(-4).row();
-                    añadirStats(debuffSlot.stats);
+                    tabla.add(debuffsSlotView.getDebuffSlot(i).miniNombre).bottom().left().padTop(-1).padBottom(-4).row();
+                    añadirStats(debuffsSlotView.getDebuffSlot(i).stats);
                 }
             }
         }
-        if (debuffsSlotView != null)
-        {
-            for (int i=0 ; i<debuffsSlotView.listaDebuffs.size() ; i++)
-            {
-                this.addActor(debuffsSlotView.listaDebuffs.get(i).getIconoSlot());
-                debuffsSlotView.listaDebuffs.get(i).getIconoSlot().setPosition(tabla.getMinWidth() + 2+i*32, -50); //i * -32 - 50);
-                //this.addActor(debuffsSlotView.listaDebuffs.get(i).getIconoDebuff());
-                //debuffsSlotView.listaDebuffs.get(i).getIconoDebuff().setPosition(tabla.getMinWidth()+2+32,i*-32-50);
-            }
-
-        }
-
+        tablaDebuffs.setPosition(tabla.getMinWidth()+2, -18);
         fondo.setBounds(0, -tabla.getMinHeight()-6, tabla.getMinWidth(), tabla.getMinHeight()-12);
     }
 
@@ -178,7 +194,7 @@ public class SpellView2 extends Group implements Disposable, PropertyChangeListe
         if (evt.getNewValue() instanceof DTOsSkill.SetSkillSlot)
         {
             int slotID = ((DTOsSkill.SetSkillSlot) evt.getNewValue()).slotID;
-            debuffsSlotView.listaDebuffs.get(slotID).actualizarTodo();
+            debuffsSlotView.getDebuffSlot(slotID).actualizarTodo();
             crearTabla();
         }
     }

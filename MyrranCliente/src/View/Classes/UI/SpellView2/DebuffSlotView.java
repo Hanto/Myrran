@@ -74,7 +74,7 @@ public class DebuffSlotView implements Disposable
         else                                imagenIcono = new Image(RSC.skillRecursosDAO.getSkillRecursosDAO().getSpellRecursos(spell).getIcono());
 
         iconoSlot.setSize(32, 32);
-        iconoSlot.addListener(new DebuffSlotTooltipListener(this, null));
+        iconoSlot.addListener(new DebuffSlotTooltipListener(this, controlador, dad));
         iconoSlot.addActor(imagenIcono);
         imagenIcono.setTouchable(Touchable.disabled);
 
@@ -85,7 +85,7 @@ public class DebuffSlotView implements Disposable
                       fuente10, Color.WHITE, Color.BLACK, Align.left, Align.bottom, 1);
 
         nombreSkill = new Texto(skillSlot.getSkill() != null? skillSlot.getSkill().getNombre(): " ",
-                      fuente14, Color.ORANGE, Color.BLACK, Align.left, Align.bottom, 1);
+                      fuente10, Color.ORANGE, Color.BLACK, Align.left, Align.bottom, 1);
 
         miniNombre  = new Texto(skillSlot.getSkill() != null? skillSlot.getSkill().getNombre(): " ",
                       fuente10, Color.ORANGE, Color.BLACK, Align.left, Align.bottom, 1);
@@ -102,6 +102,9 @@ public class DebuffSlotView implements Disposable
         iconoDebuff.addActor(keys);
         keys.setPosition(0, 16);
     }
+
+    // MODIFICACION VISTA:
+    //------------------------------------------------------------------------------------------------------------------
 
     private void setLock()
     {   lock.setTexto(skillSlot.getKeys().toString()); }

@@ -53,14 +53,6 @@ public class SkillStatsView implements Disposable, PropertyChangeListener
     // MODIFICACION VISTA:
     //------------------------------------------------------------------------------------------------------------------
 
-    private void actualizarStats(int statID)
-    {   listaSkillStatsView.get(statID).actualizarTodo(); }
-
-    private void actualizarStats()
-    {   for (SkillStatView statView : listaSkillStatsView)
-            statView.actualizarTodo();
-    }
-
     public void setSkill(SkillI skill)
     {
         if (this.skill != null)
@@ -74,6 +66,14 @@ public class SkillStatsView implements Disposable, PropertyChangeListener
         listaSkillStatsView.clear();
         crearView();
         actualizarStats();
+    }
+
+    private void actualizarStats(int statID)
+    {   listaSkillStatsView.get(statID).actualizarTodo(); }
+
+    private void actualizarStats()
+    {   for (SkillStatView statView : listaSkillStatsView)
+            statView.actualizarTodo();
     }
 
     //

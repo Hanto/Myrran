@@ -8,15 +8,22 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
 public class DebuffSlotTooltipListener extends InputListener
 {
     private DebuffSlotView debuffSlotView;
     private ControladorSpellsI controlador;
+    private DragAndDrop dad;
+
     private SpellView2 tooltip;
 
-    public DebuffSlotTooltipListener(DebuffSlotView debuffSlotView, ControladorSpellsI controlador)
-    {   this.debuffSlotView = debuffSlotView; }
+    public DebuffSlotTooltipListener(DebuffSlotView debuffSlotView, ControladorSpellsI controlador, DragAndDrop dad)
+    {
+        this.debuffSlotView = debuffSlotView;
+        this.controlador = controlador;
+        this.dad = dad;
+    }
 
     @Override public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor)
     {
@@ -24,7 +31,7 @@ public class DebuffSlotTooltipListener extends InputListener
         {
             if (debuffSlotView.getSkillSlot().getSkill() != null && tooltip == null)
             {
-                tooltip = new SpellView2(debuffSlotView.getSkillSlot().getSkill(), controlador);
+                tooltip = new SpellView2(debuffSlotView.getSkillSlot().getSkill(), controlador, dad);
                 event.getStage().addActor(tooltip);
                 Vector2 clickPos = event.getListenerActor().localToStageCoordinates(new Vector2());
                 tooltip.setPosition(clickPos.x+32, clickPos.y+50-34);
@@ -51,6 +58,7 @@ public class DebuffSlotTooltipListener extends InputListener
         {
             //TODO hacerlo a traves del controlador:8
             debuffSlotView.getSkillSlot().setSkill(null);
+            this.exit(event, x, y, pointer, null);
         }
         return true;
     }

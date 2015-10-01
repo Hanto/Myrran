@@ -18,6 +18,7 @@ import ch.qos.logback.classic.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import org.slf4j.LoggerFactory;
@@ -130,7 +131,7 @@ public class UIView extends AbstractModel implements PropertyChangeListener, Dis
         debuff2.addKey(2);
         spell.getDebuffSlots().getSlot(0).setSkill(debuff);
         spell.getDebuffSlots().getSlot(1).setSkill(debuff2);
-        SpellView2 spellView = new SpellView2(spell, null);
+        SpellView2 spellView = new SpellView2(spell, null, new DragAndDrop());
         this.getStage().addActor(spellView);
         spellView.setPosition(300, 300);
     }
